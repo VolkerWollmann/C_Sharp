@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C_SharpExampleProgram", "C_SharpExamples\C_SharpExampleProgram.csproj", "{FFDF7DAB-F9B0-4467-B712-134D59CBE965}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C_SharpExamplesLib", "C_SharpExamplesLib\C_SharpExamplesLib.csproj", "{71F15277-5F86-4DE9-B9EC-E8214D414820}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{4E10BA94-4C5B-4F25-9ADE-D24A8443A782}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessiblityOtherLibrary", "C_SharpAccessiblity2\AccessiblityOtherLibrary.csproj", "{4C0DF4C4-7FA3-41AF-BA8E-51255538C0DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessibilityLibrary", "AccessibilityLibrary\AccessibilityLibrary.csproj", "{2BE2A02E-14B7-4171-8AF0-175B1743EB3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{822B9D4A-5E74-4A32-960C-2B3D7F9FEEEA}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FFDF7DAB-F9B0-4467-B712-134D59CBE965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFDF7DAB-F9B0-4467-B712-134D59CBE965}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFDF7DAB-F9B0-4467-B712-134D59CBE965}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFDF7DAB-F9B0-4467-B712-134D59CBE965}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71F15277-5F86-4DE9-B9EC-E8214D414820}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71F15277-5F86-4DE9-B9EC-E8214D414820}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71F15277-5F86-4DE9-B9EC-E8214D414820}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71F15277-5F86-4DE9-B9EC-E8214D414820}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E10BA94-4C5B-4F25-9ADE-D24A8443A782}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E10BA94-4C5B-4F25-9ADE-D24A8443A782}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E10BA94-4C5B-4F25-9ADE-D24A8443A782}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E10BA94-4C5B-4F25-9ADE-D24A8443A782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C0DF4C4-7FA3-41AF-BA8E-51255538C0DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C0DF4C4-7FA3-41AF-BA8E-51255538C0DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C0DF4C4-7FA3-41AF-BA8E-51255538C0DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C0DF4C4-7FA3-41AF-BA8E-51255538C0DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BE2A02E-14B7-4171-8AF0-175B1743EB3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BE2A02E-14B7-4171-8AF0-175B1743EB3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BE2A02E-14B7-4171-8AF0-175B1743EB3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BE2A02E-14B7-4171-8AF0-175B1743EB3B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EF76469A-F964-487D-9866-B74BE4116053}
+	EndGlobalSection
+EndGlobal
