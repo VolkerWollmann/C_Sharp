@@ -156,5 +156,11 @@ namespace UnitTest
 			AbstractClassTest.Test();
 		}
 
+		[TestMethod]
+		public void Arrays()
+		{
+			MyArray.Test();
+		}
+
 	}
 }

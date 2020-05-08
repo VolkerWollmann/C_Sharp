@@ -51,6 +51,7 @@
     <Compile Include="Langauge\CSharp6.cs" />
     <Compile Include="Langauge\MyAbstractClass.cs" />
     <Compile Include="Langauge\MyAnonymousType.cs" />
+    <Compile Include="Langauge\MyArray.cs" />
     <Compile Include="Langauge\MyDelegate.cs" />
     <Compile Include="Langauge\MyEnum.cs" />
     <Compile Include="Langauge\MyException.cs" />

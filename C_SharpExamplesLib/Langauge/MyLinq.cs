@@ -10,9 +10,8 @@ namespace C_Sharp
 	public class MyLinq
 	{
 		
-		public static void Test()
+		public static void ListTests()
 		{
-			
 			List<int> favorites = new List<int> { 0, 7, 14, 21, 28, 35, 42, 49 };
 			List<int> all = Enumerable.Range(0, 100).ToList();
 			List<int> favoritesFirst = favorites;
@@ -23,6 +22,12 @@ namespace C_Sharp
 			List<int> result = favoritesFirst.Where(i => allowed.Contains(i)).ToList();
 
 			var takeTest = allowed.Take(20).ToList();
+		}
+
+
+		public static void Test()
+		{
+			ListTests();
 		}
 	}
 }
