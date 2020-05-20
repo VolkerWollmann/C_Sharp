@@ -24,15 +24,19 @@ namespace C_Sharp
 				}
 			}
 
+			// get an enumartor for all emelents
 			var enumerator = testArray.GetEnumerator();
 			enumerator.MoveNext();
 			var firstElement = enumerator.Current;
 
+			// get the second column
 			var secondColumn =
 				Enumerable.Range(0, testArray.GetLength(0))
 				.Select(x => testArray[x, 2])
 				.ToArray();
 
+			// get a list of all Elements
+			var allElements = testArray.Cast<string>().ToList();
 		}
 	}
 }
