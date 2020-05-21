@@ -162,5 +162,10 @@ namespace UnitTest
 			MyArray.Test();
 		}
 
+		[TestMethod]
+		public void Generics()
+		{
+			MyGeneric.Test();
+		}
 	}
 }
