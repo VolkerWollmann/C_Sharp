@@ -15,7 +15,7 @@ namespace C_Sharp
 			return list[index];
 		}
 
-		private static List<T> ShuffledList<T>(List<T> list)
+		private static List<T> GetShuffledList<T>(List<T> list)
 		{
 			List<T> result = new List<T>();
 			List<T> work = new List<T>();
@@ -35,11 +35,11 @@ namespace C_Sharp
 		{
 			List<string> animals = new List<string>{ "Esel", "Hund", "Möwe", "Katze", "Ziege" };
 			var oneAnimal = GetRandomElement<string>(animals);
-			var shuffledAnimals = ShuffledList<string>(animals);
+			var shuffledAnimals = GetShuffledList<string>(animals);
 
 			List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
 			var number = GetRandomElement<int>(numbers);
-			var shuffledNumbers = ShuffledList<int>(numbers);
+			var shuffledNumbers = GetShuffledList<int>(numbers);
 		}
 	}
 }
