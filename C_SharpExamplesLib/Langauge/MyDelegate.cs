@@ -16,7 +16,7 @@ namespace C_Sharp
 	{
 		Func<int, int> f;
 
-		// delegate : like a function pointer type
+		// #delegate : like a #function pointer type
 		delegate int IntegerFunction(int i);
 
 		// Delegate : like instance of typed function pointer
