@@ -166,12 +166,7 @@ namespace UnitTest
 		public void Generics()
 		{
 			MyGeneric.Test();
-		}
-
-		[TestMethod]
-		public void RandomSeed()
-		{
-			MyGeneric.TestSeed(); 
+			
 		}
 	}
 }
