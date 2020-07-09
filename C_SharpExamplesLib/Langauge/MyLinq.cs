@@ -9,7 +9,7 @@ namespace C_Sharp
 {
 	public class MyLinq
 	{
-		
+		// #linq #range
 		public static void ListTests()
 		{
 			List<int> favorites = new List<int> { 0, 7, 14, 21, 28, 35, 42, 49 };

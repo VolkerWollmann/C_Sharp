@@ -7,12 +7,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp
 {
+	// #inteferface #generic
 	internal interface MyRandomizer<T>
 	{
 		T GetRandomElement(List<T> list);
 		List<T> GetShuffledList(List<T> list);
 	}
 
+	// #generic
 	internal class MyIntegerRandomizer : MyRandomizer<int>
 	{
 		Random random = new Random();
