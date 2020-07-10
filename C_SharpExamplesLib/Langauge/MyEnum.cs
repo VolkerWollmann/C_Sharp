@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace C_Sharp
 {
+	// #enum #number of members
 	public class MyEnum
 	{
 		public enum Dog { Lessie, KomissarRex, Cerberus};
@@ -30,6 +31,8 @@ namespace C_Sharp
 
 		public static void Test()
 		{
+			int numberOfDogs = Enum.GetValues(typeof(Dog)).Length;
+
 			var allDogs = Enum.GetValues(typeof(Dog));
 			ShowAllElement<Dog>(allDogs);
 

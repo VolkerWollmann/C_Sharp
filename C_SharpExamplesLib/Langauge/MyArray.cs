@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace C_Sharp
 {
+    // #array #all elements
 	public class MyArray
 	{
 
@@ -24,7 +25,7 @@ namespace C_Sharp
 				}
 			}
 
-			// get an enumartor for all emelents
+			// get an enumartor for all elements
 			var enumerator = testArray.GetEnumerator();
 			enumerator.MoveNext();
 			var firstElement = enumerator.Current;
