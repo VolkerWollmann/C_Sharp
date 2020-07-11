@@ -168,5 +168,11 @@ namespace UnitTest
 			MyGeneric.Test();
 			
 		}
+
+		[TestMethod]
+		public void Comparer()
+		{
+			MyComparer.Test();
+		}
 	}
 }

@@ -52,6 +52,7 @@
     <Compile Include="Langauge\MyAbstractClass.cs" />
     <Compile Include="Langauge\MyAnonymousType.cs" />
     <Compile Include="Langauge\MyArray.cs" />
+    <Compile Include="Langauge\MyComparer.cs" />
     <Compile Include="Langauge\MyDelegate.cs" />
     <Compile Include="Langauge\MyEnum.cs" />
     <Compile Include="Langauge\MyException.cs" />
