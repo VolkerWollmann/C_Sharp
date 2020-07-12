@@ -8,8 +8,26 @@ using System.Threading.Tasks;
 
 namespace C_Sharp
 {
-	public class MySimple
+	public class MySimpleCSharp
 	{
+		// #index operator, #indexer, #range
+		private class IndexClass
+		{
+			public int[] Numbers = new int[10];
+
+			public int this[int index]
+			{
+				get { return Numbers[index]; }
+				set { Numbers[index] = value; }
+			}
+			internal IndexClass()
+			{
+				Random random = new Random();
+				Enumerable.Range(0, 10).ToList().ForEach(i => { Numbers[i] = random.Next(1, 10); });
+			}
+		}
+
+        //call by reference
 		static void Method(ref string s)
 		{
 			s = "donkey";
@@ -20,6 +38,13 @@ namespace C_Sharp
 			string s=null;
 			Method(ref s);
 			Assert.IsTrue(s == "donkey");
+
+			IndexClass indexClass = new IndexClass();
+			for(int i=0; i<10; i++)
+			{
+				Assert.AreEqual(indexClass[i], indexClass.Numbers[i]);
+			}
+
 		}
 
 	}

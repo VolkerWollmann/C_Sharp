@@ -174,5 +174,11 @@ namespace UnitTest
 		{
 			MyComparer.Test();
 		}
+
+		[TestMethod]
+		public void SimpleCSharp()
+		{
+			MySimpleCSharp.Test();
+		}
 	}
 }
