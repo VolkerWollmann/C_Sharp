@@ -180,5 +180,11 @@ namespace UnitTest
 		{
 			MySimpleCSharp.Test();
 		}
+
+		[TestMethod]
+		public void IEnumerableTest()
+		{
+			MyInteger.Test();
+		}
 	}
 }

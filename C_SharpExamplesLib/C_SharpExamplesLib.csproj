@@ -58,6 +58,7 @@
     <Compile Include="Langauge\MyException.cs" />
     <Compile Include="Langauge\MyExtensionMethod.cs" />
     <Compile Include="Langauge\MyGeneric.cs" />
+    <Compile Include="Langauge\MyIEnumerable.cs" />
     <Compile Include="Langauge\MyLinq.cs" />
     <Compile Include="Langauge\MyList.cs" />
     <Compile Include="Langauge\MyMultipleInheritance.cs" />
