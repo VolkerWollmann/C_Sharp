@@ -1,0 +1,4 @@
+﻿Esel
+Hund
+Katze
+Möwe

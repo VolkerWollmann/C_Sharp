@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using C_Sharp;
+using C_Sharp.FileOperation;
 using C_Sharp.Types;
 
 namespace UnitTest
@@ -185,6 +186,12 @@ namespace UnitTest
 		public void IEnumerableTest()
 		{
 			MyInteger.Test();
+		}
+
+		[TestMethod]
+		public void ReadFileTest()
+		{
+			MyFileOperation.ReadLinesFromFile();
 		}
 	}
 }
