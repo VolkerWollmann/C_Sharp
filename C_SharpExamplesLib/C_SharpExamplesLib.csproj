@@ -48,6 +48,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileOperation\MyFileOperation.cs" />
     <Compile Include="Langauge\CSharp6.cs" />
     <Compile Include="Langauge\MyAbstractClass.cs" />
     <Compile Include="Langauge\MyAnonymousType.cs" />
@@ -83,6 +84,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FileOperation\TextFile.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
