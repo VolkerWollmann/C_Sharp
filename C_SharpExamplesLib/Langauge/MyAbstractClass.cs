@@ -33,26 +33,27 @@ namespace C_Sharp
 			}
 			catch( Exception exp)
 			{
+				// you cannot instanciate an abstract class
 				Console.WriteLine(exp.ToString());
 				Assert.IsTrue(exp.GetType() == typeof(MissingMethodException));
 			}
 
+			// create instance of concrete class by using type information
 			object myConcreteClassInstance = Activator.CreateInstance(myConcreteClassType);
-			
 			Assert.IsNotNull(((MyConcreteClass)myConcreteClassInstance).InstancePorperty);
 
-
+			// check type with is operator and assign as base class
 			if (myConcreteClassInstance is MyAbstractClass myConcreteClassBaseClassInstance)
 			{
+				// check that casted base class instance exists
 				Assert.IsNotNull(myConcreteClassBaseClassInstance);
 
+				// Get type of casted base class instance
 				Type myConcreteClassBaseClassInstanceType = myConcreteClassBaseClassInstance.GetType();
-				
-				Assert.AreNotEqual(myConcreteClassBaseClassInstanceType, myAbstractClassType);
-				Assert.AreEqual(myConcreteClassBaseClassInstanceType, myConcreteClassType);
 
-				//Assert.IsNotNull(myConcreteClassBaseClassInstance.InstancePorperty);
-				
+				// GetType returns actual type and not casted type
+				Assert.AreEqual(myConcreteClassBaseClassInstanceType, myConcreteClassType);
+				Assert.AreNotEqual(myConcreteClassBaseClassInstanceType, myAbstractClassType);				
 			}
 		}
 	}
