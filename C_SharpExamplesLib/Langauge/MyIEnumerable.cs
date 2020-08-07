@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Schema;
@@ -10,32 +12,21 @@ using System.Xml.Schema;
 namespace C_Sharp
 {
 	/// <summary>
-	/// #IEnumrable #IEnumerator<int>
-	/// returns the number 1,2,3, ... not 0(zero)
+	/// #IEnumrable<int> #IEnumerator<int> #IQueryable<int>
+	/// returns the number 1, ...., 10
 	/// </summary>
-	public class MyInteger : IEnumerable, IEnumerator<int>
+	public class MyInteger : IEnumerable<int>, IEnumerator<int>, IQueryable<int>
 	{
-		int i;
+		private int i = 0;
+
 		#region IEnumerator<int>
-		public int Current
-		{
-			get
-			{
-				return i;
-			}
+		public int Current => i;
 
-			private set
-			{
-				i = value;
-			}
-		}
+		object IEnumerator.Current => this;
 
-		object IEnumerator.Current => Current;
+		// required by Dispose
+		protected virtual void Dispose(bool b) { }
 
-		protected virtual void Dispose(bool all)
-		{
-			Current = 0;
-		}
 		public void Dispose()
 		{
 			Dispose(true);
@@ -51,14 +42,28 @@ namespace C_Sharp
 		{
 			i = 0;
 		}
-
 		#endregion
 
-		#region IEnumerable
-		public IEnumerator GetEnumerator()
+		#region IEnumerable<int>
+		public IEnumerator<int> GetEnumerator()
 		{
 			return this;
 		}
+
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return this;
+		}
+		#endregion
+
+		#region IQueryable<int>
+
+		public Expression Expression => this.AsQueryable<int>().Expression;
+
+		public Type ElementType => typeof(int);
+
+		public IQueryProvider Provider =>  (IQueryProvider)this.AsQueryable<int>();
+
 		#endregion
 
 		public static void Test()
@@ -66,9 +71,12 @@ namespace C_Sharp
 			MyInteger myInteger = new MyInteger();
 			foreach( int i in myInteger )
 			{
-				if (i > 4)
+				if (i > 5)
 					break;
 			}
+
+			//does not work
+			//myInteger.Where(i => (i < 5)).ToList();
 		}
 	}
 }
