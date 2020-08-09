@@ -185,7 +185,7 @@ namespace UnitTest
 		[TestMethod]
 		public void IEnumerableTest()
 		{
-			MyInteger.Test();
+			MyIntegerRange.Test();
 		}
 
 		[TestMethod]

@@ -15,12 +15,13 @@ namespace C_Sharp
 	/// #IEnumrable<int> #IEnumerator<int> #IQueryable<int>
 	/// returns the number 1, ...., 10
 	/// </summary>
-	public class MyInteger : IEnumerable<int>, IEnumerator<int>, IQueryable<int>
+	public class MyIntegerRange : IEnumerable<int>, IEnumerator<int>, IQueryable<int>
 	{
-		private int i = 0;
+		private List<int> Range;
+		private int i;
 
 		#region IEnumerator<int>
-		public int Current => i;
+		public int Current => Range[i];
 
 		object IEnumerator.Current => this;
 
@@ -35,7 +36,7 @@ namespace C_Sharp
 		public bool MoveNext()
 		{
 			i = i + 1;
-			return true;
+			return i < Range.Count();
 		}
 
 		public void Reset()
@@ -58,25 +59,42 @@ namespace C_Sharp
 
 		#region IQueryable<int>
 
-		public Expression Expression => this.AsQueryable<int>().Expression;
+		public Expression Expression => Range.AsQueryable<int>().Expression;
 
 		public Type ElementType => typeof(int);
 
-		public IQueryProvider Provider =>  (IQueryProvider)this.AsQueryable<int>();
+		public IQueryProvider Provider =>  (IQueryProvider)this.Range.AsQueryable<int>();
+
+		#endregion
+
+		#region Constructor
+		private MyIntegerRange()
+		{
+			Range = new List<int>();
+			i = 0;
+		}
+		private MyIntegerRange(int start, int range) : this()
+		{
+			int j = start;
+			while( j <= start + range)
+			{
+				Range.Add(j++);
+			}
+		}
 
 		#endregion
 
 		public static void Test()
 		{
-			MyInteger myInteger = new MyInteger();
-			foreach( int i in myInteger )
+			MyIntegerRange myIntegerRange = new MyIntegerRange(1, 10);
+			foreach( int i in myIntegerRange)
 			{
 				if (i > 5)
 					break;
 			}
 
 			//does not work
-			//myInteger.Where(i => (i < 5)).ToList();
+			var x = myIntegerRange.Where(i => (i < 5)).ToList();
 		}
 	}
 }
