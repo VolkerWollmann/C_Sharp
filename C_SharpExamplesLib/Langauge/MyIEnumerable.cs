@@ -21,9 +21,22 @@ namespace C_Sharp
 		private int i;
 
 		#region IEnumerator<int>
-		public int Current => Range[i];
+		int IEnumerator<int>.Current
+		{
+			get
+			{
+				return Range[i];
+			}
+		}
 
-		object IEnumerator.Current => this;
+		object IEnumerator.Current
+		{
+			get
+			{
+				//return this.Current<int>();
+				return ((IEnumerator<int>)this).Current;
+			}
+		}
 
 		// required by Dispose
 		protected virtual void Dispose(bool b) { }
@@ -85,6 +98,7 @@ namespace C_Sharp
 				return Expression.Constant(eq);
 			}
 		}
+
 		public Type ElementType => typeof(int);
 
 		public IQueryProvider Provider =>  (IQueryProvider)this.Range.AsQueryable<int>();
@@ -117,11 +131,16 @@ namespace C_Sharp
 					break;
 			}
 
+			// myIntegerRange stands at 6
+			var a = ((IEnumerator<int>)myIntegerRange).Current;
+			var b = ((IEnumerator)myIntegerRange).Current;
+
 			// does work;
-			var l = myIntegerRange.ToList();
+			var d = myIntegerRange.ToList();
 
 			//does not work
-			var x = myIntegerRange.Where(i => (i < 5)).ToList();
+			var e = myIntegerRange.Where(i => (i < 5)).ToList();
 		}
+
 	}
 }
