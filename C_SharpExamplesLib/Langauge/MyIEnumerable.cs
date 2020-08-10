@@ -15,7 +15,7 @@ namespace C_Sharp
 	/// #IEnumrable<int> #IEnumerator<int> #IQueryable<int>
 	/// returns the number 1, ...., 10
 	/// </summary>
-	public class MyIntegerRange : IEnumerable<int>, IEnumerator<int>, IQueryable<int>
+	public class MyIntegerRange : IEnumerable<int>, IEnumerator<int>, IQueryable<int>, IQueryProvider
 	{
 		private List<int> Range;
 		private int i;
@@ -33,7 +33,6 @@ namespace C_Sharp
 		{
 			get
 			{
-				//return this.Current<int>();
 				return ((IEnumerator<int>)this).Current;
 			}
 		}
@@ -95,13 +94,39 @@ namespace C_Sharp
 
 				EnumerableQuery<int> eq = new EnumerableQuery<int>(listInitExpression);
 
-				return Expression.Constant(eq);
+				var e =  Expression.Constant(eq);
+
+				return e;
 			}
 		}
 
 		public Type ElementType => typeof(int);
 
-		public IQueryProvider Provider =>  (IQueryProvider)this.Range.AsQueryable<int>();
+		public IQueryProvider Provider =>  this;
+
+		#endregion
+
+		#region IQueryProvider
+
+		public IQueryable CreateQuery(Expression expression)
+		{
+			return new EnumerableQuery<int>(expression);
+		}
+
+		public IQueryable<T> CreateQuery<T>(Expression expression)
+		{
+			return new EnumerableQuery<T>(expression);
+		}
+
+		public object Execute(Expression expression)
+		{
+			return Expression.Lambda(expression).Compile().DynamicInvoke();
+		}
+
+		public TResult Execute<TResult>(Expression expression)
+		{
+			return (TResult)Execute(expression);
+		}
 
 		#endregion
 
@@ -124,6 +149,9 @@ namespace C_Sharp
 
 		public static void Test()
 		{
+			// uses public IEnumerator<int> GetEnumerator()
+			// uses public bool MoveNext()
+			// uses int IEnumerator<int>.Current
 			MyIntegerRange myIntegerRange = new MyIntegerRange(1, 10);
 			foreach( int i in myIntegerRange)
 			{
@@ -132,15 +160,23 @@ namespace C_Sharp
 			}
 
 			// myIntegerRange stands at 6
+			// uses int IEnumerator<int>.Current
 			var a = ((IEnumerator<int>)myIntegerRange).Current;
+
+			// uses object IEnumerator.Current
 			var b = ((IEnumerator)myIntegerRange).Current;
 
-			// does work;
+			// does work
+			// uses public IEnumerator<int> GetEnumerator()
 			var d = myIntegerRange.ToList();
 
-			//does not work
-			var e = myIntegerRange.Where(i => (i < 5)).ToList();
-		}
+			//does work
+			// uses public Expression Expression
+			// uses public IQueryable<T> CreateQuery<T>(Expression expression)
+			var e1 = myIntegerRange.Where(i => (i < 5));
+			var e2 = e1.Select( x => x*x).ToList();
 
+			e1.ToList().ForEach(x => {;});
+		}
 	}
 }
