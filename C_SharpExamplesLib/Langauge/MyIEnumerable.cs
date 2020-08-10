@@ -59,8 +59,32 @@ namespace C_Sharp
 
 		#region IQueryable<int>
 
-		public Expression Expression => Range.AsQueryable<int>().Expression;
+		// The expression as EnumerableQuery<int>
+		public Expression Expression
+		{
+			get
+			{
+				var x = Range.AsQueryable<int>();
+				var y = x.Expression;
 
+				List<ElementInit> le = new List<ElementInit>();
+				foreach( int i in Range)
+				{
+					System.Reflection.MethodInfo addMethod = typeof(List<int>).GetMethod("Add");
+					System.Linq.Expressions.ElementInit ei =
+						System.Linq.Expressions.Expression.ElementInit(addMethod, System.Linq.Expressions.Expression.Constant(i));
+
+					le.Add(ei);
+				}
+
+				NewExpression newListExpression = Expression.New(typeof(List<int>));
+				ListInitExpression listInitExpression = Expression.ListInit(newListExpression, le);
+
+				EnumerableQuery<int> eq = new EnumerableQuery<int>(listInitExpression);
+
+				return Expression.Constant(eq);
+			}
+		}
 		public Type ElementType => typeof(int);
 
 		public IQueryProvider Provider =>  (IQueryProvider)this.Range.AsQueryable<int>();
@@ -92,6 +116,9 @@ namespace C_Sharp
 				if (i > 5)
 					break;
 			}
+
+			// does work;
+			var l = myIntegerRange.ToList();
 
 			//does not work
 			var x = myIntegerRange.Where(i => (i < 5)).ToList();
