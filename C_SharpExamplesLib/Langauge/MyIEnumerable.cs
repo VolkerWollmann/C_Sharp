@@ -100,7 +100,8 @@ namespace C_Sharp
 			}
 		}
 
-		public Type ElementType => typeof(int);
+		// determines linq types
+		public Type ElementType => typeof(bool);
 
 		public IQueryProvider Provider =>  this;
 
@@ -120,7 +121,8 @@ namespace C_Sharp
 
 		public object Execute(Expression expression)
 		{
-			return Expression.Lambda(expression).Compile().DynamicInvoke();
+			var result =  Expression.Lambda(expression).Compile().DynamicInvoke();
+			return result;
 		}
 
 		public TResult Execute<TResult>(Expression expression)
@@ -173,10 +175,14 @@ namespace C_Sharp
 			//does work
 			// uses public Expression Expression
 			// uses public IQueryable<T> CreateQuery<T>(Expression expression)
-			var e1 = myIntegerRange.Where(i => (i < 5));
-			var e2 = e1.Select( x => x*x).ToList();
+			var e = myIntegerRange.Where(i => (i < 5)).ToList();
 
-			e1.ToList().ForEach(x => {;});
+
+			// does work 
+			// uses public Expression Expression
+			// uses public TResult Execute<TResult>(Expression expression)
+			var f = myIntegerRange.Sum();
+
 		}
 	}
 }
