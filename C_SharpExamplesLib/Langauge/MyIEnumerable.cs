@@ -79,24 +79,7 @@ namespace C_Sharp
 				var x = Range.AsQueryable<int>();
 				var y = x.Expression;
 
-				List<ElementInit> le = new List<ElementInit>();
-				foreach( int i in Range)
-				{
-					System.Reflection.MethodInfo addMethod = typeof(List<int>).GetMethod("Add");
-					System.Linq.Expressions.ElementInit ei =
-						System.Linq.Expressions.Expression.ElementInit(addMethod, System.Linq.Expressions.Expression.Constant(i));
-
-					le.Add(ei);
-				}
-
-				NewExpression newListExpression = Expression.New(typeof(List<int>));
-				ListInitExpression listInitExpression = Expression.ListInit(newListExpression, le);
-
-				EnumerableQuery<int> eq = new EnumerableQuery<int>(listInitExpression);
-
-				var e =  Expression.Constant(eq);
-
-				return e;
+				return y;
 			}
 		}
 
