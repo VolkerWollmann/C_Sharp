@@ -193,5 +193,11 @@ namespace UnitTest
 		{
 			MyFileOperation.ReadLinesFromFile();
 		}
+
+		[TestMethod]
+		public void SetOperations()
+		{
+			MySetOperation.Test();
+		}
 	}
 }

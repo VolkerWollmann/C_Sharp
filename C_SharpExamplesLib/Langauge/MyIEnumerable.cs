@@ -12,7 +12,7 @@ using System.Xml.Schema;
 namespace C_Sharp
 {
 	/// <summary>
-	/// #IEnumrable<int> #IEnumerator<int> #IQueryable<int>
+	/// #IEnumerable<int> #IEnumerator<int> #IQueryable<int> #IQueryProvider
 	/// returns the number 1, ...., 10
 	/// </summary>
 	public class MyIntegerRange : IEnumerable<int>, IEnumerator<int>, IQueryable<int>, IQueryProvider

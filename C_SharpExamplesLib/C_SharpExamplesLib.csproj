@@ -65,6 +65,7 @@
     <Compile Include="Langauge\MyMultipleInheritance.cs" />
     <Compile Include="Langauge\MyOperators.cs" />
     <Compile Include="Langauge\MyProcess.cs" />
+    <Compile Include="Langauge\MySetOperation.cs" />
     <Compile Include="Langauge\MySimple.cs" />
     <Compile Include="Langauge\MyTask.cs" />
     <Compile Include="Langauge\MyThread.cs" />
