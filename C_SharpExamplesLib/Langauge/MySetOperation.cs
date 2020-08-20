@@ -18,7 +18,7 @@ namespace C_Sharp
 			IEnumerable<int> interserctionSet1 = setA.Intersect(setB);
 			Assert.IsTrue(interserctionSet1.SequenceEqual<int>(Enumerable.Range(4, 3))); // {4,5,6}
 
-			IEnumerable<int> interserctionSet2 = setA.Intersect(setB);
+			IEnumerable<int> interserctionSet2 = setB.Intersect(setA);
 			Assert.IsTrue(interserctionSet2.SequenceEqual<int>(Enumerable.Range(4, 3))); // {4,5,6}
 
 			IEnumerable<int> setDifference1 = setA.Except(setB);
