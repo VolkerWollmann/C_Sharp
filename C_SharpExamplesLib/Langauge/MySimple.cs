@@ -27,10 +27,16 @@ namespace C_Sharp
 			}
 		}
 
-        //call by reference
+        //#call by reference
 		static void Method(ref string s)
 		{
 			s = "donkey";
+		}
+
+		// #Enumerable #empty list 
+		static void EnumerableTest()
+		{
+			IEnumerable<int> emptyIntegerList = Enumerable.Empty<int>();
 		}
 
 		public static void Test()
@@ -45,6 +51,7 @@ namespace C_Sharp
 				Assert.AreEqual(indexClass[i], indexClass.Numbers[i]);
 			}
 
+			EnumerableTest();
 		}
 
 	}

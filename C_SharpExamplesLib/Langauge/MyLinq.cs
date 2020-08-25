@@ -6,28 +6,46 @@ namespace C_Sharp
 {
 	public class MyLinq
 	{
-		// #linq #range
+		// #linq #range #where #take
 		public static void ListTests()
 		{
 			List<int> favorites = new List<int> { 0, 7, 14, 21, 28, 35, 42, 49 };
 			List<int> all = Enumerable.Range(0, 100).ToList();
 			List<int> favoritesFirst = favorites;
-			favoritesFirst.AddRange(all.Where(i => !favorites.Contains(i)));
+			favoritesFirst.AddRange(all.Where(i => !favorites.Contains(i))); // {0, 7, ... 49, 1, 2, ... }
 
 			List<int> allowed = new List<int> { 1, 8, 7, 50, 42, 13, 85, 2, 14, 67 };
 
-			List<int> result = favoritesFirst.Where(i => allowed.Contains(i)).ToList();
-
-			var takeTest = allowed.Take(20).ToList();
+			List<int> result = favoritesFirst.Where(i => allowed.Contains(i)).ToList(); // { 7, 14, ... 42, 1, ... }
+			
+			var takeTest = allowed.Take(20).ToList(); // take takes up to maxium 20
 		}
 
+
+		// #linq #Zip #FirstOrDefault
+		public static void LinqTest()
+		{
+			int[] numbers = { 1, 2, 3, 4 };
+			string[] words = { "one", "two", "three" };
+
+			var numbersAndWords = numbers.Zip(words, (first, second) => first + " " + second);
+
+			Assert.IsTrue(numbersAndWords.First().Contains("one"));
+			Assert.IsTrue(numbersAndWords.First().Contains("1"));
+
+			int i = 42;
+			i =  (new List<int> { }).FirstOrDefault<int>();
+
+			Assert.AreEqual(i, 0);
+		}
 
 		public static void Test()
 		{
 			ListTests();
+			LinqTest();
 		}
 
-		// #linq #set operation
+		// #linq #set operation #union #intersect #except
 		public static void TestSetOperation()
 		{
 			IEnumerable<int> setA = Enumerable.Range(1, 6); // {1,2,3,4,5,6}
