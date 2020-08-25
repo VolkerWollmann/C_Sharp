@@ -197,7 +197,7 @@ namespace UnitTest
 		[TestMethod]
 		public void SetOperations()
 		{
-			MySetOperation.Test();
+			MyLinq.TestSetOperation();
 		}
 	}
 }
