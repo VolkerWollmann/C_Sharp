@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace C_Sharp
 {
@@ -9,6 +11,7 @@ namespace C_Sharp
 		// #linq #range #where #take
 		public static void ListTests()
 		{
+			
 			List<int> favorites = new List<int> { 0, 7, 14, 21, 28, 35, 42, 49 };
 			List<int> all = Enumerable.Range(0, 100).ToList();
 			List<int> favoritesFirst = favorites;
@@ -22,9 +25,10 @@ namespace C_Sharp
 		}
 
 
-		// #linq #Zip #FirstOrDefault
+		// #linq 
 		public static void LinqTest()
 		{
+			// #Zip
 			int[] numbers = { 1, 2, 3, 4 };
 			string[] words = { "one", "two", "three" };
 
@@ -33,10 +37,19 @@ namespace C_Sharp
 			Assert.IsTrue(numbersAndWords.First().Contains("one"));
 			Assert.IsTrue(numbersAndWords.First().Contains("1"));
 
+			// #FirstOrDefault
 			int i = 42;
-			i =  (new List<int> { }).FirstOrDefault<int>();
+			List<int> l = new List<int> { };
 
+			i =  l.FirstOrDefault<int>();
 			Assert.AreEqual(i, 0);
+
+			// #First
+			int j = 43;
+			try { j = l.First<int>(); }
+			catch (InvalidOperationException) {}
+			finally { Assert.AreEqual(j, 43); }
+
 		}
 
 		public static void Test()
