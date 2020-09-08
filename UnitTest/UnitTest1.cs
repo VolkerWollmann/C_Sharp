@@ -199,5 +199,11 @@ namespace UnitTest
 		{
 			MyLinq.TestSetOperation();
 		}
+
+		[TestMethod]
+		public void Cast()
+		{
+			MyCast.Test();
+		}
 	}
 }
