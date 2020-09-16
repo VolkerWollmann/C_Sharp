@@ -6,7 +6,7 @@ using C_Sharp.Types;
 
 namespace UnitTest
 {
-	[TestClass]
+    [TestClass]
 	public class UnitTest1
 	{
 		private TestContext testContextInstance;
@@ -100,7 +100,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-	    public void TaskContinueWith()
+		public void TaskContinueWith()
 		{
 			MyTask.TestContinueWith();
 		}
@@ -167,7 +167,7 @@ namespace UnitTest
 		public void Generics()
 		{
 			MyGeneric.Test();
-			
+
 		}
 
 		[TestMethod]
@@ -206,4 +206,6 @@ namespace UnitTest
 			MyCast.Test();
 		}
 	}
+
+
 }
