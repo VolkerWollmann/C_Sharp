@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp
 {
-	// #inteferface #generic
+	// #inteferface #generic #default
 	internal interface MyRandomizer<T>
 	{
 		T GetRandomElement(List<T> list);
@@ -84,6 +84,7 @@ namespace C_Sharp
 			{
 				int index = random.Next(0, work.Count);
 				result.Add(work[index]);
+				work[index] = default(T);
 				work.RemoveAt(index);
 			}
 
