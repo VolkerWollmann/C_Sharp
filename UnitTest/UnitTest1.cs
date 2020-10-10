@@ -205,6 +205,12 @@ namespace UnitTest
 		{
 			MyCast.Test();
 		}
+
+		[TestMethod]
+		public void XML()
+        {
+			MyXML.Test();
+        }
 	}
 
 
