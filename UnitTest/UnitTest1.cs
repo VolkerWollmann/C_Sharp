@@ -211,6 +211,12 @@ namespace UnitTest
         {
 			MyXML.Test();
         }
+
+		[TestMethod]
+		public void LocalFunction()
+        {
+			CSharp.Test();
+		}
 	}
 
 

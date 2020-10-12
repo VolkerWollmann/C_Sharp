@@ -58,6 +58,7 @@
     <Compile Include="Langauge\MyArray.cs" />
     <Compile Include="Langauge\MyCast.cs" />
     <Compile Include="Langauge\MyComparer.cs" />
+    <Compile Include="Langauge\CSharp.cs" />
     <Compile Include="Langauge\MyDelegate.cs" />
     <Compile Include="Langauge\MyEnum.cs" />
     <Compile Include="Langauge\MyException.cs" />
