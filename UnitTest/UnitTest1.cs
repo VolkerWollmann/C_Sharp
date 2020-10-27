@@ -69,6 +69,12 @@ namespace UnitTest
 		}
 
 		[TestMethod]
+		public void LinqParallel()
+        {
+			MyLinq.TestLinqParallel();
+        }
+
+		[TestMethod]
 		public void Process()
 		{
 			MyProcess.Test();

@@ -80,5 +80,25 @@ namespace C_Sharp
 			IEnumerable<int> setDifference2 = setB.Except(setA);
 			Assert.IsTrue(setDifference2.SequenceEqual<int>(Enumerable.Range(7, 3))); // {7,8,9}
 		}
+
+		private static bool IsPrime(int i)
+		{
+			if (i <= 3)
+				return true;
+			var divisors = Enumerable.Range(2, (i / 2) - 1 ).ToList();
+			return !divisors.Any(d => (i % d == 0));
+		}
+
+		// #linq #parallel
+		public static void TestLinqParallel()
+        {
+			var numbers = Enumerable.Range(10000000, 500);
+
+			Console.WriteLine(DateTime.Now.ToString());
+			var primes = numbers.Where(n => IsPrime(n)).ToList();
+			Console.WriteLine(DateTime.Now.ToString());
+			var primes2 = numbers.AsParallel().Where(n => IsPrime(n)).ToList();
+			Console.WriteLine(DateTime.Now.ToString());
+		}
 	}
 }
