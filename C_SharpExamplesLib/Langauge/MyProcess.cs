@@ -54,7 +54,7 @@ namespace C_Sharp
 		public static void Test2()
 		{ 
 			var items = Enumerable.Range(0, 500);
-			Parallel.ForEach(items, item =>     // also works with 
+			Parallel.ForEach(items, item =>     // also works with Parallel.For(0, 500, ...
 			{
 				WorkOnItem(item);
 			});
