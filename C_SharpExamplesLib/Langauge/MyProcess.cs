@@ -33,14 +33,33 @@ namespace C_Sharp
 			Console.WriteLine("Task 2 ending");
 		}
 
-        // #Invoke #Parallel #Dispatcher
+		// #Invoke #Parallel #Dispatcher #foreach
 		public static void Test()
 		{
-			Dispatcher.CurrentDispatcher.Invoke(new Action(()=> { MyProcess.Method(); }));
+			Dispatcher.CurrentDispatcher.Invoke(new Action(() => { MyProcess.Method(); }));
 			Console.WriteLine("After asynchronus start of method within thread " + Thread.CurrentThread.ManagedThreadId);
 
 			Parallel.Invoke(() => Task1(), () => Task2());
 			Console.WriteLine("Finished processing within thread " + Thread.CurrentThread.ManagedThreadId);
+		}
+
+		static void WorkOnItem(object item)
+		{
+			Console.WriteLine("Started working on: " + item + " within thread " + Thread.CurrentThread.ManagedThreadId);
+			Thread.Sleep(100);
+			Console.WriteLine("Finished working on: " + item);
+		}
+
+		// # Parallel #foreach
+		public static void Test2()
+		{ 
+			var items = Enumerable.Range(0, 500);
+			Parallel.ForEach(items, item =>
+			{
+				WorkOnItem(item);
+			});
+
+			Console.WriteLine("Finished processing. Press a key to end.");
 		}
 	}
 }

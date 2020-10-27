@@ -75,6 +75,12 @@ namespace UnitTest
 		}
 
 		[TestMethod]
+		public void Process_ParallelForeach()
+		{
+			MyProcess.Test2();
+		}
+
+		[TestMethod]
 		public void TestAssert()
 		{
 			CSharp6.TestAssert();
