@@ -50,7 +50,7 @@ namespace C_Sharp
 			Console.WriteLine("Finished working on: " + item);
 		}
 
-		// # Parallel #foreach
+		// # Parallel #foreach #for #ParallelLoopState
 		public static void Test2()
 		{ 
 			var items = Enumerable.Range(0, 500);
@@ -59,7 +59,17 @@ namespace C_Sharp
 				WorkOnItem(item);
 			});
 
-			Console.WriteLine("Finished processing. Press a key to end.");
+			Console.WriteLine("----");
+
+			var itemsArray = Enumerable.Range(0, 500).ToArray();
+			ParallelLoopResult result = Parallel.For(0, itemsArray.Count(), (int i, ParallelLoopState loopState) =>
+			{
+				if (i == 200)
+					loopState.Break();
+
+				WorkOnItem(itemsArray[i]);
+			});
+
 		}
 	}
 }
