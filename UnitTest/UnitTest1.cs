@@ -7,7 +7,7 @@ using C_Sharp.Types;
 namespace UnitTest
 {
     [TestClass]
-	public class UnitTest1
+	public class AllUnitTests
 	{
 		private TestContext testContextInstance;
 
@@ -75,18 +75,6 @@ namespace UnitTest
         }
 
 		[TestMethod]
-		public void Process()
-		{
-			MyProcess.Test();
-		}
-
-		[TestMethod]
-		public void Process_ParallelForeach()
-		{
-			MyProcess.Test2();
-		}
-
-		[TestMethod]
 		public void TestAssert()
 		{
 			CSharp6.TestAssert();
@@ -115,12 +103,6 @@ namespace UnitTest
 		public void TaskContinueWith()
 		{
 			MyTask.TestContinueWith();
-		}
-
-		[TestMethod]
-		public void TaskObjectLock()
-		{
-			MyTask.TestTaskObjectLock();
 		}
 
 		[TestMethod]
@@ -229,6 +211,41 @@ namespace UnitTest
         {
 			CSharp.Test();
 		}
+	}
+
+	[TestClass]
+	public class TaskProcessTests
+    {
+		[TestMethod]
+		public void Process()
+		{
+			MyProcess.Test();
+		}
+
+		[TestMethod]
+		public void Process_ParallelForeach()
+		{
+			MyProcess.Test2();
+		}
+
+		[TestMethod]
+		public void TaskContinueWith()
+		{
+			MyTask.TestContinueWith();
+		}
+
+		[TestMethod]
+		public void TaskObjectLock()
+		{
+			MyTask.TestTaskObjectLock();
+		}
+
+		[TestMethod]
+		public void ChildTask()
+        {
+			MyTask.TestChildTask();
+		}
+
 	}
 
 

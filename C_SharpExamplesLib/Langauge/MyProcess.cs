@@ -33,7 +33,7 @@ namespace C_Sharp
 			Console.WriteLine("Task 2 ending");
 		}
 
-		// #Invoke #Parallel #Dispatcher #foreach
+		// #Invoke #Parallel #Dispatcher
 		public static void Test()
 		{
 			Dispatcher.CurrentDispatcher.Invoke(new Action(() => { MyProcess.Method(); }));
@@ -65,7 +65,8 @@ namespace C_Sharp
 			ParallelLoopResult result = Parallel.For(0, itemsArray.Count(), (int i, ParallelLoopState loopState) =>
 			{
 				if (i == 200)
-					loopState.Break();
+					loopState.Break();   // break : all lambda expressions below 200 are completed, 
+				                         // stop  : lambda expressions below 200 might be killed.
 
 				WorkOnItem(itemsArray[i]);
 			});

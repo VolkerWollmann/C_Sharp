@@ -89,19 +89,32 @@ namespace C_Sharp
 			return !divisors.Any(d => (i % d == 0));
 		}
 
-		// #linq #parallel
+		// #linq #parallel  #plinq #WithDegreeOfParallelism
 		public static void TestLinqParallel()
         {
 			var numbers = Enumerable.Range(10000000, 500);
 
-			DateTime tStart = DateTime.Now;
-			Console.WriteLine(tStart.ToString());
+			DateTime t0 = DateTime.Now;
+			Console.WriteLine(t0.ToString());
 			var primes = numbers.Where(n => IsPrime(n)).ToList();
-			DateTime t2 = DateTime.Now;
-			Console.WriteLine("Time sequential:" + t2.Subtract(tStart).ToString());
+			DateTime t1 = DateTime.Now;
+			Console.WriteLine("Time sequential:" + t1.Subtract(t0).ToString());
+			
 			var primes2 = numbers.AsParallel().Where(n => IsPrime(n)).ToList();
+			DateTime t2 = DateTime.Now;
+			Console.WriteLine("Time parallel:" + t2.Subtract(t1).ToString());
+
+			numbers = ParallelEnumerable.Range(10000000, 500);
+			var primes3 = numbers.AsParallel()
+				.AsOrdered()
+				.WithDegreeOfParallelism(3)
+				.WithExecutionMode(ParallelExecutionMode.ForceParallelism)
+				.Where(n => IsPrime(n))
+				.AsSequential()
+				.Take(500)
+				.ToList();
 			DateTime t3 = DateTime.Now;
-			Console.WriteLine("Time parallel:" + t3.Subtract(t2).ToString());
+			Console.WriteLine("Time parallel (degree 3):" + t3.Subtract(t2).ToString());
 		}
 	}
 }
