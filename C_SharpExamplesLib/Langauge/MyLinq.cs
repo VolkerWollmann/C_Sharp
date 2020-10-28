@@ -94,11 +94,14 @@ namespace C_Sharp
         {
 			var numbers = Enumerable.Range(10000000, 500);
 
-			Console.WriteLine(DateTime.Now.ToString());
+			DateTime tStart = DateTime.Now;
+			Console.WriteLine(tStart.ToString());
 			var primes = numbers.Where(n => IsPrime(n)).ToList();
-			Console.WriteLine(DateTime.Now.ToString());
+			DateTime t2 = DateTime.Now;
+			Console.WriteLine("Time sequential:" + t2.Subtract(tStart).ToString());
 			var primes2 = numbers.AsParallel().Where(n => IsPrime(n)).ToList();
-			Console.WriteLine(DateTime.Now.ToString());
+			DateTime t3 = DateTime.Now;
+			Console.WriteLine("Time parallel:" + t3.Subtract(t2).ToString());
 		}
 	}
 }
