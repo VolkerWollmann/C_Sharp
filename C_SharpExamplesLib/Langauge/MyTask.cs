@@ -66,7 +66,7 @@ namespace C_Sharp
 		#endregion
 
 		#region lock statement
-		//#lock
+		//#lock #task #waitall
 		static long sharedTotal;
 
 		// make an array that holds the values 0 to 50000000
