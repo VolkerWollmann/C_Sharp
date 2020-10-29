@@ -9,18 +9,6 @@ namespace UnitTest
     [TestClass]
 	public class AllUnitTests
 	{
-		private TestContext testContextInstance;
-
-		/// <summary>
-		///  Gets or sets the test context which provides
-		///  information about and functionality for the current test run.
-		///</summary>
-		public TestContext TestContext
-		{
-			get { return testContextInstance; }
-			set { testContextInstance = value; }
-		}
-
 		[TestMethod]
 		public void MyEnumTest()
 		{
@@ -91,31 +79,6 @@ namespace UnitTest
 		public void TaskContinueWith()
 		{
 			MyTask.TestContinueWith();
-		}
-
-		[TestMethod]
-		public void ThreadLambda()
-		{
-			MyThread.TestLambdaThreadWithData();
-		}
-
-		[TestMethod]
-		public void ThreadMethod()
-		{
-			MyThread.TestThreadMethodWidData();
-		}
-
-		[TestMethod]
-		public void ThreadStaticData()
-		{
-			TestContext.WriteLine("Hase");
-			MyThread.TestThreadStaticData();
-		}
-
-		[TestMethod]
-		public void ThreadLocalData()
-		{
-			MyThread.TestThreadLocalData();
 		}
 
 		[TestMethod]

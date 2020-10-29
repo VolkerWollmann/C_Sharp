@@ -9,7 +9,10 @@ using System.Windows.Threading;
 
 namespace C_Sharp
 {
-	public class MyProcess
+	/// <summary>
+	/// #partial class
+	/// </summary>
+	public partial class MyThread
 	{
 
 		private static void Method()
@@ -36,7 +39,7 @@ namespace C_Sharp
 		// #Invoke #Parallel #Dispatcher
 		public static void Test()
 		{
-			Dispatcher.CurrentDispatcher.Invoke(new Action(() => { MyProcess.Method(); }));
+			Dispatcher.CurrentDispatcher.Invoke(new Action(() => { MyThread.Method(); }));
 			Console.WriteLine("After asynchronus start of method within thread " + Thread.CurrentThread.ManagedThreadId);
 
 			Parallel.Invoke(() => Task1(), () => Task2());

@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace C_Sharp
 {
-	public static class MyThread
+	public partial class MyThread
 	{
 		#region private threads
 		private static Semaphore Bouncer { get; set; }
