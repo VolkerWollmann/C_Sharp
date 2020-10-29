@@ -50,7 +50,7 @@ namespace C_Sharp
 			Console.WriteLine("Finished working on: " + item);
 		}
 
-		// # Parallel #foreach #for #ParallelLoopState
+		// #Parallel #foreach #for #ParallelLoopState
 		public static void Test2()
 		{ 
 			var items = Enumerable.Range(0, 500);

@@ -27,7 +27,7 @@ namespace C_Sharp
 			{
 				MyCastClass2 t1 = (MyCastClass2)x;
 			}
-			catch (InvalidCastException ivc)
+			catch (InvalidCastException )
 			{
 				;
 			}
@@ -48,7 +48,7 @@ namespace C_Sharp
 				o = l;
 				i = (int)o;
 			}
-			catch( InvalidCastException ivc)
+			catch( InvalidCastException )
 			{
 				;
 			}

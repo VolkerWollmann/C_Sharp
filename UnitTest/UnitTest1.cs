@@ -63,18 +63,6 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void Linq1()
-		{
-			MyLinq.Test();
-		}
-
-		[TestMethod]
-		public void LinqParallel()
-        {
-			MyLinq.TestLinqParallel();
-        }
-
-		[TestMethod]
 		public void TestAssert()
 		{
 			CSharp6.TestAssert();
@@ -212,41 +200,4 @@ namespace UnitTest
 			CSharp.Test();
 		}
 	}
-
-	[TestClass]
-	public class TaskProcessTests
-    {
-		[TestMethod]
-		public void Process()
-		{
-			MyProcess.Test();
-		}
-
-		[TestMethod]
-		public void Process_ParallelForeach()
-		{
-			MyProcess.Test2();
-		}
-
-		[TestMethod]
-		public void TaskContinueWith()
-		{
-			MyTask.TestContinueWith();
-		}
-
-		[TestMethod]
-		public void TaskObjectLock()
-		{
-			MyTask.TestTaskObjectLock();
-		}
-
-		[TestMethod]
-		public void ChildTask()
-        {
-			MyTask.TestChildTask();
-		}
-
-	}
-
-
 }

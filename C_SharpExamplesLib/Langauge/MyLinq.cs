@@ -25,7 +25,7 @@ namespace C_Sharp
 		}
 
 
-		// #linq 
+		// #linq #zip #firstOrdefault
 		public static void LinqTest()
 		{
 			// #Zip
@@ -81,7 +81,8 @@ namespace C_Sharp
 			Assert.IsTrue(setDifference2.SequenceEqual<int>(Enumerable.Range(7, 3))); // {7,8,9}
 		}
 
-		private static bool IsPrime(int i)
+        #region PLINQ
+        private static bool IsPrime(int i)
 		{
 			if (i <= 3)
 				return true;
@@ -90,7 +91,7 @@ namespace C_Sharp
 		}
 
 		// #linq #parallel  #plinq #WithDegreeOfParallelism
-		public static void TestLinqParallel()
+		public static void TestParallelLinq()
         {
 			var numbers = Enumerable.Range(10000000, 500);
 
@@ -116,5 +117,50 @@ namespace C_Sharp
 			DateTime t3 = DateTime.Now;
 			Console.WriteLine("Time parallel (degree 3):" + t3.Subtract(t2).ToString());
 		}
+        #endregion
+
+        #region PLinqException
+        public static bool CheckCity(string name)
+		{
+			if (name == "")
+				throw new ArgumentException(name);
+			return name == "Seattle";
+		}
+
+		class Person
+		{
+			public string Name { get; set; }
+			public string City { get; set; }
+		}
+
+		public static void PLinqExceptions()
+		{
+			Person[] people = new Person[] {
+				new Person { Name = "Alan", City = "Hull" },
+				new Person { Name = "Beryl", City = "Seattle" },
+				new Person { Name = "Charles", City = "London" },
+				new Person { Name = "David", City = "Seattle" },
+				new Person { Name = "Eddy", City = "" },
+				new Person { Name = "Fred", City = "" },
+				new Person { Name = "Gordon", City = "Hull" },
+				new Person { Name = "Henry", City = "Seattle" },
+				new Person { Name = "Isaac", City = "Seattle" },
+				new Person { Name = "James", City = "London" }};
+
+			try
+			{
+				var result = from person in
+					people.AsParallel()
+							 where CheckCity(person.City)
+							 select person;
+				result.ForAll(person => Console.WriteLine(person.Name));
+			}
+			catch (AggregateException e)
+			{
+				Console.WriteLine(e.InnerExceptions.Count + " exceptions.");
+			}
+		}
+
+		#endregion
 	}
 }
