@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp
 {
 	public class MyTask
 	{
-        #region Task Continue with
-		// #task #ContinueWith
-        public static void TestContinueWith()
+		#region Task Continue with
+		// #task #ContinueWith #TaskContinuationOptions
+		public static void TestContinueWith()
 		{
 			Func<int> ConstFunctionEight = () => 8;
 			Func<object, int> ConstFunction = (n) => Convert.ToInt32(n);
@@ -20,13 +21,15 @@ namespace C_Sharp
 			Task<int> myTask = new Task<int>(ConstFunction,8);
 
 			Func<Task<int>,int> MultiplyByTwo = (previous) => previous.Result * 2;
-			Task<int> myTask2 = myTask.ContinueWith<int>(MultiplyByTwo);
+			Task<int> myTask2 = myTask.ContinueWith<int>(MultiplyByTwo, TaskContinuationOptions.OnlyOnRanToCompletion);
 
 			myTask.Start();
 			myTask.Wait();
 			myTask2.Wait();
 
 			int result = myTask2.Result;
+			Assert.AreEqual(result, 16);
+
 		}
 		#endregion
 
