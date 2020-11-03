@@ -37,7 +37,7 @@ namespace C_Sharp
 		}
 
 		// #Invoke #Parallel #Dispatcher
-		public static void Test()
+		public static void Thread_Dispatcher()
 		{
 			Dispatcher.CurrentDispatcher.Invoke(new Action(() => { MyThread.Method(); }));
 			Console.WriteLine("After asynchronus start of method within thread " + Thread.CurrentThread.ManagedThreadId);
@@ -54,7 +54,7 @@ namespace C_Sharp
 		}
 
 		// #Parallel #foreach #for #ParallelLoopState
-		public static void Test2()
+		public static void ParallelFor()
 		{ 
 			var items = Enumerable.Range(0, 500);
 			Parallel.ForEach(items, item =>     // also works with Parallel.For(0, 500, ...

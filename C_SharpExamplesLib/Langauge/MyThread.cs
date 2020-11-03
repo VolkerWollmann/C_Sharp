@@ -164,6 +164,23 @@ namespace C_Sharp
 
 		#endregion
 
+		#region simple thread
+		// #tread
+		private static void SimpleThreadHello()
+		{
+			Console.WriteLine("Hello from the thread");
+			Thread.Sleep(2000);
+		}
+
+		public static void ThreadSimple()
+		{
+			Thread thread = new Thread(SimpleThreadHello);
+			thread.Start();
+		}
+		#endregion
+
+		#region ParameterizedThreadStart
+		// #ParameterizedThreadStart
 		private static void WorkOnData(object data)
 		{
 			Console.WriteLine("Working on: {0}", data);
@@ -184,5 +201,6 @@ namespace C_Sharp
 			Thread myThread = new Thread((data) => { Console.WriteLine( $"Hello {data}!", data); Thread.Sleep(1000); });
 			myThread.Start("outer space");
 		}
+		#endregion
 	}
 }

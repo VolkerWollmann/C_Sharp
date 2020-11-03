@@ -22,6 +22,13 @@ namespace UnitTest
 		}
 
 		[TestMethod]
+		public void ThreadSimple()
+		{
+			MyThread.ThreadSimple();
+		}
+
+
+		[TestMethod]
 		public void ThreadLambda()
 		{
 			MyThread.TestLambdaThreadWithData();
@@ -47,15 +54,15 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void Process()
+		public void Thread_Dispatcher()
 		{
-			MyThread.Test();
+			MyThread.Thread_Dispatcher();
 		}
 
 		[TestMethod]
-		public void Process_ParallelForeach()
+		public void Thread_ParallelFor()
 		{
-			MyThread.Test2();
+			MyThread.ParallelFor();
 		}
 
 		[TestMethod]
@@ -71,7 +78,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void ChildTask()
+		public void TaskChildTask()
 		{
 			MyTask.TestChildTask();
 		}
