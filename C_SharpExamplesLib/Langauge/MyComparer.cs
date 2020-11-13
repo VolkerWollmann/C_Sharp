@@ -4,21 +4,21 @@ using System.Collections.Generic;
 namespace C_Sharp
 {
     // #comparer #equality
-	public class MyComparer : IEqualityComparer<MyComparer>
+	public class MyEqaulityComparer : IEqualityComparer<MyEqaulityComparer>
 	{
 		public int X { get; private set; }
 		public int Y { get; private set; }
-		bool IEqualityComparer<MyComparer>.Equals(MyComparer x, MyComparer y)
+		bool IEqualityComparer<MyEqaulityComparer>.Equals(MyEqaulityComparer x, MyEqaulityComparer y)
 		{
 			return (x.X == y.X) && (y.X == y.Y);
 		}
 
-		int IEqualityComparer<MyComparer>.GetHashCode(MyComparer obj)
+		int IEqualityComparer<MyEqaulityComparer>.GetHashCode(MyEqaulityComparer obj)
 		{
 			return (obj.X | obj.Y);
 		}
 
-		public MyComparer(int x, int y)
+		public MyEqaulityComparer(int x, int y)
 		{
 			X = x;
 			Y = y;
@@ -26,9 +26,9 @@ namespace C_Sharp
 
 		public static void Test()
 		{
-			MyComparer myA = new MyComparer(1, 1);
-			MyComparer myB = new MyComparer(1, 1);
-			MyComparer myC = new MyComparer(1, 2);
+			MyEqaulityComparer myA = new MyEqaulityComparer(1, 1);
+			MyEqaulityComparer myB = new MyEqaulityComparer(1, 1);
+			MyEqaulityComparer myC = new MyEqaulityComparer(1, 2);
 
 			bool b1 = (myA.Equals(myA));
 			Assert.IsTrue(b1);
@@ -44,4 +44,10 @@ namespace C_Sharp
 
 		}
 	}
+
+	// #comparer #order
+	public class MyComparer
+    {
+
+    }
 }

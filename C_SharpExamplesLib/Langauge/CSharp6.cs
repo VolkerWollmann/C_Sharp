@@ -50,6 +50,7 @@ namespace C_Sharp
 
 		internal (int Zahl, bool Wahrheit) GetTuple() => (1,true);
 
+		// #Dictionary #initialisation
 		internal Dictionary<string,int> GetDictionary()
 		{
 			return new Dictionary<string, int> { ["X"] = 5, ["Y"] = 6 };
