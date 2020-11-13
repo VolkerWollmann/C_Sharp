@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 
 namespace C_Sharp
@@ -46,8 +47,58 @@ namespace C_Sharp
 	}
 
 	// #comparer #order
-	public class MyComparer
-    {
+	public class MyComparable : IComparable<MyComparable>
+	{
+		private const string DONKEY = "Esel";
+		private const string DOG = "Hund";
+		private const string SEAGULL = "Möwe";
+		private const string CAT = "Katze";
 
-    }
+		public int Version { get; private set; }
+		public string Animal { get; private set; }
+
+		#region Constructor 
+		private MyComparable(int version, string animal)
+		{
+			Animal = animal;
+			Version = version;
+
+		}
+		#endregion
+
+		#region IComparable<MyOrderComparer>
+		// < 0 This instance precedes obj in the sort order.
+		// = 0 This instance occurs in the same position in the sort order as obj.
+		// > 0 This instance follows obj in the sort order.
+
+		int IComparable<MyComparable>.CompareTo(MyComparable other)
+		{
+			if (this.Version < other.Version)
+				return -1;
+
+			if (this.Version > other.Version)
+				return 1;
+
+			Dictionary<string, int> animalOrder = new Dictionary<string, int> { [DONKEY] = 1, [DOG] = 2, [SEAGULL] = 3, [CAT] = 4 };
+
+			return animalOrder[Animal] < animalOrder[other.Animal] ? -1 : 1;
+
+		}
+		#endregion
+
+		#region Test
+		public static void Test()
+		{
+			List<MyComparable> l = new List<MyComparable> {
+				new MyComparable(1, DONKEY),
+				new MyComparable(3, DONKEY),
+				new MyComparable(2, CAT),
+				new MyComparable(3, CAT),
+				new MyComparable(2, DOG),
+			};
+
+			l.Sort();
+		}
+		#endregion
+	}
 }

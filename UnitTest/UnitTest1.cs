@@ -116,9 +116,15 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void Comparer()
+		public void EqaulityComparer()
 		{
-			MyComparer.Test();
+			MyEqaulityComparer.Test();
+		}
+
+		[TestMethod]
+		public void OrderComparable()
+		{
+			MyComparable.Test();
 		}
 
 		[TestMethod]
