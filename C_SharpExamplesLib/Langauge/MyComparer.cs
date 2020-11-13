@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace C_Sharp
 {
@@ -46,7 +47,8 @@ namespace C_Sharp
 		}
 	}
 
-	// #comparer #order
+	// #comparer #order #DebuggerDisplay
+	[DebuggerDisplay("Version = {Version}, Animal={Animal}")]
 	public class MyComparable : IComparable<MyComparable>
 	{
 		private const string DONKEY = "Esel";
