@@ -36,7 +36,7 @@ namespace C_Sharp
 				.Select(x => testArray[x, 2])
 				.ToArray();
 
-			// get a list of all Elements
+			// get a #list of all #Elements of #array
 			var allElements = testArray.Cast<string>().ToList();
 		}
 	}
