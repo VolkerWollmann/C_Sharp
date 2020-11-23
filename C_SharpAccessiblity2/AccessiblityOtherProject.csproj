@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2BE2A02E-14B7-4171-8AF0-175B1743EB3B}</ProjectGuid>
+    <ProjectGuid>{4C0DF4C4-7FA3-41AF-BA8E-51255538C0DF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AccessibilityLibrary</RootNamespace>
-    <AssemblyName>AccessibilityLibrary</AssemblyName>
+    <RootNamespace>C_SharpAccessiblity2</RootNamespace>
+    <AssemblyName>C_SharpAccessiblity2</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -50,19 +50,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyClassAccessiblity.cs" />
+    <Compile Include="MyClassAccessiblityTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AccessibilityLibrary\AccessibilityProject.csproj">
+      <Project>{2be2a02e-14b7-4171-8af0-175b1743eb3b}</Project>
+      <Name>AccessibilityProject</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\C_SharpAccessiblity2\Data\DataText3.txt">
-      <Link>Data\Data1\DataText3.txt</Link>
-    </None>
-    <None Include="Data\Data1\DataText1.txt" />
+    <None Include="Data\DataOtherProject.txt" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

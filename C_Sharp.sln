@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C_SharpExampleProgram", "C_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C_SharpExamplesLib", "C_SharpExamplesLib\C_SharpExamplesLib.csproj", "{71F15277-5F86-4DE9-B9EC-E8214D414820}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessiblityOtherLibrary", "C_SharpAccessiblity2\AccessiblityOtherLibrary.csproj", "{4C0DF4C4-7FA3-41AF-BA8E-51255538C0DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessiblityOtherProject", "C_SharpAccessiblity2\AccessiblityOtherProject.csproj", "{4C0DF4C4-7FA3-41AF-BA8E-51255538C0DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessibilityLibrary", "AccessibilityLibrary\AccessibilityLibrary.csproj", "{2BE2A02E-14B7-4171-8AF0-175B1743EB3B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessibilityProject", "AccessibilityLibrary\AccessibilityProject.csproj", "{2BE2A02E-14B7-4171-8AF0-175B1743EB3B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{822B9D4A-5E74-4A32-960C-2B3D7F9FEEEA}"
 	ProjectSection(SolutionItems) = preProject
