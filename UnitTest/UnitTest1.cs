@@ -43,7 +43,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void CShart6Test()
+		public void CSharp6Test()
 		{
 			CSharp6.Test();
 
@@ -73,12 +73,6 @@ namespace UnitTest
 		public void TestScartchMethod()
 		{
 			Scratch.Test();
-		}
-
-		[TestMethod]
-		public void TaskContinueWith()
-		{
-			MyTask.TestContinueWith();
 		}
 
 		[TestMethod]
