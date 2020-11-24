@@ -1,15 +1,12 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using C_Sharp;
-using C_Sharp.FileOperation;
-using C_Sharp.Types;
 
 namespace UnitTest
 {
     [TestClass]
-    public class TaskThreadUnitTest
+    public class ThreadUnitTest
     {
-		private TestContext testContextInstance;
+        private TestContext testContextInstance;
 
 		/// <summary>
 		///  Gets or sets the test context which provides
@@ -64,24 +61,5 @@ namespace UnitTest
 		{
 			MyThread.ParallelFor();
 		}
-
-		[TestMethod]
-		public void TaskContinueWith()
-		{
-			MyTask.TestContinueWith();
-		}
-
-		[TestMethod]
-		public void TaskObjectLock()
-		{
-			MyTask.TestTaskObjectLock();
-		}
-
-		[TestMethod]
-		public void TaskChildTask()
-		{
-			MyTask.TestChildTask();
-		}
-
 	}
 }
