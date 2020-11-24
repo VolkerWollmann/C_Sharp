@@ -35,9 +35,9 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void ThreadMethod()
+		public void ThreadParameterizedThreadStart()
 		{
-			MyThread.TestThreadMethodWidData();
+			MyThread.TestParameterizedThreadStart();
 		}
 
 		[TestMethod]

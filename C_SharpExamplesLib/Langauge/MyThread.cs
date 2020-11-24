@@ -43,6 +43,9 @@ namespace C_Sharp
 		#endregion
 
 		#region threadlocal
+		/// <summary>
+		/// both threads work on local data
+		/// </summary>
 		public static ThreadLocal<Random> RandomGenerator =
 		new ThreadLocal<Random>(() =>
 		{
@@ -61,9 +64,10 @@ namespace C_Sharp
 			{
 				for (int i = 0; i < 5; i++)
 				{
-					Console.WriteLine("t1: {0}", RandomGenerator.Value.Next(10));
 					ThreadInt.Value = 5;
 					RandomGenerator2.Value = new Random(3);
+
+					Console.WriteLine("Thread 1: {0} {1}", RandomGenerator.Value.Next(10), ThreadInt.Value );
 					Thread.Sleep(500);
 				}
 			});
@@ -72,7 +76,7 @@ namespace C_Sharp
 			{
 				for (int i = 0; i < 5; i++)
 				{
-					Console.WriteLine("t2: {0}", RandomGenerator.Value.Next(10));
+					Console.WriteLine("Thread 2: {0} {1}", RandomGenerator.Value.Next(10), ThreadInt.Value);
 					Thread.Sleep(500);
 				}
 			});
@@ -80,7 +84,8 @@ namespace C_Sharp
 			t1.Start();
 			t2.Start();
 
-			Console.ReadKey();
+			//Console.ReadKey();
+			Thread.Sleep(5000);
 		}
 		#endregion
 
@@ -91,13 +96,13 @@ namespace C_Sharp
 		[ThreadStatic]
 		private static int ThreadStaticLocalState;
 
-		// might fail if threads are fast
+		// common field for all threads : might fail if threads are fast
 		private static int LocalState;
 
-		// will be treated by atomic operation
+		// common field for all threads : will be treated by atomic operation
 		private static int AtomicLocalState;
 
-		// will be treated by semaphore
+		// common field for all threads : will be treated by semaphore
 		private static Semaphore Semaphore;
 		private static int SemphoreProtectedLocalState;
 
@@ -165,7 +170,7 @@ namespace C_Sharp
 		#endregion
 
 		#region simple thread
-		// #tread
+		// #thread
 		private static void SimpleThreadHello()
 		{
 			Console.WriteLine("Hello from the thread");
@@ -180,14 +185,14 @@ namespace C_Sharp
 		#endregion
 
 		#region ParameterizedThreadStart
-		// #ParameterizedThreadStart
+		// #thread #ParameterizedThreadStart
 		private static void WorkOnData(object data)
 		{
 			Console.WriteLine("Working on: {0}", data);
 			Thread.Sleep(1000);
 		}
 
-		public static void TestThreadMethodWidData()
+		public static void TestParameterizedThreadStart()
 		{
 			ParameterizedThreadStart ps = new ParameterizedThreadStart(WorkOnData);
 
