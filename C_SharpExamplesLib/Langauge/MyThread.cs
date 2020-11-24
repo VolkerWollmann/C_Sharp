@@ -207,5 +207,26 @@ namespace C_Sharp
 			myThread.Start("outer space");
 		}
 		#endregion
+
+		#region threadabort
+		// #thread #abort
+
+		public static void Thread_Abort()
+		{
+			Thread tickThread = new Thread(() =>
+			{
+				int i = 0;
+				while (true)
+				{
+					Console.WriteLine("Tick" + i++.ToString());
+					Thread.Sleep(1000);
+				}
+			});
+
+			tickThread.Start();
+			Thread.Sleep(3500);
+			tickThread.Abort();
+		}
+		#endregion
 	}
 }

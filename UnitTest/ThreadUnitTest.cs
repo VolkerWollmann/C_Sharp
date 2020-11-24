@@ -61,5 +61,11 @@ namespace UnitTest
 		{
 			MyThread.ParallelFor();
 		}
+
+		[TestMethod]
+		public void Thread_Abort()
+		{
+			MyThread.Thread_Abort();
+		}
 	}
 }
