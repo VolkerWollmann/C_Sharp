@@ -73,5 +73,11 @@ namespace UnitTest
 		{
 			MyThread.Thread_Join();
 		}
+
+		[TestMethod]
+		public void Thread_AdministrativeData()
+		{
+			MyThread.Thread_AdministrativeData();
+		}
 	}
 }
