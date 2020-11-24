@@ -44,7 +44,7 @@ namespace C_Sharp
 
 		#region threadlocal
 		/// <summary>
-		/// both threads work on local data
+		/// both threads work on thread local data
 		/// </summary>
 		public static ThreadLocal<Random> RandomGenerator =
 		new ThreadLocal<Random>(() =>
@@ -55,9 +55,6 @@ namespace C_Sharp
 		public static ThreadLocal<int> ThreadInt =
 			new ThreadLocal<int>();
 
-		public static ThreadLocal<Random> RandomGenerator2 =
-		   new ThreadLocal<Random>();
-
 		public static void TestThreadLocalData()
 		{
 			Thread t1 = new Thread(() =>
@@ -65,8 +62,7 @@ namespace C_Sharp
 				for (int i = 0; i < 5; i++)
 				{
 					ThreadInt.Value = 5;
-					RandomGenerator2.Value = new Random(3);
-
+					
 					Console.WriteLine("Thread 1: {0} {1}", RandomGenerator.Value.Next(10), ThreadInt.Value );
 					Thread.Sleep(500);
 				}
