@@ -208,7 +208,7 @@ namespace C_Sharp
 		}
 		#endregion
 
-		#region threadabort
+		#region thread abort
 		// #thread #abort
 
 		public static void Thread_Abort()
@@ -226,6 +226,39 @@ namespace C_Sharp
 			tickThread.Start();
 			Thread.Sleep(3500);
 			tickThread.Abort();
+		}
+		#endregion
+
+		#region thread join
+		public static void Thread_Join()
+		{
+			Thread thread1 = new Thread(() =>
+			{
+				int i = 0;
+				while (i < 10)
+				{
+					Console.WriteLine("Thread 1 Tick " + i++.ToString());
+					Thread.Sleep(1000);
+				}
+			});
+
+			Thread thread2 = new Thread(() =>
+			{
+				int i = 0;
+				while (i < 3)
+				{
+					Console.WriteLine("Thread 2 Tick " + i++.ToString());
+					Thread.Sleep(1000);
+				}
+
+				Console.WriteLine("Thread 2 actual finished");
+				thread1.Join();
+				Console.WriteLine("Thread 2 has performed join with thread 1");
+			});
+
+			thread1.Start();
+			thread2.Start();
+			thread2.Join();
 		}
 		#endregion
 	}

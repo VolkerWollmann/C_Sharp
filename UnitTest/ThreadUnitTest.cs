@@ -67,5 +67,11 @@ namespace UnitTest
 		{
 			MyThread.Thread_Abort();
 		}
+
+		[TestMethod]
+		public void Thread_Join()
+		{
+			MyThread.Thread_Join();
+		}
 	}
 }
