@@ -57,7 +57,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void TestReject()
+		public void TestTuple()
 		{
 			CSharp6.TupleTest();
 		}
@@ -107,18 +107,6 @@ namespace UnitTest
 		{
 			MyGeneric.Test();
 
-		}
-
-		[TestMethod]
-		public void EqaulityComparer()
-		{
-			MyEqaulityComparer.Test();
-		}
-
-		[TestMethod]
-		public void OrderComparable()
-		{
-			MyComparable.Test();
 		}
 
 		[TestMethod]
