@@ -177,6 +177,10 @@ namespace C_Sharp
 		{
 			Thread thread = new Thread(SimpleThreadHello);
 			thread.Start();
+
+			ThreadStart ts = new ThreadStart(SimpleThreadHello);
+			thread = new Thread(ts);
+			thread.Start();
 		}
 		#endregion
 
