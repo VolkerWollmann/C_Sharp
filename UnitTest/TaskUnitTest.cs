@@ -20,19 +20,19 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void TaskContinueWith()
+		public void Task_ContinueWith()
 		{
 			MyTask.TestContinueWith();
 		}
 
 		[TestMethod]
-		public void TaskObjectLock()
+		public void Task_ObjectLock()
 		{
 			MyTask.TestTaskObjectLock();
 		}
 
 		[TestMethod]
-		public void TaskChildTask()
+		public void Task_ChildTask()
 		{
 			MyTask.TestChildTask();
 		}

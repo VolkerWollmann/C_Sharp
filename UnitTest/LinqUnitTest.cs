@@ -22,7 +22,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void PrallelLinqException()
+		public void ParallelLinq_Exception()
         {
 			MyLinq.PLinqExceptions();
 

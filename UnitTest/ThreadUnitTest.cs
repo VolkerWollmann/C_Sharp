@@ -19,33 +19,33 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void ThreadSimple()
+		public void Thread_Simple()
 		{
 			MyThread.ThreadSimple();
 		}
 
 
 		[TestMethod]
-		public void ThreadLambda()
+		public void Thread_Lambda()
 		{
 			MyThread.TestLambdaThreadWithData();
 		}
 
 		[TestMethod]
-		public void ThreadParameterizedThreadStart()
+		public void Thread_ParameterizedThreadStart()
 		{
 			MyThread.TestParameterizedThreadStart();
 		}
 
 		[TestMethod]
-		public void ThreadStaticData()
+		public void Thread_StaticData()
 		{
 			TestContext.WriteLine("Hase");
 			MyThread.TestThreadStaticData();
 		}
 
 		[TestMethod]
-		public void ThreadLocalData()
+		public void Thread_LocalData()
 		{
 			MyThread.TestThreadLocalData();
 		}
