@@ -14,13 +14,14 @@ namespace C_Sharp
 	/// </summary>
 	public class MyDelegate
 	{
-		Func<int, int> f;
+		// #Func : function pointer ( and type )
+		Func<int, int> func;
 
 		// #delegate : like a #function pointer type
 		delegate int IntegerFunction(int i);
 
 		// Delegate : like instance of typed function pointer
-		IntegerFunction f2;
+		IntegerFunction func2;
 
 		// Delegate : like instance of untyped function pointer
 		Delegate _delegate;
@@ -60,29 +61,29 @@ namespace C_Sharp
 			MyDelegate myDelegate = new MyDelegate();
 			int i;
 
-			myDelegate.f = myDelegate.Double;
-		    i = myDelegate.f(3);
+			myDelegate.func = myDelegate.Double;
+		    i = myDelegate.func(3);
 			Assert.IsTrue(i == 6);
 
-			myDelegate.f = myDelegate.Square;
-			i = myDelegate.f(3);
+			myDelegate.func = myDelegate.Square;
+			i = myDelegate.func(3);
 			Assert.IsTrue(i == 9);
 
-			myDelegate.f2 = myDelegate.Double;
-			i = myDelegate.f2(3);
+			myDelegate.func2 = myDelegate.Double;
+			i = myDelegate.func2(3);
 			Assert.IsTrue(i == 6);
 
-			myDelegate.f2 = new IntegerFunction(myDelegate.Square);
-			i = myDelegate.f2(3);
+			myDelegate.func2 = new IntegerFunction(myDelegate.Square);
+			i = myDelegate.func2(3);
 			Assert.IsTrue(i == 9);
 
 			// Assignment of lamda expression
-			myDelegate.f = (n) => { return n * n; };
-			i = myDelegate.f(4);
+			myDelegate.func = (n) => { return n * n; };
+			i = myDelegate.func(4);
 			Assert.IsTrue(i == 16);
 
-			myDelegate.f2 = (n) => { return n * n; };
-			i = myDelegate.f2(5);
+			myDelegate.func2 = (n) => { return n * n; };
+			i = myDelegate.func2(5);
 			Assert.IsTrue(i == 25);
 
 			myDelegate.WriteMessage("Hello World");
@@ -96,21 +97,21 @@ namespace C_Sharp
 			int i;
 			Delegate[] fInvocationList, f2InvocationList;
 
-			myDelegate.f = myDelegate.Double;
-			myDelegate.f += myDelegate.Square;
+			myDelegate.func = myDelegate.Double;
+			myDelegate.func += myDelegate.Square;
 
 			// invocationList
-		    fInvocationList = myDelegate.f.GetInvocationList();
+		    fInvocationList = myDelegate.func.GetInvocationList();
 
-			i = myDelegate.f(3);
+			i = myDelegate.func(3);
 			Assert.IsTrue(i == 9);
 
-			myDelegate.f2 = StaticDouble;
-			myDelegate.f2 += myDelegate.Square;
+			myDelegate.func2 = StaticDouble;
+			myDelegate.func2 += myDelegate.Square;
 
-			f2InvocationList = myDelegate.f2.GetInvocationList();
+			f2InvocationList = myDelegate.func2.GetInvocationList();
 
-			i = myDelegate.f2(3);
+			i = myDelegate.func2(3);
 			Assert.IsTrue(i == 9);
 
 		}
@@ -120,7 +121,7 @@ namespace C_Sharp
 			MyDelegate myDelegate = new MyDelegate();
 			int delegateResult;
 			
-			myDelegate.f2 = myDelegate.Square;
+			myDelegate.func2 = myDelegate.Square;
 
 			// will not compile because of wrong type
 			// myDelegate.f2 = myDelegate.BadFunction;
@@ -133,14 +134,14 @@ namespace C_Sharp
 			delegateResult = (int)myDelegate._delegate.DynamicInvoke(41,1);
 			Assert.IsTrue(delegateResult == 42);
 
-			myDelegate.f2 = (IntegerFunction)Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, "Square");
-			delegateResult = myDelegate.f2(4);
+			myDelegate.func2 = (IntegerFunction)Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, "Square");
+			delegateResult = myDelegate.func2(4);
 			Assert.IsTrue(delegateResult == 16);
 
 			try
 			{
-				myDelegate.f2 = (IntegerFunction)Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, "BadFunction");
-				delegateResult = myDelegate.f2(5);
+				myDelegate.func2 = (IntegerFunction)Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, "BadFunction");
+				delegateResult = myDelegate.func2(5);
 			}
 			catch (ArgumentException exp )
 			{
