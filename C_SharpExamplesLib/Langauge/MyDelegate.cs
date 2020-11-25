@@ -145,7 +145,7 @@ namespace C_Sharp
 			}
 			catch (ArgumentException exp )
 			{
-				// runtime error : BadFunction cannot be assigned to f2
+				// runtime error : BadFunction cannot be assigned to func2
 				string expDescription = exp.ToString();
 			}
 		}
