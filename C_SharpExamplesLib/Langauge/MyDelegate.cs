@@ -15,16 +15,16 @@ namespace C_Sharp
 	public class MyDelegate
 	{
 		// #Func : function pointer ( and type )
-		Func<int, int> func;
+		Func<int, int> funcIntInt;
 
 		// #delegate : like a #function pointer type
 		delegate int IntegerFunction(int i);
 
 		// Delegate : like instance of typed function pointer
-		IntegerFunction func2;
+		IntegerFunction funcIntegerFunction;
 
 		// Delegate : like instance of untyped function pointer
-		Delegate _delegate;
+		Delegate Delegate;
 
 		#region Integer Functions       
 		int Square(int i)
@@ -56,96 +56,112 @@ namespace C_Sharp
 		{			
 		}
 
-		public static void Test()
+		public static void TestDelgateAndFunc()
 		{
 			MyDelegate myDelegate = new MyDelegate();
 			int i;
 
-			myDelegate.func = myDelegate.Double;
-		    i = myDelegate.func(3);
+			myDelegate.funcIntInt = myDelegate.Double;
+		    i = myDelegate.funcIntInt(3);
 			Assert.IsTrue(i == 6);
 
-			myDelegate.func = myDelegate.Square;
-			i = myDelegate.func(3);
+			myDelegate.funcIntInt = myDelegate.Square;
+			i = myDelegate.funcIntInt(3);
 			Assert.IsTrue(i == 9);
 
-			myDelegate.func2 = myDelegate.Double;
-			i = myDelegate.func2(3);
+			myDelegate.funcIntegerFunction = myDelegate.Double;
+			i = myDelegate.funcIntegerFunction(3);
 			Assert.IsTrue(i == 6);
 
-			myDelegate.func2 = new IntegerFunction(myDelegate.Square);
-			i = myDelegate.func2(3);
+			myDelegate.funcIntegerFunction = new IntegerFunction(myDelegate.Square);
+			i = myDelegate.funcIntegerFunction(3);
 			Assert.IsTrue(i == 9);
 
 			// Assignment of lamda expression
-			myDelegate.func = (n) => { return n * n; };
-			i = myDelegate.func(4);
+			myDelegate.funcIntInt = (n) => { return n * n; };
+			i = myDelegate.funcIntInt(4);
 			Assert.IsTrue(i == 16);
 
-			myDelegate.func2 = (n) => { return n * n; };
-			i = myDelegate.func2(5);
+			myDelegate.funcIntegerFunction = (n) => { return n * n; };
+			i = myDelegate.funcIntegerFunction(5);
 			Assert.IsTrue(i == 25);
 
 			// that will not cast : similar but not same
-			// myDelegate.func2 = (IntegerFunction)myDelegate.func;
-            // myDelegate.func = (Func<int, int>)myDelegate.func2;
+			// myDelegate.funcIntInt = (IntegerFunction)myDelegate.funcIntergerFunction;
+			// myDelegate.funcIntergerFunction = (Func<int, int>)myDelegate.funcIntInt;
+
+			myDelegate.funcIntInt = myDelegate.Square;
+			myDelegate.funcIntegerFunction = new IntegerFunction(myDelegate.funcIntInt);
+			i = myDelegate.funcIntegerFunction(2);
+			Assert.IsTrue(i == 4);
+
+			myDelegate.funcIntegerFunction = myDelegate.Square;
+			myDelegate.funcIntInt = (Func<int, int>)null;
+			myDelegate.funcIntInt = new Func<int,int>(myDelegate.funcIntegerFunction);
+			i = myDelegate.funcIntInt(3);
+			Assert.IsTrue(i == 9);
 
 			myDelegate.WriteMessage("Hello World");
 
 			Assert.IsTrue(myDelegate.LessThanTree(2));
 		}
 
-		public static void Test2()
+		public static void TestDelgateFuncInvocationList()
 		{
 			MyDelegate myDelegate = new MyDelegate();
 			int i;
 			Delegate[] fInvocationList, f2InvocationList;
 
-			myDelegate.func = myDelegate.Double;
-			myDelegate.func += myDelegate.Square;
+			myDelegate.funcIntInt = myDelegate.Double;
+			myDelegate.funcIntInt += myDelegate.Square;
 
-			// invocationList
-		    fInvocationList = myDelegate.func.GetInvocationList();
+			// invocationList : normally 0 or 1 Element, but more fuctions can be assigned
+			// last wins
+		    fInvocationList = myDelegate.funcIntInt.GetInvocationList();
 
-			i = myDelegate.func(3);
+			i = myDelegate.funcIntInt(3);
 			Assert.IsTrue(i == 9);
 
-			myDelegate.func2 = StaticDouble;
-			myDelegate.func2 += myDelegate.Square;
+			myDelegate.funcIntegerFunction = StaticDouble;
+			myDelegate.funcIntegerFunction += myDelegate.Square;
 
-			f2InvocationList = myDelegate.func2.GetInvocationList();
+			f2InvocationList = myDelegate.funcIntegerFunction.GetInvocationList();
 
-			i = myDelegate.func2(3);
+			i = myDelegate.funcIntegerFunction(3);
 			Assert.IsTrue(i == 9);
 
 		}
 
-		public static void Test3()
+		public static void TestDelegateAssignmentByName()
 		{
 			MyDelegate myDelegate = new MyDelegate();
 			int delegateResult;
 			
-			myDelegate.func2 = myDelegate.Square;
+			myDelegate.Delegate = Delegate.CreateDelegate(typeof(Func<int, int>), myDelegate, "Square" );
+			delegateResult = (int)myDelegate.Delegate.DynamicInvoke(3);
+			Assert.IsTrue(delegateResult == 9);
+
+			myDelegate.Delegate = Delegate.CreateDelegate(typeof(Func<int, int, int>), myDelegate, "BadFunction");
+			delegateResult = (int)myDelegate.Delegate.DynamicInvoke(41,1);
+			Assert.IsTrue(delegateResult == 42);
+
+			myDelegate.funcIntInt = (Func<int,int>)Delegate.CreateDelegate(typeof(Func<int, int>), myDelegate, "Square");
+			int funcIntIntResult = myDelegate.funcIntInt(4);
+			Assert.IsTrue(funcIntIntResult == 16);
+
+			myDelegate.funcIntegerFunction = myDelegate.Square;
 
 			// will not compile because of wrong type
 			// myDelegate.f2 = myDelegate.BadFunction;
 
-			myDelegate._delegate = Delegate.CreateDelegate(typeof(Func<int, int>), myDelegate, "Square" );
-			delegateResult = (int)myDelegate._delegate.DynamicInvoke(3);
-			Assert.IsTrue(delegateResult == 9);
-
-			myDelegate._delegate = Delegate.CreateDelegate(typeof(Func<int, int, int>), myDelegate, "BadFunction");
-			delegateResult = (int)myDelegate._delegate.DynamicInvoke(41,1);
-			Assert.IsTrue(delegateResult == 42);
-
-			myDelegate.func2 = (IntegerFunction)Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, "Square");
-			delegateResult = myDelegate.func2(4);
+			myDelegate.funcIntegerFunction = (IntegerFunction)Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, "Square");
+			delegateResult = myDelegate.funcIntegerFunction(4);
 			Assert.IsTrue(delegateResult == 16);
 
 			try
 			{
-				myDelegate.func2 = (IntegerFunction)Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, "BadFunction");
-				delegateResult = myDelegate.func2(5);
+				myDelegate.funcIntegerFunction = (IntegerFunction)Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, "BadFunction");
+				delegateResult = myDelegate.funcIntegerFunction(5);
 			}
 			catch (ArgumentException exp )
 			{
@@ -154,7 +170,7 @@ namespace C_Sharp
 			}
 		}
 
-		public static void Test4()
+		public static void TestDelegateAssignmentByMethodInfo()
 		{
 			MyDelegate myDelegate = new MyDelegate();
 			int delegateResult;
@@ -164,29 +180,29 @@ namespace C_Sharp
 			TypeInfo ti = t.GetTypeInfo();
 			MethodInfo mSquare = ti.GetDeclaredMethod("Square");
 
-			myDelegate._delegate = Delegate.CreateDelegate(typeof(Func<int,int>), myDelegate, mSquare);
-			fRawInvocationList = myDelegate._delegate.GetInvocationList();
+			myDelegate.Delegate = Delegate.CreateDelegate(typeof(Func<int,int>), myDelegate, mSquare);
+			fRawInvocationList = myDelegate.Delegate.GetInvocationList();
 
-			delegateResult = (int)myDelegate._delegate.DynamicInvoke(3);
+			delegateResult = (int)myDelegate.Delegate.DynamicInvoke(3);
 			Assert.IsTrue(delegateResult == 9);
 
-			myDelegate._delegate = Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, mSquare);
-			fInvocationList = myDelegate._delegate.GetInvocationList();
+			myDelegate.Delegate = Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, mSquare);
+			fInvocationList = myDelegate.Delegate.GetInvocationList();
 
-			delegateResult = (int)myDelegate._delegate.DynamicInvoke(3);
+			delegateResult = (int)myDelegate.Delegate.DynamicInvoke(3);
 			Assert.IsTrue(delegateResult == 9);
 
 			MethodInfo mDouble = ti.GetDeclaredMethod("Double");
-			myDelegate._delegate = System.Delegate.Combine(myDelegate._delegate,
+			myDelegate.Delegate = System.Delegate.Combine(myDelegate.Delegate,
 				Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, mDouble));
-			f2InvocationList = myDelegate._delegate.GetInvocationList();
+			f2InvocationList = myDelegate.Delegate.GetInvocationList();
 
-			delegateResult = (int)myDelegate._delegate.DynamicInvoke(3);
+			delegateResult = (int)myDelegate.Delegate.DynamicInvoke(3);
 			Assert.IsTrue(delegateResult == 6);
 
 			MethodInfo mStaticDouble = ti.GetDeclaredMethod("StaticDouble");
-			myDelegate._delegate = Delegate.CreateDelegate(typeof(IntegerFunction), mStaticDouble);
-			delegateResult = (int)myDelegate._delegate.DynamicInvoke(4);
+			myDelegate.Delegate = Delegate.CreateDelegate(typeof(IntegerFunction), mStaticDouble);
+			delegateResult = (int)myDelegate.Delegate.DynamicInvoke(4);
 			Assert.IsTrue(delegateResult == 8);
 		} 
 	}

@@ -28,15 +28,6 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void MyDelegateTest()
-		{
-			MyDelegate.Test();
-			MyDelegate.Test2();
-			MyDelegate.Test3();
-			MyDelegate.Test4();
-		}
-
-		[TestMethod]
 		public void MyExceptionTest()
 		{
 			MyException.Test();
