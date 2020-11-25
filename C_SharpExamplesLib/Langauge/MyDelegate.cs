@@ -86,6 +86,10 @@ namespace C_Sharp
 			i = myDelegate.func2(5);
 			Assert.IsTrue(i == 25);
 
+			// that will not cast : similar but not same
+			// myDelegate.func2 = (IntegerFunction)myDelegate.func;
+            // myDelegate.func = (Func<int, int>)myDelegate.func2;
+
 			myDelegate.WriteMessage("Hello World");
 
 			Assert.IsTrue(myDelegate.LessThanTree(2));
