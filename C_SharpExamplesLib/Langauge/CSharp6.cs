@@ -61,14 +61,18 @@ namespace C_Sharp
 			return b2;
 		}
 
-		public static void TestAssert()
+		// #Assert #Exception #Action
+		public static void Assert_Test()
 		{
 			string s;
 			int divisor = 0;
+
+			Action badAction = () => { int i = 1 / divisor; };
+
 			try
 			{
 				//throw (new Exception());
-				int i = 1 / divisor;
+				badAction.Invoke();
 
 				Assert.Fail( "If this exception occurs, then prior expected exception had not been thrown." );				
 			}
@@ -76,6 +80,8 @@ namespace C_Sharp
 			{
 				s = e.GetType().Name;
 			}
+
+			Assert.ThrowsException<DivideByZeroException>(badAction, "Exception DivideByZeroException expected");
 
 		}
 

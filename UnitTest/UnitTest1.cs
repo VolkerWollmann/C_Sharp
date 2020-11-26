@@ -42,9 +42,9 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void TestAssert()
+		public void Assert_Test()
 		{
-			CSharp6.TestAssert();
+			CSharp6.Assert_Test();
 		}
 
 		[TestMethod]
