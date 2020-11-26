@@ -10,9 +10,27 @@ namespace UnitTest
     public class LinqUnitTest
     {
 		[TestMethod]
-		public void Linq1()
+		public void Linq_Zip()
 		{
-			MyLinq.Test();
+			MyLinq.Linq_Zip ();
+		}
+
+		[TestMethod]
+		public void Linq_FirstOrDefault()
+		{
+			MyLinq.Linq_FirstOrDefault();
+		}
+
+		[TestMethod]
+		public void List_Range_Where_Take()
+		{
+			MyLinq.List_Range_Where_Take();
+		}
+
+		[TestMethod]
+		public void Linq_SetOperation()
+		{
+			MyLinq.Linq_SetOperation();
 		}
 
 		[TestMethod]

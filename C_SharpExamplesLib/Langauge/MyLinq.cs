@@ -9,7 +9,7 @@ namespace C_Sharp
 	public class MyLinq
 	{
 		// #linq #range #where #take
-		public static void ListTests()
+		public static void List_Range_Where_Take()
 		{
 			
 			List<int> favorites = new List<int> { 0, 7, 14, 21, 28, 35, 42, 49 };
@@ -26,7 +26,7 @@ namespace C_Sharp
 
 
 		// #linq #zip #firstOrdefault
-		public static void LinqTest()
+		public static void Linq_Zip()
 		{
 			// #Zip
 			int[] numbers = { 1, 2, 3, 4 };
@@ -37,6 +37,10 @@ namespace C_Sharp
 			Assert.IsTrue(numbersAndWords.First().Contains("one"));
 			Assert.IsTrue(numbersAndWords.First().Contains("1"));
 
+		}
+
+		public static void Linq_FirstOrDefault()
+		{ 
 			// #FirstOrDefault
 			int i = 42;
 			List<int> l = new List<int> { };
@@ -52,14 +56,8 @@ namespace C_Sharp
 
 		}
 
-		public static void Test()
-		{
-			ListTests();
-			LinqTest();
-		}
-
 		// #linq #set operation #union #intersect #except
-		public static void TestSetOperation()
+		public static void Linq_SetOperation()
 		{
 			IEnumerable<int> setA = Enumerable.Range(1, 6); // {1,2,3,4,5,6}
 			IEnumerable<int> setB = Enumerable.Range(4, 6); //       {4,5,6,7,8,9}
