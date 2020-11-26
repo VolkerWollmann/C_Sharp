@@ -10,7 +10,7 @@ namespace C_Sharp
 {
 	public class MyAnonymousType
 	{
-		public static void Test()
+		public static void AnonymousType_Test()
 		{
 			var dog = new { Name = MyEnum.Dog.Cerberus, Größe = "50cm" };
 			var dogType = dog.GetType();

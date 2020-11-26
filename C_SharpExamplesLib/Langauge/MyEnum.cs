@@ -29,7 +29,7 @@ namespace C_Sharp
 			}
 		}
 
-		public static void Test()
+		public static void Enum_Test()
 		{
 			int numberOfDogs = Enum.GetValues(typeof(Dog)).Length;
 

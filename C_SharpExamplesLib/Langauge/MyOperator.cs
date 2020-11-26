@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace C_Sharp
 {
-	public class MyOperators
+	// #Operator ?. ??
+	public class MyOperator
 	{
 		public string Esel = "Esel";
 		private static void QuestionMarkOperator()
@@ -20,13 +21,13 @@ namespace C_Sharp
 			var u = st ?? "Esel";
 			Assert.IsTrue(u == "Igel");
 
-			MyOperators myOperators11 = null;
-			string e1 = myOperators11?.Esel;
+			MyOperator myOperator11 = null;
+			string e1 = myOperator11?.Esel;
 			Assert.IsTrue(e1 == null);
 
-			myOperators11 = new MyOperators();
-			string e2 = myOperators11?.Esel;
-			Assert.IsTrue(e2 == myOperators11.Esel);
+			myOperator11 = new MyOperator();
+			string e2 = myOperator11?.Esel;
+			Assert.IsTrue(e2 == myOperator11.Esel);
 
 			string e3 = e1 + e2;
 
@@ -34,7 +35,7 @@ namespace C_Sharp
 			Assert.IsTrue(s == "immer");
 		}
 
-		public static void Test()
+		public static void Operator_Test()
 		{
 			QuestionMarkOperator();
 		}

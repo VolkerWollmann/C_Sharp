@@ -54,7 +54,7 @@ namespace C_Sharp
 	}
 	public class MyException
 	{
-		public static void Test()
+		public static void Exception_Test()
 		{
 			try
 			{

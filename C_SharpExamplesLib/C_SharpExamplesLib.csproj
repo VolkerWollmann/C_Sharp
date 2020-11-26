@@ -68,7 +68,7 @@
     <Compile Include="Langauge\MyLinq.cs" />
     <Compile Include="Langauge\MyList.cs" />
     <Compile Include="Langauge\MyMultipleInheritance.cs" />
-    <Compile Include="Langauge\MyOperators.cs" />
+    <Compile Include="Langauge\MyOperator.cs" />
     <Compile Include="Langauge\MyThread2.cs" />
     <Compile Include="Langauge\MySimple.cs" />
     <Compile Include="Langauge\MyTask.cs" />

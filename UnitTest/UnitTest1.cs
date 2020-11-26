@@ -10,27 +10,27 @@ namespace UnitTest
 	public class AllUnitTests
 	{
 		[TestMethod]
-		public void MyEnumTest()
+		public void Enum_Test()
 		{
-			MyEnum.Test();
+			MyEnum.Enum_Test();
 		}
 
 		[TestMethod]
-		public void MyOperatorsTest()
+		public void Operator_Test()
 		{
-			MyOperators.Test();
+			MyOperator.Operator_Test();
 		}
 
 		[TestMethod]
-		public void MyAnonymousTypesTest()
+		public void AnonymousTypes_Test()
 		{
-			MyAnonymousType.Test();
+			MyAnonymousType.AnonymousType_Test();
 		}
 
 		[TestMethod]
-		public void MyExceptionTest()
+		public void Exception_Test()
 		{
-			MyException.Test();
+			MyException.Exception_Test();
 		}
 
 		[TestMethod]
@@ -67,7 +67,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void MyClassAccessiblity()
+		public void ClassAccessiblity_Test()
 		{
 			C_Sharp.AccessiblityBase.MyClassAccessiblityTestA.Test();
 			C_Sharp.AccessiblityBase.MyClassAccessiblityTestB.Test();
@@ -107,7 +107,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void IEnumerableTest()
+		public void IEnumerable_Test()
 		{
 			MyIntegerRange.Test();
 		}
