@@ -18,6 +18,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{FB47993A-3F35-4755-B856-95DE7C3CD80D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpCore", "CSharpCore\CSharpCore.csproj", "{2A4F8D2E-82BB-4C46-9B71-F8C327726545}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreUnitTest", "NetCoreUnitTest\NetCoreUnitTest.csproj", "{235AB3F0-75F4-4D04-95A0-5069822705FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +48,14 @@ Global
 		{FB47993A-3F35-4755-B856-95DE7C3CD80D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB47993A-3F35-4755-B856-95DE7C3CD80D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB47993A-3F35-4755-B856-95DE7C3CD80D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A4F8D2E-82BB-4C46-9B71-F8C327726545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A4F8D2E-82BB-4C46-9B71-F8C327726545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A4F8D2E-82BB-4C46-9B71-F8C327726545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A4F8D2E-82BB-4C46-9B71-F8C327726545}.Release|Any CPU.Build.0 = Release|Any CPU
+		{235AB3F0-75F4-4D04-95A0-5069822705FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{235AB3F0-75F4-4D04-95A0-5069822705FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{235AB3F0-75F4-4D04-95A0-5069822705FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{235AB3F0-75F4-4D04-95A0-5069822705FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
