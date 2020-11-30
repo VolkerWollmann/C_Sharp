@@ -20,7 +20,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpCore", "CSharpCore\CSharpCore.csproj", "{2A4F8D2E-82BB-4C46-9B71-F8C327726545}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreUnitTest", "NetCoreUnitTest\NetCoreUnitTest.csproj", "{235AB3F0-75F4-4D04-95A0-5069822705FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreUnitTest", "NetCoreUnitTest\NetCoreUnitTest.csproj", "{235AB3F0-75F4-4D04-95A0-5069822705FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetCore", "NetCore", "{B32A1DBE-FB06-4CAE-8DBC-FF58AA59D061}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2A4F8D2E-82BB-4C46-9B71-F8C327726545} = {B32A1DBE-FB06-4CAE-8DBC-FF58AA59D061}
+		{235AB3F0-75F4-4D04-95A0-5069822705FA} = {B32A1DBE-FB06-4CAE-8DBC-FF58AA59D061}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EF76469A-F964-487D-9866-B74BE4116053}
