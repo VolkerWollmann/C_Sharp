@@ -88,7 +88,7 @@ namespace C_Sharp
 			return !divisors.Any(d => (i % d == 0));
 		}
 
-		// #linq #parallel  #plinq #WithDegreeOfParallelism
+		// #linq #parallel  #plinq #WithDegreeOfParallelism #rime
 		public static void TestParallelLinq()
         {
 			var numbers = Enumerable.Range(10000000, 500);
