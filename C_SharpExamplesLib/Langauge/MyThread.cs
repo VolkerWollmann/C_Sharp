@@ -86,6 +86,7 @@ namespace C_Sharp
 		#endregion
 
 		#region threadstatic
+		// #thread #threadStaticData #threadPool
 
 		// A static field marked with ThreadStaticAttribute is not shared between threads.
 		// Each executing thread has a separate instance of the field with random value
