@@ -14,7 +14,7 @@ namespace NetCoreUnitTest
     }
     public class CSharp9UnitTest
     {
-            [Fact]
+        [Fact]
         public void TestRecord()
         {
                 CSharp9.TestRecord();
