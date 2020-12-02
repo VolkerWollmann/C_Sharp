@@ -19,5 +19,11 @@ namespace NetCoreUnitTest
         {
             CSharp9.TestRecord();
         }
+
+        [Fact]
+        public void TestInit()
+        {
+            CSharp9.TestInit();
+        }
     }
 }
