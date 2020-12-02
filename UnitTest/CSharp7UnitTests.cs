@@ -1,10 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using C_Sharp;
-
 namespace UnitTest
 {
-	[TestClass]
-	public class CompareUnitTest
+    [TestClass]
+    public class CSharp7UnitTests
     {
 		private TestContext testContextInstance;
 
@@ -19,15 +18,9 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void OrderComparable()
+		public void Deconstruct()
 		{
-			MyComparable.Test();
-		}
-
-		[TestMethod]
-		public void EqaulityComparer()
-		{
-			MyEqaulityComparer.Test();
+			CSharp7.TestDeconstruct();
 		}
 	}
 }

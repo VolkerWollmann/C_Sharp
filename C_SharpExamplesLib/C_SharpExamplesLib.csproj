@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="FileOperation\MyFileOperation.cs" />
     <Compile Include="Langauge\CSharp6.cs" />
+    <Compile Include="Langauge\CSharp7.cs" />
     <Compile Include="Langauge\MyAbstractClass.cs" />
     <Compile Include="Langauge\MyAnonymousType.cs" />
     <Compile Include="Langauge\MyArray.cs" />
