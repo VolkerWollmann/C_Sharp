@@ -1,12 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using Xunit.Abstractions;
 
 namespace CSharpCore
 {
     public class CSharp9
     {
-        // #record #contentEqualtity #referentialEquality
-        internal record Person(string FirstName, string LastName);
+        // #record 
+        protected record Person(string FirstName, string LastName);
 
         public static void TestRecord()
         {
@@ -20,9 +21,21 @@ namespace CSharpCore
             Assert.AreEqual(p.FirstName, son.FirstName);
         }
 
+        // #contentEquality vs #referentialEquality
+        public static void ContentEquality(ITestOutputHelper testOutputHelper)
+        {
+            Person p1 = new Person("Heinz", "Müller");
+            Person p2 = new Person("Heinz", "Müller");
+
+            testOutputHelper.WriteLine($"P1 : FirstName: {p1.FirstName} LastName: {p1.LastName}  ");
+            testOutputHelper.WriteLine($"P2 : FirstName: {p2.FirstName} LastName: {p2.LastName}  ");
+            testOutputHelper.WriteLine($"p1 == p2 : {p1 == p2}");
+            
+            Assert.AreEqual(p1, p2);
+        }
 
         // #property #init #accessor
-        internal class Point
+        protected class Point
         {
             public int X { get; init; }
 

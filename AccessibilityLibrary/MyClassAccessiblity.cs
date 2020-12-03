@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 namespace C_Sharp.AccessiblityBase
 {
 	/// <summary>
-	/// #internal #private #public
+	/// #internal	: current assembly
+	/// #private	: private
+	/// #public		: unrestricted 
+	/// #protected  : containing class or types derived
 	/// </summary>
 	public class MyClassAccessiblity
 	{
