@@ -5,22 +5,22 @@ using System.Diagnostics;
 
 namespace C_Sharp
 {
-    // #comparer #equality
-	public class MyEqaulityComparer : IEqualityComparer<MyEqaulityComparer>
+	// #comparer #IEqualityComparer
+	public class MyIEqualityComparer : IEqualityComparer<MyIEqualityComparer>
 	{
 		public int X { get; private set; }
 		public int Y { get; private set; }
-		bool IEqualityComparer<MyEqaulityComparer>.Equals(MyEqaulityComparer x, MyEqaulityComparer y)
+		bool IEqualityComparer<MyIEqualityComparer>.Equals(MyIEqualityComparer x, MyIEqualityComparer y)
 		{
 			return (x.X == y.X) && (y.X == y.Y);
 		}
 
-		int IEqualityComparer<MyEqaulityComparer>.GetHashCode(MyEqaulityComparer obj)
+		int IEqualityComparer<MyIEqualityComparer>.GetHashCode(MyIEqualityComparer obj)
 		{
 			return (obj.X | obj.Y);
 		}
 
-		public MyEqaulityComparer(int x, int y)
+		public MyIEqualityComparer(int x, int y)
 		{
 			X = x;
 			Y = y;
@@ -28,28 +28,22 @@ namespace C_Sharp
 
 		public static void Test()
 		{
-			MyEqaulityComparer myA = new MyEqaulityComparer(1, 1);
-			MyEqaulityComparer myB = new MyEqaulityComparer(1, 1);
-			MyEqaulityComparer myC = new MyEqaulityComparer(1, 2);
+			MyIEqualityComparer myA = new MyIEqualityComparer(1, 1);
+			MyIEqualityComparer myB = new MyIEqualityComparer(1, 2);
+			MyIEqualityComparer myC = new MyIEqualityComparer(1, 1);
 
-			bool b1 = (myA.Equals(myA));
-			Assert.IsTrue(b1);
+			MyIEqualityComparer myIEqualityComparer = new MyIEqualityComparer(0, 0);
+			Dictionary<MyIEqualityComparer, string> dictionary = new Dictionary<MyIEqualityComparer, string>(myIEqualityComparer);
 
-			bool b2 = (myA == myB);
-			Assert.IsFalse(b2);
-
-			bool b3 = (myA.Equals(myC));
-			Assert.IsFalse(b3);
-
-			bool b4 = (myA == myC);
-			Assert.IsFalse(b4);
-
+			dictionary.Add(myA, "Test1");
+			dictionary.Add(myB, "Test2");
+			Assert.IsTrue(dictionary.ContainsKey(myC));
 		}
 	}
 
-	// #comparer #order #DebuggerDisplay
-	[DebuggerDisplay("Version = {Version}, Animal={Animal}")]
-	public class MyComparable : IComparable<MyComparable>
+	// #comparer #IComparable #order #DebuggerDisplay
+	[DebuggerDisplay("Version={Version}, Animal={Animal}")]
+	public class MyIComparable : IComparable<MyIComparable>
 	{
 		private const string DONKEY = "Esel";
 		private const string DOG = "Hund";
@@ -60,7 +54,7 @@ namespace C_Sharp
 		public string Animal { get; private set; }
 
 		#region Constructor 
-		private MyComparable(int version, string animal)
+		internal MyIComparable(int version, string animal)
 		{
 			Animal = animal;
 			Version = version;
@@ -73,7 +67,7 @@ namespace C_Sharp
 		// = 0 This instance occurs in the same position in the sort order as obj.
 		// > 0 This instance follows obj in the sort order.
 
-		int IComparable<MyComparable>.CompareTo(MyComparable other)
+		int IComparable<MyIComparable>.CompareTo(MyIComparable other)
 		{
 			if (this.Version < other.Version)
 				return -1;
@@ -91,16 +85,80 @@ namespace C_Sharp
 		#region Test
 		public static void Test()
 		{
-			List<MyComparable> l = new List<MyComparable> {
-				new MyComparable(1, DONKEY),
-				new MyComparable(3, DONKEY),
-				new MyComparable(2, CAT),
-				new MyComparable(3, CAT),
-				new MyComparable(2, DOG),
+			List<MyIComparable> l = new List<MyIComparable> {
+				new MyIComparable(1, DONKEY),
+				new MyIComparable(3, DONKEY),
+				new MyIComparable(2, CAT),
+				new MyIComparable(3, CAT),
+				new MyIComparable(2, DOG),
 			};
 
 			l.Sort();
 		}
 		#endregion
 	}
+
+
+	// #comparer #IEquatable #override #==
+	[DebuggerDisplay("Number={Number}, Animal={Animal}")]
+	public class MyIEquatible : IEquatable<MyIEquatible>
+    {
+		public int Number { private set; get; }
+		public string Animal { private set; get; }
+
+
+		public override bool Equals(object other)
+        {
+			return this.Equals(other as MyIEquatible); 
+        }
+
+		public override int GetHashCode()
+		{
+			return Number;
+		}
+
+		#region IEquatable
+		//bool IEquatable<MyEquatible>.Equals(MyEquatible other)
+        public bool Equals(MyIEquatible other)
+		{
+			if (Object.ReferenceEquals(other, null))
+				return false;
+
+			return  this.Number == other.Number && this.Animal == other.Animal;
+		}
+		#endregion
+
+		#region override Comparsion Operators
+		public static bool operator ==(MyIEquatible obj1, MyIEquatible obj2) => obj1.Equals(obj2);
+
+        public static bool operator !=(MyIEquatible obj1, MyIEquatible obj2) => !obj1.Equals(obj2);
+
+        #endregion
+
+        #region Constructor
+        public MyIEquatible(int number, string animal)
+        {
+			Number = number;
+			Animal = animal;
+        }
+		#endregion
+
+		#region Test
+		public static void Test()
+        {
+			MyIEquatible me1 = new MyIEquatible(1, "Esel");
+			MyIEquatible me2 = new MyIEquatible(2, "Esel");
+			MyIEquatible me3 = new MyIEquatible(1, "Esel");
+
+			MyIComparable me4 = new MyIComparable(1, "Esel");
+
+			Assert.IsTrue(me1 == me3);
+			Assert.IsTrue(me1 != me2);
+
+			//Does not compile, because of type check during compilation
+			//Assert.IsTrue(me1 != me4);
+		}
+
+        #endregion
+    }
 }

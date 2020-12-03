@@ -19,15 +19,21 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void OrderComparable()
+		public void TestIComparable()
 		{
-			MyComparable.Test();
+			MyIComparable.Test();
 		}
 
 		[TestMethod]
-		public void EqaulityComparer()
+		public void TestIEqaulityComparer()
 		{
-			MyEqaulityComparer.Test();
+			MyIEqualityComparer.Test();
 		}
+
+		[TestMethod]
+		public void TestIEquatable()
+        {
+			MyIEquatible.Test();
+        }
 	}
 }
