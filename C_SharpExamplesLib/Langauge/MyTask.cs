@@ -122,5 +122,36 @@ namespace C_Sharp
 			Console.WriteLine("The total is: {0}", sharedTotal);
 		}
 		#endregion
+
+		#region Async_await
+		/// #async #awit
+		
+		private static int DoSomething()
+        {
+			Console.WriteLine("Something started");
+			Thread.Sleep(1000);
+			Console.WriteLine("Something finished");
+
+			return 1;
+        }
+
+		private static async void PerformSomething()
+		{
+			Console.WriteLine("PerfomSomething started");
+			int result = await( Task<int>.Run(DoSomething));
+			Console.WriteLine("PerfomSomething finished");
+		}
+
+		public static void Test_AsyncAwait()
+        {
+			PerformSomething();
+			for(int i = 0; i < 10; i++)
+            {
+				Thread.Sleep(200);
+				Console.WriteLine($"Test_AsyncAwait:{i}");
+            }
+
+		}
+		#endregion
 	}
 }

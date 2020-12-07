@@ -37,5 +37,11 @@ namespace UnitTest
 			MyTask.TestChildTask();
 		}
 
+		[TestMethod]
+		public void Task_AsyncAwait()
+        {
+			MyTask.Test_AsyncAwait(); 
+        }
+
 	}
 }
