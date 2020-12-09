@@ -43,5 +43,10 @@ namespace UnitTest
 			MyTask.Test_AsyncAwait(); 
         }
 
+		[TestMethod]
+		public void Test_AsyncAwaitException()
+		{
+			MyTask.Test_AsyncAwaitException();
+		}
 	}
 }

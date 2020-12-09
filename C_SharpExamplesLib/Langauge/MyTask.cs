@@ -153,5 +153,41 @@ namespace C_Sharp
 
 		}
 		#endregion
+
+		#region Asyncv_awit_exception
+
+		private static int RaiseException()
+		{
+			Console.WriteLine("Raise Exception started");
+			Thread.Sleep(1000);
+			throw new Exception("Peng");
+			//Console.WriteLine("Raise Exception finished");
+			//return 1;
+		}
+		private static async void PerformException()
+		{
+			try
+			{
+				Console.WriteLine("Perform Exception started");
+				int result = await (Task<int>.Run(RaiseException));
+				Console.WriteLine("Perform Exception finished");
+			}
+			catch (Exception e)
+            {
+				Console.WriteLine("Perform Exception caught exception:" + e.Message);
+            }
+		}
+
+		public static void Test_AsyncAwaitException()
+		{
+			PerformException();
+			for (int i = 0; i < 10; i++)
+			{
+				Thread.Sleep(200);
+				Console.WriteLine($"Test_AsyncAwaitException:{i}");
+			}
+		}
+
+		#endregion
 	}
 }
