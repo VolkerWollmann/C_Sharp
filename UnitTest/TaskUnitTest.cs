@@ -44,9 +44,15 @@ namespace UnitTest
         }
 
 		[TestMethod]
-		public void Test_AsyncAwaitException()
+		public void Task_AsyncAwaitException()
 		{
 			MyTask.Test_AsyncAwaitException();
+		}
+
+		[TestMethod]
+		public void Task_AsyncAwaitWhenAll()
+		{
+			MyTask.Test_AsyncAwaitWhenAll();
 		}
 	}
 }

@@ -126,25 +126,25 @@ namespace C_Sharp
 		#region Async_await
 		/// #async #awit
 		
-		private static int DoSomething()
+		private static int DoSomethingAsync()
         {
-			Console.WriteLine("Something started");
+			Console.WriteLine("Something async started");
 			Thread.Sleep(1000);
-			Console.WriteLine("Something finished");
+			Console.WriteLine("Something async finished");
 
 			return 1;
         }
 
-		private static async void PerformSomething()
+		private static async void PerformSomethingAsync()
 		{
-			Console.WriteLine("PerfomSomething started");
-			int result = await( Task<int>.Run(DoSomething));
-			Console.WriteLine("PerfomSomething finished");
+			Console.WriteLine("Perfom Something async started");
+			int result = await( Task<int>.Run(DoSomethingAsync));
+			Console.WriteLine("Perfom Something async finished");
 		}
 
 		public static void Test_AsyncAwait()
         {
-			PerformSomething();
+			PerformSomethingAsync();
 			for(int i = 0; i < 10; i++)
             {
 				Thread.Sleep(200);
@@ -154,8 +154,8 @@ namespace C_Sharp
 		}
 		#endregion
 
-		#region Asyncv_awit_exception
-
+		#region Async_await_exception
+		/// #async #awit #exception
 		private static int RaiseException()
 		{
 			Console.WriteLine("Raise Exception started");
@@ -188,6 +188,52 @@ namespace C_Sharp
 			}
 		}
 
+		#endregion
+
+		#region Async_await_many
+		/// #async #awit #WhenAll
+		private static Func<int> DoSomethingAsyncParallel(string input, int delay)
+		{
+			Func<int>  a  =
+				() =>
+				{
+					Console.WriteLine($"Do Something Async Parallel started {input}");
+					Thread.Sleep(delay);
+					Console.WriteLine($"Do Something Async Parallel finished {input}");
+
+					return 1;
+				}; 
+
+			return a;
+		}
+
+		private static async void PerformSomethingAsyncParallel()
+		{
+			var tasks = new List<Task<int>>();
+			Console.WriteLine("Perform Something Async Parallel started");
+			Dictionary<string, int> d = new Dictionary<string, int>();
+			d.Add("A", 300);
+			d.Add("B", 200);
+			d.Add("C", 100);
+
+			foreach( KeyValuePair<string,int> k in d.ToList())
+			{
+				tasks.Add(Task<int>.Run(DoSomethingAsyncParallel(k.Key, k.Value)));
+			}
+			await Task.WhenAll(tasks);
+			Console.WriteLine("Perform Something Async Parallel finished");
+		}
+
+		public static void Test_AsyncAwaitWhenAll()
+		{
+			PerformSomethingAsyncParallel();
+			for (int i = 0; i < 10; i++)
+			{
+				Thread.Sleep(100);
+				Console.WriteLine($"Test_AsyncAwait:{i}");
+			}
+
+		}
 		#endregion
 	}
 }
