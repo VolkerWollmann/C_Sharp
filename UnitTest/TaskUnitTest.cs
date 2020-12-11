@@ -54,5 +54,11 @@ namespace UnitTest
 		{
 			MyTask.Test_AsyncAwaitWhenAll();
 		}
+
+		[TestMethod]
+		public void Task_BlockingCollection()
+        {
+			MyTask.Test_BlockingCollection();
+        }
 	}
 }
