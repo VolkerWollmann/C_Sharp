@@ -60,5 +60,11 @@ namespace UnitTest
         {
 			MyTask.Test_BlockingCollection();
         }
+
+		[TestMethod]
+		public void Task_ConcurrentStack()
+		{
+			MyTask.Test_ConcurrentStack();
+		}
 	}
 }
