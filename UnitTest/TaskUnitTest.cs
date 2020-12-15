@@ -66,5 +66,11 @@ namespace UnitTest
 		{
 			MyTask.Test_ConcurrentStack();
 		}
+
+		[TestMethod]
+		public void Task_ConccurentQueue()
+		{
+			MyTask.Test_ConccurentQueue();
+		}
 	}
 }

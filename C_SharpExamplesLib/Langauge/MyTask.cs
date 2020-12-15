@@ -341,5 +341,63 @@ namespace C_Sharp
 
 		}
 		#endregion
+
+		#region ConcurentQueue
+		// #ConcurentQueue
+		public static void Test_ConccurentQueue()
+		{
+			Console.WriteLine("Test_ConccurentQueue start");
+
+			var tasks = new List<Task>();
+			// 
+			ConcurrentQueue<int> conccurentQueue = new ConcurrentQueue<int>();
+
+			Task producer = new Task(() =>
+			{
+				Random random = new Random();
+				Thread.CurrentThread.Name = "Producer";
+			// attempt to add 10 items to the collection - blocks after 5th
+			for (int i = 0; i < 10; i++)
+				{
+					Thread.Sleep(random.Next(0, 10));
+					conccurentQueue.Enqueue(i);
+					Console.WriteLine($"Data {i} enqueued successfully.");
+				}
+
+			});
+
+			Task consumer = new Task(() =>
+			{
+				int v;
+				Thread.CurrentThread.Name = "Consumer";
+				int i = 0;
+				while (i < 10)
+				{
+					while (!conccurentQueue.TryPeek(out v))
+					{
+						Console.WriteLine($"Try to peek failed");
+						Thread.Sleep(5);
+					}
+
+					if (conccurentQueue.TryDequeue(out v))
+					{
+						Console.WriteLine($"Data {v} dequeued successfully." );
+					}
+
+					i++;
+				}
+			});
+
+			tasks.Add(producer);
+			tasks.Add(consumer);
+
+			producer.Start();
+			consumer.Start();
+
+			Task.WhenAll(tasks).Wait();
+
+			Console.WriteLine("Test_ConccurentQueue end");
+		}
+		#endregion
 	}
 }
