@@ -195,7 +195,7 @@ namespace C_Sharp
 		/// #async #await #WhenAll
 		private static Func<int> DoSomethingAsyncParallel(string input, int delay)
 		{
-			Func<int>  a  =
+			return
 				() =>
 				{
 					Console.WriteLine($"Do Something Async Parallel started {input}");
@@ -204,8 +204,6 @@ namespace C_Sharp
 
 					return 1;
 				}; 
-
-			return a;
 		}
 
 		private static async void PerformSomethingAsyncParallel()
@@ -352,21 +350,21 @@ namespace C_Sharp
 			// 
 			ConcurrentQueue<int> conccurentQueue = new ConcurrentQueue<int>();
 
-			Task producer = new Task(() =>
-			{
-				Random random = new Random();
-				Thread.CurrentThread.Name = "Producer";
-			// attempt to add 10 items to the collection - blocks after 5th
-			for (int i = 0; i < 10; i++)
-				{
-					Thread.Sleep(random.Next(0, 10));
-					conccurentQueue.Enqueue(i);
-					Console.WriteLine($"Data {i} enqueued successfully.");
-				}
+            Task producer = new Task(() =>
+            {
+                Random random = new Random();
+                Thread.CurrentThread.Name = "Producer";
+                // attempt to add 10 items to the collection - blocks after 5th
+                for (int i = 0; i < 10; i++)
+                {
+                    Thread.Sleep(random.Next(0, 10));
+                    conccurentQueue.Enqueue(i);
+                    Console.WriteLine($"Data {i} enqueued successfully.");
+                }
 
-			});
+            });
 
-			Task consumer = new Task(() =>
+            Task consumer = new Task(() =>
 			{
 				int v;
 				Thread.CurrentThread.Name = "Consumer";
@@ -397,6 +395,45 @@ namespace C_Sharp
 			Task.WhenAll(tasks).Wait();
 
 			Console.WriteLine("Test_ConccurentQueue end");
+		}
+		#endregion
+
+		#region ConcurrentDictionary
+		// #Concurrent ConcurrentDictionary
+		public static void Test_ConcurrentDictionary()
+		{
+			Console.WriteLine("Test_ConcurrentDictionary start");
+
+			ConcurrentDictionary<int,string> dicitionary = new ConcurrentDictionary<int,string>();
+
+			for (int i = 1; i < 10; i++)
+                dicitionary.TryAdd(i, "A");
+
+			var tasks = new List<Task>();
+			foreach( string t in new List<string> { "Cosumer1", "Consumer2"})
+            {
+				tasks.Add(new Task(
+                    () =>
+					{
+						Random random = new Random();
+						for(int i = 1; i<10; i++)
+						{
+							if (dicitionary.TryUpdate(i, "B", "A"))
+							{
+								Console.WriteLine($"{t} updated {i}");
+							}
+							Thread.Sleep(random.Next(0, 10));
+						}
+					}
+					));
+            }
+
+			tasks[0].Start();
+			tasks[1].Start();
+
+			Task.WhenAll(tasks).Wait();
+
+			Console.WriteLine("Test_ConcurrentDictionary end");
 		}
 		#endregion
 	}

@@ -72,5 +72,11 @@ namespace UnitTest
 		{
 			MyTask.Test_ConccurentQueue();
 		}
+
+		[TestMethod]
+		public void Task_ConcurrentDictionary()
+        {
+			MyTask.Test_ConcurrentDictionary();
+        }
 	}
 }

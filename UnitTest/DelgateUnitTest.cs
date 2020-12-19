@@ -7,7 +7,13 @@ namespace UnitTest
     public class DelgateUnitTest
     {
 		[TestMethod]
-		public void TestDelgateAndFunc()
+		public void TestActionFuncPredicate()
+		{
+			MyDelegate.TestActionFuncPredicate();
+		}
+
+		[TestMethod]
+		public void TestDelgate()
 		{
 			MyDelegate.TestDelgateAndFunc();
 		}

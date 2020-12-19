@@ -14,6 +14,16 @@ namespace C_Sharp
 	/// </summary>
 	public class MyDelegate
 	{
+		// #action
+		static Action<string> WriteMessage = (msg) => { Console.WriteLine(msg); };
+
+		// #func
+		static Func<int> funcIntDirect = () => { return 42; };
+		static Func<int, int> funcIntIntDirect = (i) => { return i; };
+
+		// #predicate
+		static Predicate<int> LessThanTree = (i) => i < 3;
+
 		// #Func : function pointer ( and type )
 		Func<int, int> funcIntInt;
 
@@ -48,12 +58,19 @@ namespace C_Sharp
 		}
 		#endregion
 
-		Action<string> WriteMessage = (msg) => { Console.WriteLine(msg); };
-
-		Predicate<int> LessThanTree = (i) => i < 3;
-
 		private MyDelegate()
 		{			
+		}
+
+		public static void TestActionFuncPredicate()
+        {
+			WriteMessage("Hello World");
+
+			Assert.AreEqual(funcIntDirect(), 42);
+
+			Assert.AreEqual(funcIntIntDirect(42), 42);
+
+			Assert.IsTrue(LessThanTree(2));
 		}
 
 		public static void TestDelgateAndFunc()
@@ -101,9 +118,6 @@ namespace C_Sharp
 			i = myDelegate.funcIntInt(3);
 			Assert.IsTrue(i == 9);
 
-			myDelegate.WriteMessage("Hello World");
-
-			Assert.IsTrue(myDelegate.LessThanTree(2));
 		}
 
 		public static void TestDelgateFuncInvocationList()
