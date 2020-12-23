@@ -611,5 +611,10 @@ namespace C_Sharp
 		}
 
 		#endregion
+
+		#region volatile
+        // #volatile prevents variable from optimisation
+		volatile int volatileInt;
+		#endregion
 	}
 }
