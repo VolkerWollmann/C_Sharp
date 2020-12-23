@@ -124,9 +124,80 @@ namespace C_Sharp
 		}
 		#endregion
 
+		#region Monitor
+		//#Monitor #task #waitall
+		static long sharedTotalMonitor;
+
+		// make an array that holds the values 0 to 50000000
+		static int[] itemsMonitor = Enumerable.Range(0, 50000001).ToArray();
+
+		static object sharedTotalMonitorLock = new object();
+
+		static void addRangeOfValuesMonitor(int start, int end)
+		{
+			long subTotal = 0;
+			Random random = new Random();
+
+			while (start < end)
+			{
+				subTotal = subTotal + items[start];
+				start++;
+			}
+
+			bool done = false;
+			while (!done)
+			{
+				if (Monitor.TryEnter(sharedTotalMonitorLock))
+				{
+					sharedTotalMonitor = sharedTotalMonitor + subTotal;
+					Thread.Sleep(random.Next(0, 10));
+					Console.WriteLine($"{Task.CurrentId} : Adding subtotal " );
+					Monitor.Exit(sharedTotalMonitorLock);
+					done = true;
+				}
+				else
+				{
+					Console.WriteLine($"{Task.CurrentId} : Have to wait for adding subtotal");
+					Thread.Sleep(random.Next(190, 210));
+				}
+			}
+		}
+
+		/// <summary>
+		/// show usage of synchronisation with lock statement on an object
+		/// add number 0 to 50000000 with 25 threads 
+		/// </summary>
+		public static void TestTaskMonitor()
+		{
+			List<Task> tasks = new List<Task>();
+
+			int rangeSize = 2000000;
+			int rangeStart = 0;
+
+			while (rangeStart < items.Length)
+			{
+				int rangeEnd = rangeStart + rangeSize;
+
+				if (rangeEnd > items.Length)
+					rangeEnd = items.Length;
+
+				// create local copies of the parameters
+				int rs = rangeStart;
+				int re = rangeEnd;
+
+				tasks.Add(Task.Run(() => addRangeOfValuesMonitor(rs, re)));
+				rangeStart = rangeEnd;
+			}
+
+			Task.WaitAll(tasks.ToArray());
+
+			Console.WriteLine("The total is: {0}", sharedTotalMonitor);
+		}
+		#endregion
+
 		#region Async_await
 		/// #async #awit
-		
+
 		private static int DoSomethingAsync()
         {
 			Console.WriteLine("Something async started");

@@ -32,6 +32,12 @@ namespace UnitTest
 		}
 
 		[TestMethod]
+		public void Task_Monitor()
+		{
+			MyTask.TestTaskMonitor();
+		}
+
+		[TestMethod]
 		public void Task_ChildTask()
 		{
 			MyTask.TestChildTask();
