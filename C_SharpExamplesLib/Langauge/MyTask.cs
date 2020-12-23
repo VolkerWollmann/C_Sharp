@@ -195,6 +195,61 @@ namespace C_Sharp
 		}
 		#endregion
 
+		#region Interlocked Operation
+		//#Interlocked Poeration #task #waitall
+		static long sharedTotalInterlocked;
+
+		// make an array that holds the values 0 to 50000000
+		static int[] itemsInterlocked = Enumerable.Range(0, 50000001).ToArray();
+
+		static void addRangeOfValuesInterlocked(int start, int end)
+		{
+			long subTotal = 0;
+			Random random = new Random();
+
+			while (start < end)
+			{
+				subTotal = subTotal + items[start];
+				start++;
+			}
+
+			Console.WriteLine($"{Task.CurrentId} : Before adding subtotal ");
+			Interlocked.Add(ref sharedTotalInterlocked, subTotal);
+			Console.WriteLine($"{Task.CurrentId} : After adding subtotal ");
+		}
+
+		/// <summary>
+		/// show usage of synchronisation with lock statement on an object
+		/// add number 0 to 50000000 with 25 threads 
+		/// </summary>
+		public static void TestTaskInterlocked()
+		{
+			List<Task> tasks = new List<Task>();
+
+			int rangeSize = 2000000;
+			int rangeStart = 0;
+
+			while (rangeStart < items.Length)
+			{
+				int rangeEnd = rangeStart + rangeSize;
+
+				if (rangeEnd > items.Length)
+					rangeEnd = items.Length;
+
+				// create local copies of the parameters
+				int rs = rangeStart;
+				int re = rangeEnd;
+
+				tasks.Add(Task.Run(() => addRangeOfValuesInterlocked(rs, re)));
+				rangeStart = rangeEnd;
+			}
+
+			Task.WaitAll(tasks.ToArray());
+
+			Console.WriteLine("The total is: {0}", sharedTotalInterlocked);
+		}
+		#endregion
+
 		#region Async_await
 		/// #async #awit
 
