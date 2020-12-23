@@ -507,5 +507,54 @@ namespace C_Sharp
 			Console.WriteLine("Test_ConcurrentDictionary end");
 		}
 		#endregion
+
+		#region deadlock
+        // #deadlock
+		static object lock1 = new object();
+		static object lock2 = new object();
+
+		static void Method1()
+		{
+			lock (lock1)
+			{
+				Console.WriteLine("Method 1 got lock 1");
+				Console.WriteLine("Method 1 waiting for lock 2");
+				lock (lock2)
+				{
+					Console.WriteLine("Method 1 got lock 2");
+				}
+				Console.WriteLine("Method 1 released lock 2");
+			}
+			Console.WriteLine("Method 1 released lock 1");
+		}
+
+		static void Method2()
+		{
+			lock (lock2)
+			{
+				Console.WriteLine("Method 2 got lock 2");
+				Console.WriteLine("Method 2 waiting for lock 1");
+				lock (lock1)
+				{
+					Console.WriteLine("Method 2 got lock 1");
+				}
+				Console.WriteLine("Method 2 released lock 1");
+			}
+			Console.WriteLine("Method 2 released lock 2");
+		}
+
+		public static void TaskDeadLock()
+		{
+			List<Task> allTasks = new List<Task>();
+			allTasks.Add(Task.Run(() => Method1()));
+			allTasks.Add(Task.Run(() => Method2()));
+			Console.WriteLine("waiting for tasks");
+
+			Task.WhenAll(allTasks).Wait();
+
+			Console.WriteLine("Finished Deadlock");
+		}
+
+		#endregion
 	}
 }

@@ -38,6 +38,12 @@ namespace UnitTest
 		}
 
 		[TestMethod]
+		public void Task_DeadLock()
+        {
+			MyTask.TaskDeadLock();
+        }
+
+		[TestMethod]
 		public void Task_ChildTask()
 		{
 			MyTask.TestChildTask();
