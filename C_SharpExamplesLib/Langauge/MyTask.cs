@@ -564,7 +564,9 @@ namespace C_Sharp
 		#endregion
 
 		#region deadlock
-        // #deadlock
+		// #deadlock
+		static bool done1 = false;
+		static bool done2 = false;
 		static object lock1 = new object();
 		static object lock2 = new object();
 
@@ -576,6 +578,7 @@ namespace C_Sharp
 				Console.WriteLine("Method 1 waiting for lock 2");
 				lock (lock2)
 				{
+					done1 = true;
 					Console.WriteLine("Method 1 got lock 2");
 				}
 				Console.WriteLine("Method 1 released lock 2");
@@ -591,6 +594,7 @@ namespace C_Sharp
 				Console.WriteLine("Method 2 waiting for lock 1");
 				lock (lock1)
 				{
+					done2 = true;
 					Console.WriteLine("Method 2 got lock 1");
 				}
 				Console.WriteLine("Method 2 released lock 1");
@@ -605,7 +609,10 @@ namespace C_Sharp
 			allTasks.Add(Task.Run(() => Method2()));
 			Console.WriteLine("waiting for tasks");
 
-			Task.WhenAll(allTasks).Wait();
+			Task.WhenAll(allTasks).Wait(2000);
+
+			Assert.IsFalse(done1);
+			Assert.IsFalse(done2);
 
 			Console.WriteLine("Finished Deadlock");
 		}
