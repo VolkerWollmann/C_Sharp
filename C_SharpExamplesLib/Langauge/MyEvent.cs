@@ -45,11 +45,18 @@ namespace C_Sharp
                 Alarm alarm = new Alarm();
 
                 // Connect the two listener methods
+                Console.WriteLine("Add two listeners");
                 alarm.OnAlarmRaised += AlarmListener1;
                 alarm.OnAlarmRaised += AlarmListener2;
 
                 alarm.RaiseAlarm();
 
+                //reomove listener 1
+                Console.WriteLine("Remove one listener");
+                alarm.OnAlarmRaised -= AlarmListener1;
+
+                alarm.RaiseAlarm();
+                
                 Console.WriteLine("Alarm raised");
             }
         }
