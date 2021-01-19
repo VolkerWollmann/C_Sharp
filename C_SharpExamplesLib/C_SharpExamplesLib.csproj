@@ -62,6 +62,7 @@
     <Compile Include="Langauge\CSharp.cs" />
     <Compile Include="Langauge\MyDelegate.cs" />
     <Compile Include="Langauge\MyEnum.cs" />
+    <Compile Include="Langauge\MyEvent.cs" />
     <Compile Include="Langauge\MyException.cs" />
     <Compile Include="Langauge\MyExtensionMethod.cs" />
     <Compile Include="Langauge\MyGeneric.cs" />
