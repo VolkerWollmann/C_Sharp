@@ -18,9 +18,9 @@ namespace C_Sharp
 			Func<object, int> ConstFunction = (n) => Convert.ToInt32(n);
 
 			//Task<int> myTask = new Task<int>(ConstFunctionEight);
-			Task<int> myTask = new Task<int>(ConstFunction,8);
+			Task<int> myTask = new Task<int>(ConstFunction, 8);
 
-			Func<Task<int>,int> MultiplyByTwo = (previous) => previous.Result * 2;
+			Func<Task<int>, int> MultiplyByTwo = (previous) => previous.Result * 2;
 			Task<int> myTask2 = myTask.ContinueWith<int>(MultiplyByTwo, TaskContinuationOptions.OnlyOnRanToCompletion);
 
 			myTask.Start();
@@ -36,7 +36,7 @@ namespace C_Sharp
 		#region Child Tasks
 		// #action #TaskCreationOptions #AttachedToParent
 		public static void TestChildTask()
-        {
+		{
 			Action sleepAction = () => { Thread.Sleep(2000); };
 			Action parentAction1 = () =>
 			{
@@ -44,7 +44,7 @@ namespace C_Sharp
 				childTask.Start();
 			};
 
-			Task parentTask1 = new Task( parentAction1 );
+			Task parentTask1 = new Task(parentAction1);
 
 			Console.WriteLine("Start child task attached to parent " + DateTime.Now.ToString());
 			parentTask1.Start();
@@ -151,7 +151,7 @@ namespace C_Sharp
 				{
 					sharedTotalMonitor = sharedTotalMonitor + subTotal;
 					Thread.Sleep(random.Next(0, 10));
-					Console.WriteLine($"{Task.CurrentId} : Adding subtotal " );
+					Console.WriteLine($"{Task.CurrentId} : Adding subtotal ");
 					Monitor.Exit(sharedTotalMonitorLock);
 					done = true;
 				}
@@ -254,29 +254,29 @@ namespace C_Sharp
 		/// #async #awit
 
 		private static int DoSomethingAsync()
-        {
+		{
 			Console.WriteLine("Something async started");
 			Thread.Sleep(1000);
 			Console.WriteLine("Something async finished");
 
 			return 1;
-        }
+		}
 
 		private static async void PerformSomethingAsync()
 		{
 			Console.WriteLine("Perfom Something async started");
-			int result = await( Task<int>.Run(DoSomethingAsync));
+			int result = await (Task<int>.Run(DoSomethingAsync));
 			Console.WriteLine("Perfom Something async finished");
 		}
 
 		public static void Test_AsyncAwait()
-        {
+		{
 			PerformSomethingAsync();
-			for(int i = 0; i < 10; i++)
-            {
+			for (int i = 0; i < 10; i++)
+			{
 				Thread.Sleep(200);
 				Console.WriteLine($"Test_AsyncAwait:{i}");
-            }
+			}
 
 		}
 		#endregion
@@ -300,9 +300,9 @@ namespace C_Sharp
 				Console.WriteLine("Perform Exception finished");
 			}
 			catch (Exception e)
-            {
+			{
 				Console.WriteLine("Perform Exception caught exception:" + e.Message);
-            }
+			}
 		}
 
 		public static void Test_AsyncAwaitException()
@@ -329,7 +329,7 @@ namespace C_Sharp
 					Console.WriteLine($"Do Something Async Parallel finished {input}");
 
 					return 1;
-				}; 
+				};
 		}
 
 		private static async void PerformSomethingAsyncParallel()
@@ -341,7 +341,7 @@ namespace C_Sharp
 			d.Add("B", 200);
 			d.Add("C", 100);
 
-			foreach( KeyValuePair<string,int> k in d.ToList())
+			foreach (KeyValuePair<string, int> k in d.ToList())
 			{
 				tasks.Add(Task<int>.Run(DoSomethingAsyncParallel(k.Key, k.Value)));
 			}
@@ -363,7 +363,7 @@ namespace C_Sharp
 
 		#region blocking collection
 		public static void Test_BlockingCollection()
-        {
+		{
 			// #BlockingCollection #whenAll #wait
 			Console.WriteLine("Test_BlockingCollection start");
 
@@ -385,21 +385,21 @@ namespace C_Sharp
 				data.CompleteAdding();
 			});
 
-			Task consumer = new Task( () =>
-			{
-				int v;
-				Thread.CurrentThread.Name = "Consumer";
-				while (!data.IsCompleted)
-				{
-					try
-					{
-						Thread.Sleep(20);
-						v = data.Take();
-						Console.WriteLine("Data {0} taken successfully.", v);
-					}
-					catch (InvalidOperationException) { }
-				}
-			});
+			Task consumer = new Task(() =>
+		   {
+			   int v;
+			   Thread.CurrentThread.Name = "Consumer";
+			   while (!data.IsCompleted)
+			   {
+				   try
+				   {
+					   Thread.Sleep(20);
+					   v = data.Take();
+					   Console.WriteLine("Data {0} taken successfully.", v);
+				   }
+				   catch (InvalidOperationException) { }
+			   }
+		   });
 			tasks.Add(producer);
 			tasks.Add(consumer);
 
@@ -476,21 +476,21 @@ namespace C_Sharp
 			// 
 			ConcurrentQueue<int> conccurentQueue = new ConcurrentQueue<int>();
 
-            Task producer = new Task(() =>
-            {
-                Random random = new Random();
-                Thread.CurrentThread.Name = "Producer";
-                // attempt to add 10 items to the collection - blocks after 5th
-                for (int i = 0; i < 10; i++)
-                {
-                    Thread.Sleep(random.Next(0, 10));
-                    conccurentQueue.Enqueue(i);
-                    Console.WriteLine($"Data {i} enqueued successfully.");
-                }
+			Task producer = new Task(() =>
+			{
+				Random random = new Random();
+				Thread.CurrentThread.Name = "Producer";
+				// attempt to add 10 items to the collection - blocks after 5th
+				for (int i = 0; i < 10; i++)
+				{
+					Thread.Sleep(random.Next(0, 10));
+					conccurentQueue.Enqueue(i);
+					Console.WriteLine($"Data {i} enqueued successfully.");
+				}
 
-            });
+			});
 
-            Task consumer = new Task(() =>
+			Task consumer = new Task(() =>
 			{
 				int v;
 				Thread.CurrentThread.Name = "Consumer";
@@ -505,7 +505,7 @@ namespace C_Sharp
 
 					if (conccurentQueue.TryDequeue(out v))
 					{
-						Console.WriteLine($"Data {v} dequeued successfully." );
+						Console.WriteLine($"Data {v} dequeued successfully.");
 					}
 
 					i++;
@@ -530,19 +530,19 @@ namespace C_Sharp
 		{
 			Console.WriteLine("Test_ConcurrentDictionary start");
 
-			ConcurrentDictionary<int,string> dicitionary = new ConcurrentDictionary<int,string>();
+			ConcurrentDictionary<int, string> dicitionary = new ConcurrentDictionary<int, string>();
 
 			for (int i = 1; i < 10; i++)
-                dicitionary.TryAdd(i, "A");
+				dicitionary.TryAdd(i, "A");
 
 			var tasks = new List<Task>();
-			foreach( string t in new List<string> { "Cosumer1", "Consumer2"})
-            {
+			foreach (string t in new List<string> { "Cosumer1", "Consumer2" })
+			{
 				tasks.Add(new Task(
-                    () =>
+					() =>
 					{
 						Random random = new Random();
-						for(int i = 1; i<10; i++)
+						for (int i = 1; i < 10; i++)
 						{
 							if (dicitionary.TryUpdate(i, "B", "A"))
 							{
@@ -552,7 +552,7 @@ namespace C_Sharp
 						}
 					}
 					));
-            }
+			}
 
 			tasks[0].Start();
 			tasks[1].Start();
@@ -620,11 +620,12 @@ namespace C_Sharp
 		#endregion
 
 		#region volatile
-        // #volatile prevents variable from optimisation
+		// #volatile prevents variable from optimisation
 		volatile int volatileInt;
 		#endregion
 
 		#region cancellation
+		// #CancellationToken
 		static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
 		static void Clock()
@@ -641,10 +642,46 @@ namespace C_Sharp
 			Task.Run(() => Clock());
 			Console.WriteLine("Cancel clock after random time");
 			Random random = new Random();
-			Thread.Sleep(random.Next(1000,3000));
+			Thread.Sleep(random.Next(1000, 3000));
 			cancellationTokenSource.Cancel();
 			Console.WriteLine("Clock stopped");
-			
+
+		}
+		#endregion
+
+		#region OperationCanceledException
+		static void Clock(CancellationToken cancellationToken)
+		{
+			int tickCount = 0;
+
+			while (!cancellationToken.IsCancellationRequested &&
+				   tickCount < 5)
+			{
+				tickCount++;
+				Console.WriteLine("Tick");
+				Thread.Sleep(500);
+			}
+
+			cancellationToken.ThrowIfCancellationRequested();
+		}
+
+		public static void Task_OperationCanceledException()
+		{
+			CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+			Task clock = Task.Run(() => Clock(cancellationTokenSource.Token));
+
+			Thread.Sleep(500);
+			try
+			{
+				cancellationTokenSource.Cancel();
+				clock.Wait();
+			}
+			catch (AggregateException ex)
+			{
+				Console.WriteLine("Clock stopped: {0}", ex.InnerExceptions[0].GetType().ToString());
+			}
+
 		}
 		#endregion
 	}
