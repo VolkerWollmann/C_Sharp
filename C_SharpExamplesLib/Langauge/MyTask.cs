@@ -68,22 +68,70 @@ namespace C_Sharp
 
 		#endregion
 
+		#region thread saftey violation
+		// #thread safe
+		// make an array that holds the values 0 to 50000000
+
+		static long sharedTotalThreadSafetyViolation;
+		static int[] itemsThreadSafetyViolation = Enumerable.Range(0, 50000001).ToArray();
+		static void addRangeOfValuesThreadSafeViolation(int start, int end)
+		{
+			while (start < end)
+			{
+				sharedTotalThreadSafetyViolation = sharedTotalThreadSafetyViolation + itemsThreadSafetyViolation[start];
+				start++;
+			}
+		}
+
+		public static void Task_ThreadSafetyViolation()
+		{
+			List<Task> tasks = new List<Task>();
+
+			for (int i = 0; i < 3; i++)
+			{
+				int rangeSize = 1000;
+				int rangeStart = 0;
+
+				sharedTotalThreadSafetyViolation = 0;
+				while (rangeStart < itemsThreadSafetyViolation.Length)
+				{
+					int rangeEnd = rangeStart + rangeSize;
+
+					if (rangeEnd > itemsThreadSafetyViolation.Length)
+						rangeEnd = itemsThreadSafetyViolation.Length;
+
+					// create local copies of the parameters
+					int rs = rangeStart;
+					int re = rangeEnd;
+
+					tasks.Add(Task.Run(() => addRangeOfValuesThreadSafeViolation(rs, re)));
+					rangeStart = rangeEnd;
+				}
+
+				Task.WaitAll(tasks.ToArray());
+
+				Console.WriteLine("{0}.Run The total is: {1}", i, sharedTotalThreadSafetyViolation);
+			}
+			
+		}
+		#endregion
+
 		#region lock statement
 		//#lock #task #waitall
 		static long sharedTotal;
 
 		// make an array that holds the values 0 to 50000000
-		static int[] items = Enumerable.Range(0, 50000001).ToArray();
+		static int[] itemsObjectLock = Enumerable.Range(0, 50000001).ToArray();
 
 		static object sharedTotalLock = new object();
 
-		static void addRangeOfValues(int start, int end)
+		static void addRangeOfValuesObjectLock(int start, int end)
 		{
 			long subTotal = 0;
 
 			while (start < end)
 			{
-				subTotal = subTotal + items[start];
+				subTotal = subTotal + itemsObjectLock[start];
 				start++;
 			}
 			lock (sharedTotalLock)
@@ -103,18 +151,18 @@ namespace C_Sharp
 			int rangeSize = 1000000;
 			int rangeStart = 0;
 
-			while (rangeStart < items.Length)
+			while (rangeStart < itemsObjectLock.Length)
 			{
 				int rangeEnd = rangeStart + rangeSize;
 
-				if (rangeEnd > items.Length)
-					rangeEnd = items.Length;
+				if (rangeEnd > itemsObjectLock.Length)
+					rangeEnd = itemsObjectLock.Length;
 
 				// create local copies of the parameters
 				int rs = rangeStart;
 				int re = rangeEnd;
 
-				tasks.Add(Task.Run(() => addRangeOfValues(rs, re)));
+				tasks.Add(Task.Run(() => addRangeOfValuesObjectLock(rs, re)));
 				rangeStart = rangeEnd;
 			}
 
@@ -140,7 +188,7 @@ namespace C_Sharp
 
 			while (start < end)
 			{
-				subTotal = subTotal + items[start];
+				subTotal = subTotal + itemsMonitor[start];
 				start++;
 			}
 
@@ -174,12 +222,12 @@ namespace C_Sharp
 			int rangeSize = 2000000;
 			int rangeStart = 0;
 
-			while (rangeStart < items.Length)
+			while (rangeStart < itemsMonitor.Length)
 			{
 				int rangeEnd = rangeStart + rangeSize;
 
-				if (rangeEnd > items.Length)
-					rangeEnd = items.Length;
+				if (rangeEnd > itemsMonitor.Length)
+					rangeEnd = itemsMonitor.Length;
 
 				// create local copies of the parameters
 				int rs = rangeStart;
@@ -209,7 +257,7 @@ namespace C_Sharp
 
 			while (start < end)
 			{
-				subTotal = subTotal + items[start];
+				subTotal = subTotal + itemsInterlocked[start];
 				start++;
 			}
 
@@ -229,12 +277,12 @@ namespace C_Sharp
 			int rangeSize = 2000000;
 			int rangeStart = 0;
 
-			while (rangeStart < items.Length)
+			while (rangeStart < itemsInterlocked.Length)
 			{
 				int rangeEnd = rangeStart + rangeSize;
 
-				if (rangeEnd > items.Length)
-					rangeEnd = items.Length;
+				if (rangeEnd > itemsInterlocked.Length)
+					rangeEnd = itemsInterlocked.Length;
 
 				// create local copies of the parameters
 				int rs = rangeStart;

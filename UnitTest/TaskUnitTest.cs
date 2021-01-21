@@ -26,6 +26,12 @@ namespace UnitTest
 		}
 
 		[TestMethod]
+		public void Task_ThreadSafetyViolation()
+		{
+			MyTask.Task_ThreadSafetyViolation();
+		}
+
+		[TestMethod]
 		public void Task_ObjectLock()
 		{
 			MyTask.TestTaskObjectLock();
