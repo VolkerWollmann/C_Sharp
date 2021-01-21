@@ -96,5 +96,11 @@ namespace UnitTest
         {
 			MyTask.Test_ConcurrentDictionary();
         }
+
+		[TestMethod]
+		public void Task_Cancellation()
+        {
+			MyTask.Task_Cancellation();
+        }
 	}
 }

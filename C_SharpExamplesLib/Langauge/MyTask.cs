@@ -623,5 +623,29 @@ namespace C_Sharp
         // #volatile prevents variable from optimisation
 		volatile int volatileInt;
 		#endregion
+
+		#region cancellation
+		static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+		static void Clock()
+		{
+			while (!cancellationTokenSource.IsCancellationRequested)
+			{
+				Console.WriteLine("Tick");
+				Thread.Sleep(500);
+			}
+		}
+
+		public static void Task_Cancellation()
+		{
+			Task.Run(() => Clock());
+			Console.WriteLine("Cancel clock after random time");
+			Random random = new Random();
+			Thread.Sleep(random.Next(1000,3000));
+			cancellationTokenSource.Cancel();
+			Console.WriteLine("Clock stopped");
+			
+		}
+		#endregion
 	}
 }
