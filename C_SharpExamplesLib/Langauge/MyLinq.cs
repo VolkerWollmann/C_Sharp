@@ -24,6 +24,20 @@ namespace C_Sharp
 			var takeTest = allowed.Take(20).ToList(); // take takes up to maxium 20
 		}
 
+		public static void Linq_Syntax()
+        {
+			List<int> numbers = Enumerable.Range(0, 11).ToList();
+
+			// #Linq #Method_syntax
+			IEnumerable<int> q1 = numbers.Where(i => (i < 9)).Where(i => (i % 2 == 0 ));
+
+	        // #Linq #Query_syntax
+			IEnumerable<int> q2 = from m in (from n in numbers where (n < 9) select n) where (m % 2 == 0) select m;
+
+			// #CollectionAssert #Assert
+			CollectionAssert.AreEqual(q1.ToList(), q2.ToList());
+
+		}
 
 		// #linq #zip #firstOrdefault
 		public static void Linq_Zip()

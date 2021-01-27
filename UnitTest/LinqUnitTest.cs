@@ -45,5 +45,12 @@ namespace UnitTest
 			MyLinq.PLinqExceptions();
 
 		}
+
+		[TestMethod]
+		public void Linq_Syntax()
+		{
+			MyLinq.Linq_Syntax();
+
+		}
 	}
 }
