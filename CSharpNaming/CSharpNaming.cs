@@ -10,7 +10,11 @@ namespace CSharpNaming
     /// 
     /// https://www.dofactory.com/reference/csharp-coding-standards
     /// 
-    /// I. PascalCasing for classes
+
+    #region I. PascalCasing for classes
+    #endregion
+    /// <summary>
+    /// 
     /// </summary>
     public class NamingConvertion
     {
@@ -22,7 +26,7 @@ namespace CSharpNaming
 
         private void MyFunction()
         {
-            // II. do use camelCasing for local variables and method arguments. 
+            #region II. do use camelCasing for local variables and method arguments. 
             // camelCasing for local variables
             int localVariable = 1;
 
@@ -31,9 +35,10 @@ namespace CSharpNaming
 
             if ((localVariable == 0) || (iCounter == 0))
                 return;
+            #endregion
         }
 
-        // III. do use camelCasing for local variables and method arguments. 
+        #region III. do use camelCasing for local variables and method arguments. 
         //      do notuse Hungarian notation or any other type identification in identifiers
 
         // Correct
@@ -43,16 +48,17 @@ namespace CSharpNaming
         // Avoid
         int iCounter=0;
         string strName="";
+        #endregion
 
-
-        // IV. do not use Screaming Caps for constants or readonly variables 
+        #region IV. do not use Screaming Caps for constants or readonly variables 
         // Correct : PascalCasing
         public const string ShippingType = "DropShip";
 
         // Avoid : Sreaming caps
         public const string SHIPPINGTYPE = "DropShip";
+        #endregion
 
-        // V. Avoid using Abbreviations. 
+        #region V. Avoid using Abbreviations. 
         //    Exceptions: abbreviations commonly used as names, such as Id, Xml, Ftp, Uri
 
         // Correct
@@ -65,14 +71,16 @@ namespace CSharpNaming
 
         // Exceptions
         CustomerId customerId;
+        #endregion
 
-        // VI. do use PascalCasing for abbreviations 3 characters or more (2 chars are both uppercase) 
+        #region VI. do use PascalCasing for abbreviations 3 characters or more (2 chars are both uppercase) 
         // here for the type name
         //HtmlHelper htmlHelper;
         //FtpTransfer ftpTransfer;
         //UIControl uiControl;
+        #endregion
 
-        // VII. Do not use Underscores in identifiers. 
+        #region VII. Do not use Underscores in identifiers. 
         //      Exception: you can prefix private static variables with an underscore.
         // Correct
         public DateTime clientAppointment;
@@ -84,10 +92,11 @@ namespace CSharpNaming
 
         // Exception : private static
         private static DateTime _registrationDate = DateTime.Now;
+        #endregion
 
-        // VIII. Do use predefined type names instead of system type names like Int16, Single, UInt64, etc
+        #region VIII. Do use predefined type names instead of system type names like Int16, Single, UInt64, etc
         // Correct
-        string firstName="";
+        string firstName ="";
         int lastIndex=0;
         bool isSaved=false;
 
@@ -95,8 +104,9 @@ namespace CSharpNaming
         String lastName="";
         Int32 firstIndex=0;
         Boolean isDeleted=false;
+        #endregion
 
-        // IX. douse implicit type var for local variable declarations. 
+        #region IX. douse implicit type var for local variable declarations. 
         // Exception: primitive types (int, string, double, etc) use predefined names.
         private void Test()
         {
@@ -116,9 +126,10 @@ namespace CSharpNaming
 
             if ((lastIndex == 0) || (lastName == "") || isSaved)
                 return;
-        } 
+        }
+        #endregion
 
-        // X. Do use noun or noun phrases to name a class. 
+        #region X. Do use noun or noun phrases to name a class. 
         public class Employee
         {
         }
@@ -128,8 +139,9 @@ namespace CSharpNaming
         public class DocumentCollection
         {
         }
+        #endregion
 
-        // XI. Do prefix interfaces with the letter I.  
+        #region XI. Do prefix interfaces with the letter I.  
         //     Interface names are noun (phrases) or adjectives.
         public interface IShape
         {
@@ -140,6 +152,7 @@ namespace CSharpNaming
         public interface IGroupable
         {
         }
+        #endregion
 
         private void ConsumeVaraibles()
         {
