@@ -154,6 +154,7 @@ namespace CSharpNaming
         }
         #endregion
 
+        #region suppress warnings
         private void ConsumeVaraibles()
         {
             userGroup = null;
@@ -174,5 +175,6 @@ namespace CSharpNaming
             if (_registrationDate.CompareTo(DateTime.Now) == 0)
                 return;
         }
+        #endregion
     }
 }
