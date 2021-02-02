@@ -43,21 +43,18 @@ namespace UnitTest
 		public void ParallelLinq_Exception()
         {
 			MyLinq.PLinqExceptions();
-
 		}
 
 		[TestMethod]
 		public void Linq_Syntax()
 		{
 			MyLinq.Linq_Syntax();
-
 		}
 
 		[TestMethod]
 		public void Expression()
 		{
-			MyLambda.ExpressionTest();
-
+			MyLinqExpression.ExpressionTest();
 		}
 	}
 }

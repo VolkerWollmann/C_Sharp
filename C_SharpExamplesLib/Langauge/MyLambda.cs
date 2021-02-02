@@ -92,7 +92,7 @@ namespace C_Sharp
         }
     }
 
-    public class MyLambda
+    public class MyLinqExpression
     {
         public static void ExpressionTest()
         {
