@@ -52,5 +52,12 @@ namespace UnitTest
 			MyLinq.Linq_Syntax();
 
 		}
+
+		[TestMethod]
+		public void Expression()
+		{
+			MyLambda.ExpressionTest();
+
+		}
 	}
 }
