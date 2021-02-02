@@ -31,7 +31,7 @@ namespace CSharpNaming
             int localVariable = 1;
 
             // Avoid : hungarinCasing for type information
-            int iCounter=0;
+            int iCounter = 0;
 
             if ((localVariable == 0) || (iCounter == 0))
                 return;
@@ -42,12 +42,12 @@ namespace CSharpNaming
         //      do notuse Hungarian notation or any other type identification in identifiers
 
         // Correct
-        int counter=0;
-        string name="";
+        int counter = 0;
+        string name = "";
 
         // Avoid
-        int iCounter=0;
-        string strName="";
+        int iCounter = 0;
+        string strName = "";
         #endregion
 
         #region IV. do not use Screaming Caps for constants or readonly variables 
@@ -63,7 +63,7 @@ namespace CSharpNaming
 
         // Correct
         UserGroup userGroup;
-        Assignment employeeAssignment ;
+        Assignment employeeAssignment;
 
         // Avoid
         UserGroup usrGrp;
@@ -96,14 +96,14 @@ namespace CSharpNaming
 
         #region VIII. Do use predefined type names instead of system type names like Int16, Single, UInt64, etc
         // Correct
-        string firstName ="";
-        int lastIndex=0;
-        bool isSaved=false;
+        string firstName = "";
+        int lastIndex = 0;
+        bool isSaved = false;
 
         // Avoid
-        String lastName="";
-        Int32 firstIndex=0;
-        Boolean isDeleted=false;
+        String lastName = "";
+        Int32 firstIndex = 0;
+        Boolean isDeleted = false;
         #endregion
 
         #region IX. douse implicit type var for local variable declarations. 
@@ -111,12 +111,12 @@ namespace CSharpNaming
         private void Test()
         {
             var stream = File.Create("");
-            var customers = new Dictionary<int,int>();
+            var customers = new Dictionary<int, int>();
 
             // Exceptions
             int index = 100;
-            string timeSheet="";
-            bool isCompleted=false;
+            string timeSheet = "";
+            bool isCompleted = false;
 
             if ((index == 0) || (timeSheet == "") || isCompleted)
                 return;
@@ -151,6 +151,108 @@ namespace CSharpNaming
         }
         public interface IGroupable
         {
+        }
+        #endregion
+
+        #region XII. organize namespaces with a clearly defined structure
+        //namespace Company.Product.Module.SubModule { } 
+        //namespace Product.Module.Component { }
+        //namespace Product.Layer.Module.Group { }
+        #endregion
+
+        #region XIII. Do vertically align curly brackets. 
+        private class Example
+        {
+            private void Method1()
+            {
+            }
+        }
+        #endregion
+
+        #region XIV. Do declare all member variables at the top of a class, with static variables at the very top. 
+        private class Account
+        {
+            public static string BankName="";
+            public static decimal Reserves= 0;
+
+            public string Number { get; set; }
+            public DateTime DateOpened { get; set; }
+            public DateTime DateClosed { get; set; }
+            public decimal Balance { get; set; }
+
+            // Constructor
+            public Account()
+            {
+                // ...
+            }
+        }
+        #endregion
+
+        #region XV.douse singular names for enums.Exception: bit field enums.
+        // Correct
+        public enum Color
+        {
+            Red,
+            Green,
+            Blue,
+            Yellow,
+            Magenta,
+            Cyan
+        }
+
+        // Exception
+        [Flags]
+        public enum Dockings
+        {
+            None = 0,
+            Top = 1,
+            Right = 2,
+            Bottom = 4,
+            Left = 8
+        }
+        #endregion
+
+        #region XVI. Do not explicitly specify a type of an enum or values of enums
+        //      (except bit fields)
+        
+        // Don't
+        public enum WrongDirection : long
+        {
+            North = 1,
+            East = 2,
+            South = 3,
+            West = 4
+        }
+
+        // Correct
+        public enum Direction
+        {
+            North,
+            East,
+            South,
+            West
+        }
+        #endregion
+
+        #region XVII. Do notsuffix enum names with Enum
+        // Don't
+        public enum CoinEnum
+        {
+            Penny,
+            Nickel,
+            Dime,
+            Quarter,
+            Dollar
+        }
+
+        // Correct
+        public enum Coin
+        {
+            Penny,
+            Nickel,
+            Dime,
+            Quarter,
+            Dollar
         }
         #endregion
 
