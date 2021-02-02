@@ -69,6 +69,8 @@ namespace C_Sharp
         {
             indent = indent + 5;
 
+            //Type constructed = d.GetType();
+
             if (expression is ConstantExpression)
                 Write((ConstantExpression)expression);
             else if (expression is Expression<Func<int>>)
