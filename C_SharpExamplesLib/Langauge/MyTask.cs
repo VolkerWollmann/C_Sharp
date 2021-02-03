@@ -669,7 +669,7 @@ namespace C_Sharp
 
 		#region volatile
 		// #volatile prevents variable from optimisation
-		volatile int volatileInt;
+		//volatile int volatileInt=0;
 		#endregion
 
 		#region cancellation

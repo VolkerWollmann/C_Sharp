@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace C_Sharp
 {
-    internal class MyExpressionWriter
+    internal class MyExpressionWriter1
     {
         int indent = 0;
 
@@ -39,6 +39,12 @@ namespace C_Sharp
             Write(unaryFunction.Body);
         }
 
+        private void Write(Expression<Func<int, int, int>> binaryFunction)
+        {
+            Console.WriteLine(GetSpace() + "int f(int x, int y):" + binaryFunction.NodeType.ToString());
+            Write(binaryFunction.Body);
+        }
+
         private void Write(Expression<Func<int, bool>> unaryFunction)
         {
             Console.WriteLine(GetSpace() + "bool f(int x):" + unaryFunction.NodeType.ToString());
@@ -63,13 +69,9 @@ namespace C_Sharp
             Write(unaryFunction.Body);
         }
 
-
-
         internal void Write(Expression expression )
         {
             indent = indent + 5;
-
-            //Type constructed = d.GetType();
 
             if (expression is ConstantExpression)
                 Write((ConstantExpression)expression);
@@ -77,6 +79,8 @@ namespace C_Sharp
                 Write((Expression<Func<int>>)expression);
             else if (expression is Expression<Func<int, int>>)
                 Write((Expression<Func<int, int>>)expression);
+            else if (expression is Expression<Func<int, int, int>>)
+                Write((Expression<Func<int, int,int >>)expression);
             else if (expression is BinaryExpression)
                 Write((BinaryExpression)expression);
             else if (expression is Expression<Func<IEnumerable<int>, IEnumerable<int>>>)
@@ -94,11 +98,43 @@ namespace C_Sharp
         }
     }
 
+    internal class MyExpressionWriter2
+    {
+        int indent = 0;
+
+        private string GetSpace()
+        {
+            return new String(' ', indent).ToString();
+        }
+
+        private void WriteExpression(Expression expression)
+        {
+            Type constructed = expression.GetType();
+
+            Console.WriteLine(GetSpace() + "NodeType:" + expression.NodeType.ToString());
+
+            if (expression is LambdaExpression)
+            {
+                LambdaExpression lambdaExpression = expression as LambdaExpression;
+                lambdaExpression.Parameters.ToList().ForEach(p => Write(p));
+                Write(lambdaExpression.Body);         
+            }
+        }
+
+
+        internal void Write(Expression expression)
+        {
+            indent = indent + 5;
+
+            WriteExpression(expression);
+
+            indent = indent - 5;
+        }
+    }
     public class MyLinqExpression
     {
-        public static void ExpressionTest()
+        static private List<Expression> GetExpressionList()
         {
-
             //#Expression #Linq
             List<Expression> expressions = new List<Expression>();
 
@@ -107,31 +143,53 @@ namespace C_Sharp
 
             Expression<Func<int>> f42 = () => 42;
             expressions.Add(f42);
-            
+
             Expression<Func<int, int>> square = x => x * x;
             expressions.Add(square);
 
-            Expression<Func<IEnumerable<int>, IEnumerable<int>>> 
-                numberLessThan42 = l => l.Where( i => i < 42 );
+            Expression<Func<int, int, int>> sum = (x, y) => x + y;
+            expressions.Add(sum);
+
+            Expression<Func<IEnumerable<int>, IEnumerable<int>>>
+                numberLessThan42 = l => l.Where(i => i < 42);
             expressions.Add(numberLessThan42);
 
             Expression<Func<IEnumerable<int>, IEnumerable<int>>>
-                numberLessThan42AndGreater5 = 
-                l =>  l.Where(i => (i < 42) && (i > 5));
+                numberLessThan42AndGreater5 =
+                l => l.Where(i => (i < 42) && (i > 5));
             expressions.Add(numberLessThan42AndGreater5);
 
             Expression<Func<IEnumerable<int>, IEnumerable<int>>>
                 numberLessThan42Greater5 =
-                l => (l.Where(i => (i < 42)).Where( i=> (i > 5)));
+                l => (l.Where(i => (i < 42)).Where(i => (i > 5)));
             expressions.Add(numberLessThan42Greater5);
 
+            return expressions;
+        }
+
+        public static void WalkExpression1()
+        {
+            List<Expression> expressions = GetExpressionList();
             // write
-            MyExpressionWriter myExpressionWriter = new MyExpressionWriter();
+            MyExpressionWriter1 myExpressionWriter1 = new MyExpressionWriter1();
             expressions.ForEach(expression =>
                 {   Console.WriteLine(expression);
-                    myExpressionWriter.Write(expression);
+                    myExpressionWriter1.Write(expression);
                     Console.WriteLine("----");
                 });
+        }
+
+        public static void WalkExpression2()
+        {
+            List<Expression> expressions = GetExpressionList();
+            // write
+            MyExpressionWriter2 myExpressionWriter2 = new MyExpressionWriter2();
+            expressions.ForEach(expression =>
+            {
+                Console.WriteLine(expression);
+                myExpressionWriter2.Write(expression);
+                Console.WriteLine("----");
+            });
         }
     }
 }

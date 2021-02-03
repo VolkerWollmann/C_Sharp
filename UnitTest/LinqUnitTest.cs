@@ -52,9 +52,15 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void Expression()
+		public void Expression1()
 		{
-			MyLinqExpression.ExpressionTest();
+			MyLinqExpression.WalkExpression1();
+		}
+
+		[TestMethod]
+		public void Expression2()
+		{
+			MyLinqExpression.WalkExpression2();
 		}
 	}
 }
