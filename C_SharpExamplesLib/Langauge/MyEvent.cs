@@ -8,6 +8,7 @@ namespace C_Sharp
         // #action
         protected class Alarm
         {
+            // #delegate
             // Delegate for the alarm event
             public Action OnAlarmRaised { get; set; }
 
