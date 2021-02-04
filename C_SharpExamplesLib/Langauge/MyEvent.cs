@@ -10,7 +10,8 @@ namespace C_Sharp
         {
             // #delegate
             // Delegate for the alarm event
-            public Action OnAlarmRaised { get; set; }
+            // public Action OnAlarmRaised { get; set; } may work as well
+            public event Action OnAlarmRaised = delegate { };
 
             // Called to raise an alarm
             public void RaiseAlarm()
