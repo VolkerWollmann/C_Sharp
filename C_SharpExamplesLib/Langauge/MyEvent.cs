@@ -12,6 +12,7 @@ namespace C_Sharp
             // Delegate for the alarm event
             // public Action OnAlarmRaised { get; set; } may work as well
             public event Action OnAlarmRaised = delegate { };
+            public Action OnAlarmRaised2 { get; set; }
 
             // Called to raise an alarm
             public void RaiseAlarm()
@@ -21,6 +22,7 @@ namespace C_Sharp
                 if (OnAlarmRaised != null)
                 {
                     OnAlarmRaised();
+                    OnAlarmRaised2();
                 }
             }
         }
@@ -51,11 +53,15 @@ namespace C_Sharp
                 alarm.OnAlarmRaised += AlarmListener1;
                 alarm.OnAlarmRaised += AlarmListener2;
 
+                alarm.OnAlarmRaised2 += AlarmListener1;
+                alarm.OnAlarmRaised2 += AlarmListener2;
+
                 alarm.RaiseAlarm();
 
                 //reomove listener 1
                 Console.WriteLine("Remove one listener");
                 alarm.OnAlarmRaised -= AlarmListener1;
+                alarm.OnAlarmRaised2 -= AlarmListener1;
 
                 alarm.RaiseAlarm();
                 
