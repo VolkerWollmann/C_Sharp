@@ -55,7 +55,7 @@ namespace UnitTest
 
 
 		[TestMethod]
-		public void TestExtensionMethod()
+		public void ExtensionMethod()
 		{
 			MyExtensionMethod.Test();
 		}

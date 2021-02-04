@@ -19,6 +19,8 @@ namespace C_Sharp
 	}
 	public static class MyExtensionMethod
 	{
+		// #Extension method
+		// extended class without creating new class or modifying base class
 		static int Add( this  MyMath m )
 		{
 			return m.A + m.B; 
