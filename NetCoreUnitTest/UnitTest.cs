@@ -42,9 +42,9 @@ namespace NetCoreUnitTest
         }
 
         [Fact]
-        public void NamingConvetions()
+        public void NamingConventions()
         {
-            NamingConvertion.ShowNamingConvetions();
+            NamingConvention.ShowNamingConventions();
         }
     }
 }

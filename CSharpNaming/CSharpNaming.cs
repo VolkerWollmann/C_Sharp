@@ -16,7 +16,7 @@ namespace CSharpNaming
     /// <summary>
     /// 
     /// </summary>
-    public class NamingConvertion
+    public class NamingConvention
     {
         #region supporter classes
         private class UserGroup { }
@@ -288,7 +288,7 @@ namespace CSharpNaming
         }
         #endregion
 
-        public static void ShowNamingConvetions()
+        public static void ShowNamingConventions()
         {
 
         }
