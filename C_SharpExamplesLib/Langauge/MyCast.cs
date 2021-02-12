@@ -20,7 +20,7 @@ namespace C_Sharp
 
 		}
 
-		// #type-testing #cast #is #as
+		// #type-testing #cast #is #as #is varname
 		private static void DoCasts(object x)
         {
 			try
@@ -34,6 +34,11 @@ namespace C_Sharp
 			MyCastClass2 t2 = x as MyCastClass2;
 			bool t3 = (x is MyCastClass1 t4);
 			bool t5 = (x is MyCastClass2);
+
+			if (x is MyCastClass1 t6 )
+            {
+				;
+            }
 
 		}
 		// #cast #int #long 

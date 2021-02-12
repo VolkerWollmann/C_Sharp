@@ -8,7 +8,7 @@ namespace C_Sharp
         // #action
         protected class Alarm
         {
-            // #delegate
+            // #delegate #event
             // Delegate for the alarm event
             // public Action OnAlarmRaised { get; set; } may work as well
             public event Action OnAlarmRaised = delegate { };
