@@ -133,7 +133,13 @@ namespace UnitTest
 		[TestMethod]
 		public void LocalFunction()
         {
-			CSharp.Test();
+			CSharp.LocalFunction();
+		}
+
+		[TestMethod]
+		public void MultiLineStringConstant()
+		{
+			CSharp.MultiLineStringConstant();
 		}
 	}
 }

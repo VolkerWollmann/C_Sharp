@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
@@ -13,7 +14,7 @@ namespace C_Sharp
         /// test
         /// #local method #local function
         /// </summary>
-        public static void Test()
+        public static void LocalFunction()
         {
             int GetOne()
             {
@@ -21,6 +22,15 @@ namespace C_Sharp
             }
 
             var one = GetOne();
+        }
+
+        public static void MultiLineStringConstant()
+        {
+            string animals = @"donkey
+                               dog
+                               cat";
+
+            Assert.IsNotNull(animals);
         }
     }
 }
