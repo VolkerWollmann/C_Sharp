@@ -52,6 +52,12 @@ namespace UnitTest
 		}
 
 		[TestMethod]
+		public void Linq_OrderBy()
+		{
+			MyLinq.Linq_OrderBy();
+		}
+
+		[TestMethod]
 		public void Expression1()
 		{
 			MyLinqExpression.WalkExpression1();

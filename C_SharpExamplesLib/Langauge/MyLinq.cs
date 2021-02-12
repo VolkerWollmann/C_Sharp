@@ -53,6 +53,16 @@ namespace C_Sharp
 
 		}
 
+		// #linq #orderBy
+		public static void Linq_OrderBy()
+        {
+			List<int> numbers = new List<int>{ 2, 3, 1, 4 };
+
+			List<int> sortedNumbers = numbers.OrderBy(i => i).ToList();
+
+			Assert.IsTrue(sortedNumbers.First() == 1);
+		}
+
 		public static void Linq_FirstOrDefault()
 		{ 
 			// #FirstOrDefault
