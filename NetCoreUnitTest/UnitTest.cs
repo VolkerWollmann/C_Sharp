@@ -2,6 +2,7 @@ using System;
 using Xunit;
 using Xunit.Abstractions;
 using CSharpCore;
+using CSharpNaming;
 
 namespace NetCoreUnitTest
 {
@@ -38,6 +39,12 @@ namespace NetCoreUnitTest
         public void TestInit()
         {
             CSharp9.TestInit();
+        }
+
+        [Fact]
+        public void NamingConvetions()
+        {
+            NamingConvertion.ShowNamingConvetions();
         }
     }
 }

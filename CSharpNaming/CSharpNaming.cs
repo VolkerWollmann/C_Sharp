@@ -36,6 +36,15 @@ namespace CSharpNaming
             if ((localVariable == 0) || (iCounter == 0))
                 return;
             #endregion
+
+            #region II. a Use Verb Noun for Methods
+            void ClearStack()
+            {
+
+            }
+
+            ClearStack();
+            #endregion
         }
 
         #region III. do use camelCasing for local variables and method arguments. 
@@ -278,5 +287,10 @@ namespace CSharpNaming
                 return;
         }
         #endregion
+
+        public static void ShowNamingConvetions()
+        {
+
+        }
     }
 }
