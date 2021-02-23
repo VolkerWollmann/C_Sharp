@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,6 +39,20 @@ namespace C_Sharp
 
 			// get a #list of all #Elements of #array
 			var allElements = testArray.Cast<string>().ToList();
+		}
+
+		// #array #extension
+		public static void ArrayExtension()
+        {
+			string[] friends = new string[] { "Esel", "Hund" };
+
+			//friends[2] = "Möwe";
+
+			var moreFriends = friends.ToList<string>();
+			moreFriends.Add("Möwe");
+			friends = moreFriends.ToArray<string>();
+
+			Assert.AreEqual(3, moreFriends.Count());
 		}
 	}
 }

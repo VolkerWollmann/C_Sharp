@@ -94,6 +94,12 @@ namespace UnitTest
 		}
 
 		[TestMethod]
+		public void ArrayExentension()
+		{
+			MyArray.ArrayExtension();
+		}
+
+		[TestMethod]
 		public void Generics()
 		{
 			MyGeneric.Test();
