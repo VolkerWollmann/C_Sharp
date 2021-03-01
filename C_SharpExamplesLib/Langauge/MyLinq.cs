@@ -11,7 +11,7 @@ namespace C_Sharp
 		// #linq #range #where #take
 		public static void List_Range_Where_Take()
 		{
-			
+
 			List<int> favorites = new List<int> { 0, 7, 14, 21, 28, 35, 42, 49 };
 			List<int> all = Enumerable.Range(0, 100).ToList();
 			List<int> favoritesFirst = favorites;
@@ -20,18 +20,18 @@ namespace C_Sharp
 			List<int> allowed = new List<int> { 1, 8, 7, 50, 42, 13, 85, 2, 14, 67 };
 
 			List<int> result = favoritesFirst.Where(i => allowed.Contains(i)).ToList(); // { 7, 14, ... 42, 1, ... }
-			
+
 			var takeTest = allowed.Take(20).ToList(); // take takes up to maxium 20
 		}
 
 		public static void Linq_Syntax()
-        {
+		{
 			List<int> numbers = Enumerable.Range(0, 11).ToList();
 
 			// #Linq #Method_syntax
-			IEnumerable<int> q1 = numbers.Where(i => (i < 9)).Where(i => (i % 2 == 0 ));
+			IEnumerable<int> q1 = numbers.Where(i => (i < 9)).Where(i => (i % 2 == 0));
 
-	        // #Linq #Query_syntax
+			// #Linq #Query_syntax
 			IEnumerable<int> q2 = from m in (from n in numbers where (n < 9) select n) where (m % 2 == 0) select m;
 
 			// #CollectionAssert #Assert
@@ -55,8 +55,8 @@ namespace C_Sharp
 
 		// #linq #orderBy
 		public static void Linq_OrderBy()
-        {
-			List<int> numbers = new List<int>{ 2, 3, 1, 4 };
+		{
+			List<int> numbers = new List<int> { 2, 3, 1, 4 };
 
 			List<int> sortedNumbers = numbers.OrderBy(i => i).ToList();
 
@@ -64,18 +64,18 @@ namespace C_Sharp
 		}
 
 		public static void Linq_FirstOrDefault()
-		{ 
+		{
 			// #FirstOrDefault
 			int i = 42;
 			List<int> l = new List<int> { };
 
-			i =  l.FirstOrDefault<int>();
+			i = l.FirstOrDefault<int>();
 			Assert.AreEqual(i, 0);
 
 			// #First
 			int j = 43;
 			try { j = l.First<int>(); }
-			catch (InvalidOperationException) {}
+			catch (InvalidOperationException) { }
 			finally { Assert.AreEqual(j, 43); }
 
 		}
@@ -103,18 +103,18 @@ namespace C_Sharp
 			Assert.IsTrue(setDifference2.SequenceEqual<int>(Enumerable.Range(7, 3))); // {7,8,9}
 		}
 
-        #region PLINQ
-        private static bool IsPrime(int i)
+		#region PLINQ
+		private static bool IsPrime(int i)
 		{
 			if (i <= 3)
 				return true;
-			var divisors = Enumerable.Range(2, (i / 2) - 1 ).ToList();
+			var divisors = Enumerable.Range(2, (i / 2) - 1).ToList();
 			return !divisors.Any(d => (i % d == 0));
 		}
 
 		// #linq #parallel  #plinq #WithDegreeOfParallelism #rime
 		public static void TestParallelLinq()
-        {
+		{
 			var numbers = Enumerable.Range(10000000, 500);
 
 			DateTime t0 = DateTime.Now;
@@ -122,7 +122,7 @@ namespace C_Sharp
 			var primes = numbers.Where(n => IsPrime(n)).ToList();
 			DateTime t1 = DateTime.Now;
 			Console.WriteLine("Time sequential:" + t1.Subtract(t0).ToString());
-			
+
 			var primes2 = numbers.AsParallel().Where(n => IsPrime(n)).ToList();
 			DateTime t2 = DateTime.Now;
 			Console.WriteLine("Time parallel:" + t2.Subtract(t1).ToString());
@@ -139,10 +139,10 @@ namespace C_Sharp
 			DateTime t3 = DateTime.Now;
 			Console.WriteLine("Time parallel (degree 3):" + t3.Subtract(t2).ToString());
 		}
-        #endregion
+		#endregion
 
-        #region PLinqException
-        public static bool CheckCity(string name)
+		#region PLinqException
+		public static bool CheckCity(string name)
 		{
 			if (name == "")
 				throw new ArgumentException(name);
@@ -184,5 +184,26 @@ namespace C_Sharp
 		}
 
 		#endregion
+
+
+		// #linq #select implict type
+		public static void SelectImplictType()
+		{
+			Person[] people = new Person[] {
+				new Person { Name = "Alan", City = "Hull" },
+				new Person { Name = "Beryl", City = "Seattle" },
+				new Person { Name = "Charles", City = "London" },
+				new Person { Name = "David", City = "Seattle" },
+				new Person { Name = "Eddy", City = "" },
+				new Person { Name = "Fred", City = "" },
+				new Person { Name = "Gordon", City = "Hull" },
+				new Person { Name = "Henry", City = "Seattle" },
+				new Person { Name = "Isaac", City = "Seattle" },
+				new Person { Name = "James", City = "London" }};
+
+			people.Select(p => new { p.City, p.Name })
+				.Where(p2 => (p2.City != ""))
+				.ToList().ForEach(p => { Console.WriteLine(p.ToString()); });
+		}
 	}
 }
