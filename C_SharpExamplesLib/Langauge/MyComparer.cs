@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace C_Sharp
 {
@@ -83,7 +85,7 @@ namespace C_Sharp
 		#endregion
 
 		#region Test
-		public static void Test()
+		public static void TestIComparable()
 		{
 			List<MyIComparable> l = new List<MyIComparable> {
 				new MyIComparable(1, DONKEY),
@@ -94,6 +96,27 @@ namespace C_Sharp
 			};
 
 			l.Sort();
+
+			for (int i = 0; i < l.Count - 1; i++)
+				Assert.IsTrue(((IComparable<MyIComparable>)l[i]).CompareTo(l[i + 1]) <= 0);
+
+		}
+
+		public static void TestComparison()
+		{ 
+			MyIComparable[] a = new MyIComparable[] { 
+				new MyIComparable(1, DONKEY),
+				new MyIComparable(5, DONKEY),
+				new MyIComparable(2, CAT),
+				new MyIComparable(4, CAT),
+				new MyIComparable(3, DOG),
+			};
+
+			// Sort array with #Comparsion
+			Array.Sort(a, new Comparison<MyIComparable>((i1, i2) => -i2.Version.CompareTo(i1.Version)));
+
+			for (int i = 0; i < a.Length-1; i++)
+				Assert.IsTrue( a[i].Version <= a[i+1].Version );
 		}
 		#endregion
 	}
