@@ -75,3 +75,47 @@ namespace C_Sharp.AccessiblityNeigbor
 		}
 	}
 }
+
+namespace C_Sharp.InferfaceImplementation
+{
+	interface IIncrement
+    {
+		int Increment(int i); 
+    }
+
+	// #interface #explicit implementation
+    class MyExplicitIncrementer : IIncrement
+    {
+		// explicit interface implementation
+        int IIncrement.Increment(int i)
+        {
+			return i++;
+        }
+    }
+
+    class MyImplicitIncrementer : IIncrement
+    {
+		// implict interface implementation
+		public int Increment(int i)
+        {
+			return i++;
+        }
+    }
+
+
+    public class MyInterfaceVisibility
+    {
+		public static void ExplicitImplicitInterfaceImplementation()
+		{
+			MyExplicitIncrementer myExplicitIncrementer = new MyExplicitIncrementer();
+
+			// cast necessary
+			int threeA = ((IIncrement)myExplicitIncrementer).Increment(2);
+
+			MyImplicitIncrementer myImplicitIncrementer = new MyImplicitIncrementer();
+
+			// cast not necessary
+			int threeB = myImplicitIncrementer.Increment(2);
+		}
+    }
+}

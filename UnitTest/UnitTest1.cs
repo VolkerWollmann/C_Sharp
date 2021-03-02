@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using C_Sharp;
 using C_Sharp.FileOperation;
 using C_Sharp.Types;
+using C_Sharp.InferfaceImplementation;
 
 namespace UnitTest
 {
@@ -73,6 +74,12 @@ namespace UnitTest
 			C_Sharp.AccessiblityBase.MyClassAccessiblityTestB.Test();
 			C_Sharp.AccessiblityNeigbor.MyClassAccessiblityTest.Test();
 			C_Sharp.AccessiblityOtherLibrary.MyClassAccessiblityTest.Test();
+		}
+
+		[TestMethod]
+		public void ExplicitImplicitInterfaceImplementation()
+        {
+			MyInterfaceVisibility.ExplicitImplicitInterfaceImplementation();
 		}
 
 		[TestMethod]
