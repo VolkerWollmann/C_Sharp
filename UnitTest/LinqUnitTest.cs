@@ -34,6 +34,12 @@ namespace UnitTest
 		}
 
 		[TestMethod]
+		public void Linq_SelectMany()
+		{
+			MyLinq.Linq_SelectMany();
+		}
+
+		[TestMethod]
 		public void ParallelLinq()
 		{
 			MyLinq.TestParallelLinq();

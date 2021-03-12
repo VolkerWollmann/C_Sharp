@@ -63,6 +63,7 @@ namespace C_Sharp
 			Assert.IsTrue(sortedNumbers.First() == 1);
 		}
 
+		// #linq #FirstOrDefault
 		public static void Linq_FirstOrDefault()
 		{
 			// #FirstOrDefault
@@ -101,6 +102,20 @@ namespace C_Sharp
 
 			IEnumerable<int> setDifference2 = setB.Except(setA);
 			Assert.IsTrue(setDifference2.SequenceEqual<int>(Enumerable.Range(7, 3))); // {7,8,9}
+		}
+
+		// #linq #selectMany
+		public static void Linq_SelectMany()
+        {
+			IEnumerable<int> setA = Enumerable.Range(1, 3);
+
+			List<List<int>> result1 = setA.Select(i => new List<int> { i, i * i }).ToList();
+			Assert.IsTrue(result1[0].SequenceEqual<int>(new List<int> { 1, 1 }));
+			Assert.IsTrue(result1[1].SequenceEqual<int>(new List<int> { 2, 4 }));
+			Assert.IsTrue(result1[2].SequenceEqual<int>(new List<int> { 3, 9 }));
+
+			List<int> result2 = setA.SelectMany(i => new List<int> { i, i * i }).ToList();
+			Assert.IsTrue(result2.SequenceEqual<int>(new List<int> { 1, 1, 2, 4, 3, 9 })); 
 		}
 
 		#region PLINQ
