@@ -78,7 +78,7 @@ namespace C_Sharp
 			}
 			catch( Exception e )
 			{
-				s = e.GetType().Name;
+				Assert.IsInstanceOfType(e, typeof(DivideByZeroException)); 
 			}
 
 			Assert.ThrowsException<DivideByZeroException>(badAction, "Exception DivideByZeroException expected");
