@@ -66,7 +66,7 @@ namespace C_Sharp
 		// #linq #FirstOrDefault
 		public static void Linq_FirstOrDefault()
 		{
-			// #FirstOrDefault
+			// #FirstOrDefault for value type
 			int i = 42;
 			List<int> l = new List<int> { };
 
@@ -75,10 +75,18 @@ namespace C_Sharp
 
 			// #First
 			int j = 43;
-			try { j = l.First<int>(); }
-			catch (InvalidOperationException) { }
-			finally { Assert.AreEqual(j, 43); }
 
+			Action first = () => j = l.First();
+			Assert.ThrowsException<InvalidOperationException>(first);
+			Assert.AreEqual(j, 43);
+
+			// #FirstOrDefault for non value types
+			string s = null;
+			List<string> ls = new List<string> { };
+
+			s = ls.FirstOrDefault();
+
+			Assert.AreEqual(s, null);
 		}
 
 		// #linq #set operation #union #intersect #except
