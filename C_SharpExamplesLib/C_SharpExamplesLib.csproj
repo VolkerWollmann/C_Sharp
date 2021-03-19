@@ -72,14 +72,15 @@
     <Compile Include="Langauge\MyList.cs" />
     <Compile Include="Langauge\MyMultipleInheritance.cs" />
     <Compile Include="Langauge\MyOperator.cs" />
-    <Compile Include="Langauge\MyThread2.cs" />
+    <Compile Include="Langauge\Thread\MyThread2.cs" />
     <Compile Include="Langauge\MySimple.cs" />
-    <Compile Include="Langauge\MyTask.cs" />
-    <Compile Include="Langauge\MyThread.cs" />
+    <Compile Include="Langauge\Task\MyTask.cs" />
+    <Compile Include="Langauge\Thread\MyThread.cs" />
     <Compile Include="Langauge\MyType.cs" />
     <Compile Include="Langauge\MyVirtual.cs" />
     <Compile Include="Langauge\MyXML.cs" />
     <Compile Include="Langauge\Scratch.cs" />
+    <Compile Include="Langauge\Task\MyTaskEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

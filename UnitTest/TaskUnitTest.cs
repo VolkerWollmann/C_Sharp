@@ -114,5 +114,11 @@ namespace UnitTest
 		{
 			MyTask.Task_OperationCanceledException();
 		}
+
+		[TestMethod]
+		public void Task_Event()
+        {
+			MyTaskEvent.TaskEvent();
+		}
 	}
 }
