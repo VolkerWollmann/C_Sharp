@@ -623,6 +623,7 @@ namespace C_Sharp
 			lock (lock1)
 			{
 				Console.WriteLine("Method 1 got lock 1");
+				Thread.Sleep(500);
 				Console.WriteLine("Method 1 waiting for lock 2");
 				lock (lock2)
 				{
@@ -639,6 +640,7 @@ namespace C_Sharp
 			lock (lock2)
 			{
 				Console.WriteLine("Method 2 got lock 2");
+				Thread.Sleep(500);
 				Console.WriteLine("Method 2 waiting for lock 1");
 				lock (lock1)
 				{

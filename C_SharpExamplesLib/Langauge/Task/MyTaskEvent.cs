@@ -11,7 +11,7 @@ using System.Windows.Threading;
 namespace C_Sharp
 {
 	/// <summary>
-	/// #thread #event
+	/// #task #event
 	/// </summary>
 	public class MyTaskEvent
 	{
