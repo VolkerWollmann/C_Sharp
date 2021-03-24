@@ -6,10 +6,8 @@ using System.IO;
 namespace CSharpNaming
 {
     /// <summary>
-    /// Naming conventions
-    /// 
+    /// Naming conventions 
     /// https://www.dofactory.com/reference/csharp-coding-standards
-    /// 
 
     #region I. PascalCasing for classes : public class NamingConvention
     #endregion
