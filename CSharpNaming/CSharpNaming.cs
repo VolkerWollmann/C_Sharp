@@ -57,7 +57,7 @@ namespace CSharpNaming
         string strName = "";
         #endregion
 
-        #region IV. do not use Screaming Caps for constants or readonly variables:  const string ShippingType = "DropShip";
+        #region IV. do not use Screaming Caps for constants or readonly variables:  const string ShippingType = "DropShip";   Avoid: const string SHIPPINGTYPE = "DropShip";
         // Correct : PascalCasing
         public const string ShippingType = "DropShip";
 
@@ -65,7 +65,7 @@ namespace CSharpNaming
         public const string SHIPPINGTYPE = "DropShip";
         #endregion
 
-        #region V. Avoid using Abbreviations: UserGroup userGroup; avoid UserGroup usrGrp;
+        #region V. Avoid using Abbreviations: UserGroup userGroup;     Avoid UserGroup usrGrp;
         //    Exceptions: abbreviations commonly used as names, such as Id, Xml, Ftp, Uri
 
         // Correct
@@ -161,7 +161,7 @@ namespace CSharpNaming
         }
         #endregion
 
-        #region XII. organize namespaces with a clearly defined structure: namespace Company.Product.Module.SubModule
+        #region XII. Organize namespaces with a clearly defined structure: namespace Company.Product.Module.SubModule
         //namespace Company.Product.Module.SubModule { } 
         //namespace Product.Module.Component { }
         //namespace Product.Layer.Module.Group { }
@@ -197,7 +197,7 @@ namespace CSharpNaming
         }
         #endregion
 
-        #region XV.do use singular names for enums.Exception: bit field enums: public enum Color { Red, ... 
+        #region XV. Do use singular names for enums.Exception: bit field enums: public enum Color { Red, ... 
         // Correct
         public enum Color
         {
