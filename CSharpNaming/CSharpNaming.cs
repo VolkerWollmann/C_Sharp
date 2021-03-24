@@ -23,7 +23,7 @@ namespace CSharpNaming
 
         private void MyFunction()
         {
-            #region II. do use camelCasing for local variables and method arguments: int localVariable = 1;
+            #region II. Do use camelCasing for local variables and method arguments: int localVariable = 1;
             // camelCasing for local variables
             int localVariable = 1;
             #endregion
@@ -37,7 +37,7 @@ namespace CSharpNaming
                 return;
             #endregion
 
-            #region II. a Use Verb Noun for Methods: void ClearStack()
+            #region II. Use Verb Noun for Methods: void ClearStack()
             void ClearStack() {}
             #endregion
 
@@ -46,7 +46,7 @@ namespace CSharpNaming
             #endregion
         }
 
-        #region III. do use camelCasing for local variables and method arguments: int counter=0
+        #region III. Do use camelCasing for local variables and method arguments: int counter=0
         //      do notuse Hungarian notation or any other type identification in identifiers
         // Correct
         int counter = 0;
@@ -57,7 +57,7 @@ namespace CSharpNaming
         string strName = "";
         #endregion
 
-        #region IV. do not use Screaming Caps for constants or readonly variables:  const string ShippingType = "DropShip";   Avoid: const string SHIPPINGTYPE = "DropShip";
+        #region IV. Do not use Screaming Caps for constants or readonly variables:  const string ShippingType = "DropShip";   Avoid: const string SHIPPINGTYPE = "DropShip";
         // Correct : PascalCasing
         public const string ShippingType = "DropShip";
 
@@ -80,7 +80,7 @@ namespace CSharpNaming
         CustomerId customerId;
         #endregion
 
-        #region VI. do use PascalCasing for abbreviations 3 characters or more (2 chars are both uppercase) : htmlHelper
+        #region VI. Do use PascalCasing for abbreviations 3 characters or more (2 chars are both uppercase) : htmlHelper
         // here for the type name
         //HtmlHelper htmlHelper;
         //FtpTransfer ftpTransfer;
@@ -113,7 +113,7 @@ namespace CSharpNaming
         Boolean isDeleted = false;
         #endregion
 
-        #region IX. douse implicit type var for local variable declarations: var stream = File.Create("");
+        #region IX. Do use implicit type var for local variable declarations: var stream = File.Create("");
         // Exception: primitive types (int, string, double, etc) use predefined names.
         private void Test()
         {
