@@ -13,9 +13,6 @@ namespace CSharpNaming
 
     #region I. PascalCasing for classes
     #endregion
-    /// <summary>
-    /// 
-    /// </summary>
     public class NamingConvention
     {
         #region supporter classes
@@ -29,6 +26,9 @@ namespace CSharpNaming
             #region II. do use camelCasing for local variables and method arguments. 
             // camelCasing for local variables
             int localVariable = 1;
+            #endregion
+
+            #region
 
             // Avoid : hungarinCasing for type information
             int iCounter = 0;
@@ -38,18 +38,16 @@ namespace CSharpNaming
             #endregion
 
             #region II. a Use Verb Noun for Methods
-            void ClearStack()
-            {
+            void ClearStack() {}
+            #endregion
 
-            }
-
+            #region
             ClearStack();
             #endregion
         }
 
         #region III. do use camelCasing for local variables and method arguments. 
         //      do notuse Hungarian notation or any other type identification in identifiers
-
         // Correct
         int counter = 0;
         string name = "";
@@ -78,7 +76,7 @@ namespace CSharpNaming
         UserGroup usrGrp;
         Assignment empAssignment;
 
-        // Exceptions
+        // Exceptions: Id
         CustomerId customerId;
         #endregion
 
@@ -189,24 +187,22 @@ namespace CSharpNaming
             public DateTime DateClosed { get; set; }
             public decimal Balance { get; set; }
 
+            #region
             // Constructor
             public Account()
             {
                 // ...
             }
+            #endregion
         }
         #endregion
 
-        #region XV.douse singular names for enums.Exception: bit field enums.
+        #region XV.do use singular names for enums.Exception: bit field enums.
         // Correct
         public enum Color
         {
             Red,
             Green,
-            Blue,
-            Yellow,
-            Magenta,
-            Cyan
         }
 
         // Exception
@@ -215,9 +211,7 @@ namespace CSharpNaming
         {
             None = 0,
             Top = 1,
-            Right = 2,
             Bottom = 4,
-            Left = 8
         }
         #endregion
 
@@ -248,10 +242,7 @@ namespace CSharpNaming
         public enum CoinEnum
         {
             Penny,
-            Nickel,
-            Dime,
-            Quarter,
-            Dollar
+            Nickel
         }
 
         // Correct
@@ -259,9 +250,6 @@ namespace CSharpNaming
         {
             Penny,
             Nickel,
-            Dime,
-            Quarter,
-            Dollar
         }
         #endregion
 
@@ -288,9 +276,10 @@ namespace CSharpNaming
         }
         #endregion
 
+        #region Test
         public static void ShowNamingConventions()
         {
-
         }
+        #endregion
     }
 }
