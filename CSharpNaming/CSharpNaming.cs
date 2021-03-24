@@ -11,7 +11,7 @@ namespace CSharpNaming
     /// https://www.dofactory.com/reference/csharp-coding-standards
     /// 
 
-    #region I. PascalCasing for classes
+    #region I. PascalCasing for classes : public class NamingConvention
     #endregion
     public class NamingConvention
     {
@@ -23,7 +23,7 @@ namespace CSharpNaming
 
         private void MyFunction()
         {
-            #region II. do use camelCasing for local variables and method arguments. 
+            #region II. do use camelCasing for local variables and method arguments: int localVariable = 1;
             // camelCasing for local variables
             int localVariable = 1;
             #endregion
@@ -37,7 +37,7 @@ namespace CSharpNaming
                 return;
             #endregion
 
-            #region II. a Use Verb Noun for Methods
+            #region II. a Use Verb Noun for Methods: void ClearStack()
             void ClearStack() {}
             #endregion
 
@@ -46,7 +46,7 @@ namespace CSharpNaming
             #endregion
         }
 
-        #region III. do use camelCasing for local variables and method arguments. 
+        #region III. do use camelCasing for local variables and method arguments: int counter=0
         //      do notuse Hungarian notation or any other type identification in identifiers
         // Correct
         int counter = 0;
@@ -57,7 +57,7 @@ namespace CSharpNaming
         string strName = "";
         #endregion
 
-        #region IV. do not use Screaming Caps for constants or readonly variables 
+        #region IV. do not use Screaming Caps for constants or readonly variables:  const string ShippingType = "DropShip";
         // Correct : PascalCasing
         public const string ShippingType = "DropShip";
 
@@ -65,7 +65,7 @@ namespace CSharpNaming
         public const string SHIPPINGTYPE = "DropShip";
         #endregion
 
-        #region V. Avoid using Abbreviations. 
+        #region V. Avoid using Abbreviations: UserGroup userGroup; avoid UserGroup usrGrp;
         //    Exceptions: abbreviations commonly used as names, such as Id, Xml, Ftp, Uri
 
         // Correct
@@ -80,14 +80,14 @@ namespace CSharpNaming
         CustomerId customerId;
         #endregion
 
-        #region VI. do use PascalCasing for abbreviations 3 characters or more (2 chars are both uppercase) 
+        #region VI. do use PascalCasing for abbreviations 3 characters or more (2 chars are both uppercase) : htmlHelper
         // here for the type name
         //HtmlHelper htmlHelper;
         //FtpTransfer ftpTransfer;
         //UIControl uiControl;
         #endregion
 
-        #region VII. Do not use Underscores in identifiers. 
+        #region VII. Do not use Underscores in identifiers: public DateTime clientAppointment;    Avoid: client_Appointment;
         //      Exception: you can prefix private static variables with an underscore.
         // Correct
         public DateTime clientAppointment;
@@ -113,7 +113,7 @@ namespace CSharpNaming
         Boolean isDeleted = false;
         #endregion
 
-        #region IX. douse implicit type var for local variable declarations. 
+        #region IX. douse implicit type var for local variable declarations: var stream = File.Create("");
         // Exception: primitive types (int, string, double, etc) use predefined names.
         private void Test()
         {
@@ -136,7 +136,7 @@ namespace CSharpNaming
         }
         #endregion
 
-        #region X. Do use noun or noun phrases to name a class. 
+        #region X. Do use noun or noun phrases to name a class: public class Employee, public class DocumentCollection
         public class Employee
         {
         }
@@ -148,7 +148,7 @@ namespace CSharpNaming
         }
         #endregion
 
-        #region XI. Do prefix interfaces with the letter I.  
+        #region XI. Do prefix interfaces with the letter I: public interface IShape 
         //     Interface names are noun (phrases) or adjectives.
         public interface IShape
         {
@@ -161,7 +161,7 @@ namespace CSharpNaming
         }
         #endregion
 
-        #region XII. organize namespaces with a clearly defined structure
+        #region XII. organize namespaces with a clearly defined structure: namespace Company.Product.Module.SubModule
         //namespace Company.Product.Module.SubModule { } 
         //namespace Product.Module.Component { }
         //namespace Product.Layer.Module.Group { }
@@ -197,7 +197,7 @@ namespace CSharpNaming
         }
         #endregion
 
-        #region XV.do use singular names for enums.Exception: bit field enums.
+        #region XV.do use singular names for enums.Exception: bit field enums: public enum Color { Red, ... 
         // Correct
         public enum Color
         {
@@ -237,7 +237,7 @@ namespace CSharpNaming
         }
         #endregion
 
-        #region XVII. Do notsuffix enum names with Enum
+        #region XVII. Do notsuffix enum names with Enum : enum Coin   Avoid: enum CoinEnum
         // Don't
         public enum CoinEnum
         {
