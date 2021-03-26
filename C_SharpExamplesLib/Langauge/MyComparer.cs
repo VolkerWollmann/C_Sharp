@@ -47,6 +47,7 @@ namespace C_Sharp
 	[DebuggerDisplay("Version={Version}, Animal={Animal}")]
 	public class MyIComparable : IComparable<MyIComparable>
 	{
+		private const string NONE = "None";
 		private const string DONKEY = "Esel";
 		private const string DOG = "Hund";
 		private const string SEAGULL = "Möwe";
@@ -65,12 +66,26 @@ namespace C_Sharp
 		#endregion
 
 		#region IComparable<MyOrderComparer>
+		/// <summary>
+		/// Sort order is by Version, than by Animal
+		/// Except NONE, which has lowest priorty.
+		/// Nota bene: Ther must be only one NONE to make order total.
+		/// <returns></returns>
 		// < 0 This instance precedes obj in the sort order.
 		// = 0 This instance occurs in the same position in the sort order as obj.
 		// > 0 This instance follows obj in the sort order.
 
 		int IComparable<MyIComparable>.CompareTo(MyIComparable other)
 		{
+			if (( this.Animal == NONE ) && ( other.Animal == NONE))
+				return 0;
+
+			if (this.Animal == NONE)
+				return -1;
+
+			if (other.Animal == NONE)
+				return 1;
+
 			if (this.Version < other.Version)
 				return -1;
 
@@ -93,6 +108,7 @@ namespace C_Sharp
 				new MyIComparable(2, CAT),
 				new MyIComparable(3, CAT),
 				new MyIComparable(2, DOG),
+				new MyIComparable(5, NONE),
 			};
 
 			l.Sort();
