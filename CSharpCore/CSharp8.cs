@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CSharpCore
+﻿namespace CSharpCore
 {
     public class CSharp8
     {
