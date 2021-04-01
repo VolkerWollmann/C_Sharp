@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Langauge
@@ -12,6 +13,7 @@ namespace C_Sharp.Langauge
 			// does not work for two dimensional array
 			int[] xxx = new int[5];
 			var y = xxx.AsQueryable().First();
+			Assert.AreEqual(y,0);
 
 			string[,] testArray = new string[10, 10];
 			for (int row = 0; row < 10; row++)
@@ -25,16 +27,21 @@ namespace C_Sharp.Langauge
 			// get an enumerator for all elements
 			var enumerator = testArray.GetEnumerator();
 			enumerator.MoveNext();
+
+			// get first element in array
 			var firstElement = enumerator.Current;
+			Assert.IsInstanceOfType(firstElement, typeof(string));
 
 			// get the second column
 			var secondColumn =
 				Enumerable.Range(0, testArray.GetLength(0))
 				.Select(x => testArray[x, 2])
 				.ToArray();
+            Assert.IsInstanceOfType(secondColumn, typeof(string[]));
 
 			// get a #list of all #Elements of #array
 			var allElements = testArray.Cast<string>().ToList();
+			Assert.IsInstanceOfType(allElements, typeof(List<string>) );
 		}
 
 		// #array #extension

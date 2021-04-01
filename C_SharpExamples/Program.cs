@@ -5,10 +5,9 @@ namespace C_Sharp
 {
 	class Program
 	{
-		static void Main(string[] args)
+		static void Main()
         {
-            var a = args;
-			//MyEnum.Test();
+            //MyEnum.Test();
 			//MyOperators.Test();
 			//MyAnonymousType.Test();
 			//MyDelegate.Test();

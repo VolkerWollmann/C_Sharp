@@ -22,16 +22,8 @@ namespace C_Sharp.Langauge
 			Type myAbstractClassType = typeof(MyAbstractClass);
 			Type myConcreteClassType = typeof(MyConcreteClass);
 
-			try
-			{
-				object myAbstractClassInstance = Activator.CreateInstance(myAbstractClassType);
-			}
-			catch( Exception exp)
-			{
-				// you cannot instantiate an abstract class
-				Console.WriteLine(exp.ToString());
-				Assert.IsTrue(exp.GetType() == typeof(MissingMethodException));
-			}
+            void CreateAbstractClassInstanceAction() => Activator.CreateInstance(myAbstractClassType);
+            Assert.ThrowsException<MissingMethodException>((Action) CreateAbstractClassInstanceAction);
 
 			// create instance of concrete class by using type information
 			object myConcreteClassInstance = Activator.CreateInstance(myConcreteClassType);

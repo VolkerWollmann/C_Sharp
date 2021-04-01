@@ -11,7 +11,7 @@ namespace AccessibilityLibrary
     public class MyClassAccessibility
     {
 
-        private int MyPrivateNumber = 1;
+        private int _myPrivateNumber = 1;
         internal int MyInternalNumber = 2;
         protected int MyProtectedNumber = 3;
         public int MyPublicNumber = 4;
@@ -20,8 +20,8 @@ namespace AccessibilityLibrary
 
         public void Test1()
         {
-            int i = MyPrivateNumber;
-            MyPrivateNumber = i;
+            int i = _myPrivateNumber;
+            _myPrivateNumber = i;
             MyInternalNumber = 42;
             MyProtectedNumber = 42;
             MyPublicNumber = 42;

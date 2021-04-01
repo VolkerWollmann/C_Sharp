@@ -37,9 +37,7 @@ namespace UnitTest
 		public void CSharp6Test()
 		{
 			CSharp6.Test();
-
-
-		}
+        }
 
 		[TestMethod]
 		public void Assert_Test()
@@ -67,12 +65,12 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void ClassAccessiblity_Test()
+		public void ClassAccessibility_Test()
 		{
 			MyClassAccessibilityTestA.Test();
 			MyClassAccessibilityTestB.Test();
 			MyClassAccessibilityTest.Test();
-			C_SharpAccessiblity2.MyClassAccessibilityTest.Test();
+			C_SharpAccessibility2.MyClassAccessibilityTest.Test();
 		}
 
 		[TestMethod]

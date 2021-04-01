@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Langauge
 {
@@ -17,22 +18,29 @@ namespace C_Sharp.Langauge
 		// #type-testing #cast #is #as #is variable name
 		private static void DoCasts(object x)
         {
-			try
-			{
-				MyCastClass2 t1 = (MyCastClass2)x;
-			}
-			catch (InvalidCastException )
-			{
-				;
-			}
-			MyCastClass2 t2 = x as MyCastClass2;
-			bool t3 = (x is MyCastClass1 t4);
-			bool t5 = (x is MyCastClass2);
 
-			if (x is MyCastClass1 t6 )
+			// cannot cast tp abstract class
+			Action InvalidTypeCastAction = () => { MyCastClass2 t1 = (MyCastClass2)x; };
+            Assert.ThrowsException<InvalidCastException>(InvalidTypeCastAction);
+
+			// cannot cast independent classes on each another, even if they look equal
+			MyCastClass2 t2 = x as MyCastClass2;
+			Assert.IsNull(t2);
+
+			// check type with cast and assignment 
+            if (x is MyCastClass1 t4)
             {
-				;
-            }
+                Assert.IsNotNull(t4);
+			}
+            
+			// check type with is
+			bool t5 = x is MyCastClass2;
+			Assert.IsFalse(t5);
+
+
+            bool t7 = (x is MyCastClass1 t6);
+			Assert.IsTrue(t7);
+            
 
 		}
 		// #cast #int #long 
@@ -42,15 +50,14 @@ namespace C_Sharp.Langauge
 			object o;
 			int i;
 
-			try
-			{
-				o = l;
-				i = (int)o;
-			}
-			catch( InvalidCastException )
-			{
-				;
-			}
+            Action invalidBaseTypeCastAction = () =>
+            {
+                o = l;
+                i = (int) o;
+            };
+
+            Assert.ThrowsException<InvalidCastException>(invalidBaseTypeCastAction);
+
 
 			MyCastClass1 myCastClass1 = new MyCastClass1();
             DoCasts((object)myCastClass1);

@@ -113,6 +113,11 @@ namespace C_Sharp.Langauge
 			i = myDelegate.funcIntInt(3);
 			Assert.IsTrue(i == 9);
 
+			// will not compile due to type error
+            Func<int, int, int> funcIntIntInt = myDelegate.BadFunction;
+			Assert.IsNotNull(funcIntIntInt);
+			// myDelegate.funcIntInt = funcIntIntInt;
+
 		}
 
 		public static void TestDelegateFuncInvocationList()
@@ -127,6 +132,7 @@ namespace C_Sharp.Langauge
 			// invocationList : normally 0 or 1 Element, but more functions can be assigned
 			// last wins
 		    fInvocationList = myDelegate.funcIntInt.GetInvocationList();
+			Assert.IsNotNull(fInvocationList);
 
 			i = myDelegate.funcIntInt(3);
 			Assert.IsTrue(i == 9);
@@ -135,6 +141,7 @@ namespace C_Sharp.Langauge
 			myDelegate.funcIntegerFunction += myDelegate.Square;
 
 			f2InvocationList = myDelegate.funcIntegerFunction.GetInvocationList();
+			Assert.IsNotNull(f2InvocationList);
 
 			i = myDelegate.funcIntegerFunction(3);
 			Assert.IsTrue(i == 9);
@@ -167,16 +174,14 @@ namespace C_Sharp.Langauge
 			delegateResult = myDelegate.funcIntegerFunction(4);
 			Assert.IsTrue(delegateResult == 16);
 
-			try
-			{
-				myDelegate.funcIntegerFunction = (IntegerFunction)Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, "BadFunction");
-				delegateResult = myDelegate.funcIntegerFunction(5);
-			}
-			catch (ArgumentException exp )
-			{
-				// runtime error : BadFunction cannot be assigned to func2
-				string expDescription = exp.ToString();
-			}
+
+            Action createDelegateByMethodName = () =>
+            {
+                myDelegate.funcIntegerFunction =
+                    (IntegerFunction) Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, "BadFunction");
+            };
+            Assert.ThrowsException<ArgumentException>(createDelegateByMethodName);
+			
 		}
 
 		public static void TestDelegateAssignmentByMethodInfo()
@@ -191,12 +196,14 @@ namespace C_Sharp.Langauge
 
 			myDelegate.Delegate = Delegate.CreateDelegate(typeof(Func<int,int>), myDelegate, mSquare);
 			fRawInvocationList = myDelegate.Delegate.GetInvocationList();
+			Assert.IsNotNull(fRawInvocationList);
 
 			delegateResult = (int)myDelegate.Delegate.DynamicInvoke(3);
 			Assert.IsTrue(delegateResult == 9);
 
 			myDelegate.Delegate = Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, mSquare);
 			fInvocationList = myDelegate.Delegate.GetInvocationList();
+			Assert.IsNotNull(fInvocationList);
 
 			delegateResult = (int)myDelegate.Delegate.DynamicInvoke(3);
 			Assert.IsTrue(delegateResult == 9);
@@ -205,6 +212,7 @@ namespace C_Sharp.Langauge
 			myDelegate.Delegate = System.Delegate.Combine(myDelegate.Delegate,
 				Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, mDouble));
 			f2InvocationList = myDelegate.Delegate.GetInvocationList();
+            Assert.IsNotNull(f2InvocationList);
 
 			delegateResult = (int)myDelegate.Delegate.DynamicInvoke(3);
 			Assert.IsTrue(delegateResult == 6);

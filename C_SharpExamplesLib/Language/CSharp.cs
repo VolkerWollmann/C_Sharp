@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Security.Cryptography;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Langauge
 {
@@ -16,6 +17,8 @@ namespace C_Sharp.Langauge
             }
 
             var one = GetOne();
+
+            Assert.AreEqual(one,1);
         }
 
         public static void MultiLineStringConstant()
