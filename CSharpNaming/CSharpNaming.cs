@@ -176,7 +176,9 @@ namespace CSharpNaming
         #region XIV. Do declare all member variables at the top of a class, with static variables at the very top. 
         private class Account
         {
+            // ReSharper disable once MemberCanBePrivate.Local
             public static string BankName="";
+            // ReSharper disable once NotAccessedField.Local
             public static decimal Reserves= 0;
 
             public string Number { get; set; }
@@ -188,7 +190,8 @@ namespace CSharpNaming
             // Constructor
             public Account()
             {
-                // ...
+                BankName = "-";
+                Reserves = 0;
             }
             #endregion
         }

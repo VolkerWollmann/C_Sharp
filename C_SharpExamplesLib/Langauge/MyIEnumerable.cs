@@ -16,23 +16,11 @@ namespace C_Sharp
 		private int i;
 
 		#region IEnumerator<int>
-		int IEnumerator<int>.Current
-		{
-			get
-			{
-				return Range[i];
-			}
-		}
+		int IEnumerator<int>.Current => Range[i];
 
-		object IEnumerator.Current
-		{
-			get
-			{
-				return ((IEnumerator<int>)this).Current;
-			}
-		}
+        object IEnumerator.Current => ((IEnumerator<int>)this).Current;
 
-		// required by Dispose
+        // required by Dispose
 		protected virtual void Dispose(bool b) { }
 
 		public void Dispose()

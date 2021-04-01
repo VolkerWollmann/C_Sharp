@@ -187,7 +187,8 @@ namespace C_Sharp
 			MyIEquatible me2 = new MyIEquatible(2, "Esel");
 			MyIEquatible me3 = new MyIEquatible(1, "Esel");
 
-			MyIComparable me4 = new MyIComparable(1, "Esel");
+            // ReSharper disable once UnusedVariable
+            MyIComparable me4 = new MyIComparable(1, "Esel");
 
 			Assert.IsTrue(me1 == me3);
 			Assert.IsTrue(me1 != me2);

@@ -14,9 +14,9 @@ namespace C_Sharp
 
 			public int this[int index]
 			{
-				get { return Numbers[index]; }
-				set { Numbers[index] = value; }
-			}
+				get => Numbers[index];
+                set => Numbers[index] = value;
+            }
 			internal IndexClass()
 			{
 				Random random = new Random();

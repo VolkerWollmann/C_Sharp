@@ -2,7 +2,7 @@
 using C_Sharp;
 using C_Sharp.FileOperation;
 using C_Sharp.Types;
-using C_Sharp.InferfaceImplementation;
+using C_Sharp.InterfaceImplementation;
 
 namespace UnitTest
 {
@@ -69,8 +69,8 @@ namespace UnitTest
 		[TestMethod]
 		public void ClassAccessiblity_Test()
 		{
-			C_Sharp.AccessiblityBase.MyClassAccessiblityTestA.Test();
-			C_Sharp.AccessiblityBase.MyClassAccessiblityTestB.Test();
+			C_Sharp.AccessibilityBase.MyClassAccessibilityTestA.Test();
+			C_Sharp.AccessibilityBase.MyClassAccessibilityTestB.Test();
 			C_Sharp.AccessiblityNeigbor.MyClassAccessiblityTest.Test();
 			C_Sharp.AccessiblityOtherLibrary.MyClassAccessiblityTest.Test();
 		}

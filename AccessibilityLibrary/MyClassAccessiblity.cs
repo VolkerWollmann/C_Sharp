@@ -1,4 +1,6 @@
-﻿namespace C_Sharp.AccessiblityBase
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace C_Sharp.AccessibilityBase
 {
 	/// <summary>
 	/// #internal	: current assembly
@@ -6,7 +8,7 @@
 	/// #public		: unrestricted 
 	/// #protected  : containing class or types derived
 	/// </summary>
-	public class MyClassAccessiblity
+	public class MyClassAccessibility
 	{
 
 		private int MyPrivateNumber = 1;
@@ -14,7 +16,7 @@
 		protected int MyProtectedNumber = 3;
 		public int MyPublicNumber = 4;
 
-		internal protected int MyInternalProtected = 5;
+		protected internal int MyInternalProtected = 5;
 
 		public void Test1()
 		{
@@ -27,25 +29,25 @@
 		}
 	}
 
-	public static class MyClassAccessiblityTestA
+	public static class MyClassAccessibilityTestA
 	{
 		public static void Test()
 		{
-			MyClassAccessiblity mca = new MyClassAccessiblity();
-		    //mca.MyPrivateNumber = 42; //Error CS0122  'MyClassAccessiblity.MyNumber' is inaccessible due to its protection level 
+			MyClassAccessibility mca = new MyClassAccessibility();
+		    //mca.MyPrivateNumber = 42; //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level 
 			mca.MyInternalNumber = 42;
-			//mca.MyProtectedNumber = 42;  //Error CS0122  'MyClassAccessiblity.MyNumber' is inaccessible due to its protection level
+			//mca.MyProtectedNumber = 42;  //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level
 			mca.MyPublicNumber = 42;
 			mca.MyInternalProtected = 42;
 		}
 	}
 
-	public class MyClassAccessiblityTestB : MyClassAccessiblity
+	public class MyClassAccessibilityTestB : MyClassAccessibility
 	{
 		public static void Test()
 		{
-			MyClassAccessiblityTestB mca2 = new MyClassAccessiblityTestB();
-			// mca2.MyPrivateNumber = 42; //Error CS0122  'MyClassAccessiblity.MyNumber' is inaccessible due to its protection level
+			MyClassAccessibilityTestB mca2 = new MyClassAccessibilityTestB();
+			// mca2.MyPrivateNumber = 42; //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level
 			mca2.MyInternalNumber = 42;
 			mca2.MyProtectedNumber = 42;
 			mca2.MyPublicNumber = 42;
@@ -60,17 +62,17 @@ namespace C_Sharp.AccessiblityNeigbor
 	{
 		public static void Test()
 		{
-			C_Sharp.AccessiblityBase.MyClassAccessiblityTestB mcaB = new C_Sharp.AccessiblityBase.MyClassAccessiblityTestB();
-			//mcaB.MyPrivateNumber = 42; //Error CS0122  'MyClassAccessiblity.MyNumber' is inaccessible due to its protection level 
+			C_Sharp.AccessibilityBase.MyClassAccessibilityTestB mcaB = new C_Sharp.AccessibilityBase.MyClassAccessibilityTestB();
+			//mcaB.MyPrivateNumber = 42; //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level 
 			mcaB.MyInternalNumber = 42;
-			//mcaB.MyProtectedNumber = 42;  //Error CS0122  'MyClassAccessiblity.MyNumber' is inaccessible due to its protection level
+			//mcaB.MyProtectedNumber = 42;  //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level
 			mcaB.MyPublicNumber = 42;
 			mcaB.MyInternalProtected = 42;
 		}
 	}
 }
 
-namespace C_Sharp.InferfaceImplementation
+namespace C_Sharp.InterfaceImplementation
 {
 	interface IIncrement
     {
@@ -83,7 +85,7 @@ namespace C_Sharp.InferfaceImplementation
 		// explicit interface implementation
         int IIncrement.Increment(int i)
         {
-			return i++;
+			return ++i;
         }
     }
 
@@ -92,7 +94,7 @@ namespace C_Sharp.InferfaceImplementation
 		// implict interface implementation
 		public int Increment(int i)
         {
-			return i++;
+			return ++i;
         }
     }
 
@@ -105,11 +107,13 @@ namespace C_Sharp.InferfaceImplementation
 
 			// cast necessary
 			int threeA = ((IIncrement)myExplicitIncrementer).Increment(2);
+			Assert.AreEqual(threeA,3);
 
 			MyImplicitIncrementer myImplicitIncrementer = new MyImplicitIncrementer();
 
 			// cast not necessary
 			int threeB = myImplicitIncrementer.Increment(2);
+            Assert.AreEqual(threeB, 3);
 		}
     }
 }

@@ -64,8 +64,7 @@ namespace C_Sharp
 		// #Assert #Exception #Action
 		public static void Assert_Test()
 		{
-			string s;
-			int divisor = 0;
+            int divisor = 0;
 
 			Action badAction = () => { int i = 1 / divisor; };
 
@@ -92,7 +91,7 @@ namespace C_Sharp
 			Assert.IsTrue(r.Wahrheit);
 
 			var t = (1, "Hase", true);
-			(_, var tier, _) = t;
+			var (_, tier, _) = t;
 			Assert.AreEqual(tier, "Hase");
 		}
 		public static void Test()

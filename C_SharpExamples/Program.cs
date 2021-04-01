@@ -6,7 +6,8 @@ namespace ConsoleApp1
 	class Program
 	{
 		static void Main(string[] args)
-		{
+        {
+            var a = args;
 			//MyEnum.Test();
 			//MyOperators.Test();
 			//MyAnonymousType.Test();

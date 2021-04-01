@@ -131,7 +131,7 @@ namespace C_Sharp
     }
     public class MyLinqExpression
     {
-        static private List<Expression> GetExpressionList()
+        private static List<Expression> GetExpressionList()
         {
             //#Expression #Linq
             List<Expression> expressions = new List<Expression>();
