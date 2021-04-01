@@ -51,6 +51,11 @@ namespace UnitTest
 			CSharp6.TupleTest();
 		}
 
+        [TestMethod]
+        public void NullableReferences()
+        {
+            CSharp6.NullableReferences();
+        }
 
 		[TestMethod]
 		public void ExtensionMethod()

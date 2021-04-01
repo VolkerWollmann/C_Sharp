@@ -20,7 +20,7 @@ namespace C_Sharp.Langauge
         {
 
 			// cannot cast tp abstract class
-			Action InvalidTypeCastAction = () => { MyCastClass2 t1 = (MyCastClass2)x; };
+			Action InvalidTypeCastAction = () => { MyCastClass2 t1 = (MyCastClass2)x; Assert.IsNull(t1); };
             Assert.ThrowsException<InvalidCastException>(InvalidTypeCastAction);
 
 			// cannot cast independent classes on each another, even if they look equal
@@ -40,6 +40,9 @@ namespace C_Sharp.Langauge
 
             bool t7 = (x is MyCastClass1 t6);
 			Assert.IsTrue(t7);
+			
+			// not accessible
+            //Assert.IsNotNull(t6);
             
 
 		}
@@ -54,6 +57,7 @@ namespace C_Sharp.Langauge
             {
                 o = l;
                 i = (int) o;
+                o = i;
             };
 
             Assert.ThrowsException<InvalidCastException>(invalidBaseTypeCastAction);

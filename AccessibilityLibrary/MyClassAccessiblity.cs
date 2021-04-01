@@ -32,8 +32,11 @@ namespace AccessibilityLibrary
     public static class MyClassAccessibilityTestA
     {
         public static void Test()
-        {
+        { 
             MyClassAccessibility mca = new MyClassAccessibility();
+
+            mca.Test1();
+
             //mca.MyPrivateNumber = 42; //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level 
             mca.MyInternalNumber = 42;
             //mca.MyProtectedNumber = 42;  //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level

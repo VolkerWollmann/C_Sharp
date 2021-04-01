@@ -61,20 +61,22 @@ namespace C_Sharp.Langauge
 			return b2;
 		}
 
-		// #Assert #Exception #Action
+        // #Assert #Exception #Action
 		public static void Assert_Test()
 		{
             int divisor = 0;
+            int i=0;
 
-			Action badAction = () => { int i = 1 / divisor; i++; };
+			Action badAction = () => { i = 1 / divisor; };
 
 			try
 			{
 				// badAction.Invoke();
 				badAction();
 
-				Assert.Fail( "If this exception occurs, then prior expected exception had not been thrown." );				
-			}
+                Assert.IsTrue(i > 1);
+				Assert.Fail( "If this exception occurs, then prior expected exception had not been thrown." );
+            }
 			catch( Exception e )
 			{
 				Assert.IsInstanceOfType(e, typeof(DivideByZeroException)); 
@@ -124,12 +126,13 @@ namespace C_Sharp.Langauge
 			Assert.IsNotNull(CSharp6.ClassProperty);
         }
 
-		// Get nur mit c# 8.0 ( .NET Core 3 or .NET Standard 2.1)
-		//#nullable enable
-		public static void NullableReferences()
-		{
-		   //string? t = null;
-		   //TODO nullable references
-		}
+        // Get nur mit c# 8.0 ( .NET Core 3 or .NET Standard 2.1)
+        //#nullable enable
+        public static void NullableReferences()
+        {
+            //string? t = null;
+            //TODO nullable references
+        }
+
 	}
 }

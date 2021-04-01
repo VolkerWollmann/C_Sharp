@@ -18,7 +18,8 @@ namespace C_Sharp.Langauge.Task
 			Func<object, int> ConstFunction = (n) => Convert.ToInt32(n);
 
 			//Task<int> myTask = new Task<int>(ConstFunctionEight);
-			Task<int> myTask = new Task<int>(ConstFunction, 8);
+            int eight = ConstFunctionEight();
+			Task<int> myTask = new Task<int>(ConstFunction, eight);
 
 			Func<Task<int>, int> MultiplyByTwo = (previous) => previous.Result * 2;
 			Task<int> myTask2 = myTask.ContinueWith<int>(MultiplyByTwo, TaskContinuationOptions.OnlyOnRanToCompletion);

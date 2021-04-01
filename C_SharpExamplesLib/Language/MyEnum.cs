@@ -28,9 +28,24 @@ namespace C_Sharp.Langauge
 		}
 
 		public static void Enum_Test()
-		{
+        {
+            Dog lessie = Dog.Lessie;
+			Assert.AreEqual(lessie, Dog.Lessie);
+
+            Cat cat1 = Cat.Duchesse;
+            Assert.AreEqual(cat1, Cat.Duchesse);
+			Assert.AreNotEqual(cat1, Dog.Lessie);
+            Assert.AreEqual(cat1, (Cat)Dog.Lessie);
+
+			Cat cat2 = Cat.OMailey;
+            Assert.AreEqual(cat2, Cat.OMailey);
+
+            Cat cat3 = Cat.Garfield;
+            Assert.AreEqual(cat3, Cat.Garfield);
+
 			// #enum number of elements
 			int numberOfDogs = Enum.GetValues(typeof(Dog)).Length;
+			Assert.AreEqual(numberOfDogs,3);
 
 			// #enum to #array
 			var allDogs = Enum.GetValues(typeof(Dog));
