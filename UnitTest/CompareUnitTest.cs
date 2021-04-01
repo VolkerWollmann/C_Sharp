@@ -39,7 +39,7 @@ namespace UnitTest
 		[TestMethod]
 		public void TestIEquatable()
         {
-			MyIEquatible.Test();
+			MyIEquatable.Test();
         }
 	}
 }

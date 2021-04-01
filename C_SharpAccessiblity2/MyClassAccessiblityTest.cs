@@ -1,6 +1,6 @@
-﻿namespace C_Sharp.AccessiblityOtherLibrary
+﻿namespace C_Sharp.AccessibilityOtherLibrary
 { 
-	public static class MyClassAccessiblityTest
+	public static class MyClassAccessibilityTest
 	{
 		public static void Test()
 		{

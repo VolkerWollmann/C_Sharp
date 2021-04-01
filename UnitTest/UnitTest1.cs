@@ -71,8 +71,8 @@ namespace UnitTest
 		{
 			C_Sharp.AccessibilityBase.MyClassAccessibilityTestA.Test();
 			C_Sharp.AccessibilityBase.MyClassAccessibilityTestB.Test();
-			C_Sharp.AccessiblityNeigbor.MyClassAccessiblityTest.Test();
-			C_Sharp.AccessiblityOtherLibrary.MyClassAccessiblityTest.Test();
+			C_Sharp.AccessibilityNeighbour.MyClassAccessibilityTest.Test();
+			C_Sharp.AccessibilityOtherLibrary.MyClassAccessibilityTest.Test();
 		}
 
 		[TestMethod]

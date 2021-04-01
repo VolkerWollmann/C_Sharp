@@ -68,7 +68,7 @@ namespace C_Sharp
 			Assert.IsTrue(LessThanTree(2));
 		}
 
-		public static void TestDelgateAndFunc()
+		public static void TestDelegateAndFunc()
 		{
 			MyDelegate myDelegate = new MyDelegate();
 			int i;
@@ -115,7 +115,7 @@ namespace C_Sharp
 
 		}
 
-		public static void TestDelgateFuncInvocationList()
+		public static void TestDelegateFuncInvocationList()
 		{
 			MyDelegate myDelegate = new MyDelegate();
 			int i;

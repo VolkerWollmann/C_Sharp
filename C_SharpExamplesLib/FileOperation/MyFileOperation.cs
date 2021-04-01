@@ -18,7 +18,7 @@ namespace C_Sharp.FileOperation
 
 			IEnumerable<string> animals = File.ReadAllLines(fullName);
 
-			IEnumerable<string> testAnimals = new string[] { "Esel", "Hund", "Katze", "Möwe" };
+			IEnumerable<string> testAnimals = new string[] { "Donkey", "Dog", "Cat", "Seagull" };
 
 			Assert.IsTrue(animals.ToList().TrueForAll(a => testAnimals.Contains(a)));
 		}

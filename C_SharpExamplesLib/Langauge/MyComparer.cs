@@ -64,15 +64,16 @@ namespace C_Sharp
 		#endregion
 
 		#region IComparable<MyOrderComparer>
-		/// <summary>
-		/// Sort order is by Version, than by Animal
-		/// Except NONE, which has lowest priorty.
-		/// Nota bene: Ther must be only one NONE to make order total.
-		/// <returns></returns>
+		// <summary>
+		// Sort order is by Version, than by Animal
+		// Except NONE, which has lowest priority.
+		// Nota bene: There must be only one NONE to make order total.
+		// <returns>
 		// < 0 This instance precedes obj in the sort order.
 		// = 0 This instance occurs in the same position in the sort order as obj.
 		// > 0 This instance follows obj in the sort order.
-
+        // </returns>
+        // </summary>
 		int IComparable<MyIComparable>.CompareTo(MyIComparable other)
 		{
 			if (( this.Animal == NONE ) && ( other.Animal == NONE))
@@ -126,7 +127,7 @@ namespace C_Sharp
 				new MyIComparable(3, DOG),
 			};
 
-			// Sort array with #Comparsion
+			// Sort array with #Comparison
 			Array.Sort(a, new Comparison<MyIComparable>((i1, i2) => -i2.Version.CompareTo(i1.Version)));
 
 			for (int i = 0; i < a.Length-1; i++)
@@ -138,7 +139,7 @@ namespace C_Sharp
 
 	// #comparer #IEquatable #override #==
 	[DebuggerDisplay("Number={Number}, Animal={Animal}")]
-	public class MyIEquatible : IEquatable<MyIEquatible>
+	public class MyIEquatable : IEquatable<MyIEquatable>
     {
 		public int Number { private set; get; }
 		public string Animal { private set; get; }
@@ -146,7 +147,7 @@ namespace C_Sharp
 
 		public override bool Equals(object other)
         {
-			return this.Equals(other as MyIEquatible); 
+			return this.Equals(other as MyIEquatable); 
         }
 
 		public override int GetHashCode()
@@ -156,7 +157,7 @@ namespace C_Sharp
 
 		#region IEquatable
 		//bool IEquatable<MyEquatible>.Equals(MyEquatible other)
-        public bool Equals(MyIEquatible other)
+        public bool Equals(MyIEquatable other)
 		{
 			if (Object.ReferenceEquals(other, null))
 				return false;
@@ -166,14 +167,14 @@ namespace C_Sharp
 		#endregion
 
 		#region override Comparsion Operators
-		public static bool operator ==(MyIEquatible obj1, MyIEquatible obj2) => obj1.Equals(obj2);
+		public static bool operator ==(MyIEquatable obj1, MyIEquatable obj2) => obj1.Equals(obj2);
 
-        public static bool operator !=(MyIEquatible obj1, MyIEquatible obj2) => !obj1.Equals(obj2);
+        public static bool operator !=(MyIEquatable obj1, MyIEquatable obj2) => !obj1.Equals(obj2);
 
         #endregion
 
         #region Constructor
-        public MyIEquatible(int number, string animal)
+        public MyIEquatable(int number, string animal)
         {
 			Number = number;
 			Animal = animal;
@@ -183,12 +184,12 @@ namespace C_Sharp
 		#region Test
 		public static void Test()
         {
-			MyIEquatible me1 = new MyIEquatible(1, "Esel");
-			MyIEquatible me2 = new MyIEquatible(2, "Esel");
-			MyIEquatible me3 = new MyIEquatible(1, "Esel");
+			MyIEquatable me1 = new MyIEquatible(1, "Donkey");
+			MyIEquatable me2 = new MyIEquatable(2, "Donkey");
+			MyIEquatable me3 = new MyIEquatable(1, "Donkey");
 
             // ReSharper disable once UnusedVariable
-            MyIComparable me4 = new MyIComparable(1, "Esel");
+            MyIComparable me4 = new MyIComparable(1, "Donkey");
 
 			Assert.IsTrue(me1 == me3);
 			Assert.IsTrue(me1 != me2);

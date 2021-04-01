@@ -56,9 +56,9 @@ namespace C_Sharp.AccessibilityBase
 	}
 }
 
-namespace C_Sharp.AccessiblityNeigbor
+namespace C_Sharp.AccessibilityNeighbour
 {
-	public static class MyClassAccessiblityTest
+	public static class MyClassAccessibilityTest
 	{
 		public static void Test()
 		{
@@ -91,7 +91,7 @@ namespace C_Sharp.InterfaceImplementation
 
     class MyImplicitIncrementer : IIncrement
     {
-		// implict interface implementation
+		// implicit interface implementation
 		public int Increment(int i)
         {
 			return ++i;

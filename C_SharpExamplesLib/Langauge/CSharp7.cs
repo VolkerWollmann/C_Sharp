@@ -25,7 +25,7 @@ namespace C_Sharp
 
         public static void TestDeconstruct()
         {
-            Person p = new Person("Heinz", "Müller");
+            Person p = new Person("Heinz", "Miller");
             var (f, l) = p;
             Console.WriteLine($"FirstName: {f} LastName: {l}");
         }

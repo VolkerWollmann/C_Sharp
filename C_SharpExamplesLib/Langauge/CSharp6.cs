@@ -27,14 +27,14 @@ namespace C_Sharp
 			X = x;
 		}
 
-		internal double SqaureRoot(int i) 
+		internal double SquareRoot(int i) 
 		{
 			double result;
 			result = Math.Sqrt(i);   // using System.Math and only Sqrt ?
 			return result;
 		}
 
-		internal double SqaureRoot2(int i) => Math.Sqrt(i);
+		internal double SquareRoot2(int i) => Math.Sqrt(i);
 
 		// #string interpolation
 		internal string StringInterpolation()
@@ -46,7 +46,7 @@ namespace C_Sharp
 
 		internal (int Zahl, bool Wahrheit) GetTuple() => (1,true);
 
-		// #Dictionary #initialisation
+		// #Dictionary #initialization
 		internal Dictionary<string,int> GetDictionary()
 		{
 			return new Dictionary<string, int> { ["X"] = 5, ["Y"] = 6 };
@@ -90,9 +90,9 @@ namespace C_Sharp
 			var r = cs6.GetTuple();
 			Assert.IsTrue(r.Wahrheit);
 
-			var t = (1, "Hase", true);
+			var t = (1, "Rabbit", true);
 			var (_, tier, _) = t;
-			Assert.AreEqual(tier, "Hase");
+			Assert.AreEqual(tier, "Rabbit");
 		}
 		public static void Test()
 		{
@@ -115,7 +115,7 @@ namespace C_Sharp
 
 		// Get nur mit c# 8.0 ( .NET Core 3 or .NET Standard 2.1)
 		//#nullable enable
-		public static void NullableRefrences()
+		public static void NullableReferences()
 		{
 		   //string? t = null;
 		   //TODO nullable references

@@ -12,7 +12,7 @@ namespace C_Sharp
 
 	class MyConcreteClass : MyAbstractClass
 	{
-		public string InstancePorperty { get; } = "Hase";
+		public string InstanceProperty { get; } = "Rabbit";
 	}
 
 	public class AbstractClassTest
@@ -28,25 +28,25 @@ namespace C_Sharp
 			}
 			catch( Exception exp)
 			{
-				// you cannot instanciate an abstract class
+				// you cannot instantiate an abstract class
 				Console.WriteLine(exp.ToString());
 				Assert.IsTrue(exp.GetType() == typeof(MissingMethodException));
 			}
 
 			// create instance of concrete class by using type information
 			object myConcreteClassInstance = Activator.CreateInstance(myConcreteClassType);
-			Assert.IsNotNull(((MyConcreteClass)myConcreteClassInstance).InstancePorperty);
+			Assert.IsNotNull(((MyConcreteClass)myConcreteClassInstance).InstanceProperty);
 
 			// check type with is operator and assign as base class
 			if (myConcreteClassInstance is MyAbstractClass myConcreteClassBaseClassInstance)
 			{
-				// check that casted base class instance exists
+				// check that cast base class instance exists
 				Assert.IsNotNull(myConcreteClassBaseClassInstance);
 
-				// Get type of casted base class instance
+				// Get type of cast base class instance
 				Type myConcreteClassBaseClassInstanceType = myConcreteClassBaseClassInstance.GetType();
 
-				// GetType returns actual type and not casted type
+				// GetType returns actual type and not cast type
 				Assert.AreEqual(myConcreteClassBaseClassInstanceType, myConcreteClassType);
 				Assert.AreNotEqual(myConcreteClassBaseClassInstanceType, myAbstractClassType);				
 			}

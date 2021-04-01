@@ -15,13 +15,13 @@ namespace UnitTest
 		[TestMethod]
 		public void TestDelgate()
 		{
-			MyDelegate.TestDelgateAndFunc();
+			MyDelegate.TestDelegateAndFunc();
 		}
 
 		[TestMethod]
-		public void TestDelgateFuncInvocationList()
+		public void TestDelegateFuncInvocationList()
 		{
-			MyDelegate.TestDelgateFuncInvocationList();
+			MyDelegate.TestDelegateFuncInvocationList();
 		}
 
 		[TestMethod]

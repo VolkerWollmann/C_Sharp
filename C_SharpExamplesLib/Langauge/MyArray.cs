@@ -22,7 +22,7 @@ namespace C_Sharp
 				}
 			}
 
-			// get an enumartor for all elements
+			// get an enumerator for all elements
 			var enumerator = testArray.GetEnumerator();
 			enumerator.MoveNext();
 			var firstElement = enumerator.Current;
@@ -40,12 +40,12 @@ namespace C_Sharp
 		// #array #extension
 		public static void ArrayExtension()
         {
-			string[] friends = new string[] { "Esel", "Hund" };
+			string[] friends = new string[] { "Donkey", "Dog" };
 
-			//friends[2] = "Möwe";
+			//friends[2] = "Seagull";
 
 			var moreFriends = friends.ToList<string>();
-			moreFriends.Add("Möwe");
+			moreFriends.Add("Seagull");
 			friends = moreFriends.ToArray<string>();
 
 			Assert.AreEqual(3, moreFriends.Count());
