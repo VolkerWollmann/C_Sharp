@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
 {
@@ -10,8 +12,13 @@ namespace C_Sharp.Language
 		List<T> GetShuffledList(List<T> list);
 	}
 
-	// #generic
-	internal class MyIntegerRandomizer : IMyRandomizer<int>
+    internal interface IMyIntRandomizer : IMyRandomizer<int>
+    {
+
+    }
+
+    // #generic
+	internal class MyIntegerRandomizer : IMyIntRandomizer
 	{
 		Random random = new Random();
 		public int GetRandomElement(List<int> list)
@@ -91,17 +98,22 @@ namespace C_Sharp.Language
 		{
 			List<string> animals = new List<string>{ "Donkey", "Dog", "Seagull", "Cat", "Goat" };
 			var oneAnimal = GetRandomElement<string>(animals);
+			Assert.IsNotNull(oneAnimal);
+
 			var shuffledAnimals = GetShuffledList<string>(animals);
+			Assert.IsTrue(animals.Contains(shuffledAnimals.First()));
 
 			List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
 			var number = GetRandomElement<int>(numbers);
+			Assert.IsTrue( number >=1 && number <= 5);
 			var shuffledNumbers = GetShuffledList<int>(numbers);
-		
-			MyStringRandomizer myStringRandomizer = new MyStringRandomizer();
-			oneAnimal = myStringRandomizer.GetRandomElement (animals);
+            Assert.IsTrue(numbers.Contains(shuffledNumbers.First()));
+
+            IMyRandomizer<string> myStringRandomizer = new MyStringRandomizer();
+			oneAnimal = myStringRandomizer.GetRandomElement(animals);
 			shuffledAnimals = myStringRandomizer.GetShuffledList(animals);
 
-			MyIntegerRandomizer myIntegerRandomizer = new MyIntegerRandomizer();
+            IMyRandomizer<int> myIntegerRandomizer = new MyIntegerRandomizer();
 			number = myIntegerRandomizer.GetRandomElement(numbers);
 			shuffledNumbers = myIntegerRandomizer.GetShuffledList(numbers);
 		}

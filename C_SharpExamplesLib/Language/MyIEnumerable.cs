@@ -3,14 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
 {
 	/// <summary>
-	/// #IEnumerable<int> #IEnumerator<int> #IQueryable<int> #IQueryProvider
+	/// <![CDATA[ #IEnumerable<int> #IEnumerator<int> #IQueryable<int> #IQueryProvider ]]>
 	/// returns the number 1, ...., 10
 	/// </summary>
-	public class MyIntegerRange : IEnumerable<int>, IEnumerator<int>, IQueryable<int>, IQueryProvider
+	public class MyIntegerRange : IEnumerator<int>, IQueryable<int>, IQueryProvider  // IQueryable<int> includes IEnumerable<int>
 	{
 		private List<int> Range;
 		private int i;
@@ -131,24 +132,28 @@ namespace C_Sharp.Language
 			// myIntegerRange stands at 6
 			// uses int IEnumerator<int>.Current
 			var a = ((IEnumerator<int>)myIntegerRange).Current;
+			Assert.AreEqual(a,6);
 
 			// uses object IEnumerator.Current
 			var b = ((IEnumerator)myIntegerRange).Current;
+			Assert.IsNotNull(b);
 
 			// does work
 			// uses public IEnumerator<int> GetEnumerator()
 			var d = myIntegerRange.ToList();
+			Assert.IsNotNull(d);
 
 			//does work
 			// uses public Expression Expression
 			// uses public IQueryable<T> CreateQuery<T>(Expression expression)
 			var e = myIntegerRange.Where(i => (i < 5)).ToList();
-
+			Assert.IsNotNull(e);
 
 			// does work 
 			// uses public Expression Expression
 			// uses public TResult Execute<TResult>(Expression expression)
 			var f = myIntegerRange.Sum();
+			Assert.IsTrue(f>0);
 
 		}
 	}
