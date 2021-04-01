@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp
+namespace C_Sharp.Langauge
 {
 	// #enum #number of members
 	public class MyEnum
@@ -11,19 +11,19 @@ namespace C_Sharp
 
 		public enum Cat { Duchesse, OMailey, Garfield};
 
-		private static void ShowAllElement<Spieces>( Array array )
+		private static void ShowAllElement<TSpecies>( Array array )
 		{
-			foreach(Spieces spieces in array)
+			foreach(TSpecies species in array)
 			{
-				Console.WriteLine(spieces);
+				Console.WriteLine(species);
 			}
 		}
 
-		private static void ShowAllElement2<Spieces>(Spieces[] array)
+		private static void ShowAllElement2<TSpecies>(TSpecies[] array)
 		{
-			foreach (Spieces spieces in array)
+			foreach (TSpecies species in array)
 			{
-				Console.WriteLine(spieces);
+				Console.WriteLine(species);
 			}
 		}
 
@@ -36,7 +36,7 @@ namespace C_Sharp
 			var allDogs = Enum.GetValues(typeof(Dog));
 			ShowAllElement<Dog>(allDogs);
 
-			// #enum to #ienumerable
+			// #enum to #iEnumerable
 			var iEnumerableDogs = allDogs.Cast<Dog>();
 			var allDogs2 = iEnumerableDogs.ToArray();
 			ShowAllElement2<Dog>(allDogs2);

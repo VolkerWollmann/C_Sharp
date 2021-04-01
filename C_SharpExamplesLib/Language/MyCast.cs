@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace C_Sharp
+namespace C_Sharp.Langauge
 {
 	public class MyCast
 	{
@@ -14,7 +14,7 @@ namespace C_Sharp
 
 		}
 
-		// #type-testing #cast #is #as #is varname
+		// #type-testing #cast #is #as #is variable name
 		private static void DoCasts(object x)
         {
 			try

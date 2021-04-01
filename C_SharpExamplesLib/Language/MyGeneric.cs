@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace C_Sharp
+namespace C_Sharp.Langauge
 {
-	// #inteferface #generic #default
-	internal interface MyRandomizer<T>
+	// #interface #generic #default
+	internal interface IMyRandomizer<T>
 	{
 		T GetRandomElement(List<T> list);
 		List<T> GetShuffledList(List<T> list);
 	}
 
 	// #generic
-	internal class MyIntegerRandomizer : MyRandomizer<int>
+	internal class MyIntegerRandomizer : IMyRandomizer<int>
 	{
 		Random random = new Random();
 		public int GetRandomElement(List<int> list)
@@ -36,12 +36,12 @@ namespace C_Sharp
 		}
 	}
 
-	internal class MyStringRandomizer : MyRandomizer<string>
+	internal class MyStringRandomizer : IMyRandomizer<string>
 	{
-		Random random = new Random();
+        readonly Random _random = new Random();
 		public string GetRandomElement(List<string> list)
 		{
-			int index = random.Next(0, list.Count);
+			int index = _random.Next(0, list.Count);
 			return list[index];
 		}
 
@@ -52,7 +52,7 @@ namespace C_Sharp
 			list.ForEach(e => work.Add(e));
 			while (work.Count > 0)
 			{
-				int index = random.Next(0, work.Count);
+				int index = _random.Next(0, work.Count);
 				result.Add(work[index]);
 				work.RemoveAt(index);
 			}
@@ -89,7 +89,7 @@ namespace C_Sharp
 
 		public static void Test()
 		{
-			List<string> animals = new List<string>{ "Esel", "Hund", "Möwe", "Katze", "Ziege" };
+			List<string> animals = new List<string>{ "Donkey", "Dog", "Seagull", "Cat", "Goat" };
 			var oneAnimal = GetRandomElement<string>(animals);
 			var shuffledAnimals = GetShuffledList<string>(animals);
 

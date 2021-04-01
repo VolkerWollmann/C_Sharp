@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp
+namespace C_Sharp.Langauge
 {
 	//C-Sharp 6 features
 	public class CSharp6

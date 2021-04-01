@@ -1,12 +1,12 @@
-﻿using System.Threading.Tasks;
-using System;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Concurrent;
 
-namespace C_Sharp
+namespace C_Sharp.Langauge.Task
 {
 	public class MyTask
 	{
@@ -37,14 +37,14 @@ namespace C_Sharp
 		// #action #TaskCreationOptions #AttachedToParent
 		public static void TestChildTask()
 		{
-			Action sleepAction = () => { Thread.Sleep(2000); };
+			Action sleepAction = () => { System.Threading.Thread.Sleep(2000); };
 			Action parentAction1 = () =>
 			{
-				Task childTask = new Task(sleepAction, TaskCreationOptions.AttachedToParent);
+				System.Threading.Tasks.Task childTask = new System.Threading.Tasks.Task(sleepAction, TaskCreationOptions.AttachedToParent);
 				childTask.Start();
 			};
 
-			Task parentTask1 = new Task(parentAction1);
+			System.Threading.Tasks.Task parentTask1 = new System.Threading.Tasks.Task(parentAction1);
 
 			Console.WriteLine("Start child task attached to parent " + DateTime.Now.ToString());
 			parentTask1.Start();
@@ -53,11 +53,11 @@ namespace C_Sharp
 
 			Action parentAction2 = () =>
 			{
-				Task childTask = new Task(sleepAction);
+				System.Threading.Tasks.Task childTask = new System.Threading.Tasks.Task(sleepAction);
 				childTask.Start();
 			};
 
-			Task parentTask2 = new Task(parentAction2);
+			System.Threading.Tasks.Task parentTask2 = new System.Threading.Tasks.Task(parentAction2);
 
 			Console.WriteLine("Start child task unattached to parent " + DateTime.Now.ToString());
 			parentTask2.Start();
@@ -85,7 +85,7 @@ namespace C_Sharp
 
 		public static void Task_ThreadSafetyViolation()
 		{
-			List<Task> tasks = new List<Task>();
+			List<System.Threading.Tasks.Task> tasks = new List<System.Threading.Tasks.Task>();
 
 			for (int i = 0; i < 3; i++)
 			{
@@ -104,11 +104,11 @@ namespace C_Sharp
 					int rs = rangeStart;
 					int re = rangeEnd;
 
-					tasks.Add(Task.Run(() => addRangeOfValuesThreadSafeViolation(rs, re)));
+					tasks.Add(System.Threading.Tasks.Task.Run(() => addRangeOfValuesThreadSafeViolation(rs, re)));
 					rangeStart = rangeEnd;
 				}
 
-				Task.WaitAll(tasks.ToArray());
+				System.Threading.Tasks.Task.WaitAll(tasks.ToArray());
 
 				Console.WriteLine("{0}.Run The total is: {1}", i, sharedTotalThreadSafetyViolation);
 			}
@@ -146,7 +146,7 @@ namespace C_Sharp
 		/// </summary>
 		public static void TestTaskObjectLock()
 		{
-			List<Task> tasks = new List<Task>();
+			List<System.Threading.Tasks.Task> tasks = new List<System.Threading.Tasks.Task>();
 
 			int rangeSize = 1000000;
 			int rangeStart = 0;
@@ -162,11 +162,11 @@ namespace C_Sharp
 				int rs = rangeStart;
 				int re = rangeEnd;
 
-				tasks.Add(Task.Run(() => addRangeOfValuesObjectLock(rs, re)));
+				tasks.Add(System.Threading.Tasks.Task.Run(() => addRangeOfValuesObjectLock(rs, re)));
 				rangeStart = rangeEnd;
 			}
 
-			Task.WaitAll(tasks.ToArray());
+			System.Threading.Tasks.Task.WaitAll(tasks.ToArray());
 
 			Console.WriteLine("The total is: {0}", sharedTotal);
 		}
@@ -198,15 +198,15 @@ namespace C_Sharp
 				if (Monitor.TryEnter(sharedTotalMonitorLock))
 				{
 					sharedTotalMonitor = sharedTotalMonitor + subTotal;
-					Thread.Sleep(random.Next(0, 10));
-					Console.WriteLine($"{Task.CurrentId} : Adding subtotal ");
+					System.Threading.Thread.Sleep(random.Next(0, 10));
+					Console.WriteLine($"{System.Threading.Tasks.Task.CurrentId} : Adding subtotal ");
 					Monitor.Exit(sharedTotalMonitorLock);
 					done = true;
 				}
 				else
 				{
-					Console.WriteLine($"{Task.CurrentId} : Have to wait for adding subtotal");
-					Thread.Sleep(random.Next(190, 210));
+					Console.WriteLine($"{System.Threading.Tasks.Task.CurrentId} : Have to wait for adding subtotal");
+					System.Threading.Thread.Sleep(random.Next(190, 210));
 				}
 			}
 		}
@@ -217,7 +217,7 @@ namespace C_Sharp
 		/// </summary>
 		public static void TestTaskMonitor()
 		{
-			List<Task> tasks = new List<Task>();
+			List<System.Threading.Tasks.Task> tasks = new List<System.Threading.Tasks.Task>();
 
 			int rangeSize = 2000000;
 			int rangeStart = 0;
@@ -233,11 +233,11 @@ namespace C_Sharp
 				int rs = rangeStart;
 				int re = rangeEnd;
 
-				tasks.Add(Task.Run(() => addRangeOfValuesMonitor(rs, re)));
+				tasks.Add(System.Threading.Tasks.Task.Run(() => addRangeOfValuesMonitor(rs, re)));
 				rangeStart = rangeEnd;
 			}
 
-			Task.WaitAll(tasks.ToArray());
+			System.Threading.Tasks.Task.WaitAll(tasks.ToArray());
 
 			Console.WriteLine("The total is: {0}", sharedTotalMonitor);
 		}
@@ -261,9 +261,9 @@ namespace C_Sharp
 				start++;
 			}
 
-			Console.WriteLine($"{Task.CurrentId} : Before adding subtotal ");
+			Console.WriteLine($"{System.Threading.Tasks.Task.CurrentId} : Before adding subtotal ");
 			Interlocked.Add(ref sharedTotalInterlocked, subTotal);
-			Console.WriteLine($"{Task.CurrentId} : After adding subtotal ");
+			Console.WriteLine($"{System.Threading.Tasks.Task.CurrentId} : After adding subtotal ");
 		}
 
 		/// <summary>
@@ -272,7 +272,7 @@ namespace C_Sharp
 		/// </summary>
 		public static void TestTaskInterlocked()
 		{
-			List<Task> tasks = new List<Task>();
+			List<System.Threading.Tasks.Task> tasks = new List<System.Threading.Tasks.Task>();
 
 			int rangeSize = 2000000;
 			int rangeStart = 0;
@@ -288,11 +288,11 @@ namespace C_Sharp
 				int rs = rangeStart;
 				int re = rangeEnd;
 
-				tasks.Add(Task.Run(() => addRangeOfValuesInterlocked(rs, re)));
+				tasks.Add(System.Threading.Tasks.Task.Run(() => addRangeOfValuesInterlocked(rs, re)));
 				rangeStart = rangeEnd;
 			}
 
-			Task.WaitAll(tasks.ToArray());
+			System.Threading.Tasks.Task.WaitAll(tasks.ToArray());
 
 			Console.WriteLine("The total is: {0}", sharedTotalInterlocked);
 		}
@@ -304,7 +304,7 @@ namespace C_Sharp
 		private static int DoSomethingAsync()
 		{
 			Console.WriteLine("Something async started");
-			Thread.Sleep(1000);
+			System.Threading.Thread.Sleep(1000);
 			Console.WriteLine("Something async finished");
 
 			return 1;
@@ -322,7 +322,7 @@ namespace C_Sharp
 			PerformSomethingAsync();
 			for (int i = 0; i < 10; i++)
 			{
-				Thread.Sleep(200);
+				System.Threading.Thread.Sleep(200);
 				Console.WriteLine($"Test_AsyncAwait:{i}");
 			}
 
@@ -334,7 +334,7 @@ namespace C_Sharp
 		private static int RaiseException()
 		{
 			Console.WriteLine("Raise Exception started");
-			Thread.Sleep(1000);
+			System.Threading.Thread.Sleep(1000);
 			throw new Exception("Peng");
 			//Console.WriteLine("Raise Exception finished");
 			//return 1;
@@ -358,7 +358,7 @@ namespace C_Sharp
 			PerformException();
 			for (int i = 0; i < 10; i++)
 			{
-				Thread.Sleep(200);
+				System.Threading.Thread.Sleep(200);
 				Console.WriteLine($"Test_AsyncAwaitException:{i}");
 			}
 		}
@@ -373,7 +373,7 @@ namespace C_Sharp
 				() =>
 				{
 					Console.WriteLine($"Do Something Async Parallel started {input}");
-					Thread.Sleep(delay);
+					System.Threading.Thread.Sleep(delay);
 					Console.WriteLine($"Do Something Async Parallel finished {input}");
 
 					return 1;
@@ -393,7 +393,7 @@ namespace C_Sharp
 			{
 				tasks.Add(Task<int>.Run(DoSomethingAsyncParallel(k.Key, k.Value)));
 			}
-			await Task.WhenAll(tasks);
+			await System.Threading.Tasks.Task.WhenAll(tasks);
 			Console.WriteLine("Perform Something Async Parallel finished");
 		}
 
@@ -402,7 +402,7 @@ namespace C_Sharp
 			PerformSomethingAsyncParallel();
 			for (int i = 0; i < 10; i++)
 			{
-				Thread.Sleep(100);
+				System.Threading.Thread.Sleep(100);
 				Console.WriteLine($"Test_AsyncAwait:{i}");
 			}
 
@@ -415,17 +415,17 @@ namespace C_Sharp
 			// #BlockingCollection #whenAll #wait
 			Console.WriteLine("Test_BlockingCollection start");
 
-			var tasks = new List<Task>();
+			var tasks = new List<System.Threading.Tasks.Task>();
 			// Blocking collection that can hold 5 items
 			BlockingCollection<int> data = new BlockingCollection<int>(5);
 
-			Task producer = new Task(() =>
+			System.Threading.Tasks.Task producer = new System.Threading.Tasks.Task(() =>
 			{
-				Thread.CurrentThread.Name = "Producer";
+				System.Threading.Thread.CurrentThread.Name = "Producer";
 				// attempt to add 10 items to the collection - blocks after 5th
 				for (int i = 0; i < 10; i++)
 				{
-					Thread.Sleep(10);
+					System.Threading.Thread.Sleep(10);
 					data.Add(i);
 					Console.WriteLine("Data {0} added successfully.", i);
 				}
@@ -433,15 +433,15 @@ namespace C_Sharp
 				data.CompleteAdding();
 			});
 
-			Task consumer = new Task(() =>
+			System.Threading.Tasks.Task consumer = new System.Threading.Tasks.Task(() =>
 		   {
 			   int v;
-			   Thread.CurrentThread.Name = "Consumer";
+			   System.Threading.Thread.CurrentThread.Name = "Consumer";
 			   while (!data.IsCompleted)
 			   {
 				   try
 				   {
-					   Thread.Sleep(20);
+					   System.Threading.Thread.Sleep(20);
 					   v = data.Take();
 					   Console.WriteLine("Data {0} taken successfully.", v);
 				   }
@@ -454,7 +454,7 @@ namespace C_Sharp
 			producer.Start();
 			consumer.Start();
 
-			Task.WhenAll(tasks).Wait();
+			System.Threading.Tasks.Task.WhenAll(tasks).Wait();
 
 			Console.WriteLine("Test_BlockingCollection end");
 
@@ -468,17 +468,17 @@ namespace C_Sharp
 			// #BlockingCollection #whenAll #wait #ConcurrentStack
 			Console.WriteLine("Test_ConcurrentStack start");
 
-			var tasks = new List<Task>();
+			var tasks = new List<System.Threading.Tasks.Task>();
 			// Blocking collection(ConcurrentStack) that can hold 5 items
 			BlockingCollection<int> data = new BlockingCollection<int>(new ConcurrentStack<int>(), 5);
 
-			Task producer = new Task(() =>
+			System.Threading.Tasks.Task producer = new System.Threading.Tasks.Task(() =>
 			{
-				Thread.CurrentThread.Name = "Producer";
+				System.Threading.Thread.CurrentThread.Name = "Producer";
 				// attempt to add 10 items to the collection - blocks after 5th
 				for (int i = 0; i < 10; i++)
 				{
-					Thread.Sleep(10);
+					System.Threading.Thread.Sleep(10);
 					data.Add(i);
 					Console.WriteLine("Data {0} added successfully.", i);
 				}
@@ -486,15 +486,15 @@ namespace C_Sharp
 				data.CompleteAdding();
 			});
 
-			Task consumer = new Task(() =>
+			System.Threading.Tasks.Task consumer = new System.Threading.Tasks.Task(() =>
 			{
 				int v;
-				Thread.CurrentThread.Name = "Consumer";
+				System.Threading.Thread.CurrentThread.Name = "Consumer";
 				while (!data.IsCompleted)
 				{
 					try
 					{
-						Thread.Sleep(20);
+						System.Threading.Thread.Sleep(20);
 						v = data.Take();
 						Console.WriteLine("Data {0} taken successfully.", v);
 					}
@@ -507,7 +507,7 @@ namespace C_Sharp
 			producer.Start();
 			consumer.Start();
 
-			Task.WhenAll(tasks).Wait();
+			System.Threading.Tasks.Task.WhenAll(tasks).Wait();
 
 			Console.WriteLine("Test_ConcurrentStack end");
 
@@ -520,35 +520,35 @@ namespace C_Sharp
 		{
 			Console.WriteLine("Test_ConccurentQueue start");
 
-			var tasks = new List<Task>();
+			var tasks = new List<System.Threading.Tasks.Task>();
 			// 
 			ConcurrentQueue<int> conccurentQueue = new ConcurrentQueue<int>();
 
-			Task producer = new Task(() =>
+			System.Threading.Tasks.Task producer = new System.Threading.Tasks.Task(() =>
 			{
 				Random random = new Random();
-				Thread.CurrentThread.Name = "Producer";
+				System.Threading.Thread.CurrentThread.Name = "Producer";
 				// attempt to add 10 items to the collection - blocks after 5th
 				for (int i = 0; i < 10; i++)
 				{
-					Thread.Sleep(random.Next(0, 10));
+					System.Threading.Thread.Sleep(random.Next(0, 10));
 					conccurentQueue.Enqueue(i);
 					Console.WriteLine($"Data {i} enqueued successfully.");
 				}
 
 			});
 
-			Task consumer = new Task(() =>
+			System.Threading.Tasks.Task consumer = new System.Threading.Tasks.Task(() =>
 			{
 				int v;
-				Thread.CurrentThread.Name = "Consumer";
+				System.Threading.Thread.CurrentThread.Name = "Consumer";
 				int i = 0;
 				while (i < 10)
 				{
 					while (!conccurentQueue.TryPeek(out v))
 					{
 						Console.WriteLine($"Try to peek failed");
-						Thread.Sleep(5);
+						System.Threading.Thread.Sleep(5);
 					}
 
 					if (conccurentQueue.TryDequeue(out v))
@@ -566,7 +566,7 @@ namespace C_Sharp
 			producer.Start();
 			consumer.Start();
 
-			Task.WhenAll(tasks).Wait();
+			System.Threading.Tasks.Task.WhenAll(tasks).Wait();
 
 			Console.WriteLine("Test_ConccurentQueue end");
 		}
@@ -583,10 +583,10 @@ namespace C_Sharp
 			for (int i = 1; i < 10; i++)
 				dicitionary.TryAdd(i, "A");
 
-			var tasks = new List<Task>();
+			var tasks = new List<System.Threading.Tasks.Task>();
 			foreach (string t in new List<string> { "Cosumer1", "Consumer2" })
 			{
-				tasks.Add(new Task(
+				tasks.Add(new System.Threading.Tasks.Task(
 					() =>
 					{
 						Random random = new Random();
@@ -596,7 +596,7 @@ namespace C_Sharp
 							{
 								Console.WriteLine($"{t} updated {i}");
 							}
-							Thread.Sleep(random.Next(0, 10));
+							System.Threading.Thread.Sleep(random.Next(0, 10));
 						}
 					}
 					));
@@ -605,7 +605,7 @@ namespace C_Sharp
 			tasks[0].Start();
 			tasks[1].Start();
 
-			Task.WhenAll(tasks).Wait();
+			System.Threading.Tasks.Task.WhenAll(tasks).Wait();
 
 			Console.WriteLine("Test_ConcurrentDictionary end");
 		}
@@ -623,7 +623,7 @@ namespace C_Sharp
 			lock (lock1)
 			{
 				Console.WriteLine("Method 1 got lock 1");
-				Thread.Sleep(500);
+				System.Threading.Thread.Sleep(500);
 				Console.WriteLine("Method 1 waiting for lock 2");
 				lock (lock2)
 				{
@@ -640,7 +640,7 @@ namespace C_Sharp
 			lock (lock2)
 			{
 				Console.WriteLine("Method 2 got lock 2");
-				Thread.Sleep(500);
+				System.Threading.Thread.Sleep(500);
 				Console.WriteLine("Method 2 waiting for lock 1");
 				lock (lock1)
 				{
@@ -654,12 +654,12 @@ namespace C_Sharp
 
 		public static void TaskDeadLock()
 		{
-			List<Task> allTasks = new List<Task>();
-			allTasks.Add(Task.Run(() => Method1()));
-			allTasks.Add(Task.Run(() => Method2()));
+			List<System.Threading.Tasks.Task> allTasks = new List<System.Threading.Tasks.Task>();
+			allTasks.Add(System.Threading.Tasks.Task.Run(() => Method1()));
+			allTasks.Add(System.Threading.Tasks.Task.Run(() => Method2()));
 			Console.WriteLine("waiting for tasks");
 
-			Task.WhenAll(allTasks).Wait(2000);
+			System.Threading.Tasks.Task.WhenAll(allTasks).Wait(2000);
 
 			Assert.IsFalse(done1);
 			Assert.IsFalse(done2);
@@ -683,16 +683,16 @@ namespace C_Sharp
 			while (!cancellationTokenSource.IsCancellationRequested)
 			{
 				Console.WriteLine("Tick");
-				Thread.Sleep(500);
+				System.Threading.Thread.Sleep(500);
 			}
 		}
 
 		public static void Task_Cancellation()
 		{
-			Task.Run(() => Clock());
+			System.Threading.Tasks.Task.Run(() => Clock());
 			Console.WriteLine("Cancel clock after random time");
 			Random random = new Random();
-			Thread.Sleep(random.Next(1000, 3000));
+			System.Threading.Thread.Sleep(random.Next(1000, 3000));
 			cancellationTokenSource.Cancel();
 			Console.WriteLine("Clock stopped");
 
@@ -709,7 +709,7 @@ namespace C_Sharp
 			{
 				tickCount++;
 				Console.WriteLine("Tick");
-				Thread.Sleep(500);
+				System.Threading.Thread.Sleep(500);
 			}
 
 			cancellationToken.ThrowIfCancellationRequested();
@@ -719,9 +719,9 @@ namespace C_Sharp
 		{
 			CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-			Task clock = Task.Run(() => Clock(cancellationTokenSource.Token));
+			System.Threading.Tasks.Task clock = System.Threading.Tasks.Task.Run(() => Clock(cancellationTokenSource.Token));
 
-			Thread.Sleep(500);
+			System.Threading.Thread.Sleep(500);
 			try
 			{
 				cancellationTokenSource.Cancel();

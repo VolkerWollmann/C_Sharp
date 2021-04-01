@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using AccessibilityLibrary;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using C_Sharp;
 using C_Sharp.FileOperation;
-using C_Sharp.Types;
-using C_Sharp.InterfaceImplementation;
+using C_Sharp.Langauge;
 
 namespace UnitTest
 {
@@ -69,10 +69,10 @@ namespace UnitTest
 		[TestMethod]
 		public void ClassAccessiblity_Test()
 		{
-			C_Sharp.AccessibilityBase.MyClassAccessibilityTestA.Test();
-			C_Sharp.AccessibilityBase.MyClassAccessibilityTestB.Test();
-			C_Sharp.AccessibilityNeighbour.MyClassAccessibilityTest.Test();
-			C_Sharp.AccessibilityOtherLibrary.MyClassAccessibilityTest.Test();
+			MyClassAccessibilityTestA.Test();
+			MyClassAccessibilityTestB.Test();
+			MyClassAccessibilityTest.Test();
+			C_SharpAccessiblity2.MyClassAccessibilityTest.Test();
 		}
 
 		[TestMethod]

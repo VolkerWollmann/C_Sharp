@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace C_Sharp
+namespace C_Sharp.Langauge
 {
 	public class Scratch
 	{

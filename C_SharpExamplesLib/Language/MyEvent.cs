@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace C_Sharp
+namespace C_Sharp.Langauge
 {
     public class MyEvent
     {
@@ -27,7 +27,7 @@ namespace C_Sharp
             }
         }
 
-        protected class AlaramUser
+        protected class AlarmUser
         {
             //#delegate
             // Method that must run when the alarm is raised
@@ -58,7 +58,7 @@ namespace C_Sharp
 
                 alarm.RaiseAlarm();
 
-                //reomove listener 1
+                //remove listener 1
                 Console.WriteLine("Remove one listener");
                 alarm.OnAlarmRaised -= AlarmListener1;
                 alarm.OnAlarmRaised2 -= AlarmListener1;
@@ -72,7 +72,7 @@ namespace C_Sharp
         // #action #delegate
         public static void ActionDelegate()
         {
-            AlaramUser.DoIt();
+            AlarmUser.DoIt();
         }
 
         #endregion

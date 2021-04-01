@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace C_Sharp
+namespace C_Sharp.Langauge.Thread
 {
 	public partial class MyThread
 	{
@@ -15,7 +15,7 @@ namespace C_Sharp
 
 			// Do some dancing.
 			Console.WriteLine("Guest {0} is doing some dancing.", args);
-			Thread.Sleep(500);
+			System.Threading.Thread.Sleep(500);
 
 			// Let one guest out (release one semaphore).
 			Console.WriteLine("Guest {0} is leaving the nightclub.", args);
@@ -26,7 +26,7 @@ namespace C_Sharp
 			for (int i = 1; i <= 50; i++)
 			{
 				// Let each guest enter on an own thread.
-				Thread thread = new Thread(new ParameterizedThreadStart(Guest));
+				System.Threading.Thread thread = new System.Threading.Thread(new ParameterizedThreadStart(Guest));
 				thread.Start(i);
 			}
 		}
@@ -57,23 +57,23 @@ namespace C_Sharp
 
 		public static void TestThreadLocalData()
 		{
-			Thread t1 = new Thread(() =>
+			System.Threading.Thread t1 = new System.Threading.Thread(() =>
 			{
 				for (int i = 0; i < 5; i++)
 				{
 					ThreadInt.Value = 5;
 					
 					Console.WriteLine("Thread 1: {0} {1}", RandomGenerator.Value.Next(10), ThreadInt.Value );
-					Thread.Sleep(500);
+					System.Threading.Thread.Sleep(500);
 				}
 			});
 
-			Thread t2 = new Thread(() =>
+			System.Threading.Thread t2 = new System.Threading.Thread(() =>
 			{
 				for (int i = 0; i < 5; i++)
 				{
 					Console.WriteLine("Thread 2: {0} {1}", RandomGenerator.Value.Next(10), ThreadInt.Value);
-					Thread.Sleep(500);
+					System.Threading.Thread.Sleep(500);
 				}
 			});
 
@@ -81,7 +81,7 @@ namespace C_Sharp
 			t2.Start();
 
 			//Console.ReadKey();
-			Thread.Sleep(5000);
+			System.Threading.Thread.Sleep(5000);
 		}
 		#endregion
 
@@ -119,7 +119,7 @@ namespace C_Sharp
 
 			Console.WriteLine($"Local: {LocalState} AtomicLocal: {AtomicLocalState} ThreadStatic Local : {ThreadStaticLocalState} Semaphore Local: {SemphoreProtectedLocalState} ",
 				ThreadStaticLocalState, LocalState, AtomicLocalState, SemphoreProtectedLocalState);
-			Thread.Sleep(500);
+			System.Threading.Thread.Sleep(500);
 			Console.WriteLine("Work finished: {0}", state);
 		}
 
@@ -171,16 +171,16 @@ namespace C_Sharp
 		private static void SimpleThreadHello()
 		{
 			Console.WriteLine("Hello from the thread");
-			Thread.Sleep(2000);
+			System.Threading.Thread.Sleep(2000);
 		}
 
 		public static void ThreadSimple()
 		{
-			Thread thread = new Thread(SimpleThreadHello);
+			System.Threading.Thread thread = new System.Threading.Thread(SimpleThreadHello);
 			thread.Start();
 
 			ThreadStart ts = new ThreadStart(SimpleThreadHello);
-			thread = new Thread(ts);
+			thread = new System.Threading.Thread(ts);
 			thread.Start();
 		}
 		#endregion
@@ -190,21 +190,21 @@ namespace C_Sharp
 		private static void WorkOnData(object data)
 		{
 			Console.WriteLine("Working on: {0}", data);
-			Thread.Sleep(1000);
+			System.Threading.Thread.Sleep(1000);
 		}
 
 		public static void TestParameterizedThreadStart()
 		{
 			ParameterizedThreadStart ps = new ParameterizedThreadStart(WorkOnData);
 
-			Thread thread = new Thread(ps);
+			System.Threading.Thread thread = new System.Threading.Thread(ps);
 
 			thread.Start(99);
 		}
 
 		public static void TestLambdaThreadWithData()
 		{
-			Thread myThread = new Thread((data) => { Console.WriteLine( $"Hello {data}!", data); Thread.Sleep(1000); });
+			System.Threading.Thread myThread = new System.Threading.Thread((data) => { Console.WriteLine( $"Hello {data}!", data); System.Threading.Thread.Sleep(1000); });
 			myThread.Start("outer space");
 		}
 		#endregion
@@ -214,18 +214,18 @@ namespace C_Sharp
 
 		public static void Thread_Abort()
 		{
-			Thread tickThread = new Thread(() =>
+			System.Threading.Thread tickThread = new System.Threading.Thread(() =>
 			{
 				int i = 0;
 				while (true)
 				{
 					Console.WriteLine("Tick" + i++.ToString());
-					Thread.Sleep(1000);
+					System.Threading.Thread.Sleep(1000);
 				}
 			});
 
 			tickThread.Start();
-			Thread.Sleep(3500);
+			System.Threading.Thread.Sleep(3500);
 			tickThread.Abort();
 		}
 		#endregion
@@ -233,23 +233,23 @@ namespace C_Sharp
 		#region thread join
 		public static void Thread_Join()
 		{
-			Thread thread1 = new Thread(() =>
+			System.Threading.Thread thread1 = new System.Threading.Thread(() =>
 			{
 				int i = 0;
 				while (i < 10)
 				{
 					Console.WriteLine("Thread 1 Tick " + i++.ToString());
-					Thread.Sleep(1000);
+					System.Threading.Thread.Sleep(1000);
 				}
 			});
 
-			Thread thread2 = new Thread(() =>
+			System.Threading.Thread thread2 = new System.Threading.Thread(() =>
 			{
 				int i = 0;
 				while (i < 3)
 				{
 					Console.WriteLine("Thread 2 Tick " + i++.ToString());
-					Thread.Sleep(1000);
+					System.Threading.Thread.Sleep(1000);
 				}
 
 				Console.WriteLine("Thread 2 actual finished");
@@ -265,7 +265,7 @@ namespace C_Sharp
 
 		#region thread administrative data
 		// #thread #administrative data
-		static void DisplayThread(Thread t)
+		static void DisplayThread(System.Threading.Thread t)
 		{
 			Console.WriteLine("Name: {0}", t.Name);
 			Console.WriteLine("Culture: {0}", t.CurrentCulture);
@@ -277,8 +277,8 @@ namespace C_Sharp
 
 		public static void Thread_AdministrativeData()
         {
-			Thread.CurrentThread.Name = "Heinz";
-			DisplayThread(Thread.CurrentThread);
+			System.Threading.Thread.CurrentThread.Name = "Heinz";
+			DisplayThread(System.Threading.Thread.CurrentThread);
 		}
 
 		#endregion

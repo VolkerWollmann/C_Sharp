@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using C_Sharp;
+using C_Sharp.Langauge;
 
 namespace UnitTest
 {
@@ -63,7 +64,7 @@ namespace UnitTest
 		[TestMethod]
 		public void SelectImplictType()
 		{
-			MyLinq.SelectImplictType();
+			MyLinq.SelectImplicitType();
 
 		}
 

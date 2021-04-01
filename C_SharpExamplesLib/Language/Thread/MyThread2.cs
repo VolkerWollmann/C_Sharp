@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
-namespace C_Sharp
+namespace C_Sharp.Langauge.Thread
 {
 	/// <summary>
 	/// #partial class
@@ -14,22 +13,22 @@ namespace C_Sharp
 
 		private static void Method()
 		{
-			Thread.Sleep(100);
-			Console.WriteLine("Method in thread " + Thread.CurrentThread.ManagedThreadId); 
+			System.Threading.Thread.Sleep(100);
+			Console.WriteLine("Method in thread " + System.Threading.Thread.CurrentThread.ManagedThreadId); 
 			return;
 		}
 
 		static void Task1()
 		{
-			Console.WriteLine("Task 1 starting in thread " + Thread.CurrentThread.ManagedThreadId);
-			Thread.Sleep(2000);
+			Console.WriteLine("Task 1 starting in thread " + System.Threading.Thread.CurrentThread.ManagedThreadId);
+			System.Threading.Thread.Sleep(2000);
 			Console.WriteLine("Task 1 ending");
 		}
 
 		static void Task2()
 		{
-			Console.WriteLine("Task 2 starting in thread " + Thread.CurrentThread.ManagedThreadId);
-			Thread.Sleep(1000);
+			Console.WriteLine("Task 2 starting in thread " + System.Threading.Thread.CurrentThread.ManagedThreadId);
+			System.Threading.Thread.Sleep(1000);
 			Console.WriteLine("Task 2 ending");
 		}
 
@@ -37,16 +36,16 @@ namespace C_Sharp
 		public static void Thread_Dispatcher()
 		{
 			Dispatcher.CurrentDispatcher.Invoke(new Action(() => { MyThread.Method(); }));
-			Console.WriteLine("After asynchronus start of method within thread " + Thread.CurrentThread.ManagedThreadId);
+			Console.WriteLine("After asynchronus start of method within thread " + System.Threading.Thread.CurrentThread.ManagedThreadId);
 
 			Parallel.Invoke(() => Task1(), () => Task2());
-			Console.WriteLine("Finished processing within thread " + Thread.CurrentThread.ManagedThreadId);
+			Console.WriteLine("Finished processing within thread " + System.Threading.Thread.CurrentThread.ManagedThreadId);
 		}
 
 		static void WorkOnItem(object item)
 		{
-			Console.WriteLine("Started working on: " + item + " within thread " + Thread.CurrentThread.ManagedThreadId);
-			Thread.Sleep(100);
+			Console.WriteLine("Started working on: " + item + " within thread " + System.Threading.Thread.CurrentThread.ManagedThreadId);
+			System.Threading.Thread.Sleep(100);
 			Console.WriteLine("Finished working on: " + item);
 		}
 

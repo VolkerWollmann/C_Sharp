@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp
+namespace C_Sharp.Langauge
 {
 	// #Operator ?. ??
 	public class MyOperator

@@ -1,9 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp
+namespace C_Sharp.Langauge
 {
 	// #comparer #IEqualityComparer
 	public class MyIEqualityComparer : IEqualityComparer<MyIEqualityComparer>
@@ -156,7 +156,7 @@ namespace C_Sharp
 		}
 
 		#region IEquatable
-		//bool IEquatable<MyEquatible>.Equals(MyEquatible other)
+		//bool IEquatable<MyEquatable>.Equals(MyEquatable other)
         public bool Equals(MyIEquatable other)
 		{
 			if (Object.ReferenceEquals(other, null))
@@ -184,7 +184,7 @@ namespace C_Sharp
 		#region Test
 		public static void Test()
         {
-			MyIEquatable me1 = new MyIEquatible(1, "Donkey");
+			MyIEquatable me1 = new MyIEquatable(1, "Donkey");
 			MyIEquatable me2 = new MyIEquatable(2, "Donkey");
 			MyIEquatable me3 = new MyIEquatable(1, "Donkey");
 

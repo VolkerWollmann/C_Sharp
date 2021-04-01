@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace C_Sharp
+namespace C_Sharp.Langauge
 {
     public class CSharp7
     {

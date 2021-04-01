@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace C_Sharp
+namespace C_Sharp.Langauge
 {
 	public struct MyPair
 	{

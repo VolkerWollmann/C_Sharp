@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Reflection;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp
+namespace C_Sharp.Langauge
 {
 	/// <summary>
 	/// #delegate
@@ -89,7 +89,7 @@ namespace C_Sharp
 			i = myDelegate.funcIntegerFunction(3);
 			Assert.IsTrue(i == 9);
 
-			// Assignment of lamda expression
+			// Assignment of lambda expression
 			myDelegate.funcIntInt = (n) => { return n * n; };
 			i = myDelegate.funcIntInt(4);
 			Assert.IsTrue(i == 16);
@@ -99,8 +99,8 @@ namespace C_Sharp
 			Assert.IsTrue(i == 25);
 
 			// that will not cast : similar but not same
-			// myDelegate.funcIntInt = (IntegerFunction)myDelegate.funcIntergerFunction;
-			// myDelegate.funcIntergerFunction = (Func<int, int>)myDelegate.funcIntInt;
+			// myDelegate.funcIntInt = (IntegerFunction)myDelegate.funcIntegerFunction;
+			// myDelegate.funcIntegerFunction = (Func<int, int>)myDelegate.funcIntInt;
 
 			myDelegate.funcIntInt = myDelegate.Square;
 			myDelegate.funcIntegerFunction = new IntegerFunction(myDelegate.funcIntInt);
@@ -124,7 +124,7 @@ namespace C_Sharp
 			myDelegate.funcIntInt = myDelegate.Double;
 			myDelegate.funcIntInt += myDelegate.Square;
 
-			// invocationList : normally 0 or 1 Element, but more fuctions can be assigned
+			// invocationList : normally 0 or 1 Element, but more functions can be assigned
 			// last wins
 		    fInvocationList = myDelegate.funcIntInt.GetInvocationList();
 

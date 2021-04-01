@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace C_Sharp
+namespace C_Sharp.Langauge
 {
     internal class MyExpressionWriter1
     {
@@ -18,10 +18,10 @@ namespace C_Sharp
         {
             Console.WriteLine(GetSpace() + "Constant:" + constantExpression.Value );
         }
-        private void Write(Expression<Func<int>> paremeterLessIntergerFunction )
+        private void Write(Expression<Func<int>> parameterLessIntegerFunction )
         {
             Console.WriteLine(GetSpace() + "f():");
-            Write(paremeterLessIntergerFunction.Body);
+            Write(parameterLessIntegerFunction.Body);
         }
 
         private void Write(System.Linq.Expressions.BinaryExpression binaryExpression)
@@ -58,7 +58,7 @@ namespace C_Sharp
 
         private void Write(System.Linq.Expressions.ParameterExpression parameterExpression)
         {
-            Console.WriteLine(GetSpace() + "Parmeter Expression: " +  parameterExpression.Name);
+            Console.WriteLine(GetSpace() + "Parameter Expression: " +  parameterExpression.Name);
         }
 
         private void Write(Expression<Func<IEnumerable<int>, IEnumerable<int>>> unaryFunction)

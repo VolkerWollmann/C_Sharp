@@ -1,7 +1,7 @@
 ﻿using System;
-using C_Sharp;
+using C_Sharp.Langauge.Thread;
 
-namespace ConsoleApp1
+namespace C_Sharp
 {
 	class Program
 	{
