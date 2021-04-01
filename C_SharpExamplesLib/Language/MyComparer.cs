@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Langauge
+namespace C_Sharp.Language
 {
 	// #comparer #IEqualityComparer
 	public class MyIEqualityComparer : IEqualityComparer<MyIEqualityComparer>

@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Langauge
+namespace C_Sharp.Language
 {
     public class MyType
     {

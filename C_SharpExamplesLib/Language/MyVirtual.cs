@@ -1,4 +1,4 @@
-﻿namespace C_Sharp.Langauge
+﻿namespace C_Sharp.Language
 {
 	/// <summary>
 	/// ToDo explain virtual

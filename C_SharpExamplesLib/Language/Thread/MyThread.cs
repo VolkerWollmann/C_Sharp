@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace C_Sharp.Langauge.Thread
+namespace C_Sharp.Language.Thread
 {
 	public partial class MyThread
 	{

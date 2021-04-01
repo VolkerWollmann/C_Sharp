@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Langauge
+namespace C_Sharp.Language
 {
 	//C-Sharp 6 features
 	public class CSharp6

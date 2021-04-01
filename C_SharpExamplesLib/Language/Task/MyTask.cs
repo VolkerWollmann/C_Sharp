@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Langauge.Task
+namespace C_Sharp.Language.Task
 {
 	public class MyTask
 	{

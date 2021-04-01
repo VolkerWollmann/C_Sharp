@@ -1,4 +1,4 @@
-﻿Esel
-Hund
-Katze
-Möwe
+﻿Donkey
+Dog
+Cat
+Seagull

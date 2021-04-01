@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace C_Sharp.Langauge
+namespace C_Sharp.Language
 {
 	// #interface #generic #default
 	internal interface IMyRandomizer<T>

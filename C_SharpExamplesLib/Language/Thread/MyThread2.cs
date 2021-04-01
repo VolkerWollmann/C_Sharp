@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
-namespace C_Sharp.Langauge.Thread
+namespace C_Sharp.Language.Thread
 {
 	/// <summary>
 	/// #partial class

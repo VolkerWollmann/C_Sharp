@@ -1,5 +1,5 @@
 ﻿using System;
-using C_Sharp.Langauge.Thread;
+using C_Sharp.Language.Thread;
 
 namespace C_Sharp
 {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace C_Sharp.Langauge
+namespace C_Sharp.Language
 {
 	/// <summary>
 	/// #IEnumerable<int> #IEnumerator<int> #IQueryable<int> #IQueryProvider

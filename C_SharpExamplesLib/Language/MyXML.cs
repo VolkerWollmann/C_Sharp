@@ -2,7 +2,7 @@
 using System.Xml.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Langauge
+namespace C_Sharp.Language
 {
     public class MyXML
     {

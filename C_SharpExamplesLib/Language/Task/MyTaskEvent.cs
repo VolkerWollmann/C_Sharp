@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
-namespace C_Sharp.Langauge.Task
+namespace C_Sharp.Language.Task
 {
 	/// <summary>
 	/// #task #event

@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using C_Sharp;
 using C_Sharp.FileOperation;
-using C_Sharp.Langauge;
+using C_Sharp.Language;
 
 namespace UnitTest
 {
@@ -75,7 +75,7 @@ namespace UnitTest
 			MyClassAccessibilityTestA.Test();
 			MyClassAccessibilityTestB.Test();
 			MyClassAccessibilityTest.Test();
-			C_SharpAccessibility2.MyClassAccessibilityTest.Test();
+			C_SharpAccessiblity2.MyClassAccessibilityTest.Test();
 		}
 
 		[TestMethod]
