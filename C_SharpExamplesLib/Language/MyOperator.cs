@@ -5,28 +5,28 @@ namespace C_Sharp.Language
 	// #Operator ?. ??
 	public class MyOperator
 	{
-		public string Esel = "Esel";
+		public string Donkey = "Donkey";
 		private static void QuestionMarkOperator()
 		{
 			string st = null;
-			var t = st ?? "Hase";
-			Assert.IsTrue(t == "Hase");
-			st = "Igel";
-			var u = st ?? "Esel";
-			Assert.IsTrue(u == "Igel");
+			var t = st ?? "Rabbit";
+			Assert.IsTrue(t == "Rabbit");
+			st = "Hedgehog";
+			var u = st ?? "Donkey";
+			Assert.IsTrue(u == "Hedgehog");
 
 			MyOperator myOperator11 = null;
-			string e1 = myOperator11?.Esel;
+			string e1 = myOperator11?.Donkey;
 			Assert.IsTrue(e1 == null);
 
 			myOperator11 = new MyOperator();
-			string e2 = myOperator11?.Esel;
-			Assert.IsTrue(e2 == myOperator11.Esel);
+			string e2 = myOperator11?.Donkey;
+			Assert.IsTrue(e2 == myOperator11.Donkey);
 
 			string e3 = e1 + e2;
 
-			string s = (0 < 1) ? "immer" : "nie";
-			Assert.IsTrue(s == "immer");
+			string s = (0 < 1) ? "always" : "never";
+			Assert.IsTrue(s == "always");
 		}
 
 		public static void Operator_Test()

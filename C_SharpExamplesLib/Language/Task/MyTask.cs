@@ -142,7 +142,7 @@ namespace C_Sharp.Language.Task
 		}
 
 		/// <summary>
-		/// show usage of synchronisation with lock statement on an object
+		/// show usage of synchronization with lock statement on an object
 		/// add number 0 to 50000000 with 500 threads 
 		/// </summary>
 		public static void TestTaskObjectLock()
@@ -213,7 +213,7 @@ namespace C_Sharp.Language.Task
 		}
 
 		/// <summary>
-		/// show usage of synchronisation with lock statement on an object
+		/// show usage of synchronization with lock statement on an object
 		/// add number 0 to 50000000 with 25 threads 
 		/// </summary>
 		public static void TestTaskMonitor()
@@ -245,7 +245,7 @@ namespace C_Sharp.Language.Task
 		#endregion
 
 		#region Interlocked Operation
-		//#Interlocked Poeration #task #waitall
+		//#Interlocked operation #task #waitall
 		static long sharedTotalInterlocked;
 
 		// make an array that holds the values 0 to 50000000
@@ -268,7 +268,7 @@ namespace C_Sharp.Language.Task
 		}
 
 		/// <summary>
-		/// show usage of synchronisation with lock statement on an object
+		/// show usage of synchronization with lock statement on an object
 		/// add number 0 to 50000000 with 25 threads 
 		/// </summary>
 		public static void TestTaskInterlocked()
@@ -300,7 +300,7 @@ namespace C_Sharp.Language.Task
 		#endregion
 
 		#region Async_await
-		/// #async #awit
+		/// #async #await
 
 		private static int DoSomethingAsync()
 		{
@@ -313,9 +313,9 @@ namespace C_Sharp.Language.Task
 
 		private static async void PerformSomethingAsync()
 		{
-			Console.WriteLine("Perfom Something async started");
+			Console.WriteLine("Perform Something async started");
 			int result = await (Task<int>.Run(DoSomethingAsync));
-			Console.WriteLine("Perfom Something async finished");
+			Console.WriteLine("Perform Something async finished");
 		}
 
 		public static void Test_AsyncAwait()
@@ -331,7 +331,7 @@ namespace C_Sharp.Language.Task
 		#endregion
 
 		#region Async_await_exception
-		/// #async #awit #exception
+		/// #async #await #exception
 		private static int RaiseException()
 		{
 			Console.WriteLine("Raise Exception started");
@@ -516,14 +516,14 @@ namespace C_Sharp.Language.Task
 		#endregion
 
 		#region ConcurentQueue
-		// #ConcurentQueue
-		public static void Test_ConccurentQueue()
+		// #ConcurrentQueue
+		public static void Test_ConcurrentQueue()
 		{
-			Console.WriteLine("Test_ConccurentQueue start");
+			Console.WriteLine("Test_ConcurrentQueue start");
 
 			var tasks = new List<System.Threading.Tasks.Task>();
 			// 
-			ConcurrentQueue<int> conccurentQueue = new ConcurrentQueue<int>();
+			ConcurrentQueue<int> concurrentQueue = new ConcurrentQueue<int>();
 
 			System.Threading.Tasks.Task producer = new System.Threading.Tasks.Task(() =>
 			{
@@ -533,8 +533,8 @@ namespace C_Sharp.Language.Task
 				for (int i = 0; i < 10; i++)
 				{
 					System.Threading.Thread.Sleep(random.Next(0, 10));
-					conccurentQueue.Enqueue(i);
-					Console.WriteLine($"Data {i} enqueued successfully.");
+					concurrentQueue.Enqueue(i);
+					Console.WriteLine($"Data {i} queued successfully.");
 				}
 
 			});
@@ -546,13 +546,13 @@ namespace C_Sharp.Language.Task
 				int i = 0;
 				while (i < 10)
 				{
-					while (!conccurentQueue.TryPeek(out v))
+					while (!concurrentQueue.TryPeek(out v))
 					{
 						Console.WriteLine($"Try to peek failed");
 						System.Threading.Thread.Sleep(5);
 					}
 
-					if (conccurentQueue.TryDequeue(out v))
+					if (concurrentQueue.TryDequeue(out v))
 					{
 						Console.WriteLine($"Data {v} dequeued successfully.");
 					}
@@ -569,7 +569,7 @@ namespace C_Sharp.Language.Task
 
 			System.Threading.Tasks.Task.WhenAll(tasks).Wait();
 
-			Console.WriteLine("Test_ConccurentQueue end");
+			Console.WriteLine("Test_ConcurrentQueue end");
 		}
 		#endregion
 
@@ -579,10 +579,10 @@ namespace C_Sharp.Language.Task
 		{
 			Console.WriteLine("Test_ConcurrentDictionary start");
 
-			ConcurrentDictionary<int, string> dicitionary = new ConcurrentDictionary<int, string>();
+			ConcurrentDictionary<int, string> dictionary = new ConcurrentDictionary<int, string>();
 
 			for (int i = 1; i < 10; i++)
-				dicitionary.TryAdd(i, "A");
+				dictionary.TryAdd(i, "A");
 
 			var tasks = new List<System.Threading.Tasks.Task>();
 			foreach (string t in new List<string> { "Cosumer1", "Consumer2" })
@@ -593,7 +593,7 @@ namespace C_Sharp.Language.Task
 						Random random = new Random();
 						for (int i = 1; i < 10; i++)
 						{
-							if (dicitionary.TryUpdate(i, "B", "A"))
+							if (dictionary.TryUpdate(i, "B", "A"))
 							{
 								Console.WriteLine($"{t} updated {i}");
 							}
@@ -671,7 +671,7 @@ namespace C_Sharp.Language.Task
 		#endregion
 
 		#region volatile
-		// #volatile prevents variable from optimisation
+		// #volatile prevents variable from optimization
 		//volatile int volatileInt=0;
 		#endregion
 

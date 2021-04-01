@@ -95,7 +95,7 @@ namespace UnitTest
 		[TestMethod]
 		public void Task_ConccurentQueue()
 		{
-			MyTask.Test_ConccurentQueue();
+			MyTask.Test_ConcurrentQueue();
 		}
 
 		[TestMethod]

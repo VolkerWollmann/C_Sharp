@@ -7,52 +7,52 @@ namespace C_Sharp.Language
     public class MyXML
     {
         // linq to xml
-        private static XElement Create_MeineTiere_as_XElement_1()
+        private static XElement Create_MyAnimals_as_XElement_1()
         {
-            return new XElement("Meine_Tiere",
-                new XElement("Tier_1", "Esel"),
-                new XElement("Tier_2", "Hund"));
+            return new XElement("My_Animals",
+                new XElement("Animal_1", "Donkey"),
+                new XElement("Animal_2", "Dog"));
         }
 
-        private static XElement Create_MeineTiere_as_XElement_2()
+        private static XElement Create_MyAnimals_as_XElement_2()
         {
-            XElement meineTiere = new XElement("Meine_Tiere");
-            XElement esel = new XElement("Tier_1", "Esel");
-            XElement hund = new XElement("Tier_2", "Hund");
+            XElement meineTiere = new XElement("My_Animals");
+            XElement Donkey = new XElement("Animal_1", "Donkey");
+            XElement Dog = new XElement("Animal_2", "Dog");
 
-            meineTiere.Add(esel);
-            meineTiere.Add(hund);
+            meineTiere.Add(Donkey);
+            meineTiere.Add(Dog);
 
             return meineTiere;
         }
 
         // xml 3.0 an lower
-        public static XmlElement Create_MeineTiere_as_XmlElement()
+        public static XmlElement Create_MyAnimals_as_XmlElement()
         {
             XmlDocument xmlDocument = new XmlDocument();
             
-            XmlElement meineTiere = xmlDocument.CreateElement("Meine_Tiere");
+            XmlElement myAnimals = xmlDocument.CreateElement("My_Animals");
             
-            XmlElement esel = xmlDocument.CreateElement("Tier_1");
-            esel.InnerText  = "Esel";
-            meineTiere.AppendChild(esel);
+            XmlElement Donkey = xmlDocument.CreateElement("Animal_1");
+            Donkey.InnerText  = "Donkey";
+            myAnimals.AppendChild(Donkey);
 
-            XmlElement hund = xmlDocument.CreateElement("Tier_2");
-            hund.InnerText = "Hund";
-            meineTiere.AppendChild(hund);
+            XmlElement Dog = xmlDocument.CreateElement("Animal_2");
+            Dog.InnerText = "Dog";
+            myAnimals.AppendChild(Dog);
 
-            return meineTiere;
+            return myAnimals;
         }
         public static void Test()
         {
-            XElement meineTiere_as_XElement_1 = Create_MeineTiere_as_XElement_1();
-            XElement meineTiere_as_XElement_2 = Create_MeineTiere_as_XElement_2();
-            Assert.AreEqual(meineTiere_as_XElement_1.ToString(), meineTiere_as_XElement_2.ToString());
+            XElement myAnimals_as_XElement_1 = Create_MyAnimals_as_XElement_1();
+            XElement myAnimals_as_XElement_2 = Create_MyAnimals_as_XElement_2();
+            Assert.AreEqual(myAnimals_as_XElement_1.ToString(), myAnimals_as_XElement_2.ToString());
 
-            XmlElement meineTiere_as_XMLElement = Create_MeineTiere_as_XmlElement();
+            XmlElement myAnimals_as_XMLElement = Create_MyAnimals_as_XmlElement();
 
-            string s1 = meineTiere_as_XElement_1.ToString().Replace("\r\n", "").Replace("  ","");
-            string s2 = meineTiere_as_XMLElement.OuterXml;
+            string s1 = myAnimals_as_XElement_1.ToString().Replace("\r\n", "").Replace("  ","");
+            string s2 = myAnimals_as_XMLElement.OuterXml;
             Assert.AreEqual(s1, s2);
         }
     }
