@@ -27,7 +27,7 @@ namespace CSharpNaming
 
             #region
 
-            // Avoid : hungarinCasing for type information
+            // Avoid : hungarian casing for type information
             int iCounter = 0;
 
             if ((localVariable == 0) || (iCounter == 0))
@@ -44,7 +44,7 @@ namespace CSharpNaming
         }
 
         #region III. Do use camelCasing for local variables and method arguments: int counter=0
-        //      do notuse Hungarian notation or any other type identification in identifiers
+        //      do not use Hungarian notation or any other type identification in identifiers
         // Correct
         int counter = 0;
         string name = "";
@@ -58,7 +58,7 @@ namespace CSharpNaming
         // Correct : PascalCasing
         public const string ShippingType = "DropShip";
 
-        // Avoid : Sreaming caps
+        // Avoid : Screaming caps
         public const string SHIPPINGTYPE = "DropShip";
         #endregion
 
@@ -254,7 +254,7 @@ namespace CSharpNaming
         #endregion
 
         #region suppress warnings
-        private void ConsumeVaraibles()
+        private void ConsumeVariables()
         {
             userGroup = null;
             usrGrp = null;

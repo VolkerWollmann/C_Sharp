@@ -41,7 +41,7 @@ namespace UnitTest
 		[TestMethod]
 		public void Thread_StaticData()
 		{
-			TestContext.WriteLine("Hase");
+			TestContext.WriteLine("Rabbit");
 			MyThread.TestThreadStaticData();
 		}
 

@@ -32,7 +32,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void TestIEqaulityComparer()
+		public void TestIEqualityComparer()
 		{
 			MyIEqualityComparer.Test();
 		}

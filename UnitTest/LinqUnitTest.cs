@@ -62,7 +62,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void SelectImplictType()
+		public void SelectImplicitType()
 		{
 			MyLinq.SelectImplicitType();
 

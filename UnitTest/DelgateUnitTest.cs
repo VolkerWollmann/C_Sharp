@@ -5,7 +5,7 @@ using C_Sharp.Language;
 namespace UnitTest
 {
     [TestClass]
-    public class DelgateUnitTest
+    public class DelegateUnitTest
     {
 		[TestMethod]
 		public void TestActionFuncPredicate()
@@ -14,7 +14,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void TestDelgate()
+		public void TestDelegate()
 		{
 			MyDelegate.TestDelegateAndFunc();
 		}

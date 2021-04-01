@@ -336,7 +336,7 @@ namespace C_Sharp.Language.Task
 		{
 			Console.WriteLine("Raise Exception started");
 			System.Threading.Thread.Sleep(1000);
-			throw new Exception("Peng");
+			throw new Exception("Bang");
 			//Console.WriteLine("Raise Exception finished");
 			//return 1;
 		}

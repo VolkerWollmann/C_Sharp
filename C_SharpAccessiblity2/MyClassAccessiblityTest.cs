@@ -1,6 +1,6 @@
 ﻿using AccessibilityLibrary;
 
-namespace C_SharpAccessiblity2
+namespace C_SharpAccessibility2
 { 
 	public static class MyClassAccessibilityTest
 	{

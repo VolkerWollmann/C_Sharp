@@ -101,7 +101,7 @@ namespace C_Sharp.Language.Thread
 
 		// common field for all threads : will be treated by semaphore
 		private static Semaphore Semaphore;
-		private static int SemphoreProtectedLocalState;
+		private static int SemaphoreProtectedLocalState;
 
 		private static void DoWork(object state)
 		{
@@ -113,12 +113,12 @@ namespace C_Sharp.Language.Thread
 
 			Semaphore.WaitOne();
 			Console.WriteLine("Entering");
-			SemphoreProtectedLocalState += 1;
+			SemaphoreProtectedLocalState += 1;
 			Console.WriteLine("Leaving");
 			Semaphore.Release();
 
-			Console.WriteLine($"Local: {LocalState} AtomicLocal: {AtomicLocalState} ThreadStatic Local : {ThreadStaticLocalState} Semaphore Local: {SemphoreProtectedLocalState} ",
-				ThreadStaticLocalState, LocalState, AtomicLocalState, SemphoreProtectedLocalState);
+			Console.WriteLine($"Local: {LocalState} AtomicLocal: {AtomicLocalState} ThreadStatic Local : {ThreadStaticLocalState} Semaphore Local: {SemaphoreProtectedLocalState} ",
+				ThreadStaticLocalState, LocalState, AtomicLocalState, SemaphoreProtectedLocalState);
 			System.Threading.Thread.Sleep(500);
 			Console.WriteLine("Work finished: {0}", state);
 		}
@@ -127,7 +127,7 @@ namespace C_Sharp.Language.Thread
 		{
 			int timeOutSeconds = 10;
 
-			//Now wait until all threads from the Threadpool have returned
+			//Now wait until all threads from the thread pool have returned
 			while (timeOutSeconds > 0)
 			{
 				//figure out what the max worker thread count it
@@ -148,7 +148,7 @@ namespace C_Sharp.Language.Thread
 			ThreadStaticLocalState = 0;
 			LocalState = 0;
 			AtomicLocalState = 0;
-			SemphoreProtectedLocalState = 0;
+			SemaphoreProtectedLocalState = 0;
 			Semaphore = new Semaphore(1, 1);
 			ThreadPool.SetMaxThreads(4, 4);
 
@@ -159,8 +159,8 @@ namespace C_Sharp.Language.Thread
 			}
 
 			WaitForThreads();
-			string result = string.Format($"Local: {LocalState} AtomicLocal: {AtomicLocalState} ThreadStatic Local : {ThreadStaticLocalState} Semaphore Local: {SemphoreProtectedLocalState} ",
-				ThreadStaticLocalState, LocalState, AtomicLocalState, SemphoreProtectedLocalState);
+			string result = string.Format($"Local: {LocalState} AtomicLocal: {AtomicLocalState} ThreadStatic Local : {ThreadStaticLocalState} Semaphore Local: {SemaphoreProtectedLocalState} ",
+				ThreadStaticLocalState, LocalState, AtomicLocalState, SemaphoreProtectedLocalState);
 			Console.WriteLine(result);
 		}
 

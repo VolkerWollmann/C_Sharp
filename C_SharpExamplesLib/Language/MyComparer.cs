@@ -67,7 +67,7 @@ namespace C_Sharp.Language
 		// <summary>
 		// Sort order is by Version, than by Animal
 		// Except NONE, which has lowest priority.
-		// Nota bene: There must be only one NONE to make order total.
+		// Important: There must be only one NONE to make order total.
 		// <returns>
 		// < 0 This instance precedes obj in the sort order.
 		// = 0 This instance occurs in the same position in the sort order as obj.

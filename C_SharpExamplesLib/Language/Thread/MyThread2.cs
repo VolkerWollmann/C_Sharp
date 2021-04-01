@@ -36,7 +36,7 @@ namespace C_Sharp.Language.Thread
 		public static void Thread_Dispatcher()
 		{
 			Dispatcher.CurrentDispatcher.Invoke(new Action(() => { MyThread.Method(); }));
-			Console.WriteLine("After asynchronus start of method within thread " + System.Threading.Thread.CurrentThread.ManagedThreadId);
+			Console.WriteLine("After asynchronous start of method within thread " + System.Threading.Thread.CurrentThread.ManagedThreadId);
 
 			Parallel.Invoke(() => Task1(), () => Task2());
 			Console.WriteLine("Finished processing within thread " + System.Threading.Thread.CurrentThread.ManagedThreadId);

@@ -16,14 +16,14 @@ namespace C_Sharp.Language
 
         private static XElement Create_MyAnimals_as_XElement_2()
         {
-            XElement meineTiere = new XElement("My_Animals");
+            XElement myAnimals = new XElement("My_Animals");
             XElement Donkey = new XElement("Animal_1", "Donkey");
             XElement Dog = new XElement("Animal_2", "Dog");
 
-            meineTiere.Add(Donkey);
-            meineTiere.Add(Dog);
+            myAnimals.Add(Donkey);
+            myAnimals.Add(Dog);
 
-            return meineTiere;
+            return myAnimals;
         }
 
         // xml 3.0 an lower

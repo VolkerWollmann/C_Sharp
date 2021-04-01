@@ -64,7 +64,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void TestScartchMethod()
+		public void TestScratchMethod()
 		{
 			Scratch.Test();
 		}
@@ -75,7 +75,7 @@ namespace UnitTest
 			MyClassAccessibilityTestA.Test();
 			MyClassAccessibilityTestB.Test();
 			MyClassAccessibilityTest.Test();
-			C_SharpAccessiblity2.MyClassAccessibilityTest.Test();
+			C_SharpAccessibility2.MyClassAccessibilityTest.Test();
 		}
 
 		[TestMethod]
@@ -103,7 +103,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void ArrayExentension()
+		public void ArrayExtension()
 		{
 			MyArray.ArrayExtension();
 		}
