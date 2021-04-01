@@ -16,6 +16,25 @@ namespace C_Sharp.Language
 
         }
 
+        public class MyType2
+        {
+            public static void Test()
+            {
+                // Compile Error : does not know about type alias
+                //IntegerList x = new IntegerList();
+            }
+        }
+
+        public class MyType3
+        {
+            public static void Test()
+            {
+                List<int> x = new List<int>();
+
+                x.Add(1);
+            }
+        }
+
         public static void Test()
         {
             List<int> x = new List<int>();
@@ -24,11 +43,19 @@ namespace C_Sharp.Language
             Assert.IsTrue(x.GetType() == typeof(List<int>));
 
             Type tx = typeof(List<int>);
+            Assert.AreEqual(tx, typeof(List<int>));
+
             Type tx2 = typeof(System.Collections.Generic.List<int>);
+            Assert.AreEqual(tx, tx2);
+
             Type tx3 = typeof(IntegerList2);
+            Assert.AreNotEqual(tx, tx3);
 
             object tx2o = Activator.CreateInstance(tx2);
+            Assert.IsInstanceOfType(tx2o, tx2);
+
             object tx3o = Activator.CreateInstance(tx3);
+            Assert.IsInstanceOfType(tx3o, tx3);
 
             if (x is List<int> il)
                 Assert.IsTrue(il != null);
@@ -39,23 +66,10 @@ namespace C_Sharp.Language
             if (y is System.Collections.Generic.List<int> il3)
                 Assert.IsTrue(il3 != null);
 
-        }
-    }
 
-    public class MyType2
-    {
-        public static void Test()
-        {
-            // Compile Error : does not know about type alias
-            //IntegerList x = new IntegerList();
-        }
-    }
+            MyType2.Test();
 
-    public class MyType3
-    {
-        public static void Test()
-        {
-            List<int> x = new List<int>();
+            MyType3.Test();
         }
     }
 }
