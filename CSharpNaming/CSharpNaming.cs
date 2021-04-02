@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CSharpNaming
 {
@@ -122,14 +123,14 @@ namespace CSharpNaming
             string timeSheet = "";
             bool isCompleted = false;
 
-            if ((index == 0) || (timeSheet == "") || isCompleted)
-                return;
+            Assert.IsNotNull(stream);
+            Assert.IsNotNull(customers);
+          
+            Assert.AreEqual(index,100);
+            Assert.AreEqual(timeSheet,"");
+            Assert.AreEqual(isCompleted, false);
 
-            if ((firstIndex == 0) || (firstName == "") || isDeleted)
-                return;
 
-            if ((lastIndex == 0) || (lastName == "") || isSaved)
-                return;
         }
         #endregion
 
@@ -167,7 +168,7 @@ namespace CSharpNaming
         #region XIII. Do vertically align curly brackets. 
         private class Example
         {
-            private void Method1()
+            public void Method1()
             {
             }
         }
@@ -179,7 +180,7 @@ namespace CSharpNaming
             // ReSharper disable once MemberCanBePrivate.Local
             public static string BankName="";
             // ReSharper disable once NotAccessedField.Local
-            public static decimal Reserves= 0;
+            public static decimal Reserves;
 
             public string Number { get; set; }
             public DateTime DateOpened { get; set; }
@@ -191,7 +192,19 @@ namespace CSharpNaming
             public Account()
             {
                 BankName = "-";
+                Assert.AreEqual(BankName,"-");
                 Reserves = 0;
+                Number = "1";
+                string t = Number;
+                Assert.AreEqual(t,"1");
+
+                DateOpened = DateTime.Now;
+                DateClosed = DateOpened;
+                Assert.AreEqual(DateOpened, DateClosed);
+
+                Balance = 0;
+                Assert.AreEqual(Balance,0);
+
             }
             #endregion
         }
@@ -254,8 +267,81 @@ namespace CSharpNaming
         #endregion
 
         #region suppress warnings
+
+        private class Master : IShape, IShapeCollection, IGroupable
+        {
+        }
+
         private void ConsumeVariables()
         {
+            MyFunction();
+            Test();
+
+            Account account = new Account();
+            Assert.IsNotNull(account);
+
+            Example example = new Example();
+            example.Method1();
+
+            Color color = Color.Green;
+            Assert.AreEqual(color, Color.Green);
+            color = Color.Red;
+            Assert.AreEqual(color, Color.Red);
+
+            Dockings d = Dockings.Bottom | Dockings.None | Dockings.Top;
+            Assert.AreNotEqual(d, Dockings.Bottom);
+
+            WrongDirection w = WrongDirection.East;
+            Assert.AreEqual(w, WrongDirection.East);
+            w = WrongDirection.South;
+            Assert.AreEqual(w, WrongDirection.South);
+            w = WrongDirection.West;
+            Assert.AreEqual(w, WrongDirection.West);
+            w = WrongDirection.North;
+            Assert.AreEqual(w, WrongDirection.North);
+
+            Direction w2 = Direction.East;
+            Assert.AreEqual(w2, Direction.East);
+            w2 = Direction.South;
+            Assert.AreEqual(w2, Direction.South);
+            w2 = Direction.West;
+            Assert.AreEqual(w2, Direction.West);
+            w2 = Direction.North;
+            Assert.AreEqual(w2, Direction.North);
+
+            CoinEnum coin = CoinEnum.Nickel;
+            Assert.AreEqual(coin, CoinEnum.Nickel);
+            coin = CoinEnum.Penny;
+            Assert.AreEqual(coin, CoinEnum.Penny);
+
+            Coin coin2 = Coin.Nickel;
+            Assert.AreEqual(coin2, Coin.Nickel);
+            coin2 = Coin.Penny;
+            Assert.AreEqual(coin, CoinEnum.Penny);
+
+
+            Employee e = new Employee(); 
+            Assert.IsNotNull(e);
+
+            BusinessLocation b = new BusinessLocation();
+            Assert.IsNotNull(b);
+
+            DocumentCollection dc = new DocumentCollection();
+            Assert.IsNotNull(dc);
+
+            Master m = new Master();
+            Assert.IsNotNull(m);
+
+            string s = ShippingType;
+            s = SHIPPINGTYPE;
+            Assert.AreEqual(s, SHIPPINGTYPE);
+
+            this.clientAppointment = DateTime.Now;
+            this.timeLeft = TimeSpan.Zero;
+
+            this.client_Appointment = DateTime.Now;
+            this.time_Left = TimeSpan.Zero;
+
             userGroup = null;
             usrGrp = null;
             employeeAssignment = null;
@@ -279,6 +365,11 @@ namespace CSharpNaming
         #region Test
         public static void ShowNamingConventions()
         {
+            if (DateTime.Now < new DateTime(1970, 1, 1))
+            {
+                NamingConvention namingConvention = new NamingConvention();
+                namingConvention.ConsumeVariables();
+            }
         }
         #endregion
     }
