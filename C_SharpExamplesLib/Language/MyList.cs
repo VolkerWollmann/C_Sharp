@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
 {
@@ -21,18 +22,21 @@ namespace C_Sharp.Language
 	}
 	public class MyListTest
 	{
-		public static void F(MyList li, int index, int offset)
+		public static MyPair F(MyList li, int index, int offset)
 		{
-			var i = li[index-offset];
+			return li[index-offset];
 		}
 
 		public static void Test()
 		{
 
 			MyList li = new MyList(200);
-			li.Add(new MyPair(1,42));
 
-			F(li,1,1);
-		}
+            MyPair r1 = new MyPair(1, 42);
+			li.Add(r1);
+
+            MyPair r2 = F(li,1,1);
+            Assert.AreEqual(r1, r2);
+        }
 	}
 }

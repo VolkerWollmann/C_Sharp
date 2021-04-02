@@ -52,14 +52,15 @@ namespace C_Sharp.Language
 			return new Dictionary<string, int> { ["X"] = 5, ["Y"] = 6 };
 		}
 
-		private static bool NullableType()
+		private static void NullableType()
 		{
 			//
-			bool? b = false;
-			bool b2 = b.Value;
+			bool? b = null;
+			Assert.IsNull(b);
 
-			return b2;
-		}
+            b = false;
+            Assert.IsFalse(b.Value);
+        }
 
         // #Assert #Exception #Action
 		public static void Assert_Test()
@@ -115,10 +116,9 @@ namespace C_Sharp.Language
             int four = (int) cs6.SquareRoot2(16);
 			Assert.AreEqual(four,4);
 
-			var b = NullableType();
-			Assert.AreEqual(b, false);
+			NullableType();
 
-			cs6.Y = 42;
+            cs6.Y = 42;
 
 			// Does not compile 
 			// Assert.IsNotNull(cs6.ClassProperty); 

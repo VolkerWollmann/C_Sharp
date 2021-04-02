@@ -156,5 +156,11 @@ namespace UnitTest
 		{
 			CSharp.MultiLineStringConstant();
 		}
-	}
+
+        [TestMethod]
+        public void ListCapicity()
+        {
+            MyListTest.Test();
+        }
+    }
 }

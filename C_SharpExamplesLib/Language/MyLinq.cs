@@ -19,8 +19,10 @@ namespace C_Sharp.Language
 			List<int> allowed = new List<int> { 1, 8, 7, 50, 42, 13, 85, 2, 14, 67 };
 
 			List<int> result = favoritesFirst.Where(i => allowed.Contains(i)).ToList(); // { 7, 14, ... 42, 1, ... }
+			Assert.IsTrue(result.All( i => allowed.Contains(i)));
 
 			var takeTest = allowed.Take(20).ToList(); // take takes up to maximum 20
+			Assert.IsTrue(takeTest.Count == 10);
 		}
 
 		public static void Linq_Syntax()
@@ -141,11 +143,16 @@ namespace C_Sharp.Language
 
 			DateTime t0 = DateTime.Now;
 			Console.WriteLine(t0.ToString());
-			var primes = numbers.Where(n => IsPrime(n)).ToList();
+			
+            var primes = numbers.Where(n => IsPrime(n)).ToList();
+			Assert.IsNotNull(primes);
+
 			DateTime t1 = DateTime.Now;
 			Console.WriteLine("Time sequential:" + t1.Subtract(t0).ToString());
 
 			var primes2 = numbers.AsParallel().Where(n => IsPrime(n)).ToList();
+			Assert.IsNotNull(primes2);
+
 			DateTime t2 = DateTime.Now;
 			Console.WriteLine("Time parallel:" + t2.Subtract(t1).ToString());
 
@@ -158,6 +165,8 @@ namespace C_Sharp.Language
 				.AsSequential()
 				.Take(500)
 				.ToList();
+			Assert.IsNotNull(primes3);
+
 			DateTime t3 = DateTime.Now;
 			Console.WriteLine("Time parallel (degree 3):" + t3.Subtract(t2).ToString());
 		}

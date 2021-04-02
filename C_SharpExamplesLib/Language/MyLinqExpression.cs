@@ -7,11 +7,11 @@ namespace C_Sharp.Language
 {
     internal class MyExpressionWriter1
     {
-        int indent = 0;
+        int _indent;
 
         private string GetSpace()
         {
-            return new String(' ', indent).ToString();
+            return new String(' ', _indent).ToString();
         }
 
         private void Write(ConstantExpression constantExpression)
@@ -69,7 +69,7 @@ namespace C_Sharp.Language
 
         internal void Write(Expression expression )
         {
-            indent = indent + 5;
+            _indent = _indent + 5;
 
             if (expression is ConstantExpression)
                 Write((ConstantExpression)expression);
@@ -92,22 +92,22 @@ namespace C_Sharp.Language
             else
                 Console.WriteLine(GetSpace() + expression);
             
-            indent = indent - 5;
+            _indent = _indent - 5;
         }
     }
 
     internal class MyExpressionWriter2
     {
-        int indent = 0;
+        int _indent;
 
         private string GetSpace()
         {
-            return new String(' ', indent).ToString();
+            return new String(' ', _indent).ToString();
         }
 
         private void WriteExpression(Expression expression)
         {
-            Type constructed = expression.GetType();
+            //Type constructed = expression.GetType();
 
             Console.WriteLine(GetSpace() + "NodeType:" + expression.NodeType.ToString());
 
@@ -122,11 +122,11 @@ namespace C_Sharp.Language
 
         internal void Write(Expression expression)
         {
-            indent = indent + 5;
+            _indent = _indent + 5;
 
             WriteExpression(expression);
 
-            indent = indent - 5;
+            _indent = _indent - 5;
         }
     }
     public class MyLinqExpression

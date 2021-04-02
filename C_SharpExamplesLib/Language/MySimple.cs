@@ -10,7 +10,7 @@ namespace C_Sharp.Language
 		// #index operator, #indexer, #range
 		private class IndexClass
 		{
-			public int[] Numbers = new int[10];
+			public readonly int[] Numbers = new int[10];
 
 			public int this[int index]
 			{
@@ -20,7 +20,7 @@ namespace C_Sharp.Language
 			internal IndexClass()
 			{
 				Random random = new Random();
-				Enumerable.Range(0, 10).ToList().ForEach(i => { Numbers[i] = random.Next(1, 10); });
+				Enumerable.Range(0, 10).ToList().ForEach(i => { this[i] = random.Next(1, 10); });
 			}
 		}
 
@@ -34,6 +34,7 @@ namespace C_Sharp.Language
 		static void EnumerableTest()
 		{
 			IEnumerable<int> emptyIntegerList = Enumerable.Empty<int>();
+			Assert.IsFalse(emptyIntegerList.Any());
 		}
 
 		public static void Test()
