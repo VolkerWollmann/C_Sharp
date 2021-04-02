@@ -18,7 +18,7 @@ namespace C_Sharp.Language
 
         public class MyType2
         {
-            public static void Test()
+            public static void Test2()
             {
                 // Compile Error : does not know about type alias
                 //IntegerList x = new IntegerList();
@@ -27,7 +27,7 @@ namespace C_Sharp.Language
 
         public class MyType3
         {
-            public static void Test()
+            public static void Test3()
             {
                 List<int> x = new List<int>();
 
@@ -67,9 +67,9 @@ namespace C_Sharp.Language
                 Assert.IsTrue(il3 != null);
 
 
-            MyType2.Test();
+            MyType2.Test2();
 
-            MyType3.Test();
+            MyType3.Test3();
         }
     }
 }

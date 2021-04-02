@@ -14,6 +14,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{822B9D4A-5E74-4A32-960C-2B3D7F9FEEEA}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		C_Sharp.sln.DotSettings = C_Sharp.sln.DotSettings
+		C_Sharp.sln.DotSettings.user = C_Sharp.sln.DotSettings.user
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{FB47993A-3F35-4755-B856-95DE7C3CD80D}"
@@ -24,7 +26,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreUnitTest", "NetCoreU
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetCore", "NetCore", "{B32A1DBE-FB06-4CAE-8DBC-FF58AA59D061}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpNaming", "CSharpNaming\CSharpNaming.csproj", "{E2D0B6BD-92E5-4CE8-B73F-DF6EE94A0DED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpNaming", "CSharpNaming\CSharpNaming.csproj", "{E2D0B6BD-92E5-4CE8-B73F-DF6EE94A0DED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
