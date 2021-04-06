@@ -10,7 +10,7 @@ namespace C_Sharp.Language
 	public class MyDelegate
 	{
 		// #action
-		static Action<string> WriteMessage = (msg) => { Console.WriteLine(msg); };
+		static Action<string> WriteMessage = msg => { Console.WriteLine(msg); };
 
 		// #func
 		static Func<int> funcIntDirect = () => { return 42; };
@@ -85,7 +85,7 @@ namespace C_Sharp.Language
 			i = myDelegate.funcIntegerFunction(3);
 			Assert.IsTrue(i == 6);
 
-			myDelegate.funcIntegerFunction = new IntegerFunction(myDelegate.Square);
+			myDelegate.funcIntegerFunction = myDelegate.Square;
 			i = myDelegate.funcIntegerFunction(3);
 			Assert.IsTrue(i == 9);
 
@@ -108,7 +108,7 @@ namespace C_Sharp.Language
 			Assert.IsTrue(i == 4);
 
 			myDelegate.funcIntegerFunction = myDelegate.Square;
-			myDelegate.funcIntInt = (Func<int, int>)null;
+			myDelegate.funcIntInt = null;
 			myDelegate.funcIntInt = new Func<int,int>(myDelegate.funcIntegerFunction);
 			i = myDelegate.funcIntInt(3);
 			Assert.IsTrue(i == 9);
@@ -209,7 +209,7 @@ namespace C_Sharp.Language
 			Assert.IsTrue(delegateResult == 9);
 
 			MethodInfo mDouble = ti.GetDeclaredMethod("Double");
-			myDelegate.Delegate = System.Delegate.Combine(myDelegate.Delegate,
+			myDelegate.Delegate = Delegate.Combine(myDelegate.Delegate,
 				Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, mDouble));
 			f2InvocationList = myDelegate.Delegate.GetInvocationList();
             Assert.IsNotNull(f2InvocationList);

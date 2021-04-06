@@ -42,8 +42,8 @@ namespace C_Sharp.Language
 				Assert.IsTrue(ne.StackTrace.Contains("InnerGet"));
 				Assert.IsTrue(ne.StackTrace.Contains("GetFirstCharacter"));
 				Assert.IsTrue(!ne.StackTrace.Contains("Test"));
-				throw ne; //cuts the call stack below GetFirstCharacter2 : 
-				          //in this case like throw new NullReferenceException();
+				throw; //cuts the call stack below GetFirstCharacter2 :
+           //          //in this case like throw new NullReferenceException();
 			}
 		}
 	}

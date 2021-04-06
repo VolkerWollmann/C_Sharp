@@ -22,7 +22,7 @@ namespace C_Sharp.Language.Task
 			Task<int> myTask = new Task<int>(ConstFunction, eight);
 
 			Func<Task<int>, int> MultiplyByTwo = (previous) => previous.Result * 2;
-			Task<int> myTask2 = myTask.ContinueWith<int>(MultiplyByTwo, TaskContinuationOptions.OnlyOnRanToCompletion);
+			Task<int> myTask2 = myTask.ContinueWith(MultiplyByTwo, TaskContinuationOptions.OnlyOnRanToCompletion);
 
 			myTask.Start();
 			myTask.Wait();
@@ -437,14 +437,13 @@ namespace C_Sharp.Language.Task
 
 			System.Threading.Tasks.Task consumer = new System.Threading.Tasks.Task(() =>
 		   {
-			   int v;
-			   System.Threading.Thread.CurrentThread.Name = "Consumer";
+               System.Threading.Thread.CurrentThread.Name = "Consumer";
 			   while (!data.IsCompleted)
 			   {
 				   try
 				   {
 					   System.Threading.Thread.Sleep(20);
-					   v = data.Take();
+					   var v = data.Take();
 					   Console.WriteLine("Data {0} taken successfully.", v);
 				   }
 				   catch (InvalidOperationException) { }
@@ -490,14 +489,13 @@ namespace C_Sharp.Language.Task
 
 			System.Threading.Tasks.Task consumer = new System.Threading.Tasks.Task(() =>
 			{
-				int v;
-				System.Threading.Thread.CurrentThread.Name = "Consumer";
+                System.Threading.Thread.CurrentThread.Name = "Consumer";
 				while (!data.IsCompleted)
 				{
 					try
 					{
 						System.Threading.Thread.Sleep(20);
-						v = data.Take();
+						var v = data.Take();
 						Console.WriteLine("Data {0} taken successfully.", v);
 					}
 					catch (InvalidOperationException) { }
@@ -542,14 +540,14 @@ namespace C_Sharp.Language.Task
 
 			System.Threading.Tasks.Task consumer = new System.Threading.Tasks.Task(() =>
 			{
-				int v;
-				System.Threading.Thread.CurrentThread.Name = "Consumer";
+                System.Threading.Thread.CurrentThread.Name = "Consumer";
 				int i = 0;
 				while (i < 10)
 				{
-					while (!concurrentQueue.TryPeek(out v))
+                    int v;
+                    while (!concurrentQueue.TryPeek(out v))
 					{
-						Console.WriteLine($"Try to peek failed");
+						Console.WriteLine("Try to peek failed");
 						System.Threading.Thread.Sleep(5);
 					}
 
@@ -656,10 +654,11 @@ namespace C_Sharp.Language.Task
 
 		public static void TaskDeadLock()
 		{
-			List<System.Threading.Tasks.Task> allTasks = new List<System.Threading.Tasks.Task>();
-			allTasks.Add(System.Threading.Tasks.Task.Run(() => Method1()));
-			allTasks.Add(System.Threading.Tasks.Task.Run(() => Method2()));
-			Console.WriteLine("waiting for tasks");
+            List<System.Threading.Tasks.Task> allTasks = new List<System.Threading.Tasks.Task>
+            {
+                System.Threading.Tasks.Task.Run(Method1), System.Threading.Tasks.Task.Run(Method2)
+            };
+            Console.WriteLine("waiting for tasks");
 
 			System.Threading.Tasks.Task.WhenAll(allTasks).Wait(2000);
 
@@ -691,7 +690,7 @@ namespace C_Sharp.Language.Task
 
 		public static void Task_Cancellation()
 		{
-			System.Threading.Tasks.Task.Run(() => Clock());
+			System.Threading.Tasks.Task.Run(Clock);
 			Console.WriteLine("Cancel clock after random time");
 			Random random = new Random();
 			System.Threading.Thread.Sleep(random.Next(1000, 3000));
@@ -731,7 +730,7 @@ namespace C_Sharp.Language.Task
 			}
 			catch (AggregateException ex)
 			{
-				Console.WriteLine("Clock stopped: {0}", ex.InnerExceptions[0].GetType().ToString());
+				Console.WriteLine("Clock stopped: {0}", ex.InnerExceptions[0].GetType());
 			}
 
 		}

@@ -15,7 +15,7 @@ namespace C_Sharp.Language
 			public int this[int index]
 			{
 				get => Numbers[index];
-                set => Numbers[index] = value;
+                private set => Numbers[index] = value;
             }
 			internal IndexClass()
 			{
@@ -27,7 +27,7 @@ namespace C_Sharp.Language
         //#call by reference
 		static void Method(ref string s)
 		{
-			s = "donkey";
+			s = s +"donkey";
 		}
 
 		// #Enumerable #empty list 

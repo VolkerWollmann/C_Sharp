@@ -1,13 +1,12 @@
-﻿/// <summary>
-/// #Defining a #alias type
-/// </summary>
-
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
 {
+    /// <summary>
+    /// #Defining a #alias type
+    /// </summary>
     public class MyType
     {
         // Defining a type as class based on base type
@@ -29,9 +28,9 @@ namespace C_Sharp.Language
         {
             public static void Test3()
             {
-                List<int> x = new List<int>();
+                List<int> x = new List<int> { 1 };
+                Assert.IsNotNull(x);
 
-                x.Add(1);
             }
         }
 

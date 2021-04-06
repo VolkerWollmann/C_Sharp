@@ -53,7 +53,7 @@ namespace C_Sharp.Language
 
 			var moreFriends = friends.ToList();
 			moreFriends.Add("Seagull");
-            Assert.AreEqual(3, moreFriends.Count());
+            Assert.AreEqual(3, moreFriends.Count);
 
 			friends = moreFriends.ToArray<string>();
 			Assert.IsTrue(friends.Contains("Seagull"));

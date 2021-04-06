@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
 {
@@ -13,11 +14,13 @@ namespace C_Sharp.Language
 			List<string> qNameElems = qName.Split('/').Where(s => !string.IsNullOrEmpty(s)).ToList();
 			List<string> qNameIterated = new List<string>();
 			string newQName = "/";
-			for(int i=0; i< qNameElems.Count; i++)
-			{
-				newQName = newQName + qNameElems[i] + "/";
-				qNameIterated.Add(newQName);
-			}
+			foreach (var t in qNameElems)
+            {
+                newQName = newQName + t + "/";
+                qNameIterated.Add(newQName);
+            }
+
+			Assert.IsNotNull(qNameIterated);
 		}
 	}
 }

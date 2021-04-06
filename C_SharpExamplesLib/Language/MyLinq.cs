@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -142,7 +143,7 @@ namespace C_Sharp.Language
 			var numbers = Enumerable.Range(10000000, 500);
 
 			DateTime t0 = DateTime.Now;
-			Console.WriteLine(t0.ToString());
+			Console.WriteLine(t0.ToString(CultureInfo.InvariantCulture));
 			
             var primes = numbers.Where(n => IsPrime(n)).ToList();
 			Assert.IsNotNull(primes);

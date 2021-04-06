@@ -33,11 +33,10 @@ namespace C_Sharp.Language
 			MyIEqualityComparer myC = new MyIEqualityComparer(1, 1);
 
 			MyIEqualityComparer myIEqualityComparer = new MyIEqualityComparer(0, 0);
-			Dictionary<MyIEqualityComparer, string> dictionary = new Dictionary<MyIEqualityComparer, string>(myIEqualityComparer);
+            Dictionary<MyIEqualityComparer, string> dictionary =
+                new Dictionary<MyIEqualityComparer, string>(myIEqualityComparer) {{myA, "Test1"}, {myB, "Test2"}};
 
-			dictionary.Add(myA, "Test1");
-			dictionary.Add(myB, "Test2");
-			Assert.IsTrue(dictionary.ContainsKey(myC));
+            Assert.IsTrue(dictionary.ContainsKey(myC));
 		}
 	}
 
@@ -128,7 +127,8 @@ namespace C_Sharp.Language
 			};
 
 			// Sort array with #Comparison
-			Array.Sort(a, new Comparison<MyIComparable>((i1, i2) => -i2.Version.CompareTo(i1.Version)));
+            Comparison<MyIComparable> comparison = (i1, i2) => -i2.Version.CompareTo(i1.Version);
+			Array.Sort(a, comparison);
 
 			for (int i = 0; i < a.Length-1; i++)
 				Assert.IsTrue( a[i].Version <= a[i+1].Version );

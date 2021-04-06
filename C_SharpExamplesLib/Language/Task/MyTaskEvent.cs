@@ -57,8 +57,9 @@ namespace C_Sharp.Language.Task
 				for (int i = 0; i < max; i++)
 				{
 					System.Threading.Thread.Sleep(random.Next(100, 150)); ;
-					ProduceEvent(i, (i==(max-1)));
-					Console.WriteLine("Data {0} produced successfully.", i);
+                    if (ProduceEvent != null) 
+                        ProduceEvent(i, (i == (max - 1)));
+                    Console.WriteLine("Data {0} produced successfully.", i);
 				}
 			}
 

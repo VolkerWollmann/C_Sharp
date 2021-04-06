@@ -8,6 +8,7 @@ namespace CSharpNaming
     /// <summary>
     /// Naming conventions 
     /// https://www.dofactory.com/reference/csharp-coding-standards
+    /// </summary>
 
     #region I. PascalCasing for classes : public class NamingConvention
     #endregion
@@ -29,9 +30,9 @@ namespace CSharpNaming
             #region
 
             // Avoid : hungarian casing for type information
-            int iCounter = 0;
+            int iMaximum = 0;
 
-            if ((localVariable == 0) || (iCounter == 0))
+            if ((localVariable == 0) || (iMaximum == 0))
                 return;
             #endregion
 
@@ -325,7 +326,7 @@ namespace CSharpNaming
             Coin coin2 = Coin.Nickel;
             Assert.AreEqual(coin2, Coin.Nickel);
             coin2 = Coin.Penny;
-            Assert.AreEqual(coin, CoinEnum.Penny);
+            Assert.AreEqual(coin2, CoinEnum.Penny);
 
 
             Employee e = new Employee(); 
@@ -341,6 +342,7 @@ namespace CSharpNaming
             Assert.IsNotNull(m);
 
             string s = ShippingType;
+            Assert.AreEqual(s, ShippingType);
             s = SHIPPINGTYPE;
             Assert.AreEqual(s, SHIPPINGTYPE);
 
@@ -365,8 +367,12 @@ namespace CSharpNaming
 
             if ((name == "") || (strName == ""))
                 return;
+
             if (_registrationDate.CompareTo(DateTime.Now) == 0)
                 return;
+
+            _registrationDate = DateTime.Now;
+            Assert.IsNotNull(_registrationDate);
         }
         #endregion
 

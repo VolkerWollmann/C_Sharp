@@ -97,25 +97,29 @@ namespace C_Sharp.Language
 		public static void Test()
 		{
 			List<string> animals = new List<string>{ "Donkey", "Dog", "Seagull", "Cat", "Goat" };
-			var oneAnimal = GetRandomElement<string>(animals);
+			var oneAnimal = GetRandomElement(animals);
 			Assert.IsNotNull(oneAnimal);
 
-			var shuffledAnimals = GetShuffledList<string>(animals);
+			var shuffledAnimals = GetShuffledList(animals);
 			Assert.IsTrue(animals.Contains(shuffledAnimals.First()));
 
 			List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
-			var number = GetRandomElement<int>(numbers);
+			var number = GetRandomElement(numbers);
 			Assert.IsTrue( number >=1 && number <= 5);
-			var shuffledNumbers = GetShuffledList<int>(numbers);
+			var shuffledNumbers = GetShuffledList(numbers);
             Assert.IsTrue(numbers.Contains(shuffledNumbers.First()));
 
             IMyRandomizer<string> myStringRandomizer = new MyStringRandomizer();
-			oneAnimal = myStringRandomizer.GetRandomElement(animals);
-			shuffledAnimals = myStringRandomizer.GetShuffledList(animals);
+            oneAnimal = myStringRandomizer.GetRandomElement(animals);
+			Assert.IsNotNull(oneAnimal);
+            shuffledAnimals = myStringRandomizer.GetShuffledList(animals);
+			CollectionAssert.AllItemsAreNotNull(shuffledAnimals);
 
             IMyRandomizer<int> myIntegerRandomizer = new MyIntegerRandomizer();
-			number = myIntegerRandomizer.GetRandomElement(numbers);
+            number = myIntegerRandomizer.GetRandomElement(numbers);
+            Assert.IsNotNull(number);
 			shuffledNumbers = myIntegerRandomizer.GetShuffledList(numbers);
+            CollectionAssert.AllItemsAreNotNull(shuffledNumbers);
 		}
 	}
 }

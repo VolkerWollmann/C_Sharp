@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using C_Sharp;
 using C_Sharp.Language.Task;
 
 
@@ -9,17 +8,11 @@ namespace UnitTest
     [TestClass]
     public class TaskUnitTest
     {
-		private TestContext _testContextInstance;
-
-		/// <summary>
+        /// <summary>
 		///  Gets or sets the test context which provides
 		///  information about and functionality for the current test run.
 		///</summary>
-		public TestContext TestContext
-		{
-			get => _testContextInstance;
-            set => _testContextInstance = value;
-        }
+		public TestContext TestContext { get; set; }
 
         [TestMethod]
         public void TestTheContext()

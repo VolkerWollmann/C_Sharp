@@ -47,10 +47,7 @@ namespace C_Sharp.Language.Thread
 		/// both threads work on thread local data
 		/// </summary>
 		public static ThreadLocal<Random> RandomGenerator =
-		new ThreadLocal<Random>(() =>
-		{
-			return new Random(2);
-		});
+		new ThreadLocal<Random>(() => new Random(2));
 
 		public static ThreadLocal<int> ThreadInt =
 			new ThreadLocal<int>();

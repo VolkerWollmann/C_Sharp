@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using C_Sharp;
 using C_Sharp.Language.Thread;
 
 namespace UnitTest
@@ -7,19 +6,13 @@ namespace UnitTest
     [TestClass]
     public class ThreadUnitTest
     {
-        private TestContext testContextInstance;
-
-		/// <summary>
+        /// <summary>
 		///  Gets or sets the test context which provides
 		///  information about and functionality for the current test run.
 		///</summary>
-		public TestContext TestContext
-		{
-			get => testContextInstance;
-            set => testContextInstance = value;
-        }
+		public TestContext TestContext { get; set; }
 
-		[TestMethod]
+        [TestMethod]
 		public void Thread_Simple()
 		{
 			MyThread.ThreadSimple();

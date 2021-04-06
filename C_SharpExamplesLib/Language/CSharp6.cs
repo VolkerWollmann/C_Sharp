@@ -24,15 +24,15 @@ namespace C_Sharp.Language
 
 		internal CSharp6(int x)
 		{
+			Assert.AreEqual(X,7);
 			X = x;
 		}
 
-		internal double SquareRoot(int i) 
-		{
-			double result;
-			result = Math.Sqrt(i);   // using System.Math and only Sqrt ?
-			return result;
-		}
+		internal double SquareRoot(int i)
+        {
+            var result = Math.Sqrt(i);
+            return result;
+        }
 
 		internal double SquareRoot2(int i) => Math.Sqrt(i);
 

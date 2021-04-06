@@ -18,6 +18,8 @@ namespace C_Sharp.Language
 		// #type-testing #cast #is #as #is variable name
 		private static void DoCasts(object x)
         {
+            var mc2 = new MyCastClass2();
+			Assert.IsNotNull(mc2);
 
 			// cannot cast tp abstract class
 			Action InvalidTypeCastAction = () => { MyCastClass2 t1 = (MyCastClass2)x; Assert.IsNull(t1); };
@@ -33,7 +35,7 @@ namespace C_Sharp.Language
                 Assert.IsNotNull(t4);
 			}
             
-			// check type with is
+			// check type with #is
 			bool t5 = x is MyCastClass2;
 			Assert.IsFalse(t5);
 
@@ -61,7 +63,7 @@ namespace C_Sharp.Language
 
 
 			MyCastClass1 myCastClass1 = new MyCastClass1();
-            DoCasts((object)myCastClass1);
+            DoCasts(myCastClass1);
 
 		}
 	}

@@ -54,7 +54,7 @@ namespace C_Sharp.Language
 			// #enum to #iEnumerable
 			var iEnumerableDogs = allDogs.Cast<Dog>();
 			var allDogs2 = iEnumerableDogs.ToArray();
-			ShowAllElement2<Dog>(allDogs2);
+			ShowAllElement2(allDogs2);
 
 			// #enum max element
 			Dog maxDog = Enum.GetValues(typeof(Dog)).Cast<Dog>().Max();
@@ -64,7 +64,7 @@ namespace C_Sharp.Language
 			ShowAllElement<Dog>(allCats);
 
 			var allCats2 = allCats.Cast<Cat>().ToArray();
-			ShowAllElement2<Cat>(allCats2);
+			ShowAllElement2(allCats2);
 		}
 	}
 }

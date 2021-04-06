@@ -62,7 +62,7 @@ namespace C_Sharp.Language.Thread
 			Console.WriteLine("----");
 
 			var itemsArray = Enumerable.Range(0, 500).ToArray();
-			ParallelLoopResult result = Parallel.For(0, itemsArray.Count(), (int i, ParallelLoopState loopState) =>
+			ParallelLoopResult result = Parallel.For(0, itemsArray.Length, (int i, ParallelLoopState loopState) =>
 			{
                 // break : all lambda expressions below 200 are completed, 
                 // stop  : lambda expressions below 200 might be killed.
