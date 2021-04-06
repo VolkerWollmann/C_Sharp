@@ -162,5 +162,11 @@ namespace UnitTest
         {
             MyListTest.Test();
         }
-    }
+
+        [TestMethod]
+        public void VirtualMethod()
+        {
+            VirtualTest.Test();
+        }
+	}
 }

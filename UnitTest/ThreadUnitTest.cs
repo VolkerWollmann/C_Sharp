@@ -80,5 +80,12 @@ namespace UnitTest
 		{
 			MyThread.Thread_AdministrativeData();
 		}
-	}
+
+        [TestMethod]
+		public void Semaphore()
+        {
+            MyThread.SemaphoreExample();
+
+        }
+    }
 }
