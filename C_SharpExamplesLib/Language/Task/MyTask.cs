@@ -73,13 +73,13 @@ namespace C_Sharp.Language.Task
 		// #thread safe
 		// make an array that holds the values 0 to 50000000
 
-		static long sharedTotalThreadSafetyViolation;
+		static long _sharedTotalThreadSafetyViolation;
 		static int[] itemsThreadSafetyViolation = Enumerable.Range(0, 50000001).ToArray();
-		static void addRangeOfValuesThreadSafeViolation(int start, int end)
+		static void AddRangeOfValuesThreadSafeViolation(int start, int end)
 		{
 			while (start < end)
 			{
-				sharedTotalThreadSafetyViolation = sharedTotalThreadSafetyViolation + itemsThreadSafetyViolation[start];
+				_sharedTotalThreadSafetyViolation = _sharedTotalThreadSafetyViolation + itemsThreadSafetyViolation[start];
 				start++;
 			}
 		}
@@ -93,7 +93,7 @@ namespace C_Sharp.Language.Task
 				int rangeSize = 1000;
 				int rangeStart = 0;
 
-				sharedTotalThreadSafetyViolation = 0;
+				_sharedTotalThreadSafetyViolation = 0;
 				while (rangeStart < itemsThreadSafetyViolation.Length)
 				{
 					int rangeEnd = rangeStart + rangeSize;
@@ -105,13 +105,13 @@ namespace C_Sharp.Language.Task
 					int rs = rangeStart;
 					int re = rangeEnd;
 
-					tasks.Add(System.Threading.Tasks.Task.Run(() => addRangeOfValuesThreadSafeViolation(rs, re)));
+					tasks.Add(System.Threading.Tasks.Task.Run(() => AddRangeOfValuesThreadSafeViolation(rs, re)));
 					rangeStart = rangeEnd;
 				}
 
 				System.Threading.Tasks.Task.WaitAll(tasks.ToArray());
 
-				Console.WriteLine("{0}.Run The total is: {1}", i, sharedTotalThreadSafetyViolation);
+				Console.WriteLine("{0}.Run The total is: {1}", i, _sharedTotalThreadSafetyViolation);
 			}
 			
 		}
@@ -119,14 +119,14 @@ namespace C_Sharp.Language.Task
 
 		#region lock statement
 		//#lock #task #waitall
-		static long sharedTotal;
+		static long _sharedTotal;
 
 		// make an array that holds the values 0 to 50000000
 		static int[] itemsObjectLock = Enumerable.Range(0, 50000001).ToArray();
 
 		static object sharedTotalLock = new object();
 
-		static void addRangeOfValuesObjectLock(int start, int end)
+		static void AddRangeOfValuesObjectLock(int start, int end)
 		{
 			long subTotal = 0;
 
@@ -137,7 +137,7 @@ namespace C_Sharp.Language.Task
 			}
 			lock (sharedTotalLock)
 			{
-				sharedTotal = sharedTotal + subTotal;
+				_sharedTotal = _sharedTotal + subTotal;
 			}
 		}
 
@@ -163,26 +163,26 @@ namespace C_Sharp.Language.Task
 				int rs = rangeStart;
 				int re = rangeEnd;
 
-				tasks.Add(System.Threading.Tasks.Task.Run(() => addRangeOfValuesObjectLock(rs, re)));
+				tasks.Add(System.Threading.Tasks.Task.Run(() => AddRangeOfValuesObjectLock(rs, re)));
 				rangeStart = rangeEnd;
 			}
 
 			System.Threading.Tasks.Task.WaitAll(tasks.ToArray());
 
-			Console.WriteLine("The total is: {0}", sharedTotal);
+			Console.WriteLine("The total is: {0}", _sharedTotal);
 		}
 		#endregion
 
 		#region Monitor
 		//#Monitor #task #waitall
-		static long sharedTotalMonitor;
+		static long _sharedTotalMonitor;
 
 		// make an array that holds the values 0 to 50000000
 		static int[] itemsMonitor = Enumerable.Range(0, 50000001).ToArray();
 
 		static object sharedTotalMonitorLock = new object();
 
-		static void addRangeOfValuesMonitor(int start, int end)
+		static void AddRangeOfValuesMonitor(int start, int end)
 		{
 			long subTotal = 0;
 			Random random = new Random();
@@ -198,7 +198,7 @@ namespace C_Sharp.Language.Task
 			{
 				if (Monitor.TryEnter(sharedTotalMonitorLock))
 				{
-					sharedTotalMonitor = sharedTotalMonitor + subTotal;
+					_sharedTotalMonitor = _sharedTotalMonitor + subTotal;
 					System.Threading.Thread.Sleep(random.Next(0, 10));
 					Console.WriteLine($"{System.Threading.Tasks.Task.CurrentId} : Adding subtotal ");
 					Monitor.Exit(sharedTotalMonitorLock);
@@ -234,24 +234,24 @@ namespace C_Sharp.Language.Task
 				int rs = rangeStart;
 				int re = rangeEnd;
 
-				tasks.Add(System.Threading.Tasks.Task.Run(() => addRangeOfValuesMonitor(rs, re)));
+				tasks.Add(System.Threading.Tasks.Task.Run(() => AddRangeOfValuesMonitor(rs, re)));
 				rangeStart = rangeEnd;
 			}
 
 			System.Threading.Tasks.Task.WaitAll(tasks.ToArray());
 
-			Console.WriteLine("The total is: {0}", sharedTotalMonitor);
+			Console.WriteLine("The total is: {0}", _sharedTotalMonitor);
 		}
 		#endregion
 
 		#region Interlocked Operation
 		//#Interlocked operation #task #waitall
-		static long sharedTotalInterlocked;
+		static long _sharedTotalInterlocked;
 
 		// make an array that holds the values 0 to 50000000
 		static int[] itemsInterlocked = Enumerable.Range(0, 50000001).ToArray();
 
-		static void addRangeOfValuesInterlocked(int start, int end)
+		static void AddRangeOfValuesInterlocked(int start, int end)
 		{
 			long subTotal = 0;
 
@@ -262,7 +262,7 @@ namespace C_Sharp.Language.Task
 			}
 
 			Console.WriteLine($"{System.Threading.Tasks.Task.CurrentId} : Before adding subtotal ");
-			Interlocked.Add(ref sharedTotalInterlocked, subTotal);
+			Interlocked.Add(ref _sharedTotalInterlocked, subTotal);
 			Console.WriteLine($"{System.Threading.Tasks.Task.CurrentId} : After adding subtotal ");
 		}
 
@@ -288,13 +288,13 @@ namespace C_Sharp.Language.Task
 				int rs = rangeStart;
 				int re = rangeEnd;
 
-				tasks.Add(System.Threading.Tasks.Task.Run(() => addRangeOfValuesInterlocked(rs, re)));
+				tasks.Add(System.Threading.Tasks.Task.Run(() => AddRangeOfValuesInterlocked(rs, re)));
 				rangeStart = rangeEnd;
 			}
 
 			System.Threading.Tasks.Task.WaitAll(tasks.ToArray());
 
-			Console.WriteLine("The total is: {0}", sharedTotalInterlocked);
+			Console.WriteLine("The total is: {0}", _sharedTotalInterlocked);
 		}
 		#endregion
 
@@ -613,8 +613,8 @@ namespace C_Sharp.Language.Task
 
 		#region deadlock
 		// #deadlock
-		static bool done1;  // by default false
-		static bool done2;
+		static bool _done1;  // by default false
+		static bool _done2;
 		static object lock1 = new object();
 		static object lock2 = new object();
 
@@ -627,7 +627,7 @@ namespace C_Sharp.Language.Task
 				Console.WriteLine("Method 1 waiting for lock 2");
 				lock (lock2)
 				{
-					done1 = true;
+					_done1 = true;
 					Console.WriteLine("Method 1 got lock 2");
 				}
 				Console.WriteLine("Method 1 released lock 2");
@@ -644,7 +644,7 @@ namespace C_Sharp.Language.Task
 				Console.WriteLine("Method 2 waiting for lock 1");
 				lock (lock1)
 				{
-					done2 = true;
+					_done2 = true;
 					Console.WriteLine("Method 2 got lock 1");
 				}
 				Console.WriteLine("Method 2 released lock 1");
@@ -662,8 +662,8 @@ namespace C_Sharp.Language.Task
 
 			System.Threading.Tasks.Task.WhenAll(allTasks).Wait(2000);
 
-			Assert.IsFalse(done1);
-			Assert.IsFalse(done2);
+			Assert.IsFalse(_done1);
+			Assert.IsFalse(_done2);
 
 			Console.WriteLine("Finished Deadlock");
 		}

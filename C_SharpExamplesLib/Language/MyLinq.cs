@@ -80,7 +80,7 @@ namespace C_Sharp.Language
 			int j = 43;
 
 			Action first = () => j = l.First();
-			Assert.ThrowsException<InvalidOperationException>(first);
+            Assert.ThrowsException<InvalidOperationException>(first);
 			Assert.AreEqual(j, 43);
 
 			// #FirstOrDefault for non value types
