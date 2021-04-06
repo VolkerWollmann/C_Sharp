@@ -123,8 +123,16 @@ namespace CSharpNaming
             string timeSheet = "";
             bool isCompleted = false;
 
+            Assert.IsNotNull(firstName);
+            Assert.AreEqual(lastIndex,0);
+
             Assert.IsNotNull(stream);
             Assert.IsNotNull(customers);
+            Assert.IsFalse(isSaved);
+
+            Assert.IsNotNull(lastName);
+            Assert.AreEqual(firstIndex,0);
+            Assert.IsFalse(isDeleted);
           
             Assert.AreEqual(index,100);
             Assert.AreEqual(timeSheet,"");

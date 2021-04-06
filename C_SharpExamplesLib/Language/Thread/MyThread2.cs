@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language.Thread
 {
@@ -70,6 +71,8 @@ namespace C_Sharp.Language.Thread
 
 				WorkOnItem(itemsArray[i]);
 			});
+
+			Assert.IsFalse(result.IsCompleted);
 
 		}
 	}

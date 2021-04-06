@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using C_Sharp;
 using C_Sharp.Language;
 
@@ -7,7 +8,7 @@ namespace UnitTest
 	[TestClass]
 	public class CompareUnitTest
     {
-		private TestContext testContextInstance;
+		private TestContext _testContextInstance;
 
 		/// <summary>
 		///  Gets or sets the test context which provides
@@ -15,8 +16,14 @@ namespace UnitTest
 		///</summary>
 		public TestContext TestContext
 		{
-			get => testContextInstance;
-            set => testContextInstance = value;
+			get => _testContextInstance;
+            set => _testContextInstance = value;
+        }
+
+        [TestMethod]
+        public void TestTheContext()
+        {
+            Console.WriteLine(TestContext.TestName);
         }
 
 		[TestMethod]

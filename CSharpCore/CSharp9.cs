@@ -44,7 +44,8 @@ namespace CSharpCore
         public static void TestInit()
         {
             Point m = new Point { X = 41, Y = 42 };
-            
+            Assert.IsTrue( m.X == 41);
+
             //Will not compile
             //m.X = 43;
         }
