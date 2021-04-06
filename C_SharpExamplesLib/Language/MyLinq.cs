@@ -70,7 +70,8 @@ namespace C_Sharp.Language
 		{
 			// #FirstOrDefault for value type
 			int i = 42;
-			List<int> l = new List<int> { };
+			Assert.AreEqual(i, 42);
+			List<int> l = new List<int>();
 
 			i = l.FirstOrDefault<int>();
 			Assert.AreEqual(i, 0);

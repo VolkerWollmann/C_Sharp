@@ -15,9 +15,8 @@ namespace C_Sharp.Language.Thread
 		private static void Method()
 		{
 			System.Threading.Thread.Sleep(100);
-			Console.WriteLine("Method in thread " + System.Threading.Thread.CurrentThread.ManagedThreadId); 
-			return;
-		}
+			Console.WriteLine("Method in thread " + System.Threading.Thread.CurrentThread.ManagedThreadId);
+        }
 
 		static void Task1()
 		{
@@ -36,7 +35,7 @@ namespace C_Sharp.Language.Thread
 		// #Invoke #Parallel #Dispatcher
 		public static void Thread_Dispatcher()
 		{
-			Dispatcher.CurrentDispatcher.Invoke(new Action(() => { MyThread.Method(); }));
+			Dispatcher.CurrentDispatcher.Invoke(MyThread.Method);
 			Console.WriteLine("After asynchronous start of method within thread " + System.Threading.Thread.CurrentThread.ManagedThreadId);
 
 			Parallel.Invoke(() => Task1(), () => Task2());
@@ -62,7 +61,7 @@ namespace C_Sharp.Language.Thread
 			Console.WriteLine("----");
 
 			var itemsArray = Enumerable.Range(0, 500).ToArray();
-			ParallelLoopResult result = Parallel.For(0, itemsArray.Length, (int i, ParallelLoopState loopState) =>
+			ParallelLoopResult result = Parallel.For(0, itemsArray.Length, (i, loopState) =>
 			{
                 // break : all lambda expressions below 200 are completed, 
                 // stop  : lambda expressions below 200 might be killed.

@@ -20,10 +20,10 @@ namespace C_Sharp.Language
     // #generic
 	internal class MyIntegerRandomizer : IMyIntRandomizer
 	{
-		Random random = new Random();
+        readonly Random _random = new Random();
 		public int GetRandomElement(List<int> list)
 		{
-			int index = random.Next(0, list.Count);
+			int index = _random.Next(0, list.Count);
 			return list[index];
 		}
 
@@ -34,7 +34,7 @@ namespace C_Sharp.Language
 			list.ForEach(e => work.Add(e));
 			while (work.Count > 0)
 			{
-				int index = random.Next(0, work.Count);
+				int index = _random.Next(0, work.Count);
 				result.Add(work[index]);
 				work.RemoveAt(index);
 			}
@@ -71,10 +71,10 @@ namespace C_Sharp.Language
 
 	public class MyGeneric
 	{
-		private static Random random = new Random();
+		private static readonly Random Random = new Random();
 		private static T GetRandomElement<T>(List<T> list)
 		{
-			int index = random.Next(0, list.Count );
+			int index = Random.Next(0, list.Count );
 			return list[index];
 		}
 
@@ -85,7 +85,7 @@ namespace C_Sharp.Language
 			list.ForEach(e => work.Add(e));
 			while( work.Count > 0 )
 			{
-				int index = random.Next(0, work.Count);
+				int index = Random.Next(0, work.Count);
 				result.Add(work[index]);
 				work[index] = default(T);
 				work.RemoveAt(index);

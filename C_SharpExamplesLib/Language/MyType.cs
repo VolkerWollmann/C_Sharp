@@ -10,7 +10,7 @@ namespace C_Sharp.Language
     public class MyType
     {
         // Defining a type as class based on base type
-        public class IntegerList2 : System.Collections.Generic.List<int>
+        public class IntegerList2 : List<int>
         {
 
         }
@@ -44,25 +44,25 @@ namespace C_Sharp.Language
             Type tx = typeof(List<int>);
             Assert.AreEqual(tx, typeof(List<int>));
 
-            Type tx2 = typeof(System.Collections.Generic.List<int>);
+            Type tx2 = typeof(List<int>);
             Assert.AreEqual(tx, tx2);
 
             Type tx3 = typeof(IntegerList2);
             Assert.AreNotEqual(tx, tx3);
 
-            object tx2o = Activator.CreateInstance(tx2);
-            Assert.IsInstanceOfType(tx2o, tx2);
+            object tx2O = Activator.CreateInstance(tx2);
+            Assert.IsInstanceOfType(tx2O, tx2);
 
-            object tx3o = Activator.CreateInstance(tx3);
-            Assert.IsInstanceOfType(tx3o, tx3);
+            object tx3O = Activator.CreateInstance(tx3);
+            Assert.IsInstanceOfType(tx3O, tx3);
 
             if (x is List<int> il)
                 Assert.IsTrue(il != null);
 
-            if (x is System.Collections.Generic.List<int> il2)
+            if (x is List<int> il2)
                 Assert.IsTrue(il2 != null);
 
-            if (y is System.Collections.Generic.List<int> il3)
+            if (y is List<int> il3)
                 Assert.IsTrue(il3 != null);
 
 

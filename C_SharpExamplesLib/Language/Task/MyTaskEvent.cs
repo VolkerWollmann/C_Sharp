@@ -9,30 +9,30 @@ namespace C_Sharp.Language.Task
 	/// </summary>
 	public class MyTaskEvent
 	{
-		static Random random = new Random();
+		static readonly Random Random = new Random();
 
 		public delegate void ProduceEventHandler(int e, bool final);
 
 		private class Consumer
         {
-			BlockingCollection<int> data = new BlockingCollection<int>();
+            readonly BlockingCollection<int> _data = new BlockingCollection<int>();
 
 			public void AddData(int i, bool final)
 			{
-				data.Add(i);
+				_data.Add(i);
 				if (final)
-					data.CompleteAdding();
+					_data.CompleteAdding();
 			}
 
 			public void Run()
 			{
 				System.Threading.Thread.CurrentThread.Name = "Consumer";
-				while (!data.IsCompleted)
+				while (!_data.IsCompleted)
 				{
 					try
 					{
-						System.Threading.Thread.Sleep(random.Next(100, 200));
-						int v = data.Take();
+						System.Threading.Thread.Sleep(Random.Next(100, 200));
+						int v = _data.Take();
 						Console.WriteLine("Data {0} taken successfully.", v);
 					}
 					catch (InvalidOperationException) { }
@@ -56,7 +56,7 @@ namespace C_Sharp.Language.Task
 
 				for (int i = 0; i < max; i++)
 				{
-					System.Threading.Thread.Sleep(random.Next(100, 150)); ;
+					System.Threading.Thread.Sleep(Random.Next(100, 150));
                     ProduceEvent?.Invoke(i, (i == (max - 1)));
                     Console.WriteLine("Data {0} produced successfully.", i);
 				}

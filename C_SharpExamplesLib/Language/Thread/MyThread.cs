@@ -26,7 +26,7 @@ namespace C_Sharp.Language.Thread
 			for (int i = 1; i <= 50; i++)
 			{
 				// Let each guest enter on an own thread.
-				System.Threading.Thread thread = new System.Threading.Thread(new ParameterizedThreadStart(Guest));
+				System.Threading.Thread thread = new System.Threading.Thread(Guest);
 				thread.Start(i);
 			}
 		}
@@ -176,7 +176,7 @@ namespace C_Sharp.Language.Thread
 			System.Threading.Thread thread = new System.Threading.Thread(SimpleThreadHello);
 			thread.Start();
 
-			ThreadStart ts = new ThreadStart(SimpleThreadHello);
+			ThreadStart ts = SimpleThreadHello;
 			thread = new System.Threading.Thread(ts);
 			thread.Start();
 		}
@@ -192,7 +192,7 @@ namespace C_Sharp.Language.Thread
 
 		public static void TestParameterizedThreadStart()
 		{
-			ParameterizedThreadStart ps = new ParameterizedThreadStart(WorkOnData);
+			ParameterizedThreadStart ps = WorkOnData;
 
 			System.Threading.Thread thread = new System.Threading.Thread(ps);
 

@@ -71,24 +71,24 @@ namespace C_Sharp.Language
         {
             _indent = _indent + 5;
 
-            if (expression is ConstantExpression)
-                Write((ConstantExpression)expression);
-            else if (expression is Expression<Func<int>>)
-                Write((Expression<Func<int>>)expression);
-            else if (expression is Expression<Func<int, int>>)
-                Write((Expression<Func<int, int>>)expression);
-            else if (expression is Expression<Func<int, int, int>>)
-                Write((Expression<Func<int, int,int >>)expression);
-            else if (expression is BinaryExpression)
-                Write((BinaryExpression)expression);
-            else if (expression is Expression<Func<IEnumerable<int>, IEnumerable<int>>>)
-                Write((Expression<Func<IEnumerable<int>, IEnumerable<int>>>)expression);
-            else if (expression is MethodCallExpression)
-                Write((MethodCallExpression)expression);
-            else if (expression is ParameterExpression)
-                Write((ParameterExpression)expression);
-            else if (expression is Expression<Func<int, bool>>)
-                Write((Expression<Func<int, bool>>)expression);
+            if (expression is ConstantExpression constantExpression)
+                Write(constantExpression);
+            else if (expression is Expression<Func<int>> expression1)
+                Write(expression1);
+            else if (expression is Expression<Func<int, int>> expression2)
+                Write(expression2);
+            else if (expression is Expression<Func<int, int, int>> expression3)
+                Write(expression3);
+            else if (expression is BinaryExpression binaryExpression)
+                Write(binaryExpression);
+            else if (expression is Expression<Func<IEnumerable<int>, IEnumerable<int>>> expression4)
+                Write(expression4);
+            else if (expression is MethodCallExpression callExpression)
+                Write(callExpression);
+            else if (expression is ParameterExpression parameterExpression)
+                Write(parameterExpression);
+            else if (expression is Expression<Func<int, bool>> expression5)
+                Write(expression5);
             else
                 Console.WriteLine(GetSpace() + expression);
             
@@ -111,9 +111,8 @@ namespace C_Sharp.Language
 
             Console.WriteLine(GetSpace() + "NodeType:" + expression.NodeType.ToString());
 
-            if (expression is LambdaExpression)
+            if (expression is LambdaExpression lambdaExpression)
             {
-                LambdaExpression lambdaExpression = expression as LambdaExpression;
                 lambdaExpression.Parameters.ToList().ForEach(p => Write(p));
                 Write(lambdaExpression.Body);         
             }
