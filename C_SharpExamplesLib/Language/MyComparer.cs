@@ -44,11 +44,11 @@ namespace C_Sharp.Language
 	[DebuggerDisplay("Version={Version}, Animal={Animal}")]
 	public class MyIComparable : IComparable<MyIComparable>
 	{
-		private const string NONE = "None";
-		private const string DONKEY = "Esel";
-		private const string DOG = "Hund";
-		private const string SEAGULL = "Möwe";
-		private const string CAT = "Katze";
+		private const string None = "None";
+		private const string Donkey = "Esel";
+		private const string Dog = "Hund";
+		private const string Seagull = "Möwe";
+		private const string Cat = "Katze";
 
 		public int Version { get; private set; }
 		public string Animal { get; private set; }
@@ -75,13 +75,13 @@ namespace C_Sharp.Language
         // </summary>
 		int IComparable<MyIComparable>.CompareTo(MyIComparable other)
 		{
-			if (( this.Animal == NONE ) && ( other.Animal == NONE))
+			if (( this.Animal == None ) && ( other.Animal == None))
 				return 0;
 
-			if (this.Animal == NONE)
+			if (this.Animal == None)
 				return -1;
 
-			if (other.Animal == NONE)
+			if (other.Animal == None)
 				return 1;
 
 			if (this.Version < other.Version)
@@ -90,7 +90,7 @@ namespace C_Sharp.Language
 			if (this.Version > other.Version)
 				return 1;
 
-			Dictionary<string, int> animalOrder = new Dictionary<string, int> { [DONKEY] = 1, [DOG] = 2, [SEAGULL] = 3, [CAT] = 4 };
+			Dictionary<string, int> animalOrder = new Dictionary<string, int> { [Donkey] = 1, [Dog] = 2, [Seagull] = 3, [Cat] = 4 };
 
 			return animalOrder[Animal] < animalOrder[other.Animal] ? -1 : 1;
 
@@ -101,12 +101,12 @@ namespace C_Sharp.Language
 		public static void TestIComparable()
 		{
 			List<MyIComparable> l = new List<MyIComparable> {
-				new MyIComparable(1, DONKEY),
-				new MyIComparable(3, DONKEY),
-				new MyIComparable(2, CAT),
-				new MyIComparable(3, CAT),
-				new MyIComparable(2, DOG),
-				new MyIComparable(5, NONE),
+				new MyIComparable(1, Donkey),
+				new MyIComparable(3, Donkey),
+				new MyIComparable(2, Cat),
+				new MyIComparable(3, Cat),
+				new MyIComparable(2, Dog),
+				new MyIComparable(5, None),
 			};
 
 			l.Sort();
@@ -119,11 +119,11 @@ namespace C_Sharp.Language
 		public static void TestComparison()
 		{ 
 			MyIComparable[] a = new MyIComparable[] { 
-				new MyIComparable(1, DONKEY),
-				new MyIComparable(5, DONKEY),
-				new MyIComparable(2, CAT),
-				new MyIComparable(4, CAT),
-				new MyIComparable(3, DOG),
+				new MyIComparable(1, Donkey),
+				new MyIComparable(5, Donkey),
+				new MyIComparable(2, Cat),
+				new MyIComparable(4, Cat),
+				new MyIComparable(3, Dog),
 			};
 
 			// Sort array with #Comparison
