@@ -89,8 +89,8 @@ namespace CSharpNaming
         #region VII. Do not use Underscores in identifiers: public DateTime clientAppointment;    Avoid: client_Appointment;
         //      Exception: you can prefix private static variables with an underscore.
         // Correct
-        public DateTime clientAppointment;
-        public TimeSpan timeLeft;
+        public DateTime ClientAppointment;
+        public TimeSpan TimeLeft;
 
         // Avoid
         public DateTime client_Appointment;
@@ -189,12 +189,12 @@ namespace CSharpNaming
             // ReSharper disable once MemberCanBePrivate.Local
             public static string BankName="";
             // ReSharper disable once NotAccessedField.Local
-            public static decimal Reserves;
+            private static decimal Reserves;
 
-            public string Number { get; set; }
-            public DateTime DateOpened { get; set; }
-            public DateTime DateClosed { get; set; }
-            public decimal Balance { get; set; }
+            private string Number { get; }
+            private DateTime DateOpened { get; }
+            private DateTime DateClosed { get; }
+            private decimal Balance { get; }
 
             #region
             // Constructor
@@ -203,6 +203,7 @@ namespace CSharpNaming
                 BankName = "-";
                 Assert.AreEqual(BankName,"-");
                 Reserves = 0;
+                Assert.AreEqual(Reserves,0);
                 Number = "1";
                 string t = Number;
                 Assert.AreEqual(t,"1");
@@ -346,17 +347,17 @@ namespace CSharpNaming
             s = SHIPPINGTYPE;
             Assert.AreEqual(s, SHIPPINGTYPE);
 
-            this.clientAppointment = DateTime.Now;
-            this.timeLeft = TimeSpan.Zero;
+            this.ClientAppointment = DateTime.Now;
+            this.TimeLeft = TimeSpan.Zero;
 
             this.client_Appointment = DateTime.Now;
             this.time_Left = TimeSpan.Zero;
 
-            userGroup = null;
+            userGroup = new UserGroup();
             usrGrp = null;
-            employeeAssignment = null;
+            employeeAssignment = new Assignment();
             empAssignment = null;
-            customerId = null;
+            customerId = new CustomerId();
 
             if ( (userGroup == null) || (usrGrp == null ) || (employeeAssignment == null) ||
                  (empAssignment == null) || ( customerId == null ) )
@@ -373,6 +374,7 @@ namespace CSharpNaming
 
             _registrationDate = DateTime.Now;
             Assert.IsNotNull(_registrationDate);
+
         }
         #endregion
 

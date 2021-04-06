@@ -15,11 +15,11 @@ namespace NetCoreUnitTest
     }
     public class CSharp9UnitTest
     {
-        private readonly ITestOutputHelper output;
+        private readonly ITestOutputHelper _output;
 
         public CSharp9UnitTest(ITestOutputHelper output)
         {
-            this.output = output;
+            this._output = output;
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace NetCoreUnitTest
         [Fact]
         public void ContentEquality()
         {
-            CSharp9.ContentEquality(this.output);
+            CSharp9.ContentEquality(this._output);
         }
 
         [Fact]

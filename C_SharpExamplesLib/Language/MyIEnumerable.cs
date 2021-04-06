@@ -13,11 +13,11 @@ namespace C_Sharp.Language
 	/// </summary>
 	public class MyIntegerRange : IEnumerator<int>, IQueryable<int>, IQueryProvider  // IQueryable<int> includes IEnumerable<int>
 	{
-		private readonly List<int> Range;
-		private int i;
+		private readonly List<int> _range;
+		private int _i;
 
 		#region IEnumerator<int>
-		int IEnumerator<int>.Current => Range[i];
+		int IEnumerator<int>.Current => _range[_i];
 
         object IEnumerator.Current => ((IEnumerator<int>)this).Current;
 
@@ -31,13 +31,13 @@ namespace C_Sharp.Language
 
 		public bool MoveNext()
 		{
-			i = i + 1;
-			return i < Range.Count;
+			_i = _i + 1;
+			return _i < _range.Count;
 		}
 
 		public void Reset()
 		{
-			i = 0;
+			_i = 0;
 		}
 		#endregion
 
@@ -61,7 +61,7 @@ namespace C_Sharp.Language
 		{
 			get
 			{
-				var x = Range.AsQueryable();
+				var x = _range.AsQueryable();
 				var y = x.Expression;
 
 				return y;
@@ -103,15 +103,15 @@ namespace C_Sharp.Language
 		#region Constructor
 		private MyIntegerRange()
 		{
-			Range = new List<int>();
-			i = 0;
+			_range = new List<int>();
+			_i = 0;
 		}
 		private MyIntegerRange(int start, int range) : this()
 		{
 			int j = start;
 			while( j <= start + range)
 			{
-				Range.Add(j++);
+				_range.Add(j++);
 			}
 		}
 

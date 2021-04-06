@@ -139,7 +139,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void XML()
+		public void TestXml()
         {
 			MyXML.Test();
         }

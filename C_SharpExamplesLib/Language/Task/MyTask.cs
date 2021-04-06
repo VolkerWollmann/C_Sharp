@@ -718,14 +718,14 @@ namespace C_Sharp.Language.Task
 
 		public static void Task_OperationCanceledException()
 		{
-			CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+			CancellationTokenSource localcancellationTokenSource = new CancellationTokenSource();
 
-			System.Threading.Tasks.Task clock = System.Threading.Tasks.Task.Run(() => Clock(cancellationTokenSource.Token));
+			System.Threading.Tasks.Task clock = System.Threading.Tasks.Task.Run(() => Clock(localcancellationTokenSource.Token));
 
 			System.Threading.Thread.Sleep(500);
 			try
 			{
-				cancellationTokenSource.Cancel();
+				localcancellationTokenSource.Cancel();
 				clock.Wait();
 			}
 			catch (AggregateException ex)

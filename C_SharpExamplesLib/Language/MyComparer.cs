@@ -8,11 +8,11 @@ namespace C_Sharp.Language
 	// #comparer #IEqualityComparer
 	public class MyIEqualityComparer : IEqualityComparer<MyIEqualityComparer>
 	{
-		public int X { get; private set; }
-		public int Y { get; private set; }
+		public int X { get; }
+		public int Y { get; }
 		bool IEqualityComparer<MyIEqualityComparer>.Equals(MyIEqualityComparer x, MyIEqualityComparer y)
 		{
-			return (x.X == y.X) && (y.X == y.Y);
+			return y != null && x != null && (x.X == y.X) && (y.X == y.Y);
 		}
 
 		int IEqualityComparer<MyIEqualityComparer>.GetHashCode(MyIEqualityComparer obj)
