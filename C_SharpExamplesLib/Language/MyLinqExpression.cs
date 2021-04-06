@@ -24,7 +24,7 @@ namespace C_Sharp.Language
             Write(parameterLessIntegerFunction.Body);
         }
 
-        private void Write(System.Linq.Expressions.BinaryExpression binaryExpression)
+        private void Write(BinaryExpression binaryExpression)
         {
             Console.WriteLine(GetSpace() + "Binary Expression:" + binaryExpression.NodeType.ToString());
             Write(binaryExpression.Left);
@@ -49,14 +49,14 @@ namespace C_Sharp.Language
             Write(unaryFunction.Body);
         }
 
-        private void Write(System.Linq.Expressions.MethodCallExpression methodCallExpression)
+        private void Write(MethodCallExpression methodCallExpression)
         {
             Console.WriteLine(GetSpace() + "MethodCall:" + methodCallExpression.NodeType.ToString());
 
             methodCallExpression.Arguments.ToList().ForEach(a => { Write(a);  });
         }
 
-        private void Write(System.Linq.Expressions.ParameterExpression parameterExpression)
+        private void Write(ParameterExpression parameterExpression)
         {
             Console.WriteLine(GetSpace() + "Parameter Expression: " +  parameterExpression.Name);
         }
@@ -102,7 +102,7 @@ namespace C_Sharp.Language
 
         private string GetSpace()
         {
-            return new String(' ', _indent).ToString();
+            return new String(' ', _indent);
         }
 
         private void WriteExpression(Expression expression)

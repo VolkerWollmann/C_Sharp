@@ -10,14 +10,14 @@ namespace C_Sharp.Language
 	public class MyDelegate
 	{
 		// #action
-		static Action<string> WriteMessage = msg => { Console.WriteLine(msg); };
+		static readonly Action<string> WriteMessage = msg => { Console.WriteLine(msg); };
 
 		// #func
-		static Func<int> funcIntDirect = () => { return 42; };
-		static Func<int, int> funcIntIntDirect = (i) => { return i; };
+		static readonly Func<int> FuncIntDirect = () => { return 42; };
+		static readonly Func<int, int> FuncIntIntDirect = (i) => { return i; };
 
 		// #predicate
-		static Predicate<int> LessThanTree = (i) => i < 3;
+		static readonly Predicate<int> LessThanTree = (i) => i < 3;
 
 		// #Func : function pointer ( and type )
 		Func<int, int> _funcIntInt;
@@ -61,9 +61,9 @@ namespace C_Sharp.Language
         {
 			WriteMessage("Hello World");
 
-			Assert.AreEqual(funcIntDirect(), 42);
+			Assert.AreEqual(FuncIntDirect(), 42);
 
-			Assert.AreEqual(funcIntIntDirect(42), 42);
+			Assert.AreEqual(FuncIntIntDirect(42), 42);
 
 			Assert.IsTrue(LessThanTree(2));
 		}
@@ -71,10 +71,9 @@ namespace C_Sharp.Language
 		public static void TestDelegateAndFunc()
 		{
 			MyDelegate myDelegate = new MyDelegate();
-			int i;
 
-			myDelegate._funcIntInt = myDelegate.Double;
-		    i = myDelegate._funcIntInt(3);
+            myDelegate._funcIntInt = myDelegate.Double;
+		    var i = myDelegate._funcIntInt(3);
 			Assert.IsTrue(i == 6);
 
 			myDelegate._funcIntInt = myDelegate.Square;
@@ -123,8 +122,7 @@ namespace C_Sharp.Language
 		public static void TestDelegateFuncInvocationList()
 		{
 			MyDelegate myDelegate = new MyDelegate();
-			int i;
-			Delegate[] fInvocationList, f2InvocationList;
+            Delegate[] fInvocationList, f2InvocationList;
 
 			myDelegate._funcIntInt = myDelegate.Double;
 			myDelegate._funcIntInt += myDelegate.Square;
@@ -134,7 +132,7 @@ namespace C_Sharp.Language
 		    fInvocationList = myDelegate._funcIntInt.GetInvocationList();
 			Assert.IsNotNull(fInvocationList);
 
-			i = myDelegate._funcIntInt(3);
+			var i = myDelegate._funcIntInt(3);
 			Assert.IsTrue(i == 9);
 
 			myDelegate._funcIntegerFunction = StaticDouble;
@@ -151,10 +149,9 @@ namespace C_Sharp.Language
 		public static void TestDelegateAssignmentByName()
 		{
 			MyDelegate myDelegate = new MyDelegate();
-			int delegateResult;
-			
-			myDelegate._delegate = Delegate.CreateDelegate(typeof(Func<int, int>), myDelegate, "Square" );
-			delegateResult = (int)myDelegate._delegate.DynamicInvoke(3);
+
+            myDelegate._delegate = Delegate.CreateDelegate(typeof(Func<int, int>), myDelegate, "Square" );
+			var delegateResult = (int)myDelegate._delegate.DynamicInvoke(3);
 			Assert.IsTrue(delegateResult == 9);
 
 			myDelegate._delegate = Delegate.CreateDelegate(typeof(Func<int, int, int>), myDelegate, "BadFunction");
@@ -187,8 +184,7 @@ namespace C_Sharp.Language
 		public static void TestDelegateAssignmentByMethodInfo()
 		{
 			MyDelegate myDelegate = new MyDelegate();
-			int delegateResult;
-			Delegate[] fRawInvocationList, fInvocationList, f2InvocationList;
+            Delegate[] fRawInvocationList, fInvocationList, f2InvocationList;
 
 			Type t = myDelegate.GetType();
 			TypeInfo ti = t.GetTypeInfo();
@@ -198,7 +194,7 @@ namespace C_Sharp.Language
 			fRawInvocationList = myDelegate._delegate.GetInvocationList();
 			Assert.IsNotNull(fRawInvocationList);
 
-			delegateResult = (int)myDelegate._delegate.DynamicInvoke(3);
+			var delegateResult = (int)myDelegate._delegate.DynamicInvoke(3);
 			Assert.IsTrue(delegateResult == 9);
 
 			myDelegate._delegate = Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, mSquare);

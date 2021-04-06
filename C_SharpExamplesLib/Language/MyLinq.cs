@@ -48,7 +48,7 @@ namespace C_Sharp.Language
 			int[] numbers = { 1, 2, 3, 4 };
 			string[] words = { "one", "two", "three" };
 
-			var numbersAndWords = numbers.Zip(words, (first, second) => first + " " + second);
+			var numbersAndWords = numbers.Zip(words, (first, second) => first + " " + second).ToList();
 
 			Assert.IsTrue(numbersAndWords.First().Contains("one"));
 			Assert.IsTrue(numbersAndWords.First().Contains("1"));
@@ -72,8 +72,9 @@ namespace C_Sharp.Language
 			int i = 42;
 			Assert.AreEqual(i, 42);
 			List<int> l = new List<int>();
+			Assert.IsNotNull(l);
 
-			i = l.FirstOrDefault<int>();
+			i = l.FirstOrDefault();
 			Assert.AreEqual(i, 0);
 
 			// #First
@@ -85,7 +86,9 @@ namespace C_Sharp.Language
 
 			// #FirstOrDefault for non value types
 			string s = null;
+			Assert.IsNull(s);
 			List<string> ls = new List<string>();
+			Assert.IsNotNull(ls);
 
 			s = ls.FirstOrDefault();
 
@@ -100,33 +103,33 @@ namespace C_Sharp.Language
 
 
 			IEnumerable<int> unionSet = setA.Union(setB);
-			Assert.IsTrue(unionSet.SequenceEqual<int>(Enumerable.Range(1, 9))); // {1,2,3,4,5,6,7,8,9}
+			Assert.IsTrue(unionSet.SequenceEqual(Enumerable.Range(1, 9))); // {1,2,3,4,5,6,7,8,9}
 
 			IEnumerable<int> intersectionSet1 = setA.Intersect(setB);
-			Assert.IsTrue(intersectionSet1.SequenceEqual<int>(Enumerable.Range(4, 3))); // {4,5,6}
+			Assert.IsTrue(intersectionSet1.SequenceEqual(Enumerable.Range(4, 3))); // {4,5,6}
 
 			IEnumerable<int> intersectionSet2 = setB.Intersect(setA);
-			Assert.IsTrue(intersectionSet2.SequenceEqual<int>(Enumerable.Range(4, 3))); // {4,5,6}
+			Assert.IsTrue(intersectionSet2.SequenceEqual(Enumerable.Range(4, 3))); // {4,5,6}
 
 			IEnumerable<int> setDifference1 = setA.Except(setB);
-			Assert.IsTrue(setDifference1.SequenceEqual<int>(Enumerable.Range(1, 3))); // {1,2,3}
+			Assert.IsTrue(setDifference1.SequenceEqual(Enumerable.Range(1, 3))); // {1,2,3}
 
 			IEnumerable<int> setDifference2 = setB.Except(setA);
-			Assert.IsTrue(setDifference2.SequenceEqual<int>(Enumerable.Range(7, 3))); // {7,8,9}
+			Assert.IsTrue(setDifference2.SequenceEqual(Enumerable.Range(7, 3))); // {7,8,9}
 		}
 
 		// #linq #selectMany
 		public static void Linq_SelectMany()
         {
-			IEnumerable<int> setA = Enumerable.Range(1, 3);
+			List<int> setA = Enumerable.Range(1, 3).ToList();
 
 			List<List<int>> result1 = setA.Select(i => new List<int> { i, i * i }).ToList();
-			Assert.IsTrue(result1[0].SequenceEqual<int>(new List<int> { 1, 1 }));
-			Assert.IsTrue(result1[1].SequenceEqual<int>(new List<int> { 2, 4 }));
-			Assert.IsTrue(result1[2].SequenceEqual<int>(new List<int> { 3, 9 }));
+			Assert.IsTrue(result1[0].SequenceEqual(new List<int> { 1, 1 }));
+			Assert.IsTrue(result1[1].SequenceEqual(new List<int> { 2, 4 }));
+			Assert.IsTrue(result1[2].SequenceEqual(new List<int> { 3, 9 }));
 
 			List<int> result2 = setA.SelectMany(i => new List<int> { i, i * i }).ToList();
-			Assert.IsTrue(result2.SequenceEqual<int>(new List<int> { 1, 1, 2, 4, 3, 9 })); 
+			Assert.IsTrue(result2.SequenceEqual(new List<int> { 1, 1, 2, 4, 3, 9 })); 
 		}
 
 		#region PLINQ
@@ -141,7 +144,7 @@ namespace C_Sharp.Language
 		// #linq #parallel  #pLinq #WithDegreeOfParallelism #rime
 		public static void TestParallelLinq()
 		{
-			var numbers = Enumerable.Range(10000000, 500);
+			var numbers = Enumerable.Range(10000000, 500).ToList();
 
 			DateTime t0 = DateTime.Now;
 			Console.WriteLine(t0.ToString(CultureInfo.InvariantCulture));
@@ -158,7 +161,7 @@ namespace C_Sharp.Language
 			DateTime t2 = DateTime.Now;
 			Console.WriteLine("Time parallel:" + t2.Subtract(t1).ToString());
 
-			numbers = ParallelEnumerable.Range(10000000, 500);
+			numbers = ParallelEnumerable.Range(10000000, 500).ToList();
 			var primes3 = numbers.AsParallel()
 				.AsOrdered()
 				.WithDegreeOfParallelism(3)

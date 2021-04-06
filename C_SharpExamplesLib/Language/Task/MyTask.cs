@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -47,10 +48,10 @@ namespace C_Sharp.Language.Task
 
 			System.Threading.Tasks.Task parentTask1 = new System.Threading.Tasks.Task(parentAction1);
 
-			Console.WriteLine("Start child task attached to parent " + DateTime.Now.ToString());
+			Console.WriteLine("Start child task attached to parent " + DateTime.Now.ToString(CultureInfo.InvariantCulture));
 			parentTask1.Start();
 			parentTask1.Wait();
-			Console.WriteLine("Start child task attached to parent " + DateTime.Now.ToString());
+			Console.WriteLine("Start child task attached to parent " + DateTime.Now.ToString(CultureInfo.InvariantCulture));
 
 			Action parentAction2 = () =>
 			{
@@ -60,10 +61,10 @@ namespace C_Sharp.Language.Task
 
 			System.Threading.Tasks.Task parentTask2 = new System.Threading.Tasks.Task(parentAction2);
 
-			Console.WriteLine("Start child task unattached to parent " + DateTime.Now.ToString());
+			Console.WriteLine("Start child task unattached to parent " + DateTime.Now.ToString(CultureInfo.InvariantCulture));
 			parentTask2.Start();
 			parentTask2.Wait();
-			Console.WriteLine("Start child task unattached to parent " + DateTime.Now.ToString());
+			Console.WriteLine("Start child task unattached to parent " + DateTime.Now.ToString(CultureInfo.InvariantCulture));
 
 		}
 
