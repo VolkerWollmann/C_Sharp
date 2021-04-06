@@ -254,9 +254,8 @@ namespace C_Sharp.Language.Task
 		static void addRangeOfValuesInterlocked(int start, int end)
 		{
 			long subTotal = 0;
-			Random random = new Random();
 
-			while (start < end)
+            while (start < end)
 			{
 				subTotal = subTotal + itemsInterlocked[start];
 				start++;
@@ -315,6 +314,7 @@ namespace C_Sharp.Language.Task
 		{
 			Console.WriteLine("Perform Something async started");
 			int result = await (Task<int>.Run(DoSomethingAsync));
+			Assert.AreEqual(result,1);
 			Console.WriteLine("Perform Something async finished");
 		}
 
@@ -346,6 +346,7 @@ namespace C_Sharp.Language.Task
 			{
 				Console.WriteLine("Perform Exception started");
 				int result = await (Task<int>.Run(RaiseException));
+				Assert.AreEqual(result, 2, "This assert must not occur");
 				Console.WriteLine("Perform Exception finished");
 			}
 			catch (Exception e)
@@ -614,8 +615,8 @@ namespace C_Sharp.Language.Task
 
 		#region deadlock
 		// #deadlock
-		static bool done1 = false;
-		static bool done2 = false;
+		static bool done1;  // by default false
+		static bool done2;
 		static object lock1 = new object();
 		static object lock2 = new object();
 
