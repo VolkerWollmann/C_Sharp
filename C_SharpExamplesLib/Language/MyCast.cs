@@ -38,14 +38,11 @@ namespace C_Sharp.Language
 			Assert.IsFalse(t5);
 
 
-            bool t7 = (x is MyCastClass1 t6);
-			Assert.IsTrue(t7);
-			
-			// not accessible
-            //Assert.IsNotNull(t6);
-            
-
-		}
+            if (x is MyCastClass1 t6)
+			{ 
+				Assert.IsNotNull(t6);
+            }
+        }
 		// #cast #int #long 
 		public static void Test()
 		{

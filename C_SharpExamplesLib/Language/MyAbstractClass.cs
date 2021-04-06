@@ -23,7 +23,7 @@ namespace C_Sharp.Language
 			Type myConcreteClassType = typeof(MyConcreteClass);
 
             void CreateAbstractClassInstanceAction() => Activator.CreateInstance(myAbstractClassType);
-            Assert.ThrowsException<MissingMethodException>((Action) CreateAbstractClassInstanceAction);
+            Assert.ThrowsException<MissingMethodException>(CreateAbstractClassInstanceAction);
 
 			// create instance of concrete class by using type information
 			object myConcreteClassInstance = Activator.CreateInstance(myConcreteClassType);

@@ -158,7 +158,7 @@ namespace UnitTest
 		}
 
         [TestMethod]
-        public void ListCapicity()
+        public void ListCapacity()
         {
             MyListTest.Test();
         }
