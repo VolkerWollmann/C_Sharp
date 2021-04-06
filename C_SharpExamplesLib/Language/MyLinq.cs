@@ -85,7 +85,7 @@ namespace C_Sharp.Language
 
 			// #FirstOrDefault for non value types
 			string s = null;
-			List<string> ls = new List<string> { };
+			List<string> ls = new List<string>();
 
 			s = ls.FirstOrDefault();
 
@@ -95,8 +95,8 @@ namespace C_Sharp.Language
 		// #linq #set operation #union #intersect #except
 		public static void Linq_SetOperation()
 		{
-			IEnumerable<int> setA = Enumerable.Range(1, 6); // {1,2,3,4,5,6}
-			IEnumerable<int> setB = Enumerable.Range(4, 6); //       {4,5,6,7,8,9}
+			List<int> setA = Enumerable.Range(1, 6).ToList(); // {1,2,3,4,5,6}
+			List<int> setB = Enumerable.Range(4, 6).ToList(); //       {4,5,6,7,8,9}
 
 
 			IEnumerable<int> unionSet = setA.Union(setB);
