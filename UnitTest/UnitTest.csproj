@@ -67,9 +67,9 @@
       <Project>{2be2a02e-14b7-4171-8af0-175b1743eb3b}</Project>
       <Name>AccessibilityProject</Name>
     </ProjectReference>
-    <ProjectReference Include="..\C_SharpAccessiblity2\AccessiblityOtherProject.csproj">
+    <ProjectReference Include="..\C_SharpAccessiblity2\AccessibilityOtherProject.csproj">
       <Project>{4c0df4c4-7fa3-41af-ba8e-51255538c0df}</Project>
-      <Name>AccessiblityOtherProject</Name>
+      <Name>AccessibilityOtherProject</Name>
     </ProjectReference>
     <ProjectReference Include="..\C_SharpExamplesLib\C_SharpExamplesLib.csproj">
       <Project>{71f15277-5f86-4de9-b9ec-e8214d414820}</Project>
