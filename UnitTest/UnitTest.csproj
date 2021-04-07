@@ -63,7 +63,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AccessibilityLibrary\AccessibilityProject.csproj">
+    <ProjectReference Include="..\AccessibilityProject\AccessibilityProject.csproj">
       <Project>{2be2a02e-14b7-4171-8af0-175b1743eb3b}</Project>
       <Name>AccessibilityProject</Name>
     </ProjectReference>

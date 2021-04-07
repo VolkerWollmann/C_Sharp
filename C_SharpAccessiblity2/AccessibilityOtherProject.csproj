@@ -54,16 +54,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AccessibilityLibrary\AccessibilityProject.csproj">
-      <Project>{2be2a02e-14b7-4171-8af0-175b1743eb3b}</Project>
-      <Name>AccessibilityProject</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\DataOtherProject.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AccessibilityProject\AccessibilityProject.csproj">
+      <Project>{2be2a02e-14b7-4171-8af0-175b1743eb3b}</Project>
+      <Name>AccessibilityProject</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
