@@ -158,6 +158,12 @@ namespace UnitTest
 		}
 
         [TestMethod]
+        public void MultipleInheritance()
+        {
+            MyMultipleInheritanceTest.Test();
+        }
+
+		[TestMethod]
         public void ListCapacity()
         {
             MyListTest.Test();

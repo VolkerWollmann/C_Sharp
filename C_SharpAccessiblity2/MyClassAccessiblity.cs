@@ -1,4 +1,5 @@
 ﻿using AccessibilityProject;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AccessibilityOtherProject
 { 
@@ -6,15 +7,18 @@ namespace AccessibilityOtherProject
 	{
 		public static void Test()
 		{
-			MyClassAccessibility mcaA = new MyClassAccessibility();
-			mcaA.MyPublicNumber = 42;
+            MyClassAccessibility mcaA = new MyClassAccessibility {MyPublicNumber = 42};
 
-			MyClassAccessibilityTestB mcaB = new MyClassAccessibilityTestB();
-			//mcaB.MyPrivateNumber = 42; //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level 
-			//mcaB.MyInternalNumber = 42; //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level 
-			//mcaB.MyProtectedNumber = 42; //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level
-			mcaB.MyPublicNumber = 42;
-			//mcaB.MyInternalProtected = 42; //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level
-		}
+            MyClassAccessibilityTestB mcaB = new MyClassAccessibilityTestB
+            {
+                MyPublicNumber = 42
+                //MyInternalNumber = 42, //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level 
+                //MyProtectedNumber = 42, //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level
+                //MyInternalProtected = 42 //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level
+            };
+
+            Assert.IsNotNull(mcaA);
+            Assert.IsNotNull(mcaB);
+        }
 	}
 } 
