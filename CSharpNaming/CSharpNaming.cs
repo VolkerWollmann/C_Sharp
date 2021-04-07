@@ -1,10 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CSharpNaming
 {
+    #region supporter classes
+    internal class UserGroup { }
+    internal class Assignment { }
+    internal class CustomerId { }
+
+    internal class HtmlHelper { }
+
+    internal class FtpTransfer { }
+
+    // ReSharper disable once InconsistentNaming
+    internal class UIControl { }
+
+    #endregion
+
     /// <summary>
     /// Naming conventions 
     /// https://www.dofactory.com/reference/csharp-coding-standards
@@ -12,14 +27,10 @@ namespace CSharpNaming
 
     #region I. PascalCasing for classes : public class NamingConvention
     #endregion
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    [SuppressMessage("ReSharper", "IdentifierTypo")]
     public class NamingConvention
     {
-        #region supporter classes
-        private class UserGroup { }
-        private class Assignment { }
-        private class CustomerId { }
-        #endregion
-
         private void FunctionII()
         {
             #region II. Do use camelCasing for local variables and method arguments: int localVariable = 1;
@@ -56,30 +67,24 @@ namespace CSharpNaming
         public const string ShippingType = "DropShip";
 
         // Avoid : Screaming caps
-        // ReSharper disable once IdentifierTypo
-        // ReSharper disable once InconsistentNaming
         public const string SHIPPINGTYPE = "DropShip";
         #endregion
 
-        private void FunctionVI()
+        [SuppressMessage("ReSharper", "JoinDeclarationAndInitializer")]
+        private void FunctionV()
         {
             #region V. Avoid using Abbreviations: UserGroup userGroup;     Avoid UserGroup usrGrp;
 
             //    Exceptions: abbreviations commonly used as names, such as Id, Xml, Ftp, Uri
 
             // Correct
-            // ReSharper disable once JoinDeclarationAndInitializer
             UserGroup userGroup;
-            // ReSharper disable once JoinDeclarationAndInitializer
             Assignment employeeAssignment;
 
             // Avoid
-            // ReSharper disable once JoinDeclarationAndInitializer
             UserGroup usrGrp;
-            // ReSharper disable once JoinDeclarationAndInitializer
             Assignment empAssignment;
             // Exceptions: Id
-            // ReSharper disable once JoinDeclarationAndInitializer
             CustomerId customerId;
 
             #endregion
@@ -101,10 +106,27 @@ namespace CSharpNaming
         }
 
         #region VI. Do use PascalCasing for abbreviations 3 characters or more (2 chars are both uppercase) : htmlHelper
-        // here for the type name
-        //HtmlHelper htmlHelper;
-        //FtpTransfer ftpTransfer;
-        //UIControl uiControl;
+
+        [SuppressMessage("ReSharper", "JoinDeclarationAndInitializer")]
+        private void FunctionVI()
+        {
+            // here for the type name
+            HtmlHelper htmlHelper;
+            FtpTransfer ftpTransfer;
+            UIControl uiControl;
+
+            #region
+            htmlHelper = new HtmlHelper();
+            Assert.IsNotNull(htmlHelper);
+            ftpTransfer = new FtpTransfer();
+            Assert.IsNotNull(ftpTransfer);
+            uiControl = new UIControl();
+            Assert.IsNotNull(uiControl);
+
+            #endregion
+
+        }
+
         #endregion
 
         #region VII. Do not use Underscores in identifiers: public DateTime clientAppointment;    Avoid: client_Appointment;
@@ -114,10 +136,7 @@ namespace CSharpNaming
         public TimeSpan TimeLeft;
 
         // Avoid
-        // ReSharper disable once InconsistentNaming
         public DateTime client_Appointment;
-
-        // ReSharper disable once InconsistentNaming
         public TimeSpan time_Left;
 
         // Exception : private static
@@ -211,12 +230,11 @@ namespace CSharpNaming
         #endregion
 
         #region XIV. Do declare all member variables at the top of a class, with static variables at the very top. 
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Local")]
+        [SuppressMessage("ReSharper", "PrivateFieldCanBeConvertedToLocalVariable")]
         private class Account
         {
-            // ReSharper disable once MemberCanBePrivate.Local
             public static string BankName="";
-
-            // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
             private static decimal _reserves;
 
             private string Number { get; }
@@ -314,6 +332,7 @@ namespace CSharpNaming
         private void ConsumeVariables()
         {
             FunctionII();
+            FunctionV();
             FunctionVI();
             Test();
 
