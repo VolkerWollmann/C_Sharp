@@ -72,8 +72,7 @@ namespace C_Sharp.Language
 
 			try
 			{
-				// badAction.Invoke();
-				badAction();
+				badAction.Invoke();
 
                 Assert.IsTrue(i > 1);
 				Assert.Fail( "If this exception occurs, then prior expected exception had not been thrown." );
