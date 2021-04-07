@@ -8,8 +8,8 @@
     <ProjectGuid>{2BE2A02E-14B7-4171-8AF0-175B1743EB3B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AccessibilityLibrary</RootNamespace>
-    <AssemblyName>AccessibilityLibrary</AssemblyName>
+    <RootNamespace>AccessibilityProject</RootNamespace>
+    <AssemblyName>AccessibilityProject</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
