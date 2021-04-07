@@ -22,8 +22,8 @@ namespace C_Sharp.Language
 			Assert.IsNotNull(mc2);
 
 			// cannot cast tp abstract class
-			Action InvalidTypeCastAction = () => { MyCastClass2 t1 = (MyCastClass2)x; Assert.IsNull(t1); };
-            Assert.ThrowsException<InvalidCastException>(InvalidTypeCastAction);
+			Action invalidTypeCastAction = () => { var t1 = (MyCastClass2)x; Assert.IsNull(t1); };
+            Assert.ThrowsException<InvalidCastException>(invalidTypeCastAction.Invoke);
 
 			// cannot cast independent classes on each another, even if they look equal
 			MyCastClass2 t2 = x as MyCastClass2;
@@ -59,7 +59,7 @@ namespace C_Sharp.Language
                 o = i;
             };
 
-            Assert.ThrowsException<InvalidCastException>(invalidBaseTypeCastAction);
+            Assert.ThrowsException<InvalidCastException>(invalidBaseTypeCastAction.Invoke);
 
 
 			MyCastClass1 myCastClass1 = new MyCastClass1();

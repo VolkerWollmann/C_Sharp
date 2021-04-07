@@ -53,7 +53,10 @@ namespace C_Sharp.Language
         {
             Console.WriteLine(GetSpace() + "MethodCall:" + methodCallExpression.NodeType.ToString());
 
-            methodCallExpression.Arguments.ToList().ForEach(a => { Write(a);  });
+            foreach (var a in methodCallExpression.Arguments.ToList())
+            {
+                Write(a);
+            }
         }
 
         private void Write(ParameterExpression parameterExpression)
@@ -113,7 +116,8 @@ namespace C_Sharp.Language
 
             if (expression is LambdaExpression lambdaExpression)
             {
-                lambdaExpression.Parameters.ToList().ForEach(p => Write(p));
+                lambdaExpression.Parameters.ToList().ForEach(Write);
+
                 Write(lambdaExpression.Body);         
             }
         }
