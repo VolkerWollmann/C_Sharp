@@ -727,7 +727,8 @@ namespace C_Sharp.Language.Task
 			try
 			{
 				localCancellationTokenSource.Cancel();
-				clock.Wait(localCancellationTokenSource.Token);
+                // ReSharper disable once MethodSupportsCancellation
+                clock.Wait();
 			}
 			catch (AggregateException ex)
 			{

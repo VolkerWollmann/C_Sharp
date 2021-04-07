@@ -20,20 +20,13 @@ namespace CSharpNaming
         private class CustomerId { }
         #endregion
 
-        private void MyFunction()
+        private void FunctionII()
         {
             #region II. Do use camelCasing for local variables and method arguments: int localVariable = 1;
             // camelCasing for local variables
             int localVariable = 1;
-            #endregion
-
-            #region
-
             // Avoid : hungarian casing for type information
             int iMaximum = 0;
-
-            if ((localVariable == 0) || (iMaximum == 0))
-                return;
             #endregion
 
             #region II. Use Verb Noun for Methods: void ClearStack()
@@ -41,6 +34,8 @@ namespace CSharpNaming
             #endregion
 
             #region
+            Assert.AreEqual(localVariable,0);
+            Assert.AreEqual(iMaximum,0);
             ClearStack();
             #endregion
         }
@@ -62,23 +57,48 @@ namespace CSharpNaming
 
         // Avoid : Screaming caps
         // ReSharper disable once IdentifierTypo
+        // ReSharper disable once InconsistentNaming
         public const string SHIPPINGTYPE = "DropShip";
         #endregion
 
-        #region V. Avoid using Abbreviations: UserGroup userGroup;     Avoid UserGroup usrGrp;
-        //    Exceptions: abbreviations commonly used as names, such as Id, Xml, Ftp, Uri
+        private void FunctionVI()
+        {
+            #region V. Avoid using Abbreviations: UserGroup userGroup;     Avoid UserGroup usrGrp;
 
-        // Correct
-        UserGroup userGroup;
-        Assignment employeeAssignment;
+            //    Exceptions: abbreviations commonly used as names, such as Id, Xml, Ftp, Uri
 
-        // Avoid
-        UserGroup usrGrp;
-        Assignment empAssignment;
+            // Correct
+            // ReSharper disable once JoinDeclarationAndInitializer
+            UserGroup userGroup;
+            // ReSharper disable once JoinDeclarationAndInitializer
+            Assignment employeeAssignment;
 
-        // Exceptions: Id
-        CustomerId customerId;
-        #endregion
+            // Avoid
+            // ReSharper disable once JoinDeclarationAndInitializer
+            UserGroup usrGrp;
+            // ReSharper disable once JoinDeclarationAndInitializer
+            Assignment empAssignment;
+            // Exceptions: Id
+            // ReSharper disable once JoinDeclarationAndInitializer
+            CustomerId customerId;
+
+            #endregion
+
+            #region
+            userGroup = new UserGroup();
+            usrGrp = null;
+            employeeAssignment = new Assignment();
+            empAssignment = null;
+            customerId = new CustomerId();
+
+            Assert.IsNotNull(userGroup);
+            Assert.IsNull(usrGrp);
+            Assert.IsNotNull(employeeAssignment);
+            Assert.IsNull(empAssignment);
+            Assert.IsNotNull(customerId);
+            #endregion
+
+        }
 
         #region VI. Do use PascalCasing for abbreviations 3 characters or more (2 chars are both uppercase) : htmlHelper
         // here for the type name
@@ -94,7 +114,10 @@ namespace CSharpNaming
         public TimeSpan TimeLeft;
 
         // Avoid
+        // ReSharper disable once InconsistentNaming
         public DateTime client_Appointment;
+
+        // ReSharper disable once InconsistentNaming
         public TimeSpan time_Left;
 
         // Exception : private static
@@ -125,6 +148,7 @@ namespace CSharpNaming
             string timeSheet = "";
             bool isCompleted = false;
 
+            #region 
             Assert.IsNotNull(firstName);
             Assert.AreEqual(lastIndex,0);
 
@@ -138,8 +162,9 @@ namespace CSharpNaming
           
             Assert.AreEqual(index,100);
             Assert.AreEqual(timeSheet,"");
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
             Assert.AreEqual(isCompleted, false);
-
+            #endregion
 
         }
         #endregion
@@ -190,8 +215,9 @@ namespace CSharpNaming
         {
             // ReSharper disable once MemberCanBePrivate.Local
             public static string BankName="";
-            // ReSharper disable once NotAccessedField.Local
-            private static decimal Reserves;
+
+            // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
+            private static decimal _reserves;
 
             private string Number { get; }
             private DateTime DateOpened { get; }
@@ -204,8 +230,8 @@ namespace CSharpNaming
             {
                 BankName = "-";
                 Assert.AreEqual(BankName,"-");
-                Reserves = 0;
-                Assert.AreEqual(Reserves,0);
+                _reserves = 0;
+                Assert.AreEqual(_reserves,0);
                 Number = "1";
                 string t = Number;
                 Assert.AreEqual(t,"1");
@@ -287,7 +313,8 @@ namespace CSharpNaming
 
         private void ConsumeVariables()
         {
-            MyFunction();
+            FunctionII();
+            FunctionVI();
             Test();
 
             Account account = new Account();
@@ -356,16 +383,6 @@ namespace CSharpNaming
             this.client_Appointment = DateTime.Now;
             this.time_Left = TimeSpan.Zero;
 
-            userGroup = new UserGroup();
-            usrGrp = null;
-            employeeAssignment = new Assignment();
-            empAssignment = null;
-            customerId = new CustomerId();
-
-            if ( (userGroup == null) || (usrGrp == null ) || (employeeAssignment == null) ||
-                 (empAssignment == null) || ( customerId == null ) )
-                return;
-            
             if ((counter == 0) || (iCounter == 0))
                 return;
 
