@@ -26,7 +26,8 @@ namespace C_Sharp.Language
 			string e3 = e1 + e2;
 			Assert.AreEqual(e3, "Donkey" );
 
-			string s = (0 < 1) ? "always" : "never";
+            // ReSharper disable once UnreachableCode
+            string s = (0 < 1) ? "always" : "never";
 			Assert.IsTrue(s == "always");
 		}
 
