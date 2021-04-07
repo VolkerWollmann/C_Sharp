@@ -214,7 +214,7 @@ namespace C_Sharp.Language.Thread
 			System.Threading.Thread tickThread = new System.Threading.Thread(() =>
 			{
 				int i = 0;
-				while (true)
+				while (i<1000000000)
 				{
 					Console.WriteLine("Tick" + i++.ToString());
 					System.Threading.Thread.Sleep(1000);

@@ -122,14 +122,13 @@ namespace C_Sharp.Language
 		public static void TestDelegateFuncInvocationList()
 		{
 			MyDelegate myDelegate = new MyDelegate();
-            Delegate[] fInvocationList, f2InvocationList;
 
-			myDelegate._funcIntInt = myDelegate.Double;
+            myDelegate._funcIntInt = myDelegate.Double;
 			myDelegate._funcIntInt += myDelegate.Square;
 
 			// invocationList : normally 0 or 1 Element, but more functions can be assigned
 			// last wins
-		    fInvocationList = myDelegate._funcIntInt.GetInvocationList();
+		    var fInvocationList = myDelegate._funcIntInt.GetInvocationList();
 			Assert.IsNotNull(fInvocationList);
 
 			var i = myDelegate._funcIntInt(3);
@@ -138,7 +137,7 @@ namespace C_Sharp.Language
 			myDelegate._funcIntegerFunction = StaticDouble;
 			myDelegate._funcIntegerFunction += myDelegate.Square;
 
-			f2InvocationList = myDelegate._funcIntegerFunction.GetInvocationList();
+			var f2InvocationList = myDelegate._funcIntegerFunction.GetInvocationList();
 			Assert.IsNotNull(f2InvocationList);
 
 			i = myDelegate._funcIntegerFunction(3);
@@ -184,21 +183,20 @@ namespace C_Sharp.Language
 		public static void TestDelegateAssignmentByMethodInfo()
 		{
 			MyDelegate myDelegate = new MyDelegate();
-            Delegate[] fRawInvocationList, fInvocationList, f2InvocationList;
 
-			Type t = myDelegate.GetType();
+            Type t = myDelegate.GetType();
 			TypeInfo ti = t.GetTypeInfo();
 			MethodInfo mSquare = ti.GetDeclaredMethod("Square");
 
 			myDelegate._delegate = Delegate.CreateDelegate(typeof(Func<int,int>), myDelegate, mSquare);
-			fRawInvocationList = myDelegate._delegate.GetInvocationList();
+			var fRawInvocationList = myDelegate._delegate.GetInvocationList();
 			Assert.IsNotNull(fRawInvocationList);
 
 			var delegateResult = (int)myDelegate._delegate.DynamicInvoke(3);
 			Assert.IsTrue(delegateResult == 9);
 
 			myDelegate._delegate = Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, mSquare);
-			fInvocationList = myDelegate._delegate.GetInvocationList();
+			var fInvocationList = myDelegate._delegate.GetInvocationList();
 			Assert.IsNotNull(fInvocationList);
 
 			delegateResult = (int)myDelegate._delegate.DynamicInvoke(3);
@@ -207,7 +205,7 @@ namespace C_Sharp.Language
 			MethodInfo mDouble = ti.GetDeclaredMethod("Double");
 			myDelegate._delegate = Delegate.Combine(myDelegate._delegate,
 				Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, mDouble));
-			f2InvocationList = myDelegate._delegate.GetInvocationList();
+			var f2InvocationList = myDelegate._delegate.GetInvocationList();
             Assert.IsNotNull(f2InvocationList);
 
 			delegateResult = (int)myDelegate._delegate.DynamicInvoke(3);

@@ -75,7 +75,7 @@ namespace C_Sharp.Language.Task
 		// make an array that holds the values 0 to 50000000
 
 		static long _sharedTotalThreadSafetyViolation;
-		static int[] itemsThreadSafetyViolation = Enumerable.Range(0, 50000001).ToArray();
+		static readonly int[] itemsThreadSafetyViolation = Enumerable.Range(0, 50000001).ToArray();
 		static void AddRangeOfValuesThreadSafeViolation(int start, int end)
 		{
 			while (start < end)
@@ -123,9 +123,9 @@ namespace C_Sharp.Language.Task
 		static long _sharedTotal;
 
 		// make an array that holds the values 0 to 50000000
-		static int[] itemsObjectLock = Enumerable.Range(0, 50000001).ToArray();
+		static readonly int[] itemsObjectLock = Enumerable.Range(0, 50000001).ToArray();
 
-		static object sharedTotalLock = new object();
+		static readonly object sharedTotalLock = new object();
 
 		static void AddRangeOfValuesObjectLock(int start, int end)
 		{
@@ -179,9 +179,9 @@ namespace C_Sharp.Language.Task
 		static long _sharedTotalMonitor;
 
 		// make an array that holds the values 0 to 50000000
-		static int[] itemsMonitor = Enumerable.Range(0, 50000001).ToArray();
+		static readonly int[] itemsMonitor = Enumerable.Range(0, 50000001).ToArray();
 
-		static object sharedTotalMonitorLock = new object();
+		static readonly object sharedTotalMonitorLock = new object();
 
 		static void AddRangeOfValuesMonitor(int start, int end)
 		{
@@ -250,7 +250,7 @@ namespace C_Sharp.Language.Task
 		static long _sharedTotalInterlocked;
 
 		// make an array that holds the values 0 to 50000000
-		static int[] itemsInterlocked = Enumerable.Range(0, 50000001).ToArray();
+		static readonly int[] itemsInterlocked = Enumerable.Range(0, 50000001).ToArray();
 
 		static void AddRangeOfValuesInterlocked(int start, int end)
 		{
@@ -314,7 +314,7 @@ namespace C_Sharp.Language.Task
 		private static async void PerformSomethingAsync()
 		{
 			Console.WriteLine("Perform Something async started");
-			int result = await (Task<int>.Run(DoSomethingAsync));
+			int result = await (System.Threading.Tasks.Task.Run(DoSomethingAsync));
 			Assert.AreEqual(result,1);
 			Console.WriteLine("Perform Something async finished");
 		}
@@ -346,7 +346,7 @@ namespace C_Sharp.Language.Task
 			try
 			{
 				Console.WriteLine("Perform Exception started");
-				int result = await (Task<int>.Run(RaiseException));
+				int result = await (System.Threading.Tasks.Task.Run(RaiseException));
 				Assert.AreEqual(result, 2, "This assert must not occur");
 				Console.WriteLine("Perform Exception finished");
 			}
@@ -394,7 +394,7 @@ namespace C_Sharp.Language.Task
 
 			foreach (KeyValuePair<string, int> k in d.ToList())
 			{
-				tasks.Add(Task<int>.Run(DoSomethingAsyncParallel(k.Key, k.Value)));
+				tasks.Add(System.Threading.Tasks.Task.Run(DoSomethingAsyncParallel(k.Key, k.Value)));
 			}
 			await System.Threading.Tasks.Task.WhenAll(tasks);
 			Console.WriteLine("Perform Something Async Parallel finished");
@@ -616,8 +616,8 @@ namespace C_Sharp.Language.Task
 		// #deadlock
 		static bool _done1;  // by default false
 		static bool _done2;
-		static object lock1 = new object();
-		static object lock2 = new object();
+		static readonly object lock1 = new object();
+		static readonly object lock2 = new object();
 
 		static void Method1()
 		{
@@ -678,7 +678,7 @@ namespace C_Sharp.Language.Task
 
 		#region cancellation
 		// #CancellationToken
-		static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+		static readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
 		static void Clock()
 		{
@@ -721,13 +721,13 @@ namespace C_Sharp.Language.Task
 		{
 			CancellationTokenSource localCancellationTokenSource = new CancellationTokenSource();
 
-			System.Threading.Tasks.Task clock = System.Threading.Tasks.Task.Run(() => Clock(localCancellationTokenSource.Token));
+			System.Threading.Tasks.Task clock = System.Threading.Tasks.Task.Run(() => Clock(localCancellationTokenSource.Token), localCancellationTokenSource.Token);
 
 			System.Threading.Thread.Sleep(500);
 			try
 			{
 				localCancellationTokenSource.Cancel();
-				clock.Wait();
+				clock.Wait(localCancellationTokenSource.Token);
 			}
 			catch (AggregateException ex)
 			{
