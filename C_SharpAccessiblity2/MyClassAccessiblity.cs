@@ -1,6 +1,6 @@
-﻿using AccessibilityLibrary;
+﻿using AccessibilityProject;
 
-namespace C_SharpAccessibility2
+namespace AccessibilityOtherProject
 { 
 	public static class MyClassAccessibilityTest
 	{
