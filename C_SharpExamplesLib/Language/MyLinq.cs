@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+
 namespace C_Sharp.Language
 {
-	public class MyLinq
+	[SuppressMessage("ReSharper", "ConvertToLocalFunction")]
+    [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
+    public class MyLinq
 	{
 		// #linq #range #where #take
 		public static void List_Range_Where_Take()

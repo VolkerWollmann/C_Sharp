@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
@@ -9,21 +10,23 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language.Task
 {
-	public class MyTask
+	[SuppressMessage("ReSharper", "ConvertToLocalFunction")]
+    [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
+    public class MyTask
 	{
 		#region Task Continue with
 		// #task #ContinueWith #TaskContinuationOptions
 		public static void TestContinueWith()
 		{
-			Func<int> ConstFunctionEight = () => 8;
-			Func<object, int> ConstFunction = (n) => Convert.ToInt32(n);
+			Func<int> constFunctionEight = () => 8;
+			Func<object, int> constFunction = (n) => Convert.ToInt32(n);
 
 			//Task<int> myTask = new Task<int>(ConstFunctionEight);
-            int eight = ConstFunctionEight();
-			Task<int> myTask = new Task<int>(ConstFunction, eight);
+            int eight = constFunctionEight();
+			Task<int> myTask = new Task<int>(constFunction, eight);
 
-			Func<Task<int>, int> MultiplyByTwo = (previous) => previous.Result * 2;
-			Task<int> myTask2 = myTask.ContinueWith(MultiplyByTwo, TaskContinuationOptions.OnlyOnRanToCompletion);
+			Func<Task<int>, int> multiplyByTwo = (previous) => previous.Result * 2;
+			Task<int> myTask2 = myTask.ContinueWith(multiplyByTwo, TaskContinuationOptions.OnlyOnRanToCompletion);
 
 			myTask.Start();
 			myTask.Wait();
@@ -75,12 +78,12 @@ namespace C_Sharp.Language.Task
 		// make an array that holds the values 0 to 50000000
 
 		static long _sharedTotalThreadSafetyViolation;
-		static readonly int[] itemsThreadSafetyViolation = Enumerable.Range(0, 50000001).ToArray();
+		static readonly int[] ItemsThreadSafetyViolation = Enumerable.Range(0, 50000001).ToArray();
 		static void AddRangeOfValuesThreadSafeViolation(int start, int end)
 		{
 			while (start < end)
 			{
-				_sharedTotalThreadSafetyViolation = _sharedTotalThreadSafetyViolation + itemsThreadSafetyViolation[start];
+				_sharedTotalThreadSafetyViolation = _sharedTotalThreadSafetyViolation + ItemsThreadSafetyViolation[start];
 				start++;
 			}
 		}
@@ -95,12 +98,12 @@ namespace C_Sharp.Language.Task
 				int rangeStart = 0;
 
 				_sharedTotalThreadSafetyViolation = 0;
-				while (rangeStart < itemsThreadSafetyViolation.Length)
+				while (rangeStart < ItemsThreadSafetyViolation.Length)
 				{
 					int rangeEnd = rangeStart + rangeSize;
 
-					if (rangeEnd > itemsThreadSafetyViolation.Length)
-						rangeEnd = itemsThreadSafetyViolation.Length;
+					if (rangeEnd > ItemsThreadSafetyViolation.Length)
+						rangeEnd = ItemsThreadSafetyViolation.Length;
 
 					// create local copies of the parameters
 					int rs = rangeStart;
@@ -123,9 +126,9 @@ namespace C_Sharp.Language.Task
 		static long _sharedTotal;
 
 		// make an array that holds the values 0 to 50000000
-		static readonly int[] itemsObjectLock = Enumerable.Range(0, 50000001).ToArray();
+		static readonly int[] ItemsObjectLock = Enumerable.Range(0, 50000001).ToArray();
 
-		static readonly object sharedTotalLock = new object();
+		static readonly object SharedTotalLock = new object();
 
 		static void AddRangeOfValuesObjectLock(int start, int end)
 		{
@@ -133,10 +136,10 @@ namespace C_Sharp.Language.Task
 
 			while (start < end)
 			{
-				subTotal = subTotal + itemsObjectLock[start];
+				subTotal = subTotal + ItemsObjectLock[start];
 				start++;
 			}
-			lock (sharedTotalLock)
+			lock (SharedTotalLock)
 			{
 				_sharedTotal = _sharedTotal + subTotal;
 			}
@@ -153,12 +156,12 @@ namespace C_Sharp.Language.Task
 			int rangeSize = 1000000;
 			int rangeStart = 0;
 
-			while (rangeStart < itemsObjectLock.Length)
+			while (rangeStart < ItemsObjectLock.Length)
 			{
 				int rangeEnd = rangeStart + rangeSize;
 
-				if (rangeEnd > itemsObjectLock.Length)
-					rangeEnd = itemsObjectLock.Length;
+				if (rangeEnd > ItemsObjectLock.Length)
+					rangeEnd = ItemsObjectLock.Length;
 
 				// create local copies of the parameters
 				int rs = rangeStart;
@@ -179,9 +182,9 @@ namespace C_Sharp.Language.Task
 		static long _sharedTotalMonitor;
 
 		// make an array that holds the values 0 to 50000000
-		static readonly int[] itemsMonitor = Enumerable.Range(0, 50000001).ToArray();
+		static readonly int[] ItemsMonitor = Enumerable.Range(0, 50000001).ToArray();
 
-		static readonly object sharedTotalMonitorLock = new object();
+		static readonly object SharedTotalMonitorLock = new object();
 
 		static void AddRangeOfValuesMonitor(int start, int end)
 		{
@@ -190,19 +193,19 @@ namespace C_Sharp.Language.Task
 
 			while (start < end)
 			{
-				subTotal = subTotal + itemsMonitor[start];
+				subTotal = subTotal + ItemsMonitor[start];
 				start++;
 			}
 
 			bool done = false;
 			while (!done)
 			{
-				if (Monitor.TryEnter(sharedTotalMonitorLock))
+				if (Monitor.TryEnter(SharedTotalMonitorLock))
 				{
 					_sharedTotalMonitor = _sharedTotalMonitor + subTotal;
 					System.Threading.Thread.Sleep(random.Next(0, 10));
 					Console.WriteLine($"{System.Threading.Tasks.Task.CurrentId} : Adding subtotal ");
-					Monitor.Exit(sharedTotalMonitorLock);
+					Monitor.Exit(SharedTotalMonitorLock);
 					done = true;
 				}
 				else
@@ -224,12 +227,12 @@ namespace C_Sharp.Language.Task
 			int rangeSize = 2000000;
 			int rangeStart = 0;
 
-			while (rangeStart < itemsMonitor.Length)
+			while (rangeStart < ItemsMonitor.Length)
 			{
 				int rangeEnd = rangeStart + rangeSize;
 
-				if (rangeEnd > itemsMonitor.Length)
-					rangeEnd = itemsMonitor.Length;
+				if (rangeEnd > ItemsMonitor.Length)
+					rangeEnd = ItemsMonitor.Length;
 
 				// create local copies of the parameters
 				int rs = rangeStart;
@@ -250,7 +253,7 @@ namespace C_Sharp.Language.Task
 		static long _sharedTotalInterlocked;
 
 		// make an array that holds the values 0 to 50000000
-		static readonly int[] itemsInterlocked = Enumerable.Range(0, 50000001).ToArray();
+		static readonly int[] ItemsInterlocked = Enumerable.Range(0, 50000001).ToArray();
 
 		static void AddRangeOfValuesInterlocked(int start, int end)
 		{
@@ -258,7 +261,7 @@ namespace C_Sharp.Language.Task
 
             while (start < end)
 			{
-				subTotal = subTotal + itemsInterlocked[start];
+				subTotal = subTotal + ItemsInterlocked[start];
 				start++;
 			}
 
@@ -278,12 +281,12 @@ namespace C_Sharp.Language.Task
 			int rangeSize = 2000000;
 			int rangeStart = 0;
 
-			while (rangeStart < itemsInterlocked.Length)
+			while (rangeStart < ItemsInterlocked.Length)
 			{
 				int rangeEnd = rangeStart + rangeSize;
 
-				if (rangeEnd > itemsInterlocked.Length)
-					rangeEnd = itemsInterlocked.Length;
+				if (rangeEnd > ItemsInterlocked.Length)
+					rangeEnd = ItemsInterlocked.Length;
 
 				// create local copies of the parameters
 				int rs = rangeStart;
@@ -387,12 +390,9 @@ namespace C_Sharp.Language.Task
 		{
 			var tasks = new List<Task<int>>();
 			Console.WriteLine("Perform Something Async Parallel started");
-			Dictionary<string, int> d = new Dictionary<string, int>();
-			d.Add("A", 300);
-			d.Add("B", 200);
-			d.Add("C", 100);
+            Dictionary<string, int> d = new Dictionary<string, int> {{"A", 300}, {"B", 200}, {"C", 100}};
 
-			foreach (KeyValuePair<string, int> k in d.ToList())
+            foreach (KeyValuePair<string, int> k in d.ToList())
 			{
 				tasks.Add(System.Threading.Tasks.Task.Run(DoSomethingAsyncParallel(k.Key, k.Value)));
 			}
@@ -616,17 +616,17 @@ namespace C_Sharp.Language.Task
 		// #deadlock
 		static bool _done1;  // by default false
 		static bool _done2;
-		static readonly object lock1 = new object();
-		static readonly object lock2 = new object();
+		static readonly object Lock1 = new object();
+		static readonly object Lock2 = new object();
 
 		static void Method1()
 		{
-			lock (lock1)
+			lock (Lock1)
 			{
 				Console.WriteLine("Method 1 got lock 1");
 				System.Threading.Thread.Sleep(500);
 				Console.WriteLine("Method 1 waiting for lock 2");
-				lock (lock2)
+				lock (Lock2)
 				{
 					_done1 = true;
 					Console.WriteLine("Method 1 got lock 2");
@@ -638,12 +638,12 @@ namespace C_Sharp.Language.Task
 
 		static void Method2()
 		{
-			lock (lock2)
+			lock (Lock2)
 			{
 				Console.WriteLine("Method 2 got lock 2");
 				System.Threading.Thread.Sleep(500);
 				Console.WriteLine("Method 2 waiting for lock 1");
-				lock (lock1)
+				lock (Lock1)
 				{
 					_done2 = true;
 					Console.WriteLine("Method 2 got lock 1");
@@ -678,11 +678,11 @@ namespace C_Sharp.Language.Task
 
 		#region cancellation
 		// #CancellationToken
-		static readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+		static readonly CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
 
 		static void Clock()
 		{
-			while (!cancellationTokenSource.IsCancellationRequested)
+			while (!CancellationTokenSource.IsCancellationRequested)
 			{
 				Console.WriteLine("Tick");
 				System.Threading.Thread.Sleep(500);
@@ -695,7 +695,7 @@ namespace C_Sharp.Language.Task
 			Console.WriteLine("Cancel clock after random time");
 			Random random = new Random();
 			System.Threading.Thread.Sleep(random.Next(1000, 3000));
-			cancellationTokenSource.Cancel();
+			CancellationTokenSource.Cancel();
 			Console.WriteLine("Clock stopped");
 
 		}

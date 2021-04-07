@@ -1,9 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
 {
 	// #Operator ?. ??
-	public class MyOperator
+	[SuppressMessage("ReSharper", "ConstantNullCoalescingCondition")]
+    [SuppressMessage("ReSharper", "ExpressionIsAlwaysNull")]
+    [SuppressMessage("ReSharper", "ConstantConditionalAccessQualifier")]
+    public class MyOperator
 	{
 		public string Donkey = "Donkey";
 		private static void QuestionMarkOperator()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -7,7 +8,10 @@ namespace C_Sharp.Language
 	/// <summary>
 	/// #delegate
 	/// </summary>
-	public class MyDelegate
+	[SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
+    [SuppressMessage("ReSharper", "ConvertToLambdaExpression")]
+    [SuppressMessage("ReSharper", "ConvertToLocalFunction")]
+    public class MyDelegate
 	{
 		// #action
 		static readonly Action<string> WriteMessage = msg => { Console.WriteLine(msg); };
