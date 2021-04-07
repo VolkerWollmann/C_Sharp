@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C_SharpExampleProgram", "C_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C_SharpExamplesLib", "C_SharpExamplesLib\C_SharpExamplesLib.csproj", "{71F15277-5F86-4DE9-B9EC-E8214D414820}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessibilityOtherProject", "C_SharpAccessiblity2\AccessibilityOtherProject.csproj", "{4C0DF4C4-7FA3-41AF-BA8E-51255538C0DF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{822B9D4A-5E74-4A32-960C-2B3D7F9FEEEA}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -28,6 +26,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpNaming", "CSharpNamin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessibilityProject", "AccessibilityProject\AccessibilityProject.csproj", "{2BE2A02E-14B7-4171-8AF0-175B1743EB3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessibilityOtherProject", "AccessibilityOtherProject\AccessibilityOtherProject.csproj", "{4C0DF4C4-7FA3-41AF-BA8E-51255538C0DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,10 +42,6 @@ Global
 		{71F15277-5F86-4DE9-B9EC-E8214D414820}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71F15277-5F86-4DE9-B9EC-E8214D414820}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71F15277-5F86-4DE9-B9EC-E8214D414820}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C0DF4C4-7FA3-41AF-BA8E-51255538C0DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C0DF4C4-7FA3-41AF-BA8E-51255538C0DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C0DF4C4-7FA3-41AF-BA8E-51255538C0DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C0DF4C4-7FA3-41AF-BA8E-51255538C0DF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FB47993A-3F35-4755-B856-95DE7C3CD80D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FB47993A-3F35-4755-B856-95DE7C3CD80D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB47993A-3F35-4755-B856-95DE7C3CD80D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -66,6 +62,10 @@ Global
 		{2BE2A02E-14B7-4171-8AF0-175B1743EB3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BE2A02E-14B7-4171-8AF0-175B1743EB3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BE2A02E-14B7-4171-8AF0-175B1743EB3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C0DF4C4-7FA3-41AF-BA8E-51255538C0DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C0DF4C4-7FA3-41AF-BA8E-51255538C0DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C0DF4C4-7FA3-41AF-BA8E-51255538C0DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C0DF4C4-7FA3-41AF-BA8E-51255538C0DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
