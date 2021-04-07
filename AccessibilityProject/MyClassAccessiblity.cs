@@ -49,12 +49,14 @@ namespace AccessibilityProject
     {
         public static void Test()
         {
-            MyClassAccessibilityTestB mca2 = new MyClassAccessibilityTestB();
-            // mca2.MyPrivateNumber = 42; //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level
-            mca2.MyInternalNumber = 42;
-            mca2.MyProtectedNumber = 42;
-            mca2.MyPublicNumber = 42;
-            mca2.MyInternalProtected = 42;
+            MyClassAccessibilityTestB mca2 = new MyClassAccessibilityTestB
+            {
+                MyInternalNumber = 42, MyProtectedNumber = 42, MyPublicNumber = 42, MyInternalProtected = 42
+                //, _myPrivateNumber = 42 //Error   CS0122  'MyClassAccessibility._myPrivateNumber' is inaccessible due to its protection level AccessibilityProject    E:\C_Sharp\C_Sharp\AccessibilityProject\MyClassAccessibility.cs  55  Active
+
+            };
+            
+            Assert.IsNotNull(mca2);
         }
     }
 
@@ -62,12 +64,15 @@ namespace AccessibilityProject
     {
         public static void Test()
         {
-            MyClassAccessibilityTestB mcaB = new MyClassAccessibilityTestB();
-            //mcaB.MyPrivateNumber = 42; //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level 
-            mcaB.MyInternalNumber = 42;
-            //mcaB.MyProtectedNumber = 42;  //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level
-            mcaB.MyPublicNumber = 42;
-            mcaB.MyInternalProtected = 42;
+            MyClassAccessibilityTestB mcaB = new MyClassAccessibilityTestB
+            {
+                MyInternalNumber = 42, MyPublicNumber = 42, MyInternalProtected = 42
+
+                //, MyPrivateNumber = 42,    //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level 
+                //, MyProtectedNumber = 42,  //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level
+            };
+
+            Assert.IsNotNull(mcaB);
         }
     }
 

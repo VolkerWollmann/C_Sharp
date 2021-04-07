@@ -127,6 +127,7 @@ namespace C_Sharp.Language
 			};
 
 			// Sort array with #Comparison
+            // ReSharper disable once ConvertToLocalFunction
             Comparison<MyIComparable> comparison = (i1, i2) => -i2.Version.CompareTo(i1.Version);
 			Array.Sort(a, comparison);
 

@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
 {
-    public class MyXML
+    public class MyXml
     {
         // linq to xml
         private static XElement Create_MyAnimals_as_XElement_1()
@@ -17,11 +17,11 @@ namespace C_Sharp.Language
         private static XElement Create_MyAnimals_as_XElement_2()
         {
             XElement myAnimals = new XElement("My_Animals");
-            XElement Donkey = new XElement("Animal_1", "Donkey");
-            XElement Dog = new XElement("Animal_2", "Dog");
+            XElement donkey = new XElement("Animal_1", "Donkey");
+            XElement dog = new XElement("Animal_2", "Dog");
 
-            myAnimals.Add(Donkey);
-            myAnimals.Add(Dog);
+            myAnimals.Add(donkey);
+            myAnimals.Add(dog);
 
             return myAnimals;
         }
@@ -33,26 +33,26 @@ namespace C_Sharp.Language
             
             XmlElement myAnimals = xmlDocument.CreateElement("My_Animals");
             
-            XmlElement Donkey = xmlDocument.CreateElement("Animal_1");
-            Donkey.InnerText  = "Donkey";
-            myAnimals.AppendChild(Donkey);
+            XmlElement donkey = xmlDocument.CreateElement("Animal_1");
+            donkey.InnerText  = "Donkey";
+            myAnimals.AppendChild(donkey);
 
-            XmlElement Dog = xmlDocument.CreateElement("Animal_2");
-            Dog.InnerText = "Dog";
-            myAnimals.AppendChild(Dog);
+            XmlElement dog = xmlDocument.CreateElement("Animal_2");
+            dog.InnerText = "Dog";
+            myAnimals.AppendChild(dog);
 
             return myAnimals;
         }
         public static void Test()
         {
-            XElement myAnimals_as_XElement_1 = Create_MyAnimals_as_XElement_1();
-            XElement myAnimals_as_XElement_2 = Create_MyAnimals_as_XElement_2();
-            Assert.AreEqual(myAnimals_as_XElement_1.ToString(), myAnimals_as_XElement_2.ToString());
+            XElement myAnimalsAsXElement1 = Create_MyAnimals_as_XElement_1();
+            XElement myAnimalsAsXElement2 = Create_MyAnimals_as_XElement_2();
+            Assert.AreEqual(myAnimalsAsXElement1.ToString(), myAnimalsAsXElement2.ToString());
 
-            XmlElement myAnimals_as_XMLElement = Create_MyAnimals_as_XmlElement();
+            XmlElement myAnimalsAsXmlElement = Create_MyAnimals_as_XmlElement();
 
-            string s1 = myAnimals_as_XElement_1.ToString().Replace("\r\n", "").Replace("  ","");
-            string s2 = myAnimals_as_XMLElement.OuterXml;
+            string s1 = myAnimalsAsXElement1.ToString().Replace("\r\n", "").Replace("  ","");
+            string s2 = myAnimalsAsXmlElement.OuterXml;
             Assert.AreEqual(s1, s2);
         }
     }

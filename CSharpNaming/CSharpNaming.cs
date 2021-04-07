@@ -61,6 +61,7 @@ namespace CSharpNaming
         public const string ShippingType = "DropShip";
 
         // Avoid : Screaming caps
+        // ReSharper disable once IdentifierTypo
         public const string SHIPPINGTYPE = "DropShip";
         #endregion
 
@@ -163,6 +164,7 @@ namespace CSharpNaming
         public interface IShapeCollection
         {
         }
+        // ReSharper disable once IdentifierTypo
         public interface IGroupable
         {
         }
@@ -230,6 +232,7 @@ namespace CSharpNaming
 
         // Exception
         [Flags]
+        // ReSharper disable once IdentifierTypo
         public enum Dockings
         {
             None = 0,

@@ -11,7 +11,7 @@ namespace C_Sharp.Language
 
         private string GetSpace()
         {
-            return new String(' ', _indent).ToString();
+            return new string(' ', _indent);
         }
 
         private void Write(ConstantExpression constantExpression)

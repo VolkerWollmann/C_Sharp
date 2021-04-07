@@ -142,7 +142,7 @@ namespace UnitTest
 		[TestMethod]
 		public void TestXml()
         {
-			MyXML.Test();
+			MyXml.Test();
         }
 
 		[TestMethod]

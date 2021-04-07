@@ -36,7 +36,8 @@ namespace C_Sharp.Language
 			}
             
 			// check type with #is
-			bool t5 = x is MyCastClass2;
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+            bool t5 = x is MyCastClass2;
 			Assert.IsFalse(t5);
 
 

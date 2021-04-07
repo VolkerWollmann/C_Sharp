@@ -88,34 +88,34 @@ namespace C_Sharp.Language.Thread
 		// A static field marked with ThreadStaticAttribute is not shared between threads.
 		// Each executing thread has a separate instance of the field with random value
 		[ThreadStatic]
-		private static int ThreadStaticLocalState;
+		private static int _threadStaticLocalState;
 
 		// common field for all threads : might fail if threads are fast
-		private static int LocalState;
+		private static int _localState;
 
 		// common field for all threads : will be treated by atomic operation
-		private static int AtomicLocalState;
+		private static int _atomicLocalState;
 
 		// common field for all threads : will be treated by semaphore
-		private static Semaphore Semaphore;
-		private static int SemaphoreProtectedLocalState;
+		private static Semaphore _semaphore;
+		private static int _semaphoreProtectedLocalState;
 
 		private static void DoWork(object state)
 		{
 			Console.WriteLine("Doing work: {0}", state);
 			
-			LocalState += 1;
-			ThreadStaticLocalState += 1;
-			Interlocked.Increment(ref AtomicLocalState);
+			_localState += 1;
+			_threadStaticLocalState += 1;
+			Interlocked.Increment(ref _atomicLocalState);
 
-			Semaphore.WaitOne();
+			_semaphore.WaitOne();
 			Console.WriteLine("Entering");
-			SemaphoreProtectedLocalState += 1;
+			_semaphoreProtectedLocalState += 1;
 			Console.WriteLine("Leaving");
-			Semaphore.Release();
+			_semaphore.Release();
 
-			Console.WriteLine($"Local: {LocalState} AtomicLocal: {AtomicLocalState} ThreadStatic Local : {ThreadStaticLocalState} Semaphore Local: {SemaphoreProtectedLocalState} ",
-				ThreadStaticLocalState, LocalState, AtomicLocalState, SemaphoreProtectedLocalState);
+			Console.WriteLine($"Local: {_localState} AtomicLocal: {_atomicLocalState} ThreadStatic Local : {_threadStaticLocalState} Semaphore Local: {_semaphoreProtectedLocalState} ",
+				_threadStaticLocalState, _localState, _atomicLocalState, _semaphoreProtectedLocalState);
 			System.Threading.Thread.Sleep(500);
 			Console.WriteLine("Work finished: {0}", state);
 		}
@@ -142,11 +142,11 @@ namespace C_Sharp.Language.Thread
 
 		public static void TestThreadStaticData()
 		{
-			ThreadStaticLocalState = 0;
-			LocalState = 0;
-			AtomicLocalState = 0;
-			SemaphoreProtectedLocalState = 0;
-			Semaphore = new Semaphore(1, 1);
+			_threadStaticLocalState = 0;
+			_localState = 0;
+			_atomicLocalState = 0;
+			_semaphoreProtectedLocalState = 0;
+			_semaphore = new Semaphore(1, 1);
 			ThreadPool.SetMaxThreads(4, 4);
 
 			for (int i = 0; i < 50; i++)
@@ -156,8 +156,8 @@ namespace C_Sharp.Language.Thread
 			}
 
 			WaitForThreads();
-			string result = string.Format($"Local: {LocalState} AtomicLocal: {AtomicLocalState} ThreadStatic Local : {ThreadStaticLocalState} Semaphore Local: {SemaphoreProtectedLocalState} ",
-				ThreadStaticLocalState, LocalState, AtomicLocalState, SemaphoreProtectedLocalState);
+			string result = string.Format($"Local: {_localState} AtomicLocal: {_atomicLocalState} ThreadStatic Local : {_threadStaticLocalState} Semaphore Local: {_semaphoreProtectedLocalState} ",
+				_threadStaticLocalState, _localState, _atomicLocalState, _semaphoreProtectedLocalState);
 			Console.WriteLine(result);
 		}
 
