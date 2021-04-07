@@ -86,8 +86,13 @@ namespace C_Sharp.Language
 
 		}
 
+        // #Tuple
 		public static void TupleTest()
-		{
+        {
+            Tuple<int, int> myTuple = new Tuple<int, int> (1, 42);
+			Assert.AreEqual(myTuple.Item1, 1);
+			Assert.AreEqual(myTuple.Item2, 42);
+
 			CSharp6 cs6 = new CSharp6(5);
 			var r = cs6.GetTuple();
 			Assert.IsTrue(r.Wahrheit);
