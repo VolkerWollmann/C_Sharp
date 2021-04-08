@@ -13,7 +13,10 @@ namespace C_Sharp.Language
     [SuppressMessage("ReSharper", "ConvertToLocalFunction")]
     public class MyDelegate
 	{
-		// #action
+		// #empty #action
+        private static readonly Action EmptyAction = () => { };
+
+        // #action
 		static readonly Action<string> WriteMessage = msg => { Console.WriteLine(msg); };
 
 		// #func
@@ -63,6 +66,8 @@ namespace C_Sharp.Language
 
 		public static void TestActionFuncPredicate()
         {
+            EmptyAction();
+
 			WriteMessage("Hello World");
 
 			Assert.AreEqual(FuncIntDirect(), 42);
