@@ -60,9 +60,7 @@
     <None Include="Data\DataText1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\C_SharpAccessiblity2\Data\DataOtherProject.txt">
-      <Link>Data\DataOtherProject.txt</Link>
-    </Content>
+    <Content Include="Data\DataOtherProject.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
