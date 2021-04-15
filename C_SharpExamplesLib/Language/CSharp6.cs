@@ -44,6 +44,11 @@ namespace C_Sharp.Language
 
 		internal string StringInterpolation2() => $"({X})";
 
+        // #string interpolation #alignment
+		private const string InternalHase = "Hase";
+		internal string StringInterpolation3() => $"({InternalHase}:{InternalHase, 10}:{InternalHase,3}:{InternalHase,-10}:)";
+
+
 		internal (int Zahl, bool Wahrheit) GetTuple() => (1,true);
 
 		// #Dictionary #initialization
@@ -110,6 +115,9 @@ namespace C_Sharp.Language
 
             string t = cs6.StringInterpolation2();
 			Assert.AreEqual(t, "(5)");
+
+            string u = cs6.StringInterpolation3();
+			Assert.IsNotNull(u);
 
 			var dict = cs6.GetDictionary();
 			Assert.IsInstanceOfType(dict, typeof( Dictionary<string,int>));
