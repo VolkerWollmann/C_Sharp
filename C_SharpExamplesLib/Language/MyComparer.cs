@@ -114,6 +114,20 @@ namespace C_Sharp.Language
 			for (int i = 0; i < l.Count - 1; i++)
 				Assert.IsTrue(((IComparable<MyIComparable>)l[i]).CompareTo(l[i + 1]) <= 0);
 
+			// #partial ordering won't work 
+            List<MyIComparable> l2 = new List<MyIComparable> {
+				new MyIComparable(2, Cat),
+				new MyIComparable(1, Donkey),
+                new MyIComparable(3, Donkey),
+                new MyIComparable(2, Cat),
+                new MyIComparable(3, Cat),
+                new MyIComparable(3, Donkey),
+				new MyIComparable(2, Dog),
+                new MyIComparable(5, None),
+            };
+
+			l2.Sort();
+
 		}
 
 		public static void TestComparison()

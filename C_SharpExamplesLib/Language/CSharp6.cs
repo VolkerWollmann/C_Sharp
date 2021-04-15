@@ -45,8 +45,8 @@ namespace C_Sharp.Language
 		internal string StringInterpolation2() => $"({X})";
 
         // #string interpolation #alignment
-		private const string InternalHase = "Hase";
-		internal string StringInterpolation3() => $"({InternalHase}:{InternalHase, 10}:{InternalHase,3}:{InternalHase,-10}:)";
+		private const string InternalRabbit = "Rabbit";
+		internal string StringInterpolation3() => $"({InternalRabbit}:{InternalRabbit, 10}:{InternalRabbit,3}:{InternalRabbit,-10}:)";
 
 
 		internal (int Zahl, bool Wahrheit) GetTuple() => (1,true);
