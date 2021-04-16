@@ -42,5 +42,12 @@ namespace UnitTest
         {
 			MyIEquatable.Test();
         }
-	}
+
+        [TestMethod]
+        public void PartialOrder()
+        {
+            MyIEquatable.PartialOrderTest();
+
+        }
+    }
 }

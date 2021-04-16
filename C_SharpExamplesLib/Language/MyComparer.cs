@@ -213,6 +213,12 @@ namespace C_Sharp.Language
 			//Assert.IsTrue(me1 != me4);
 		}
 
+		public static void PartialOrderTest()
+        {
+            List<int> l = new List<int>() {3, 4, 8, 2, 1, 2, 4, 5, 2, 7,};
+            l.Sort();
+        }
+
         #endregion
     }
 }
