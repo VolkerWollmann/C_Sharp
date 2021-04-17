@@ -67,12 +67,20 @@ namespace C_Sharp.Language
 		// Sort order is by Version, than by Animal
 		// Except NONE, which has lowest priority.
 		// Important: There must be only one NONE to make order total.
+		//
+		// ![CDATA[
+		// This ComapareTo() <= 0 is a pre order:
+		// - reflexivity  : (1,Dog) <= (1,Dog)
+		// - transitivity : (1,Cat) <= (1,Dog) & (1,Dog) <= (1,Donkey) => (1,Cat) <= (1,Donkey) 
+		// ]]>
+		/// <param name="other"></param>
+		/// <returns></returns>
 		// <returns>
 		// < 0 This instance precedes obj in the sort order.
 		// = 0 This instance occurs in the same position in the sort order as obj.
 		// > 0 This instance follows obj in the sort order.
-        // </returns>
-        // </summary>
+		// </returns>
+		// </summary>
 		int IComparable<MyIComparable>.CompareTo(MyIComparable other)
 		{
 			if (( this.Animal == None ) && ( other.Animal == None))
@@ -92,9 +100,15 @@ namespace C_Sharp.Language
 
 			Dictionary<string, int> animalOrder = new Dictionary<string, int> { [Donkey] = 1, [Dog] = 2, [Seagull] = 3, [Cat] = 4 };
 
-			return animalOrder[Animal] < animalOrder[other.Animal] ? -1 : 1;
+			if ( animalOrder[Animal] < animalOrder[other.Animal] ) 
+                return -1;
 
-		}
+            if (animalOrder[Animal] > animalOrder[other.Animal])
+                return 1;
+
+			return 0;
+
+        }
 		#endregion
 
 		#region Test
@@ -102,7 +116,7 @@ namespace C_Sharp.Language
 		{
 			List<MyIComparable> l = new List<MyIComparable> {
 				new MyIComparable(1, Donkey),
-				new MyIComparable(3, Donkey),
+                new MyIComparable(3, Donkey),
 				new MyIComparable(2, Cat),
 				new MyIComparable(3, Cat),
 				new MyIComparable(2, Dog),
@@ -114,7 +128,7 @@ namespace C_Sharp.Language
 			for (int i = 0; i < l.Count - 1; i++)
 				Assert.IsTrue(((IComparable<MyIComparable>)l[i]).CompareTo(l[i + 1]) <= 0);
 
-			// #partial ordering won't work 
+			// #pre order works for one NONE
             List<MyIComparable> l2 = new List<MyIComparable> {
 				new MyIComparable(2, Cat),
 				new MyIComparable(1, Donkey),
@@ -127,6 +141,28 @@ namespace C_Sharp.Language
             };
 
 			l2.Sort();
+            for (int i = 0; i < l2.Count - 1; i++)
+                Assert.IsTrue(((IComparable<MyIComparable>)l2[i]).CompareTo(l2[i + 1]) <= 0);
+
+
+			// #pre order works for three NONE
+			List<MyIComparable> l3 = new List<MyIComparable> {
+                new MyIComparable(2, Cat),
+                new MyIComparable(1, Donkey),
+                new MyIComparable(3, Donkey),
+                new MyIComparable(3, None),
+                new MyIComparable(5, None),
+				new MyIComparable(2, Cat),
+                new MyIComparable(3, Cat),
+                new MyIComparable(3, Donkey),
+                new MyIComparable(2, Dog),
+                new MyIComparable(5, None),
+            };
+
+            l3.Sort();
+            for (int i = 0; i < l3.Count - 1; i++)
+                Assert.IsTrue(((IComparable<MyIComparable>)l3[i]).CompareTo(l3[i + 1]) <= 0);
+
 
 		}
 

@@ -7,15 +7,7 @@ namespace C_Sharp
 	{
 		static void Main()
         {
-            //MyEnum.Test();
-			//MyOperators.Test();
-			//MyAnonymousType.Test();
-			//MyDelegate.Test();
-			//MyException.Test();
-			//MyListTest.Test();
-			//MyThread.SemaphoreExample();
-			MyThread.TestThreadStaticData();
-			Console.ReadKey();
+            //Console.ReadKey();
 		}
 	}
 }
