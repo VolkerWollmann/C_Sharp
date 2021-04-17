@@ -78,5 +78,11 @@ namespace UnitTest
 		{
 			MyLinqExpression.WalkExpression2();
 		}
+
+        [TestMethod]
+        public void LinkedList()
+        {
+            MyLinq.Linq_LinkedList();
+        }
 	}
 }

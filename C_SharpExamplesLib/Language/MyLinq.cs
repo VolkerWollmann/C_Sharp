@@ -99,6 +99,19 @@ namespace C_Sharp.Language
 			Assert.AreEqual(s, null);
 		}
 
+        /// #linq #all but last #pairs #linkedList
+        public static void Linq_LinkedList()
+        {
+            List<int> list = Enumerable.Range(1, 6).ToList();
+
+			LinkedList<int> linkedList = new LinkedList<int>(list);
+
+            var pairs = linkedList.Select(e => new Tuple<int, int?>(e, linkedList.Find(e)?.Next?.Value)).ToList();
+
+			Assert.IsTrue( pairs.All( t => (t.Item2 == null) || t.Item1 < t.Item2 ));
+        }
+
+
 		// #linq #set operation #union #intersect #except
 		public static void Linq_SetOperation()
 		{
