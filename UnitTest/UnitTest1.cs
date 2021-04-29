@@ -180,5 +180,16 @@ namespace UnitTest
         {
             MyVector.Test();
         }
+
+        [TestMethod]
+        public void Yield()
+        {
+            int i = 1;
+            foreach (int j in MyYield.OneToSix())
+            {
+				Assert.AreEqual(i, j);
+                i++;
+            }
+        }
 	}
 }

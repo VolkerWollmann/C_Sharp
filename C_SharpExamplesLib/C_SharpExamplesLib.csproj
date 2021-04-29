@@ -86,6 +86,7 @@
     <Compile Include="Language\MyMultipleInheritance.cs" />
     <Compile Include="Language\MyOperator.cs" />
     <Compile Include="Language\MyVector.cs" />
+    <Compile Include="Language\MyYield.cs" />
     <Compile Include="Language\Thread\MyThread2.cs" />
     <Compile Include="Language\MySimple.cs" />
     <Compile Include="Language\Task\MyTask.cs" />
