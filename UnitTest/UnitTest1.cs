@@ -174,5 +174,11 @@ namespace UnitTest
         {
             VirtualTest.Test();
         }
+
+		[TestMethod]
+        public void Vector()
+        {
+            MyVector.Test();
+        }
 	}
 }
