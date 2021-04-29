@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
 {
@@ -22,7 +23,7 @@ namespace C_Sharp.Language
             yield return 6;
         }
 
-        public static IEnumerable<int> OneToSix()
+        private static IEnumerable<int> OneToSix()
         {
             foreach (int i in OneToThree())
             {
@@ -35,5 +36,14 @@ namespace C_Sharp.Language
             }
         }
 
+        public static void Test()
+        {
+            int i = 1;
+            foreach (int j in MyYield.OneToSix())
+            {
+                Assert.AreEqual(i, j);
+                i++;
+            }
+        }
     }
 }

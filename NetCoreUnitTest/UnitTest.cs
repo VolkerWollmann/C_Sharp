@@ -1,3 +1,4 @@
+using C_Sharp.Language;
 using Xunit;
 using Xunit.Abstractions;
 using CSharpCore;
@@ -45,5 +46,12 @@ namespace NetCoreUnitTest
         {
             NamingConvention.ShowNamingConventions();
         }
+
+        [Fact]
+        public void Vector()
+        {
+            MyVector.Test();
+        }
+
     }
 }
