@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace C_Sharp.Language
+namespace C_Sharp.Language.Event
 {
     public class MyEvent
     {

@@ -75,7 +75,7 @@
     <Compile Include="Language\CSharp.cs" />
     <Compile Include="Language\MyDelegate.cs" />
     <Compile Include="Language\MyEnum.cs" />
-    <Compile Include="Language\MyEvent.cs" />
+    <Compile Include="Language\Event\MyEvent.cs" />
     <Compile Include="Language\MyException.cs" />
     <Compile Include="Language\MyExtensionMethod.cs" />
     <Compile Include="Language\MyGeneric.cs" />
@@ -85,6 +85,7 @@
     <Compile Include="Language\MyList.cs" />
     <Compile Include="Language\MyMultipleInheritance.cs" />
     <Compile Include="Language\MyOperator.cs" />
+    <Compile Include="Language\Event\MyWeakEventHandler.cs" />
     <Compile Include="Language\MyYield.cs" />
     <Compile Include="Language\Thread\MyThread2.cs" />
     <Compile Include="Language\MySimple.cs" />
@@ -115,6 +116,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
