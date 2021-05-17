@@ -15,5 +15,11 @@ namespace UnitTest
         {
             MyEvent.ActionDelegate();
         }
+
+        [TestMethod]
+        public void WeakEventDelegate()
+        {
+            MyWeakEventHandlerExample.Test();
+        }
     }
 }

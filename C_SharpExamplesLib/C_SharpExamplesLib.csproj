@@ -85,7 +85,7 @@
     <Compile Include="Language\MyList.cs" />
     <Compile Include="Language\MyMultipleInheritance.cs" />
     <Compile Include="Language\MyOperator.cs" />
-    <Compile Include="Language\Event\MyWeakEventHandler.cs" />
+    <Compile Include="Language\Event\MyWeakEventHandlerExample.cs" />
     <Compile Include="Language\MyYield.cs" />
     <Compile Include="Language\Thread\MyThread2.cs" />
     <Compile Include="Language\MySimple.cs" />
