@@ -1,4 +1,5 @@
-﻿using AccessibilityProject;
+﻿using ThisAccessibilityProject = AccessibilityProject ;
+using OtherAccessibilityProject = AccessibilityOtherProject;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using C_Sharp.FileOperation;
 using C_Sharp.Language;
@@ -72,16 +73,16 @@ namespace UnitTest
 		[TestMethod]
 		public void ClassAccessibility_Test()
 		{
-			MyClassAccessibilityTestA.Test();
-			MyClassAccessibilityTestB.Test();
-			MyClassAccessibilityTest.Test();
-            AccessibilityOtherProject.MyClassAccessibilityTest.Test();
+			ThisAccessibilityProject.MyClassAccessibilityTestA.Test();
+			ThisAccessibilityProject.MyClassAccessibilityTestB.Test();
+			ThisAccessibilityProject.MyClassAccessibilityTest.Test();
+			OtherAccessibilityProject.MyClassAccessibilityTest.Test();
 		}
 
 		[TestMethod]
 		public void ExplicitImplicitInterfaceImplementation()
         {
-			MyInterfaceVisibility.ExplicitImplicitInterfaceImplementation();
+			ThisAccessibilityProject.MyInterfaceVisibility.ExplicitImplicitInterfaceImplementation();
 		}
 
 		[TestMethod]
