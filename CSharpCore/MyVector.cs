@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Numerics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Language
+namespace CSharpCore
 {
     public class MyVector
     {

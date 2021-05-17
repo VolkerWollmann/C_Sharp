@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Diagnostics.Tracing;
-using System.Reflection.Emit;
 using System.Windows;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language.Event
 {
+    // # 
     // https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/weak-event-patterns?view=netframeworkdesktop-4.8
-    public class MyWeakEventHandlerExample
+    public class MyWeakEventManagerExample
     {
         private class AlarmEventArgs : EventArgs
         {
-            public string Message;
+            public readonly string Message;
 
             public AlarmEventArgs(string message)
             {
@@ -34,7 +34,7 @@ namespace C_Sharp.Language.Event
 
         private class AlarmConsumer
         {
-            private int Id;
+            private readonly int Id;
             public void Listener(object sender, AlarmEventArgs alarmEventArgs)
             {
                 Console.WriteLine($"Alarm listener {Id} received {alarmEventArgs.Message}");
@@ -60,9 +60,9 @@ namespace C_Sharp.Language.Event
                                           EventHandler<AlarmEventArgs> handler)
             {
                 if (source == null)
-                    throw new ArgumentNullException("source");
+                    throw new ArgumentNullException(nameof(source));
                 if (handler == null)
-                    throw new ArgumentNullException("handler");
+                    throw new ArgumentNullException(nameof(handler));
 
                 CurrentManager.ProtectedAddHandler(source, handler);
             }
@@ -74,9 +74,9 @@ namespace C_Sharp.Language.Event
                                              EventHandler<AlarmEventArgs> handler)
             {
                 if (source == null)
-                    throw new ArgumentNullException("source");
+                    throw new ArgumentNullException(nameof(source));
                 if (handler == null)
-                    throw new ArgumentNullException("handler");
+                    throw new ArgumentNullException(nameof(handler));
 
                 CurrentManager.ProtectedRemoveHandler(source, handler);
             }
@@ -117,7 +117,7 @@ namespace C_Sharp.Language.Event
             protected override void StartListening(object source)
             {
                 AlarmSource typedSource = (AlarmSource)source;
-                typedSource.OnAlarmRaised += new EventHandler<AlarmEventArgs>(OnSomeEvent);
+                typedSource.OnAlarmRaised += OnAlarmEvent;
             }
 
             /// <summary>
@@ -126,13 +126,13 @@ namespace C_Sharp.Language.Event
             protected override void StopListening(object source)
             {
                 AlarmSource typedSource = (AlarmSource)source;
-                typedSource.OnAlarmRaised -= new EventHandler<AlarmEventArgs>(OnSomeEvent);
+                typedSource.OnAlarmRaised -= OnAlarmEvent;
             }
 
             /// <summary>
             /// Event handler for the SomeEvent event.
             /// </summary>
-            void OnSomeEvent(object sender, AlarmEventArgs e)
+            void OnAlarmEvent(object sender, AlarmEventArgs e)
             {
                 DeliverEvent(sender, e);
             }
