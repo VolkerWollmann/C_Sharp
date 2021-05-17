@@ -5,7 +5,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language.Event
 {
-    // # 
+    // #pattern #weak event pattern
+    // #WeakEventManager
     // https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/weak-event-patterns?view=netframeworkdesktop-4.8
     public class MyWeakEventManagerExample
     {
