@@ -4,7 +4,6 @@ namespace C_Sharp.Language.Event
 {
     public class MyEvent
     {
-        // comment 17.05.2021
         #region ActionDelegate
         // #action
         protected class Alarm
