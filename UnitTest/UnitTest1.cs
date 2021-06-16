@@ -98,6 +98,12 @@ namespace UnitTest
 		}
 
 		[TestMethod]
+		public void Reflection()
+		{
+			MyReflection.Test();
+		}
+
+		[TestMethod]
 		public void Arrays()
 		{
 			MyArray.Test();
