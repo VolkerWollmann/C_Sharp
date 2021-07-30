@@ -20,7 +20,7 @@ namespace C_Sharp.Language
             public static void Test2()
             {
                 // Compile Error : does not know about type alias
-                //IntegerList x = new IntegerList();
+                // IntegerList x = new IntegerList();
             }
         }
 
@@ -69,6 +69,18 @@ namespace C_Sharp.Language
             MyType2.Test2();
 
             MyType3.Test3();
+
+            // #Reading #types from #assembly
+            Type myType2Type = typeof(MyType2);
+            string mytype2Name = myType2Type.FullName;
+
+            var ass = Type.GetType(mytype2Name).Assembly;
+
+            Type myType3Type = typeof(MyType3);
+            string mytype3Name = myType3Type.FullName;
+            Type testType = ass.GetType(mytype3Name);
+
+            Assert.AreEqual(myType3Type, testType);
         }
     }
 }
