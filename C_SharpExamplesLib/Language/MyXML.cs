@@ -27,11 +27,12 @@ namespace C_Sharp.Language
         }
 
         // xml 3.0 an lower
-        public static XmlElement Create_MyAnimals_as_XmlElement()
+        public static XmlDocument Create_MyAnimals_as_XmlDocument()
         {
             XmlDocument xmlDocument = new XmlDocument();
             
             XmlElement myAnimals = xmlDocument.CreateElement("My_Animals");
+            xmlDocument.AppendChild(myAnimals);
             
             XmlElement donkey = xmlDocument.CreateElement("Animal_1");
             donkey.InnerText  = "Donkey";
@@ -41,7 +42,7 @@ namespace C_Sharp.Language
             dog.InnerText = "Dog";
             myAnimals.AppendChild(dog);
 
-            return myAnimals;
+            return xmlDocument;
         }
         public static void Test()
         {
@@ -49,7 +50,7 @@ namespace C_Sharp.Language
             XElement myAnimalsAsXElement2 = Create_MyAnimals_as_XElement_2();
             Assert.AreEqual(myAnimalsAsXElement1.ToString(), myAnimalsAsXElement2.ToString());
 
-            XmlElement myAnimalsAsXmlElement = Create_MyAnimals_as_XmlElement();
+            XmlDocument myAnimalsAsXmlElement = Create_MyAnimals_as_XmlDocument();
 
             string s1 = myAnimalsAsXElement1.ToString().Replace("\r\n", "").Replace("  ","");
             string s2 = myAnimalsAsXmlElement.OuterXml;
