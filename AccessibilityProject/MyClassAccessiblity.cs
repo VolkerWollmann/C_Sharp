@@ -51,9 +51,11 @@ namespace AccessibilityProject
         {
             MyClassAccessibilityTestB mca2 = new MyClassAccessibilityTestB
             {
-                MyInternalNumber = 42, MyProtectedNumber = 42, MyPublicNumber = 42, MyInternalProtected = 42
-                //, _myPrivateNumber = 42 //Error   CS0122  'MyClassAccessibility._myPrivateNumber' is inaccessible due to its protection level AccessibilityProject    E:\C_Sharp\C_Sharp\AccessibilityProject\MyClassAccessibility.cs  55  Active
-
+                // _MyPrivateNumber = 42 //Error   CS0122  'MyClassAccessibility._myPrivateNumber' is inaccessible due to its protection level AccessibilityProject    E:\C_Sharp\C_Sharp\AccessibilityProject\MyClassAccessibility.cs  55  Active
+                MyInternalNumber = 42, 
+                MyProtectedNumber = 42, 
+                MyPublicNumber = 42, 
+                MyInternalProtected = 42
             };
             
             Assert.IsNotNull(mca2);
