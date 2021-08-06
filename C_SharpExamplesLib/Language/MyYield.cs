@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
 {
+    // #yield
     public class MyYield
     {
         private static IEnumerable<int> OneToThree()
