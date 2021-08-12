@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Language
+namespace C_Sharp.Language.DataTypes
 {
     // #array #all elements
 	public class MyArray

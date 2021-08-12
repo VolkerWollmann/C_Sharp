@@ -1,9 +1,5 @@
-﻿using System;
-using C_Sharp.Language;
+﻿using C_Sharp.Language.DataTypes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using C_Sharp.Language.Task;
-
-
 
 namespace UnitTest
 {

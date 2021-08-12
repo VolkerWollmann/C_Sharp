@@ -75,6 +75,7 @@ namespace C_Sharp.Language
             string mytype2Name = myType2Type.FullName;
 
             var ass = Type.GetType(mytype2Name).Assembly;
+            Assert.IsNotNull(ass);
 
             Type myType3Type = typeof(MyType3);
             string mytype3Name = myType3Type.FullName;
