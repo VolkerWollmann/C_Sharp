@@ -157,6 +157,9 @@ namespace C_Sharp.Language.Event
             GC.Collect();
 
             alarmSource.RaiseAlarm();
+
+            AlarmEventWeakEventManager.RemoveHandler(alarmSource, alarmConsumer2.Listener);
+
         }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
 {
-    // #reflection #getmethod #getconstructors
+    // #reflection #GetMethod #GetConstructors
     internal class Ship
     {
         public string Name { get; }

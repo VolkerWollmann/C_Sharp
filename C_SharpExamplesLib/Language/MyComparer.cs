@@ -69,7 +69,7 @@ namespace C_Sharp.Language
 		// Important: There must be only one NONE to make order total.
 		//
 		// ![CDATA[
-		// This ComapareTo() <= 0 is a pre order:
+		// This CompareTo() <= 0 is a pre order:
 		// - reflexivity  : (1,Dog) <= (1,Dog)
 		// - transitivity : (1,Cat) <= (1,Dog) & (1,Dog) <= (1,Donkey) => (1,Cat) <= (1,Donkey) 
 		// ]]>

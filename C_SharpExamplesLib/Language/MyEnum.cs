@@ -68,7 +68,7 @@ namespace C_Sharp.Language
 
 			// string to enum
 			var dogsFromString = Enum.Parse(typeof(Dog), "KomissarRex");
-			
+			Assert.AreEqual(dogsFromString, Dog.KomissarRex);
 		}
 	}
 }
