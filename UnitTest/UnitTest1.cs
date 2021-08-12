@@ -104,18 +104,6 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void Arrays()
-		{
-			MyArray.Test();
-		}
-
-		[TestMethod]
-		public void ArrayExtension()
-		{
-			MyArray.ArrayExtension();
-		}
-
-		[TestMethod]
 		public void Generics()
 		{
 			MyGeneric.Test();
@@ -147,12 +135,6 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void TestXml()
-        {
-			MyXml.Test();
-        }
-
-		[TestMethod]
 		public void LocalFunction()
         {
 			CSharp.LocalFunction();
@@ -168,12 +150,6 @@ namespace UnitTest
         public void MultipleInheritance()
         {
             MyMultipleInheritanceTest.Test();
-        }
-
-		[TestMethod]
-        public void ListCapacity()
-        {
-            MyListTest.Test();
         }
 
         [TestMethod]
