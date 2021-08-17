@@ -42,15 +42,15 @@ namespace C_Sharp.Language
             int result = m.Add();
 			Assert.AreEqual(7, result);
 
-            MyMath resultA = m.IncA().IncA();
-            Assert.AreEqual(5, resultA.A);
+            MyMath result1 = m.IncA().IncA();
+            Assert.AreEqual(5, result1.A);
 
-            MyMath resultB = m.IncB().IncB();
-            Assert.AreEqual(6, resultB.B);
+            MyMath result2 = m.IncB().IncB();
+            Assert.AreEqual(6, result2.B);
 
             MyMath DoubleIncA(MyMath math) => math.IncA().IncA();
-            MyMath resultC = DoubleIncA(m);
-            Assert.AreEqual(7, resultC.A);
+            MyMath result3 = DoubleIncA(m);
+            Assert.AreEqual(7, result3.A);
 		}
 	}
 }
