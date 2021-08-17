@@ -128,6 +128,18 @@ namespace C_Sharp.Language
 
 		}
 
+        public static void TestFuncConcatenation()
+        {
+            Func<int, int> increment = (n) => { return ++n; };
+
+            Func<int, int> square = (n) => { return n*n; };
+
+			Assert.AreEqual( square(increment(1)),4);
+
+            Func<int, int> both = (n) => square(increment(n));
+
+            Assert.AreEqual(both(1), 4);
+		}
 		public static void TestDelegateFuncInvocationList()
 		{
 			MyDelegate myDelegate = new MyDelegate();

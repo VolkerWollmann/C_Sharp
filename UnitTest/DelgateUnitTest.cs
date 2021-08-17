@@ -35,5 +35,11 @@ namespace UnitTest
 		{
 			MyDelegate.TestDelegateAssignmentByMethodInfo();
 		}
+
+        [TestMethod]
+        public void TestFuncConcatenation()
+        {
+            MyDelegate.TestFuncConcatenation();
+        }
 	}
 }
