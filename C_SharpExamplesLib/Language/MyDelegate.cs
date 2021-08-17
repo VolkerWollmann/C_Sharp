@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -150,7 +151,7 @@ namespace C_Sharp.Language
 			// invocationList : normally 0 or 1 Element, but more functions can be assigned
 			// last wins
 		    var fInvocationList = myDelegate.FuncIntInt.GetInvocationList();
-			Assert.IsNotNull(fInvocationList);
+			Assert.IsNotNull(fInvocationList.Select( m => m.Method.Name).Contains("Double"));
 
 			var i = myDelegate.FuncIntInt(3);
 			Assert.IsTrue(i == 9);
@@ -159,7 +160,7 @@ namespace C_Sharp.Language
 			myDelegate.FuncIntegerFunction += myDelegate.Square;
 
 			var f2InvocationList = myDelegate.FuncIntegerFunction.GetInvocationList();
-			Assert.IsNotNull(f2InvocationList);
+            Assert.IsNotNull(fInvocationList.Select(m => m.Method.Name).Contains("StaticDouble"));
 
 			i = myDelegate.FuncIntegerFunction(3);
 			Assert.IsTrue(i == 9);
