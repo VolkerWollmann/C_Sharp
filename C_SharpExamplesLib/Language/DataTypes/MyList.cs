@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language.DataTypes
 {
+	// Data types : #List #struct
 	public struct MyPair
 	{
 		public int X;
