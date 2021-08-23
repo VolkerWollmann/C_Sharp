@@ -160,7 +160,7 @@ namespace C_Sharp.Language
 			myDelegate.FuncIntegerFunction += myDelegate.Square;
 
 			var f2InvocationList = myDelegate.FuncIntegerFunction.GetInvocationList();
-            Assert.IsNotNull(fInvocationList.Select(m => m.Method.Name).Contains("StaticDouble"));
+            Assert.IsNotNull(f2InvocationList.Select(m => m.Method.Name).Contains("StaticDouble"));
 
 			i = myDelegate.FuncIntegerFunction(3);
 			Assert.IsTrue(i == 9);
