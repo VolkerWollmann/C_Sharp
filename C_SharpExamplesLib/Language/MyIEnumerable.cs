@@ -10,8 +10,10 @@ namespace C_Sharp.Language
 	/// <summary>
 	/// <![CDATA[ #IEnumerable<int> #IEnumerator<int> #IQueryable<int> #IQueryProvider ]]>
 	/// returns the number 1, ...., 10
+	///
+	/// see : https://putridparrot.com/blog/creating-a-custom-linq-provider/
 	/// </summary>
-	public class MyIntegerRange : IEnumerator<int>, IQueryable<int>, IQueryProvider  // IQueryable<int> includes IEnumerable<int>
+	public class MyIntegerRange : IEnumerator<int>, IQueryable<int>, IQueryProvider // IQueryable<int> includes IEnumerable<int>
 	{
 		private readonly List<int> _Range;
 		private int _I;
@@ -60,16 +62,18 @@ namespace C_Sharp.Language
 		public Expression Expression
 		{
 			get
-			{
-				var x = _Range.AsQueryable();
-				var y = x.Expression;
+            {
+                var z = Expression.Constant(this, typeof(IQueryable<int>));
 
-				return y;
+				var x = _Range.AsQueryable();
+                var y = x.Expression;
+
+				return z;
 			}
 		}
 
 		// determines linq types
-		public Type ElementType => typeof(bool);
+		public Type ElementType => typeof(int);
 
 		public IQueryProvider Provider =>  this;
 
