@@ -12,6 +12,12 @@ namespace NetCoreUnitTest
         {
             CSharp8.RangeOperators();
         }
+
+        [Fact]
+        public void SwitchWithCaseGuards()
+        {
+            CSharp8.CaseGuards();
+        }
     }
     public class CSharp9UnitTest
     {

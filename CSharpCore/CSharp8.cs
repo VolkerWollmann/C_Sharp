@@ -17,5 +17,29 @@ namespace CSharpCore
             Assert.IsNotNull(slice3);
             Assert.IsNotNull(slice4);
         }
+
+        private readonly struct Point
+        {
+            public Point(int x, int y) => (X, Y) = (x, y);
+
+            public int X { get; }
+            public int Y { get; }
+        }
+
+        private static Point Transform(Point point) => point switch
+        {
+            { X: 0, Y: 0 } => new Point(0, 0),
+            { X: var x, Y: var y } when x < y => new Point(x + y, y),
+            { X: var x, Y: var y } when x > y => new Point(x - y, y),
+            { X: var x, Y: var y } => new Point(2 * x, 2 * y),
+        };
+
+        /// <summary>
+        /// #switch #case
+        /// </summary>
+        public static void CaseGuards()
+        {
+            Point r = Transform(new Point(3, 3));
+        }
     }
 }
