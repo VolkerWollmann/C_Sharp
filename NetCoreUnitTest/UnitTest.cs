@@ -14,9 +14,9 @@ namespace NetCoreUnitTest
         }
 
         [Fact]
-        public void PatternMatch()
+        public void SwitchWithCaseGuards()
         {
-            CSharp8.PatternMatching();
+            CSharp8.CaseGuards();
         }
     }
     public class CSharp9UnitTest

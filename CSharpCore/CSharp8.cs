@@ -20,46 +20,28 @@ namespace CSharpCore
             Assert.IsNotNull(slice4);
         }
 
-        private class Person
+        private readonly struct Point
         {
-            internal string FamilyName { private set; get; }
-            internal string FirstName { private set; get; }
+            public Point(int x, int y) => (X, Y) = (x, y);
 
-            internal int Age { private set; get; }
-
-            internal Person(string familyName, string firstName, int age)
-            {
-                FamilyName = familyName;
-                FirstName = firstName;
-                Age = age;
-            }
-
-            public void Deconstruct(out string familyName, out string firstName, out int age)
-            {
-                familyName = FamilyName;
-                firstName = FirstName;
-                age = Age;
-            }
+            public int X { get; }
+            public int Y { get; }
         }
 
-        private static string S(string s)
+        private static Point Transform(Point point) => point switch
         {
-            return s;
-        }
-        private static string T(Person person)
-        {
-            return person switch
-            {
-                ("Polizei", { } firstName, _) =>  S(firstName),
-            };
-        }
+            { X: 0, Y: 0 } => new Point(0, 0),
+            { X: var x, Y: var y } when x < y => new Point(x + y, y),
+            { X: var x, Y: var y } when x > y => new Point(x - y, y),
+            { X: var x, Y: var y } => new Point(2 * x, 2 * y),
+        };
 
-        public static void PatternMatching()
+        /// <summary>
+        /// #switch #case
+        /// </summary>
+        public static void CaseGuards()
         {
-            
-            Person macchi = new Person( "Polizei", "Macchi", 35);
-            Assert.AreEqual(T(macchi), "Macchi");
-            
+            Point r = Transform(new Point(3, 3));
         }
     }
 }
