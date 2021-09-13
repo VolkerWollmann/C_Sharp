@@ -18,6 +18,12 @@ namespace NetCoreUnitTest
         {
             CSharp8.CaseGuards();
         }
+
+        [Fact]
+        public void PatternMatching()
+        {
+            CSharp8.PatternMatching();
+        }
     }
     public class CSharp9UnitTest
     {
