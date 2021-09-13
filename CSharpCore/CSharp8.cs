@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Drawing;
+using System.Runtime.CompilerServices;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CSharpCore
 {
@@ -16,6 +18,48 @@ namespace CSharpCore
             Assert.IsNotNull(slice2);
             Assert.IsNotNull(slice3);
             Assert.IsNotNull(slice4);
+        }
+
+        private class Person
+        {
+            internal string FamilyName { private set; get; }
+            internal string FirstName { private set; get; }
+
+            internal int Age { private set; get; }
+
+            internal Person(string familyName, string firstName, int age)
+            {
+                FamilyName = familyName;
+                FirstName = firstName;
+                Age = age;
+            }
+
+            public void Deconstruct(out string familyName, out string firstName, out int age)
+            {
+                familyName = FamilyName;
+                firstName = FirstName;
+                age = Age;
+            }
+        }
+
+        private static string S(string s)
+        {
+            return s;
+        }
+        private static string T(Person person)
+        {
+            return person switch
+            {
+                ("Polizei", { } firstName, _) =>  S(firstName),
+            };
+        }
+
+        public static void PatternMatching()
+        {
+            
+            Person macchi = new Person( "Polizei", "Macchi", 35);
+            Assert.AreEqual(T(macchi), "Macchi");
+            
         }
     }
 }

@@ -12,6 +12,12 @@ namespace NetCoreUnitTest
         {
             CSharp8.RangeOperators();
         }
+
+        [Fact]
+        public void PatternMatch()
+        {
+            CSharp8.PatternMatching();
+        }
     }
     public class CSharp9UnitTest
     {
