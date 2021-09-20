@@ -44,25 +44,44 @@ namespace CSharpCore
             Point r = Transform(new Point(3, 3));
         }
 
+        private class Animal
+        {
+            internal string Name { get; }
+
+            internal Animal(string name)
+            {
+                Name = name;
+            }
+
+            public void Deconstruct(out string name)
+            {
+                name = Name;
+            }
+        }
+
         private class Person
         {
-            internal string FamilyName { private set; get; }
-            internal string FirstName { private set; get; }
+            internal string FamilyName { get; }
+            private string FirstName { get; }
 
             internal int Age { private set; get; }
 
-            internal Person(string familyName, string firstName, int age)
+            internal Animal Pet { get; }
+
+            internal Person(string familyName, string firstName, int age, Animal pet)
             {
                 FamilyName = familyName;
                 FirstName = firstName;
                 Age = age;
+                Pet = pet;
             }
 
-            public void Deconstruct(out string familyName, out string firstName, out int age)
+            public void Deconstruct(out string familyName, out string firstName, out int age, out Animal pet)
             {
                 familyName = FamilyName;
                 firstName = FirstName;
                 age = Age;
+                pet = Pet;
             }
         }
 
@@ -74,14 +93,18 @@ namespace CSharpCore
         {
             return person switch
             {
-                ("Polizei", { } firstName, _) => S(firstName),
+                ("Polizia", {} firstName, {} lastName, null) => S(firstName + " ohne Macchi"),
+                ("Polizia", {} firstName, _, { Name: {} petName}  ) => S(firstName + " mit " + petName ),
             };
         }
 
         public static void PatternMatching()
         {
-            Person macchi = new Person("Polizei", "Macchi", 35);
-            Assert.AreEqual(T(macchi), "Macchi");
+            Person wolfgang1 = new Person("Polizia", "Wolfgang", 35, null);
+            Assert.AreEqual(T(wolfgang1), "Wolfgang ohne Macchi");
+
+            Person wolfgang2 = new Person("Polizia", "Wolfgang", 35, new Animal("Macchi"));
+            Assert.AreEqual(T(wolfgang2), "Wolfgang mit Macchi");
         }
     }
 }
