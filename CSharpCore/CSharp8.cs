@@ -62,7 +62,7 @@ namespace CSharpCore
         private class Person
         {
             internal string FamilyName { get; }
-            private string FirstName { get; }
+            internal string FirstName { get; }
 
             internal int Age { private set; get; }
 
@@ -97,8 +97,11 @@ namespace CSharpCore
         {
             return person switch
             {
-                ("Polizia", {} firstName, {} lastName, null) => S(firstName + " ohne Macchi"),
-                ("Polizia", {} firstName, _, { Name: {} petName}  ) => S(firstName + " mit " + petName ),
+                // ReSharper disable once PatternAlwaysOfType
+                (Person { FamilyName: "Polizia", FirstName: {} firstName, Age: _, Pet: null}) 
+                    => S(firstName + " ohne Macchi"),
+                (Person { FamilyName: "Polizia", FirstName: {} firstName, Age:_ , Pet: (Animal { Name: { } petName})})
+                    => S(firstName + " mit " + petName),
             };
         }
 
