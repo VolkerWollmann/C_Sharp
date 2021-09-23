@@ -7,13 +7,21 @@ namespace C_Sharp.Language
 	/// #abstract class
 	/// </summary>
 	abstract class MyAbstractClass
-	{
-	}
+    {
+        
+        internal abstract int GetNumber();
+
+    }
 
 	class MyConcreteClass : MyAbstractClass
 	{
 		public string InstanceProperty { get; } = "Rabbit";
-	}
+
+        internal override int GetNumber()
+        {
+            return 42;
+        }
+    }
 
 	public class AbstractClassTest
 	{
@@ -40,9 +48,12 @@ namespace C_Sharp.Language
 
 				// GetType returns actual type and not cast type
 				Assert.AreEqual(myConcreteClassBaseClassInstanceType, myConcreteClassType);
-				Assert.AreNotEqual(myConcreteClassBaseClassInstanceType, myAbstractClassType);				
+				Assert.AreNotEqual(myConcreteClassBaseClassInstanceType, myAbstractClassType);
+
+                Assert.AreEqual(42, ((MyConcreteClass)myConcreteClassInstance).GetNumber());
 			}
-		}
+
+        }
 	}
 
 }
