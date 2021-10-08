@@ -19,9 +19,15 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void TestXml()
+        public void TestXmlElement()
         {
-            MyXml.Test();
+            MyXml.TestXmlElement();
+        }
+
+        [TestMethod]
+        public void TestXmlFile()
+        {
+            MyXml.TestXmlFile();
         }
 
         [TestMethod]

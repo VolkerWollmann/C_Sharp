@@ -1,12 +1,15 @@
-﻿using System.Xml;
+﻿using System;
+using System.IO;
+using System.Xml;
 using System.Xml.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language.DataTypes
 {
+    // #xml
     public class MyXml
     {
-        // linq to xml
+        // #linq to #xml
         private static XElement Create_MyAnimals_as_XElement_1()
         {
             return new XElement("My_Animals",
@@ -44,7 +47,7 @@ namespace C_Sharp.Language.DataTypes
 
             return xmlDocument;
         }
-        public static void Test()
+        public static void TestXmlElement()
         {
             XElement myAnimalsAsXElement1 = Create_MyAnimals_as_XElement_1();
             XElement myAnimalsAsXElement2 = Create_MyAnimals_as_XElement_2();
@@ -55,6 +58,25 @@ namespace C_Sharp.Language.DataTypes
             string s1 = myAnimalsAsXElement1.ToString().Replace("\r\n", "").Replace("  ","");
             string s2 = myAnimalsAsXmlElement.OuterXml;
             Assert.AreEqual(s1, s2);
+        }
+
+
+        // read/write #xml to/from #file
+        public static void TestXmlFile()
+        {
+            XElement myAnimalsAsXElement1 = Create_MyAnimals_as_XElement_1();
+            
+            string tempFile = Path.GetTempFileName();
+            myAnimalsAsXElement1.Save(tempFile);
+
+            XElement myAnimalsFromFile = XElement.Load(tempFile);
+
+            File.Delete(tempFile);
+
+            string s1 = myAnimalsAsXElement1.ToString().Replace("\r\n", "").Replace("  ", "");
+            string s2 = myAnimalsFromFile.ToString().Replace("\r\n", "").Replace("  ", "");
+            Assert.AreEqual(s1, s2);
+            
         }
     }
 }
