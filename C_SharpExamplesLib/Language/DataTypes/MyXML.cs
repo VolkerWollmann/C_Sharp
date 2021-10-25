@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.XPath;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language.DataTypes
@@ -58,6 +61,10 @@ namespace C_Sharp.Language.DataTypes
             string s1 = myAnimalsAsXElement1.ToString().Replace("\r\n", "").Replace("  ","");
             string s2 = myAnimalsAsXmlElement.OuterXml;
             Assert.AreEqual(s1, s2);
+
+            // #XNode #XPathSelectElements
+            List<XElement> l = myAnimalsAsXElement1.XPathSelectElements("./Animal_2").ToList();
+            Assert.IsTrue( l[0].Value=="Dog");
         }
 
 
