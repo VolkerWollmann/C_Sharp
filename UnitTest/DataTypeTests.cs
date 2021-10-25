@@ -31,6 +31,12 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void TestNodeVsElement()
+        {
+            MyXml.TestNodeVsElement();
+        }
+
+        [TestMethod]
         public void ListCapacity()
         {
             MyListTest.Test();

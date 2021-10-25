@@ -67,6 +67,22 @@ namespace C_Sharp.Language.DataTypes
             Assert.IsTrue( l[0].Value=="Dog");
         }
 
+        // #XNode vs #XElement
+        public static void TestNodeVsElement()
+        {
+            XDocument doc = XDocument.Parse("<root><el1 />some text<!-- comment --></root>");
+            if (doc.Root != null)
+            {
+                var nodes = doc.Root.Nodes().ToList();
+                Assert.IsTrue(nodes.Count == 3);
+                Assert.AreEqual(((XElement)nodes[0]).Name, "el1");
+
+                var elements = doc.Root.Elements().ToList();
+                Assert.IsTrue(elements.Count == 1);
+                Assert.AreEqual(elements[0].Name, "el1");
+            }
+        }
+
 
         // read/write #xml to/from #file
         public static void TestXmlFile()
