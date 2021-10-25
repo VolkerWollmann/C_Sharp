@@ -68,7 +68,7 @@ namespace C_Sharp.Language.DataTypes
         }
 
         // #XNode vs #XElement
-        public static void TestNodeVsElement()
+        public static void TestXmlNodeVsElement()
         {
             XDocument doc = XDocument.Parse("<root><el1 />some text<!-- comment --></root>");
             if (doc.Root != null)
