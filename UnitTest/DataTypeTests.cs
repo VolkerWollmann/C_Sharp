@@ -7,6 +7,12 @@ namespace UnitTest
     public class AbstractDataTests
     {
         [TestMethod]
+        public void SimpleTypes()
+        {
+            MySimpleTypes.Test();
+        }
+
+        [TestMethod]
         public void Arrays()
         {
             MyArray.Test();
