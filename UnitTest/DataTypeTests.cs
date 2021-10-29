@@ -25,6 +25,13 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void Generics()
+        {
+            MyGeneric.Test();
+
+        }
+
+        [TestMethod]
         public void XmlElement()
         {
             MyXml.TestXmlElement();

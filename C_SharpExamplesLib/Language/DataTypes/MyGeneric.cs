@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Language
+namespace C_Sharp.Language.DataTypes
 {
 	// #interface #generic #default
 	internal interface IMyRandomizer<T>

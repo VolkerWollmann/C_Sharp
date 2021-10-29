@@ -79,7 +79,7 @@
     <Compile Include="Language\Event\MyEvent.cs" />
     <Compile Include="Language\MyException.cs" />
     <Compile Include="Language\MyExtensionMethod.cs" />
-    <Compile Include="Language\MyGeneric.cs" />
+    <Compile Include="Language\DataTypes\MyGeneric.cs" />
     <Compile Include="Language\MyIEnumerable.cs" />
     <Compile Include="Language\MyLinqExpression.cs" />
     <Compile Include="Language\MyLinq.cs" />
