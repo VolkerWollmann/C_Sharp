@@ -25,9 +25,16 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void Generics()
+        public void GenericInterface()
         {
-            MyGeneric.Test();
+            MyGenericInterface.Test();
+
+        }
+
+        [TestMethod]
+        public void GenericClass()
+        {
+            MyGenericClass.Test();
 
         }
 

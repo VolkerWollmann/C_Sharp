@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language.DataTypes
 {
+	#region Generic Interface 
 	// #interface #generic #default
 	internal interface IMyRandomizer<T>
 	{
@@ -69,7 +70,7 @@ namespace C_Sharp.Language.DataTypes
 	}
 
 
-	public class MyGeneric
+	public class MyGenericInterface
 	{
 		private static readonly Random Random = new Random();
 		private static T GetRandomElement<T>(List<T> list)
@@ -121,5 +122,53 @@ namespace C_Sharp.Language.DataTypes
 			shuffledNumbers = myIntegerRandomizer.GetShuffledList(numbers);
             CollectionAssert.AllItemsAreNotNull(shuffledNumbers);
 		}
+    }
+	#endregion
+
+	#region Generic class
+	// #generic #type restriction
+    internal class MyBaseClass
+    {
+        public int BaseClassMethod()
+        {
+            return 42;
+        }
+    }
+
+    internal class RefinedClassA : MyBaseClass
+	{
+
+    }
+
+    internal class RefinedClassB : MyBaseClass
+	{
+
+    }
+
+    internal class GenericClass<TGenericClassInstanceType> where TGenericClassInstanceType : MyBaseClass, new()
+    {
+        private readonly TGenericClassInstanceType InternalClass = new TGenericClassInstanceType();
+		public int GenericClassMethod()
+        {
+            return InternalClass.BaseClassMethod();
+        }
+
 	}
+
+    public class MyGenericClass
+    {
+        public static void Test()
+        {
+            var t1 = new GenericClass<RefinedClassA>();
+			var t2 = new GenericClass<RefinedClassB>();
+            
+			Assert.AreEqual(42, t1.GenericClassMethod());
+            Assert.AreEqual(42, t2.GenericClassMethod());
+
+			//will not Compile
+			//var t3 = new GenericClass<int>();
+		}
+    }
+
+	#endregion
 }
