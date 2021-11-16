@@ -167,6 +167,15 @@ namespace C_Sharp.Language.DataTypes
 
 			//will not Compile
 			//var t3 = new GenericClass<int>();
+
+			//create dynamic valid generic class instance
+			Type t4 = typeof(GenericClass<RefinedClassA>);
+			var t5 = Activator.CreateInstance(t4);
+			Assert.AreEqual(42, ((GenericClass<RefinedClassA>)t5).GenericClassMethod());
+
+			//create dynamic invalid generic class instance
+			Assert.ThrowsException<ArgumentException>(() => { Type t6 = typeof(GenericClass<>).MakeGenericType(typeof(int)); });
+
 		}
     }
 
