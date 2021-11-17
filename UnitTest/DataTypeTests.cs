@@ -7,6 +7,12 @@ namespace UnitTest
     public class AbstractDataTests
     {
         [TestMethod]
+        public void SimpleTypes()
+        {
+            MySimpleTypes.Test();
+        }
+
+        [TestMethod]
         public void Arrays()
         {
             MyArray.Test();
@@ -19,9 +25,35 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void TestXml()
+        public void GenericInterface()
         {
-            MyXml.Test();
+            MyGenericInterface.Test();
+
+        }
+
+        [TestMethod]
+        public void GenericClass()
+        {
+            MyGenericClass.Test();
+
+        }
+
+        [TestMethod]
+        public void XmlElement()
+        {
+            MyXml.TestXmlElement();
+        }
+
+        [TestMethod]
+        public void XmlFile()
+        {
+            MyXml.TestXmlFile();
+        }
+
+        [TestMethod]
+        public void XmlNodeVsElement()
+        {
+            MyXml.TestXmlNodeVsElement();
         }
 
         [TestMethod]

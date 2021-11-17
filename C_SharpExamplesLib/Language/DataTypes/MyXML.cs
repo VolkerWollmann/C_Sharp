@@ -1,12 +1,18 @@
-﻿using System.Xml;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Xml;
 using System.Xml.Linq;
+using System.Xml.XPath;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language.DataTypes
 {
+    // #xml
     public class MyXml
     {
-        // linq to xml
+        // #linq to #xml
         private static XElement Create_MyAnimals_as_XElement_1()
         {
             return new XElement("My_Animals",
@@ -44,7 +50,7 @@ namespace C_Sharp.Language.DataTypes
 
             return xmlDocument;
         }
-        public static void Test()
+        public static void TestXmlElement()
         {
             XElement myAnimalsAsXElement1 = Create_MyAnimals_as_XElement_1();
             XElement myAnimalsAsXElement2 = Create_MyAnimals_as_XElement_2();
@@ -55,6 +61,45 @@ namespace C_Sharp.Language.DataTypes
             string s1 = myAnimalsAsXElement1.ToString().Replace("\r\n", "").Replace("  ","");
             string s2 = myAnimalsAsXmlElement.OuterXml;
             Assert.AreEqual(s1, s2);
+
+            // #XNode #XPathSelectElements
+            List<XElement> l = myAnimalsAsXElement1.XPathSelectElements("./Animal_2").ToList();
+            Assert.IsTrue( l[0].Value=="Dog");
+        }
+
+        // #XNode vs #XElement
+        public static void TestXmlNodeVsElement()
+        {
+            XDocument doc = XDocument.Parse("<root><el1 />some text<!-- comment --></root>");
+            if (doc.Root != null)
+            {
+                var nodes = doc.Root.Nodes().ToList();
+                Assert.IsTrue(nodes.Count == 3);
+                Assert.AreEqual(((XElement)nodes[0]).Name, "el1");
+
+                var elements = doc.Root.Elements().ToList();
+                Assert.IsTrue(elements.Count == 1);
+                Assert.AreEqual(elements[0].Name, "el1");
+            }
+        }
+
+
+        // read/write #xml to/from #file
+        public static void TestXmlFile()
+        {
+            XElement myAnimalsAsXElement1 = Create_MyAnimals_as_XElement_1();
+            
+            string tempFile = Path.GetTempFileName();
+            myAnimalsAsXElement1.Save(tempFile);
+
+            XElement myAnimalsFromFile = XElement.Load(tempFile);
+
+            File.Delete(tempFile);
+
+            string s1 = myAnimalsAsXElement1.ToString().Replace("\r\n", "").Replace("  ", "");
+            string s2 = myAnimalsFromFile.ToString().Replace("\r\n", "").Replace("  ", "");
+            Assert.AreEqual(s1, s2);
+            
         }
     }
 }

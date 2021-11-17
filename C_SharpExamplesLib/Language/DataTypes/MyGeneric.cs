@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Language
+namespace C_Sharp.Language.DataTypes
 {
+	#region Generic Interface 
 	// #interface #generic #default
 	internal interface IMyRandomizer<T>
 	{
@@ -69,7 +70,7 @@ namespace C_Sharp.Language
 	}
 
 
-	public class MyGeneric
+	public class MyGenericInterface
 	{
 		private static readonly Random Random = new Random();
 		private static T GetRandomElement<T>(List<T> list)
@@ -121,5 +122,62 @@ namespace C_Sharp.Language
 			shuffledNumbers = myIntegerRandomizer.GetShuffledList(numbers);
             CollectionAssert.AllItemsAreNotNull(shuffledNumbers);
 		}
+    }
+	#endregion
+
+	#region Generic class
+	// #generic #type restriction
+    internal class MyBaseClass
+    {
+        public int BaseClassMethod()
+        {
+            return 42;
+        }
+    }
+
+    internal class RefinedClassA : MyBaseClass
+	{
+
+    }
+
+    internal class RefinedClassB : MyBaseClass
+	{
+
+    }
+
+    internal class GenericClass<TGenericClassInstanceType> where TGenericClassInstanceType : MyBaseClass, new()
+    {
+        private readonly TGenericClassInstanceType InternalClass = new TGenericClassInstanceType();
+		public int GenericClassMethod()
+        {
+            return InternalClass.BaseClassMethod();
+        }
+
 	}
+
+    public class MyGenericClass
+    {
+        public static void Test()
+        {
+            var t1 = new GenericClass<RefinedClassA>();
+			var t2 = new GenericClass<RefinedClassB>();
+            
+			Assert.AreEqual(42, t1.GenericClassMethod());
+            Assert.AreEqual(42, t2.GenericClassMethod());
+
+			//will not Compile
+			//var t3 = new GenericClass<int>();
+
+			//create dynamic valid generic class instance
+			Type t4 = typeof(GenericClass<RefinedClassA>);
+			var t5 = Activator.CreateInstance(t4);
+			Assert.AreEqual(42, ((GenericClass<RefinedClassA>)t5).GenericClassMethod());
+
+			//create dynamic invalid generic class instance
+			Assert.ThrowsException<ArgumentException>(() => { Type t6 = typeof(GenericClass<>).MakeGenericType(typeof(int)); });
+
+		}
+    }
+
+	#endregion
 }

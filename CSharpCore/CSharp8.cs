@@ -98,10 +98,11 @@ namespace CSharpCore
             return person switch
             {
                 // ReSharper disable once PatternAlwaysOfType
-                (Person { FamilyName: "Polizia", FirstName: {} firstName, Age: _, Pet: null}) 
+                (Person { FamilyName: "Polizia", FirstName: { } firstName, Age: _, Pet: null })
                     => S(firstName + " ohne Macchi"),
-                (Person { FamilyName: "Polizia", FirstName: {} firstName, Age:_ , Pet: (Animal { Name: { } petName})})
+                (Person { FamilyName: "Polizia", FirstName: { } firstName, Age: _, Pet: (Animal { Name: { } petName }) })
                     => S(firstName + " mit " + petName),
+                _ => throw new System.NotImplementedException(),
             };
         }
 

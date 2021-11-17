@@ -66,7 +66,7 @@ namespace C_Sharp.Language
 			var allCats2 = allCats.Cast<Cat>().ToArray();
 			ShowAllElement2(allCats2);
 
-			// string to enum
+			// string to enum #enum #parse 
 			var dogsFromString = Enum.Parse(typeof(Dog), "KomissarRex");
 			Assert.AreEqual(dogsFromString, Dog.KomissarRex);
 		}
