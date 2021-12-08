@@ -53,6 +53,7 @@
     <Compile Include="CompareUnitTest.cs" />
     <Compile Include="CSharp7UnitTests.cs" />
     <Compile Include="DelgateUnitTest.cs" />
+    <Compile Include="EnvironmentUnitTest.cs" />
     <Compile Include="EventUnitTest.cs" />
     <Compile Include="LinqUnitTest.cs" />
     <Compile Include="T.cs" />

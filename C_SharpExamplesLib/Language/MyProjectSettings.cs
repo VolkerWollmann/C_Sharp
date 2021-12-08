@@ -7,14 +7,16 @@ namespace C_Sharp.Language
 {
     public class MyProjectSettings
     {
-
+        // #Project #setting
         public static void ReadSettings()
         {
+            // this works
             Settings settings = new Settings();
-
             var result = (string)settings.ProjectSetting;
             Assert.AreEqual( result, "ProjectSettingValue");
-            //var appSettings = ConfigurationManager.AppSettings["UnitTestSetting"];
+
+            // liked this
+            // var appSettings = ConfigurationManager.AppSettings["UnitTestSetting"];
         }
     }
 }
