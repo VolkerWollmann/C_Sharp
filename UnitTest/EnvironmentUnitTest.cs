@@ -15,5 +15,12 @@ namespace UnitTest
         {
             MyProjectSettings.ReadSettings();
         }
+
+        [TestMethod]
+
+        public void CurrentDirectory()
+        {
+            MyProjectSettings.CurrentDirectory();
+        }
     }
 }
