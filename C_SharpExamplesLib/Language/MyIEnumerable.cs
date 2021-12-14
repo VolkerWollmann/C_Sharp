@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.Remoting.Messaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
@@ -17,8 +16,8 @@ namespace C_Sharp.Language
     public class
         MyIntegerRange : IEnumerator<int>, IQueryable<int>, IQueryProvider // IQueryable<int> includes IEnumerable<int>
     {
-        private readonly List<int> _Range;
-        private int _I;
+        private readonly List<int> _range;
+        private int _i;
 
         #region IEnumerator<int>
 
@@ -34,31 +33,19 @@ namespace C_Sharp.Language
 
         public bool MoveNext()
         {
-            _I = _I + 1;
-            return _I < _Range.Count;
+            _i = _i + 1;
+            return _i < _range.Count;
             ;
         }
 
         public void Reset()
         {
-            _I = 0;
+            _i = 0;
         }
 
-        int IEnumerator<int>.Current
-        {
-            get
-            {
-                return _Range[_I];
-            }
-        }
+        int IEnumerator<int>.Current => _range[_i];
 
-        object IEnumerator.Current
-        {
-            get
-            {
-                return (object)((IEnumerator<int>)this).Current;
-            }
-        }
+        object IEnumerator.Current => ((IEnumerator<int>)this).Current;
 
         #endregion
 
@@ -85,8 +72,9 @@ namespace C_Sharp.Language
             get
             {
                 var z = Expression.Constant(this);
+                Assert.IsNotNull(z);
 
-                var x = _Range.AsQueryable();
+                var x = _range.AsQueryable();
                 var y = x.Expression;
 
                 return y;
@@ -129,8 +117,8 @@ namespace C_Sharp.Language
 
         private MyIntegerRange()
         {
-            _Range = new List<int>();
-            _I = 0;
+            _range = new List<int>();
+            _i = 0;
         }
 
         private MyIntegerRange(int start, int range) : this()
@@ -138,7 +126,7 @@ namespace C_Sharp.Language
             int j = start;
             while (j <= start + range)
             {
-                _Range.Add(j++);
+                _range.Add(j++);
             }
         }
 

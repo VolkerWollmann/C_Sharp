@@ -21,10 +21,10 @@ namespace C_Sharp.Language.DataTypes
     // #generic
 	internal class MyIntegerRandomizer : IMyIntRandomizer
 	{
-        readonly Random _Random = new Random();
+        readonly Random _random = new Random();
 		public int GetRandomElement(List<int> list)
 		{
-			int index = _Random.Next(0, list.Count);
+			int index = _random.Next(0, list.Count);
 			return list[index];
 		}
 
@@ -35,7 +35,7 @@ namespace C_Sharp.Language.DataTypes
 			list.ForEach(e => work.Add(e));
 			while (work.Count > 0)
 			{
-				int index = _Random.Next(0, work.Count);
+				int index = _random.Next(0, work.Count);
 				result.Add(work[index]);
 				work.RemoveAt(index);
 			}
@@ -46,10 +46,10 @@ namespace C_Sharp.Language.DataTypes
 
 	internal class MyStringRandomizer : IMyRandomizer<string>
 	{
-        readonly Random _Random = new Random();
+        readonly Random _random = new Random();
 		public string GetRandomElement(List<string> list)
 		{
-			int index = _Random.Next(0, list.Count);
+			int index = _random.Next(0, list.Count);
 			return list[index];
 		}
 
@@ -60,7 +60,7 @@ namespace C_Sharp.Language.DataTypes
 			list.ForEach(e => work.Add(e));
 			while (work.Count > 0)
 			{
-				int index = _Random.Next(0, work.Count);
+				int index = _random.Next(0, work.Count);
 				result.Add(work[index]);
 				work.RemoveAt(index);
 			}
@@ -147,10 +147,10 @@ namespace C_Sharp.Language.DataTypes
 
     internal class GenericClass<TGenericClassInstanceType> where TGenericClassInstanceType : MyBaseClass, new()
     {
-        private readonly TGenericClassInstanceType InternalClass = new TGenericClassInstanceType();
+        private readonly TGenericClassInstanceType _internalClass = new TGenericClassInstanceType();
 		public int GenericClassMethod()
         {
-            return InternalClass.BaseClassMethod();
+            return _internalClass.BaseClassMethod();
         }
 
 	}

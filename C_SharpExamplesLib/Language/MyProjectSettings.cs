@@ -1,7 +1,5 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.IO;
-using System.Runtime.InteropServices;
 using C_Sharp.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,7 +12,7 @@ namespace C_Sharp.Language
         {
             // this works
             Settings settings = new Settings();
-            var result = (string)settings.ProjectSetting;
+            var result = settings.ProjectSetting;
             Assert.AreEqual( result, "ProjectSettingValue");
 
             // liked this

@@ -15,24 +15,24 @@ namespace C_Sharp.Language.Task
 
 		private class Consumer
         {
-            readonly BlockingCollection<int> _Data = new BlockingCollection<int>();
+            readonly BlockingCollection<int> _data = new BlockingCollection<int>();
 
 			public void AddData(int i, bool final)
 			{
-				_Data.Add(i);
+				_data.Add(i);
 				if (final)
-					_Data.CompleteAdding();
+					_data.CompleteAdding();
 			}
 
 			public void Run()
 			{
 				System.Threading.Thread.CurrentThread.Name = "Consumer";
-				while (!_Data.IsCompleted)
+				while (!_data.IsCompleted)
 				{
 					try
 					{
 						System.Threading.Thread.Sleep(Random.Next(100, 200));
-						int v = _Data.Take();
+						int v = _data.Take();
 						Console.WriteLine("Data {0} taken successfully.", v);
 					}
 					catch (InvalidOperationException) { }

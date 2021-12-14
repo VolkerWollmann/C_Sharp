@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-using System.Runtime.CompilerServices;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CSharpCore
 {
@@ -42,6 +40,7 @@ namespace CSharpCore
         public static void CaseGuards()
         {
             Point r = Transform(new Point(3, 3));
+            Assert.AreEqual(r.X, 6);
         }
 
         private class Animal

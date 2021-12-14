@@ -35,15 +35,15 @@ namespace C_Sharp.Language.Event
 
         private class AlarmConsumer
         {
-            private readonly int Id;
+            private readonly int _id;
             public void Listener(object sender, AlarmEventArgs alarmEventArgs)
             {
-                Console.WriteLine($"Alarm listener {Id} received {alarmEventArgs.Message}");
+                Console.WriteLine($"Alarm listener {_id} received {alarmEventArgs.Message}");
             }
 
             public AlarmConsumer(int id)
             {
-                Id = id;
+                _id = id;
             }
         }
 
