@@ -68,5 +68,10 @@ namespace UnitTest
             MyStackTest.Test();
         }
 
+        [TestMethod]
+        public void HashSet()
+        {
+            MyHashSet.Test();
+        }
     }
 }
