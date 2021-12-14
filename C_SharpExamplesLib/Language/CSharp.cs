@@ -56,9 +56,11 @@ namespace C_Sharp.Language
         {
             var d = new Digit(7);
 
+            // #implicit operator
             byte number = d;
             Assert.AreEqual(number, 7);
 
+            //  #explicit operator
             Digit digit = (Digit)number;
             Assert.AreEqual(digit, 7);
         }
