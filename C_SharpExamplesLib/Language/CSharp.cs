@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
 {
@@ -17,7 +18,7 @@ namespace C_Sharp.Language
 
             var one = GetOne();
 
-            Assert.AreEqual(one,1);
+            Assert.AreEqual(one, 1);
         }
 
         public static void MultiLineStringConstant()
@@ -28,5 +29,39 @@ namespace C_Sharp.Language
 
             Assert.IsNotNull(animals);
         }
+
+        #region Implict Operator
+        public readonly struct Digit
+        {
+            private readonly byte digit;
+
+            public Digit(byte digit)
+            {
+                if (digit > 9)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(digit), "Digit cannot be greater than nine.");
+                }
+                this.digit = digit;
+            }
+
+            public static implicit operator byte(Digit d) => d.digit;
+            public static explicit operator Digit(byte b) => new Digit(b);
+
+            public override string ToString() => $"{digit}";
+        }
+
+
+
+        public static void ImplicitExplicitOperator()
+        {
+            var d = new Digit(7);
+
+            byte number = d;
+            Assert.AreEqual(number, 7);
+
+            Digit digit = (Digit)number;
+            Assert.AreEqual(digit, 7);
+        }
     }
+    #endregion
 }

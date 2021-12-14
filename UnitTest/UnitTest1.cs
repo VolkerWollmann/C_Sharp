@@ -156,5 +156,11 @@ namespace UnitTest
         {
             MyYield.Test();
         }
+
+        [TestMethod]
+        public void ImplicitOperator()
+        {
+            CSharp.ImplicitExplicitOperator();
+        }
 	}
 }
