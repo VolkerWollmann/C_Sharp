@@ -62,7 +62,7 @@ namespace C_Sharp.Language
 		}
 		#endregion
 
-		#region IComparable<MyOrderComparer>
+		#region IComparable<MyIComparable>
 		// <summary>
 		// Sort order is by Version, than by Animal
 		// Except NONE, which has lowest priority.
@@ -163,7 +163,7 @@ namespace C_Sharp.Language
             for (int i = 0; i < l3.Count - 1; i++)
                 Assert.IsTrue(((IComparable<MyIComparable>)l3[i]).CompareTo(l3[i + 1]) <= 0);
 
-
+			
 		}
 
 		public static void TestComparison()
@@ -188,7 +188,7 @@ namespace C_Sharp.Language
 	}
 
 
-	// #comparer #IEquatable #override #==
+	// #comparer #IEquatable #override #== #<
 	[DebuggerDisplay("Number={Number}, Animal={Animal}")]
 	public class MyIEquatable : IEquatable<MyIEquatable>
     {
@@ -201,12 +201,9 @@ namespace C_Sharp.Language
 			return this.Equals(other as MyIEquatable); 
         }
 
-		public override int GetHashCode()
-		{
-			return Number;
-		}
+		public override int GetHashCode() => Number;
 
-		#region IEquatable
+        #region IEquatable
 		//bool IEquatable<MyEquatable>.Equals(MyEquatable other)
         public bool Equals(MyIEquatable other)
 		{
@@ -222,10 +219,14 @@ namespace C_Sharp.Language
 
         public static bool operator !=(MyIEquatable obj1, MyIEquatable obj2) => !(obj1 is null) && !obj1.Equals(obj2);
 
-        #endregion
+        public static bool operator <(MyIEquatable obj1, MyIEquatable obj2) => (obj1.Number < obj2.Number);
 
-        #region Constructor
-        public MyIEquatable(int number, string animal)
+        public static bool operator >(MyIEquatable obj1, MyIEquatable obj2) => (obj1.Number > obj2.Number);
+
+		#endregion
+
+		#region Constructor
+		public MyIEquatable(int number, string animal)
         {
 			Number = number;
 			Animal = animal;
@@ -244,6 +245,7 @@ namespace C_Sharp.Language
 
 			Assert.IsTrue(me1 == me3);
 			Assert.IsTrue(me1 != me2);
+			Assert.IsTrue(me1 < me2);
 
 			//Does not compile, because of type check during compilation
 			//Assert.IsTrue(me1 != me4);
