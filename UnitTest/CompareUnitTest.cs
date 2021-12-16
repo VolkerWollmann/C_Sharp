@@ -20,10 +20,16 @@ namespace UnitTest
         }
 
 		[TestMethod]
-		public void TestIComparable()
+		public void TestIComparer()
 		{
-			MyIComparable.TestIComparable();
+			MyIComparable.TestIComparer();
 		}
+
+        [TestMethod]
+        public void TestIComparable()
+        {
+            MyIComparable.TestIComparable();
+        }
 
 		[TestMethod]
 		public void TestComparison()

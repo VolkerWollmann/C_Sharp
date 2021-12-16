@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
@@ -42,7 +43,7 @@ namespace C_Sharp.Language
 
 	// #comparer #IComparable #order #DebuggerDisplay
 	[DebuggerDisplay("Version={Version}, Animal={Animal}")]
-	public class MyIComparable : IComparable<MyIComparable>
+	public class MyIComparable : IComparable<MyIComparable>, IComparer<MyIComparable>
 	{
 		private const string None = "None";
 		private const string Donkey = "Esel";
@@ -61,6 +62,35 @@ namespace C_Sharp.Language
 
 		}
 		#endregion
+
+        private int CompareInternal(MyIComparable other)
+        {
+            if ((this.Animal == None) && (other.Animal == None))
+                return 0;
+
+            if (this.Animal == None)
+                return -1;
+
+            if (other.Animal == None)
+                return 1;
+
+            if (this.Version < other.Version)
+                return -1;
+
+            if (this.Version > other.Version)
+                return 1;
+
+            Dictionary<string, int> animalOrder = new Dictionary<string, int> { [Donkey] = 1, [Dog] = 2, [Seagull] = 3, [Cat] = 4 };
+
+            if (animalOrder[Animal] < animalOrder[other.Animal])
+                return -1;
+
+            if (animalOrder[Animal] > animalOrder[other.Animal])
+                return 1;
+
+            return 0;
+
+        }
 
 		#region IComparable<MyIComparable>
 		// <summary>
@@ -81,78 +111,71 @@ namespace C_Sharp.Language
 		// > 0 This instance follows obj in the sort order.
 		// </returns>
 		// </summary>
+
+
 		int IComparable<MyIComparable>.CompareTo(MyIComparable other)
-		{
-			if (( this.Animal == None ) && ( other.Animal == None))
-				return 0;
+        {
+            return CompareInternal(other);
+        }
 
-			if (this.Animal == None)
-				return -1;
 
-			if (other.Animal == None)
-				return 1;
+		#endregion
 
-			if (this.Version < other.Version)
-				return -1;
-
-			if (this.Version > other.Version)
-				return 1;
-
-			Dictionary<string, int> animalOrder = new Dictionary<string, int> { [Donkey] = 1, [Dog] = 2, [Seagull] = 3, [Cat] = 4 };
-
-			if ( animalOrder[Animal] < animalOrder[other.Animal] ) 
-                return -1;
-
-            if (animalOrder[Animal] > animalOrder[other.Animal])
-                return 1;
-
-			return 0;
-
+		#region IComparer
+		// #IComparer
+        int IComparer<MyIComparable>.Compare(MyIComparable x, MyIComparable y)
+        {
+            // ReSharper disable once PossibleNullReferenceException
+            return x.CompareInternal(y);
         }
 		#endregion
 
 		#region Test
-		public static void TestIComparable()
-		{
-			List<MyIComparable> l = new List<MyIComparable> {
-				new MyIComparable(1, Donkey),
+
+        public static void TestIComparable()
+        {
+            List<MyIComparable> l = new List<MyIComparable>
+            {
+                new MyIComparable(1, Donkey),
                 new MyIComparable(3, Donkey),
-				new MyIComparable(2, Cat),
-				new MyIComparable(3, Cat),
-				new MyIComparable(2, Dog),
-				new MyIComparable(5, None),
-			};
+                new MyIComparable(2, Cat),
+                new MyIComparable(3, Cat),
+                new MyIComparable(2, Dog),
+                new MyIComparable(5, None),
+            };
 
-			l.Sort();
+            l.Sort();
 
-			for (int i = 0; i < l.Count - 1; i++)
-				Assert.IsTrue(((IComparable<MyIComparable>)l[i]).CompareTo(l[i + 1]) <= 0);
+            for (int i = 0; i < l.Count - 1; i++)
+                Assert.IsTrue(((IComparable<MyIComparable>)l[i]).CompareTo(l[i + 1]) <= 0);
 
-			// #pre order works for one NONE
-            List<MyIComparable> l2 = new List<MyIComparable> {
-				new MyIComparable(2, Cat),
-				new MyIComparable(1, Donkey),
+            // #pre order works for one NONE
+            List<MyIComparable> l2 = new List<MyIComparable>
+            {
+                new MyIComparable(2, Cat),
+                new MyIComparable(1, Donkey),
                 new MyIComparable(3, Donkey),
                 new MyIComparable(2, Cat),
                 new MyIComparable(3, Cat),
                 new MyIComparable(3, Donkey),
-				new MyIComparable(2, Dog),
+                new MyIComparable(2, Dog),
                 new MyIComparable(5, None),
             };
 
-			l2.Sort();
+            l2.Sort();
             for (int i = 0; i < l2.Count - 1; i++)
                 Assert.IsTrue(((IComparable<MyIComparable>)l2[i]).CompareTo(l2[i + 1]) <= 0);
 
 
-			// #pre order works for three NONE
-			List<MyIComparable> l3 = new List<MyIComparable> {
+            // #pre order works for three NONE
+            List<MyIComparable> l3 = new List<MyIComparable>
+            {
                 new MyIComparable(2, Cat),
                 new MyIComparable(1, Donkey),
                 new MyIComparable(3, Donkey),
                 new MyIComparable(3, None),
                 new MyIComparable(5, None),
-				new MyIComparable(2, Cat),
+                new MyIComparable(2, Cat),
                 new MyIComparable(3, Cat),
                 new MyIComparable(3, Donkey),
                 new MyIComparable(2, Dog),
@@ -163,7 +186,25 @@ namespace C_Sharp.Language
             for (int i = 0; i < l3.Count - 1; i++)
                 Assert.IsTrue(((IComparable<MyIComparable>)l3[i]).CompareTo(l3[i + 1]) <= 0);
 
-			
+        }
+
+        public static void TestIComparer()
+        {
+            List<MyIComparable> l = new List<MyIComparable>
+            {
+                new MyIComparable(1, Donkey),
+                new MyIComparable(3, Donkey),
+                new MyIComparable(2, Cat),
+                new MyIComparable(3, Cat),
+                new MyIComparable(2, Dog),
+                new MyIComparable(5, None),
+            };
+
+			IComparer<MyIComparable>comparer = new MyIComparable(0, None);
+			l.Sort(comparer);
+
+            for (int i = 0; i < l.Count - 1; i++)
+                Assert.IsTrue(((IComparable<MyIComparable>)l[i]).CompareTo(l[i + 1]) <= 0);
 		}
 
 		public static void TestComparison()
@@ -184,8 +225,9 @@ namespace C_Sharp.Language
 			for (int i = 0; i < a.Length-1; i++)
 				Assert.IsTrue( a[i].Version <= a[i+1].Version );
 		}
-		#endregion
-	}
+
+        #endregion
+    }
 
 
 	// #comparer #IEquatable #override #== #<
