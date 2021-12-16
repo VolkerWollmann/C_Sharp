@@ -56,7 +56,13 @@ namespace UnitTest
 			MyThread.ParallelFor();
 		}
 
-		[TestMethod]
+        [TestMethod]
+        public void Thread_ParallelBagAccess()
+        {
+            MyThread.ParallelInsertIntoBagInsteadOfList();
+        }
+
+        [TestMethod]
 		public void Thread_Abort()
 		{
 			MyThread.Thread_Abort();
