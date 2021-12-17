@@ -63,6 +63,12 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void SortedList()
+        {
+            MySortedListTest.Test();
+        }
+
+        [TestMethod]
         public void Stack()
         {
             MyStackTest.Test();
