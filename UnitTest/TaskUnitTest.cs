@@ -32,11 +32,19 @@ namespace UnitTest
 			MyTask.Task_ThreadSafetyViolation();
 		}
 
+
+        [TestMethod]
+        public void Lock_Granularity()
+        {
+            MyTask.SimpleTotal.TestSimpleTotal();
+            MyTask.SharedTotal.TestTaskObjectLock();
+		}
+        
+
 		[TestMethod]
 		public void Task_ObjectLock()
 		{
-			MyTask.SimpleTotal.TestSimpleTotal();
-			MyTask.SharedTotal.TestTaskObjectLock();
+            MyTask.SharedTotal.TestTaskObjectLock();
 		}
 
 		[TestMethod]
