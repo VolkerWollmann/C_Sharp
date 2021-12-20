@@ -35,7 +35,8 @@ namespace UnitTest
 		[TestMethod]
 		public void Task_ObjectLock()
 		{
-			MyTask.TestTaskObjectLock();
+			MyTask.SimpleTotal.TestSimpleTotal();
+			MyTask.SharedTotal.TestTaskObjectLock();
 		}
 
 		[TestMethod]
