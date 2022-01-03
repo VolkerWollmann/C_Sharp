@@ -6,6 +6,8 @@ namespace CSharpCore
 {
     public class CSharp9
     {
+        // Visual Studio 2022 : comment test change
+
         // #record 
         protected record Person(string FirstName, string LastName);
 
