@@ -81,7 +81,7 @@ namespace C_Sharp.Language.Thread
 
         #region #ConcurrentBag #concurrent list
         // #Parallel access to #list(bag)  #ConcurrentBag #concurrent list
-        public static void ParallelInsertIntoBagInsteadOfList()
+        public static void ParallelInsertIntoConcurrentBagInsteadOfList()
         {
             ConcurrentBag<int> bag = new ConcurrentBag<int>();
             Random random = new Random();

@@ -57,9 +57,9 @@ namespace UnitTest
 		}
 
         [TestMethod]
-        public void Thread_ParallelBagAccess()
+        public void Thread_ParallelConcurrentBagAccess()
         {
-            MyThread.ParallelInsertIntoBagInsteadOfList();
+            MyThread.ParallelInsertIntoConcurrentBagInsteadOfList();
         }
 
         [TestMethod]
