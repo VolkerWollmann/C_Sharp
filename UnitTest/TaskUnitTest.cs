@@ -87,24 +87,6 @@ namespace UnitTest
         }
 
 		[TestMethod]
-		public void Task_ConcurrentStack()
-		{
-			MyTask.Test_ConcurrentStack();
-		}
-
-		[TestMethod]
-		public void Task_ConcurrentQueue()
-		{
-			MyTask.Test_ConcurrentQueue();
-		}
-
-		[TestMethod]
-		public void Task_ConcurrentDictionary()
-        {
-			MyTask.Test_ConcurrentDictionary();
-        }
-
-		[TestMethod]
 		public void Task_Cancellation()
         {
 			MyTask.Task_Cancellation();
