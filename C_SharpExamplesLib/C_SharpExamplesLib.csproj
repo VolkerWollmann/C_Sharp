@@ -66,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileOperation\MyFileOperation.cs" />
+    <Compile Include="Language\ConccurentDataTypes\MyConcurrentBag.cs" />
+    <Compile Include="Language\ConccurentDataTypes\MyLock.cs" />
     <Compile Include="Language\CSharp6.cs" />
     <Compile Include="Language\CSharp7.cs" />
     <Compile Include="Language\DataTypes\MyHashSet.cs" />

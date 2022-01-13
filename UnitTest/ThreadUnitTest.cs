@@ -57,12 +57,6 @@ namespace UnitTest
 		}
 
         [TestMethod]
-        public void Thread_ParallelConcurrentBagAccess()
-        {
-            MyThread.ParallelInsertIntoConcurrentBagInsteadOfList();
-        }
-
-        [TestMethod]
 		public void Thread_Abort()
 		{
 			MyThread.Thread_Abort();
