@@ -25,6 +25,7 @@ namespace C_Sharp.Language
 			Action invalidTypeCastAction = () => { var t1 = (MyCastClass2)x; Assert.IsNull(t1); };
             Assert.ThrowsException<InvalidCastException>(invalidTypeCastAction.Invoke);
 
+			// cast with #as
 			// cannot cast independent classes on each another, even if they look equal
 			MyCastClass2 t2 = x as MyCastClass2;
 			Assert.IsNull(t2);
