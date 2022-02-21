@@ -1,3 +1,4 @@
+using C_Sharp.Language.Roslyn;
 using Xunit;
 using Xunit.Abstractions;
 using CSharpCore;
@@ -64,5 +65,19 @@ namespace NetCoreUnitTest
             MyVector.Test();
         }
 
+        [Fact]
+        public void Roslyn()
+        {
+            MyRoslynNextCore.Test();
+        }
+    }
+
+    public class RoslynUnitTest
+    {
+        [Fact]
+        public void Roslyn()
+        {
+            MyRoslynNextCore.Test();
+        }
     }
 }
