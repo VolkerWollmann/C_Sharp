@@ -16,7 +16,20 @@ namespace C_Sharp.Language
 
         private void Write(ConstantExpression constantExpression)
         {
-            Console.WriteLine(GetSpace() + "Constant:" + constantExpression.Value );
+            var cr = typeof(System.Linq.EnumerableQuery<int>);
+            
+            if (constantExpression.Type.IsAssignableFrom(cr))
+            {
+                Console.WriteLine(GetSpace() + "Enumerable Query:" + constantExpression.Value);
+            }
+            else
+                Console.WriteLine(GetSpace() + "Constant:" + constantExpression.Value );
+        }
+
+        private void Write(UnaryExpression unaryExpression)
+        {
+            Console.WriteLine(GetSpace() + "Unary Expression:");
+            Write(unaryExpression.Operand);
         }
         private void Write(Expression<Func<int>> parameterLessIntegerFunction )
         {
@@ -76,6 +89,8 @@ namespace C_Sharp.Language
 
             if (expression is ConstantExpression constantExpression)
                 Write(constantExpression);
+            else if (expression is UnaryExpression unaryExpression)
+                Write(unaryExpression);
             else if (expression is Expression<Func<int>> expression1)
                 Write(expression1);
             else if (expression is Expression<Func<int, int>> expression2)
@@ -164,6 +179,10 @@ namespace C_Sharp.Language
                 numberLessThan42Greater5 =
                 l => (l.Where(i => (i < 42)).Where(i => (i > 5)));
             expressions.Add(numberLessThan42Greater5);
+
+            var numberList = Enumerable.Range(1, 10).AsQueryable();
+            IQueryable<int> filteredNumberList = numberList.Where(i => i >= 3 && i <= 6).AsQueryable();
+            expressions.Add(filteredNumberList.Expression);
 
             return expressions;
         }
