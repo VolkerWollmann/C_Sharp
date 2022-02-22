@@ -111,6 +111,7 @@
     <Compile Include="Language\MyLinq.cs" />
     <Compile Include="Language\DataTypes\MyList.cs" />
     <Compile Include="Language\MyMultipleInheritance.cs" />
+    <Compile Include="Language\MyObsolete.cs" />
     <Compile Include="Language\MyOperator.cs" />
     <Compile Include="Language\Event\MyWeakEventManagerExample.cs" />
     <Compile Include="Language\MyProjectSettings.cs" />

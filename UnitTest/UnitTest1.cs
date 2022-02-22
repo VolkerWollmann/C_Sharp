@@ -162,5 +162,11 @@ namespace UnitTest
         {
             CSharp.ImplicitExplicitOperator();
         }
+
+        [TestMethod]
+        public void ObsoleteMethod()
+        {
+			MyObsolete.Test();
+        }
 	}
 }
