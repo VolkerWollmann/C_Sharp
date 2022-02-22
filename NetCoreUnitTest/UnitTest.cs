@@ -65,11 +65,6 @@ namespace NetCoreUnitTest
             MyVector.Test();
         }
 
-        [Fact]
-        public void Roslyn()
-        {
-            MyRoslynNextCore.Test();
-        }
     }
 
     public class RoslynUnitTest
