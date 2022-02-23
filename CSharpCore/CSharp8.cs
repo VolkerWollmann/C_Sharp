@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CSharpCore
 {
@@ -52,6 +53,7 @@ namespace CSharpCore
                 Name = name;
             }
 
+            // ReSharper disable once UnusedMember.Local
             public void Deconstruct(out string name)
             {
                 name = Name;
@@ -63,7 +65,7 @@ namespace CSharpCore
             internal string FamilyName { get; }
             internal string FirstName { get; }
 
-            internal int Age { private set; get; }
+            internal int Age { get; }
 
             internal Animal Pet { get; }
 
@@ -75,6 +77,7 @@ namespace CSharpCore
                 Pet = pet;
             }
 
+            // ReSharper disable once UnusedMember.Local
             public void Deconstruct(out string familyName, out string firstName, out int age, out Animal pet)
             {
                 familyName = FamilyName;
@@ -92,13 +95,15 @@ namespace CSharpCore
         // #pattern matching #recursive #structured
         // https://docs.microsoft.com/en-us/archive/msdn-magazine/2019/may/csharp-8-0-pattern-matching-in-csharp-8-0
         // https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/proposals/csharp-8.0/patterns
-        private static string T(Person person)
+        [SuppressMessage("ReSharper", "RedundantAlwaysMatchSubpattern")]
+        [SuppressMessage("ReSharper", "RedundantTypeCheckInPattern")]
+        private static string PersonMatch(Person person)
         {
             return person switch
             {
-                // ReSharper disable once PatternAlwaysOfType
                 (Person { FamilyName: "Polizia", FirstName: { } firstName, Age: _, Pet: null })
                     => S(firstName + " ohne Macchi"),
+                
                 (Person { FamilyName: "Polizia", FirstName: { } firstName, Age: _, Pet: (Animal { Name: { } petName }) })
                     => S(firstName + " mit " + petName),
                 _ => throw new System.NotImplementedException(),
@@ -108,10 +113,10 @@ namespace CSharpCore
         public static void PatternMatching()
         {
             Person wolfgang1 = new Person("Polizia", "Wolfgang", 35, null);
-            Assert.AreEqual(T(wolfgang1), "Wolfgang ohne Macchi");
+            Assert.AreEqual(PersonMatch(wolfgang1), "Wolfgang ohne Macchi");
 
             Person wolfgang2 = new Person("Polizia", "Wolfgang", 35, new Animal("Macchi"));
-            Assert.AreEqual(T(wolfgang2), "Wolfgang mit Macchi");
+            Assert.AreEqual(PersonMatch(wolfgang2), "Wolfgang mit Macchi");
         }
     }
 }

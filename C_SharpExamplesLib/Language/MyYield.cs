@@ -50,7 +50,7 @@ namespace C_Sharp.Language
         {
             foreach (int i in OneToThree().Union(FourToSix()).ToList())
             {
-                Console.WriteLine("1..6 Union of Enumerables to List: Return " + i);
+                Console.WriteLine("1..6 Union of Enumerable to List: Return " + i);
                 yield return i;
             }
         }

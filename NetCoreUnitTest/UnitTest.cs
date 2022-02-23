@@ -1,7 +1,7 @@
-using C_Sharp.Language.Roslyn;
 using Xunit;
 using Xunit.Abstractions;
 using CSharpCore;
+using CSharpCore.Roslyn;
 using CSharpNaming;
 
 namespace NetCoreUnitTest

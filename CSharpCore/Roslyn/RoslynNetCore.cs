@@ -1,28 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Text;
 
-
-namespace C_Sharp.Language.Roslyn
+namespace CSharpCore.Roslyn
 {
     internal class CustomWalker : CSharpSyntaxWalker
     {
-        static int Tabs = 0;
+        static int _tabs;
         public override void Visit(SyntaxNode node)
         {
-            Tabs++;
-            var indents = new String(' ', Tabs);
+            _tabs++;
+            var indents = new String(' ', _tabs);
             Debug.WriteLine(indents + $"{node.Kind(),-20}" + ":" + MyRoslynNextCore.ProgramText.Substring(node.FullSpan.Start, node.FullSpan.Length).Substring(0, Math.Min(100, node.FullSpan.Length)).Replace("  ", " ").Replace("\r\n", string.Empty));
             base.Visit(node);
-            --Tabs;
+            --_tabs;
         }
     }
     public class MyRoslynNextCore

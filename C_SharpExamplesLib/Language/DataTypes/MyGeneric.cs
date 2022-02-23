@@ -174,7 +174,8 @@ namespace C_Sharp.Language.DataTypes
 			Assert.AreEqual(42, ((GenericClass<RefinedClassA>)t5).GenericClassMethod());
 
 			//create dynamic invalid generic class instance
-			Assert.ThrowsException<ArgumentException>(() => { Type t6 = typeof(GenericClass<>).MakeGenericType(typeof(int)); });
+            // ReSharper disable once UnusedVariable
+            Assert.ThrowsException<ArgumentException>(() => { Type t6 = typeof(GenericClass<>).MakeGenericType(typeof(int)); });
 
 		}
     }

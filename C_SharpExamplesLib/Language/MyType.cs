@@ -74,11 +74,13 @@ namespace C_Sharp.Language
             Type myType2Type = typeof(MyType2);
             string mytype2Name = myType2Type.FullName;
 
+            // ReSharper disable once PossibleNullReferenceException
             var ass = Type.GetType(mytype2Name).Assembly;
             Assert.IsNotNull(ass);
 
             Type myType3Type = typeof(MyType3);
             string mytype3Name = myType3Type.FullName;
+            // ReSharper disable once AssignNullToNotNullAttribute
             Type testType = ass.GetType(mytype3Name);
 
             Assert.AreEqual(myType3Type, testType);

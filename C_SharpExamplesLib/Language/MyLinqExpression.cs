@@ -16,7 +16,7 @@ namespace C_Sharp.Language
 
         private void Write(ConstantExpression constantExpression)
         {
-            var cr = typeof(System.Linq.EnumerableQuery<int>);
+            var cr = typeof(EnumerableQuery<int>);
             
             if (constantExpression.Type.IsAssignableFrom(cr))
             {

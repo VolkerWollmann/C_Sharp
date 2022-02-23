@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language.DataTypes
@@ -8,10 +7,13 @@ namespace C_Sharp.Language.DataTypes
     {
         public static void Test()
         {
-            HashSet<int> integerHashSet = new HashSet<int>();
+            // ReSharper disable once UseObjectOrCollectionInitializer
+            HashSet<int> integerHashSet = new HashSet<int>
+            {
+                1,
+                2
+            };
 
-            integerHashSet.Add(1);
-            integerHashSet.Add(2);
             integerHashSet.Add(1);
 
             Assert.AreEqual(integerHashSet.Count, 2);
