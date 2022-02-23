@@ -20,17 +20,15 @@ namespace C_Sharp.Language.Roslyn
         {
             Tabs++;
             var indents = new String(' ', Tabs);
-            Debug.WriteLine(indents + node.Kind());
+            Debug.WriteLine(indents + $"{node.Kind(),-20}" + ":" + MyRoslynNextCore.ProgramText.Substring(node.FullSpan.Start, node.FullSpan.Length).Substring(0, Math.Min(100, node.FullSpan.Length)).Replace("  ", " ").Replace("\r\n", string.Empty));
             base.Visit(node);
             --Tabs;
         }
     }
     public class MyRoslynNextCore
     {
-        public static void Test()
-        {
-            const string programText =
-                @"  using System;
+        public const string ProgramText =
+            @"  using System;
                     using System.Collections;
                     using System.Linq;
                     using System.Text;
@@ -45,8 +43,9 @@ namespace C_Sharp.Language.Roslyn
                             }
                         }
                     }";
-
-            SyntaxTree tree = CSharpSyntaxTree.ParseText(programText);
+        public static void Test()
+        {
+            SyntaxTree tree = CSharpSyntaxTree.ParseText(ProgramText);
             CompilationUnitSyntax root = tree.GetCompilationUnitRoot();
 
             Debug.WriteLine($"The tree is a {root.Kind()} node.");
@@ -58,11 +57,11 @@ namespace C_Sharp.Language.Roslyn
             // Check
             NamespaceDeclarationSyntax nameSpace = (NamespaceDeclarationSyntax)root.Members[0];
             Debug.WriteLine("Namespace:");
-            Debug.WriteLine(programText.Substring(nameSpace.FullSpan.Start, nameSpace.FullSpan.Length));
+            Debug.WriteLine(ProgramText.Substring(nameSpace.FullSpan.Start, nameSpace.FullSpan.Length));
 
             ClassDeclarationSyntax programClass = (ClassDeclarationSyntax)nameSpace.Members[0];
             Debug.WriteLine("Class:");
-            Debug.WriteLine(programText.Substring(programClass.FullSpan.Start, programClass.FullSpan.Length));
+            Debug.WriteLine(ProgramText.Substring(programClass.FullSpan.Start, programClass.FullSpan.Length));
 
             var walker = new CustomWalker();
             walker.Visit(tree.GetRoot());
