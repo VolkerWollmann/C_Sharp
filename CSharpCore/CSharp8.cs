@@ -2,6 +2,7 @@
 
 namespace CSharpCore
 {
+    // Karlsruhe, VS2022, 09.03.22
     public class CSharp8
     {
         public static void RangeOperators()
