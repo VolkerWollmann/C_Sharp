@@ -30,7 +30,7 @@ namespace C_Sharp.Language
 			string e3 = e1 + e2;
 			Assert.AreEqual(e3, "Donkey" );
 
-            // ReSharper disable once UnreachableCode
+            // ReSharper disable once HeuristicUnreachableCode
             string s = (0 < 1) ? "always" : "never";
 			Assert.IsTrue(s == "always");
 		}

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
@@ -63,7 +62,8 @@ namespace C_Sharp.Language
 		}
 		#endregion
 
-        private int CompareInternal(MyIComparable other)
+        
+		private int CompareInternal(MyIComparable other)
         {
             if ((this.Animal == None) && (other.Animal == None))
                 return 0;
@@ -130,7 +130,7 @@ namespace C_Sharp.Language
         }
 		#endregion
 
-		#region Test
+		#region Tests
 
         public static void TestIComparable()
         {
@@ -249,6 +249,7 @@ namespace C_Sharp.Language
 		//bool IEquatable<MyEquatable>.Equals(MyEquatable other)
         public bool Equals(MyIEquatable other)
 		{
+			// #Object #ReferenceEquals 
 			if (Object.ReferenceEquals(other, null))
 				return false;
 

@@ -20,7 +20,7 @@ namespace C_Sharp.Language
 
             // #ConfigurationManager
             Configuration configuration =  ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            Assert.IsTrue(configuration.FilePath.Contains("TestPlatform"));
+            Assert.IsTrue(configuration.FilePath.Contains("UnitTest"));
         }
 
         public static void CurrentDirectory()

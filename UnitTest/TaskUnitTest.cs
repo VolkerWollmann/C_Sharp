@@ -1,4 +1,5 @@
 ﻿using System;
+using C_Sharp.Language.ConcurrentDataTypes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using C_Sharp.Language.Task;
 
@@ -35,7 +36,7 @@ namespace UnitTest
 		[TestMethod]
 		public void Task_ObjectLock()
 		{
-			MyTask.TestTaskObjectLock();
+            MyLock.SharedTotal.TestTaskObjectLock();
 		}
 
 		[TestMethod]
@@ -84,24 +85,6 @@ namespace UnitTest
 		public void Task_BlockingCollection()
         {
 			MyTask.Test_BlockingCollection();
-        }
-
-		[TestMethod]
-		public void Task_ConcurrentStack()
-		{
-			MyTask.Test_ConcurrentStack();
-		}
-
-		[TestMethod]
-		public void Task_ConcurrentQueue()
-		{
-			MyTask.Test_ConcurrentQueue();
-		}
-
-		[TestMethod]
-		public void Task_ConcurrentDictionary()
-        {
-			MyTask.Test_ConcurrentDictionary();
         }
 
 		[TestMethod]

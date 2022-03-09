@@ -1,8 +1,0 @@
-﻿namespace UnitTest
-{
-    class T
-    {
-
-
-    }
-}

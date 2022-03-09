@@ -35,7 +35,6 @@ namespace C_Sharp.Language
         {
             _i = _i + 1;
             return _i < _range.Count;
-            ;
         }
 
         public void Reset()

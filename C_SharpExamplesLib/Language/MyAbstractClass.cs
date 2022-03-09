@@ -50,7 +50,9 @@ namespace C_Sharp.Language
 				Assert.AreEqual(myConcreteClassBaseClassInstanceType, myConcreteClassType);
 				Assert.AreNotEqual(myConcreteClassBaseClassInstanceType, myAbstractClassType);
 
-                Assert.AreEqual(42, ((MyConcreteClass)myConcreteClassInstance).GetNumber());
+                Assert.AreEqual(42, ((MyConcreteClass)myConcreteClassBaseClassInstance).GetNumber());
+
+                Assert.AreEqual(42, myConcreteClassBaseClassInstance.GetNumber());
 			}
 
         }
