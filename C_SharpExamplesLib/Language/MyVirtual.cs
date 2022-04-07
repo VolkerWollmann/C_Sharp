@@ -3,7 +3,7 @@
 namespace C_Sharp.Language
 {
 	/// <summary>
-	/// 
+	/// #virtual method
 	/// </summary>
 	public class MyVirtual
 	{
