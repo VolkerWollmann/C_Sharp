@@ -96,6 +96,17 @@ namespace C_Sharp.Language
             return _range.Count > 0;
         }
 
+        private bool Any(Func<int,bool> condition)
+        {
+            foreach (int i in _range)
+            {
+                if (condition(i))
+                    return true;
+            }
+
+            return false;
+        }
+
         #endregion
 
         #region IQueryProvider
@@ -123,22 +134,15 @@ namespace C_Sharp.Language
                     
                     if (methodCallExpression.Arguments.Count == 2)
                     {
+                        // complie lambda function as condition for any
                         UnaryExpression unaryExpression = (UnaryExpression)methodCallExpression.Arguments[1];
-                        
                         List<ParameterExpression> lp = new List<ParameterExpression>();
                         lp.Add(Expression.Parameter(ElementType));
                         InvocationExpression ie = Expression.Invoke(unaryExpression, lp);
                         var lambdaExpression = Expression.Lambda<Func<int,bool>>(ie, lp);
                         var anyFunction = lambdaExpression.Compile();
 
-                        foreach (int i in _range)
-                        {
-                            if (anyFunction(i))
-                                return true;
-                        }
-                        // evaluate lambda condition for each element
-
-                        return false;
+                        return Any(anyFunction);
                     }
                 }
             }
