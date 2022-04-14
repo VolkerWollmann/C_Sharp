@@ -136,8 +136,7 @@ namespace C_Sharp.Language
                     {
                         // complie lambda function as condition for any
                         UnaryExpression unaryExpression = (UnaryExpression)methodCallExpression.Arguments[1];
-                        List<ParameterExpression> lp = new List<ParameterExpression>();
-                        lp.Add(Expression.Parameter(ElementType));
+                        List<ParameterExpression> lp = new List<ParameterExpression> {Expression.Parameter(ElementType)};
                         InvocationExpression ie = Expression.Invoke(unaryExpression, lp);
                         var lambdaExpression = Expression.Lambda<Func<int,bool>>(ie, lp);
                         var anyFunction = lambdaExpression.Compile();
