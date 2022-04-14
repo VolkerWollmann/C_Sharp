@@ -44,7 +44,7 @@ namespace C_Sharp.Language
 
         int IEnumerator<int>.Current => _range[_i];
 
-        object IEnumerator.Current => ((IEnumerator<int>)this).Current;
+        object IEnumerator.Current => ((IEnumerator<int>) this).Current;
 
         #endregion
 
@@ -61,6 +61,7 @@ namespace C_Sharp.Language
         }
 
         #endregion
+
 
         #region IQueryable<int>
 
@@ -87,6 +88,15 @@ namespace C_Sharp.Language
 
         #endregion
 
+        #region Enumerable
+
+        private bool Any()
+        {
+            return _range.Count > 0;
+        }
+
+        #endregion
+
         #region IQueryProvider
 
         public IQueryable CreateQuery(Expression expression)
@@ -101,13 +111,20 @@ namespace C_Sharp.Language
 
         public object Execute(Expression expression)
         {
+            if (expression.NodeType == ExpressionType.Call)
+            {
+                // private implementation of Enumerable.Any
+                if (((MethodCallExpression) expression).Method.Name == "Any")
+                    return Any();
+            }
+
             var result = Expression.Lambda(expression).Compile().DynamicInvoke();
             return result;
         }
 
         public TResult Execute<TResult>(Expression expression)
         {
-            return (TResult)Execute(expression);
+            return (TResult) Execute(expression);
         }
 
         #endregion
@@ -120,7 +137,7 @@ namespace C_Sharp.Language
             _i = 0;
         }
 
-        private MyIntegerRange(int start, int range) : this()
+        public MyIntegerRange(int start, int range) : this()
         {
             int j = start;
             while (j <= start + range)
@@ -130,6 +147,10 @@ namespace C_Sharp.Language
         }
 
         #endregion
+    }
+
+    public class MyIntegerRangeTest
+    {
 
         public static void Test()
         {
@@ -145,17 +166,19 @@ namespace C_Sharp.Language
 
             // myIntegerRange stands at 6
             // uses int IEnumerator<int>.Current
-            var a = ((IEnumerator<int>)myIntegerRange).Current;
+            var a = ((IEnumerator<int>) myIntegerRange).Current;
             Assert.AreEqual(a, 6);
 
             // uses object IEnumerator.Current
-            var b = ((IEnumerator)myIntegerRange).Current;
+            var b = ((IEnumerator) myIntegerRange).Current;
             Assert.IsNotNull(b);
 
             // does work
             // uses public IEnumerator<int> GetEnumerator()
             var d = myIntegerRange.ToList();
             Assert.IsNotNull(d);
+
+            var d1 = myIntegerRange.Any();
 
             //does work
             // uses public Expression Expression
