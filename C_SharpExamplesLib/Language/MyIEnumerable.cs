@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
@@ -113,9 +114,33 @@ namespace C_Sharp.Language
         {
             if (expression.NodeType == ExpressionType.Call)
             {
-                // private implementation of Enumerable.Any
-                if (((MethodCallExpression) expression).Method.Name == "Any")
-                    return Any();
+                MethodCallExpression methodCallExpression = (MethodCallExpression) expression;
+                // private implementation of Enumerable.Any #Any
+                if (methodCallExpression.Method.Name == "Any")
+                {
+                    if (methodCallExpression.Arguments.Count == 1)
+                        return Any();
+                    
+                    if (methodCallExpression.Arguments.Count == 2)
+                    {
+                        UnaryExpression unaryExpression = (UnaryExpression)methodCallExpression.Arguments[1];
+                        
+                        List<ParameterExpression> lp = new List<ParameterExpression>();
+                        lp.Add(Expression.Parameter(ElementType));
+                        InvocationExpression ie = Expression.Invoke(unaryExpression, lp);
+                        var lambdaExpression = Expression.Lambda<Func<int,bool>>(ie, lp);
+                        var anyFunction = lambdaExpression.Compile();
+
+                        foreach (int i in _range)
+                        {
+                            if (anyFunction(i))
+                                return true;
+                        }
+                        // evaluate lambda condition for each element
+
+                        return false;
+                    }
+                }
             }
 
             var result = Expression.Lambda(expression).Compile().DynamicInvoke();
@@ -178,7 +203,13 @@ namespace C_Sharp.Language
             var d = myIntegerRange.ToList();
             Assert.IsNotNull(d);
 
+            // does work
+            // uses private any implementation
             var d1 = myIntegerRange.Any();
+
+            // does work
+            // uses private conditional any implementation
+            var d2 = myIntegerRange.Any(i => i > 5);
 
             //does work
             // uses public Expression Expression
