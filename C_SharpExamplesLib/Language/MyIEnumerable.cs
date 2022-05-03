@@ -36,7 +36,11 @@ namespace C_Sharp.Language
 
         public bool MoveNext()
         {
-            _i = _i + 1;
+            do
+            {
+                _i = _i + 1;
+            } while ((_i < _range.Count) && !EvalQueryExpression());
+
             return _i < _range.Count;
         }
 
@@ -76,15 +80,12 @@ namespace C_Sharp.Language
         {
             get
             {
-                var z = Expression.Constant(this);
-                Assert.IsNotNull(z);
+                // evaluation should be done by MyIntegerRange
+                // expose MyIntegerRange as constant outside
+                var expression = Expression.Constant(this);
+                Assert.IsNotNull(expression);
 
-                var x = _range.AsQueryable();
-                var y = x.Expression;
-
-                return z;
-
-                //return this.Expression;
+                return expression;
             }
         }
 
@@ -127,6 +128,18 @@ namespace C_Sharp.Language
 
         #region IQueryProvider
 
+        private Expression QueryExpression { get; set; }
+
+        private bool EvalQueryExpression()
+        {
+            if (QueryExpression == null)
+                return true;
+
+            // evaluate where condition for current element
+            var result = ExecuteForCurrentElement(QueryExpression);
+
+            return (bool)result;
+        }
         public IQueryable CreateQuery(Expression expression)
         {
             return new EnumerableQuery<int>(expression);
@@ -134,7 +147,33 @@ namespace C_Sharp.Language
 
         public IQueryable<T> CreateQuery<T>(Expression expression)
         {
-            return new EnumerableQuery<T>(expression);
+            QueryExpression = expression;
+            return (IQueryable <T>)this;
+        }
+
+        public object ExecuteForCurrentElement(Expression expression)
+        {
+            if (expression.NodeType == ExpressionType.Call)
+            {
+                MethodCallExpression methodCallExpression = (MethodCallExpression) expression;
+                // private implementation of Enumerable.Any #Any
+                if (methodCallExpression.Method.Name == "Where")
+                {
+                    if (methodCallExpression.Arguments.Count == 2)
+                    {
+                        UnaryExpression unaryExpression = (UnaryExpression)methodCallExpression.Arguments[1];
+                        List<ParameterExpression> lp = new List<ParameterExpression> { Expression.Parameter(ElementType) };
+                        InvocationExpression ie = Expression.Invoke(unaryExpression, lp);
+                        var lambdaExpression = Expression.Lambda<Func<int, bool>>(ie, lp);
+                        var whereFunction = lambdaExpression.Compile();
+
+                        bool result = whereFunction(((IEnumerator<int>) this).Current);
+                        return result;
+                    }
+                }
+            }
+
+            return null;
         }
 
         public object Execute(Expression expression)
@@ -165,6 +204,8 @@ namespace C_Sharp.Language
                 {
                     return Sum();
                 }
+
+                
             }
 
             var result = Expression.Lambda(expression).Compile().DynamicInvoke();
@@ -248,7 +289,7 @@ namespace C_Sharp.Language
             var f = myIntegerRange.Sum();
             Assert.IsTrue(f > 0);
 
-            //does not work
+            //does not really  work
             // uses public Expression Expression
             // uses public IQueryable<T> CreateQuery<T>(Expression expression)
             var e = myIntegerRange.Where(i => (i < 5)).ToList();
