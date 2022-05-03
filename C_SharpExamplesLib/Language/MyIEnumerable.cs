@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
 {
+
     /// <summary>
     /// <![CDATA[ #IEnumerable<int> #IEnumerator<int> #IQueryable<int> #IQueryProvider ]]>
     /// returns the number 1, ...., 10
@@ -41,7 +42,7 @@ namespace C_Sharp.Language
 
         public void Reset()
         {
-            _i = 0;
+            _i = -1;
         }
 
         int IEnumerator<int>.Current => _range[_i];
@@ -54,11 +55,13 @@ namespace C_Sharp.Language
 
         public IEnumerator<int> GetEnumerator()
         {
+            Reset();
             return this;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
+            Reset();
             return this;
         }
 
@@ -92,7 +95,7 @@ namespace C_Sharp.Language
 
         #endregion
 
-        #region Enumerable
+        #region Queryable Extensions Methods
 
         private bool Any()
         {
@@ -101,7 +104,7 @@ namespace C_Sharp.Language
 
         private bool Any(Func<int,bool> condition)
         {
-            foreach (int i in _range)
+            foreach (int i in this)
             {
                 if (condition(i))
                     return true;
@@ -112,7 +115,11 @@ namespace C_Sharp.Language
 
         private int Sum()
         {
-            int sum = _range.Sum();
+            int sum = 0;
+            foreach (int i in this)
+            {
+                sum = sum + i;
+            }
             return sum;
         }
 
