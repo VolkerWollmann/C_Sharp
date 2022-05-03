@@ -249,7 +249,7 @@ namespace C_Sharp.Language
     public class MyIntegerRangeTest
     {
 
-        public static void Test()
+        public static void Test_IEnumerable()
         {
             // uses public IEnumerator<int> GetEnumerator()
             // uses public bool MoveNext()
@@ -274,6 +274,11 @@ namespace C_Sharp.Language
             // uses public IEnumerator<int> GetEnumerator()
             var d = myIntegerRange.ToList();
             Assert.IsNotNull(d);
+        }
+
+        public static void Test_IQueryable()
+        {
+            MyIntegerRange myIntegerRange = new MyIntegerRange(1, 10);
 
             // does work
             // uses private any implementation
