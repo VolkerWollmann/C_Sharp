@@ -17,6 +17,7 @@ namespace C_Sharp.Language
     public class
         MyIntegerRange : IEnumerator<int>, IQueryable<int>, IQueryProvider // IQueryable<int> includes IEnumerable<int>
     {
+        public  string Name { get; set; }
         private readonly List<int> _range;
         private int _i;
 
@@ -78,7 +79,9 @@ namespace C_Sharp.Language
                 var x = _range.AsQueryable();
                 var y = x.Expression;
 
-                return y;
+                return z;
+
+                //return this.Expression;
             }
         }
 
@@ -159,13 +162,14 @@ namespace C_Sharp.Language
 
         #region Constructor
 
-        private MyIntegerRange()
+        private MyIntegerRange(string name)
         {
+            Name = name;
             _range = new List<int>();
             _i = 0;
         }
 
-        public MyIntegerRange(int start, int range) : this()
+        public MyIntegerRange(int start, int range, string name) : this(name)
         {
             int j = start;
             while (j <= start + range)
@@ -174,7 +178,13 @@ namespace C_Sharp.Language
             }
         }
 
-        #endregion
+        public MyIntegerRange(int start, int range) :
+            this(start, range, "MIR" + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second)
+        {
+
+        }
+
+            #endregion
     }
 
     public class MyIntegerRangeTest
@@ -214,7 +224,7 @@ namespace C_Sharp.Language
             // uses private conditional any implementation
             var d2 = myIntegerRange.Any(i => i > 5);
 
-            //does work
+            //does not work
             // uses public Expression Expression
             // uses public IQueryable<T> CreateQuery<T>(Expression expression)
             var e = myIntegerRange.Where(i => (i < 5)).ToList();
