@@ -289,7 +289,7 @@ namespace C_Sharp.Language
             var f = myIntegerRange.Sum();
             Assert.IsTrue(f > 0);
 
-            //does not really  work
+            //does work
             // uses public Expression Expression
             // uses public IQueryable<T> CreateQuery<T>(Expression expression)
             var e = myIntegerRange.Where(i => (i < 5)).ToList();
