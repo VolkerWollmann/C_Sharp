@@ -150,8 +150,9 @@ namespace C_Sharp.Language
 
         public IQueryable<T> CreateQuery<T>(Expression expression)
         {
-            QueryExpression = expression;
-            return (IQueryable <T>)this;
+            MyIntegerRange copy = this.Copy();
+            copy.QueryExpression = expression;
+            return (IQueryable <T>)copy;
         }
 
         public object ExecuteForCurrentElement(Expression expression)
@@ -248,7 +249,18 @@ namespace C_Sharp.Language
 
         }
 
-            #endregion
+        #endregion
+
+        #region Copy
+
+        public MyIntegerRange Copy()
+        {
+            MyIntegerRange copy = new MyIntegerRange(this.Start, this.Range,
+                this.Name + "_Copy_" + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second);
+
+            return copy;
+        }
+        #endregion
     }
 
     public class MyIntegerRangeTest
@@ -311,6 +323,20 @@ namespace C_Sharp.Language
             var g1 = myIntegerRange.Where(i => (i < 5));
             var g2 = g1.ToList();
             Assert.IsTrue(g2.Count == 4);
+        }
+
+        public static void IQueryable_MultipleExpressions()
+        {
+            //does work lazy evaluation
+            //treat more like expressions
+            MyIntegerRange myIntegerRange = new MyIntegerRange(1, 10);
+            var g1 = myIntegerRange.Where(i => (i < 5));
+            var g2 = myIntegerRange.Where(i => (i < 3));
+
+            var g1r = g1.ToList();
+            Assert.IsTrue(g1r.Count == 4);
+            var g2r = g2.ToList();
+            Assert.IsTrue(g2r.Count == 2);
         }
     }
 }

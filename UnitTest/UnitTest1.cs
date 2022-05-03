@@ -121,6 +121,12 @@ namespace UnitTest
             MyIntegerRangeTest.Test_IQueryable();
         }
 
+        [TestMethod]
+        public void IQueryable_MultipleExpressions()
+        {
+            MyIntegerRangeTest.IQueryable_MultipleExpressions();
+        }
+
 		[TestMethod]
 		public void ReadFileTest()
 		{
