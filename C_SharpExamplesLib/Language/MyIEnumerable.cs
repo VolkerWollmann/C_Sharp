@@ -156,7 +156,7 @@ namespace C_Sharp.Language
             if (expression.NodeType == ExpressionType.Call)
             {
                 MethodCallExpression methodCallExpression = (MethodCallExpression) expression;
-                // private implementation of Enumerable.Any #Any
+                // private implementation of Queryable.Where
                 if (methodCallExpression.Method.Name == "Where")
                 {
                     if (methodCallExpression.Arguments.Count == 2)
