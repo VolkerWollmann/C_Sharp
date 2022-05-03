@@ -299,6 +299,13 @@ namespace C_Sharp.Language
             // uses public IQueryable<T> CreateQuery<T>(Expression expression)
             var e = myIntegerRange.Where(i => (i < 5)).ToList();
             Assert.IsNotNull(e);
+
+            //does work lazy evaluation
+            // uses public Expression Expression
+            // uses public IQueryable<T> CreateQuery<T>(Expression expression)
+            var g1 = myIntegerRange.Where(i => (i < 5));
+            var g2 = g1.ToList();
+            Assert.IsTrue(g2.Count == 4);
         }
     }
 }
