@@ -110,7 +110,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void IEnumerable_Test()
+		public void IEnumerable_IQueryable_Test()
 		{
             MyIntegerRangeTest.Test();
 		}
