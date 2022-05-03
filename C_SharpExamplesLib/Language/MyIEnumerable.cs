@@ -19,6 +19,8 @@ namespace C_Sharp.Language
         MyIntegerRange : IEnumerator<int>, IQueryable<int>, IQueryProvider // IQueryable<int> includes IEnumerable<int>
     {
         public  string Name { get; set; }
+        public int Start { get; set; }
+        public int Range { get; set; }
         private readonly List<int> _range;
         private int _i;
 
@@ -231,8 +233,10 @@ namespace C_Sharp.Language
 
         public MyIntegerRange(int start, int range, string name) : this(name)
         {
-            int j = start;
-            while (j <= start + range)
+            Start = start;
+            Range = range;
+            int j = Start;
+            while (j <= Start + Range)
             {
                 _range.Add(j++);
             }
