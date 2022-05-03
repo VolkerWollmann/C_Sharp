@@ -110,6 +110,12 @@ namespace C_Sharp.Language
             return false;
         }
 
+        private int Sum()
+        {
+            int sum = _range.Sum();
+            return sum;
+        }
+
         #endregion
 
         #region IQueryProvider
@@ -146,6 +152,11 @@ namespace C_Sharp.Language
 
                         return Any(anyFunction);
                     }
+                }
+
+                if (methodCallExpression.Method.Name == "Sum")
+                {
+                    return Sum();
                 }
             }
 
@@ -224,18 +235,17 @@ namespace C_Sharp.Language
             // uses private conditional any implementation
             var d2 = myIntegerRange.Any(i => i > 5);
 
-            //does not work
-            // uses public Expression Expression
-            // uses public IQueryable<T> CreateQuery<T>(Expression expression)
-            var e = myIntegerRange.Where(i => (i < 5)).ToList();
-            Assert.IsNotNull(e);
-
             // does work 
             // uses public Expression Expression
             // uses public TResult Execute<TResult>(Expression expression)
             var f = myIntegerRange.Sum();
             Assert.IsTrue(f > 0);
 
+            //does not work
+            // uses public Expression Expression
+            // uses public IQueryable<T> CreateQuery<T>(Expression expression)
+            var e = myIntegerRange.Where(i => (i < 5)).ToList();
+            Assert.IsNotNull(e);
         }
     }
 }
