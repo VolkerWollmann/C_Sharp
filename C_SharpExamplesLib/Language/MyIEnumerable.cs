@@ -142,7 +142,8 @@ namespace C_Sharp.Language
         }
         public IQueryable CreateQuery(Expression expression)
         {
-            return new EnumerableQuery<int>(expression);
+            QueryExpression = expression;
+            return this;
         }
 
         public IQueryable<T> CreateQuery<T>(Expression expression)
