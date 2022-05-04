@@ -110,24 +110,6 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void IEnumerable_Test()
-		{
-            MyIntegerRangeTest.Test_IEnumerable();
-		}
-
-        [TestMethod]
-        public void IQueryable_Test()
-        {
-            MyIntegerRangeTest.Test_IQueryable();
-        }
-
-        [TestMethod]
-        public void IQueryable_MultipleExpressions()
-        {
-            MyIntegerRangeTest.IQueryable_MultipleExpressions();
-        }
-
-		[TestMethod]
 		public void ReadFileTest()
 		{
 			MyFileOperation.ReadLinesFromFile();

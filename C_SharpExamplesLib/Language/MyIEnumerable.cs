@@ -18,6 +18,8 @@ namespace C_Sharp.Language
     public class
         MyIntegerRange : IEnumerator<int>, IQueryable<int>, IQueryProvider // IQueryable<int> includes IEnumerable<int>
     {
+        private static int Counter=1;
+
         public  string Name { get; set; }
         public int Start { get; set; }
         public int Range { get; set; }
@@ -144,14 +146,15 @@ namespace C_Sharp.Language
         }
         public IQueryable CreateQuery(Expression expression)
         {
-            QueryExpression = expression;
-            return this;
+            MyIntegerRange copy = this.Copy();
+            copy.QueryExpression = expression;  // TODO: needs concatenation
+            return copy;
         }
 
         public IQueryable<T> CreateQuery<T>(Expression expression)
         {
             MyIntegerRange copy = this.Copy();
-            copy.QueryExpression = expression;
+            copy.QueryExpression = expression;  // TODO: needs concatenation
             return (IQueryable <T>)copy;
         }
 
@@ -244,7 +247,7 @@ namespace C_Sharp.Language
         }
 
         public MyIntegerRange(int start, int range) :
-            this(start, range, "MIR" + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second)
+            this(start, range, "MIR" + Counter++ )
         {
 
         }
@@ -256,7 +259,7 @@ namespace C_Sharp.Language
         public MyIntegerRange Copy()
         {
             MyIntegerRange copy = new MyIntegerRange(this.Start, this.Range,
-                this.Name + "_Copy_" + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second);
+                this.Name + "_Copy_" + Counter++);
 
             return copy;
         }
@@ -266,7 +269,7 @@ namespace C_Sharp.Language
     public class MyIntegerRangeTest
     {
 
-        public static void Test_IEnumerable()
+        public static void Test_IQueryable_as_IEnumerable()
         {
             // uses public IEnumerator<int> GetEnumerator()
             // uses public bool MoveNext()
@@ -325,13 +328,30 @@ namespace C_Sharp.Language
             Assert.IsTrue(g2.Count == 4);
         }
 
-        public static void IQueryable_MultipleExpressions()
+        public static void Test_MultipleExpressions()
         {
             //does work lazy evaluation
+            //CreateQuery creates a copy  
             //treat more like expressions
             MyIntegerRange myIntegerRange = new MyIntegerRange(1, 10);
             var g1 = myIntegerRange.Where(i => (i < 5));
             var g2 = myIntegerRange.Where(i => (i < 3));
+
+            var g1r = g1.ToList();
+            Assert.IsTrue(g1r.Count == 4);
+            var g2r = g2.ToList();
+            Assert.IsTrue(g2r.Count == 2);
+        }
+
+
+        public static void Test_CascadedExpressions()
+        {
+            //does work lazy evaluation
+            //CreateQuery creates a copy  
+            //treat more like expressions
+            MyIntegerRange myIntegerRange = new MyIntegerRange(1, 10);
+            var g1 = myIntegerRange.Where(i => (i < 5));
+            var g2 = g1.Where(i => (i < 3));
 
             var g1r = g1.ToList();
             Assert.IsTrue(g1r.Count == 4);

@@ -56,6 +56,7 @@
     <Compile Include="DelgateUnitTest.cs" />
     <Compile Include="EnvironmentUnitTest.cs" />
     <Compile Include="EventUnitTest.cs" />
+    <Compile Include="IQueryableUnitTest.cs" />
     <Compile Include="LinqUnitTest.cs" />
     <Compile Include="RoslynUnitTest.cs" />
     <Compile Include="TaskUnitTest.cs" />
