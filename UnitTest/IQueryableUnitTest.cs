@@ -33,5 +33,11 @@ namespace UnitTest
         {
             MyIntegerRangeTest.Test_CascadedExpressions();
         }
+
+        [TestMethod]
+        public void Test()
+        {
+            MyIntegerRangeTest.Test_Test();
+        }
     }
 }

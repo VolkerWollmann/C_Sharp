@@ -86,7 +86,12 @@ namespace C_Sharp.Language
             {
                 // evaluation should be done by MyIntegerRange
                 // expose MyIntegerRange as constant outside
-                var expression = Expression.Constant(this);
+                Expression expression;
+                if (QueryExpression == null)
+                    expression = Expression.Constant(this);
+                else
+                    expression = this.QueryExpression;
+
                 Assert.IsNotNull(expression);
 
                 return expression;
@@ -154,7 +159,9 @@ namespace C_Sharp.Language
         public IQueryable<T> CreateQuery<T>(Expression expression)
         {
             MyIntegerRange copy = this.Copy();
-            copy.QueryExpression = expression;  // TODO: needs concatenation
+            copy.QueryExpression = expression;
+
+            //Expression.AndAlso()
             return (IQueryable <T>)copy;
         }
 
@@ -260,6 +267,7 @@ namespace C_Sharp.Language
         {
             MyIntegerRange copy = new MyIntegerRange(this.Start, this.Range,
                 this.Name + "_Copy_" + Counter++);
+            copy.QueryExpression = this.QueryExpression;
 
             return copy;
         }
@@ -351,12 +359,22 @@ namespace C_Sharp.Language
             //treat more like expressions
             MyIntegerRange myIntegerRange = new MyIntegerRange(1, 10);
             var g1 = myIntegerRange.Where(i => (i % 2 == 0));
-            var g2 = g1.Where(i => (i <= 6 ));
+            var g2 = g1.Where(i => (i <= 6));
 
             var g1r = g1.ToList();
             Assert.IsTrue(g1r.Count == 5);
             var g2r = g2.ToList();
-            // Assert.IsTrue(g2r.Count == 3);   // TODO: Must be g2r == { 2,4,6 }
+            // Assert.IsTrue(g2r.Count == 3);   // TODO: Is g2r == {1,2,3,4,5,6} Must be g2r == { 2,4,6 }
+        }
+
+        public static void Test_Test()
+        {
+            List<int> l = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+            var l1 = l.Where(i => (i % 2 == 0)).Where(i => (i <= 6));
+            MyIntegerRange myIntegerRange = new MyIntegerRange(1, 10);
+            var g1 = myIntegerRange.Where(i => (i % 2 == 0)).Where(i => (i <= 6));
+
+            var g1r = g1.ToList();
         }
     }
 }
