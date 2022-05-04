@@ -160,8 +160,7 @@ namespace C_Sharp.Language
         {
             MyIntegerRange copy = this.Copy();
             copy.QueryExpression = expression;
-
-            //Expression.AndAlso()
+            string x = typeof(T).ToString();
             return (IQueryable <T>)copy;
         }
 
@@ -364,17 +363,25 @@ namespace C_Sharp.Language
             var g1r = g1.ToList();
             Assert.IsTrue(g1r.Count == 5);
             var g2r = g2.ToList();
-            // Assert.IsTrue(g2r.Count == 3);   // TODO: Is g2r == {1,2,3,4,5,6} Must be g2r == { 2,4,6 }
+            Assert.IsTrue(g2r.Count == 3);
+        }
+
+        public static void Test_ProjectionExpression()
+        {
+            MyIntegerRange myIntegerRange = new MyIntegerRange(1, 5);
+            var g1 = myIntegerRange.Where(i => (i <= 3));
+            var g2 = g1.Select(x => new Tuple<int, char>(2*x, 'A'));
+            var g3 = g2.ToList();
+            Assert.IsTrue( g3.Last().Item1 == 6);
         }
 
         public static void Test_Test()
         {
-            List<int> l = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-            var l1 = l.Where(i => (i % 2 == 0)).Where(i => (i <= 6));
-            MyIntegerRange myIntegerRange = new MyIntegerRange(1, 10);
-            var g1 = myIntegerRange.Where(i => (i % 2 == 0)).Where(i => (i <= 6));
-
-            var g1r = g1.ToList();
+            List<int> l = new List<int>() {1, 2, 3, 4, 5};
+            var g1 = l.Where(i => (i <= 3));
+            var g2 = g1.Select(x => new Tuple<int, char>(2*x, 'A'));
+            var g3 = g2.ToList();
+            Assert.IsTrue(g3.Last().Item1 == 3);
         }
     }
 }

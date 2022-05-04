@@ -35,9 +35,17 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void ProjectionExpression()
+        {
+            MyIntegerRangeTest.Test_ProjectionExpression();
+        }
+
+        [TestMethod]
         public void Test()
         {
             MyIntegerRangeTest.Test_Test();
         }
+
+
     }
 }
