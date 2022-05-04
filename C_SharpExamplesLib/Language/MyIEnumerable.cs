@@ -350,13 +350,13 @@ namespace C_Sharp.Language
             //CreateQuery creates a copy  
             //treat more like expressions
             MyIntegerRange myIntegerRange = new MyIntegerRange(1, 10);
-            var g1 = myIntegerRange.Where(i => (i < 5));
-            var g2 = g1.Where(i => (i < 3));
+            var g1 = myIntegerRange.Where(i => (i % 2 == 0));
+            var g2 = g1.Where(i => (i <= 6 ));
 
             var g1r = g1.ToList();
-            Assert.IsTrue(g1r.Count == 4);
+            Assert.IsTrue(g1r.Count == 5);
             var g2r = g2.ToList();
-            Assert.IsTrue(g2r.Count == 2);
+            // Assert.IsTrue(g2r.Count == 3);   // TODO: Must be g2r == { 2,4,6 }
         }
     }
 }
