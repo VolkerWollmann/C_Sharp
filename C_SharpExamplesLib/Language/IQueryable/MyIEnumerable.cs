@@ -16,7 +16,7 @@ namespace C_Sharp.Language
     /// see : https://putridparrot.com/blog/creating-a-custom-linq-provider/
     /// </summary>
     public class
-        MyIntegerRange : IEnumerator<int>, IQueryable<int>, IQueryProvider // IQueryable<int> includes IEnumerable<int>
+        MyIntegerRange : IEnumerator<int>, IQueryable<int> // IQueryable<int> includes IEnumerable<int>
     {
         private static int Counter=1;
 
@@ -40,11 +40,8 @@ namespace C_Sharp.Language
 
         public bool MoveNext()
         {
-            do
-            {
-                _i = _i + 1;
-            } while ((_i < _range.Count) && !EvalQueryExpression());
-
+            _i = _i + 1;
+            
             return _i < _range.Count;
         }
 
@@ -87,10 +84,8 @@ namespace C_Sharp.Language
                 // evaluation should be done by MyIntegerRange
                 // expose MyIntegerRange as constant outside
                 Expression expression;
-                if (QueryExpression == null)
-                    expression = Expression.Constant(this);
-                else
-                    expression = this.QueryExpression;
+                expression = Expression.Constant(this);
+                //expression = this.GetEnumerator();
 
                 Assert.IsNotNull(expression);
 
@@ -101,18 +96,19 @@ namespace C_Sharp.Language
         // determines linq types
         public Type ElementType => typeof(int);
 
-        public IQueryProvider Provider => this;
+        private IQueryProvider _provider;
+        public IQueryProvider Provider => _provider;
 
         #endregion
 
         #region Queryable Extensions Methods
 
-        private bool Any()
+        public bool Any()
         {
             return _range.Count > 0;
         }
 
-        private bool Any(Func<int,bool> condition)
+        public bool Any(Func<int,bool> condition)
         {
             foreach (int i in this)
             {
@@ -123,7 +119,7 @@ namespace C_Sharp.Language
             return false;
         }
 
-        private int Sum()
+        public int Sum()
         {
             int sum = 0;
             foreach (int i in this)
@@ -135,103 +131,6 @@ namespace C_Sharp.Language
 
         #endregion
 
-        #region IQueryProvider
-
-        private Expression QueryExpression { get; set; }
-
-        private bool EvalQueryExpression()
-        {
-            if (QueryExpression == null)
-                return true;
-
-            // evaluate where condition for current element
-            var result = ExecuteForCurrentElement(QueryExpression);
-
-            return (bool)result;
-        }
-        public IQueryable CreateQuery(Expression expression)
-        {
-            MyIntegerRange copy = this.Copy();
-            copy.QueryExpression = expression;  // TODO: needs concatenation
-            return copy;
-        }
-
-        public IQueryable<T> CreateQuery<T>(Expression expression)
-        {
-            MyIntegerRange copy = this.Copy();
-            copy.QueryExpression = expression;
-            string x = typeof(T).ToString();
-            return (IQueryable <T>)copy;
-        }
-
-        public object ExecuteForCurrentElement(Expression expression)
-        {
-            if (expression.NodeType == ExpressionType.Call)
-            {
-                MethodCallExpression methodCallExpression = (MethodCallExpression) expression;
-                // private implementation of Queryable.Where
-                if (methodCallExpression.Method.Name == "Where")
-                {
-                    if (methodCallExpression.Arguments.Count == 2)
-                    {
-                        UnaryExpression unaryExpression = (UnaryExpression)methodCallExpression.Arguments[1];
-                        List<ParameterExpression> lp = new List<ParameterExpression> { Expression.Parameter(ElementType) };
-                        InvocationExpression ie = Expression.Invoke(unaryExpression, lp);
-                        var lambdaExpression = Expression.Lambda<Func<int, bool>>(ie, lp);
-                        var whereFunction = lambdaExpression.Compile();
-
-                        bool result = whereFunction(((IEnumerator<int>) this).Current);
-                        return result;
-                    }
-                }
-            }
-
-            return null;
-        }
-
-        public object Execute(Expression expression)
-        {
-            if (expression.NodeType == ExpressionType.Call)
-            {
-                MethodCallExpression methodCallExpression = (MethodCallExpression) expression;
-                // private implementation of Enumerable.Any #Any
-                if (methodCallExpression.Method.Name == "Any")
-                {
-                    if (methodCallExpression.Arguments.Count == 1)
-                        return Any();
-                    
-                    if (methodCallExpression.Arguments.Count == 2)
-                    {
-                        // complie lambda function as condition for any
-                        UnaryExpression unaryExpression = (UnaryExpression)methodCallExpression.Arguments[1];
-                        List<ParameterExpression> lp = new List<ParameterExpression> {Expression.Parameter(ElementType)};
-                        InvocationExpression ie = Expression.Invoke(unaryExpression, lp);
-                        var lambdaExpression = Expression.Lambda<Func<int,bool>>(ie, lp);
-                        var anyFunction = lambdaExpression.Compile();
-
-                        return Any(anyFunction);
-                    }
-                }
-
-                if (methodCallExpression.Method.Name == "Sum")
-                {
-                    return Sum();
-                }
-
-                
-            }
-
-            var result = Expression.Lambda(expression).Compile().DynamicInvoke();
-            return result;
-        }
-
-        public TResult Execute<TResult>(Expression expression)
-        {
-            return (TResult) Execute(expression);
-        }
-
-        #endregion
-
         #region Constructor
 
         private MyIntegerRange(string name)
@@ -239,6 +138,8 @@ namespace C_Sharp.Language
             Name = name;
             _range = new List<int>();
             _i = 0;
+
+            _provider = new MyIntegerRangeIQueryProvider(this);
         }
 
         public MyIntegerRange(int start, int range, string name) : this(name)
@@ -266,122 +167,10 @@ namespace C_Sharp.Language
         {
             MyIntegerRange copy = new MyIntegerRange(this.Start, this.Range,
                 this.Name + "_Copy_" + Counter++);
-            copy.QueryExpression = this.QueryExpression;
-
+           
             return copy;
         }
         #endregion
     }
 
-    public class MyIntegerRangeTest
-    {
-
-        public static void Test_IQueryable_as_IEnumerable()
-        {
-            // uses public IEnumerator<int> GetEnumerator()
-            // uses public bool MoveNext()
-            // uses int IEnumerator<int>.Current
-            MyIntegerRange myIntegerRange = new MyIntegerRange(1, 10);
-            foreach (int i in myIntegerRange)
-            {
-                if (i > 5)
-                    break;
-            }
-
-            // myIntegerRange stands at 6
-            // uses int IEnumerator<int>.Current
-            var a = ((IEnumerator<int>) myIntegerRange).Current;
-            Assert.AreEqual(a, 6);
-
-            // uses object IEnumerator.Current
-            var b = ((IEnumerator) myIntegerRange).Current;
-            Assert.IsNotNull(b);
-
-            // does work
-            // uses public IEnumerator<int> GetEnumerator()
-            var d = myIntegerRange.ToList();
-            Assert.IsNotNull(d);
-        }
-
-        public static void Test_IQueryable()
-        {
-            MyIntegerRange myIntegerRange = new MyIntegerRange(1, 10);
-
-            // does work
-            // uses private any implementation
-            var d1 = myIntegerRange.Any();
-
-            // does work
-            // uses private conditional any implementation
-            var d2 = myIntegerRange.Any(i => i > 5);
-
-            // does work 
-            // uses public Expression Expression
-            // uses public TResult Execute<TResult>(Expression expression)
-            var f = myIntegerRange.Sum();
-            Assert.IsTrue(f > 0);
-
-            //does work
-            // uses public Expression Expression
-            // uses public IQueryable<T> CreateQuery<T>(Expression expression)
-            var e = myIntegerRange.Where(i => (i < 5)).ToList();
-            Assert.IsNotNull(e);
-
-            //does work lazy evaluation
-            // uses public Expression Expression
-            // uses public IQueryable<T> CreateQuery<T>(Expression expression)
-            var g1 = myIntegerRange.Where(i => (i < 5));
-            var g2 = g1.ToList();
-            Assert.IsTrue(g2.Count == 4);
-        }
-
-        public static void Test_MultipleExpressions()
-        {
-            //does work lazy evaluation
-            //CreateQuery creates a copy  
-            //treat more like expressions
-            MyIntegerRange myIntegerRange = new MyIntegerRange(1, 10);
-            var g1 = myIntegerRange.Where(i => (i < 5));
-            var g2 = myIntegerRange.Where(i => (i < 3));
-
-            var g1r = g1.ToList();
-            Assert.IsTrue(g1r.Count == 4);
-            var g2r = g2.ToList();
-            Assert.IsTrue(g2r.Count == 2);
-        }
-
-
-        public static void Test_CascadedExpressions()
-        {
-            //does work lazy evaluation
-            //CreateQuery creates a copy  
-            //treat more like expressions
-            MyIntegerRange myIntegerRange = new MyIntegerRange(1, 10);
-            var g1 = myIntegerRange.Where(i => (i % 2 == 0));
-            var g2 = g1.Where(i => (i <= 6));
-
-            var g1r = g1.ToList();
-            Assert.IsTrue(g1r.Count == 5);
-            var g2r = g2.ToList();
-            Assert.IsTrue(g2r.Count == 3);
-        }
-
-        public static void Test_ProjectionExpression()
-        {
-            MyIntegerRange myIntegerRange = new MyIntegerRange(1, 5);
-            var g1 = myIntegerRange.Where(i => (i <= 3));
-            var g2 = g1.Select(x => new Tuple<int, char>(2*x, 'A'));
-            var g3 = g2.ToList();
-            Assert.IsTrue( g3.Last().Item1 == 6);
-        }
-
-        public static void Test_Test()
-        {
-            List<int> l = new List<int>() {1, 2, 3, 4, 5};
-            var g1 = l.Where(i => (i <= 3));
-            var g2 = g1.Select(x => new Tuple<int, char>(2*x, 'A'));
-            var g3 = g2.ToList();
-            Assert.IsTrue(g3.Last().Item1 == 3);
-        }
-    }
 }
