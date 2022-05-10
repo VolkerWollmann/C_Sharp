@@ -121,6 +121,12 @@ namespace UnitTest
 			MyCast.Test();
 		}
 
+        [TestMethod]
+        public void Attribute()
+        {
+			MyAttributedClassTest.Test();
+        }
+
 		[TestMethod]
 		public void LocalFunction()
         {
