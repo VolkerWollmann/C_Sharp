@@ -1,4 +1,5 @@
-﻿using ThisAccessibilityProject = AccessibilityProject;
+﻿using System.Linq;
+using ThisAccessibilityProject = AccessibilityProject;
 using OtherAccessibilityProject = AccessibilityOtherProject;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using C_Sharp.FileOperation;
@@ -19,6 +20,12 @@ namespace UnitTest
         [TestMethod]
         public void IQueryable_Test()
         {
+            MyIntegerRange myIntegerRange = new MyIntegerRange(1, 10);
+
+            // does work
+            // uses private any implementation
+            var d1 = ((IQueryable<int>) myIntegerRange).Any();
+
             MyIntegerRangeTest.Test_IQueryable();
         }
 

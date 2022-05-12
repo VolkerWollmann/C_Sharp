@@ -103,12 +103,12 @@ namespace C_Sharp.Language
 
         #region Queryable Extensions Methods
 
-        public bool Any()
+        internal bool Any()
         {
             return _range.Count > 0;
         }
 
-        public bool Any(Func<int,bool> condition)
+        internal bool Any(Func<int,bool> condition)
         {
             foreach (int i in this)
             {
@@ -119,7 +119,7 @@ namespace C_Sharp.Language
             return false;
         }
 
-        public int Sum()
+        internal int Sum()
         {
             int sum = 0;
             foreach (int i in this)
@@ -159,6 +159,24 @@ namespace C_Sharp.Language
 
         }
 
+        public MyIntegerRange(MyIntegerRange myIntegerRange)
+        {
+            Name = myIntegerRange.Name;
+            Start = myIntegerRange.Start;
+            Range = myIntegerRange.Range;
+
+            _range = new List<int>();
+            _i = 0;
+
+            int j = Start;
+            while (j <= Start + Range)
+            {
+                _range.Add(j++);
+            }
+
+
+        }
+             
         #endregion
 
         #region Copy

@@ -7,19 +7,18 @@ using System.Threading.Tasks;
 
 namespace C_Sharp.Language
 {
-    public class MyIntegerRangeIQueryProvider : IQueryProvider
+    public class MyIntegerRangeIQueryProvider : MyIntegerRange, IQueryProvider
     {
-        private MyIntegerRange _myIntegerRange;
-
+       
         public System.Linq.IQueryable CreateQuery(Expression expression)
         {
-            MyIntegerRange copy = _myIntegerRange.Copy();
+            MyIntegerRange copy = base.Copy();
             return copy;
         }
 
         public IQueryable<T> CreateQuery<T>(Expression expression)
         {
-            MyIntegerRange copy = _myIntegerRange.Copy();
+            MyIntegerRange copy = base.Copy();
             string x = typeof(T).ToString();
             return (IQueryable<T>)expression;
         }
@@ -34,24 +33,24 @@ namespace C_Sharp.Language
                 if (methodCallExpression.Method.Name == "Any")
                 {
                     if (methodCallExpression.Arguments.Count == 1)
-                        return _myIntegerRange.Any();
+                        return base.Any();
 
                     if (methodCallExpression.Arguments.Count == 2)
                     {
                         // complie lambda function as condition for any
                         UnaryExpression unaryExpression = (UnaryExpression)methodCallExpression.Arguments[1];
-                        List<ParameterExpression> lp = new List<ParameterExpression> { Expression.Parameter(_myIntegerRange.ElementType) };
+                        List<ParameterExpression> lp = new List<ParameterExpression> { Expression.Parameter(base.ElementType) };
                         InvocationExpression ie = Expression.Invoke(unaryExpression, lp);
                         var lambdaExpression = Expression.Lambda<Func<int, bool>>(ie, lp);
                         var anyFunction = lambdaExpression.Compile();
 
-                        return _myIntegerRange.Any(anyFunction);
+                        return base.Any(anyFunction);
                     }
                 }
 
                 if (methodCallExpression.Method.Name == "Sum")
                 {
-                    return _myIntegerRange.Sum();
+                    return base.Sum();
                 }
 
 
@@ -67,10 +66,11 @@ namespace C_Sharp.Language
         }
 
         #region Constructor
-        public MyIntegerRangeIQueryProvider(MyIntegerRange myIntegerRange)
+        public MyIntegerRangeIQueryProvider(MyIntegerRange myIntegerRange): base(myIntegerRange)
         {
-            _myIntegerRange = myIntegerRange;
+            
         }
         #endregion
     }
+
 }
