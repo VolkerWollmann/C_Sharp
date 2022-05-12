@@ -103,7 +103,7 @@ namespace C_Sharp.Language
 
         #region Queryable Extensions Methods
 
-        internal bool Any()
+        internal bool xAny()
         {
             return _range.Count > 0;
         }

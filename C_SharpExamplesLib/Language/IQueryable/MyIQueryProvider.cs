@@ -33,7 +33,7 @@ namespace C_Sharp.Language
                 if (methodCallExpression.Method.Name == "Any")
                 {
                     if (methodCallExpression.Arguments.Count == 1)
-                        return base.Any();
+                        return this.Any();
 
                     if (methodCallExpression.Arguments.Count == 2)
                     {
@@ -71,6 +71,7 @@ namespace C_Sharp.Language
             
         }
         #endregion
+
     }
 
 }
