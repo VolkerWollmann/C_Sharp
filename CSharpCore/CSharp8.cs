@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CSharpCore
@@ -20,6 +21,7 @@ namespace CSharpCore
             Assert.IsNotNull(slice4);
         }
 
+        #region switch case guards
         private readonly struct Point
         {
             public Point(int x, int y) => (X, Y) = (x, y);
@@ -44,7 +46,9 @@ namespace CSharpCore
             Point r = Transform(new Point(3, 3));
             Assert.AreEqual(r.X, 6);
         }
+        #endregion
 
+        #region pattern matching
         private class Animal
         {
             internal string Name { get; }
@@ -107,7 +111,7 @@ namespace CSharpCore
                 
                 (Person { FamilyName: "Polizia", FirstName: { } firstName, Age: _, Pet: (Animal { Name: { } petName }) })
                     => S(firstName + " mit " + petName),
-                _ => throw new System.NotImplementedException(),
+                _ => throw new NotImplementedException(),
             };
         }
 
@@ -119,5 +123,22 @@ namespace CSharpCore
             Person wolfgang2 = new Person("Polizia", "Wolfgang", 35, new Animal("Macchi"));
             Assert.AreEqual(PersonMatch(wolfgang2), "Wolfgang mit Macchi");
         }
+        #endregion
+
+        #region null forgiving operator
+#nullable enable
+        public class NullablePerson
+        {
+            public NullablePerson(string name) => Name = name ?? throw new ArgumentNullException(name);
+
+            public string Name { get; }
+        }
+
+        public static void NullNameShouldThrowTest()
+        {
+            // ! null forgiving operator
+            var person = new NullablePerson(null!);
+        }
+        #endregion
     }
 }

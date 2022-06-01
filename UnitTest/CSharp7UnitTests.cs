@@ -23,5 +23,11 @@ namespace UnitTest
 		{
 			CSharp7.TestDeconstruct();
 		}
+
+        [TestMethod, ExpectedException(typeof(OutOfMemoryException), "Expected OutOfMemoryException" )]
+        public void ExpectedException()
+        {
+            throw new OutOfMemoryException();
+        }
 	}
 }

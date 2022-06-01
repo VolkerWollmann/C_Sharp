@@ -1,8 +1,11 @@
+using System;
 using Xunit;
 using Xunit.Abstractions;
 using CSharpCore;
 using CSharpCore.Roslyn;
 using CSharpNaming;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace NetCoreUnitTest
 {
@@ -24,6 +27,23 @@ namespace NetCoreUnitTest
         public void PatternMatching()
         {
             CSharp8.PatternMatching();
+        }
+
+        // seems to not work, see unit 
+        [Fact]
+        //[ExpectedException(typeof(ArgumentNullException), "Expected Argument null exception")]
+        public void NullForgivingOperator()
+        {
+            try
+            {
+                CSharp8.NullNameShouldThrowTest();
+            }
+            catch (ArgumentNullException ane)
+            {
+                Assert.AreNotEqual(ane, null);
+                //throw ane;
+            }
+           
         }
     }
     public class CSharp9UnitTest

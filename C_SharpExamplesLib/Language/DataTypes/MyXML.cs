@@ -12,14 +12,14 @@ namespace C_Sharp.Language.DataTypes
     public class MyXml
     {
         // #linq to #xml
-        private static XElement Create_MyAnimals_as_XElement_1()
+        private static XElement Create_MyAnimals_as_XElements_1()
         {
             return new XElement("My_Animals",
                 new XElement("Animal_1", "Donkey"),
                 new XElement("Animal_2", "Dog"));
         }
 
-        private static XElement Create_MyAnimals_as_XElement_2()
+        private static XElement Create_MyAnimals_as_XElements_2()
         {
             XElement myAnimals = new XElement("My_Animals");
             XElement donkey = new XElement("Animal_1", "Donkey");
@@ -51,19 +51,20 @@ namespace C_Sharp.Language.DataTypes
         }
         public static void TestXmlElement()
         {
-            XElement myAnimalsAsXElement1 = Create_MyAnimals_as_XElement_1();
-            XElement myAnimalsAsXElement2 = Create_MyAnimals_as_XElement_2();
-            Assert.AreEqual(myAnimalsAsXElement1.ToString(), myAnimalsAsXElement2.ToString());
+            XElement myAnimalsAsXElements1 = Create_MyAnimals_as_XElements_1();
+            XElement myAnimalsAsXElements2 = Create_MyAnimals_as_XElements_2();
+            Assert.AreEqual(myAnimalsAsXElements1.ToString(), myAnimalsAsXElements2.ToString());
 
-            XmlDocument myAnimalsAsXmlElement = Create_MyAnimals_as_XmlDocument();
+            XmlDocument myAnimalsAsXmlElements = Create_MyAnimals_as_XmlDocument();
 
-            string s1 = myAnimalsAsXElement1.ToString().Replace("\r\n", "").Replace("  ","");
-            string s2 = myAnimalsAsXmlElement.OuterXml;
+            string s1 = myAnimalsAsXElements1.ToString().Replace("\r\n", "").Replace("  ","");
+            string s2 = myAnimalsAsXmlElements.OuterXml;
             Assert.AreEqual(s1, s2);
 
             // #XNode #XPathSelectElements
-            List<XElement> l = myAnimalsAsXElement1.XPathSelectElements("./Animal_2").ToList();
+            List<XElement> l = myAnimalsAsXElements1.XPathSelectElements("./Animal_2").ToList();
             Assert.IsTrue( l[0].Value=="Dog");
+
         }
 
         // #XNode vs #XElement
@@ -86,7 +87,7 @@ namespace C_Sharp.Language.DataTypes
         // read/write #xml to/from #file
         public static void TestXmlFile()
         {
-            XElement myAnimalsAsXElement1 = Create_MyAnimals_as_XElement_1();
+            XElement myAnimalsAsXElement1 = Create_MyAnimals_as_XElements_1();
             
             string tempFile = Path.GetTempFileName();
             myAnimalsAsXElement1.Save(tempFile);
