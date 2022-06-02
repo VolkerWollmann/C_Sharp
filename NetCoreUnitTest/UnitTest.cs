@@ -85,6 +85,13 @@ namespace NetCoreUnitTest
             MyVector.Test();
         }
 
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        public void TestTheoryExample(int i)
+        {
+            Assert.IsTrue(i< 2);
+        }
     }
 
     public class RoslynUnitTest
