@@ -148,7 +148,7 @@ namespace CSharpCore
         #endregion
 
             #region tuple pattern matching
-            // #Tuple #pattern #Tuple pattern
+            // #Tuple #pattern #Tuple pattern #switch expression
             private static string RockPaperScissors(string first, string second)
             => (first, second) switch
             {
