@@ -24,9 +24,21 @@ namespace NetCoreUnitTest
         }
 
         [Fact]
-        public void PatternMatching()
+        public void PropertyPatternMatching()
         {
-            CSharp8.PatternMatching();
+            CSharp8.PropertyPatternMatching();
+        }
+
+        [Fact]
+        public void PositionalPatternMatching()
+        {
+            CSharp8.PositionalPatternMatching();
+        }
+
+        [Fact]
+        public void TuplePatternMatching()
+        {
+            CSharp8.TuplePatternMatching();
         }
 
         // seems to not work, see unit 

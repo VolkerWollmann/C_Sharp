@@ -48,7 +48,7 @@ namespace CSharpCore
         }
         #endregion
 
-        #region pattern matching
+        #region property, postional pattern matching 
         private class Animal
         {
             internal string Name { get; }
@@ -97,7 +97,7 @@ namespace CSharpCore
             return s;
         }
 
-        // #pattern matching #recursive #structured
+        // #pattern matching #recursive #structured #property pattern
         // https://docs.microsoft.com/en-us/archive/msdn-magazine/2019/may/csharp-8-0-pattern-matching-in-csharp-8-0
         // https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/proposals/csharp-8.0/patterns
         [SuppressMessage("ReSharper", "RedundantAlwaysMatchSubpattern")]
@@ -115,7 +115,19 @@ namespace CSharpCore
             };
         }
 
-        public static void PatternMatching()
+        private static string PersonPositionalMatch(Person person) => person
+
+            switch
+            {
+                //("Polizia","Wolfgang", _, ("Macchi")) => "", not recursive
+                ("Polizia", "Wolfgang", _,_ ) => "Polizia and Wolfgang match",
+                ("Polizia", _, _, _ ) => "Polizia matches",
+                var (_,_,_,_) => "nothing matches",
+                _ => ""
+            };
+        
+
+        public static void PropertyPatternMatching()
         {
             Person wolfgang1 = new Person("Polizia", "Wolfgang", 35, null);
             Assert.AreEqual(PersonMatch(wolfgang1), "Wolfgang ohne Macchi");
@@ -123,6 +135,38 @@ namespace CSharpCore
             Person wolfgang2 = new Person("Polizia", "Wolfgang", 35, new Animal("Macchi"));
             Assert.AreEqual(PersonMatch(wolfgang2), "Wolfgang mit Macchi");
         }
+
+        public static void PositionalPatternMatching()
+        {
+            Person wolfgang1 = new Person("Polizia", "", 35, null);
+            Assert.AreEqual(PersonPositionalMatch(wolfgang1), "Polizia matches");
+
+            Person wolfgang2 = new Person("Polizia", "Wolfgang", 35, new Animal("Macchi"));
+            Assert.AreEqual(PersonPositionalMatch(wolfgang2), "Polizia and Wolfgang match");
+        }
+
+        #endregion
+
+            #region tuple pattern matching
+            // #Tuple #pattern #Tuple pattern
+            private static string RockPaperScissors(string first, string second)
+            => (first, second) switch
+            {
+                ("rock", "paper") => "rock is covered by paper. Paper wins.",
+                ("rock", "scissors") => "rock breaks scissors. Rock wins.",
+                ("paper", "rock") => "paper covers rock. Paper wins.",
+                ("paper", "scissors") => "paper is cut by scissors. Scissors wins.",
+                ("scissors", "rock") => "scissors is broken by rock. Rock wins.",
+                ("scissors", "paper") => "scissors cuts paper. Scissors wins.",
+                (_, _) => "tie"
+            };
+
+        public static void TuplePatternMatching()
+        {
+            Assert.AreEqual(RockPaperScissors("rock", "scissors"), "rock breaks scissors. Rock wins.");
+            Assert.AreEqual(RockPaperScissors("rock","rock"), "tie");
+        }
+
         #endregion
 
         #region null forgiving operator
