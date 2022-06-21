@@ -115,17 +115,17 @@ namespace CSharpCore
             };
         }
 
-        private static string PersonPositionalMatch(Person person) => person
-
-            switch
+        private static string PersonPositionalMatch(Person person)
+        {
+            return person switch
             {
                 //("Polizia","Wolfgang", _, ("Macchi")) => "", not recursive
-                ("Polizia", "Wolfgang", _,_ ) => "Polizia and Wolfgang match",
-                ("Polizia", _, _, _ ) => "Polizia matches",
-                var (_,_,_,_) => "nothing matches",
+                ("Polizia", "Wolfgang", _, _) => "Polizia and Wolfgang match",
+                ("Polizia", _, _, _) => "Polizia matches",
+                var (_, _, _, _) => "nothing matches",
                 _ => ""
             };
-        
+        }
 
         public static void PropertyPatternMatching()
         {
