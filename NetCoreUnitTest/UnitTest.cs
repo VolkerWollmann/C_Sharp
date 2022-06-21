@@ -57,6 +57,12 @@ namespace NetCoreUnitTest
             }
            
         }
+
+        [Fact]
+        public void NullCoalescingExample()
+        {
+            CSharp8.NullCoalescingExample();
+        }
     }
     public class CSharp9UnitTest
     {

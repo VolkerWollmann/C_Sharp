@@ -184,5 +184,19 @@ namespace CSharpCore
             var person = new NullablePerson(null!);
         }
         #endregion
+
+        #region Null-coalescing assignment
+        // #Null-coalescing assignment #Null #coalescing assignment
+        public static void NullCoalescingExample()
+        {
+            int? i = null!;
+
+            i ??= 5;
+            Assert.AreEqual(5, i);
+
+            i ??= 6;
+            Assert.AreEqual(5, i);
+        }
+        #endregion
     }
 }
