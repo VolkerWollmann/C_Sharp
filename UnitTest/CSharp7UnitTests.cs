@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using C_Sharp.Language;
+using System.Collections.Generic;
 
 namespace UnitTest
 {
@@ -37,5 +38,20 @@ namespace UnitTest
         {
             Assert.AreEqual(value1 + value2, string.Concat(value1, value2));
         }
+
+
+        private static IEnumerable<object[]> GetDynamicData()
+        {
+            yield return new object[] { "a", "b" };
+            yield return new object[] { " ", "b" };
+        }
+
+        [DynamicData(nameof(GetDynamicData), DynamicDataSourceType.Method)] 
+        [TestMethod()]
+        public void DynamicDataTestMethod(string value1, string value2)
+        {
+            Assert.AreEqual(value1 + value2, string.Concat(value1, value2));
+        }
+        
     }
 }
