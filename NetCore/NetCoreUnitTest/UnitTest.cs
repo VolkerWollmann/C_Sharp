@@ -6,6 +6,7 @@ using CSharpCore.Roslyn;
 using CSharpNaming;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+using LoadingAssembly;
 
 namespace NetCoreUnitTest
 {
@@ -109,6 +110,12 @@ namespace NetCoreUnitTest
         public void TestTheoryExample(int i)
         {
             Assert.IsTrue(i< 2);
+        }
+
+        [Fact]
+        public void TestDynamicLoad()
+        {
+            LoadingClass.Execute();
         }
     }
 
