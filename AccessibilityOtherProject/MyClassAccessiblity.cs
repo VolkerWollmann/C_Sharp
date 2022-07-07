@@ -5,6 +5,9 @@ namespace AccessibilityOtherProject
 { 
 	public static class MyClassAccessibilityTest
 	{
+        /// <summary>
+        /// Accesses classes from referenced project AccessibilityProject.
+        /// </summary>
 		public static void Test()
 		{
             MyClassAccessibility mcaA = new MyClassAccessibility {MyPublicNumber = 42};
