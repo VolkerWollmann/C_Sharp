@@ -29,5 +29,13 @@ namespace UnitTest
         {
             throw new OutOfMemoryException();
         }
-	}
+
+        [DataTestMethod]
+        [DataRow("a", "b")]
+        [DataRow(" ", "a")]
+        public void DataTestMethod(string value1, string value2)
+        {
+            Assert.AreEqual(value1 + value2, string.Concat(value1, value2));
+        }
+    }
 }
