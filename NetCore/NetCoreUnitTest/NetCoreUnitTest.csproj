@@ -23,8 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\CSharpNaming\CSharpNaming.csproj" />
     <ProjectReference Include="..\CSharpCore\CSharpCore.csproj" />
-    <ProjectReference Include="..\CSharpNaming\CSharpNaming.csproj" />
   </ItemGroup>
 
 </Project>
