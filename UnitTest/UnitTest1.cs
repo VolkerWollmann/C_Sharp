@@ -140,6 +140,18 @@ namespace UnitTest
 		}
 
         [TestMethod]
+		public void NamedParameters()
+        {
+			CSharp.NamedParmaters();
+        }
+
+		[TestMethod]
+		public void OptionalParameters()
+		{
+			CSharp.OptionalParameters();
+		}
+
+		[TestMethod]
         public void MultipleInheritance()
         {
             MyMultipleInheritanceTest.Test();

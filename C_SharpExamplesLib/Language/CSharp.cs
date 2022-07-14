@@ -64,6 +64,46 @@ namespace C_Sharp.Language
             Digit digit = (Digit)number;
             Assert.AreEqual(digit, 7);
         }
+
+        #endregion
+
+        #region Named Parameter
+
+        // #named parameter
+        public static void NamedParmaters()
+        {
+            int Sum( int parameter1, int parameter2)
+            {
+                return parameter1 + parameter2;
+            }
+
+            int result = Sum(parameter2: 5, parameter1: 3);
+
+            Assert.AreEqual(result, 8);
+        }
+
+        #endregion
+
+        #region Optional Parameter
+        // #optinal parameter
+        public static void OptionalParameters()
+        {
+            int Sum(int parameter1, int parameter2=3)
+            {
+                return parameter1 + parameter2;
+            }
+
+            int result = Sum(2);
+            Assert.AreEqual(result, 5);
+
+            int result2 = Sum(1, 2);
+            Assert.AreEqual(result2, 3);
+
+        }
+        #endregion
+
     }
-    #endregion
+
+
+
 }
