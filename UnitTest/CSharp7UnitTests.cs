@@ -31,6 +31,7 @@ namespace UnitTest
             throw new OutOfMemoryException();
         }
 
+        // #DataTestMethod #DataRow #UintTest #Parameter
         [DataTestMethod]
         [DataRow("a", "b")]
         [DataRow(" ", "a")]
@@ -46,6 +47,7 @@ namespace UnitTest
             yield return new object[] { " ", "b" };
         }
 
+        // #DynamicData #UintTest #Parameter
         [DynamicData(nameof(GetDynamicData), DynamicDataSourceType.Method)] 
         [TestMethod()]
         public void DynamicDataTestMethod(string value1, string value2)
