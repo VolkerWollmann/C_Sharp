@@ -102,6 +102,26 @@ namespace C_Sharp.Language
         }
         #endregion
 
+        #region CallerMember
+        // #CompilerServices #CallerMemberName #GetCurrentMethod
+        public static void ShowCompilerServices()
+        {
+            TraceMessage(System.Reflection.MethodBase.GetCurrentMethod().Name);
+        }
+
+        public static void TraceMessage(string message,
+                [System.Runtime.CompilerServices.CallerMemberName] string memberName = "",
+                [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = "",
+                [System.Runtime.CompilerServices.CallerLineNumber] int sourceLineNumber = 0)
+        {
+            Assert.AreEqual(message, "ShowCompilerServices");
+            Assert.AreEqual(memberName, "ShowCompilerServices");
+            Assert.IsTrue(sourceFilePath.EndsWith("CSharp.cs"));
+            Assert.IsTrue( sourceLineNumber > 0);
+        }
+
+        #endregion
+
     }
 
 

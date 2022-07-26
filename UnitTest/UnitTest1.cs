@@ -151,6 +151,12 @@ namespace UnitTest
 			CSharp.OptionalParameters();
 		}
 
+        [TestMethod]
+		public void ShowCompilerServices()
+        {
+			CSharp.ShowCompilerServices();
+		}
+
 		[TestMethod]
         public void MultipleInheritance()
         {
