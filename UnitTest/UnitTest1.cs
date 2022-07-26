@@ -158,6 +158,13 @@ namespace UnitTest
 		}
 
 		[TestMethod]
+		public void LazyClassTest()
+		{
+			CSharp.LazyClassTest();
+		}
+		
+
+		[TestMethod]
         public void MultipleInheritance()
         {
             MyMultipleInheritanceTest.Test();
@@ -186,5 +193,7 @@ namespace UnitTest
         {
 			MyObsolete.Test();
         }
+
+		
 	}
 }

@@ -122,6 +122,44 @@ namespace C_Sharp.Language
 
         #endregion
 
+        #region Lazy
+        // #lazy
+        private class LazyClass
+        {
+            int[] _array;
+            public LazyClass()
+            {
+                _array = new int[10];
+            }
+            public int Length
+            {
+                get
+                {
+                    return _array.Length;
+                }
+            }
+        }
+
+        public static void LazyClassTest()
+        {
+            // Create Lazy.
+            Lazy<LazyClass> lazy = new Lazy<LazyClass>();
+
+            // Show that IsValueCreated is false.
+            Assert.IsFalse(lazy.IsValueCreated);
+
+            // Get the Value.
+            // ... This executes Test().
+            LazyClass test = lazy.Value;
+
+            // Show the IsValueCreated is true.
+            Assert.IsTrue(lazy.IsValueCreated);
+
+            // The object can be used.
+            Assert.IsTrue( test.Length > 0);
+        }
+
+        #endregion
     }
 
 
