@@ -2,11 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Language
+namespace C_Sharp.Language.IQueryable
 {
     public class MyIntegerRangeTest
     {
@@ -45,10 +43,12 @@ namespace C_Sharp.Language
             // does work
             // uses private any implementation
             var d1 = myIntegerRange.Any();
+            Assert.IsTrue(d1);
 
             // does work
             // uses private conditional any implementation
             var d2 = myIntegerRange.Any(i => i > 15);
+            Assert.IsFalse(d2);
 
             // does work 
             // uses public Expression Expression
@@ -79,10 +79,10 @@ namespace C_Sharp.Language
             var g1 = myIntegerRange.Where(i => (i < 5));
             var g2 = myIntegerRange.Where(i => (i < 3));
 
-            var g1r = g1.ToList();
-            Assert.IsTrue(g1r.Count == 4);
-            var g2r = g2.ToList();
-            Assert.IsTrue(g2r.Count == 2);
+            var g1R = g1.ToList();
+            Assert.IsTrue(g1R.Count == 4);
+            var g2R = g2.ToList();
+            Assert.IsTrue(g2R.Count == 2);
         }
 
 
@@ -95,10 +95,10 @@ namespace C_Sharp.Language
             var g1 = myIntegerRange.Where(i => (i % 2 == 0));
             var g2 = g1.Where(i => (i <= 6));
 
-            var g1r = g1.ToList();
-            Assert.IsTrue(g1r.Count == 5);
-            var g2r = g2.ToList();
-            Assert.IsTrue(g2r.Count == 3);
+            var g1R = g1.ToList();
+            Assert.IsTrue(g1R.Count == 5);
+            var g2R = g2.ToList();
+            Assert.IsTrue(g2R.Count == 3);
         }
 
         public static void Test_ProjectionExpression()

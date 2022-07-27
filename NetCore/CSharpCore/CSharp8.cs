@@ -194,6 +194,7 @@ namespace CSharpCore
             i ??= 5;
             Assert.AreEqual(5, i);
 
+            // ReSharper disable once ConstantNullCoalescingCondition
             i ??= 6;
             Assert.AreEqual(5, i);
         }

@@ -142,7 +142,7 @@ namespace UnitTest
         [TestMethod]
 		public void NamedParameters()
         {
-			CSharp.NamedParmaters();
+			CSharp.NamedParameters();
         }
 
 		[TestMethod]

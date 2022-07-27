@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace C_Sharp.Language.IQueryable
+﻿namespace C_Sharp.Language.IQueryable
 {
-    public static class MyIntegerRangeExentsion
+    // ReSharper disable once UnusedMember.Global
+    public static class MyIntegerRangeExtension
     {
+        // ReSharper disable once UnusedMember.Global
         public static bool Any(this MyIntegerRange myIntegerRange)
         {
-            return myIntegerRange.xAny();
+            return myIntegerRange.XAny();
         }
     }
 }

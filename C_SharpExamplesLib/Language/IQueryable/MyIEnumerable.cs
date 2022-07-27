@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Language
+namespace C_Sharp.Language.IQueryable
 {
 
     /// <summary>
@@ -15,10 +14,9 @@ namespace C_Sharp.Language
     ///
     /// see : https://putridparrot.com/blog/creating-a-custom-linq-provider/
     /// </summary>
-    public class
-        MyIntegerRange : IEnumerator<int>, IQueryable<int> // IQueryable<int> includes IEnumerable<int>
+    public class MyIntegerRange : IEnumerator<int>, IQueryable<int> // IQueryable<int> includes IEnumerable<int>
     {
-        private static int Counter=1;
+        private static int _counter=1;
 
         public  string Name { get; set; }
         public int Start { get; set; }
@@ -83,8 +81,7 @@ namespace C_Sharp.Language
             {
                 // evaluation should be done by MyIntegerRange
                 // expose MyIntegerRange as constant outside
-                Expression expression;
-                expression = Expression.Constant(this);
+                Expression expression = Expression.Constant(this);
                 //expression = this.GetEnumerator();
 
                 Assert.IsNotNull(expression);
@@ -96,14 +93,13 @@ namespace C_Sharp.Language
         // determines linq types
         public Type ElementType => typeof(int);
 
-        private IQueryProvider _provider;
-        public IQueryProvider Provider => _provider;
+        public IQueryProvider Provider { get; }
 
         #endregion
 
         #region Queryable Extensions Methods
 
-        internal bool xAny()
+        internal bool XAny()
         {
             return _range.Count > 0;
         }
@@ -139,7 +135,7 @@ namespace C_Sharp.Language
             _range = new List<int>();
             _i = 0;
 
-            _provider = new MyIntegerRangeIQueryProvider(this);
+            Provider = new MyIntegerRangeIQueryProvider(this);
         }
 
         public MyIntegerRange(int start, int range, string name) : this(name)
@@ -154,13 +150,14 @@ namespace C_Sharp.Language
         }
 
         public MyIntegerRange(int start, int range) :
-            this(start, range, "MIR" + Counter++ )
+            this(start, range, "MIR" + _counter++ )
         {
 
         }
 
         public MyIntegerRange(MyIntegerRange myIntegerRange)
         {
+            //Provider = new MyIntegerRangeIQueryProvider(this);
             Name = myIntegerRange.Name;
             Start = myIntegerRange.Start;
             Range = myIntegerRange.Range;
@@ -184,7 +181,7 @@ namespace C_Sharp.Language
         public MyIntegerRange Copy()
         {
             MyIntegerRange copy = new MyIntegerRange(this.Start, this.Range,
-                this.Name + "_Copy_" + Counter++);
+                this.Name + "_Copy_" + _counter++);
            
             return copy;
         }

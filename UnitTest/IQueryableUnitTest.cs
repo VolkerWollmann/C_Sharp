@@ -2,13 +2,13 @@
 using ThisAccessibilityProject = AccessibilityProject;
 using OtherAccessibilityProject = AccessibilityOtherProject;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using C_Sharp.FileOperation;
-using C_Sharp.Language;
+using C_Sharp.Language.IQueryable;
 
 
 namespace UnitTest
 {
     [TestClass]
+    // ReSharper disable once InconsistentNaming
     public class IQueryableUnitTest
     {
         [TestMethod]
@@ -24,6 +24,8 @@ namespace UnitTest
 
             // does work
             // uses private any implementation
+            // ReSharper disable once RedundantCast
+            // ReSharper disable once UnusedVariable
             var d1 = ((IQueryable<int>) myIntegerRange).Any();
 
             MyIntegerRangeTest.Test_IQueryable();

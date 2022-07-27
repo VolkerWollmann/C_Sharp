@@ -1,13 +1,9 @@
 ﻿namespace AssemblyToLoad
 {
-    public class ClassToLoad : DynamicLoadInterface.DynamicLoadInterface
+    // ReSharper disable once UnusedMember.Global
+    public class ClassToLoad : DynamicLoadInterface.IDynamicLoadInterface
     {
-        public ClassToLoad()
-        {
-
-        }
-
-        int DynamicLoadInterface.DynamicLoadInterface.Add(int value1, int value2)
+        int DynamicLoadInterface.IDynamicLoadInterface.Add(int value1, int value2)
         {
             return value1 + value2;
         }

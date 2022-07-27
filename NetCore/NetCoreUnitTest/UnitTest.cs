@@ -4,7 +4,6 @@ using Xunit.Abstractions;
 using CSharpCore;
 using CSharpCore.Roslyn;
 using CSharpNaming;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 using LoadingAssembly;
 

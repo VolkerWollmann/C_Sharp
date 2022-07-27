@@ -11,14 +11,14 @@ namespace LoadingAssembly
             Assembly assembly = Assembly.Load("AssemblyToLoad");
 
             // get the classes by interface
-            Type dli = typeof(DynamicLoadInterface.DynamicLoadInterface);
-            Type desiredClass = assembly.GetTypes()
-                .Where(c => dli.IsAssignableFrom(c))
-                .First();
+            Type dli = typeof(DynamicLoadInterface.IDynamicLoadInterface);
+            Type desiredClass = assembly
+                .GetTypes()
+                .First(c => dli.IsAssignableFrom(c));
 
-            DynamicLoadInterface.DynamicLoadInterface? dynamicCreatedInstance 
+            DynamicLoadInterface.IDynamicLoadInterface? dynamicCreatedInstance 
                 = Activator.CreateInstance(desiredClass)
-                  as DynamicLoadInterface.DynamicLoadInterface;
+                  as DynamicLoadInterface.IDynamicLoadInterface;
 
             int result = dynamicCreatedInstance!.Add(1, 2);
             Assert.IsTrue(result == 3);

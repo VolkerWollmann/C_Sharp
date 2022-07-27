@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
 {
@@ -11,22 +6,22 @@ namespace C_Sharp.Language
     [System.AttributeUsage(System.AttributeTargets.Class)]
     public class AuthorAttribute : System.Attribute
     {
-        private string name;
-        public double version;
+        private readonly string _name;
+        public double Version;
 
         public AuthorAttribute(string name)
         {
-            this.name = name;
-            version = 1.0;
+            this._name = name;
+            Version = 1.0;
         }
 
         public string GetName()
         {
-            return name;
+            return _name;
         }
     }
 
-    [Author("Me", version = 1.1)]
+    [Author("Me", Version = 1.1)]
     public class MyAttributedClass
     {
 
@@ -41,11 +36,10 @@ namespace C_Sharp.Language
             // Displaying output
             foreach (System.Attribute attr in attrs)
             {
-                if (attr is AuthorAttribute)
+                if (attr is AuthorAttribute attribute)
                 {
-                    AuthorAttribute a = (AuthorAttribute) attr;
-                    Assert.AreEqual(a.GetName(), "Me");
-                    Assert.AreEqual(a.version, 1.1);
+                    Assert.AreEqual(attribute.GetName(), "Me");
+                    Assert.AreEqual(attribute.Version, 1.1);
                 }
             }
         }

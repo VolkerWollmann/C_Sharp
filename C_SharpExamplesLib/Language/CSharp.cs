@@ -70,7 +70,7 @@ namespace C_Sharp.Language
         #region Named Parameter
 
         // #named parameter
-        public static void NamedParmaters()
+        public static void NamedParameters()
         {
             int Sum( int parameter1, int parameter2)
             {
@@ -85,7 +85,7 @@ namespace C_Sharp.Language
         #endregion
 
         #region Optional Parameter
-        // #optinal parameter
+        // #optional parameter
         public static void OptionalParameters()
         {
             int Sum(int parameter1, int parameter2=3)
@@ -106,6 +106,7 @@ namespace C_Sharp.Language
         // #CompilerServices #CallerMemberName #GetCurrentMethod
         public static void ShowCompilerServices()
         {
+            // ReSharper disable once PossibleNullReferenceException
             TraceMessage(System.Reflection.MethodBase.GetCurrentMethod().Name);
         }
 
@@ -126,18 +127,12 @@ namespace C_Sharp.Language
         // #lazy
         private class LazyClass
         {
-            int[] _array;
+            readonly int[] _array;
             public LazyClass()
             {
                 _array = new int[10];
             }
-            public int Length
-            {
-                get
-                {
-                    return _array.Length;
-                }
-            }
+            public int Length => _array.Length;
         }
 
         public static void LazyClassTest()
