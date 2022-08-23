@@ -9,12 +9,11 @@ namespace C_Sharp.Language.IQueryable
 {
 
     /// <summary>
-    /// <![CDATA[ #IEnumerable<int> #IEnumerator<int> #IQueryable<int> #IQueryProvider ]]>
     /// returns the number 1, ...., 10
     ///
     /// see : https://putridparrot.com/blog/creating-a-custom-linq-provider/
     /// </summary>
-    public class MyIntegerRange : IEnumerator<int>, IQueryable<int> // IQueryable<int> includes IEnumerable<int>
+    public class MyEnumerableIntegerRange : IEnumerator<int>, IEnumerable<int>
     {
         private static int _counter=1;
 
@@ -54,14 +53,16 @@ namespace C_Sharp.Language.IQueryable
 
         #endregion
 
-        #region IEnumerable<int>
+        #region IEnumerator<int>
 
         public IEnumerator<int> GetEnumerator()
         {
             Reset();
             return this;
         }
+        #endregion
 
+        #region IEnumerable<int>
         IEnumerator IEnumerable.GetEnumerator()
         {
             Reset();
@@ -70,75 +71,16 @@ namespace C_Sharp.Language.IQueryable
 
         #endregion
 
-
-        #region IQueryable<int>
-
-        // The expression as EnumerableQuery<int>
-        // #Expression
-        public Expression Expression
-        {
-            get
-            {
-                // evaluation should be done by MyIntegerRange
-                // expose MyIntegerRange as constant outside
-                Expression expression = Expression.Constant(this);
-                //expression = this.GetEnumerator();
-
-                Assert.IsNotNull(expression);
-
-                return expression;
-            }
-        }
-
-        // determines linq types
-        public Type ElementType => typeof(int);
-
-        public IQueryProvider Provider { get; }
-
-        #endregion
-
-        #region Queryable Extensions Methods
-
-        internal bool XAny()
-        {
-            return _range.Count > 0;
-        }
-
-        internal bool Any(Func<int,bool> condition)
-        {
-            foreach (int i in this)
-            {
-                if (condition(i))
-                    return true;
-            }
-
-            return false;
-        }
-
-        internal int Sum()
-        {
-            int sum = 0;
-            foreach (int i in this)
-            {
-                sum = sum + i;
-            }
-            return sum;
-        }
-
-        #endregion
-
         #region Constructor
-
-        private MyIntegerRange(string name)
+        private MyEnumerableIntegerRange(string name)
         {
             Name = name;
             _range = new List<int>();
             _i = 0;
 
-            Provider = new MyIntegerRangeIQueryProvider(this);
         }
 
-        public MyIntegerRange(int start, int range, string name) : this(name)
+        public MyEnumerableIntegerRange(int start, int range, string name) : this(name)
         {
             Start = start;
             Range = range;
@@ -149,13 +91,13 @@ namespace C_Sharp.Language.IQueryable
             }
         }
 
-        public MyIntegerRange(int start, int range) :
-            this(start, range, "MIR" + _counter++ )
+        public MyEnumerableIntegerRange(int start, int range) :
+            this(start, range, "MIR" + _counter++)
         {
 
         }
 
-        public MyIntegerRange(MyIntegerRange myIntegerRange)
+        public MyEnumerableIntegerRange(MyEnumerableIntegerRange myIntegerRange)
         {
             //Provider = new MyIntegerRangeIQueryProvider(this);
             Name = myIntegerRange.Name;
@@ -173,19 +115,8 @@ namespace C_Sharp.Language.IQueryable
 
 
         }
-             
         #endregion
 
-        #region Copy
-
-        public MyIntegerRange Copy()
-        {
-            MyIntegerRange copy = new MyIntegerRange(this.Start, this.Range,
-                this.Name + "_Copy_" + _counter++);
-           
-            return copy;
-        }
-        #endregion
     }
 
 }

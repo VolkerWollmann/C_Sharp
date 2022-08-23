@@ -94,9 +94,7 @@
     <Compile Include="Language\CSharp7.cs" />
     <Compile Include="Language\DataTypes\MyHashSet.cs" />
     <Compile Include="Language\DataTypes\MySimpleTypes.cs" />
-    <Compile Include="Language\IQueryable\MyIntegerRangeExentsion.cs" />
-    <Compile Include="Language\IQueryable\MyIntegerRangeTests.cs" />
-    <Compile Include="Language\IQueryable\MyIQueryProvider.cs" />
+    <Compile Include="Language\IQueryable\MyEnumerableIntegerRangeTest.cs" />
     <Compile Include="Language\MyAbstractClass.cs" />
     <Compile Include="Language\MyAnonymousType.cs" />
     <Compile Include="Language\DataTypes\MyArray.cs" />
@@ -110,7 +108,7 @@
     <Compile Include="Language\MyException.cs" />
     <Compile Include="Language\MyExtensionMethod.cs" />
     <Compile Include="Language\DataTypes\MyGeneric.cs" />
-    <Compile Include="Language\IQueryable\MyIEnumerable.cs" />
+    <Compile Include="Language\IQueryable\MyEnumerableIntegerRange.cs" />
     <Compile Include="Language\MyLinqExpression.cs" />
     <Compile Include="Language\MyLinq.cs" />
     <Compile Include="Language\DataTypes\MyList.cs" />
