@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using ThisAccessibilityProject = AccessibilityProject;
 using OtherAccessibilityProject = AccessibilityOtherProject;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,6 +16,15 @@ namespace UnitTest
         public void IEnumerable_Test()
         {
             MyEnumerableIntegerRangeTest.Test_IEnumerable();
+        }
+
+        [TestMethod]
+        public void IQueryable_Test_MyQueryableIntegerSet()
+        {
+            MyQueryableIntegerSet myQueryableIntegerSet = 
+                new MyQueryableIntegerSet(new List<int>{1,2,3});
+
+            Assert.AreEqual(myQueryableIntegerSet.Expression, null);
         }
     }
 }

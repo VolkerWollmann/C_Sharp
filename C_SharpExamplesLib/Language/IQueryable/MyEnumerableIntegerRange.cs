@@ -92,29 +92,11 @@ namespace C_Sharp.Language.IQueryable
         }
 
         public MyEnumerableIntegerRange(int start, int range) :
-            this(start, range, "MIR" + _counter++)
+            this(start, range, "MyIntegerRange" + _counter++)
         {
 
         }
 
-        public MyEnumerableIntegerRange(MyEnumerableIntegerRange myIntegerRange)
-        {
-            //Provider = new MyIntegerRangeIQueryProvider(this);
-            Name = myIntegerRange.Name;
-            Start = myIntegerRange.Start;
-            Range = myIntegerRange.Range;
-
-            _range = new List<int>();
-            _i = 0;
-
-            int j = Start;
-            while (j <= Start + Range)
-            {
-                _range.Add(j++);
-            }
-
-
-        }
         #endregion
 
     }
