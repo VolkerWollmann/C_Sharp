@@ -68,6 +68,9 @@ namespace C_Sharp.Language.IQueryable
         {
             _set = set;
             Reset();
+
+            Provider = new MyQueryableIntegerSetQueryProvider();
+            Expression = Expression.Constant(this);
         }
         #endregion
 
