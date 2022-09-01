@@ -24,10 +24,33 @@ namespace C_Sharp.Language.IQueryable
         public Type ElementType { get; }
         public IQueryProvider Provider { get; }
 
+        #region Constructors
         public MyQueryableIntegerSet()
         {
             Provider = new MyQueryableIntegerSetQueryProvider();
             Expression = Expression.Constant(this);
         }
+
+        /// <summary> 
+        /// This constructor is called by Provider.CreateQuery(). 
+        /// </summary>
+        /// <param name="provider"></param>
+        /// <param name="expression"></param>
+        public MyQueryableIntegerSet(MyQueryableIntegerSetQueryProvider provider, Expression expression)
+        {
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
+
+            if (!typeof(IQueryable<int>).IsAssignableFrom(expression.Type))
+            {
+                throw new ArgumentOutOfRangeException(nameof(expression));
+            }
+
+            Provider = provider ?? throw new ArgumentNullException(nameof(provider));
+            Expression = expression;
+        }
+        #endregion
     }
 }

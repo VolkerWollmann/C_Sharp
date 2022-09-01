@@ -16,7 +16,10 @@ namespace C_Sharp.Language.IQueryable
 
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
-            throw new NotImplementedException();
+            // TElement must be int
+            if (typeof(TElement) != typeof(int)) 
+                throw new NotImplementedException();
+            return (IQueryable<TElement>)new MyQueryableIntegerSet(this, expression);
         }
 
         public object Execute(Expression expression)
