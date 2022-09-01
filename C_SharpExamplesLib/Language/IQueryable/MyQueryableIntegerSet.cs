@@ -8,51 +8,11 @@ using System.Threading.Tasks;
 
 namespace C_Sharp.Language.IQueryable
 {
-    public class MyQueryableIntegerSet : IEnumerator<int>,  IQueryable<int>
+    public class MyQueryableIntegerSet : IQueryable<int>
     {
-        #region IntegerRangeData
-        
-        private readonly List<int> _set;
-        private int _i;
-
-        #endregion
-
-        #region IEnumerator<int>
-        public void Dispose()
-        {
-            
-        }
-
-        public bool MoveNext()
-        {
-            _i = _i + 1;
-
-            return _i < _set.Count;
-        }
-
-        public void Reset()
-        {
-            _i = -1;
-        }
-
-        public int Current => _set[_i];
-
-        object IEnumerator.Current => ((IEnumerator<int>)this).Current;
-        #endregion 
-
-        #region IQueryable<int>
-        public Expression Expression { get; }
-        public Type ElementType { get; }
-        public IQueryProvider Provider { get; }
-
-        private IEnumerator<int> GetResetedEnumerator()
-        {
-            Reset();
-            return this;
-        }
         public IEnumerator<int> GetEnumerator()
         {
-            return GetResetedEnumerator();
+            throw new NotImplementedException();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -60,19 +20,14 @@ namespace C_Sharp.Language.IQueryable
             return GetEnumerator();
         }
 
-        #endregion
+        public Expression Expression { get; }
+        public Type ElementType { get; }
+        public IQueryProvider Provider { get; }
 
-        #region Constructor
-
-        public MyQueryableIntegerSet(List<int> set)
+        public MyQueryableIntegerSet()
         {
-            _set = set;
-            Reset();
-
             Provider = new MyQueryableIntegerSetQueryProvider();
             Expression = Expression.Constant(this);
         }
-        #endregion
-
     }
 }

@@ -22,11 +22,15 @@ namespace UnitTest
         [TestMethod]
         public void IQueryable_Test_MyQueryableIntegerSet()
         {
-            MyQueryableIntegerSet myQueryableIntegerSet = 
-                new MyQueryableIntegerSet(new List<int>{1,2,3});
-            
+            MyIntegerSet myIntegerSet = 
+                new MyIntegerSet(new List<int>{1,2,3});
+
+            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet();
+
             Assert.AreEqual(myQueryableIntegerSet.Expression.Type, typeof(MyQueryableIntegerSet));
             Assert.AreEqual(myQueryableIntegerSet.Expression.GetType(), typeof(ConstantExpression));
+
+
         }
     }
 }
