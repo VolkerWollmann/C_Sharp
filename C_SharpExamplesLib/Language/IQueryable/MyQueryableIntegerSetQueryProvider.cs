@@ -9,7 +9,19 @@ namespace C_Sharp.Language.IQueryable
 {
     public class MyQueryableIntegerSetQueryProvider : IQueryProvider
     {
-        public System.Linq.IQueryable CreateQuery(Expression expression)
+        private MyIntegerSet _integerSet;
+
+        #region private Methods
+        // Executes the expression tree that is passed to it. 
+        internal static object Execute(Expression expression, bool isEnumerable)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IQueryProvider
+            public System.Linq.IQueryable CreateQuery(Expression expression)
         {
             throw new NotImplementedException();
         }
@@ -29,7 +41,18 @@ namespace C_Sharp.Language.IQueryable
 
         public TResult Execute<TResult>(Expression expression)
         {
+            bool isEnumerable = (typeof(TResult).Name == "IEnumerable`1");
+
             throw new NotImplementedException();
         }
+        #endregion
+
+        #region Construcutor
+
+        public MyQueryableIntegerSetQueryProvider(MyIntegerSet integerSet)
+        {
+            _integerSet = integerSet;
+        }
+        #endregion
     }
 }

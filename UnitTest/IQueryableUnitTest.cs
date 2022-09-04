@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using ThisAccessibilityProject = AccessibilityProject;
@@ -14,23 +15,34 @@ namespace UnitTest
     public class IQueryableUnitTest
     {
         [TestMethod]
-        public void IEnumerable_Test()
+        public void Test_IEnumerable()
         {
             MyEnumerableIntegerRangeTest.Test_IEnumerable();
         }
 
         [TestMethod]
-        public void IQueryable_Test_MyQueryableIntegerSet()
+        public void Test_IQueryable()
         {
-            MyIntegerSet myIntegerSet = 
-                new MyIntegerSet(new List<int>{1,2,3});
+            MyIntegerSet myIntegerSet =
+                new MyIntegerSet(new List<int> {1, 2, 3});
 
-            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet();
+            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
 
             Assert.AreEqual(myQueryableIntegerSet.Expression.Type, typeof(MyQueryableIntegerSet));
             Assert.AreEqual(myQueryableIntegerSet.Expression.GetType(), typeof(ConstantExpression));
 
+        }
 
+        [TestMethod]
+        public void Test_IQueryable_Where()
+        {
+            MyIntegerSet myIntegerSet =
+                new MyIntegerSet(new List<int> { 1, 2, 3 });
+
+            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
+
+            var expression = myQueryableIntegerSet.Where(i => (i == 2));
+            Assert.ThrowsException<NotImplementedException>( () => expression.ToList());
         }
     }
-}
+} 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace C_Sharp.Language.IQueryable
 {
@@ -12,12 +13,12 @@ namespace C_Sharp.Language.IQueryable
     {
         public IEnumerator<int> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return (Provider.Execute<IEnumerable<int>>(Expression)).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return (Provider.Execute<System.Collections.IEnumerable>(Expression)).GetEnumerator();
         }
 
         public Expression Expression { get; }
@@ -25,9 +26,9 @@ namespace C_Sharp.Language.IQueryable
         public IQueryProvider Provider { get; }
 
         #region Constructors
-        public MyQueryableIntegerSet()
+        public MyQueryableIntegerSet(MyIntegerSet integerSet)
         {
-            Provider = new MyQueryableIntegerSetQueryProvider();
+            Provider = new MyQueryableIntegerSetQueryProvider(integerSet);
             Expression = Expression.Constant(this);
         }
 
