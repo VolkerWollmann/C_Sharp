@@ -59,7 +59,7 @@ namespace C_Sharp.Language
 
 		private static void NullableType()
 		{
-			// #nullable
+			// #nullable : b might be true, false, null 
 			bool? b = null;
 			Assert.IsNull(b);
 
