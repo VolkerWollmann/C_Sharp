@@ -7,6 +7,15 @@ using System.Threading.Tasks;
 
 namespace C_Sharp.Language.IQueryable
 {
+    internal class MyQueryableIntegerSetQueryContext
+    {
+        // Executes the expression tree that is passed to it. 
+        internal static object Execute(Expression expression, bool isEnumerable)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class MyQueryableIntegerSetQueryProvider : IQueryProvider
     {
         private MyIntegerSet _integerSet;
@@ -43,7 +52,7 @@ namespace C_Sharp.Language.IQueryable
         {
             bool isEnumerable = (typeof(TResult).Name == "IEnumerable`1");
 
-            throw new NotImplementedException();
+            return (TResult)MyQueryableIntegerSetQueryContext.Execute(expression, isEnumerable);
         }
         #endregion
 
