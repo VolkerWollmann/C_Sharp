@@ -14,20 +14,20 @@ namespace C_Sharp.Language
     [SuppressMessage("ReSharper", "ConvertToLocalFunction")]
     public class MyDelegate
 	{
-		// #empty #action
+		// #empty #action #no parameter
         private static readonly Action EmptyAction = () => { };
 
-        // #action
+        // #action #parameter 
 		static readonly Action<string> WriteMessage = msg => { Console.WriteLine(msg); };
 
-		// #func
+		// #function #func #no parameter #parameter
 		static readonly Func<int> FuncIntDirect = () => { return 42; };
 		static readonly Func<int, int> FuncIntIntDirect = (i) => { return i; };
 
 		// #predicate
 		static readonly Predicate<int> LessThanTree = (i) => i < 3;
 
-		// #Func : function pointer ( and type )
+		// #Function  #Func : function pointer ( and type )
 		Func<int, int> _funcIntInt;
 
 		// #delegate : like a #function pointer type
