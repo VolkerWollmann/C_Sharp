@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -38,9 +39,15 @@ namespace C_Sharp.Language.IQueryable
         public int Current => _set[_i];
 
         object IEnumerator.Current => ((IEnumerator<int>)this).Current;
-        #endregion 
+        #endregion
 
-       
+        #region Helper methods
+
+        public List<int> ToList()
+        {
+            return _set.ToList();
+        }
+        #endregion
 
         #region Constructor
 

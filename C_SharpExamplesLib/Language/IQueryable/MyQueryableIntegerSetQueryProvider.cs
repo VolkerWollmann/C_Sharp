@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,9 +30,29 @@ namespace C_Sharp.Language.IQueryable
         }
     }
 
+    internal class ExpressionTreeModifier : ExpressionVisitor
+    {
+        private readonly IQueryable<int> _queryableInts;
+
+        internal ExpressionTreeModifier(IQueryable<int> list)
+        {
+            _queryableInts = list;
+        }
+
+        protected override Expression VisitConstant(ConstantExpression c)
+        {
+            // #this is important: Replace the constant QueryableTerraServerData arg with the queryable Place collection. 
+            if (c.Type == typeof(MyQueryableIntegerSet))
+                return Expression.Constant(_queryableInts);
+            else
+                return c;
+        }
+    }
+
     internal class MyQueryableIntegerSetQueryContext
     {
-        private static bool IsQueryOverDataSource(Expression expression)
+        public MyIntegerSet MyIntegerSet;
+        private bool IsQueryOverDataSource(Expression expression)
         {
             // If expression represents an unqueried IQueryable data source instance, 
             // expression is of type ConstantExpression, not MethodCallExpression. 
@@ -38,7 +60,7 @@ namespace C_Sharp.Language.IQueryable
         }
 
         // Executes the expression tree that is passed to it. 
-        internal static object Execute(Expression expression, bool isEnumerable)
+        internal object Execute(Expression expression, bool isEnumerable)
         {
             if (!IsQueryOverDataSource(expression))
                 throw new InvalidProgramException("No query over the data source was specified.");
@@ -49,7 +71,18 @@ namespace C_Sharp.Language.IQueryable
             if (whereExpression == null)
             {
                 // is something, that we do not want to do on our own
-                throw new NotImplementedException("Handle not where clause");
+                // Create a list of 
+                List<int> l = MyIntegerSet.ToList();
+                IQueryable<int> queryableInts = l.AsQueryable();
+
+                ExpressionTreeModifier treeCopier = new ExpressionTreeModifier(queryableInts);
+                Expression newExpressionTree = treeCopier.Visit(expression);
+
+                if (isEnumerable)
+                    return queryableInts.Provider.CreateQuery(newExpressionTree);
+                else
+                    return queryableInts.Provider.Execute(newExpressionTree);
+
 
             }
 
@@ -93,7 +126,12 @@ namespace C_Sharp.Language.IQueryable
         {
             bool isEnumerable = (typeof(TResult).Name == "IEnumerable`1");
 
-            return (TResult)MyQueryableIntegerSetQueryContext.Execute(expression, isEnumerable);
+            MyQueryableIntegerSetQueryContext myQueryableIntegerSetQueryContext =
+                new MyQueryableIntegerSetQueryContext();
+
+            myQueryableIntegerSetQueryContext.MyIntegerSet = _integerSet;
+
+            return (TResult)myQueryableIntegerSetQueryContext.Execute(expression, isEnumerable);
         }
         #endregion
 

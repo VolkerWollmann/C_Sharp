@@ -37,12 +37,25 @@ namespace UnitTest
         public void Test_IQueryable_Where()
         {
             MyIntegerSet myIntegerSet =
-                new MyIntegerSet(new List<int> { 1, 2, 3 });
+                new MyIntegerSet(new List<int> {1, 2, 3});
 
             MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
 
             var expression = myQueryableIntegerSet.Where(i => (i == 2));
-            Assert.ThrowsException<NotImplementedException>( () => expression.ToList());
+            Assert.ThrowsException<NotImplementedException>(() => expression.ToList());
+        }
+
+        [TestMethod]
+        public void Test_IQueryable_Sum()
+        {
+            MyIntegerSet myIntegerSet =
+                new MyIntegerSet(new List<int> {1, 2, 3});
+
+            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
+
+            var sum = myQueryableIntegerSet.Sum();
+
+            Assert.IsTrue(sum == 6);
         }
     }
 } 
