@@ -43,6 +43,19 @@ namespace C_Sharp.Language.IQueryable
 
         #region Helper methods
 
+        public MyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
+        {
+            List<int> result = new List<int>();
+            Func<int, bool> compiledExpression = (Func<int, bool>)lambdaExpression.Compile();
+            
+            foreach (var item in _set)
+            {
+                if (compiledExpression(item))
+                    result.Add(item);
+            }
+
+            return new MyIntegerSet(result);
+        }
         public List<int> ToList()
         {
             return _set.ToList();

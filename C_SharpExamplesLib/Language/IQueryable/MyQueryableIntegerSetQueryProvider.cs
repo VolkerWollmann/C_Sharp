@@ -49,6 +49,28 @@ namespace C_Sharp.Language.IQueryable
         }
     }
 
+    internal class ExpressionTreeModifier2 : ExpressionVisitor
+    {
+        private readonly MyIntegerSet _myIntegerSet;
+
+        internal ExpressionTreeModifier2(MyIntegerSet myIntegerSet)
+        {
+            _myIntegerSet = myIntegerSet;
+        }
+
+        protected override Expression VisitMethodCall(MethodCallExpression expression)
+        {
+            if (expression.Method.Name == "Where")
+            {
+                ;
+            }
+
+            Visit(expression.Arguments[0]);
+            return expression;
+        }
+
+    }
+
     internal class MyQueryableIntegerSetQueryContext
     {
         public MyIntegerSet MyIntegerSet;
@@ -71,7 +93,6 @@ namespace C_Sharp.Language.IQueryable
             if (whereExpression == null)
             {
                 // is something, that we do not want to do on our own
-                // Create a list of 
                 List<int> l = MyIntegerSet.ToList();
                 IQueryable<int> queryableInts = l.AsQueryable();
 
@@ -82,17 +103,35 @@ namespace C_Sharp.Language.IQueryable
                     return queryableInts.Provider.CreateQuery(newExpressionTree);
                 else
                     return queryableInts.Provider.Execute(newExpressionTree);
-
-
             }
 
+            // apply lambda/where on the items and get a filtered MyIntegerSet
+            LambdaExpression lambdaExpression = (LambdaExpression)((UnaryExpression)(whereExpression.Arguments[1])).Operand;
+            var result = MyIntegerSet.GetFilteredSet(lambdaExpression);
+
+            // replace innermost where clause with calculated MyIntegerSet
+            ExpressionTreeModifier2 expressionTreeModifier2 = new ExpressionTreeModifier2(result);
+            Expression newExpressionTree2 = expressionTreeModifier2.Visit(expression);
+
+            MyQueryableIntegerSetQueryProvider x = new MyQueryableIntegerSetQueryProvider(result);
+
+            if (isEnumerable)
+                return x.CreateQuery(newExpressionTree2);
+            else
+                return x.Execute(newExpressionTree2);
+
             throw new NotImplementedException("Handle where clause");
+        }
+
+        internal MyQueryableIntegerSetQueryContext(MyIntegerSet myIntegerSet)
+        {
+            MyIntegerSet = myIntegerSet;
         }
     }
 
     public class MyQueryableIntegerSetQueryProvider : IQueryProvider
     {
-        private MyIntegerSet _integerSet;
+        private readonly MyIntegerSet _integerSet;
 
         #region private Methods
         // Executes the expression tree that is passed to it. 
@@ -127,10 +166,9 @@ namespace C_Sharp.Language.IQueryable
             bool isEnumerable = (typeof(TResult).Name == "IEnumerable`1");
 
             MyQueryableIntegerSetQueryContext myQueryableIntegerSetQueryContext =
-                new MyQueryableIntegerSetQueryContext();
+                new MyQueryableIntegerSetQueryContext(_integerSet);
 
-            myQueryableIntegerSetQueryContext.MyIntegerSet = _integerSet;
-
+            
             return (TResult)myQueryableIntegerSetQueryContext.Execute(expression, isEnumerable);
         }
         #endregion
