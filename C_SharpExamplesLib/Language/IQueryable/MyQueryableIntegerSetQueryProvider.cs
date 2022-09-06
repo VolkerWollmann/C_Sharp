@@ -7,12 +7,53 @@ using System.Threading.Tasks;
 
 namespace C_Sharp.Language.IQueryable
 {
+    internal class InnermostWhereFinder : ExpressionVisitor
+    {
+        private MethodCallExpression _innermostWhereExpression=null;
+
+        public MethodCallExpression GetInnermostWhere(Expression expression)
+        {
+            Visit(expression);
+            return _innermostWhereExpression;
+        }
+
+        protected override Expression VisitMethodCall(MethodCallExpression expression)
+        {
+            if (expression.Method.Name == "Where")
+                _innermostWhereExpression = expression;
+
+            Visit(expression.Arguments[0]);
+
+            return expression;
+        }
+    }
+
     internal class MyQueryableIntegerSetQueryContext
     {
+        private static bool IsQueryOverDataSource(Expression expression)
+        {
+            // If expression represents an unqueried IQueryable data source instance, 
+            // expression is of type ConstantExpression, not MethodCallExpression. 
+            return (expression is MethodCallExpression);
+        }
+
         // Executes the expression tree that is passed to it. 
         internal static object Execute(Expression expression, bool isEnumerable)
         {
-            throw new NotImplementedException();
+            if (!IsQueryOverDataSource(expression))
+                throw new InvalidProgramException("No query over the data source was specified.");
+
+            // Find the call to Where() and get the lambda expression predicate.
+            InnermostWhereFinder whereFinder = new InnermostWhereFinder();
+            MethodCallExpression whereExpression = whereFinder.GetInnermostWhere(expression);
+            if (whereExpression == null)
+            {
+                // is something, that we do not want to do on our own
+                throw new NotImplementedException("Handle not where clause");
+
+            }
+
+            throw new NotImplementedException("Handle where clause");
         }
     }
 
