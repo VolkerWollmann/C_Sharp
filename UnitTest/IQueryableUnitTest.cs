@@ -44,6 +44,21 @@ namespace UnitTest
             var expression = myQueryableIntegerSet.Where(i => (i == 2));
             var result = expression.ToList();
             Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(result[0], 2);
+        }
+
+        [TestMethod]
+        public void Test_IQueryable_WhereWhere()
+        {
+            MyIntegerSet myIntegerSet =
+                new MyIntegerSet(new List<int> { 1, 2, 3 });
+
+            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
+
+            var expression = myQueryableIntegerSet.Where(i => (i == 2)).Where(i => (i == 2));
+            var result = expression.ToList();
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(result[0], 2);
         }
 
         [TestMethod]

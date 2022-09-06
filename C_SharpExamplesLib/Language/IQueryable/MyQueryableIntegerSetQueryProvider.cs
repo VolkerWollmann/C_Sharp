@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace C_Sharp.Language.IQueryable
 {
@@ -51,22 +52,34 @@ namespace C_Sharp.Language.IQueryable
 
     internal class ExpressionTreeModifier2 : ExpressionVisitor
     {
-        private readonly MyIntegerSet MyIntegerSet;
+        private readonly MyQueryableIntegerSet MyQueryableIntegerSet;
+        private bool done=false;
 
-        internal ExpressionTreeModifier2(MyIntegerSet myIntegerSet)
+        internal ExpressionTreeModifier2(MyQueryableIntegerSet myQueryableIntegerSet)
         {
-            MyIntegerSet = myIntegerSet;
+            MyQueryableIntegerSet = myQueryableIntegerSet;
         }
 
         protected override Expression VisitMethodCall(MethodCallExpression expression)
         {
             if (expression.Method.Name == "Where")
             {
-                ;
+                if (!done)
+                {
+                    ConstantExpression c = expression.Arguments[0] as ConstantExpression;
+                    if (c != null)
+                    {
+                        done = true;
+                        return Expression.Constant(MyQueryableIntegerSet);
+                    }
+
+                    var a0 = Visit(expression.Arguments[0]);
+                    var a1 = Visit(expression.Arguments[1]);
+                    return Expression.Call(expression.Method, new List<Expression>{a0, a1});
+                }
             }
 
-            Visit(expression.Arguments[0]);
-            return expression;
+            return Visit(expression);
         }
 
     }
@@ -118,9 +131,9 @@ namespace C_Sharp.Language.IQueryable
             // apply lambda/where on the items and get a filtered MyIntegerSet
             LambdaExpression lambdaExpression = (LambdaExpression)((UnaryExpression)(whereExpression.Arguments[1])).Operand;
             var result = MyIntegerSet.GetFilteredSet(lambdaExpression);
-
+            var result2 = new MyQueryableIntegerSet(result);
             // replace innermost where clause with calculated MyIntegerSet
-            ExpressionTreeModifier2 expressionTreeModifier2 = new ExpressionTreeModifier2(result);
+            ExpressionTreeModifier2 expressionTreeModifier2 = new ExpressionTreeModifier2(result2);
             Expression newExpressionTree2 = expressionTreeModifier2.Visit(expression);
 
             MyQueryableIntegerSetQueryProvider myQueryableIntegerSetQueryProvider = new MyQueryableIntegerSetQueryProvider(result);
@@ -141,7 +154,7 @@ namespace C_Sharp.Language.IQueryable
 
     public class MyQueryableIntegerSetQueryProvider : IQueryProvider
     {
-        private readonly MyIntegerSet IntegerSet;
+        public readonly MyIntegerSet IntegerSet;
 
         #region private Methods
         // Executes the expression tree that is passed to it. 

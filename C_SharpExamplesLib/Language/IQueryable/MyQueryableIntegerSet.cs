@@ -11,14 +11,26 @@ namespace C_Sharp.Language.IQueryable
 {
     public class MyQueryableIntegerSet : IQueryable<int>
     {
+       
         public IEnumerator<int> GetEnumerator()
         {
+            if (Expression is ConstantExpression constantExpression)
+            {
+                if (constantExpression.Value is MyQueryableIntegerSet myQueryableIntegerSet)
+                    return ((MyQueryableIntegerSetQueryProvider)myQueryableIntegerSet.Provider).IntegerSet;
+            }
+
             return (Provider.Execute<IEnumerable<int>>(Expression)).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return (Provider.Execute<System.Collections.IEnumerable>(Expression)).GetEnumerator();
+            if (Expression is ConstantExpression constantExpression)
+            {
+                if (constantExpression.Value is MyQueryableIntegerSet myQueryableIntegerSet)
+                    return ((MyQueryableIntegerSetQueryProvider)myQueryableIntegerSet.Provider).IntegerSet;
+            }
+            return (Provider.Execute<IEnumerable>(Expression)).GetEnumerator();
         }
 
         public Expression Expression { get; }
