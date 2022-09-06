@@ -37,7 +37,9 @@ namespace C_Sharp.Language.IQueryable
         /// </summary>
         /// <param name="provider"></param>
         /// <param name="expression"></param>
-        public MyQueryableIntegerSet(MyQueryableIntegerSetQueryProvider provider, Expression expression)
+        /// <param name="integerSet"></param>
+        public MyQueryableIntegerSet(MyIntegerSet integerSet, MyQueryableIntegerSetQueryProvider provider, Expression expression):
+            this(integerSet)
         {
             if (expression == null)
             {

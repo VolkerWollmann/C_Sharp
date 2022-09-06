@@ -42,7 +42,8 @@ namespace UnitTest
             MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
 
             var expression = myQueryableIntegerSet.Where(i => (i == 2));
-            Assert.ThrowsException<NotImplementedException>(() => expression.ToList());
+            var result = expression.ToList();
+            Assert.AreEqual(1, result.Count);
         }
 
         [TestMethod]
