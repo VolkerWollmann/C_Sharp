@@ -11,7 +11,8 @@ namespace C_Sharp.Language.IQueryable
 {
     public class MyQueryableIntegerSet : IQueryable<int>
     {
-       
+        public MyIntegerSet MyIntegerSet;
+
         public IEnumerator<int> GetEnumerator()
         {
             // if expression is only a MyQueryableIntegerSet,
@@ -19,7 +20,7 @@ namespace C_Sharp.Language.IQueryable
             if (Expression is ConstantExpression constantExpression)
             {
                 if (constantExpression.Value is MyQueryableIntegerSet myQueryableIntegerSet)
-                    return ((MyQueryableIntegerSetQueryProvider)myQueryableIntegerSet.Provider).MyIntegerSet;
+                    return MyIntegerSet;
             }
 
             return (Provider.Execute<IEnumerable<int>>(Expression)).GetEnumerator();
@@ -32,7 +33,7 @@ namespace C_Sharp.Language.IQueryable
             if (Expression is ConstantExpression constantExpression)
             {
                 if (constantExpression.Value is MyQueryableIntegerSet myQueryableIntegerSet)
-                    return ((MyQueryableIntegerSetQueryProvider)myQueryableIntegerSet.Provider).MyIntegerSet;
+                    return MyIntegerSet;
             }
             return (Provider.Execute<IEnumerable>(Expression)).GetEnumerator();
         }
@@ -42,9 +43,10 @@ namespace C_Sharp.Language.IQueryable
         public IQueryProvider Provider { get; }
 
         #region Constructors
-        public MyQueryableIntegerSet(MyIntegerSet integerSet)
+        public MyQueryableIntegerSet(MyIntegerSet myIntegerSet)
         {
-            Provider = new MyQueryableIntegerSetQueryProvider(integerSet);
+            MyIntegerSet = myIntegerSet;
+            Provider = new MyQueryableIntegerSetQueryProvider(this);
             Expression = Expression.Constant(this);
         }
 
