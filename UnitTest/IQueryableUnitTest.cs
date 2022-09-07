@@ -33,6 +33,21 @@ namespace UnitTest
 
         }
 
+
+        /// <summary>
+        /// Test function for debugging purpose 
+        /// </summary>
+        /// <param name="i">number to test</param>
+        /// <returns>true, if i == 2</returns>
+        private bool TestForTwo(int i )
+        {
+            return i == 2;
+        }
+
+        /// <summary>
+        /// Shows, how the MyQueryableIntegerSet together with the inner most where clause is
+        /// evaluted first, before the result of this evaluation is provied to further linq query execution
+        /// </summary>
         [TestMethod]
         public void Test_IQueryable_Where()
         {
@@ -41,12 +56,16 @@ namespace UnitTest
 
             MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
 
-            var expression = myQueryableIntegerSet.Where(i => (i == 2));
+            var expression = myQueryableIntegerSet.Where(i => TestForTwo(i));
             var result = expression.ToList();
             Assert.AreEqual(1, result.Count);
             Assert.AreEqual(result[0], 2);
         }
 
+        /// <summary>
+        /// Shows, how the MyQueryableIntegerSet together with the inner most where clause is
+        /// evaluted first, before the result of this evaluation is provied to further linq query execution
+        /// </summary>
         [TestMethod]
         public void Test_IQueryable_WhereWhere()
         {
@@ -55,7 +74,7 @@ namespace UnitTest
 
             MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
 
-            var expression = myQueryableIntegerSet.Where(i => (i == 2)).Where(i => (i == 2));
+            var expression = myQueryableIntegerSet.Where(i => TestForTwo(i)).Where(i => TestForTwo(i));
             var result = expression.ToList();
             Assert.AreEqual(1, result.Count);
             Assert.AreEqual(result[0], 2);

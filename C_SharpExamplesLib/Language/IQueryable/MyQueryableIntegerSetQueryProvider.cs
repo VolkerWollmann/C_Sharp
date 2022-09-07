@@ -50,12 +50,12 @@ namespace C_Sharp.Language.IQueryable
         }
     }
 
-    internal class ExpressionTreeModifier2 : ExpressionVisitor
+    internal class ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor : ExpressionVisitor
     {
         private readonly MyQueryableIntegerSet MyQueryableIntegerSet;
         private bool done=false;
 
-        internal ExpressionTreeModifier2(MyQueryableIntegerSet myQueryableIntegerSet)
+        internal ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor(MyQueryableIntegerSet myQueryableIntegerSet)
         {
             MyQueryableIntegerSet = myQueryableIntegerSet;
         }
@@ -130,13 +130,13 @@ namespace C_Sharp.Language.IQueryable
 
             // apply lambda/where on the items and get a filtered MyIntegerSet
             LambdaExpression lambdaExpression = (LambdaExpression)((UnaryExpression)(whereExpression.Arguments[1])).Operand;
-            var result = MyIntegerSet.GetFilteredSet(lambdaExpression);
-            var result2 = new MyQueryableIntegerSet(result);
+            var filteredMyIntegerSet = MyIntegerSet.GetFilteredSet(lambdaExpression);
+            var filteredMyQueryableIntegerSet = new MyQueryableIntegerSet(filteredMyIntegerSet);
             // replace innermost where clause with calculated MyIntegerSet
-            ExpressionTreeModifier2 expressionTreeModifier2 = new ExpressionTreeModifier2(result2);
+            ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor expressionTreeModifier2 = new ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor(filteredMyQueryableIntegerSet);
             Expression newExpressionTree2 = expressionTreeModifier2.Visit(expression);
 
-            MyQueryableIntegerSetQueryProvider myQueryableIntegerSetQueryProvider = new MyQueryableIntegerSetQueryProvider(result);
+            MyQueryableIntegerSetQueryProvider myQueryableIntegerSetQueryProvider = new MyQueryableIntegerSetQueryProvider(filteredMyIntegerSet);
 
             if (isEnumerable)
                 return myQueryableIntegerSetQueryProvider.CreateQuery(newExpressionTree2);
@@ -154,7 +154,7 @@ namespace C_Sharp.Language.IQueryable
 
     public class MyQueryableIntegerSetQueryProvider : IQueryProvider
     {
-        public readonly MyIntegerSet IntegerSet;
+        public readonly MyIntegerSet MyIntegerSet;
 
         #region private Methods
         // Executes the expression tree that is passed to it. 
@@ -170,7 +170,7 @@ namespace C_Sharp.Language.IQueryable
         {
             try
             {
-                var result = new MyQueryableIntegerSet(IntegerSet);
+                var result = new MyQueryableIntegerSet(MyIntegerSet, this, expression);
 
                 return (System.Linq.IQueryable)result;
             }
@@ -185,13 +185,13 @@ namespace C_Sharp.Language.IQueryable
             // TElement must be int
             if (typeof(TElement) != typeof(int)) 
                 throw new NotImplementedException();
-            return (IQueryable<TElement>)new MyQueryableIntegerSet(IntegerSet,this, expression);
+            return (IQueryable<TElement>)new MyQueryableIntegerSet(MyIntegerSet, this, expression);
         }
 
         public object Execute(Expression expression)
         {
             MyQueryableIntegerSetQueryContext myQueryableIntegerSetQueryContext =
-                new MyQueryableIntegerSetQueryContext(IntegerSet);
+                new MyQueryableIntegerSetQueryContext(MyIntegerSet);
             return myQueryableIntegerSetQueryContext.Execute(expression, false);
         }
 
@@ -200,7 +200,7 @@ namespace C_Sharp.Language.IQueryable
             bool isEnumerable = (typeof(TResult).Name == "IEnumerable`1");
 
             MyQueryableIntegerSetQueryContext myQueryableIntegerSetQueryContext =
-                new MyQueryableIntegerSetQueryContext(IntegerSet);
+                new MyQueryableIntegerSetQueryContext(MyIntegerSet);
 
             
             return (TResult)myQueryableIntegerSetQueryContext.Execute(expression, isEnumerable);
@@ -209,9 +209,9 @@ namespace C_Sharp.Language.IQueryable
 
         #region Construcutor
 
-        public MyQueryableIntegerSetQueryProvider(MyIntegerSet integerSet)
+        public MyQueryableIntegerSetQueryProvider(MyIntegerSet myIntegerSet)
         {
-            IntegerSet = integerSet;
+            MyIntegerSet = myIntegerSet;
         }
         #endregion
     }
