@@ -109,7 +109,7 @@ namespace C_Sharp.Language.IQueryable
                 MyQueryableIntegerSet myQueryableIntegerSet = (MyQueryableIntegerSet)constantExpression.Value;
                 if (myQueryableIntegerSet != null)
                 {
-                    return myQueryableIntegerSet.ToList();
+                    return myQueryableIntegerSet.MyIntegerSet.ToList();
                 }
             }
 
@@ -209,7 +209,8 @@ namespace C_Sharp.Language.IQueryable
                 new MyQueryableIntegerSetQueryContext(MyQueryableIntegerSet);
 
             
-            return (TResult)myQueryableIntegerSetQueryContext.Execute(expression, isEnumerable);
+            var result =  (TResult)myQueryableIntegerSetQueryContext.Execute(expression, isEnumerable);
+            return result;
         }
         #endregion
 

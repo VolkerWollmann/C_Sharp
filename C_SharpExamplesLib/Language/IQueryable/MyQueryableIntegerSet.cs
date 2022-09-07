@@ -15,26 +15,11 @@ namespace C_Sharp.Language.IQueryable
 
         public IEnumerator<int> GetEnumerator()
         {
-            // if expression is only a MyQueryableIntegerSet,
-            // the expression is simple enough to return only the enumerator of MyIntegerSet
-            if (Expression is ConstantExpression constantExpression)
-            {
-                if (constantExpression.Value is MyQueryableIntegerSet myQueryableIntegerSet)
-                    return MyIntegerSet;
-            }
-
             return (Provider.Execute<IEnumerable<int>>(Expression)).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            // if expression is only a MyQueryableIntegerSet,
-            // the expression is simple enough to return only the enumerator of MyIntegerSet
-            if (Expression is ConstantExpression constantExpression)
-            {
-                if (constantExpression.Value is MyQueryableIntegerSet myQueryableIntegerSet)
-                    return MyIntegerSet;
-            }
             return (Provider.Execute<IEnumerable>(Expression)).GetEnumerator();
         }
 
