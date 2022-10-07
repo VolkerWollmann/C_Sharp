@@ -12,7 +12,7 @@ namespace C_Sharp.Language
 		public int Y { get; }
 		bool IEqualityComparer<MyIEqualityComparer>.Equals(MyIEqualityComparer x, MyIEqualityComparer y)
 		{
-			return y != null && x != null && (x.X == y.X) && (y.X == y.Y);
+			return y != null && x != null && (x.X == y.X) && (x.Y == y.Y);
 		}
 
 		int IEqualityComparer<MyIEqualityComparer>.GetHashCode(MyIEqualityComparer obj)
@@ -30,13 +30,24 @@ namespace C_Sharp.Language
 		{
 			MyIEqualityComparer myA = new MyIEqualityComparer(1, 1);
 			MyIEqualityComparer myB = new MyIEqualityComparer(1, 2);
-			MyIEqualityComparer myC = new MyIEqualityComparer(1, 1);
+			MyIEqualityComparer myC = new MyIEqualityComparer(1, 2);
 
-			MyIEqualityComparer myIEqualityComparer = new MyIEqualityComparer(0, 0);
-            Dictionary<MyIEqualityComparer, string> dictionary =
-                new Dictionary<MyIEqualityComparer, string>(myIEqualityComparer) {{myA, "Test1"}, {myB, "Test2"}};
+            // Use reference comparer
+            Dictionary<MyIEqualityComparer, string> dictionary1 =
+                new Dictionary<MyIEqualityComparer, string> { { myA, "Test1" }, { myB, "Test2" } };
 
-            Assert.IsTrue(dictionary.ContainsKey(myC));
+			// Fails, since myC != myA and myC != myB due to reference comparer
+            Assert.IsFalse(dictionary1.ContainsKey(myC));
+
+            // Create a comparer
+            MyIEqualityComparer myIEqualityComparer = new MyIEqualityComparer(0, 0);
+
+            //Use comparer for the dictionary
+            Dictionary<MyIEqualityComparer, string> dictionary2 =
+                new Dictionary<MyIEqualityComparer, string>(myIEqualityComparer){{myA, "Test1"}, {myB, "Test2"}};
+
+            // True, since myC == myB due to my MyIEqualityComparer
+            Assert.IsTrue(dictionary2.ContainsKey(myC));
 		}
 	}
 
