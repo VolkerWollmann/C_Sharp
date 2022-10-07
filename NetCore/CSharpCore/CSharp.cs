@@ -11,7 +11,7 @@ namespace CSharpCore
         public static async void StreamTest()
         {
             string[] lines = { "First line", "Second line", "Third line" };
-            using StreamWriter file = new("WriteLines2.txt"); // works without brackets
+            using StreamWriter file = new("WriteLines2.txt"); // works without brackets in C# 8.0
 
             foreach (string line in lines)
             {
