@@ -116,6 +116,12 @@ namespace NetCoreUnitTest
         {
             LoadingClass.Execute();
         }
+
+        [Fact]
+        public void StreamTest()
+        {
+            CSharp.StreamTest();
+        }
     }
 
     public class RoslynUnitTest
