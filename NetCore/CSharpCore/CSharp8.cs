@@ -199,5 +199,31 @@ namespace CSharpCore
             Assert.AreEqual(5, i);
         }
         #endregion
+
+        #region IDisposable
+        //#IDisposable
+        static int step = 0;
+
+        private class MyData : IDisposable
+        {
+            public void Dispose()
+            {
+                step = 1;
+            }
+        }
+
+        private static void Use_MyData()
+        {
+            using MyData data = new MyData();
+            Assert.AreEqual(step, 0);
+        }
+        public static void Test_IDisposable()
+        {
+            step = 0;
+            Use_MyData();
+            Assert.AreEqual(step, 1);
+        }
+
+        #endregion
     }
 }

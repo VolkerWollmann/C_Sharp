@@ -133,7 +133,7 @@ namespace NetCoreUnitTest
         [Fact]
         public void Test_IDisposable()
         {
-            CSharp.Test_IDisposable();
+            CSharp8.Test_IDisposable();
         }
     }
 
