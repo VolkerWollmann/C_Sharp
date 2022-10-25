@@ -118,9 +118,16 @@ namespace NetCoreUnitTest
         }
 
         [Fact]
-        public void StreamTest()
+        public void StreamTestUnconventionalUsage()
         {
-            CSharp.StreamTest();
+            CSharp.StreamTestUnconventionalUsage();
+        }
+
+
+        [Fact]
+        public void StreamTestFlush()
+        {
+            CSharp.StreamTestFlush();
         }
     }
 
