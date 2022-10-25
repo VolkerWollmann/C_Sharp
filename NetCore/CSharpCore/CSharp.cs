@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CSharpCore
 {
+    #region stream
     public class CSharp
     {
         // #Stream
@@ -37,7 +39,7 @@ namespace CSharpCore
         // #stream
         public static async void StreamTestFlush()
         {
-            MemoryStream p2MemoryStream = new MemoryStream();
+            using MemoryStream p2MemoryStream = new MemoryStream();
             // open p2File
             var sw = new StreamWriter(p2MemoryStream);
 
@@ -51,5 +53,33 @@ namespace CSharpCore
 
             Assert.IsTrue(s.Contains("Hund"));
         }
+        #endregion
+
+        #region IDisposable
+        //#IDisposable
+        static int step = 0;
+
+   
+        private class MyData : IDisposable
+        {
+            public void Dispose()
+            {
+                step = 1;
+            }
+        }
+
+        private static void Use_MyData()
+        {
+            using MyData data = new MyData();
+            Assert.AreEqual(step, 0);
+        }
+        public static void Test_IDisposable()
+        {
+            step = 0;
+            Use_MyData();
+            Assert.AreEqual(step, 1);
+        }
+
+        #endregion
     }
 }

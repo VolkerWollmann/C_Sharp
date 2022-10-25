@@ -129,6 +129,12 @@ namespace NetCoreUnitTest
         {
             CSharp.StreamTestFlush();
         }
+
+        [Fact]
+        public void Test_IDisposable()
+        {
+            CSharp.Test_IDisposable();
+        }
     }
 
     public class RoslynUnitTest
