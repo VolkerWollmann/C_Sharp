@@ -18,7 +18,13 @@ namespace UnitTest
 			MyDelegate.TestDelegateAndFunc();
 		}
 
-		[TestMethod]
+        [TestMethod]
+        public void TestMemberwiseClone()
+        {
+            MyMemberwiseClone.Test();
+        }
+
+        [TestMethod]
 		public void TestDelegateFuncInvocationList()
 		{
 			MyDelegate.TestDelegateFuncInvocationList();

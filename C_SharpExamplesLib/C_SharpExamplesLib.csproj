@@ -115,6 +115,7 @@
     <Compile Include="Language\MyLinqExpression.cs" />
     <Compile Include="Language\MyLinq.cs" />
     <Compile Include="Language\DataTypes\MyList.cs" />
+    <Compile Include="Language\MyMemberwiseClone.cs" />
     <Compile Include="Language\MyMultipleInheritance.cs" />
     <Compile Include="Language\MyObsolete.cs" />
     <Compile Include="Language\MyOperator.cs" />
