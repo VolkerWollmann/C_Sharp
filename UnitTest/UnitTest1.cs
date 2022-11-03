@@ -194,6 +194,10 @@ namespace UnitTest
 			MyObsolete.Test();
         }
 
-		
-	}
+        [TestMethod]
+        public void ToStringTest()
+        {
+            CSharp.ToStringExamples();
+        }
+    }
 }

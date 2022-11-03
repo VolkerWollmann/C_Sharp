@@ -155,6 +155,27 @@ namespace C_Sharp.Language
         }
 
         #endregion
+
+        #region ToString
+
+        private enum MyNumbers
+        {
+            FourtyTwo = 42,
+        }
+        /// #ToString()
+        public static void ToStringExamples()
+        {
+            string iString  = 1.ToString();
+            Assert.AreEqual(iString, "1");
+
+            //Does not compile
+            //string nullString = null.ToString();
+
+            string constString = MyNumbers.FourtyTwo.ToString();
+            Assert.AreEqual(constString, "FourtyTwo");
+
+        }
+        #endregion
     }
 
 
