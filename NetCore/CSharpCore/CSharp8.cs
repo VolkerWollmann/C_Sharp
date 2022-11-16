@@ -97,7 +97,7 @@ namespace CSharpCore
             return s;
         }
 
-        // #pattern matching #recursive #structured #property pattern
+        // #switch #pattern matching #recursive #structured #property pattern
         // https://docs.microsoft.com/en-us/archive/msdn-magazine/2019/may/csharp-8-0-pattern-matching-in-csharp-8-0
         // https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/proposals/csharp-8.0/patterns
         [SuppressMessage("ReSharper", "RedundantAlwaysMatchSubpattern")]
