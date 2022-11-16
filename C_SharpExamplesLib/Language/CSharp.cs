@@ -69,7 +69,7 @@ namespace C_Sharp.Language
 
         #region Named Parameter
 
-        // #named parameter
+        // #named #parameter #named parameter
         public static void NamedParameters()
         {
             int Sum( int parameter1, int parameter2)
