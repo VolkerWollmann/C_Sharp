@@ -122,16 +122,16 @@ namespace C_Sharp.Language.IQueryable
             if (whereExpression == null)
             {
                 // is something, that we do not want to do on our own
-                List<int> l = MyQueryableIntegerSet.MyIntegerSet.ToList();
-                IQueryable<int> queryableInts = l.AsQueryable();
+                List<int> l = MyQueryableIntegerSet.ToList();
+                IQueryable<int> queryableIntegers = l.AsQueryable();
 
-                ExpressionTreeModifier treeCopier = new ExpressionTreeModifier(queryableInts);
+                ExpressionTreeModifier treeCopier = new ExpressionTreeModifier(queryableIntegers);
                 Expression newExpressionTree = treeCopier.Visit(expression);
 
                 if (isEnumerable)
-                    return queryableInts.Provider.CreateQuery(newExpressionTree);
+                    return queryableIntegers.Provider.CreateQuery(newExpressionTree);
                 else
-                    return queryableInts.Provider.Execute(newExpressionTree);
+                    return queryableIntegers.Provider.Execute(newExpressionTree);
             }
 
             // apply lambda/where on the items and get a filtered MyIntegerSet

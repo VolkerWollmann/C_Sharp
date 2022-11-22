@@ -27,6 +27,20 @@ namespace C_Sharp.Language.IQueryable
         public Type ElementType { get; }
         public IQueryProvider Provider { get; }
 
+        #region IList<int>
+        public List<int> ToList()
+        {
+            List<int> result = new List<int>();
+           
+            foreach (int i in this)
+            {
+                result.Add(i);
+            }
+
+            return result;
+        }
+        #endregion
+
         #region Constructors
         public MyQueryableIntegerSet(MyIntegerSet myIntegerSet)
         {
