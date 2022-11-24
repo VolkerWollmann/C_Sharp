@@ -11,7 +11,7 @@ namespace C_Sharp.Language.IQueryable
 {
     public class MyQueryableIntegerSet : IQueryable<int>
     {
-        public MyIntegerSet MyIntegerSet;
+        private MyIntegerSet _myIntegerSet;
 
         public IEnumerator<int> GetEnumerator()
         {
@@ -31,20 +31,26 @@ namespace C_Sharp.Language.IQueryable
         public List<int> ToList()
         {
             List<int> result = new List<int>();
-           
-            foreach (int i in this)
+
+            _myIntegerSet.Reset();
+            while (_myIntegerSet.MoveNext())
             {
-                result.Add(i);
+                result.Add(_myIntegerSet.Current);
             }
 
             return result;
         }
         #endregion
 
-        #region Constructors
-        public MyQueryableIntegerSet(MyIntegerSet myIntegerSet)
+        public MyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
         {
-            MyIntegerSet = myIntegerSet;
+            return _myIntegerSet.GetFilteredSet(lambdaExpression);
+        }
+
+        #region Constructors
+            public MyQueryableIntegerSet(MyIntegerSet myIntegerSet)
+        {
+            _myIntegerSet = myIntegerSet;
             Provider = new MyQueryableIntegerSetQueryProvider(this);
             Expression = Expression.Constant(this);
         }
@@ -55,7 +61,7 @@ namespace C_Sharp.Language.IQueryable
         /// <param name="provider"></param>
         /// <param name="expression"></param>
         /// <param name="integerSet"></param>
-        public MyQueryableIntegerSet(MyIntegerSet integerSet, MyQueryableIntegerSetQueryProvider provider, Expression expression):
+        private MyQueryableIntegerSet(MyIntegerSet integerSet, MyQueryableIntegerSetQueryProvider provider, Expression expression):
             this(integerSet)
         {
             if (expression == null)
@@ -70,6 +76,12 @@ namespace C_Sharp.Language.IQueryable
 
             Provider = provider ?? throw new ArgumentNullException(nameof(provider));
             Expression = expression;
+        }
+
+        public MyQueryableIntegerSet CreateMyQueryableIntegerSet(MyQueryableIntegerSetQueryProvider provider,
+            Expression expression)
+        {
+            return new MyQueryableIntegerSet(this._myIntegerSet, provider, expression);
         }
         #endregion
     }
