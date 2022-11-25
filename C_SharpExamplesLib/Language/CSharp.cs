@@ -177,7 +177,7 @@ namespace C_Sharp.Language
         }
         #endregion
 
-        #region recursive Class
+        #region #Recursive #Class
 
         public class MyRecursiveCLass
         {
@@ -206,7 +206,7 @@ namespace C_Sharp.Language
             }
 
             /// <summary>
-            /// Structure is not recursive, but you can step down infinitly
+            /// Structure is not recursive, but you can step down finitely
             /// </summary>
             public static void Test()
             {
