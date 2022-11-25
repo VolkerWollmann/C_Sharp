@@ -206,7 +206,7 @@ namespace C_Sharp.Language
             }
 
             /// <summary>
-            /// Structure is not recursive, but you can step down finitely
+            /// Structure is not recursive, but you can step down infinitely
             /// </summary>
             public static void Test()
             {
