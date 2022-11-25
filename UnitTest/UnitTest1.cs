@@ -109,7 +109,13 @@ namespace UnitTest
 			MySimpleCSharp.Test();
 		}
 
-		[TestMethod]
+        [TestMethod]
+        public void RecursiveClassTest()
+        {
+            CSharp.MyRecursiveCLass.Test();
+        }
+
+        [TestMethod]
 		public void ReadFileTest()
 		{
 			MyFileOperation.ReadLinesFromFile();

@@ -176,6 +176,46 @@ namespace C_Sharp.Language
 
         }
         #endregion
+
+        #region recursive Class
+
+        public class MyRecursiveCLass
+        {
+            public static MyRecursiveCLass Anchor = new MyRecursiveCLass();
+            public static int Counter = 1;
+            public int MyCounter=0;
+
+            public static int RecursionCounter = 0;
+
+            public MyRecursiveCLass()
+            {
+                MyCounter = Counter++;
+            }
+
+            public void WriteData()
+            {
+                Console.WriteLine("MyCounter:" + MyCounter);
+                
+                if (RecursionCounter == 0)
+                    return;
+
+                RecursionCounter--;
+                
+                // Cycle
+                Anchor.WriteData();
+            }
+
+            /// <summary>
+            /// Structure is not recursive, but you can step down infinitly
+            /// </summary>
+            public static void Test()
+            {
+                MyRecursiveCLass myRecursiveCLass = new MyRecursiveCLass();
+                RecursionCounter = 5;
+                myRecursiveCLass.WriteData();
+            }
+        }
+        #endregion
     }
 
 
