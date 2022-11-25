@@ -208,7 +208,6 @@ namespace C_Sharp.Language
             public static void Test()
             {
                 MyRecursiveCLass myRecursiveCLass = new MyRecursiveCLass();
-                RecursionCounter = 5;
                 myRecursiveCLass.WriteData();
             }
         }
