@@ -212,6 +212,41 @@ namespace C_Sharp.Language
             }
         }
         #endregion
+
+        #region Goto
+
+        public static void GotoTest()
+        {
+            Random random = new Random();
+
+            if (random.Next(0, 100) < 50)
+            {
+                goto Label1;
+            }
+            else
+            {
+                goto Label2;
+            }
+
+            // ReSharper disable once HeuristicUnreachableCode
+            throw new Exception("That must not happen");
+
+            Label1:
+                Console.WriteLine("Successful Test with Label 1.");
+                goto Label3;
+
+            Label2:
+                Console.WriteLine("Successful Test with Label 2.");
+                goto Label3;
+
+            // ReSharper disable once HeuristicUnreachableCode
+            throw new Exception("That must not happen");
+
+            Label3:
+                Console.WriteLine("Test end.");
+
+        }
+        #endregion
     }
 
 

@@ -205,5 +205,11 @@ namespace UnitTest
         {
             CSharp.ToStringExamples();
         }
+
+        [TestMethod]
+        public void Goto()
+        {
+            CSharp.GotoTest();
+        }
     }
 }
