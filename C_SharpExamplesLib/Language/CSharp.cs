@@ -220,13 +220,9 @@ namespace C_Sharp.Language
             Random random = new Random();
 
             if (random.Next(0, 100) < 50)
-            {
                 goto Label1;
-            }
             else
-            {
                 goto Label2;
-            }
 
             // ReSharper disable once HeuristicUnreachableCode
             throw new Exception("That must not happen");
