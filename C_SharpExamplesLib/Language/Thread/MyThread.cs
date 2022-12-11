@@ -226,7 +226,12 @@ namespace C_Sharp.Language.Thread
             DateTime start = DateTime.Now;
 			// no restriction to actual system threads
             ThreadPool.SetMaxThreads(numThreads, numThreads);
-            for (int i = 1000000; i < 1200000; i++)
+
+            int a, b;
+            ThreadPool.GetAvailableThreads(out a, out b );
+			
+            
+            for (int i = 1; i < 100000; i++)
             {
                 IncreaseThreadCount(numThreads, ref waits);
                 int stateNumber = i;
@@ -238,8 +243,8 @@ namespace C_Sharp.Language.Thread
 
         public static void TestTheadPoolWithPrimeSearch()
         {
-            FindPrimesWithNumberOfThreads(6);
-            FindPrimesWithNumberOfThreads(12);
+            FindPrimesWithNumberOfThreads(4);
+            FindPrimesWithNumberOfThreads(8);
         }
 
         #endregion
