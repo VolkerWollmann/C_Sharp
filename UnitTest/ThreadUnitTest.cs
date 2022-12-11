@@ -44,6 +44,12 @@ namespace UnitTest
 			MyThread.TestThreadLocalData();
 		}
 
+        [TestMethod]
+        public void Thread_Pool_ThreadAllocation()
+        {
+			MyThread.TestTheadPoolWithPrimeSearch();
+        }
+
 		[TestMethod]
 		public void Thread_Dispatcher()
 		{
