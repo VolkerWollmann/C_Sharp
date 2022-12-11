@@ -224,6 +224,7 @@ namespace C_Sharp.Language.Thread
 
             int waits = 0;
             DateTime start = DateTime.Now;
+			// no restriction to actual system threads
             ThreadPool.SetMaxThreads(numThreads, numThreads);
             for (int i = 1000000; i < 1200000; i++)
             {
