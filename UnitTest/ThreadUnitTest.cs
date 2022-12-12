@@ -45,7 +45,7 @@ namespace UnitTest
 		}
 
         [TestMethod]
-        public void Thread_Pool_ThreadAllocation()
+        public void Failling_Thread_Pool_ThreadAllocation()
         {
 			MyThread.TestTheadPoolWithPrimeSearch();
         }

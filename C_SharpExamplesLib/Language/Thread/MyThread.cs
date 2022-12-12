@@ -224,11 +224,13 @@ namespace C_Sharp.Language.Thread
 
             int waits = 0;
             DateTime start = DateTime.Now;
-			// no restriction to actual system threads
-            ThreadPool.SetMaxThreads(numThreads, numThreads);
+            // no restriction to actual system threads : result is false
+            // https://learn.microsoft.com/en-us/dotnet/api/system.threading.threadpool.setmaxthreads?view=net-7.0
+            // You cannot set the maximum number of worker threads or I/O completion threads to a number smaller than the number of processors on the computer. 
+            bool result = ThreadPool.SetMaxThreads(numThreads, numThreads);
 
             int a, b;
-            ThreadPool.GetAvailableThreads(out a, out b );
+            ThreadPool.GetMaxThreads(out a, out b );
 			
             
             for (int i = 1; i < 100000; i++)
