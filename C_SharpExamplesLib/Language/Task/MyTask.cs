@@ -534,6 +534,88 @@ namespace C_Sharp.Language.Task
 			}
 
 		}
-		#endregion
-	}
+        #endregion
+
+        #region prime search with thread pool
+
+        private static int _taskCount;
+        private static Semaphore _taskCountSemaphore;
+
+        private static void IncreaseThreadCount(int maxTaskNum, ref int waits)
+        {
+            while (true)
+            {
+                _taskCountSemaphore.WaitOne();
+                if (_taskCount < maxTaskNum)
+                {
+                    _taskCount++;
+                    _taskCountSemaphore.Release();
+                    return;
+                }
+                waits++;
+                _taskCountSemaphore.Release();
+                System.Threading.Thread.Sleep(10);
+            }
+        }
+
+        private static void DecreaseThreadCount()
+        {
+            _taskCountSemaphore.WaitOne();
+            _taskCount--;
+            _taskCountSemaphore.Release();
+
+        }
+
+        private static long _maxPrime = 1;
+        private static Semaphore _primeSemaphore;
+        private static bool IsPrime(int candidate)
+        {
+            bool result = true;
+            for (int i = 2; i < (candidate / 2) + 1; i++)
+            {
+                if (candidate % i == 0)
+                {
+                    result = false;
+                }
+            }
+
+            if (result == true)
+            {
+                _primeSemaphore.WaitOne();
+                if (candidate > _maxPrime)
+                    _maxPrime = candidate;
+                _primeSemaphore.Release();
+            }
+
+            DecreaseThreadCount();
+            return result;
+        }
+
+        private static void FindPrimesWithNumberOfTasks(int numTasks)
+        {
+            _primeSemaphore = new Semaphore(1, 1);
+            _taskCountSemaphore = new Semaphore(1, 1);
+
+            int waits = 0;
+            DateTime start = DateTime.Now;
+
+
+            for (int i = 1000000; i < 1010000; i++)
+            {
+                IncreaseThreadCount(numTasks, ref waits);
+                int stateNumber = i;
+                System.Threading.Tasks.Task.Run(() => IsPrime(stateNumber));
+            }
+            TimeSpan t = DateTime.Now.Subtract(start);
+            Console.WriteLine("Time {0} with tasks : {1} Waits:{2} MaxPrime:{3}", t, numTasks, waits, _maxPrime);
+        }
+
+        public static void TestTasksWithPrimeSearch()
+        {
+            FindPrimesWithNumberOfTasks(4);
+            FindPrimesWithNumberOfTasks(12);
+        }
+
+        #endregion
+    }
 }
