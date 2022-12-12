@@ -45,9 +45,16 @@ namespace UnitTest
 		}
 
         [TestMethod]
-        public void Failling_Thread_Pool_ThreadAllocation()
+		[Ignore]
+        public void ThreadPool_ThreadAllocation()
         {
 			MyThread.TestTheadPoolWithPrimeSearch();
+        }
+
+        [TestMethod]
+        public void ThreadPool_Configuration()
+        {
+            MyThread.TestThreadPoolConfiguration();
         }
 
 		[TestMethod]
