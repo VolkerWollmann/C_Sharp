@@ -44,38 +44,5 @@ namespace C_Sharp.Language.Thread
                               System.Threading.Thread.CurrentThread.ManagedThreadId);
         }
 
-        static void WorkOnItem(object item)
-        {
-            Console.WriteLine("Started working on: " + item + " within thread " +
-                              System.Threading.Thread.CurrentThread.ManagedThreadId);
-            System.Threading.Thread.Sleep(100);
-            Console.WriteLine("Finished working on: " + item);
-        }
-
-        // #Parallel #foreach #for #ParallelLoopState
-        public static void ParallelFor()
-        {
-            var items = Enumerable.Range(0, 500);
-            Parallel.ForEach(items, item => // also works with Parallel.For(0, 500, ...
-            {
-                WorkOnItem(item);
-            });
-
-            Console.WriteLine("----");
-
-            var itemsArray = Enumerable.Range(0, 500).ToArray();
-            ParallelLoopResult result = Parallel.For(0, itemsArray.Length, (i, loopState) =>
-            {
-                // break : all lambda expressions below 200 are completed, 
-                // stop  : lambda expressions below 200 might be killed.
-                if (i == 200)
-                    loopState.Break();
-
-                WorkOnItem(itemsArray[i]);
-            });
-
-            Assert.IsFalse(result.IsCompleted);
-
-        }
     }
 }

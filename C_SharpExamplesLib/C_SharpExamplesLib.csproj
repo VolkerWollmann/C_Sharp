@@ -125,6 +125,7 @@
     <Compile Include="Language\DataTypes\MyStack.cs" />
     <Compile Include="Language\MyYield.cs" />
     <Compile Include="Language\Roslyn\MyRoslyn.cs" />
+    <Compile Include="Language\Task\MyParallel.cs" />
     <Compile Include="Language\Thread\MyThread2.cs" />
     <Compile Include="Language\MySimple.cs" />
     <Compile Include="Language\Task\MyTask.cs" />

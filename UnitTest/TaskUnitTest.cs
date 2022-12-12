@@ -104,11 +104,5 @@ namespace UnitTest
         {
 			MyTaskEvent.TaskEvent();
 		}
-
-        [TestMethod]
-        public void Task_TaskAllocation()
-        {
-            MyTask.TestTasksWithPrimeSearch();
-        }
-	}
+    }
 }

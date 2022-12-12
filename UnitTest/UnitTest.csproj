@@ -58,6 +58,7 @@
     <Compile Include="EventUnitTest.cs" />
     <Compile Include="IQueryableUnitTest.cs" />
     <Compile Include="LinqUnitTest.cs" />
+    <Compile Include="ParallelTest.cs" />
     <Compile Include="RoslynUnitTest.cs" />
     <Compile Include="TaskUnitTest.cs" />
     <Compile Include="ThreadUnitTest.cs" />

@@ -46,7 +46,7 @@ namespace UnitTest
 
         [TestMethod]
 		[Ignore]
-        public void ThreadPool_ThreadAllocation()
+        public void ThreadPool_GradeOfParallelism()
         {
 			MyThread.TestTheadPoolWithPrimeSearch();
         }
@@ -61,12 +61,6 @@ namespace UnitTest
 		public void Thread_Dispatcher()
 		{
 			MyThread.Thread_Dispatcher();
-		}
-
-		[TestMethod]
-		public void Thread_ParallelFor()
-		{
-			MyThread.ParallelFor();
 		}
 
         [TestMethod]
