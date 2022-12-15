@@ -135,9 +135,15 @@ namespace C_Sharp.Language.IQueryable
             }
 
             // apply lambda/where on the items and get a filtered MyIntegerSet
+            // get lambda expression
             LambdaExpression lambdaExpression = (LambdaExpression)((UnaryExpression)(whereExpression.Arguments[1])).Operand;
+
+            // apply lambda expression to MyQueryableIntegerSet
             var filteredMyIntegerSet = MyQueryableIntegerSet.GetFilteredSet(lambdaExpression);
+
+            // create filtered MyQueryableIntegerSet
             var filteredMyQueryableIntegerSet = new MyQueryableIntegerSet(filteredMyIntegerSet);
+            
             // replace innermost where clause with calculated MyIntegerSet
             ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor expressionTreeModifier2 = new ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor(filteredMyQueryableIntegerSet);
             Expression newExpressionTree2 = expressionTreeModifier2.Visit(expression);
