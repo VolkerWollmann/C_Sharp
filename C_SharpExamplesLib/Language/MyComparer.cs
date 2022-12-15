@@ -10,7 +10,9 @@ namespace C_Sharp.Language
 	{
 		public int X { get; }
 		public int Y { get; }
-		bool IEqualityComparer<MyIEqualityComparer>.Equals(MyIEqualityComparer x, MyIEqualityComparer y)
+
+        #region IEqualityComparer<T>
+        bool IEqualityComparer<MyIEqualityComparer>.Equals(MyIEqualityComparer x, MyIEqualityComparer y)
 		{
 			return y != null && x != null && (x.X == y.X) && (x.Y == y.Y);
 		}
@@ -19,8 +21,9 @@ namespace C_Sharp.Language
 		{
 			return (obj.X | obj.Y);
 		}
+        #endregion
 
-		public MyIEqualityComparer(int x, int y)
+        public MyIEqualityComparer(int x, int y)
 		{
 			X = x;
 			Y = y;
