@@ -104,5 +104,5 @@ namespace UnitTest
         {
 			MyTaskEvent.TaskEvent();
 		}
-	}
+    }
 }

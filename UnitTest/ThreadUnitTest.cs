@@ -44,16 +44,23 @@ namespace UnitTest
 			MyThread.TestThreadLocalData();
 		}
 
+        [TestMethod]
+		[Ignore]
+        public void ThreadPool_GradeOfParallelism()
+        {
+			MyThread.TestTheadPoolWithPrimeSearch();
+        }
+
+        [TestMethod]
+        public void ThreadPool_Configuration()
+        {
+            MyThread.TestThreadPoolConfiguration();
+        }
+
 		[TestMethod]
 		public void Thread_Dispatcher()
 		{
 			MyThread.Thread_Dispatcher();
-		}
-
-		[TestMethod]
-		public void Thread_ParallelFor()
-		{
-			MyThread.ParallelFor();
 		}
 
         [TestMethod]

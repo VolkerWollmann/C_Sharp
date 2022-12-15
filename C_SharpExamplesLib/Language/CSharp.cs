@@ -69,7 +69,7 @@ namespace C_Sharp.Language
 
         #region Named Parameter
 
-        // #named parameter
+        // #named #parameter #named parameter
         public static void NamedParameters()
         {
             int Sum( int parameter1, int parameter2)
@@ -173,6 +173,73 @@ namespace C_Sharp.Language
 
             string constString = MyNumbers.FourtyTwo.ToString();
             Assert.AreEqual(constString, "FourtyTwo");
+
+        }
+        #endregion
+
+        #region #Recursive #Class
+
+        public class MyRecursiveCLass
+        {
+            public static MyRecursiveCLass Anchor = new MyRecursiveCLass();
+            public static int Counter = 1;
+            public int MyCounter=0;
+
+            public MyRecursiveCLass()
+            {
+                MyCounter = Counter++;
+            }
+
+            public void WriteData()
+            {
+                Console.WriteLine("MyCounter:" + MyCounter);
+
+                // Don't comment this out
+                if (Anchor == this)
+                    return;
+
+                // Cycle
+                Anchor.WriteData();
+            }
+
+            /// <summary>
+            /// Structure is not recursive, but you can step down infinitely
+            /// </summary>
+            public static void Test()
+            {
+                MyRecursiveCLass myRecursiveCLass = new MyRecursiveCLass();
+                myRecursiveCLass.WriteData();
+            }
+        }
+        #endregion
+
+        #region Goto
+
+        public static void GotoTest()
+        {
+            Random random = new Random();
+
+            if (random.Next(0, 100) < 50)
+                goto Label1;
+            else
+                goto Label2;
+
+            // ReSharper disable once HeuristicUnreachableCode
+            throw new Exception("That must not happen");
+
+            Label1:
+                Console.WriteLine("Successful Test with Label 1.");
+                goto Label3;
+
+            Label2:
+                Console.WriteLine("Successful Test with Label 2.");
+                goto Label3;
+
+            // ReSharper disable once HeuristicUnreachableCode
+            throw new Exception("That must not happen");
+
+            Label3:
+                Console.WriteLine("Test end.");
 
         }
         #endregion

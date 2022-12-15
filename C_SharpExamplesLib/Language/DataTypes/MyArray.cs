@@ -49,6 +49,7 @@ namespace C_Sharp.Language.DataTypes
         {
 			string[] friends = new string[] { "Donkey", "Dog" };
 
+			// will fail
 			//friends[2] = "Seagull";
 
 			var moreFriends = friends.ToList();
@@ -57,7 +58,13 @@ namespace C_Sharp.Language.DataTypes
 
 			friends = moreFriends.ToArray<string>();
 			Assert.IsTrue(friends.Contains("Seagull"));
-			
-		}
+
+            // #array : insert at #index
+            moreFriends.Add(null);
+            moreFriends.Insert(3, "Goat");  // equivalent to moreFriends[3] = "Goat"
+            Assert.IsTrue(moreFriends[3] == "Goat");
+
+
+        }
 	}
 }

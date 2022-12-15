@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace C_Sharp.Language.IQueryable
 {
+    /// <summary>
+    /// Simulate a source, which is worth to be encapsulated for lazy linq queries.
+    /// </summary>
     public class MyIntegerSet : IEnumerator<int>
     {
         #region IntegerRangeData
@@ -24,9 +27,14 @@ namespace C_Sharp.Language.IQueryable
             
         }
 
+        /// <summary>
+        /// Simulate time consuming generation of next element
+        /// </summary>
+        /// <returns>next value</returns>
         public bool MoveNext()
         {
             _i = _i + 1;
+            System.Threading.Thread.Sleep(100);
 
             return _i < _set.Count;
         }
@@ -48,18 +56,16 @@ namespace C_Sharp.Language.IQueryable
             List<int> result = new List<int>();
             Func<int, bool> compiledExpression = (Func<int, bool>)lambdaExpression.Compile();
             
-            foreach (var item in _set)
+            Reset();
+            while (MoveNext())
             {
-                if (compiledExpression(item))
-                    result.Add(item);
+                if (compiledExpression(Current))
+                    result.Add(Current);
             }
 
             return new MyIntegerSet(result);
         }
-        public List<int> ToList()
-        {
-            return _set.ToList();
-        }
+        
         #endregion
 
         #region Constructor

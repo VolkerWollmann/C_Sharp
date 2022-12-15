@@ -109,7 +109,7 @@ namespace C_Sharp.Language.IQueryable
                 MyQueryableIntegerSet myQueryableIntegerSet = (MyQueryableIntegerSet)constantExpression.Value;
                 if (myQueryableIntegerSet != null)
                 {
-                    return myQueryableIntegerSet.MyIntegerSet.ToList();
+                    return myQueryableIntegerSet.ToList();
                 }
             }
 
@@ -122,21 +122,21 @@ namespace C_Sharp.Language.IQueryable
             if (whereExpression == null)
             {
                 // is something, that we do not want to do on our own
-                List<int> l = MyQueryableIntegerSet.MyIntegerSet.ToList();
-                IQueryable<int> queryableInts = l.AsQueryable();
+                List<int> l = MyQueryableIntegerSet.ToList();
+                IQueryable<int> queryableIntegers = l.AsQueryable();
 
-                ExpressionTreeModifier treeCopier = new ExpressionTreeModifier(queryableInts);
+                ExpressionTreeModifier treeCopier = new ExpressionTreeModifier(queryableIntegers);
                 Expression newExpressionTree = treeCopier.Visit(expression);
 
                 if (isEnumerable)
-                    return queryableInts.Provider.CreateQuery(newExpressionTree);
+                    return queryableIntegers.Provider.CreateQuery(newExpressionTree);
                 else
-                    return queryableInts.Provider.Execute(newExpressionTree);
+                    return queryableIntegers.Provider.Execute(newExpressionTree);
             }
 
             // apply lambda/where on the items and get a filtered MyIntegerSet
             LambdaExpression lambdaExpression = (LambdaExpression)((UnaryExpression)(whereExpression.Arguments[1])).Operand;
-            var filteredMyIntegerSet = MyQueryableIntegerSet.MyIntegerSet.GetFilteredSet(lambdaExpression);
+            var filteredMyIntegerSet = MyQueryableIntegerSet.GetFilteredSet(lambdaExpression);
             var filteredMyQueryableIntegerSet = new MyQueryableIntegerSet(filteredMyIntegerSet);
             // replace innermost where clause with calculated MyIntegerSet
             ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor expressionTreeModifier2 = new ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor(filteredMyQueryableIntegerSet);
@@ -176,7 +176,7 @@ namespace C_Sharp.Language.IQueryable
         {
             try
             {
-                var result = new MyQueryableIntegerSet(MyQueryableIntegerSet.MyIntegerSet, this, expression);
+                var result = MyQueryableIntegerSet.CreateMyQueryableIntegerSet(this, expression);
 
                 return (System.Linq.IQueryable)result;
             }
@@ -191,7 +191,7 @@ namespace C_Sharp.Language.IQueryable
             // TElement must be int
             if (typeof(TElement) != typeof(int)) 
                 throw new NotImplementedException();
-            return (IQueryable<TElement>)new MyQueryableIntegerSet(MyQueryableIntegerSet.MyIntegerSet, this, expression);
+            return (IQueryable<TElement>)MyQueryableIntegerSet.CreateMyQueryableIntegerSet( this, expression);
         }
 
         public object Execute(Expression expression)

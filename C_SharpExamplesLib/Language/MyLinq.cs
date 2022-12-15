@@ -149,8 +149,19 @@ namespace C_Sharp.Language
 			Assert.IsTrue(result2.SequenceEqual(new List<int> { 1, 1, 2, 4, 3, 9 })); 
 		}
 
-		#region PLINQ
-		private static bool IsPrime(int i)
+        // #linq #single
+        public static void Linq_Single()
+        {
+            IEnumerable<int> oneElementSet = Enumerable.Range(1, 1);
+			Assert.IsTrue(oneElementSet.Single() == 1);
+
+            IEnumerable<int> twoElementSet = Enumerable.Range(1, 2);
+			Assert.ThrowsException<InvalidOperationException>( () => { twoElementSet.Single(); });
+        }
+
+
+        #region PLINQ
+        private static bool IsPrime(int i)
 		{
 			if (i <= 3)
 				return true;

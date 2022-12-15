@@ -1,5 +1,8 @@
 ﻿using System;
+using System.ComponentModel.Design.Serialization;
+using System.Security.Permissions;
 using System.Threading;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language.Thread
 {
@@ -163,9 +166,124 @@ namespace C_Sharp.Language.Thread
 
 		#endregion
 
-		#region simple thread
-		// #thread
-		private static void SimpleThreadHello()
+		#region prime search with thread pool
+
+        private static int _threadCount;
+        private static Semaphore _threadCountSemaphore;
+
+        private static void IncreaseThreadCount(int maxThreadNum, ref int waits)
+        {
+            while (true)
+            {
+                _threadCountSemaphore.WaitOne();
+                if (_threadCount < maxThreadNum)
+                {
+                    _threadCount++;
+                    _threadCountSemaphore.Release();
+                    return;
+                }
+				waits++;
+                _threadCountSemaphore.Release();
+                System.Threading.Thread.Sleep(10);
+            }
+        }
+
+        private static void DecreaseThreadCount()
+        {
+            _threadCountSemaphore.WaitOne();
+            _threadCount--;
+            _threadCountSemaphore.Release();
+            
+        }
+
+        private static long _maxPrime = 1;
+        private static Semaphore _primeSemaphore;
+        private static bool IsPrime(int candidate)
+        {
+            bool result = true;
+            for (int i = 2; i < candidate / 2; i++)
+            {
+                if (candidate % i == 0)
+                {
+                    DecreaseThreadCount(); 
+                    result = false;
+                }
+            }
+            _primeSemaphore.WaitOne();
+			if (candidate > _maxPrime)
+				_maxPrime = candidate;
+            _primeSemaphore.Release();
+
+            DecreaseThreadCount();
+            return result;
+        }
+
+        private static void FindPrimesWithNumberOfThreads(int numThreads)
+        {
+            _primeSemaphore = new Semaphore(1, 1);
+            _threadCountSemaphore = new Semaphore(1, 1);
+
+            int waits = 0;
+            DateTime start = DateTime.Now;
+            
+            // no restriction to actual system threads : result is false
+            // https://learn.microsoft.com/en-us/dotnet/api/system.threading.threadpool.setmaxthreads?view=net-7.0
+            // You cannot set the maximum number of worker threads or I/O completion threads to a number smaller than the number of processors on the computer. 
+            bool result = ThreadPool.SetMaxThreads(numThreads, numThreads);
+			Assert.IsTrue(result, "Cannot restrict thread count to 4 or 8");
+            
+            int a, b;
+            ThreadPool.GetMaxThreads(out a, out b );
+			
+            
+            for (int i = 1; i < 100000; i++)
+            {
+                IncreaseThreadCount(numThreads, ref waits);
+                int stateNumber = i;
+                ThreadPool.QueueUserWorkItem(state => IsPrime(stateNumber));
+            }
+            TimeSpan t = DateTime.Now.Subtract(start);
+            Console.WriteLine("Time with {0} threads: {1} Waits:{2} MaxPrime:{3}", t, numThreads, waits, _maxPrime);
+        }
+
+        public static void TestTheadPoolWithPrimeSearch()
+        {
+            FindPrimesWithNumberOfThreads(4);
+            FindPrimesWithNumberOfThreads(8);
+        }
+
+        #endregion
+
+        #region #ThreadPool #Configuration
+
+        public static void TestThreadPoolConfiguration()
+        {
+            int cores = Environment.ProcessorCount;
+            bool result;
+            
+            result = ThreadPool.SetMaxThreads(cores, cores);
+			Assert.IsTrue(result);
+
+            int a, b;
+            ThreadPool.GetMaxThreads(out a, out b);
+			Assert.AreEqual(a, cores);
+            Assert.AreEqual(b, cores);
+
+            //    // https://learn.microsoft.com/en-us/dotnet/api/system.threading.threadpool.setmaxthreads?view=net-7.0
+            // Thread pool configuration cannot be smaller than cores in computer
+            result = ThreadPool.SetMaxThreads(cores-1, cores-1);
+			Assert.IsFalse(result);
+
+            ThreadPool.GetMaxThreads(out a, out b);
+            Assert.AreEqual(a, cores);
+            Assert.AreEqual(b, cores);
+        }
+
+        #endregion
+
+        #region simple thread
+        // #thread
+        private static void SimpleThreadHello()
 		{
 			Console.WriteLine("Hello from the thread");
 			System.Threading.Thread.Sleep(2000);

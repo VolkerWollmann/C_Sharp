@@ -44,7 +44,7 @@ namespace C_Sharp.Language
 
 		internal string StringInterpolation2() => $"({X})";
 
-        // #string interpolation #alignment
+        // #string #interpolation #alignment
 		private const string InternalRabbit = "Rabbit";
 		internal string StringInterpolation3() => $"({InternalRabbit}:{InternalRabbit, 10}:{InternalRabbit,3}:{InternalRabbit,-10}:)";
 
