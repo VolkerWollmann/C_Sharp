@@ -39,7 +39,7 @@ namespace UnitTest
         /// </summary>
         /// <param name="i">number to test</param>
         /// <returns>true, if i == 2</returns>
-        private bool TestForTwo(int i )
+        private bool TestForTwo(int i)
         {
             return i == 2;
         }
@@ -70,7 +70,7 @@ namespace UnitTest
         public void Test_IQueryable_WhereWhere()
         {
             MyIntegerSet myIntegerSet =
-                new MyIntegerSet(new List<int> { 1, 2, 3 });
+                new MyIntegerSet(new List<int> {1, 2, 3});
 
             MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
 
@@ -91,6 +91,21 @@ namespace UnitTest
             var sum = myQueryableIntegerSet.Sum();
 
             Assert.IsTrue(sum == 6);
+        }
+
+        [TestMethod]
+        [Ignore]
+        public void Test_IQueryable_Select()
+
+        {
+            MyIntegerSet myIntegerSet =
+                new MyIntegerSet(new List<int> {1, 2, 3});
+
+            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
+
+            var result = myQueryableIntegerSet.Select(e => "N" + e);
+
+            Assert.IsTrue(result.All(e => e.StartsWith("N")));
         }
     }
 } 
