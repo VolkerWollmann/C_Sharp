@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language.IQueryable
@@ -15,21 +16,36 @@ namespace C_Sharp.Language.IQueryable
             // uses public bool MoveNext()
             // uses int IEnumerator<int>.Current
             MyEnumerableIntegerRange myIntegerRange = new MyEnumerableIntegerRange(1, 10);
+            int test = 0;
             foreach (int i in myIntegerRange)
             {
+                test++;
                 if (i > 5)
+                    break;
+                Assert.IsTrue(test < 6);
+            }
+
+            foreach (int i in myIntegerRange)
+            {
+                test = i;
+                foreach (int j in myIntegerRange)
+                {
+                    Assert.AreEqual(test, i);
+                    if (j > 3)
+                        break;
+
+                    Console.WriteLine("i:{0} j:{1}", i, j);
+                }
+
+                Assert.AreEqual(test, i);
+
+                if (i > 3)
                     break;
             }
 
-            // myIntegerRange stands at 6
-            // uses int IEnumerator<int>.Current
-            var a = ((IEnumerator<int>)myIntegerRange).Current;
-            Assert.AreEqual(a, 6);
-
-            // uses object IEnumerator.Current
-            var b = ((IEnumerator)myIntegerRange).Current;
-            Assert.IsNotNull(b);
-
+            // Does not compile, because it is internal and that is wanted. 
+            // myIntegerRange.ValueAt(-1);
+            
             // does work
             // uses public IEnumerator<int> GetEnumerator()
             var d = myIntegerRange.ToList();
