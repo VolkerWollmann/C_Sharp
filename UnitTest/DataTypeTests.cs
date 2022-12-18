@@ -34,7 +34,7 @@ namespace UnitTest
         [TestMethod]
         public void GenericClass()
         {
-            MyGenericClass.Test();
+            MyGenericClassTest.Test();
 
         }
 
