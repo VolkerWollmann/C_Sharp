@@ -145,7 +145,8 @@ namespace C_Sharp.Language.DataTypes
 
     }
 
-    internal class GenericClass<TGenericClassInstanceType> where TGenericClassInstanceType : MyBaseClass, new()
+    // be aware of type variable TGenericClassInstanceType in debugger
+    internal class MyGenericClass<TGenericClassInstanceType> where TGenericClassInstanceType : MyBaseClass, new()
     {
         private readonly TGenericClassInstanceType _internalClass = new TGenericClassInstanceType();
 		public int GenericClassMethod()
@@ -155,12 +156,12 @@ namespace C_Sharp.Language.DataTypes
 
 	}
 
-    public class MyGenericClass
+    public class MyGenericClassTest
     {
         public static void Test()
         {
-            var t1 = new GenericClass<RefinedClassA>();
-			var t2 = new GenericClass<RefinedClassB>();
+            var t1 = new MyGenericClass<RefinedClassA>();
+			var t2 = new MyGenericClass<RefinedClassB>();
             
 			Assert.AreEqual(42, t1.GenericClassMethod());
             Assert.AreEqual(42, t2.GenericClassMethod());
@@ -169,13 +170,13 @@ namespace C_Sharp.Language.DataTypes
 			//var t3 = new GenericClass<int>();
 
 			//create dynamic valid generic class instance
-			Type t4 = typeof(GenericClass<RefinedClassA>);
+			Type t4 = typeof(MyGenericClass<RefinedClassA>);
 			var t5 = Activator.CreateInstance(t4);
-			Assert.AreEqual(42, ((GenericClass<RefinedClassA>)t5).GenericClassMethod());
+			Assert.AreEqual(42, ((MyGenericClass<RefinedClassA>)t5).GenericClassMethod());
 
 			//create dynamic invalid generic class instance
             // ReSharper disable once UnusedVariable
-            Assert.ThrowsException<ArgumentException>(() => { Type t6 = typeof(GenericClass<>).MakeGenericType(typeof(int)); });
+            Assert.ThrowsException<ArgumentException>(() => { Type t6 = typeof(MyGenericClass<>).MakeGenericType(typeof(int)); });
 
 		}
     }
