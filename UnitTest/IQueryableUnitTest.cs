@@ -82,7 +82,7 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void Test_IQueryable_Sum()
+        public void Test_IQueryable_SumAsExtension()
         {
             MyIntegerSet myIntegerSet =
                 new MyIntegerSet(new List<int> {1, 2, 3});
@@ -92,6 +92,19 @@ namespace UnitTest
             var sum = myQueryableIntegerSet.Sum();
 
             Assert.IsTrue(sum == 6);
+        }
+
+        [TestMethod]
+        public void Test_IQueryable_MaxDelegated()
+        {
+            MyIntegerSet myIntegerSet =
+                new MyIntegerSet(new List<int> { 1, 2, 3 });
+
+            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
+
+            var max = myQueryableIntegerSet.Max();
+
+            Assert.IsTrue(max == 3);
         }
 
         [TestMethod]

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -29,6 +31,7 @@ namespace C_Sharp.Language.IQueryable
         public IQueryProvider Provider { get; }
 
         #region IList<int>
+
         public List<int> ToList()
         {
             List<int> result = new List<int>();
@@ -41,6 +44,7 @@ namespace C_Sharp.Language.IQueryable
 
             return result;
         }
+
         #endregion
 
         public MyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
@@ -49,7 +53,8 @@ namespace C_Sharp.Language.IQueryable
         }
 
         #region Constructors
-            public MyQueryableIntegerSet(MyIntegerSet myIntegerSet)
+
+        public MyQueryableIntegerSet(MyIntegerSet myIntegerSet)
         {
             _myIntegerSet = myIntegerSet;
             Provider = new MyQueryableIntegerSetQueryProvider(this);
@@ -62,7 +67,8 @@ namespace C_Sharp.Language.IQueryable
         /// <param name="provider"></param>
         /// <param name="expression"></param>
         /// <param name="integerSet"></param>
-        private MyQueryableIntegerSet(MyIntegerSet integerSet, MyQueryableIntegerSetQueryProvider provider, Expression expression):
+        private MyQueryableIntegerSet(MyIntegerSet integerSet, MyQueryableIntegerSetQueryProvider provider,
+            Expression expression) :
             this(integerSet)
         {
             if (expression == null)
@@ -83,6 +89,28 @@ namespace C_Sharp.Language.IQueryable
             Expression expression)
         {
             return new MyQueryableIntegerSet(this._myIntegerSet, provider, expression);
+        }
+
+        #endregion
+    }
+
+    public static class MyQueryableIntegerSetExtensionMethods
+    {
+        #region Extension methods
+
+        public static int Sum(this MyQueryableIntegerSet myQueryableIntegerSet)
+        {
+            int sum = 0;
+            IEnumerator<int> enumerator = myQueryableIntegerSet.GetEnumerator();
+
+            while (enumerator.MoveNext())
+            {
+                sum += enumerator.Current;
+            }
+
+            enumerator.Dispose();
+
+            return sum;
         }
         #endregion
     }
