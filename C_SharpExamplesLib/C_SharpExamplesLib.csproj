@@ -95,7 +95,6 @@
     <Compile Include="Language\DataTypes\MyHashSet.cs" />
     <Compile Include="Language\DataTypes\MySimpleTypes.cs" />
     <Compile Include="Language\IQueryable\MyEnumerableIntegerRangeTest.cs" />
-    <Compile Include="Language\IQueryable\MyIntegerSet.cs" />
     <Compile Include="Language\IQueryable\MyQueryableIntegerSet.cs" />
     <Compile Include="Language\IQueryable\MyQueryableIntegerSetQueryProvider.cs" />
     <Compile Include="Language\MyAbstractClass.cs" />
@@ -159,10 +158,6 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyEnumerableIntegerRange\MyEnumerableIntegerRange.csproj">
-      <Project>{f7014aa5-dbca-4dc4-a41e-b4a87568b8de}</Project>
-      <Name>MyEnumerableIntegerRange</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MyIntegerRangeLibrary\MyEnumerableIntegerRangeLibrary.csproj">
       <Project>{7fbfb7b1-ad16-4ea7-84d3-15bcdc5d982e}</Project>
       <Name>MyEnumerableIntegerRangeLibrary</Name>

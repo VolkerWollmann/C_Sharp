@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace C_Sharp.Language.IQueryable
+namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 {
     /// <summary>
     /// Simulate a source, which is worth to be encapsulated for lazy linq queries.

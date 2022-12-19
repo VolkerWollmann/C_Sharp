@@ -82,6 +82,10 @@
       <Project>{71f15277-5f86-4de9-b9ec-e8214d414820}</Project>
       <Name>C_SharpExamplesLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MyEnumerableIntegerRange\MyEnumerableIntegerRangeLibrary.csproj">
+      <Project>{f7014aa5-dbca-4dc4-a41e-b4a87568b8de}</Project>
+      <Name>MyEnumerableIntegerRangeLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

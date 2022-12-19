@@ -41,7 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyEnumerableIntegerRangeLibrary.cs" />
+    <Compile Include="MyEnumerableIntegerRange.cs" />
+    <Compile Include="MyIntegerSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
