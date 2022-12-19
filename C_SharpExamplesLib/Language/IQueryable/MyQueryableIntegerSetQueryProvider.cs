@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -59,7 +60,6 @@ namespace C_Sharp.Language.IQueryable
         {
             MyQueryableIntegerSet = myQueryableIntegerSet;
         }
-
         protected override Expression VisitMethodCall(MethodCallExpression expression)
         {
             if (expression.Method.Name == "Where")
@@ -100,40 +100,36 @@ namespace C_Sharp.Language.IQueryable
             return (expression is MethodCallExpression);
         }
 
-        // Executes the expression tree that is passed to it. 
-        internal object Execute(Expression expression, bool isEnumerable)
+        #region Expression evaluation
+
+        private object EvaluateConstantExpression(ConstantExpression constantExpression)
         {
-            ConstantExpression constantExpression = expression as ConstantExpression;
-            if (constantExpression != null) 
+            MyQueryableIntegerSet myQueryableIntegerSet = (MyQueryableIntegerSet)constantExpression.Value;
+            if (myQueryableIntegerSet != null)
             {
-                MyQueryableIntegerSet myQueryableIntegerSet = (MyQueryableIntegerSet)constantExpression.Value;
-                if (myQueryableIntegerSet != null)
-                {
-                    return myQueryableIntegerSet.ToList();
-                }
+                return myQueryableIntegerSet.ToList();
             }
 
-            if (!IsQueryOverDataSource(expression))
-                throw new InvalidProgramException("No query over the data source was specified.");
+            throw new Exception("Cannot evaluate constant expression");
+        }
 
-            // Find the call to Where() and get the lambda expression predicate.
-            InnermostWhereFinder whereFinder = new InnermostWhereFinder();
-            MethodCallExpression whereExpression = whereFinder.GetInnermostWhere(expression);
-            if (whereExpression == null)
-            {
-                // is something, that we do not want to do on our own
-                List<int> l = MyQueryableIntegerSet.ToList();
-                IQueryable<int> queryableIntegers = l.AsQueryable();
+        private object EvaluateNonWhereExpression(Expression expression, bool isEnumerable)
+        {
+            // is something, that we do not want to do on our own
+            List<int> l = MyQueryableIntegerSet.ToList();
+            IQueryable<int> queryableIntegers = l.AsQueryable();
 
-                ExpressionTreeModifier treeCopier = new ExpressionTreeModifier(queryableIntegers);
-                Expression newExpressionTree = treeCopier.Visit(expression);
+            ExpressionTreeModifier treeCopier = new ExpressionTreeModifier(queryableIntegers);
+            Expression newExpressionTree = treeCopier.Visit(expression);
 
-                if (isEnumerable)
-                    return queryableIntegers.Provider.CreateQuery(newExpressionTree);
-                else
-                    return queryableIntegers.Provider.Execute(newExpressionTree);
-            }
+            if (isEnumerable)
+                return queryableIntegers.Provider.CreateQuery(newExpressionTree);
+            else
+                return queryableIntegers.Provider.Execute(newExpressionTree);
+        }
 
+        private object EvaluateWhereExpression(Expression expression, MethodCallExpression whereExpression, bool isEnumerable)
+        {
             // apply lambda/where on the items and get a filtered MyIntegerSet
             // get lambda expression
             LambdaExpression lambdaExpression = (LambdaExpression)((UnaryExpression)(whereExpression.Arguments[1])).Operand;
@@ -143,7 +139,7 @@ namespace C_Sharp.Language.IQueryable
 
             // create filtered MyQueryableIntegerSet
             var filteredMyQueryableIntegerSet = new MyQueryableIntegerSet(filteredMyIntegerSet);
-            
+
             // replace innermost where clause with calculated MyIntegerSet
             ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor expressionTreeModifier2 = new ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor(filteredMyQueryableIntegerSet);
             Expression newExpressionTree2 = expressionTreeModifier2.Visit(expression);
@@ -154,8 +150,26 @@ namespace C_Sharp.Language.IQueryable
                 return myQueryableIntegerSetQueryProvider.CreateQuery(newExpressionTree2);
             else
                 return myQueryableIntegerSetQueryProvider.Execute(newExpressionTree2);
+        }
 
-            throw new NotImplementedException("Handle where clause");
+        #endregion
+        // Executes the expression tree that is passed to it. 
+        internal object Execute(Expression expression, bool isEnumerable)
+        {
+            ConstantExpression constantExpression = expression as ConstantExpression;
+            if (constantExpression != null)
+                return EvaluateConstantExpression(constantExpression);
+           
+            if (!IsQueryOverDataSource(expression))
+                throw new InvalidProgramException("No query over the data source was specified.");
+
+            // Find the call to Where() and get the lambda expression predicate.
+            InnermostWhereFinder whereFinder = new InnermostWhereFinder();
+            MethodCallExpression whereExpression = whereFinder.GetInnermostWhere(expression);
+            if (whereExpression == null)
+                return EvaluateNonWhereExpression(expression, isEnumerable);
+
+            return EvaluateWhereExpression(expression, whereExpression, isEnumerable);
         }
 
         internal MyQueryableIntegerSetQueryContext(MyQueryableIntegerSet myQueryableIntegerSet)
