@@ -108,8 +108,8 @@ namespace UnitTest
         }
 
         [TestMethod]
-        [Ignore]
-        public void Test_IQueryable_Select()
+        //[Ignore]
+        public void Test_IQueryable_Select_Simple()
 
         {
             MyIntegerSet myIntegerSet =
@@ -117,9 +117,24 @@ namespace UnitTest
 
             MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
 
-            var result = myQueryableIntegerSet.Select(e => "N" + e);
+            var result = myQueryableIntegerSet.Select(e => e);
 
-            Assert.IsTrue(result.All(e => e.StartsWith("N")));
+            Assert.IsTrue(result.All(e => (e.GetType()) == typeof(int) ));
+        }
+
+        [TestMethod]
+        public void Test_IQueryable_Select_IntegerFunction()
+
+        {
+            MyIntegerSet myIntegerSet =
+                new MyIntegerSet(new List<int> { 1, 2, 3 });
+
+            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
+
+            var result = myQueryableIntegerSet.Select(e => e*2);
+
+            // #Assert #list #equal
+            CollectionAssert.AreEqual(result.ToList(), new List<int> { 2, 4, 6 });
         }
     }
 } 
