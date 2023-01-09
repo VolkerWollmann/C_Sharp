@@ -225,10 +225,13 @@ namespace C_Sharp.Language.Thread
 
             int waits = 0;
             DateTime start = DateTime.Now;
-            
+
             // no restriction to actual system threads : result is false
             // https://learn.microsoft.com/en-us/dotnet/api/system.threading.threadpool.setmaxthreads?view=net-7.0
             // You cannot set the maximum number of worker threads or I/O completion threads to a number smaller than the number of processors on the computer. 
+            //
+            // also see MyParallel.Parallel_GradeOfParallelism
+            //
             bool result = ThreadPool.SetMaxThreads(numThreads, numThreads);
 			Assert.IsTrue(result, "Cannot restrict thread count to 4 or 8");
             
