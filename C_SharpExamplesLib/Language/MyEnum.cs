@@ -47,7 +47,7 @@ namespace C_Sharp.Language
 			int numberOfDogs = Enum.GetValues(typeof(Dog)).Length;
 			Assert.AreEqual(numberOfDogs,3);
 
-			// #enum to #array
+			// #enum to #array, #enumeration of values of enum
 			var allDogs = Enum.GetValues(typeof(Dog));
 			ShowAllElement<Dog>(allDogs);
 
