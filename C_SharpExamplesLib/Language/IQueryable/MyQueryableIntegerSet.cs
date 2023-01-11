@@ -28,7 +28,7 @@ namespace C_Sharp.Language.IQueryable
         }
 
         public Expression Expression { get; }
-        public Type ElementType { get; }
+        public Type ElementType => typeof(int);
         public IQueryProvider Provider { get; }
 
         #region IList<int>
