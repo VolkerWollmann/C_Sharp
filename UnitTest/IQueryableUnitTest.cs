@@ -136,5 +136,36 @@ namespace UnitTest
             // #Assert #list #equal
             CollectionAssert.AreEqual(result.ToList(), new List<int> { 2, 4, 6 });
         }
+
+        [TestMethod]
+        public void Test_IQueryable_SelectSelect_IntegerFunction()
+
+        {
+            MyIntegerSet myIntegerSet =
+                new MyIntegerSet(new List<int> { 1, 2, 3 });
+
+            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
+
+            var result = myQueryableIntegerSet.Select(e => e * 2).Select( e=> e *2 );
+
+            // #Assert #list #equal
+            CollectionAssert.AreEqual(result.ToList(), new List<int> { 4, 8, 12 });
+        }
+
+        [TestMethod]
+        public void Test_IQueryable_Select_StringFunction()
+        {
+            MyIntegerSet myIntegerSet =
+                new MyIntegerSet(new List<int> { 1, 2, 3 });
+
+            
+
+            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
+
+            var result = myQueryableIntegerSet.Select(e => "Z"+e);
+
+            // #Assert #list #equal
+            CollectionAssert.AreEqual(result.ToList(), new List<string> { "Z1", "Z2", "Z3" });
+        }
     }
 } 

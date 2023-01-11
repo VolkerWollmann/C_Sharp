@@ -12,6 +12,7 @@ using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 
 namespace C_Sharp.Language.IQueryable
 {
+    
     public class MyQueryableIntegerSet : IQueryable<int>
     {
         private MyIntegerSet _myIntegerSet;
@@ -23,7 +24,7 @@ namespace C_Sharp.Language.IQueryable
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return (Provider.Execute<IEnumerable>(Expression)).GetEnumerator();
+            return GetEnumerator();
         }
 
         public Expression Expression { get; }

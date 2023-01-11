@@ -116,7 +116,7 @@ namespace C_Sharp.Language.IQueryable
         private object EvaluateNonWhereExpression(Expression expression, bool isEnumerable)
         {
             // is something, that we do not want to do on our own
-            List<int> l = MyQueryableIntegerSet.ToList();
+            IEnumerable<int> l = MyQueryableIntegerSet.ToList();
             IQueryable<int> queryableIntegers = l.AsQueryable();
 
             ExpressionTreeModifier treeCopier = new ExpressionTreeModifier(queryableIntegers);
