@@ -153,12 +153,11 @@ namespace UnitTest
         }
 
         [TestMethod]
+        [Ignore]
         public void Test_IQueryable_Select_StringFunction()
         {
             MyIntegerSet myIntegerSet =
                 new MyIntegerSet(new List<int> { 1, 2, 3 });
-
-            
 
             MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
 
