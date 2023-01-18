@@ -160,17 +160,34 @@ namespace C_Sharp.Language.DataTypes
     {
         public static void Test()
         {
-            var t1 = new MyGenericClass<RefinedClassA>();
-			var t2 = new MyGenericClass<RefinedClassB>();
+            var tA = new MyGenericClass<RefinedClassA>();
+			var tB = new MyGenericClass<RefinedClassB>();
             
-			Assert.AreEqual(42, t1.GenericClassMethod());
-            Assert.AreEqual(42, t2.GenericClassMethod());
+			Assert.AreEqual(42, tA.GenericClassMethod());
+            Assert.AreEqual(42, tB.GenericClassMethod());
 
-			//will not Compile
-			//var t3 = new GenericClass<int>();
+            // #Type checks comparissom
+            var tAType = tA.GetType();
+            var tBType = tB.GetType();
+            Assert.IsFalse(tAType.Equals(tBType));
 
-			//create dynamic valid generic class instance
-			Type t4 = typeof(MyGenericClass<RefinedClassA>);
+            var tAGenericTypeDefinition = tA.GetType().GetGenericTypeDefinition();
+            var tBGenericTypeDefinition = tB.GetType().GetGenericTypeDefinition();
+            Assert.IsTrue(tAGenericTypeDefinition.Equals(tBGenericTypeDefinition));
+
+            var tATypeGenericTypeArgument = tAType.GenericTypeArguments[0];
+            var refinedClassAType = typeof(RefinedClassA);
+            Assert.IsTrue(tATypeGenericTypeArgument.Equals(refinedClassAType));
+
+            var myGenericClassTypeName = typeof(MyGenericClass<>);
+            Assert.IsTrue(tAGenericTypeDefinition.Equals(myGenericClassTypeName));
+
+
+            //will not Compile
+            //var t3 = new GenericClass<int>();
+
+            //create dynamic valid generic class instance
+            Type t4 = typeof(MyGenericClass<RefinedClassA>);
 			var t5 = Activator.CreateInstance(t4);
 			Assert.AreEqual(42, ((MyGenericClass<RefinedClassA>)t5).GenericClassMethod());
 
