@@ -14,6 +14,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
     /// </summary>
     public class MyIntegerSet : IEnumerator<int>
     {
+        Guid guid = Guid.NewGuid();
         #region IntegerRangeData
         
         private readonly List<int> _set;

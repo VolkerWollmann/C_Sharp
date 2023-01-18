@@ -221,8 +221,10 @@ namespace C_Sharp.Language.IQueryable
                 MyQueryableIntegerSetQueryProvider<TElement> myQueryableIntegerSetQueryProvider =
                     new MyQueryableIntegerSetQueryProvider<TElement>(myQueryableIntegerSet);
 
-                return (IQueryable<TElement>)myQueryableIntegerSet.CreateMyQueryableIntegerSet<TElement>(
+                var result =  (IQueryable<TElement>)myQueryableIntegerSet.CreateMyQueryableIntegerSet<TElement>(
                     myQueryableIntegerSetQueryProvider, expression);
+
+                return result;
             }
 
             return (IQueryable<TElement>)MyQueryableIntegerSet.CreateMyQueryableIntegerSet( this, expression);
