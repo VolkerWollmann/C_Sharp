@@ -43,20 +43,24 @@ namespace C_Sharp.Language.IQueryable
 
         protected override Expression VisitConstant(ConstantExpression c)
         {
-            // #this is important: Replace the constant QueryableTerraServerData arg with the queryable Place collection. 
-            if (c.Type == typeof(MyQueryableIntegerSet))
+            if (!c.Type.IsGenericType)
+                return c;
+
+            // #this is important: Replace the constant MyQueryableIntegerSet arg with the IQueryable<TBaseType> collection. 
+            var cGenericTypeDefinition = c.Type.GetGenericTypeDefinition();
+            if (cGenericTypeDefinition.Equals(typeof(MyQueryableIntegerSet<>)))
                 return Expression.Constant(QueryableIntegers);
             else
                 return c;
         }
     }
 
-    internal class ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor : ExpressionVisitor
+    internal class ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor<TOutputType> : ExpressionVisitor
     {
-        private readonly MyQueryableIntegerSet MyQueryableIntegerSet;
+        private readonly MyQueryableIntegerSet<TOutputType> MyQueryableIntegerSet;
         private bool done=false;
 
-        internal ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor(MyQueryableIntegerSet myQueryableIntegerSet)
+        internal ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor(MyQueryableIntegerSet<TOutputType> myQueryableIntegerSet)
         {
             MyQueryableIntegerSet = myQueryableIntegerSet;
         }
@@ -90,9 +94,9 @@ namespace C_Sharp.Language.IQueryable
 
     }
 
-    internal class MyQueryableIntegerSetQueryContext
+    internal class MyQueryableIntegerSetQueryContext<TOutputType>
     {
-        public MyQueryableIntegerSet MyQueryableIntegerSet;
+        public MyQueryableIntegerSet<TOutputType> MyQueryableIntegerSet;
         private bool IsQueryOverDataSource(Expression expression)
         {
             // If expression represents an unqueried IQueryable data source instance, 
@@ -104,7 +108,7 @@ namespace C_Sharp.Language.IQueryable
 
         private object EvaluateConstantExpression(ConstantExpression constantExpression)
         {
-            MyQueryableIntegerSet myQueryableIntegerSet = (MyQueryableIntegerSet)constantExpression.Value;
+            MyQueryableIntegerSet<TOutputType> myQueryableIntegerSet = (MyQueryableIntegerSet<TOutputType>)constantExpression.Value;
             if (myQueryableIntegerSet != null)
             {
                 return myQueryableIntegerSet.ToList();
@@ -116,7 +120,7 @@ namespace C_Sharp.Language.IQueryable
         private object EvaluateNonWhereExpression(Expression expression, bool isEnumerable)
         {
             // is something, that we do not want to do on our own
-            IEnumerable<int> l = MyQueryableIntegerSet.ToList();
+            IEnumerable<int> l = MyQueryableIntegerSet.ToIntegerList();
             IQueryable<int> queryableIntegers = l.AsQueryable();
 
             ExpressionTreeModifier treeCopier = new ExpressionTreeModifier(queryableIntegers);
@@ -138,13 +142,15 @@ namespace C_Sharp.Language.IQueryable
             var filteredMyIntegerSet = MyQueryableIntegerSet.GetFilteredSet(lambdaExpression);
 
             // create filtered MyQueryableIntegerSet
-            var filteredMyQueryableIntegerSet = new MyQueryableIntegerSet(filteredMyIntegerSet);
+            var filteredMyQueryableIntegerSet = new MyQueryableIntegerSet<TOutputType>(filteredMyIntegerSet);
 
             // replace innermost where clause with calculated MyIntegerSet
-            ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor expressionTreeModifier2 = new ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor(filteredMyQueryableIntegerSet);
+            ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor<TOutputType> expressionTreeModifier2 = 
+                new ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor<TOutputType>(filteredMyQueryableIntegerSet);
             Expression newExpressionTree2 = expressionTreeModifier2.Visit(expression);
 
-            MyQueryableIntegerSetQueryProvider myQueryableIntegerSetQueryProvider = new MyQueryableIntegerSetQueryProvider(filteredMyQueryableIntegerSet);
+            MyQueryableIntegerSetQueryProvider<TOutputType> myQueryableIntegerSetQueryProvider = 
+                new MyQueryableIntegerSetQueryProvider<TOutputType>(filteredMyQueryableIntegerSet);
 
             if (isEnumerable)
                 return myQueryableIntegerSetQueryProvider.CreateQuery(newExpressionTree2);
@@ -172,15 +178,15 @@ namespace C_Sharp.Language.IQueryable
             return EvaluateWhereExpression(expression, whereExpression, isEnumerable);
         }
 
-        internal MyQueryableIntegerSetQueryContext(MyQueryableIntegerSet myQueryableIntegerSet)
+        internal MyQueryableIntegerSetQueryContext(MyQueryableIntegerSet<TOutputType> myQueryableIntegerSet)
         {
             MyQueryableIntegerSet = myQueryableIntegerSet;
         }
     }
 
-    public class MyQueryableIntegerSetQueryProvider : IQueryProvider
+    public class MyQueryableIntegerSetQueryProvider<TOutputType> : IQueryProvider
     {
-        public readonly MyQueryableIntegerSet MyQueryableIntegerSet;
+        public readonly MyQueryableIntegerSet<TOutputType> MyQueryableIntegerSet;
 
         #region private Methods
         // Executes the expression tree that is passed to it. 
@@ -209,15 +215,23 @@ namespace C_Sharp.Language.IQueryable
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
             // TElement must be int
-            if (typeof(TElement) != typeof(int)) 
-                throw new NotImplementedException();
+            if (typeof(TElement) != typeof(int))
+            {
+                MyQueryableIntegerSet<TElement> myQueryableIntegerSet = MyQueryableIntegerSet.CastToNewType<TElement>();
+                MyQueryableIntegerSetQueryProvider<TElement> myQueryableIntegerSetQueryProvider =
+                    new MyQueryableIntegerSetQueryProvider<TElement>(myQueryableIntegerSet);
+
+                return (IQueryable<TElement>)myQueryableIntegerSet.CreateMyQueryableIntegerSet<TElement>(
+                    myQueryableIntegerSetQueryProvider, expression);
+            }
+
             return (IQueryable<TElement>)MyQueryableIntegerSet.CreateMyQueryableIntegerSet( this, expression);
         }
 
         public object Execute(Expression expression)
         {
-            MyQueryableIntegerSetQueryContext myQueryableIntegerSetQueryContext =
-                new MyQueryableIntegerSetQueryContext(MyQueryableIntegerSet);
+            MyQueryableIntegerSetQueryContext<TOutputType> myQueryableIntegerSetQueryContext =
+                new MyQueryableIntegerSetQueryContext<TOutputType>(MyQueryableIntegerSet);
             return myQueryableIntegerSetQueryContext.Execute(expression, false);
         }
 
@@ -225,8 +239,8 @@ namespace C_Sharp.Language.IQueryable
         {
             bool isEnumerable = (typeof(TResult).Name == "IEnumerable`1");
 
-            MyQueryableIntegerSetQueryContext myQueryableIntegerSetQueryContext =
-                new MyQueryableIntegerSetQueryContext(MyQueryableIntegerSet);
+            MyQueryableIntegerSetQueryContext<TOutputType> myQueryableIntegerSetQueryContext =
+                new MyQueryableIntegerSetQueryContext<TOutputType>(MyQueryableIntegerSet);
 
             
             var result =  (TResult)myQueryableIntegerSetQueryContext.Execute(expression, isEnumerable);
@@ -236,7 +250,7 @@ namespace C_Sharp.Language.IQueryable
 
         #region Construcutor
 
-        public MyQueryableIntegerSetQueryProvider(MyQueryableIntegerSet myQueryableIntegerSet)
+        public MyQueryableIntegerSetQueryProvider(MyQueryableIntegerSet<TOutputType> myQueryableIntegerSet)
         {
             MyQueryableIntegerSet = myQueryableIntegerSet;
         }

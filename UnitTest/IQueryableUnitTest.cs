@@ -7,7 +7,7 @@ using OtherAccessibilityProject = AccessibilityOtherProject;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using C_Sharp.Language.IQueryable;
 using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
-
+using System.Web;
 
 namespace UnitTest
 {
@@ -27,9 +27,9 @@ namespace UnitTest
             MyIntegerSet myIntegerSet =
                 new MyIntegerSet(new List<int> {1, 2, 3});
 
-            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
+            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
-            Assert.AreEqual(myQueryableIntegerSet.Expression.Type, typeof(MyQueryableIntegerSet));
+            Assert.AreEqual(myQueryableIntegerSet.Expression.Type, typeof(MyQueryableIntegerSet<int>));
             Assert.AreEqual(myQueryableIntegerSet.Expression.GetType(), typeof(ConstantExpression));
 
         }
@@ -55,7 +55,7 @@ namespace UnitTest
             MyIntegerSet myIntegerSet =
                 new MyIntegerSet(new List<int> {1, 2, 3});
 
-            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
+            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
             var expression = myQueryableIntegerSet.Where(i => TestForTwo(i));
             var result = expression.ToList();
@@ -73,7 +73,7 @@ namespace UnitTest
             MyIntegerSet myIntegerSet =
                 new MyIntegerSet(new List<int> {1, 2, 3});
 
-            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
+            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
             var expression = myQueryableIntegerSet.Where(i => TestForTwo(i)).Where(i => TestForTwo(i));
             var result = expression.ToList();
@@ -87,7 +87,7 @@ namespace UnitTest
             MyIntegerSet myIntegerSet =
                 new MyIntegerSet(new List<int> {1, 2, 3});
 
-            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
+            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
             var sum = myQueryableIntegerSet.Sum();
 
@@ -100,7 +100,7 @@ namespace UnitTest
             MyIntegerSet myIntegerSet =
                 new MyIntegerSet(new List<int> { 1, 2, 3 });
 
-            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
+            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
             var max = myQueryableIntegerSet.Max();
 
@@ -115,7 +115,7 @@ namespace UnitTest
             MyIntegerSet myIntegerSet =
                 new MyIntegerSet(new List<int> {1, 2, 3});
 
-            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
+            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
             var result = myQueryableIntegerSet.Select(e => e);
 
@@ -129,7 +129,7 @@ namespace UnitTest
             MyIntegerSet myIntegerSet =
                 new MyIntegerSet(new List<int> { 1, 2, 3 });
 
-            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
+            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
             var result = myQueryableIntegerSet.Select(e => e*2);
 
@@ -144,7 +144,7 @@ namespace UnitTest
             MyIntegerSet myIntegerSet =
                 new MyIntegerSet(new List<int> { 1, 2, 3 });
 
-            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
+            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
             var result = myQueryableIntegerSet.Select(e => e * 2).Select( e=> e *2 );
 
@@ -153,18 +153,37 @@ namespace UnitTest
         }
 
         [TestMethod]
-        [Ignore]
-        public void Test_IQueryable_Select_StringFunction()
+        //[Ignore]
+        public void Test_IQueryable_Select_String()
         {
             MyIntegerSet myIntegerSet =
                 new MyIntegerSet(new List<int> { 1, 2, 3 });
 
-            MyQueryableIntegerSet myQueryableIntegerSet = new MyQueryableIntegerSet(myIntegerSet);
+            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
             var result = myQueryableIntegerSet.Select(e => "Z"+e);
 
             // #Assert #list #equal
             CollectionAssert.AreEqual(result.ToList(), new List<string> { "Z1", "Z2", "Z3" });
+        }
+
+        [TestMethod]
+        //[Ignore]
+        public void Test_IQueryable_Select_Tupel()
+        {
+            MyIntegerSet myIntegerSet =
+                new MyIntegerSet(new List<int> { 1, 2, 3 });
+
+            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+
+            var result = myQueryableIntegerSet.Select(e => Tuple.Create( "A", e ) );
+
+            // #Assert #list #equal
+            CollectionAssert.AreEqual(result.ToList(), 
+                new List<Tuple<string,int>> { 
+                    Tuple.Create("A", 1), 
+                    Tuple.Create("A", 2), 
+                    Tuple.Create("A", 3) });
         }
     }
 } 
