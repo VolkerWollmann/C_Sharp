@@ -20,7 +20,7 @@ namespace CSharpNaming
 
     #endregion
 
-    // Merge Test : Change in branch Merge Test
+    // Merge Test : Change in branch Merge Test (2)
 
     // Merge Test : Change in branch Master
 
