@@ -20,6 +20,8 @@ namespace CSharpNaming
 
     #endregion
 
+    // Merge Test : Change in branch Master
+
     /// <summary>
     /// Naming conventions 
     /// https://www.dofactory.com/reference/csharp-coding-standards
