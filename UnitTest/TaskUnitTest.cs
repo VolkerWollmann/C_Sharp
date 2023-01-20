@@ -99,10 +99,17 @@ namespace UnitTest
 			MyTask.Task_OperationCanceledException();
 		}
 
-		[TestMethod]
+        [TestMethod]
+        public void Task_Scheduler()
+        {
+            MyTask.Task_SchedulerTest();
+        }
+
+        [TestMethod]
 		public void Task_Event()
         {
 			MyTaskEvent.TaskEvent();
 		}
+
     }
 }

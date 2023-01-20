@@ -121,8 +121,6 @@ namespace C_Sharp.Language.Task
 		}
 		#endregion
 
-		
-
 		#region Monitor
 		//#Monitor #task #waitall
 		static long _sharedTotalMonitor;
@@ -534,6 +532,88 @@ namespace C_Sharp.Language.Task
 			}
 
 		}
+        #endregion
+
+        #region Scheduler
+        
+        #region Time
+        private static DateTime GetNextStartDateTime()
+        {
+            TimeSpan ts;
+            DateTime now = DateTime.Now;
+
+            DateTime start = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, 0);
+
+            if (now.Second > 50)
+                ts = new TimeSpan(0, 1, 0);
+            else
+                ts = new TimeSpan(0, 0, ((now.Second / 10) + 1) * 10);
+
+            start += ts;
+
+            return start;
+        }
+
+        private static DateTime IncrementStartTime(DateTime start, int seconds)
+        {
+            TimeSpan ts = TimeSpan.FromSeconds(seconds);
+            DateTime newStartTime = start;
+
+            newStartTime = newStartTime.Add(ts);
+            while (newStartTime < DateTime.Now)
+                newStartTime = newStartTime.Add(ts);
+
+            return newStartTime;
+        }
+
+        private static void WaitUntil(string label, DateTime next)
+        {
+            int calculatedWaitTime = (int)((next - DateTime.Now).TotalMilliseconds + 1);
+            System.Threading.Thread.Sleep(calculatedWaitTime);
+            Console.WriteLine(label + DateTime.Now.ToString("hh:mm:ss.fff"));
+        }
+
+        private static void WaitFor(Action action)
+        {
+            List<System.Threading.Tasks.Task> tasks = new List<System.Threading.Tasks.Task> { System.Threading.Tasks.Task.Run(action) };
+            System.Threading.Tasks.Task.WaitAll(tasks.ToArray());
+        }
+        #endregion
+
+        private static void SchedulerWork()
+        {
+            Console.WriteLine("Scheduler Work Start:" + DateTime.Now.ToString("hh:mm:ss.fff"));
+            Random random = new Random();
+            int worktime = random.Next(1, 50);
+            System.Threading.Thread.Sleep(worktime);
+            Console.WriteLine("Scheduler Work End  :" + DateTime.Now.ToString("hh:mm:ss.fff"));
+        }
+
+        private static void SchedulerLoop()
+        {
+            DateTime start = GetNextStartDateTime();
+            Random random = new Random();
+
+            while (true)
+            {
+                WaitUntil("Start:", start);
+
+                WaitFor(SchedulerWork);
+
+                start = IncrementStartTime(start, 10);
+
+            }
+
+        }
+
+        public static void Task_SchedulerTest()
+        {
+
+            System.Threading.Tasks.Task.Run(() => { SchedulerLoop(); });
+
+            System.Threading.Thread.Sleep(50 * 1000);
+        }
+
         #endregion
     }
 }
