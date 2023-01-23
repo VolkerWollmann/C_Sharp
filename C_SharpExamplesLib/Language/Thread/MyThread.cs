@@ -359,7 +359,9 @@ namespace C_Sharp.Language.Thread
 					Console.WriteLine("Thread 1 Tick " + i++.ToString());
 					System.Threading.Thread.Sleep(1000);
 				}
-			});
+
+                Console.WriteLine("Thread 1 actual finished");
+            });
 
 			System.Threading.Thread thread2 = new System.Threading.Thread(() =>
 			{
@@ -375,10 +377,19 @@ namespace C_Sharp.Language.Thread
 				Console.WriteLine("Thread 2 has performed join with thread 1");
 			});
 
-			thread1.Start();
-			thread2.Start();
-			thread2.Join();
-		}
+            Console.WriteLine("Thread Test runs.");
+
+            thread1.Start();
+            Console.WriteLine("Thread 1 is started.");
+
+           
+            thread2.Start();
+            Console.WriteLine("Thread 2 is started");
+
+            thread2.Join();
+            Console.WriteLine("Thread Test has performed join with thread 2.");
+
+        }
 		#endregion
 
 		#region thread administrative data
