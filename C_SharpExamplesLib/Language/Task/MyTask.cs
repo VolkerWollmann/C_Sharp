@@ -580,7 +580,7 @@ namespace C_Sharp.Language.Task
         }
         #endregion
 
-        private static void SchedulerWork()
+        private static void SchedulerWork(object data)
         {
             Console.WriteLine("Scheduler Work Start:" + DateTime.Now.ToString("hh:mm:ss.fff"));
             Random random = new Random();
@@ -592,13 +592,15 @@ namespace C_Sharp.Language.Task
         private static void SchedulerLoop()
         {
             DateTime start = GetNextStartDateTime();
-            Random random = new Random();
-
+           
             while (true)
             {
                 WaitUntil("Start:", start);
 
-                WaitFor(SchedulerWork);
+                WaitFor(()=>
+                {
+                    SchedulerWork(null);
+                });
 
                 start = IncrementStartTime(start, 10);
 
@@ -614,6 +616,15 @@ namespace C_Sharp.Language.Task
             System.Threading.Thread.Sleep(50 * 1000);
         }
 
+        public static void Task_SchedulerTest_WithTimer()
+        {
+            DateTime start = GetNextStartDateTime();
+            WaitUntil("Start:", start);
+            Timer t = new Timer(SchedulerWork, null, 0, 10000);
+            System.Threading.Thread.Sleep(50 * 1000);
+        }
+
+
         #endregion
-    }
+        }
 }

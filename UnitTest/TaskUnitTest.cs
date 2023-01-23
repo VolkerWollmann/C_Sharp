@@ -106,6 +106,12 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void Task_SchedulerTest_WithTimer()
+        {
+            MyTask.Task_SchedulerTest_WithTimer();
+        }
+
+        [TestMethod]
 		public void Task_Event()
         {
 			MyTaskEvent.TaskEvent();
