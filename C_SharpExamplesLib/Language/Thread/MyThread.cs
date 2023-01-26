@@ -272,7 +272,7 @@ namespace C_Sharp.Language.Thread
 			Assert.AreEqual(a, cores);
             Assert.AreEqual(b, cores);
 
-            //    // https://learn.microsoft.com/en-us/dotnet/api/system.threading.threadpool.setmaxthreads?view=net-7.0
+            // https://learn.microsoft.com/en-us/dotnet/api/system.threading.threadpool.setmaxthreads?view=net-7.0
             // Thread pool configuration cannot be smaller than cores in computer
             result = ThreadPool.SetMaxThreads(cores-1, cores-1);
 			Assert.IsFalse(result);
