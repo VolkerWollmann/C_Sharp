@@ -34,7 +34,10 @@ namespace C_Sharp.Language
 
             Cat cat1 = Cat.Duchesse;
             Assert.AreEqual(cat1, Cat.Duchesse);
-			Assert.AreNotEqual(cat1, Dog.Lessie);
+			
+			//Does not Compile
+            //Assert.AreNotEqual(cat1, Dog.Lessie);
+            
             Assert.AreEqual(cat1, (Cat)Dog.Lessie);
 
 			Cat cat2 = Cat.OMailey;

@@ -380,7 +380,7 @@ namespace CSharpNaming
             Coin coin2 = Coin.Nickel;
             Assert.AreEqual(coin2, Coin.Nickel);
             coin2 = Coin.Penny;
-            Assert.AreEqual(coin2, CoinEnum.Penny);
+            Assert.AreEqual(coin2, (Coin)CoinEnum.Penny);
 
 
             Employee e = new Employee(); 
