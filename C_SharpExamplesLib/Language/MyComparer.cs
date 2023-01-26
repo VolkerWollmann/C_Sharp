@@ -106,28 +106,28 @@ namespace C_Sharp.Language
 
         }
 
-		#region IComparable<MyIComparable>
-		// <summary>
-		// Sort order is by Version, than by Animal
-		// Except NONE, which has lowest priority.
-		// Important: There must be only one NONE to make order total.
-		//
-		// ![CDATA[
-		// This CompareTo() <= 0 is a pre order:
-		// - reflexivity  : (1,Dog) <= (1,Dog)
-		// - transitivity : (1,Cat) <= (1,Dog) & (1,Dog) <= (1,Donkey) => (1,Cat) <= (1,Donkey) 
-		// ]]>
-		/// <param name="other"></param>
-		/// <returns></returns>
-		// <returns>
-		// < 0 This instance precedes obj in the sort order.
-		// = 0 This instance occurs in the same position in the sort order as obj.
-		// > 0 This instance follows obj in the sort order.
-		// </returns>
-		// </summary>
+        #region IComparable<MyIComparable>
+        // <summary>
+        // Sort order is by Version, than by Animal
+        // Except NONE, which has lowest priority.
+        // Important: There must be only one NONE to make order total.
+        //
+        // ![CDATA[
+        // This CompareTo() <= 0 is a pre order:
+        // - reflexivity  : (1,Dog) <= (1,Dog)
+        // - transitivity : (1,Cat) <= (1,Dog) & (1,Dog) <= (1,Donkey) => (1,Cat) <= (1,Donkey) 
+        // ]]>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        // <returns>
+        // < 0 This instance precedes obj in the sort order.
+        // = 0 This instance occurs in the same position in the sort order as obj.
+        // > 0 This instance follows obj in the sort order.
+        // </returns>
+        // </summary>
 
-
-		int IComparable<MyIComparable>.CompareTo(MyIComparable other)
+        // #IComparable
+        int IComparable<MyIComparable>.CompareTo(MyIComparable other)
         {
             return CompareInternal(other);
         }
@@ -214,6 +214,7 @@ namespace C_Sharp.Language
                 new MyIComparable(5, None),
             };
 
+            // #IComparer
 			IComparer<MyIComparable>comparer = new MyIComparable(0, None);
 			l.Sort(comparer);
 
