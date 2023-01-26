@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
 {
-    // #reflection #GetMethod #GetConstructors
+    // #reflection #GetMethod #GetConstructors #Invoke
     internal class Ship
     {
         public string Name { get; }
