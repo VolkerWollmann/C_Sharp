@@ -177,6 +177,12 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void InterfaceInheritance()
+        {
+            MyInheritanceInterfaceTest.Test();
+        }
+
+        [TestMethod]
         public void VirtualMethod()
         {
             VirtualTest.Test();

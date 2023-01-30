@@ -110,6 +110,7 @@
     <Compile Include="Language\MyException.cs" />
     <Compile Include="Language\MyExtensionMethod.cs" />
     <Compile Include="Language\DataTypes\MyGeneric.cs" />
+    <Compile Include="Language\MyInheritance.cs" />
     <Compile Include="Language\MyLinqExpression.cs" />
     <Compile Include="Language\MyLinq.cs" />
     <Compile Include="Language\DataTypes\MyList.cs" />
