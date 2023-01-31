@@ -11,6 +11,7 @@ namespace C_Sharp.Language
 
     internal class BaseClass : IInheritanceInterface
     {
+        // as public members
         public int GetValue()
         {
             return 1;
@@ -31,7 +32,7 @@ namespace C_Sharp.Language
         }
     }
 
-    internal class DerivedClassWithPartialNewImplementation : BaseClass, IInheritanceInterface
+    internal class DerivedClassWithPartialNewImplementation : BaseClass
     {
         // #new
         public new int GetValue()
