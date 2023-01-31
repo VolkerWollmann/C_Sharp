@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
 {
+    // #interface #implenetation #explicit
     internal interface IInheritanceInterface
     {
         int GetValue();
