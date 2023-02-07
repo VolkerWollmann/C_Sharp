@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
 {
-    // #interface #implenetation #explicit
+    // #interface #implementation #explicit
     internal interface IInheritanceInterface
     {
         int GetValue();
