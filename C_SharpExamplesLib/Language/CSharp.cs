@@ -243,6 +243,29 @@ namespace C_Sharp.Language
 
         }
         #endregion
+
+        #region params
+        /// #params : list of optional parameters of same type
+        
+        private static int ParamsSum(params int[] values)
+        {
+            int sum=0;
+            foreach (var value in values)
+            {
+                sum += value;
+            }
+
+            return sum;
+        }
+
+        public static void ParamsTest()
+        {
+            Assert.AreEqual(12, ParamsSum(new int[3] { 2, 4, 6 }));
+
+            Assert.AreEqual(9, ParamsSum(1,3,5));
+
+        }
+        #endregion
     }
 
 

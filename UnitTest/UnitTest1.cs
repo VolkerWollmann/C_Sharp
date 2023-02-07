@@ -217,5 +217,11 @@ namespace UnitTest
         {
             CSharp.GotoTest();
         }
+
+        [TestMethod]
+        public void Params()
+        {
+            CSharp.ParamsTest();
+        }
     }
 }
