@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
@@ -10,7 +11,7 @@ namespace C_Sharp.Language
         int GetValue2();
     }
 
-    internal class BaseClass : IInheritanceInterface
+    internal class ClassPublicImpl : IInheritanceInterface
     {
         // as public members
         public int GetValue()
@@ -24,7 +25,7 @@ namespace C_Sharp.Language
         }
     }
 
-    internal class DerivedClassWithPartialExplicit : BaseClass, IInheritanceInterface
+    internal class ClassPublicImplDerivedPartialImpl : ClassPublicImpl, IInheritanceInterface
     {
         // similar to #new 
         int IInheritanceInterface.GetValue()
@@ -33,7 +34,7 @@ namespace C_Sharp.Language
         }
     }
 
-    internal class DerivedClassWithPartialNewImplementation : BaseClass
+    internal class ClassPublicImplDerivedNewPublicImpl : ClassPublicImpl
     {
         // #new
         public new int GetValue()
@@ -42,7 +43,7 @@ namespace C_Sharp.Language
         }
     }
 
-    internal class BaseClassWithExplicitImplementation : IInheritanceInterface
+    internal class ClassExplicitImpl : IInheritanceInterface
     {
         int IInheritanceInterface.GetValue()
         {
@@ -55,7 +56,7 @@ namespace C_Sharp.Language
         }
     }
 
-    internal class DerivedClassFromBaseClassWithExplicitImplementation : BaseClassWithExplicitImplementation, IInheritanceInterface
+    internal class ClassExplicitImplDerivedExplicitImpl : ClassExplicitImpl, IInheritanceInterface
     {
         // similar to #new 
         int IInheritanceInterface.GetValue()
@@ -69,7 +70,7 @@ namespace C_Sharp.Language
         }
     }
 
-    internal class DerivedClassFromBaseClassWithPartialImplementation : BaseClassWithExplicitImplementation, IInheritanceInterface
+    internal class ClassExplicitImplDerivedPartialExplicitImpl : ClassExplicitImpl, IInheritanceInterface
     {
         // similar to #new 
         int IInheritanceInterface.GetValue()
@@ -78,7 +79,7 @@ namespace C_Sharp.Language
         }
     }
 
-    //internal class DerivedClassFromBaseClassWithNewImplementation : BaseClassWithExplicitImplementation, IInheritanceInterface
+    //internal class ClassExplicitImplDerivedNewExplicitImpl : ClassExplicitImpl, IInheritanceInterface
     //{
     //    // will not compile
     //    new int IInheritanceInterface.GetValue()
@@ -89,46 +90,41 @@ namespace C_Sharp.Language
 
     public class MyInheritanceInterfaceTest
     {
+        [SuppressMessage("ReSharper", "IdentifierTypo")]
+        [SuppressMessage("ReSharper", "CommentTypo")]
         public static void Test()
         {
-            BaseClass baseClass = new BaseClass();
-            int baseClassValue = baseClass.GetValue();
-            Assert.AreEqual(1, baseClassValue);
+            ClassPublicImpl cpi = new ClassPublicImpl();
+            int cpiv = cpi.GetValue();
+            Assert.AreEqual(1, cpiv);
 
-            DerivedClassWithPartialExplicit derivedClass = new DerivedClassWithPartialExplicit();
-            int derivedClassValue = derivedClass.GetValue();
-            Assert.AreEqual(1, derivedClassValue);
+            ClassPublicImplDerivedPartialImpl cpidpi = new ClassPublicImplDerivedPartialImpl();
+            int cpidpiv = cpidpi.GetValue();
+            Assert.AreEqual(1, cpidpiv);
 
-            int derivedClassValueCasted = ((IInheritanceInterface) derivedClass).GetValue();
+            int derivedClassValueCasted = ((IInheritanceInterface)cpidpi).GetValue();
             Assert.AreEqual(2, derivedClassValueCasted);
 
-            DerivedClassWithPartialNewImplementation derivedClassWithNewImpl = 
-                new DerivedClassWithPartialNewImplementation();
-            int derivedClassWithExplictImplValue = derivedClassWithNewImpl.GetValue();
-            Assert.AreEqual(3, derivedClassWithExplictImplValue);
+            ClassPublicImplDerivedNewPublicImpl cpidnpi = new ClassPublicImplDerivedNewPublicImpl();
+            int cpidnpiv = cpidnpi.GetValue();
+            Assert.AreEqual(3, cpidnpiv);
 
-            BaseClassWithExplicitImplementation baseClassWithExplicitImplementation =
-                new BaseClassWithExplicitImplementation();
+            ClassExplicitImpl cei = new ClassExplicitImpl();
             // will not compile
-            //int baseClassWithExplicitImplementationValue = baseClassWithExplicitImplementation.GetValue();
-            int baseClassWithExplicitImplementationValue = 
-                ((IInheritanceInterface)baseClassWithExplicitImplementation).GetValue();
-            Assert.AreEqual(4, baseClassWithExplicitImplementationValue);
+            //int ceiv = cei.GetValue();
+            int ceiv = ((IInheritanceInterface)cei).GetValue();
+            Assert.AreEqual(4, ceiv);
 
-            DerivedClassFromBaseClassWithExplicitImplementation derivedClassFromBaseClassWithExplicitImplementation 
-                = new DerivedClassFromBaseClassWithExplicitImplementation();
+            ClassExplicitImplDerivedExplicitImpl ceidei = new ClassExplicitImplDerivedExplicitImpl();
             // will not compile
-            //int derivedClassFromBaseClassWithExplicitImplementationValue =
-            //    derivedClassFromBaseClassWithExplicitImplementation.GetValue();
-            int derivedClassFromBaseClassWithExplicitImplementationValue =
-                ((IInheritanceInterface)derivedClassFromBaseClassWithExplicitImplementation).GetValue();
-            Assert.AreEqual(5, derivedClassFromBaseClassWithExplicitImplementationValue);
+            //int ceideiv = ceidei.GetValue();
+            int ceideiv = ((IInheritanceInterface)ceidei).GetValue();
+            Assert.AreEqual(5, ceideiv);
 
-            DerivedClassFromBaseClassWithPartialImplementation derivedClassFromBaseClassWithPartialImplementation =
-                new DerivedClassFromBaseClassWithPartialImplementation();
-            int derivedClassFromBaseClassWithPartialImplementationValue =
-                ((IInheritanceInterface)derivedClassFromBaseClassWithPartialImplementation).GetValue();
-            Assert.AreEqual(7, derivedClassFromBaseClassWithPartialImplementationValue);
+            ClassExplicitImplDerivedPartialExplicitImpl ceidpei =
+                new ClassExplicitImplDerivedPartialExplicitImpl();
+            int ceidpeiv = ((IInheritanceInterface)ceidpei).GetValue();
+            Assert.AreEqual(7, ceidpeiv);
 
         }
     }
