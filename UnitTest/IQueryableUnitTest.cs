@@ -15,6 +15,14 @@ namespace UnitTest
     // ReSharper disable once InconsistentNaming
     public class IQueryableUnitTest
     {
+        IMyIntegerSet[] myIntegerSets; 
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            myIntegerSets = MyIntegerSetFactory.GetTestData();
+        }
+
         [TestMethod]
         public void Test_IEnumerable()
         {
@@ -24,7 +32,7 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable()
         {
-            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
+            //IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
@@ -55,7 +63,7 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable_Where()
         {
-            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
+            //IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
@@ -76,7 +84,7 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable_WhereWhere()
         {
-            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
+            //IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
@@ -93,7 +101,7 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable_SumAsExtension()
         {
-            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
+            //IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
@@ -109,7 +117,7 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable_MaxDelegated()
         {
-            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
+            //IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
@@ -127,7 +135,7 @@ namespace UnitTest
         public void Test_IQueryable_Select_Simple()
 
         {
-            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
+            //IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
@@ -144,7 +152,7 @@ namespace UnitTest
         public void Test_IQueryable_Select_IntegerFunction()
 
         {
-            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
+            //IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
@@ -162,7 +170,7 @@ namespace UnitTest
         public void Test_IQueryable_SelectSelect_IntegerFunction()
 
         {
-            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
+            //IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
@@ -180,7 +188,7 @@ namespace UnitTest
         //[Ignore]
         public void Test_IQueryable_Select_String()
         {
-            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
+            //IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
@@ -198,7 +206,7 @@ namespace UnitTest
         //[Ignore]
         public void Test_IQueryable_Select_Tuple()
         {
-            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
+            //IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
