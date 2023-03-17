@@ -16,7 +16,7 @@ namespace C_Sharp.Language.IQueryable
     
     public class MyQueryableIntegerSet<TOutputType> : IQueryable<TOutputType>
     {
-        private MyIntegerSet _myIntegerSet;
+        private IMyIntegerSet _myIntegerSet;
 
         public IEnumerator<TOutputType> GetEnumerator()
         {
@@ -70,14 +70,14 @@ namespace C_Sharp.Language.IQueryable
 
         #endregion
 
-        public MyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
+        public IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
         {
             return _myIntegerSet.GetFilteredSet(lambdaExpression);
         }
 
         #region Constructors
 
-        public MyQueryableIntegerSet(MyIntegerSet myIntegerSet)
+        public MyQueryableIntegerSet(IMyIntegerSet myIntegerSet)
         {
             _myIntegerSet = myIntegerSet;
             Provider = new MyQueryableIntegerSetQueryProvider<TOutputType>(this);
@@ -90,7 +90,7 @@ namespace C_Sharp.Language.IQueryable
         /// <param name="provider"></param>
         /// <param name="expression"></param>
         /// <param name="integerSet"></param>
-        private MyQueryableIntegerSet(MyIntegerSet integerSet, MyQueryableIntegerSetQueryProvider<TOutputType> provider,
+        private MyQueryableIntegerSet(IMyIntegerSet integerSet, MyQueryableIntegerSetQueryProvider<TOutputType> provider,
             Expression expression) :
             this(integerSet)
         {

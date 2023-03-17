@@ -12,7 +12,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
     /// <summary>
     /// Simulate a source, which is worth to be encapsulated for lazy linq queries.
     /// </summary>
-    public class MyIntegerSet : IEnumerator<int>
+    public class MyIntegerSet : IMyIntegerSet
     {
         Guid guid = Guid.NewGuid();
         #region IntegerRangeData
@@ -52,7 +52,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         #region Helper methods
 
-        public MyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
+        public IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
         {
             List<int> result = new List<int>();
             Func<int, bool> compiledExpression = (Func<int, bool>)lambdaExpression.Compile();
