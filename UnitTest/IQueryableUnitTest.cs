@@ -15,12 +15,15 @@ namespace UnitTest
     // ReSharper disable once InconsistentNaming
     public class IQueryableUnitTest
     {
+        private MyIntegerSetFactory myIntegerSetFactory;
         IMyIntegerSet[] myIntegerSets; 
 
         [TestInitialize]
         public void Initialize()
         {
-            myIntegerSets = MyIntegerSetFactory.GetTestData();
+            myIntegerSetFactory = new MyIntegerSetFactory();
+            ;
+            myIntegerSets = myIntegerSetFactory.GetTestData();
         }
 
         [TestMethod]
