@@ -24,13 +24,19 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable()
         {
-            MyIntegerSet myIntegerSet =
-                new MyIntegerSet(new List<int> {1, 2, 3});
+            IMyIntegerSet[] myIntegerSets =  {
+                new MyIntegerSet(new List<int> {1, 2, 3}),
+                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
+            };
 
-            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
+            {
 
-            Assert.AreEqual(myQueryableIntegerSet.Expression.Type, typeof(MyQueryableIntegerSet<int>));
-            Assert.AreEqual(myQueryableIntegerSet.Expression.GetType(), typeof(ConstantExpression));
+                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+
+                Assert.AreEqual(myQueryableIntegerSet.Expression.Type, typeof(MyQueryableIntegerSet<int>));
+                Assert.AreEqual(myQueryableIntegerSet.Expression.GetType(), typeof(ConstantExpression));
+            }
 
         }
 
@@ -47,64 +53,88 @@ namespace UnitTest
 
         /// <summary>
         /// Shows, how the MyQueryableIntegerSet together with the inner most where clause is
-        /// evaluted first, before the result of this evaluation is provied to further linq query execution
+        /// evaluated first, before the result of this evaluation is provided to further linq query execution
         /// </summary>
         [TestMethod]
         public void Test_IQueryable_Where()
         {
-            MyIntegerSet myIntegerSet =
-                new MyIntegerSet(new List<int> {1, 2, 3});
+            IMyIntegerSet[] myIntegerSets =  {
+                new MyIntegerSet(new List<int> {1, 2, 3}),
+                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
+            };
 
-            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
+            {
 
-            var expression = myQueryableIntegerSet.Where(i => TestForTwo(i));
-            var result = expression.ToList();
-            Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(result[0], 2);
+                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+
+                var expression = myQueryableIntegerSet.Where(i => TestForTwo(i));
+                var result = expression.ToList();
+                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(result[0], 2);
+            }
         }
 
         /// <summary>
         /// Shows, how the MyQueryableIntegerSet together with the inner most where clause is
-        /// evaluted first, before the result of this evaluation is provied to further linq query execution
+        /// evaluated first, before the result of this evaluation is provided to further linq query execution
         /// </summary>
         [TestMethod]
         public void Test_IQueryable_WhereWhere()
         {
-            MyIntegerSet myIntegerSet =
-                new MyIntegerSet(new List<int> {1, 2, 3});
+            IMyIntegerSet[] myIntegerSets =  {
+                new MyIntegerSet(new List<int> {1, 2, 3}),
+                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
+            };
 
-            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
+            {
 
-            var expression = myQueryableIntegerSet.Where(i => TestForTwo(i)).Where(i => TestForTwo(i));
-            var result = expression.ToList();
-            Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(result[0], 2);
+                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+
+                var expression = myQueryableIntegerSet.Where(i => TestForTwo(i)).Where(i => TestForTwo(i));
+                var result = expression.ToList();
+                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(result[0], 2);
+            }
         }
 
         [TestMethod]
         public void Test_IQueryable_SumAsExtension()
         {
-            MyIntegerSet myIntegerSet =
-                new MyIntegerSet(new List<int> {1, 2, 3});
+            IMyIntegerSet[] myIntegerSets =  {
+                new MyIntegerSet(new List<int> {1, 2, 3}),
+                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
+            };
 
-            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
+            {
 
-            var sum = myQueryableIntegerSet.Sum();
+                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
-            Assert.IsTrue(sum == 6);
+                var sum = myQueryableIntegerSet.Sum();
+
+                Assert.IsTrue(sum == 6);
+            }
         }
 
         [TestMethod]
         public void Test_IQueryable_MaxDelegated()
         {
-            MyIntegerSet myIntegerSet =
-                new MyIntegerSet(new List<int> { 1, 2, 3 });
+            IMyIntegerSet[] myIntegerSets =  {
+                new MyIntegerSet(new List<int> {1, 2, 3}),
+                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
+            };
 
-            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
+            {
 
-            var max = myQueryableIntegerSet.Max();
+                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
-            Assert.IsTrue(max == 3);
+                var max = myQueryableIntegerSet.Max();
+
+                Assert.IsTrue(max == 3);
+            }
         }
 
         [TestMethod]
@@ -112,78 +142,109 @@ namespace UnitTest
         public void Test_IQueryable_Select_Simple()
 
         {
-            MyIntegerSet myIntegerSet =
-                new MyIntegerSet(new List<int> {1, 2, 3});
+            IMyIntegerSet[] myIntegerSets =  {
+                new MyIntegerSet(new List<int> {1, 2, 3}),
+                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
+            };
 
-            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
+            {
 
-            var result = myQueryableIntegerSet.Select(e => e);
+                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
-            Assert.IsTrue(result.All(e => (e.GetType()) == typeof(int) ));
+                var result = myQueryableIntegerSet.Select(e => e);
+
+                Assert.IsTrue(result.All(e => (e.GetType()) == typeof(int)));
+            }
         }
 
         [TestMethod]
         public void Test_IQueryable_Select_IntegerFunction()
 
         {
-            MyIntegerSet myIntegerSet =
-                new MyIntegerSet(new List<int> { 1, 2, 3 });
+            IMyIntegerSet[] myIntegerSets =  {
+                new MyIntegerSet(new List<int> {1, 2, 3}),
+                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
+            };
 
-            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
+            {
 
-            var result = myQueryableIntegerSet.Select(e => e*2);
+                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
-            // #Assert #list #equal
-            CollectionAssert.AreEqual(result.ToList(), new List<int> { 2, 4, 6 });
+                var result = myQueryableIntegerSet.Select(e => e * 2);
+
+                // #Assert #list #equal
+                CollectionAssert.AreEqual(result.ToList(), new List<int> {2, 4, 6});
+            }
         }
 
         [TestMethod]
         public void Test_IQueryable_SelectSelect_IntegerFunction()
 
         {
-            MyIntegerSet myIntegerSet =
-                new MyIntegerSet(new List<int> { 1, 2, 3 });
+            IMyIntegerSet[] myIntegerSets =  {
+                new MyIntegerSet(new List<int> {1, 2, 3}),
+                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
+            };
 
-            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
+            {
 
-            var result = myQueryableIntegerSet.Select(e => e * 2).Select( e=> e *2 );
+                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
-            // #Assert #list #equal
-            CollectionAssert.AreEqual(result.ToList(), new List<int> { 4, 8, 12 });
+                var result = myQueryableIntegerSet.Select(e => e * 2).Select(e => e * 2);
+
+                // #Assert #list #equal
+                CollectionAssert.AreEqual(result.ToList(), new List<int> {4, 8, 12});
+            }
         }
 
         [TestMethod]
         //[Ignore]
         public void Test_IQueryable_Select_String()
         {
-            MyIntegerSet myIntegerSet =
-                new MyIntegerSet(new List<int> { 1, 2, 3 });
+            IMyIntegerSet[] myIntegerSets =  {
+                new MyIntegerSet(new List<int> {1, 2, 3}),
+                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
+            };
 
-            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
+            {
+                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
-            var result = myQueryableIntegerSet.Select(e => "Z"+e);
+                var result = myQueryableIntegerSet.Select(e => "Z" + e);
 
-            // #Assert #list #equal
-            CollectionAssert.AreEqual(result.ToList(), new List<string> { "Z1", "Z2", "Z3" });
+                // #Assert #list #equal
+                CollectionAssert.AreEqual(result.ToList(), new List<string> {"Z1", "Z2", "Z3"});
+            }
         }
 
         [TestMethod]
+        //[DataRow(new MyIntegerSet(new List<int> { 1, 2, 3 }))]
         //[Ignore]
         public void Test_IQueryable_Select_Tupel()
         {
-            MyIntegerSet myIntegerSet =
-                new MyIntegerSet(new List<int> { 1, 2, 3 });
+            IMyIntegerSet[] myIntegerSets =  {
+                new MyIntegerSet(new List<int> {1, 2, 3}),
+                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
+            } ;
 
-            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
+            {
+                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
-            var result = myQueryableIntegerSet.Select(e => Tuple.Create( "A", e ) );
+                var result = myQueryableIntegerSet.Select(e => Tuple.Create("A", e));
 
-            // #Assert #list #equal
-            CollectionAssert.AreEqual(result.ToList(), 
-                new List<Tuple<string,int>> { 
-                    Tuple.Create("A", 1), 
-                    Tuple.Create("A", 2), 
-                    Tuple.Create("A", 3) });
+                // #Assert #list #equal
+                CollectionAssert.AreEqual(result.ToList(),
+                    new List<Tuple<string, int>>
+                    {
+                        Tuple.Create("A", 1),
+                        Tuple.Create("A", 2),
+                        Tuple.Create("A", 3)
+                    });
+            }
         }
     }
 } 
