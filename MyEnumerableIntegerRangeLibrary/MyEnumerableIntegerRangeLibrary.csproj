@@ -54,6 +54,7 @@
     <Compile Include="MyDatabaseIntegerSet.cs" />
     <Compile Include="MyEnumerableIntegerRange.cs" />
     <Compile Include="MyIntegerSet.cs" />
+    <Compile Include="MyIntegerSetFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

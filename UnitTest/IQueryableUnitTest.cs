@@ -24,10 +24,7 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable()
         {
-            IMyIntegerSet[] myIntegerSets =  {
-                new MyIntegerSet(new List<int> {1, 2, 3}),
-                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
-            };
+            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
@@ -58,10 +55,7 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable_Where()
         {
-            IMyIntegerSet[] myIntegerSets =  {
-                new MyIntegerSet(new List<int> {1, 2, 3}),
-                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
-            };
+            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
@@ -82,10 +76,7 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable_WhereWhere()
         {
-            IMyIntegerSet[] myIntegerSets =  {
-                new MyIntegerSet(new List<int> {1, 2, 3}),
-                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
-            };
+            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
@@ -102,10 +93,7 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable_SumAsExtension()
         {
-            IMyIntegerSet[] myIntegerSets =  {
-                new MyIntegerSet(new List<int> {1, 2, 3}),
-                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
-            };
+            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
@@ -121,10 +109,7 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable_MaxDelegated()
         {
-            IMyIntegerSet[] myIntegerSets =  {
-                new MyIntegerSet(new List<int> {1, 2, 3}),
-                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
-            };
+            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
@@ -142,10 +127,7 @@ namespace UnitTest
         public void Test_IQueryable_Select_Simple()
 
         {
-            IMyIntegerSet[] myIntegerSets =  {
-                new MyIntegerSet(new List<int> {1, 2, 3}),
-                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
-            };
+            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
@@ -162,10 +144,7 @@ namespace UnitTest
         public void Test_IQueryable_Select_IntegerFunction()
 
         {
-            IMyIntegerSet[] myIntegerSets =  {
-                new MyIntegerSet(new List<int> {1, 2, 3}),
-                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
-            };
+            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
@@ -183,10 +162,7 @@ namespace UnitTest
         public void Test_IQueryable_SelectSelect_IntegerFunction()
 
         {
-            IMyIntegerSet[] myIntegerSets =  {
-                new MyIntegerSet(new List<int> {1, 2, 3}),
-                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
-            };
+            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
@@ -204,10 +180,7 @@ namespace UnitTest
         //[Ignore]
         public void Test_IQueryable_Select_String()
         {
-            IMyIntegerSet[] myIntegerSets =  {
-                new MyIntegerSet(new List<int> {1, 2, 3}),
-                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
-            };
+            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
@@ -223,12 +196,9 @@ namespace UnitTest
         [TestMethod]
         //[DataRow(new MyIntegerSet(new List<int> { 1, 2, 3 }))]
         //[Ignore]
-        public void Test_IQueryable_Select_Tupel()
+        public void Test_IQueryable_Select_Tuple()
         {
-            IMyIntegerSet[] myIntegerSets =  {
-                new MyIntegerSet(new List<int> {1, 2, 3}),
-                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
-            } ;
+            IMyIntegerSet[] myIntegerSets = MyIntegerSetFactory.GetTestData();
 
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
