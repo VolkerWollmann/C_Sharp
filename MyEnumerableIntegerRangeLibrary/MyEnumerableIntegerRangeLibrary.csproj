@@ -8,8 +8,8 @@
     <ProjectGuid>{F7014AA5-DBCA-4DC4-A41E-B4A87568B8DE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MyEnumerableIntegerRange</RootNamespace>
-    <AssemblyName>MyEnumerableIntegerRange</AssemblyName>
+    <RootNamespace>MyEnumerableIntegerRangeLibrary</RootNamespace>
+    <AssemblyName>MyEnumerableIntegerRangeLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

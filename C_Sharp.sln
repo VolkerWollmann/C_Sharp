@@ -36,7 +36,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoadingAssembly", "NetCore\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssemblyToLoad", "NetCore\DynamicLoad\AssemblyToLoad\AssemblyToLoad.csproj", "{FF246179-433C-4B1E-B2E7-F9D1DCAA4731}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyEnumerableIntegerRangeLibrary", "MyEnumerableIntegerRange\MyEnumerableIntegerRangeLibrary.csproj", "{F7014AA5-DBCA-4DC4-A41E-B4A87568B8DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyEnumerableIntegerRangeLibrary", "MyEnumerableIntegerRangeLibrary\MyEnumerableIntegerRangeLibrary.csproj", "{F7014AA5-DBCA-4DC4-A41E-B4A87568B8DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
