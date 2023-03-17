@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="DatabaseServer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">BONN</Value>
+      <Value Profile="(Default)">BONN\SQLEXPRESS</Value>
     </Setting>
     <Setting Name="DatabaseName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">CSharp</Value>
+      <Value Profile="(Default)">MyCSharp</Value>
     </Setting>
     <Setting Name="DatabaseUser" Type="System.String" Scope="User">
       <Value Profile="(Default)">anw</Value>

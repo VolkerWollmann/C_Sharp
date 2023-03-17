@@ -25,7 +25,7 @@ namespace MyEnumerableIntegerRangeLibrary.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("BONN")]
+        [global::System.Configuration.DefaultSettingValueAttribute("BONN\\SQLEXPRESS")]
         public string DatabaseServer {
             get {
                 return ((string)(this["DatabaseServer"]));
@@ -37,7 +37,7 @@ namespace MyEnumerableIntegerRangeLibrary.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("CSharp")]
+        [global::System.Configuration.DefaultSettingValueAttribute("MyCSharp")]
         public string DatabaseName {
             get {
                 return ((string)(this["DatabaseName"]));
