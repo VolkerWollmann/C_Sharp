@@ -53,9 +53,16 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             return true;
         }
 
+        public void Dispose()
+        {
+            if (_myDatabaseIntegerSet != null)
+                _myDatabaseIntegerSet.Dispose();
+        }
         public MyIntegerSetFactory()
         {
             _databaseAvailable = TestDatabaseConnection();
+            if (_databaseAvailable)
+                _myDatabaseIntegerSet = new MyDatabaseIntegerSet(_dataBaseConnection, new List<int> {1, 2, 3});
         }
 
         public List<IMyIntegerSet> GetTestData()

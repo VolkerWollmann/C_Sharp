@@ -26,6 +26,12 @@ namespace UnitTest
             myIntegerSets = myIntegerSetFactory.GetTestData();
         }
 
+        [TestCleanup]
+        public void Cleanup()
+        {
+            myIntegerSetFactory.Dispose();
+        }
+
         [TestMethod]
         public void Test_IEnumerable()
         {
