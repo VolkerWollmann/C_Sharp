@@ -16,7 +16,7 @@ namespace UnitTest
     public class IQueryableUnitTest
     {
         private MyIntegerSetFactory myIntegerSetFactory;
-        IMyIntegerSet[] myIntegerSets; 
+        List<IMyIntegerSet> myIntegerSets; 
 
         [TestInitialize]
         public void Initialize()
