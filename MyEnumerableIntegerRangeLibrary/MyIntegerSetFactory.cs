@@ -13,6 +13,8 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         private bool _databaseAvailable=false;
         SqlConnection _dataBaseConnection=null;
 
+        private MyDatabaseIntegerSet _myDatabaseIntegerSet = null;
+
         private string CreateConnectionString()
         {
             Settings settings = new Settings();
@@ -56,12 +58,13 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             _databaseAvailable = TestDatabaseConnection();
         }
 
-        public IMyIntegerSet[] GetTestData()
+        public List<IMyIntegerSet> GetTestData()
         {
-            IMyIntegerSet[] data = {
+            List<IMyIntegerSet> data = new List<IMyIntegerSet>() {
                 new MyIntegerSet(new List<int> {1, 2, 3}),
-                new MyDatabaseIntegerSet(new List<int> {1, 2, 3})
             };
+            if (_myDatabaseIntegerSet != null)
+                data.Add(_myDatabaseIntegerSet);
 
             return data;
         }
