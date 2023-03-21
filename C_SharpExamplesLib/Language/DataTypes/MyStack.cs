@@ -5,7 +5,7 @@ namespace C_Sharp.Language.DataTypes
 { 
     public class MyStackTest
     {
-        // #stack
+        // #stack #struct
         internal struct MyStackElement
         {
             public int X;

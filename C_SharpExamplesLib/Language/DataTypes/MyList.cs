@@ -4,8 +4,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language.DataTypes
 {
-	// Data types : #List #struct
-	public class MyPair : IComparable<MyPair>
+    // Data types : #List #IComparable
+    public class MyPair : IComparable<MyPair>
 	{
 		
 		public int X;
