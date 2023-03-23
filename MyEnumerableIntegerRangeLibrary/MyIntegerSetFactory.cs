@@ -46,7 +46,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
                 _dataBaseConnection.Close();
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

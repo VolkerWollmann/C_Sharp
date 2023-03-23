@@ -22,8 +22,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         private SqlConnection _dataBaseConnection;
 
         #region IntegerRangeData
-
-        private readonly List<int> _set;
         private int _i;
 
         #endregion
