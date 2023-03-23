@@ -56,6 +56,7 @@
     <Compile Include="MyEnumerableIntegerRange.cs" />
     <Compile Include="MyIntegerSet.cs" />
     <Compile Include="MyIntegerSetFactory.cs" />
+    <Compile Include="MyOptimizedDatabaseIntegerSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

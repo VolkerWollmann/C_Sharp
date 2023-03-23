@@ -134,7 +134,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         #region Helper methods
 
-        public IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
+        public virtual IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
         {
             List<int> result = new List<int>();
             Func<int, bool> compiledExpression = (Func<int, bool>)lambdaExpression.Compile();

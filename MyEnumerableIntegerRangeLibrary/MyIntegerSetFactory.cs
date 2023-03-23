@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyEnumerableIntegerRangeLibrary;
 
 namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 {
@@ -13,7 +14,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         private bool _databaseAvailable=false;
         SqlConnection _dataBaseConnection=null;
 
-        private MyDatabaseIntegerSet _myDatabaseIntegerSet = null;
+        private List<IMyIntegerSet> _myIntegerSets = new List<IMyIntegerSet>();
 
         private string CreateConnectionString()
         {
@@ -55,25 +56,23 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         public void Dispose()
         {
-            if (_myDatabaseIntegerSet != null)
-                _myDatabaseIntegerSet.Dispose();
+            _myIntegerSets.ForEach( mdis => mdis.Dispose() );
         }
         public MyIntegerSetFactory()
         {
+            _myIntegerSets.Add(new MyIntegerSet(new List<int> {1, 2, 3}));
             _databaseAvailable = TestDatabaseConnection();
             if (_databaseAvailable)
-                _myDatabaseIntegerSet = new MyDatabaseIntegerSet(_dataBaseConnection, new List<int> {1, 2, 3});
+            {
+                _myIntegerSets.Add(new MyDatabaseIntegerSet(_dataBaseConnection, new List<int> {1, 2, 3}));
+                _myIntegerSets.Add(new MyOptimizedDatabaseIntegerSet(_dataBaseConnection, new List<int> { 1, 2, 3 }));
+            }
+
         }
 
         public List<IMyIntegerSet> GetTestData()
         {
-            List<IMyIntegerSet> data = new List<IMyIntegerSet>() {
-                new MyIntegerSet(new List<int> {1, 2, 3}),
-            };
-            if (_myDatabaseIntegerSet != null)
-                data.Add(_myDatabaseIntegerSet);
-
-            return data;
+            return _myIntegerSets;
         }
 
     }
