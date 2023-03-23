@@ -84,7 +84,7 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void Test_Development()
+        public void Test_IQueryable_Where_DatabaseIntegerSet()
         {
             MyOptimizedDatabaseIntegerSet modis = myIntegerSetFactory.GetOptimizedDatabaseIntegerSet();
 

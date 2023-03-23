@@ -18,8 +18,11 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
     /// </summary>
     public class MyDatabaseIntegerSet : IMyIntegerSet
     {
-        private string _TableName;
-        private SqlConnection _dataBaseConnection;
+        internal readonly string TableName;
+        internal const string TheIndex = "theIndex";
+        internal const string TheValue = "theValue";
+
+        internal SqlConnection _dataBaseConnection;
 
         #region IntegerRangeData
         private int _i;
@@ -64,13 +67,13 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         private void CreateTable()
         {
-            string statement = $"create table {_TableName}(theIndex int, theValue int)";
+            string statement = $"create table {TableName}(theIndex int, theValue int)";
             ExecuteNonQuery(statement);
         }
 
         private void InsertValues(List<int> set)
         {
-            string statement = $"insert into {_TableName} values ";
+            string statement = $"insert into {TableName} values ";
             int i = 1;
             foreach (int v in set)
             {
@@ -86,19 +89,19 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         private void DeleteTable()
         {
-            string statement = $"drop table {_TableName}";
+            string statement = $"drop table {TableName}";
             ExecuteNonQuery(statement);
         }
 
         private int GetNextIndex(int i)
         {
-            string statement = $"select min(theIndex) from {_TableName} where theIndex > {i}";
+            string statement = $"select min({TheIndex}) from {TableName} where {TheIndex} > {i}";
             return ExecuteScalarQuery(statement);
         }
 
         private int GetValueAtIndex(int i)
         {
-            string statement = $"select theValue from {_TableName} where theIndex = {i}";
+            string statement = $"select {TheValue} from {TableName} where {TheIndex} = {i}";
             return ExecuteScalarQuery(statement);
         }
 
@@ -154,7 +157,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         public MyDatabaseIntegerSet(SqlConnection dataBaseConnection, List<int> set)
         {
             _dataBaseConnection = dataBaseConnection;
-            _TableName = "MyDatabaseIntegerSet" + Guid.NewGuid().ToString("N").ToUpper();
+            TableName = "MyDatabaseIntegerSet" + Guid.NewGuid().ToString("N").ToUpper();
 
             // create table
             CreateTable();

@@ -60,14 +60,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         }
         public MyIntegerSetFactory()
         {
-            _myIntegerSets.Add(new MyIntegerSet(new List<int> {1, 2, 3}));
-            _databaseAvailable = TestDatabaseConnection();
-            if (_databaseAvailable)
-            {
-                _myIntegerSets.Add(new MyDatabaseIntegerSet(_dataBaseConnection, new List<int> {1, 2, 3}));
-                _myIntegerSets.Add(new MyOptimizedDatabaseIntegerSet(_dataBaseConnection, new List<int> { 1, 2, 3 }));
-            }
-
         }
 
         public List<IMyIntegerSet> GetTestData()
