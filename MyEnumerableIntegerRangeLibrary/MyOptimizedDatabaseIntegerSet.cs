@@ -9,10 +9,25 @@ using System.Threading.Tasks;
 
 namespace MyEnumerableIntegerRangeLibrary
 {
-    internal class MyOptimizedDatabaseIntegerSet : MyDatabaseIntegerSet
+    public class MyOptimizedDatabaseIntegerSet : MyDatabaseIntegerSet
     {
+        #region lambda expression visitor
+
+        public class ExpressionTestVisitor : ExpressionVisitor
+        {
+            public override Expression Visit(Expression node)
+            {
+                ;
+                return base.Visit(node);
+            }
+        }
+
+        #endregion
         public override IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
         {
+            ExpressionTestVisitor visitor = new ExpressionTestVisitor();
+            visitor.Visit(lambdaExpression);
+
             return base.GetFilteredSet(lambdaExpression);
         }
 

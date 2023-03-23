@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using C_Sharp.Language.IQueryable;
 using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 using System.Web;
+using MyEnumerableIntegerRangeLibrary;
 
 namespace UnitTest
 {
@@ -80,6 +81,18 @@ namespace UnitTest
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(result[0], 2);
             }
+        }
+
+        [TestMethod]
+        public void Test_Development()
+        {
+            MyOptimizedDatabaseIntegerSet modis = myIntegerSetFactory.GetOptimizedDatabaseIntegerSet();
+
+            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(modis);
+            var expression = myQueryableIntegerSet.Where(i => ( i == 2));
+            var result = expression.ToList();
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(result[0], 2);
         }
 
         /// <summary>
