@@ -86,7 +86,16 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable_Where_DatabaseIntegerSet()
         {
-            MyOptimizedDatabaseIntegerSet modis = myIntegerSetFactory.GetOptimizedDatabaseIntegerSet();
+            MyOptimizedDatabaseIntegerSet modis=null;
+            try
+            {
+                modis = myIntegerSetFactory.GetOptimizedDatabaseIntegerSet();
+            }
+            catch (Exception)
+            {
+                Assert.Inconclusive("No database connection");
+            }
+            
 
             MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(modis);
             var expression = myQueryableIntegerSet.Where(i => ( i == 2));
