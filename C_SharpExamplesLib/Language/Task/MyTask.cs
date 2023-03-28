@@ -582,7 +582,10 @@ namespace C_Sharp.Language.Task
 
         private static void SchedulerWork(object data)
         {
-            Console.WriteLine("Scheduler Work Start:" + DateTime.Now.ToString("hh:mm:ss.fff"));
+			int? taskId = System.Threading.Tasks.Task.CurrentId;
+            System.Threading.Thread thread = System.Threading.Thread.CurrentThread;
+			
+			Console.WriteLine("Scheduler Work Start:" + DateTime.Now.ToString("hh:mm:ss.fff") + " Task:" + taskId + " Thread:" + thread.ManagedThreadId);
             Random random = new Random();
             int worktime = random.Next(1, 50);
             System.Threading.Thread.Sleep(worktime);
