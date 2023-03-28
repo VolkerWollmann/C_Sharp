@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static System.Collections.Specialized.BitVector32;
 
 namespace C_Sharp.Language.Task
 {
@@ -592,7 +593,7 @@ namespace C_Sharp.Language.Task
             Console.WriteLine("Scheduler Work End  :" + DateTime.Now.ToString("hh:mm:ss.fff"));
         }
 
-        private static void SchedulerLoop()
+        private static void SchedulerInfiniteLoop()
         {
             DateTime start = GetNextStartDateTime();
            
@@ -608,26 +609,41 @@ namespace C_Sharp.Language.Task
                 start = IncrementStartTime(start, 10);
 
             }
-
         }
 
-        public static void Task_SchedulerTest()
+        public static void SchedulerStart(object data)
         {
-
-            System.Threading.Tasks.Task.Run(() => { SchedulerLoop(); });
-
-            System.Threading.Thread.Sleep(50 * 1000);
+            WaitFor(() =>
+            {
+                SchedulerWork(null);
+            });
         }
 
-        public static void Task_SchedulerTest_WithTimer()
+        public static void Task_SchedulerTest_AsTask()
+        {
+            System.Threading.Tasks.Task.Run(() => { SchedulerInfiniteLoop(); });
+
+            System.Threading.Thread.Sleep(30 * 1000);
+        }
+
+        public static void Task_SchedulerTest_Timer()
         {
             DateTime start = GetNextStartDateTime();
             WaitUntil("Start:", start);
             Timer t = new Timer(SchedulerWork, null, 0, 10000);
-            System.Threading.Thread.Sleep(50 * 1000);
+            System.Threading.Thread.Sleep(30 * 1000);
         }
 
+        public static void Task_SchedulerTest_Timer_Task()
+        {
+            DateTime start = GetNextStartDateTime();
+            WaitUntil("Start:", start);
+            Timer t = new Timer(SchedulerStart, null, 0, 10000);
+            System.Threading.Thread.Sleep(30 * 1000);
+        }
+
+       
 
         #endregion
-        }
+    }
 }

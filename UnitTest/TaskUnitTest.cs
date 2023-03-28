@@ -102,13 +102,19 @@ namespace UnitTest
         [TestMethod]
         public void Task_Scheduler()
         {
-            MyTask.Task_SchedulerTest();
+            MyTask.Task_SchedulerTest_AsTask();
         }
 
         [TestMethod]
-        public void Task_SchedulerTest_WithTimer()
+        public void Task_SchedulerTest_Timer()
         {
-            MyTask.Task_SchedulerTest_WithTimer();
+            MyTask.Task_SchedulerTest_Timer();
+        }
+
+        [TestMethod]
+        public void Task_SchedulerTest_Timer_Task()
+        {
+            MyTask.Task_SchedulerTest_Timer_Task();
         }
 
         [TestMethod]
