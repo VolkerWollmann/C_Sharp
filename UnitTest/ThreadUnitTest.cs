@@ -45,7 +45,7 @@ namespace UnitTest
 		}
 
         [TestMethod]
-		[Ignore]
+		[Ignore("Only for debug purpose")]
         public void ThreadPool_GradeOfParallelism()
         {
 			MyThread.TestTheadPoolWithPrimeSearch();
