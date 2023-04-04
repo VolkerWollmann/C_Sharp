@@ -51,7 +51,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         /// Expected values are > 0
         /// </summary>
         /// <returns>-1, if not found, otherwise the value</returns>
-        private int ExecuteScalarQuery(string statement)
+        internal int ExecuteScalarQuery(string statement)
         {
             int result = -1;
             _dataBaseConnection.Open();
@@ -133,7 +133,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         object IEnumerator.Current => ((IEnumerator<int>)this).Current;
         #endregion
 
-        #region Helper methods
+        #region IMyIntegerSet
 
         public virtual IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
         {
@@ -148,6 +148,18 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             }
 
             return new MyIntegerSet(result);
+        }
+
+        public virtual int Sum()
+        {
+            int sum=0;
+            Reset();
+            while (MoveNext())
+            {
+                sum = sum + Current;
+            }
+
+            return sum;
         }
 
         #endregion

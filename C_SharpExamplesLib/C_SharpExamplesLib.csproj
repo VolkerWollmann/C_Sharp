@@ -95,6 +95,7 @@
     <Compile Include="Language\DataTypes\MySimpleTypes.cs" />
     <Compile Include="Language\IQueryable\MyEnumerableIntegerRangeTest.cs" />
     <Compile Include="Language\IQueryable\MyQueryableIntegerSet.cs" />
+    <Compile Include="Language\IQueryable\MyQueryableIntegerSetExtensionMethods.cs" />
     <Compile Include="Language\IQueryable\MyQueryableIntegerSetQueryProvider.cs" />
     <Compile Include="Language\MyAbstractClass.cs" />
     <Compile Include="Language\MyAnonymousType.cs" />

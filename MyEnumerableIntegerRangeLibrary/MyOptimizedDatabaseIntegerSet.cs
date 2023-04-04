@@ -55,6 +55,8 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         }
 
         #endregion
+
+        #region IMyIntegerSet
         public override IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
         {
             ExpressionCompileVisitor visitor = new ExpressionCompileVisitor();
@@ -76,6 +78,14 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
             return new MyIntegerSet(result);
         }
+
+        public override int Sum()
+        {
+            int sum = base.ExecuteScalarQuery($"select Sum({TheValue}) from {TableName}");
+            return sum;
+        }
+
+        #endregion
 
         public MyOptimizedDatabaseIntegerSet(SqlConnection dataBaseConnection, List<int> set) : 
             base(dataBaseConnection, set)

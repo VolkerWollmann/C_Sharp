@@ -15,6 +15,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
     public class MyIntegerSet : IMyIntegerSet
     {
         Guid guid = Guid.NewGuid();
+
         #region IntegerRangeData
         
         private readonly List<int> _set;
@@ -50,7 +51,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         object IEnumerator.Current => ((IEnumerator<int>)this).Current;
         #endregion
 
-        #region Helper methods
+        #region IMyIntegerSet
 
         public IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
         {
@@ -66,7 +67,19 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
             return new MyIntegerSet(result);
         }
-        
+
+        public int Sum()
+        {
+            int sum = 0;
+            Reset();
+            while (MoveNext())
+            {
+                sum = sum + Current;
+            }
+
+            return sum;
+        }
+
         #endregion
 
         #region Constructor

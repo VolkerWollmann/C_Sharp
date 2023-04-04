@@ -12,5 +12,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
     public interface IMyIntegerSet : IEnumerator<int>
     {
         IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression);
+
+        int Sum();
     }
 }

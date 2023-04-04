@@ -75,6 +75,11 @@ namespace C_Sharp.Language.IQueryable
             return _myIntegerSet.GetFilteredSet(lambdaExpression);
         }
 
+        public int SumImplementation()
+        {
+            return _myIntegerSet.Sum();
+        }
+
         #region Constructors
 
         public MyQueryableIntegerSet(IMyIntegerSet myIntegerSet)
@@ -115,27 +120,6 @@ namespace C_Sharp.Language.IQueryable
             return new MyQueryableIntegerSet<TBaseType2>(this._myIntegerSet, provider, expression);
         }
 
-        #endregion
-    }
-
-    public static class MyQueryableIntegerSetExtensionMethods
-    {
-        #region Extension methods
-
-        public static int Sum(this MyQueryableIntegerSet<int> myQueryableIntegerSet)
-        {
-            int sum = 0;
-            IEnumerator<int> enumerator = myQueryableIntegerSet.GetEnumerator();
-
-            while (enumerator.MoveNext())
-            {
-                sum += enumerator.Current;
-            }
-
-            enumerator.Dispose();
-
-            return sum;
-        }
         #endregion
     }
 }

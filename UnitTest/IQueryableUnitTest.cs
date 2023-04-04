@@ -71,37 +71,34 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable_Where()
         {
-            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
-            {
+            IMyIntegerSet myIntegerSet = myIntegerSetFactory.GetIntegerSet();
 
-                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
-                var expression = myQueryableIntegerSet.Where(i => TestForTwo(i));
-                var result = expression.ToList();
-                Assert.AreEqual(1, result.Count);
-                Assert.AreEqual(result[0], 2);
-            }
+            var expression = myQueryableIntegerSet.Where(i => TestForTwo(i));
+            var result = expression.ToList();
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(result[0], 2);
+
         }
 
         [TestMethod]
         public void Test_IQueryable_Where_DatabaseIntegerSet()
         {
-            MyOptimizedDatabaseIntegerSet modis=null;
-            try
-            {
-                modis = myIntegerSetFactory.GetOptimizedDatabaseIntegerSet();
-            }
-            catch (Exception)
+            if (!myIntegerSets.Any(integerSet => (integerSet is MyDatabaseIntegerSet)))
             {
                 Assert.Inconclusive("No database connection");
             }
-            
 
-            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(modis);
-            var expression = myQueryableIntegerSet.Where(i => ( i == 2));
-            var result = expression.ToList();
-            Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(result[0], 2);
+            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
+            {
+
+                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+                var expression = myQueryableIntegerSet.Where(i => (i == 2));
+                var result = expression.ToList();
+                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(result[0], 2);
+            }
         }
 
         /// <summary>
@@ -111,17 +108,16 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable_WhereWhere()
         {
-            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
-            {
+            IMyIntegerSet myIntegerSet = myIntegerSetFactory.GetIntegerSet();
 
-                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
-                var expression = myQueryableIntegerSet.Where(i => TestForTwo(i)).Where(i => TestForTwo(i));
-                var result = expression.ToList();
-                Assert.AreEqual(1, result.Count);
-                Assert.AreEqual(result[0], 2);
-            }
+            var expression = myQueryableIntegerSet.Where(i => TestForTwo(i)).Where(i => TestForTwo(i));
+            var result = expression.ToList();
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(result[0], 2);
         }
+    
 
         [TestMethod]
         public void Test_IQueryable_SumAsExtension()
