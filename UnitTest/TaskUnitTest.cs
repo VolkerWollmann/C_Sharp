@@ -100,9 +100,9 @@ namespace UnitTest
 		}
 
         [TestMethod]
-        public void Task_Scheduler()
+        public void Task_SchedulerTest_AsInfiniteLoop()
         {
-            MyTask.Task_SchedulerTest_AsTask();
+            MyTask.Task_SchedulerTest_AsInfiniteLoop();
         }
 
         [TestMethod]

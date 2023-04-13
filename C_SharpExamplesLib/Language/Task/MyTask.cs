@@ -574,7 +574,7 @@ namespace C_Sharp.Language.Task
             Console.WriteLine(label + DateTime.Now.ToString("hh:mm:ss.fff"));
         }
 
-        private static void WaitFor(Action action)
+        private static void WaitForTask(Action action)
         {
             List<System.Threading.Tasks.Task> tasks = new List<System.Threading.Tasks.Task> { System.Threading.Tasks.Task.Run(action) };
             System.Threading.Tasks.Task.WaitAll(tasks.ToArray());
@@ -601,7 +601,7 @@ namespace C_Sharp.Language.Task
             {
                 WaitUntil("Start:", start);
 
-                WaitFor(()=>
+                WaitForTask(()=>
                 {
                     SchedulerWork(null);
                 });
@@ -613,13 +613,13 @@ namespace C_Sharp.Language.Task
 
         public static void SchedulerStart(object data)
         {
-            WaitFor(() =>
+            WaitForTask(() =>
             {
                 SchedulerWork(null);
             });
         }
 
-        public static void Task_SchedulerTest_AsTask()
+        public static void Task_SchedulerTest_AsInfiniteLoop()
         {
             System.Threading.Tasks.Task.Run(() => { SchedulerInfiniteLoop(); });
 
