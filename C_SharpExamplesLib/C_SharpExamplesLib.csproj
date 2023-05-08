@@ -93,6 +93,7 @@
     <Compile Include="Language\CSharp7.cs" />
     <Compile Include="Language\DataTypes\MyHashSet.cs" />
     <Compile Include="Language\DataTypes\MySimpleTypes.cs" />
+    <Compile Include="Language\DebugStepThrough.cs" />
     <Compile Include="Language\IQueryable\MyEnumerableIntegerRangeTest.cs" />
     <Compile Include="Language\IQueryable\MyQueryableIntegerSet.cs" />
     <Compile Include="Language\IQueryable\MyQueryableIntegerSetExtensionMethods.cs" />

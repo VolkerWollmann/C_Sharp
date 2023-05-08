@@ -223,5 +223,11 @@ namespace UnitTest
         {
             CSharp.ParamsTest();
         }
+
+        [TestMethod]
+        public void StepThrough()
+        {
+			DebugStepThrough.StepThroughExample();
+        }
     }
 }
