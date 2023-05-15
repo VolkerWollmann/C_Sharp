@@ -19,11 +19,18 @@ namespace UnitTest
         {
 			Console.WriteLine(TestContext.TestName);
         }
+
 		[TestMethod]
 		public void Deconstruct()
 		{
 			CSharp7.TestDeconstruct();
 		}
+
+        [TestMethod]
+        public void BigInteger()
+        {
+            CSharp7.TestBigInteger();
+        }
 
         [TestMethod, ExpectedException(typeof(OutOfMemoryException), "Expected OutOfMemoryException" )]
         public void ExpectedException()

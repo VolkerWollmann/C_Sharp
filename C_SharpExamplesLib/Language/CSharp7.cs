@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Numerics;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
 {
@@ -28,6 +30,16 @@ namespace C_Sharp.Language
             Person p = new Person("Heinz", "Miller");
             var (f, l) = p;
             Console.WriteLine($"FirstName: {f} LastName: {l}");
+        }
+
+        // #BigInteger
+        public static void TestBigInteger()
+        {
+            // ~ 150 bit integer
+            BigInteger bi = BigInteger.Parse("12345678901234567890123456789012345678901234567890");
+            bi = BigInteger.Add(bi, BigInteger.One);
+            string bis = bi.ToString();
+            Assert.AreEqual("12345678901234567890123456789012345678901234567891", bis);
         }
     }
 }
