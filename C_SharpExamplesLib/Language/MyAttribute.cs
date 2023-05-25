@@ -38,8 +38,8 @@ namespace C_Sharp.Language
             {
                 if (attr is AuthorAttribute attribute)
                 {
-                    Assert.AreEqual(attribute.GetName(), "Me");
-                    Assert.AreEqual(attribute.Version, 1.1);
+                    Assert.AreEqual("Me", attribute.GetName());
+                    Assert.AreEqual(1.1, attribute.Version);
                 }
             }
         }

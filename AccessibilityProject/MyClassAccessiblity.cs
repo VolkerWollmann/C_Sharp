@@ -111,13 +111,13 @@ namespace AccessibilityProject
 
             // cast necessary
             int threeA = ((IIncrement)myExplicitIncrementer).Increment(2);
-            Assert.AreEqual(threeA,3);
+            Assert.AreEqual(3, threeA);
 
             MyImplicitIncrementer myImplicitIncrementer = new MyImplicitIncrementer();
 
             // cast not necessary
             int threeB = myImplicitIncrementer.Increment(2);
-            Assert.AreEqual(threeB, 3);
+            Assert.AreEqual(3, threeB);
         }
     }
 }

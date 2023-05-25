@@ -30,25 +30,25 @@ namespace C_Sharp.Language
 		public static void Enum_Test()
         {
             Dog lessie = Dog.Lessie;
-			Assert.AreEqual(lessie, Dog.Lessie);
+			Assert.AreEqual(Dog.Lessie, lessie);
 
             Cat cat1 = Cat.Duchesse;
-            Assert.AreEqual(cat1, Cat.Duchesse);
+            Assert.AreEqual(Cat.Duchesse, cat1);
 			
 			//Does not Compile
             //Assert.AreNotEqual(cat1, Dog.Lessie);
             
-            Assert.AreEqual(cat1, (Cat)Dog.Lessie);
+            Assert.AreEqual((Cat)Dog.Lessie, cat1);
 
 			Cat cat2 = Cat.OMailey;
-            Assert.AreEqual(cat2, Cat.OMailey);
+            Assert.AreEqual(Cat.OMailey, cat2);
 
             Cat cat3 = Cat.Garfield;
-            Assert.AreEqual(cat3, Cat.Garfield);
+            Assert.AreEqual(Cat.Garfield, cat3);
 
 			// #enum number of elements
 			int numberOfDogs = Enum.GetValues(typeof(Dog)).Length;
-			Assert.AreEqual(numberOfDogs,3);
+			Assert.AreEqual(3, numberOfDogs);
 
 			// #enum to #array, #enumeration of values of enum
 			var allDogs = Enum.GetValues(typeof(Dog));
@@ -61,7 +61,7 @@ namespace C_Sharp.Language
 
 			// #enum max element
 			Dog maxDog = Enum.GetValues(typeof(Dog)).Cast<Dog>().Max();
-			Assert.AreEqual(maxDog, Dog.Cerberus);
+			Assert.AreEqual(Dog.Cerberus, maxDog);
 
 			var allCats = Enum.GetValues(typeof(Cat));
 			ShowAllElement<Dog>(allCats);
@@ -71,7 +71,7 @@ namespace C_Sharp.Language
 
 			// string to enum #enum #parse 
 			var dogsFromString = Enum.Parse(typeof(Dog), "KomissarRex");
-			Assert.AreEqual(dogsFromString, Dog.KomissarRex);
+			Assert.AreEqual(Dog.KomissarRex, dogsFromString);
 		}
 	}
 }

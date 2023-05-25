@@ -44,7 +44,7 @@ namespace CSharpCore
         public static void CaseGuards()
         {
             Point r = Transform(new Point(3, 3));
-            Assert.AreEqual(r.X, 6);
+            Assert.AreEqual(6, r.X);
         }
         #endregion
 
@@ -130,19 +130,19 @@ namespace CSharpCore
         public static void PropertyPatternMatching()
         {
             Person wolfgang1 = new Person("Polizia", "Wolfgang", 35, null);
-            Assert.AreEqual(PersonMatch(wolfgang1), "Wolfgang ohne Macchi");
+            Assert.AreEqual( "Wolfgang ohne Macchi", PersonMatch(wolfgang1));
 
             Person wolfgang2 = new Person("Polizia", "Wolfgang", 35, new Animal("Macchi"));
-            Assert.AreEqual(PersonMatch(wolfgang2), "Wolfgang mit Macchi");
+            Assert.AreEqual( "Wolfgang mit Macchi", PersonMatch(wolfgang2));
         }
 
         public static void PositionalPatternMatching()
         {
             Person wolfgang1 = new Person("Polizia", "", 35, null);
-            Assert.AreEqual(PersonPositionalMatch(wolfgang1), "Polizia matches");
+            Assert.AreEqual( "Polizia matches", PersonPositionalMatch(wolfgang1));
 
             Person wolfgang2 = new Person("Polizia", "Wolfgang", 35, new Animal("Macchi"));
-            Assert.AreEqual(PersonPositionalMatch(wolfgang2), "Polizia and Wolfgang match");
+            Assert.AreEqual("Polizia and Wolfgang match", PersonPositionalMatch(wolfgang2));
         }
 
         #endregion
@@ -163,8 +163,8 @@ namespace CSharpCore
 
         public static void TuplePatternMatching()
         {
-            Assert.AreEqual(RockPaperScissors("rock", "scissors"), "rock breaks scissors. Rock wins.");
-            Assert.AreEqual(RockPaperScissors("rock","rock"), "tie");
+            Assert.AreEqual("rock breaks scissors. Rock wins.", RockPaperScissors("rock", "scissors"));
+            Assert.AreEqual("tie", RockPaperScissors("rock", "rock"));
         }
 
         #endregion
@@ -215,13 +215,13 @@ namespace CSharpCore
         private static void Use_MyData()
         {
             using MyData data = new MyData();
-            Assert.AreEqual(step, 0);
+            Assert.AreEqual(0, step);
         }
         public static void Test_IDisposable()
         {
             step = 0;
             Use_MyData();
-            Assert.AreEqual(step, 1);
+            Assert.AreEqual(1, step);
         }
 
         #endregion

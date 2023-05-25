@@ -74,19 +74,19 @@ namespace C_Sharp.Language
 		{
 			// #FirstOrDefault for value type
 			int i = 42;
-			Assert.AreEqual(i, 42);
+			Assert.AreEqual(42, i);
 			List<int> l = new List<int>();
 			Assert.IsNotNull(l);
 
 			i = l.FirstOrDefault();
-			Assert.AreEqual(i, 0);
+			Assert.AreEqual(0, i);
 
 			// #First
 			int j = 43;
 
 			Action first = () => j = l.First();
             Assert.ThrowsException<InvalidOperationException>(first);
-			Assert.AreEqual(j, 43);
+			Assert.AreEqual(43, j);
 
 			// #FirstOrDefault for non value types
 			string s = null;
@@ -96,7 +96,7 @@ namespace C_Sharp.Language
 
 			s = ls.FirstOrDefault();
 
-			Assert.AreEqual(s, null);
+			Assert.AreEqual(null, s);
 		}
 
         /// #linq #all but last #pairs #linkedList

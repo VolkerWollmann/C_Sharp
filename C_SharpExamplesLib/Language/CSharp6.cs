@@ -24,7 +24,7 @@ namespace C_Sharp.Language
 
 		internal CSharp6(int x)
 		{
-			Assert.AreEqual(X,7);
+			Assert.AreEqual(7,X);
 			X = x;
 		}
 
@@ -95,8 +95,8 @@ namespace C_Sharp.Language
 		public static void TupleTest()
         {
             Tuple<int, int> myTuple = new Tuple<int, int> (1, 42);
-			Assert.AreEqual(myTuple.Item1, 1);
-			Assert.AreEqual(myTuple.Item2, 42);
+			Assert.AreEqual(1, myTuple.Item1);
+			Assert.AreEqual(42, myTuple.Item2);
 
 			CSharp6 cs6 = new CSharp6(5);
 			var r = cs6.GetTuple();
@@ -104,7 +104,7 @@ namespace C_Sharp.Language
 
 			var t = (1, "Rabbit", true);
 			var (_, tier, _) = t;
-			Assert.AreEqual(tier, "Rabbit");
+			Assert.AreEqual("Rabbit", tier);
 		}
 		public static void Test()
 		{
@@ -114,7 +114,7 @@ namespace C_Sharp.Language
 			Assert.IsTrue(s == "(5)");
 
             string t = cs6.StringInterpolation2();
-			Assert.AreEqual(t, "(5)");
+			Assert.AreEqual("(5)", t);
 
             string u = cs6.StringInterpolation3();
 			Assert.IsNotNull(u);
@@ -123,10 +123,10 @@ namespace C_Sharp.Language
 			Assert.IsInstanceOfType(dict, typeof( Dictionary<string,int>));
 
             int three = (int)cs6.SquareRoot(9);
-			Assert.AreEqual(three, 3);
+			Assert.AreEqual(3, three);
 
             int four = (int) cs6.SquareRoot2(16);
-			Assert.AreEqual(four,4);
+			Assert.AreEqual(4, four);
 
 			NullableType();
 

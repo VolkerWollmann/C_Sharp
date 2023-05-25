@@ -13,7 +13,7 @@ namespace C_Sharp.Language.DataTypes
 			// does not work for two dimensional array
 			int[] xxx = new int[5];
 			var y = xxx.AsQueryable().First();
-			Assert.AreEqual(y,0);
+			Assert.AreEqual(0, y);
 
 			string[,] testArray = new string[10, 10];
 			for (int row = 0; row < 10; row++)

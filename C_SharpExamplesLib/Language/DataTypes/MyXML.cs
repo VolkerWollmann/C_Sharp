@@ -75,11 +75,11 @@ namespace C_Sharp.Language.DataTypes
             {
                 var nodes = doc.Root.Nodes().ToList();
                 Assert.IsTrue(nodes.Count == 3);
-                Assert.AreEqual(((XElement)nodes[0]).Name, "el1");
+                Assert.AreEqual("el1", ((XElement)nodes[0]).Name);
 
                 var elements = doc.Root.Elements().ToList();
                 Assert.IsTrue(elements.Count == 1);
-                Assert.AreEqual(elements[0].Name, "el1");
+                Assert.AreEqual("el1", elements[0].Name);
             }
         }
 

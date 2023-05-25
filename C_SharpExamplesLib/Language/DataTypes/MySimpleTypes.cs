@@ -8,7 +8,7 @@ namespace C_Sharp.Language.DataTypes
         {
             char c = 'c';
 
-            Assert.AreEqual(c, 'c');
+            Assert.AreEqual('c', c);
         }
     }
 }

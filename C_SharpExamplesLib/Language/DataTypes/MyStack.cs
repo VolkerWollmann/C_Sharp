@@ -32,10 +32,10 @@ namespace C_Sharp.Language.DataTypes
             MyStackElement pair = new MyStackElement(1, 42);
             stack.Push(pair);
 
-            Assert.AreEqual(stack.Count, 1);
+            Assert.AreEqual(1, stack.Count);
 
             var pair2 = stack.Pop();
-            Assert.AreEqual(stack.Count, 0);
+            Assert.AreEqual(0, stack.Count);
 
             Assert.AreEqual(pair, pair2);
 

@@ -32,11 +32,11 @@ namespace C_Sharp.Language
         {
             MyConcrete1 concrete1 = new MyConcrete1();
             int t1 = concrete1.One();
-            Assert.AreEqual(t1, 1);
+            Assert.AreEqual(1, t1);
 
             MyConcrete2 concrete2 = new MyConcrete2();
             int t2 = concrete2.One();
-            Assert.AreEqual(t2,2);
+            Assert.AreEqual(2, t2);
         }
     }
 

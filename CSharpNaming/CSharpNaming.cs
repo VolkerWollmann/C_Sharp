@@ -49,8 +49,8 @@ namespace CSharpNaming
             #endregion
 
             #region
-            Assert.AreEqual(localVariable,0);
-            Assert.AreEqual(iMaximum,0);
+            Assert.AreEqual(0, localVariable);
+            Assert.AreEqual(0, iMaximum);
             ClearStack();
             #endregion
         }
@@ -173,18 +173,18 @@ namespace CSharpNaming
 
             #region 
             Assert.IsNotNull(firstName);
-            Assert.AreEqual(lastIndex,0);
+            Assert.AreEqual(0, lastIndex);
 
             Assert.IsNotNull(stream);
             Assert.IsNotNull(customers);
             Assert.IsFalse(isSaved);
 
             Assert.IsNotNull(lastName);
-            Assert.AreEqual(firstIndex,0);
+            Assert.AreEqual(0, firstIndex);
             Assert.IsFalse(isDeleted);
           
-            Assert.AreEqual(index,100);
-            Assert.AreEqual(timeSheet,"");
+            Assert.AreEqual(100,index);
+            Assert.AreEqual("", timeSheet);
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
             Assert.AreEqual(isCompleted, false);
             #endregion
@@ -256,14 +256,14 @@ namespace CSharpNaming
                 Assert.AreEqual(_reserves,0);
                 Number = "1";
                 string t = Number;
-                Assert.AreEqual(t,"1");
+                Assert.AreEqual("1", t);
 
                 DateOpened = DateTime.Now;
                 DateClosed = DateOpened;
                 Assert.AreEqual(DateOpened, DateClosed);
 
                 Balance = 0;
-                Assert.AreEqual(Balance,0);
+                Assert.AreEqual(0, Balance);
 
             }
             #endregion
@@ -347,40 +347,40 @@ namespace CSharpNaming
             example.Method1();
 
             Color color = Color.Green;
-            Assert.AreEqual(color, Color.Green);
+            Assert.AreEqual(Color.Green, color);
             color = Color.Red;
-            Assert.AreEqual(color, Color.Red);
+            Assert.AreEqual(Color.Red, color);
 
             Dockings d = Dockings.Bottom | Dockings.None | Dockings.Top;
             Assert.AreNotEqual(d, Dockings.Bottom);
 
             WrongDirection w = WrongDirection.East;
-            Assert.AreEqual(w, WrongDirection.East);
+            Assert.AreEqual(WrongDirection.East, w);
             w = WrongDirection.South;
-            Assert.AreEqual(w, WrongDirection.South);
+            Assert.AreEqual(WrongDirection.South, w);
             w = WrongDirection.West;
-            Assert.AreEqual(w, WrongDirection.West);
+            Assert.AreEqual(WrongDirection.West, w);
             w = WrongDirection.North;
-            Assert.AreEqual(w, WrongDirection.North);
+            Assert.AreEqual(WrongDirection.North, w);
 
             Direction w2 = Direction.East;
-            Assert.AreEqual(w2, Direction.East);
+            Assert.AreEqual(Direction.East, w2);
             w2 = Direction.South;
-            Assert.AreEqual(w2, Direction.South);
+            Assert.AreEqual(Direction.South, w2);
             w2 = Direction.West;
-            Assert.AreEqual(w2, Direction.West);
+            Assert.AreEqual(Direction.West, w2);
             w2 = Direction.North;
-            Assert.AreEqual(w2, Direction.North);
+            Assert.AreEqual(Direction.North, w2);
 
             CoinEnum coin = CoinEnum.Nickel;
-            Assert.AreEqual(coin, CoinEnum.Nickel);
+            Assert.AreEqual(CoinEnum.Nickel, coin);
             coin = CoinEnum.Penny;
-            Assert.AreEqual(coin, CoinEnum.Penny);
+            Assert.AreEqual(CoinEnum.Penny, coin);
 
             Coin coin2 = Coin.Nickel;
-            Assert.AreEqual(coin2, Coin.Nickel);
+            Assert.AreEqual(Coin.Nickel, coin2);
             coin2 = Coin.Penny;
-            Assert.AreEqual(coin2, (Coin)CoinEnum.Penny);
+            Assert.AreEqual((Coin)CoinEnum.Penny, coin2);
 
 
             Employee e = new Employee(); 
@@ -396,9 +396,9 @@ namespace CSharpNaming
             Assert.IsNotNull(m);
 
             string s = ShippingType;
-            Assert.AreEqual(s, ShippingType);
+            Assert.AreEqual(ShippingType, s);
             s = SHIPPINGTYPE;
-            Assert.AreEqual(s, SHIPPINGTYPE);
+            Assert.AreEqual(SHIPPINGTYPE, s);
 
             this.ClientAppointment = DateTime.Now;
             this.TimeLeft = TimeSpan.Zero;

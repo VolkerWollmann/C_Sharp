@@ -12,7 +12,7 @@ namespace CSharpCore
             Assert.IsTrue(b);
 
             int vectorSize = Vector<int>.Count;
-            Assert.AreEqual(vectorSize,8);
+            Assert.AreEqual(8, vectorSize);
 
             int[] vector1Data = new int[8];
             int[] vector2Data = new int[8];

@@ -42,7 +42,7 @@ namespace C_Sharp.Language
 
             mi.Invoke(ship, new object[] {5});
 
-            Assert.AreEqual(((Ship)ship).Speed, 5);
+            Assert.AreEqual(5, ((Ship)ship).Speed);
         }
 
     }

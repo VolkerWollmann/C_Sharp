@@ -19,7 +19,7 @@ namespace C_Sharp.Language
 
             var one = GetOne();
 
-            Assert.AreEqual(one, 1);
+            Assert.AreEqual(1, one);
         }
 
         public static void MultiLineStringConstant()
@@ -59,11 +59,11 @@ namespace C_Sharp.Language
 
             // #implicit operator
             byte number = d;
-            Assert.AreEqual(number, 7);
+            Assert.AreEqual(7, number);
 
             //  #explicit operator
             Digit digit = (Digit)number;
-            Assert.AreEqual(digit, 7);
+            Assert.AreEqual(7, digit);
         }
 
         #endregion
@@ -80,7 +80,7 @@ namespace C_Sharp.Language
 
             int result = Sum(parameter2: 5, parameter1: 3);
 
-            Assert.AreEqual(result, 8);
+            Assert.AreEqual(8, result);
         }
 
         #endregion
@@ -95,10 +95,10 @@ namespace C_Sharp.Language
             }
 
             int result = Sum(2);
-            Assert.AreEqual(result, 5);
+            Assert.AreEqual(5, result);
 
             int result2 = Sum(1, 2);
-            Assert.AreEqual(result2, 3);
+            Assert.AreEqual(3, result2);
 
         }
         #endregion
@@ -116,8 +116,8 @@ namespace C_Sharp.Language
                 [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = "",
                 [System.Runtime.CompilerServices.CallerLineNumber] int sourceLineNumber = 0)
         {
-            Assert.AreEqual(message, "ShowCompilerServices");
-            Assert.AreEqual(memberName, "ShowCompilerServices");
+            Assert.AreEqual("ShowCompilerServices", message);
+            Assert.AreEqual("ShowCompilerServices", memberName);
             Assert.IsTrue(sourceFilePath.EndsWith("CSharp.cs"));
             Assert.IsTrue( sourceLineNumber > 0);
         }
@@ -167,13 +167,13 @@ namespace C_Sharp.Language
         public static void ToStringExamples()
         {
             string iString  = 1.ToString();
-            Assert.AreEqual(iString, "1");
+            Assert.AreEqual("1", iString);
 
             //Does not compile
             //string nullString = null.ToString();
 
             string constString = MyNumbers.FourtyTwo.ToString();
-            Assert.AreEqual(constString, "FourtyTwo");
+            Assert.AreEqual("FourtyTwo", constString);
 
         }
         #endregion

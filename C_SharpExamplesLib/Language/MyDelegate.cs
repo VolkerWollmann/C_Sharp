@@ -71,9 +71,9 @@ namespace C_Sharp.Language
 
 			WriteMessage("Hello World");
 
-			Assert.AreEqual(FuncIntDirect(), 42);
+			Assert.AreEqual(42, FuncIntDirect());
 
-			Assert.AreEqual(FuncIntIntDirect(42), 42);
+			Assert.AreEqual(42, FuncIntIntDirect(42));
 
 			Assert.IsTrue(LessThanTree(2));
 		}
@@ -135,11 +135,11 @@ namespace C_Sharp.Language
 
             Func<int, int> square = (n) => { return n*n; };
 
-			Assert.AreEqual( square(increment(1)),4);
+			Assert.AreEqual(4, square(increment(1)));
 
             Func<int, int> both = (n) => square(increment(n));
 
-            Assert.AreEqual(both(1), 4);
+            Assert.AreEqual(4, both(1));
 		}
 		public static void TestDelegateFuncInvocationList()
 		{

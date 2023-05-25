@@ -47,8 +47,8 @@ namespace UnitTest
 
                 MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
-                Assert.AreEqual(myQueryableIntegerSet.Expression.Type, typeof(MyQueryableIntegerSet<int>));
-                Assert.AreEqual(myQueryableIntegerSet.Expression.GetType(), typeof(ConstantExpression));
+                Assert.AreEqual(typeof(MyQueryableIntegerSet<int>), myQueryableIntegerSet.Expression.Type);
+                Assert.AreEqual(typeof(ConstantExpression), myQueryableIntegerSet.Expression.GetType());
             }
 
         }
@@ -78,7 +78,7 @@ namespace UnitTest
             var expression = myQueryableIntegerSet.Where(i => TestForTwo(i));
             var result = expression.ToList();
             Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(result[0], 2);
+            Assert.AreEqual(2, result[0]);
 
         }
 
@@ -97,7 +97,7 @@ namespace UnitTest
                 var expression = myQueryableIntegerSet.Where(i => (i == 2));
                 var result = expression.ToList();
                 Assert.AreEqual(1, result.Count);
-                Assert.AreEqual(result[0], 2);
+                Assert.AreEqual(2, result[0]);
             }
         }
 
@@ -115,7 +115,7 @@ namespace UnitTest
             var expression = myQueryableIntegerSet.Where(i => TestForTwo(i)).Where(i => TestForTwo(i));
             var result = expression.ToList();
             Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(result[0], 2);
+            Assert.AreEqual(2, result[0]);
         }
     
 

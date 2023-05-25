@@ -13,7 +13,7 @@ namespace C_Sharp.Language
             // this works
             Settings settings = new Settings();
             var result = settings.ProjectSetting;
-            Assert.AreEqual( result, "ProjectSettingValue");
+            Assert.AreEqual("ProjectSettingValue", result);
 
             // liked this
             //var appSettings = ConfigurationManager.AppSettings["UnitTestSetting"];

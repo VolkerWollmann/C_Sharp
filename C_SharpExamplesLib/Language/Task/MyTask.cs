@@ -34,7 +34,7 @@ namespace C_Sharp.Language.Task
 			myTask2.Wait();
 
 			int result = myTask2.Result;
-			Assert.AreEqual(result, 16);
+			Assert.AreEqual(16, result);
 
 		}
 		#endregion
@@ -263,7 +263,7 @@ namespace C_Sharp.Language.Task
 		{
 			Console.WriteLine("Perform Something async started");
 			int result = await (System.Threading.Tasks.Task.Run(DoSomethingAsync));
-			Assert.AreEqual(result,1);
+			Assert.AreEqual(1, result);
 			Console.WriteLine("Perform Something async finished");
 		}
 

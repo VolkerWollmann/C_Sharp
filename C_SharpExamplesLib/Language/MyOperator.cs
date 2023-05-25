@@ -28,7 +28,7 @@ namespace C_Sharp.Language
 			Assert.IsTrue(e2 == myOperator11.Donkey);
 
 			string e3 = e1 + e2;
-			Assert.AreEqual(e3, "Donkey" );
+			Assert.AreEqual("Donkey", e3);
 
             // ReSharper disable once HeuristicUnreachableCode
             string s = (0 < 1) ? "always" : "never";
