@@ -32,6 +32,7 @@ namespace UnitTest
             CSharp7.TestBigInteger();
         }
 
+        // #ExpectedException
         [TestMethod, ExpectedException(typeof(OutOfMemoryException), "Expected OutOfMemoryException" )]
         public void ExpectedException()
         {
