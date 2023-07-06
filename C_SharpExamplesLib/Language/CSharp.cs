@@ -276,6 +276,20 @@ namespace C_Sharp.Language
 
         }
         #endregion
+
+        static int one;
+
+        private static int GetOne()
+        {
+            return one = 1;
+        }
+
+        public static void ReturnAssignment()
+        {
+            int one;
+
+            one = GetOne();
+        }
     }
 
 

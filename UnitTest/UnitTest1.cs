@@ -229,5 +229,11 @@ namespace UnitTest
         {
 			DebugStepThrough.StepThroughExample();
         }
+
+		[TestMethod]
+		public void TestReturnAssignment()
+		{
+			CSharp.ReturnAssignment();
+		}
     }
 }
