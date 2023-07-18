@@ -284,6 +284,7 @@ namespace C_Sharp.Language
             return one = 1;
         }
 
+        // #return #assignment #expression
         public static void ReturnAssignment()
         {
             int one;
