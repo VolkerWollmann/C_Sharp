@@ -195,6 +195,12 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void EnumerableAssignment()
+        {
+            MyYield.TestIEnumerableAssignment();
+        }
+
+        [TestMethod]
         public void ImplicitOperator()
         {
             CSharp.ImplicitExplicitOperator();

@@ -41,7 +41,7 @@ namespace C_Sharp.Language
         {
             foreach (int i in OneToThree().ToList().Union(FourToSix().ToList()))
             {
-                Console.WriteLine("1..6 Union of Lists:"+ i);
+                Console.WriteLine("1..6 Union of Lists:" + i);
                 yield return i;
             }
         }
@@ -57,12 +57,12 @@ namespace C_Sharp.Language
 
         private static IEnumerable<int> OneToSixAsThreeLists()
         {
-            int k=0;
+            int k = 0;
             List<int> all = OneToThree().Union(FourToSix()).ToList();
 
             for (int i = 0; i <= 2; i++)
             {
-                List<int> l = new List<int>() {all[2*i], all[(2*i)+1]};
+                List<int> l = new List<int>() {all[2 * i], all[(2 * i) + 1]};
                 foreach (int j in l)
                 {
                     Console.WriteLine("1..6 as threeLists: List {0} Element {1} ", i, k++);
@@ -79,18 +79,29 @@ namespace C_Sharp.Language
                 Assert.AreEqual(i, j);
                 i++;
             }
+
             Console.WriteLine("--");
         }
 
 
         public static void Test()
-        { 
+        {
             Test(OneToSix());
             Test(OneToSixUnionOfLists());
             Test(OneToSixUnionOfEnumerableToList());
             Test(OneToSixAsThreeLists());
         }
 
-
+        public static void TestIEnumerableAssignment()
+        {
+            //#IEnumerable OneToSix is only assigned, Debugger F11 will pass by
+            var l16 = OneToSix();
+           
+            var l16Enumerator = l16.GetEnumerator();
+            l16Enumerator.MoveNext(); //#IEnumerable is used
+            var firstElement = l16Enumerator.Current;
+            Assert.AreEqual(1,firstElement);
+            l16Enumerator.Dispose();
+        }
     }
 }
