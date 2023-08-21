@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -290,6 +291,23 @@ namespace C_Sharp.Language
             int one;
 
             one = GetOne();
+        }
+
+        // string operations
+        // #string #join #list of integers to a string
+        public static void StringJoin()
+        {
+            List<int> ids1 = new List<int> {1, 2, 3};
+
+            string commaSeparatedIds1 = string.Join(", ", ids1);
+
+            Assert.AreEqual("1, 2, 3", commaSeparatedIds1);
+
+            List<int> ids2 = new List<int> { 1 };
+
+            string commaSeparatedIds2 = string.Join(", ", ids2);
+
+            Assert.AreEqual("1", commaSeparatedIds2);
         }
     }
 

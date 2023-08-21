@@ -241,5 +241,11 @@ namespace UnitTest
 		{
 			CSharp.ReturnAssignment();
 		}
+
+        [TestMethod]
+        public void StringJoin()
+        {
+            CSharp.StringJoin();
+        }
     }
 }
