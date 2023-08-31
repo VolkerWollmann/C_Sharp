@@ -131,6 +131,12 @@ namespace NetCoreUnitTest
         }
 
         [Fact]
+        public void CountDownEventTest()
+        {
+            CSharp.CountDownEventTest();
+        }
+
+        [Fact]
         public void Test_IDisposable()
         {
             CSharp8.Test_IDisposable();
