@@ -11,9 +11,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CSharpCore
 {
-    #region stream
+    
     public class CSharp
     {
+        #region stream
         // #Stream
         public static async void StreamTestUnconventionalUsage()
         {
@@ -59,7 +60,7 @@ namespace CSharpCore
 
         #endregion
 
-        #region 
+        #region CountDownEventTest
         public static async void CountDownEventTest()
         {
             // Initialize a queue and a CountdownEvent
