@@ -36,7 +36,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoadingAssembly", "NetNew\D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpNew", "NetNew\CSharpCore\CSharpNew.csproj", "{FF517035-411F-4AB0-80BC-08B581B8D1BF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetnewUnitTest", "NetNew\NetCoreUnitTest\NetnewUnitTest.csproj", "{A9CE382A-6660-4D12-8EF8-2F72D5DBAE1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetNewUnitTest", "NetNew\NetCoreUnitTest\NetNewUnitTest.csproj", "{A9CE382A-6660-4D12-8EF8-2F72D5DBAE1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
