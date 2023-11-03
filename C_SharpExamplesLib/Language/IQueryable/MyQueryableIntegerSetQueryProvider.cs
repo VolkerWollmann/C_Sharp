@@ -16,10 +16,10 @@ namespace C_Sharp.Language.IQueryable
     /// </summary>
     internal class InnermostExpressionFinder : ExpressionVisitor
     {
-        private string _innerMostExpressionName = "";
+        private string _innerMostExpressionName = "Where";
         private MethodCallExpression _innermostExpression=null;
 
-        public MethodCallExpression GetInnermostWhere(Expression expression)
+        public MethodCallExpression GetInnermostExpression(Expression expression)
         {
             Visit(expression);
             return _innermostExpression;
@@ -36,6 +36,10 @@ namespace C_Sharp.Language.IQueryable
             return expression;
         }
 
+        public InnermostExpressionFinder(string expressionName)
+        {
+            _innerMostExpressionName = expressionName;
+        }
     }
 
     internal class ExpressionTreeModifier : ExpressionVisitor
@@ -63,12 +67,12 @@ namespace C_Sharp.Language.IQueryable
 
     internal class ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor<TOutputType> : ExpressionVisitor
     {
-        private readonly MyQueryableIntegerSet<TOutputType> MyQueryableIntegerSet;
+        private readonly MyQueryableIntegerSet<TOutputType> _myQueryableIntegerSet;
         private bool done=false;
 
         internal ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor(MyQueryableIntegerSet<TOutputType> myQueryableIntegerSet)
         {
-            MyQueryableIntegerSet = myQueryableIntegerSet;
+            _myQueryableIntegerSet = myQueryableIntegerSet;
         }
         protected override Expression VisitMethodCall(MethodCallExpression expression)
         {
@@ -80,7 +84,7 @@ namespace C_Sharp.Language.IQueryable
                     if (c != null)
                     {
                         done = true;
-                        return Expression.Constant(MyQueryableIntegerSet);
+                        return Expression.Constant(_myQueryableIntegerSet);
                     }
 
                     var a0 = Visit(expression.Arguments[0]);
@@ -177,12 +181,12 @@ namespace C_Sharp.Language.IQueryable
                 throw new InvalidProgramException("No query over the data source was specified.");
 
             // Find the call to Where() and get the lambda expression predicate.
-            InnermostExpressionFinder whereFinder = new InnermostExpressionFinder();
-            MethodCallExpression whereExpression = whereFinder.GetInnermostWhere(expression);
-            if (whereExpression == null)
-                return EvaluateNonWhereExpression(expression, isEnumerable);
+            InnermostExpressionFinder whereFinder = new InnermostExpressionFinder( "Where");
+            MethodCallExpression whereExpression = whereFinder.GetInnermostExpression(expression);
+            if (whereExpression != null)
+                return EvaluateWhereExpression(expression, whereExpression, isEnumerable);
 
-            return EvaluateWhereExpression(expression, whereExpression, isEnumerable);
+            return EvaluateNonWhereExpression(expression, isEnumerable);
         }
 
         internal MyQueryableIntegerSetQueryContext(MyQueryableIntegerSet<TOutputType> myQueryableIntegerSet)

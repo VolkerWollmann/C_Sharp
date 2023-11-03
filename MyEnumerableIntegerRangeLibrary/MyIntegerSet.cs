@@ -80,6 +80,17 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             return sum;
         }
 
+        public virtual bool Any(LambdaExpression lambdaExpression)
+        {
+            Func<int, bool> compiledExpression = (Func<int, bool>)lambdaExpression.Compile();
+
+            Reset();
+            if (compiledExpression(Current))
+                return true;
+
+            return false;
+        }
+
         #endregion
 
         #region Constructor

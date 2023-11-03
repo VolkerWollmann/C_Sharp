@@ -83,7 +83,21 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void Test_IQueryable_Any()
+        public void Test_IQueryable_AnyDelegated()
+        {
+            IMyIntegerSet myIntegerSet = myIntegerSetFactory.GetIntegerSet();
+
+            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+
+            var expression = myQueryableIntegerSet.Any();
+            var result = expression;
+
+            Assert.AreEqual(result, true);
+
+        }
+
+        [TestMethod]
+        public void Test_IQueryable_AnyWithConditionAsExtension()
         {
             IMyIntegerSet myIntegerSet = myIntegerSetFactory.GetIntegerSet();
 

@@ -14,5 +14,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression);
 
         int Sum();
+
+        bool Any(LambdaExpression lambdaExpression);
     }
 }
