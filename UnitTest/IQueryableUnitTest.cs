@@ -83,6 +83,20 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void Test_IQueryable_Any()
+        {
+            IMyIntegerSet myIntegerSet = myIntegerSetFactory.GetIntegerSet();
+
+            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+
+            var expression = myQueryableIntegerSet.Any(i => TestForTwo(i));
+            var result = expression;
+            
+            Assert.AreEqual(result, true);
+
+        }
+
+        [TestMethod]
         public void Test_IQueryable_Where_DatabaseIntegerSet()
         {
             if (!myIntegerSets.Any(integerSet => (integerSet is MyDatabaseIntegerSet)))

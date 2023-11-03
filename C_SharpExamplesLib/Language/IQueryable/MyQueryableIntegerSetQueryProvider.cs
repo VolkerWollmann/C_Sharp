@@ -11,20 +11,23 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace C_Sharp.Language.IQueryable
 {
+    /// <summary>
+    /// used to find an expression that could be evaluated by MyQueryableIntegerSet and MyQueryableIntegerSetQueryProvider
+    /// </summary>
     internal class InnermostWhereFinder : ExpressionVisitor
     {
-        private MethodCallExpression InnermostWhereExpression=null;
+        private MethodCallExpression _innermostWhereExpression=null;
 
         public MethodCallExpression GetInnermostWhere(Expression expression)
         {
             Visit(expression);
-            return InnermostWhereExpression;
+            return _innermostWhereExpression;
         }
 
         protected override Expression VisitMethodCall(MethodCallExpression expression)
         {
             if (expression.Method.Name == "Where")
-                InnermostWhereExpression = expression;
+                _innermostWhereExpression = expression;
 
             Visit(expression.Arguments[0]);
 
@@ -34,11 +37,11 @@ namespace C_Sharp.Language.IQueryable
 
     internal class ExpressionTreeModifier : ExpressionVisitor
     {
-        private readonly IQueryable<int> QueryableIntegers;
+        private readonly IQueryable<int> _queryableIntegers;
 
         internal ExpressionTreeModifier(IQueryable<int> list)
         {
-            QueryableIntegers = list;
+            _queryableIntegers = list;
         }
 
         protected override Expression VisitConstant(ConstantExpression c)
@@ -49,7 +52,7 @@ namespace C_Sharp.Language.IQueryable
             // #this is important: Replace the constant MyQueryableIntegerSet arg with the IQueryable<TBaseType> collection. 
             var cGenericTypeDefinition = c.Type.GetGenericTypeDefinition();
             if (cGenericTypeDefinition.Equals(typeof(MyQueryableIntegerSet<>)))
-                return Expression.Constant(QueryableIntegers);
+                return Expression.Constant(_queryableIntegers);
             else
                 return c;
         }
@@ -120,6 +123,7 @@ namespace C_Sharp.Language.IQueryable
         private object EvaluateNonWhereExpression(Expression expression, bool isEnumerable)
         {
             // is something, that we do not want to do on our own
+            // so we provide an expression with explicit integer set within instead of MyQueryAbleIntegerSet  
             IEnumerable<int> l = MyQueryableIntegerSet.ToIntegerList();
             IQueryable<int> queryableIntegers = l.AsQueryable();
 
