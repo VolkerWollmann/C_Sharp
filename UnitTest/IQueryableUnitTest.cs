@@ -144,6 +144,29 @@ namespace UnitTest
         }
 
         /// <summary>
+        /// Will fail for optimmized database integer set
+        /// </summary>
+        [TestMethod]
+        [Ignore]
+        public void Test_IQueryable_Where_DatabaseIntegerSet_ComplexWhere()
+        {
+            if (!myIntegerSets.Any(integerSet => (integerSet is MyDatabaseIntegerSet)))
+            {
+                Assert.Inconclusive("No database connection");
+            }
+
+            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
+            {
+
+                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+                var expression = myQueryableIntegerSet.Where(i => TestForTwo(i));
+                var result = expression.ToList();
+                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(2, result[0]);
+            }
+        }
+
+        /// <summary>
         /// Shows, how the MyQueryableIntegerSet together with the inner most where clause is
         /// evaluated first, before the result of this evaluation is provided to further linq query execution
         /// </summary>
@@ -159,7 +182,6 @@ namespace UnitTest
             Assert.AreEqual(1, result.Count);
             Assert.AreEqual(2, result[0]);
         }
-    
 
         [TestMethod]
         public void Test_IQueryable_SumAsExtension()
