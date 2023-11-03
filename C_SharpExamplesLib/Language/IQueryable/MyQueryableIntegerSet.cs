@@ -80,6 +80,17 @@ namespace C_Sharp.Language.IQueryable
             return _myIntegerSet.Sum();
         }
 
+        public bool AnyImplementation(LambdaExpression lambdaExpression)
+        {
+            return _myIntegerSet.Any(lambdaExpression);
+        }
+
+        bool Any(Expression<Func<int, bool>> predicate)
+        {
+            throw new NotImplementedException();
+            return true;
+        }
+
         #region Constructors
 
         public MyQueryableIntegerSet(IMyIntegerSet myIntegerSet)

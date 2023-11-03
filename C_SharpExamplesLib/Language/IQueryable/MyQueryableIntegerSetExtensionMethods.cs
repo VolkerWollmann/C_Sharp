@@ -20,6 +20,17 @@ namespace C_Sharp.Language.IQueryable
         {
             return myQueryableIntegerSet.SumImplementation();
         }
+
+        public static bool Any(this MyQueryableIntegerSet<int> myQueryableIntegerSet, LambdaExpression lambdaExpression)
+        {
+            return myQueryableIntegerSet.AnyImplementation(lambdaExpression);
+        }
+
+        public static bool Any(this MyQueryableIntegerSet<int> myQueryableIntegerSet, Expression<Func<int, bool>> predicate)
+        {
+            return myQueryableIntegerSet.AnyImplementation(predicate);
+        }
+
         #endregion
     }
 }

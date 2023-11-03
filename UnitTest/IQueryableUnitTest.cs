@@ -97,17 +97,31 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void Test_IQueryable_AnyWithConditionAsExtension()
+        public void Test_IQueryable_AnyWithFunctionCallConditionAsExtension()
         {
-            IMyIntegerSet myIntegerSet = myIntegerSetFactory.GetIntegerSet();
+            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
+            {
+                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
-            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+                var expression = myQueryableIntegerSet.Any(i => TestForTwo(i));
+                var result = expression;
 
-            var expression = myQueryableIntegerSet.Any(i => TestForTwo(i));
-            var result = expression;
-            
-            Assert.AreEqual(result, true);
+                Assert.AreEqual(result, true);
+            }
+        }
 
+        [TestMethod]
+        public void Test_IQueryable_AnyWithSimpleExpressionConditionAsExtension()
+        {
+            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
+            {
+                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+
+                var expression = myQueryableIntegerSet.Any(i => i<2);
+                var result = expression;
+
+                Assert.AreEqual(result, true);
+            }
         }
 
         [TestMethod]

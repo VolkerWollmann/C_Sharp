@@ -85,8 +85,11 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             Func<int, bool> compiledExpression = (Func<int, bool>)lambdaExpression.Compile();
 
             Reset();
-            if (compiledExpression(Current))
-                return true;
+            while (MoveNext())
+            {
+                if (compiledExpression(Current))
+                    return true;
+            }
 
             return false;
         }

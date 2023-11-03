@@ -85,12 +85,20 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             return sum;
         }
 
+        public override bool Any(LambdaExpression lambdaExpression)
+        {
+            // understand expression and compile it to a sql server expression
+            return base.Any(lambdaExpression) == true;
+        }
+
         #endregion
 
+        #region Constructor
         public MyOptimizedDatabaseIntegerSet(SqlConnection dataBaseConnection, List<int> set) : 
             base(dataBaseConnection, set)
         {
 
         }
+        #endregion
     }
 }
