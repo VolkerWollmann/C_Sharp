@@ -17,6 +17,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         /// <summary>
         /// very very primitive compiler to retrieve the values form the database,
         /// which match the lambda expression
+        /// only evaluates = 2, should evaluate [<|>|=] e.g 3-4, ...
         /// </summary>
         public class ExpressionCompileVisitor : ExpressionVisitor
         {
