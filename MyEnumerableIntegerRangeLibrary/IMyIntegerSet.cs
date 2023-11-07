@@ -17,5 +17,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         bool Any(LambdaExpression lambdaExpression);
 
+        bool Any();
+
     }
 }

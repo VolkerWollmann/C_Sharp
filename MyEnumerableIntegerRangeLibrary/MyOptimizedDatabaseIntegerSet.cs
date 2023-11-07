@@ -122,8 +122,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         public override bool Any(LambdaExpression lambdaExpression)
         {
-            // understand expression and compile it to a sql server expression
-            return base.Any(lambdaExpression) == true;
+            return GetFilteredSet(lambdaExpression).Any();        
         }
 
         #endregion

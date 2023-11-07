@@ -84,6 +84,19 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             return new MyIntegerSet(new List<int> { 1, 2, 3 });
         }
 
+        public MyDatabaseIntegerSet GetDatabaseIntegerSet()
+        {
+            if (TestDatabaseConnection())
+            {
+                var result = new MyDatabaseIntegerSet(_dataBaseConnection, new List<int> { 1, 2, 3 });
+                _myIntegerSets.Add(result);
+                return result;
+            }
+
+            throw new Exception("No database connection");
+        }
+
+
         public MyOptimizedDatabaseIntegerSet GetOptimizedDatabaseIntegerSet()
         {
             if (TestDatabaseConnection())

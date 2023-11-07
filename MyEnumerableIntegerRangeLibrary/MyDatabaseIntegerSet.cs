@@ -176,6 +176,12 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             return false;
         }
 
+        public virtual bool Any()
+        {
+            Reset();
+            return MoveNext();
+        }
+
         #endregion
 
         #region Constructor
