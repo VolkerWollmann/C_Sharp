@@ -99,9 +99,7 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable_AnyWithFunctionCallConditionAsExtension()
         {
-            foreach (IMyIntegerSet myIntegerSet 
-               in new List<IMyIntegerSet> { 
-                   myIntegerSetFactory.GetIntegerSet(), myIntegerSetFactory.GetDatabaseIntegerSet() } )
+            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
             {
                 MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
@@ -163,7 +161,9 @@ namespace UnitTest
             var expression = myQueryableIntegerSet.Where(i => TestForTwo(i));
 
             Assert.ThrowsException <NotImplementedException>(() => expression.ToList());
-           
+            //Assert.AreEqual(1, result.Count);
+            //Assert.AreEqual(2, result[0]);
+
         }
 
         /// <summary>
