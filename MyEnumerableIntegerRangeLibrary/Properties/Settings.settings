@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="DatabaseServer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">BONN\SQLEXPRESS</Value>
+      <Value Profile="(Default)">vm-wo-vs2022\SQLEXPRESS</Value>
     </Setting>
     <Setting Name="DatabaseName" Type="System.String" Scope="User">
       <Value Profile="(Default)">MyCSharp</Value>
@@ -12,7 +12,7 @@
       <Value Profile="(Default)">anw</Value>
     </Setting>
     <Setting Name="DatabasePassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">anw</Value>
+      <Value Profile="(Default)">!Esel1111</Value>
     </Setting>
   </Settings>
 </SettingsFile>
