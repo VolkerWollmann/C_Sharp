@@ -31,7 +31,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             }
 
             /// <summary>
-            /// interpret something like i==2 as theValue==2 for the table in the database
+            /// interpret something like i==2 or j==2 as theValue==2 for the table in the database
             /// </summary>
             /// <param name="node"></param>
             /// <returns></returns>
@@ -39,6 +39,12 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             {
                 results[index++] = TheValue;
                 return node;
+            }
+
+            protected override Expression VisitMethodCall(MethodCallExpression node)
+            {
+                throw new NotImplementedException("No function calls in optimized database integer set");
+                //return base.VisitMethodCall(node);
             }
 
             protected override Expression VisitBinary(BinaryExpression node)
