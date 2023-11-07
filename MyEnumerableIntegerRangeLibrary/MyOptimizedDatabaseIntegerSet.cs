@@ -30,6 +30,11 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
                 return node;
             }
 
+            /// <summary>
+            /// interpret something like i==2 as theValue==2 for the table in the database
+            /// </summary>
+            /// <param name="node"></param>
+            /// <returns></returns>
             protected override Expression VisitParameter(ParameterExpression node)
             {
                 results[index++] = TheValue;
@@ -38,11 +43,34 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
             protected override Expression VisitBinary(BinaryExpression node)
             {
-                
+
                 base.Visit(node.Left);
                 base.Visit(node.Right);
 
-                string s = results[index-2] + "=" + results[index - 1];
+                string operation;
+
+                Dictionary<ExpressionType, string> knownOperations =
+                    new Dictionary<ExpressionType, string>()
+                    {
+                        { ExpressionType.Equal, "=" },
+                        { ExpressionType.GreaterThanOrEqual, ">=" },
+                        { ExpressionType.GreaterThan, ">" },
+                        { ExpressionType.LessThan, "<" },
+                        { ExpressionType.LessThanOrEqual, "<=" },
+                        { ExpressionType.NotEqual, "!=" },
+                        { ExpressionType.Multiply, "*" },
+                        { ExpressionType.Divide, "/" },
+                        { ExpressionType.Modulo, "%" },
+                        { ExpressionType.Add, "+" },
+                        { ExpressionType.Subtract, "-" },
+                    };
+            
+                if (knownOperations.ContainsKey(node.NodeType))
+                    operation = knownOperations[node.NodeType];
+                else
+                    throw new Exception("Compile error");
+
+                string s = results[index-2] + " " + operation + " " + results[index - 1];
                 index -= 2;
                 results[index++] = s;
 

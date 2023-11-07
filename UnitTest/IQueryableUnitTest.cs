@@ -136,7 +136,7 @@ namespace UnitTest
             {
 
                 MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
-                var expression = myQueryableIntegerSet.Where(i => (i == 2));
+                var expression = myQueryableIntegerSet.Where(i => (i*3 == 2 + 2 + 2));
                 var result = expression.ToList();
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(2, result[0]);
