@@ -99,7 +99,8 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable_AnyWithFunctionCallConditionAsExtension()
         {
-            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
+            foreach (IMyIntegerSet myIntegerSet in 
+                myIntegerSetFactory.GetTestData(MyIntegerSetFactory.DesiredDatabases.Simple | MyIntegerSetFactory.DesiredDatabases.Database))
             {
                 MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 

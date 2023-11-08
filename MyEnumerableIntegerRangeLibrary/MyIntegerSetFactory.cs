@@ -11,6 +11,13 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 {
     public class MyIntegerSetFactory
     {
+        public enum DesiredDatabases
+        {
+            Simple = 1,
+            Database = 2,
+            DatabaseOptimized = 4
+        }
+
         private bool _databaseAvailable=false;
         SqlConnection _dataBaseConnection=null;
 
@@ -63,21 +70,41 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             _databaseAvailable = TestDatabaseConnection();
         }
 
+        public List<IMyIntegerSet> GetTestData(DesiredDatabases desiredDatabases)
+        {
+            List<IMyIntegerSet> result = new List<IMyIntegerSet>();
+            if (( desiredDatabases & DesiredDatabases.Simple) == DesiredDatabases.Simple)
+            {
+                var myIntegerSet = new MyIntegerSet(new List<int> { 1, 2, 3 });
+                _myIntegerSets.Add(myIntegerSet);
+                result.Add(myIntegerSet);
+                
+            }
+
+            if (!_databaseAvailable)
+                return result;
+
+            if ((desiredDatabases & DesiredDatabases.Database) == DesiredDatabases.Database)
+            {
+                var myDatabaseIntegerSet = new MyDatabaseIntegerSet(_dataBaseConnection, new List<int> { 1, 2, 3 });
+                _myIntegerSets.Add(myDatabaseIntegerSet);
+                result.Add(myDatabaseIntegerSet);
+            }
+
+            if ((desiredDatabases & DesiredDatabases.DatabaseOptimized) == DesiredDatabases.DatabaseOptimized)
+            {
+                var myOptimizedDatabaseIntegerSet = new MyOptimizedDatabaseIntegerSet(_dataBaseConnection, new List<int> { 1, 2, 3 });
+                _myIntegerSets.Add(myOptimizedDatabaseIntegerSet);
+            }
+           
+            return result;
+        }
+
         public List<IMyIntegerSet> GetTestData()
         {
-            var myIntegerSet = new MyIntegerSet(new List<int> {1, 2, 3});
-            _myIntegerSets.Add(myIntegerSet);
-            if (!_databaseAvailable)
-                return new List<IMyIntegerSet>() { myIntegerSet };
-
-            var myDatabaseIntegerSet = new MyDatabaseIntegerSet(_dataBaseConnection, new List<int> {1, 2, 3});
-            _myIntegerSets.Add(myDatabaseIntegerSet);
-            var myOptimizedDatabaseIntegerSet = new MyOptimizedDatabaseIntegerSet(_dataBaseConnection, new List<int> {1, 2, 3});
-            _myIntegerSets.Add(myOptimizedDatabaseIntegerSet);
-
-           
-            return new List<IMyIntegerSet>() { myIntegerSet, myDatabaseIntegerSet, myOptimizedDatabaseIntegerSet };
+            return GetTestData(DesiredDatabases.Simple | DesiredDatabases.Database | DesiredDatabases.DatabaseOptimized);
         }
+
 
         public MyIntegerSet GetIntegerSet()
         {
