@@ -25,7 +25,7 @@ namespace MyEnumerableIntegerRangeLibrary.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("vm-wo-vs2022\\SQLEXPRESS")]
+        [global::System.Configuration.DefaultSettingValueAttribute("BONN\\SQLEXPRESS")]
         public string DatabaseServer {
             get {
                 return ((string)(this["DatabaseServer"]));
@@ -61,7 +61,7 @@ namespace MyEnumerableIntegerRangeLibrary.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("!Esel1111")]
+        [global::System.Configuration.DefaultSettingValueAttribute("anw")]
         public string DatabasePassword {
             get {
                 return ((string)(this["DatabasePassword"]));

@@ -127,7 +127,7 @@ namespace C_Sharp.Language.IQueryable
             throw new Exception("Cannot evaluate constant expression");
         }
 
-        private object EvaluateNonWhereExpression(Expression expression, bool isEnumerable)
+        private object ExecuteNonWhereExpression(Expression expression, bool isEnumerable)
         {
             // is something, that we do not want to do on our own
             // so we provide an expression with explicit integer set within instead of MyQueryAbleIntegerSet  
@@ -143,7 +143,7 @@ namespace C_Sharp.Language.IQueryable
                 return queryableIntegers.Provider.Execute(newExpressionTree);
         }
 
-        private object EvaluateWhereExpression(Expression expression, MethodCallExpression whereExpression)
+        private object ExecuteWhereExpression(Expression expression, MethodCallExpression whereExpression)
         {
             // apply lambda/where on the items and get a filtered MyIntegerSet
             // get lambda expression
@@ -182,9 +182,9 @@ namespace C_Sharp.Language.IQueryable
             InnermostExpressionFinder whereFinder = new InnermostExpressionFinder( "Where");
             MethodCallExpression whereExpression = whereFinder.GetInnermostExpression(expression);
             if (whereExpression != null)
-                return EvaluateWhereExpression(expression, whereExpression);
+                return ExecuteWhereExpression(expression, whereExpression);
 
-            return EvaluateNonWhereExpression(expression, isEnumerable);
+            return ExecuteNonWhereExpression(expression, isEnumerable);
         }
 
         internal MyQueryableIntegerSetQueryContext(MyQueryableIntegerSet<TOutputType> myQueryableIntegerSet)
