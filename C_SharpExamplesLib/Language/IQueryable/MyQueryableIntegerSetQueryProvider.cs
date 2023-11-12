@@ -143,7 +143,7 @@ namespace C_Sharp.Language.IQueryable
                 return queryableIntegers.Provider.Execute(newExpressionTree);
         }
 
-        private object EvaluateWhereExpression(Expression expression, MethodCallExpression whereExpression, bool isEnumerable)
+        private object EvaluateWhereExpression(Expression expression, MethodCallExpression whereExpression)
         {
             // apply lambda/where on the items and get a filtered MyIntegerSet
             // get lambda expression
@@ -162,11 +162,9 @@ namespace C_Sharp.Language.IQueryable
 
             MyQueryableIntegerSetQueryProvider<TOutputType> myQueryableIntegerSetQueryProvider = 
                 new MyQueryableIntegerSetQueryProvider<TOutputType>(filteredMyQueryableIntegerSet);
-
-            if (isEnumerable)
-                return myQueryableIntegerSetQueryProvider.CreateQuery(newExpressionTree2);
-            else
-                return myQueryableIntegerSetQueryProvider.Execute(newExpressionTree2);
+            
+            return myQueryableIntegerSetQueryProvider.CreateQuery(newExpressionTree2);
+            
         }
 
         #endregion
@@ -184,7 +182,7 @@ namespace C_Sharp.Language.IQueryable
             InnermostExpressionFinder whereFinder = new InnermostExpressionFinder( "Where");
             MethodCallExpression whereExpression = whereFinder.GetInnermostExpression(expression);
             if (whereExpression != null)
-                return EvaluateWhereExpression(expression, whereExpression, isEnumerable);
+                return EvaluateWhereExpression(expression, whereExpression);
 
             return EvaluateNonWhereExpression(expression, isEnumerable);
         }
