@@ -163,6 +163,7 @@ namespace C_Sharp.Language.IQueryable
             MyQueryableIntegerSetQueryProvider<TOutputType> myQueryableIntegerSetQueryProvider = 
                 new MyQueryableIntegerSetQueryProvider<TOutputType>(filteredMyQueryableIntegerSet);
             
+            // TODO : should not pass create query
             return myQueryableIntegerSetQueryProvider.CreateQuery(newExpressionTree2);
             
         }
