@@ -155,7 +155,9 @@ namespace C_Sharp.Language.IQueryable
             // create filtered MyQueryableIntegerSet
             var filteredMyQueryableIntegerSet = new MyQueryableIntegerSet<TOutputType>(filteredMyIntegerSet);
 
-            // replace innermost where clause with calculated MyIntegerSet
+            // Lesson : Create an List<int> instead and use that for replacement
+
+            // replace innermost where clause with calculated MyQueryableIntegerSet
             ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor<TOutputType> expressionTreeModifier2 = 
                 new ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor<TOutputType>(filteredMyQueryableIntegerSet);
             Expression newExpressionTree2 = expressionTreeModifier2.Visit(expression);
@@ -163,7 +165,6 @@ namespace C_Sharp.Language.IQueryable
             MyQueryableIntegerSetQueryProvider<TOutputType> myQueryableIntegerSetQueryProvider = 
                 new MyQueryableIntegerSetQueryProvider<TOutputType>(filteredMyQueryableIntegerSet);
             
-            // TODO : should not pass create query
             return myQueryableIntegerSetQueryProvider.CreateQuery(newExpressionTree2);
             
         }
