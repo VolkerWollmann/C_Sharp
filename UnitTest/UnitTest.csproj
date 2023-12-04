@@ -49,7 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OtherTests\OtherExamplesTest.cs" />
+    <Compile Include="OtherTests\HttpExamplesTest.cs" />
     <Compile Include="ConcurrentDataTypeTests.cs" />
     <Compile Include="DataTypeTests.cs" />
     <Compile Include="CompareUnitTest.cs" />
