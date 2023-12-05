@@ -9,13 +9,13 @@ namespace UnitTest
         [TestMethod]
         public void HttpRequestSimple()
         {
-            GetRadnomNumner.TestHttpRequestSimple();
+            DoHttpRequests.TestHttpRequestSimple();
         }
 
         [TestMethod]
-        public void HttpRequest2()
+        public void HttpRequestJSON()
         {
-            GetRadnomNumner.TestHttpRequest2();
+            DoHttpRequests.TestHttpRequestJSON();
         }
     }
 }

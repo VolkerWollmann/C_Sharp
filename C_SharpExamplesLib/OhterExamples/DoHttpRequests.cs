@@ -1,15 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 
 namespace C_Sharp.OhterExamples
 {
     /// <summary>
     /// #random #http client
     /// </summary>
-    public class GetRadnomNumner
+    public class DoHttpRequests
     {
         private static int result = 0;
         private static async void DoTheRequest()
@@ -33,33 +38,6 @@ namespace C_Sharp.OhterExamples
             }
         }
 
-        private static async void DoRequest2()
-        {
-            result = 0;
-            string url = "https://jsonplaceholder.typicode.com/posts?userId=1";
-            //string jsonParameter =
-            //    @"userId=1";
-            using (HttpClient httpClient = new HttpClient())
-            {
-                try
-                {
-                    //var content = new StringContent(jsonParameter, Encoding.UTF8, "application/json");
-
-                    // Make a GET request
-                    HttpResponseMessage response = await httpClient.GetAsync(url);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string responseString = await response.Content.ReadAsStringAsync();
-                        
-                        Assert.IsTrue(responseString.Contains("\"id\": 1"));
-                        result = 1;
-                    }
-                }
-                finally { }
-            }
-        }
-
         public static void TestHttpRequestSimple()
         {
             DoTheRequest();
@@ -68,11 +46,54 @@ namespace C_Sharp.OhterExamples
             Console.WriteLine("Random number:" + result);
         }
 
-        public static void TestHttpRequest2()
+        #region JSON Response
+
+        internal class Post
         {
-            DoRequest2();
+            public int UserId { get; set; }
+           
+            public int Id { get; set; }
+            
+            public string Title { get; set; }
+            
+            public string Body { get; set; }
+        }
+
+        private static async void DoRequestJSON()
+        {
+            result = 0;
+            string url = "https://jsonplaceholder.typicode.com/posts?userId=1";
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                try
+                {
+                    HttpResponseMessage response = await httpClient.GetAsync(url);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseString = await response.Content.ReadAsStringAsync();
+
+                        JsonSerializer js = JsonSerializer.Create();
+                        JsonReader jr = new JsonTextReader( new StringReader(responseString));
+                        var resultList = js.Deserialize<List<Post>>(jr);
+
+                        Assert.IsTrue(resultList.Any( e => e.Title == "eum et est occaecati"));
+                        result = 1;
+                    }
+                }
+                finally { }
+            }
+        }
+
+
+        public static void TestHttpRequestJSON()
+        {  
+            DoRequestJSON();
             while (result == 0)
                 System.Threading.Thread.Sleep(1000);
         }
+
+        #endregion
     }
 }
