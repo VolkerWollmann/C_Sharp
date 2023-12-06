@@ -62,6 +62,8 @@ namespace C_Sharp.OhterExamples
         private static async void DoRequestJSON()
         {
             result = 0;
+
+            // Request posts by user 1
             string url = "https://jsonplaceholder.typicode.com/posts?userId=1";
 
             using (HttpClient httpClient = new HttpClient())
