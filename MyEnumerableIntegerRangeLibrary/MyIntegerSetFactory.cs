@@ -37,7 +37,8 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
                 MultipleActiveResultSets = false, // activate/deactivate MARS
                 PersistSecurityInfo = true, // hide login credentials
                 UserID = settings.DatabaseUser, // user name
-                Password = settings.DatabasePassword // password
+                Password = settings.DatabasePassword, // password
+                ApplicationName = this.GetType().Name  // MyIntegerSetFactory
             };
             return builder.ConnectionString;
 
