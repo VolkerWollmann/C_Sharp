@@ -118,5 +118,30 @@ namespace CSharpCore
             Assert.AreEqual(2, path);
         }
         #endregion
+
+        #region DebuggerDisplay
+
+        [DebuggerDisplay("Ship: Name = {Name}, Tonnage = {Tonnage}" )]
+        private class Ship
+        {
+            internal string Name { get; private set; }
+            internal int  Tonnage { get; private set; }
+
+            internal Ship(string name, int tonnage)
+            {
+                Name = name;
+                Tonnage = tonnage;
+            }
+        }
+
+        public static void TestDebuggerDisplay()
+        {
+            Ship ship = new Ship("SMS rubber boat", 5);
+
+            ; // watch in ship in Debugger
+        }
+        
+        #endregion
+
     }
 }

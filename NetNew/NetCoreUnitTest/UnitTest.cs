@@ -137,6 +137,12 @@ namespace NetCoreUnitTest
         }
 
         [Fact]
+        public void TestDebuggerDisplay()
+        {
+            CSharp.TestDebuggerDisplay();
+        }
+
+        [Fact]
         public void Test_IDisposable()
         {
             CSharp8.Test_IDisposable();
