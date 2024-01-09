@@ -70,7 +70,8 @@ namespace C_Sharp.Language.DataTypes
 	}
 
 
-	public class MyGenericInterface
+    // #generic #method
+    public class MyGenericInterface
 	{
 		private static readonly Random Random = new Random();
 		private static T GetRandomElement<T>(List<T> list)
