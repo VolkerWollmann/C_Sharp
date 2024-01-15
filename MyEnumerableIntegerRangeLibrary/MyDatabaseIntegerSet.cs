@@ -39,7 +39,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             {
                 SqlCommand command = new SqlCommand(statement, _dataBaseConnection);
                 command.ExecuteNonQuery();
-                scope.Complete();
+                scope.Complete();               // enforces the commit
                 
             }
 
