@@ -76,7 +76,8 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void Thread_AdministrativeData()
+        [Ignore("Only for debug purpose")]
+        public void Thread_AdministrativeData()
 		{
 			MyThread.Thread_AdministrativeData();
 		}
