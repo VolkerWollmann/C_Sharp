@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MyEnumerableIntegerRangeLibrary.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="DatabaseServer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">VM-WO-VS2022\SQLEXPRESS</Value>
-    </Setting>
     <Setting Name="DatabaseName" Type="System.String" Scope="User">
       <Value Profile="(Default)">MyCSharp</Value>
     </Setting>
@@ -12,7 +9,10 @@
       <Value Profile="(Default)">anw</Value>
     </Setting>
     <Setting Name="DatabasePassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">!Esel1111</Value>
+      <Value Profile="(Default)">anw</Value>
+    </Setting>
+    <Setting Name="DatabaseServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BONN\SQLEXPRESS</Value>
     </Setting>
   </Settings>
 </SettingsFile>

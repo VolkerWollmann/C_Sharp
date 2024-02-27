@@ -157,4 +157,13 @@ namespace NetCoreUnitTest
             MyRoslynNextCore.Test();
         }
     }
+
+    public class HTTPListnerTest
+    {
+        [Fact]
+        public void SelfHostestTest()
+        {
+            
+        }
+    }
 }
