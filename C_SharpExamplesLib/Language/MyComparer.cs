@@ -245,7 +245,7 @@ namespace C_Sharp.Language
     }
 
 
-	// #comparer #IEquatable #override #== #<
+	// #comparer #IEquatable #override #== # <, >, !=
 	[DebuggerDisplay("Number={Number}, Animal={Animal}")]
 	public class MyIEquatable : IEquatable<MyIEquatable>
     {
