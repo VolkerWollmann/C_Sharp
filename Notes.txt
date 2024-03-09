@@ -1,0 +1,3 @@
+Debug 
+- Parallel Stacks window
+- Add specific exceptions
