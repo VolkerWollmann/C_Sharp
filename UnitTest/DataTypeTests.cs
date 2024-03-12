@@ -79,5 +79,11 @@ namespace UnitTest
         {
             MyHashSet.Test();
         }
+
+        [TestMethod]
+        public void DateTimeComparison()
+        {
+            MyDate.DateTimeComparison();
+        }
     }
 }
