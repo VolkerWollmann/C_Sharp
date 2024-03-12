@@ -18,10 +18,10 @@ namespace C_Sharp.Language.DataTypes
             bool b1 = d1.Equals(d2);
             Assert.AreEqual(false, b1);
 
-            DateTime d1l = d1.ToLocalTime();
-            DateTime d2l = d2.ToLocalTime();
+            DateTime d1L = d1.ToLocalTime();
+            DateTime d2L = d2.ToLocalTime();
 
-            bool b2 = d1l.Equals(d2l);
+            bool b2 = d1L.Equals(d2L);
             Assert.AreEqual(true,b2);
         }
     }
