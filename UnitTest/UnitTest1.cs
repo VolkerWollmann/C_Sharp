@@ -207,6 +207,12 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void ShowBitArray()
+        {
+			CSharp.ShowBitArray();
+        }
+
+        [TestMethod]
         public void ObsoleteMethod()
         {
 			MyObsolete.Test();

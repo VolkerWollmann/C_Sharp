@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -52,17 +53,15 @@ namespace C_Sharp.Language
             public override string ToString() => $"{_digit}";
         }
 
-
-
         public static void ImplicitExplicitOperator()
         {
             var d = new Digit(7);
 
-            // #implicit operator
+            // #implicit operator : statement would raise a compilation error without implicit cast operator
             byte number = d;
             Assert.AreEqual(7, number);
 
-            //  #explicit operator
+            //  #explicit operator : : statement would raise a compilation error without explicit cast operator
             Digit digit = (Digit)number;
             Assert.AreEqual(7, digit);
         }
@@ -309,6 +308,48 @@ namespace C_Sharp.Language
 
             Assert.AreEqual("1", commaSeparatedIds2);
         }
+
+        #region byte bitarray
+
+        /// <summary>
+        /// print the value
+        /// </summary>
+        /// <param name="myList">the bits</param>
+        /// <param name="myWidth">bits per line</param>
+        public static void PrintBitArrayValues(BitArray myList, int myWidth)
+        {
+            Console.WriteLine("   Values:");
+            int i = myWidth;
+            foreach (bool bit in myList)
+            {
+                if (i <= 0)
+                {
+                    i = myWidth;
+                    Console.WriteLine();
+                }
+                i--;
+                Console.Write("{0,1}", ((bit == false) ? 0 : 1));
+            }
+            Console.WriteLine();
+        }
+        
+        public static void ShowBitArray()
+        {
+            byte[] myBytes = new byte[5] { 1, 2, 3, 4, 5 };
+            BitArray myBitArray = new BitArray(myBytes);    // Internal representation is in integer
+            
+            Assert.AreEqual(40, myBitArray.Count);
+            Assert.AreEqual(40, myBitArray.Length);
+            PrintBitArrayValues(myBitArray, 32);
+
+            int[] ints = new int[1] {-1};
+            BitArray myBitArray2 = new BitArray(ints);
+            Assert.AreEqual(32, myBitArray2.Count);
+            Assert.AreEqual(32, myBitArray2.Length);
+            PrintBitArrayValues(myBitArray2, 32);
+
+        }
+        #endregion
     }
 
 
