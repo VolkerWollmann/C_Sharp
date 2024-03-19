@@ -169,7 +169,7 @@ namespace C_Sharp.Language
 			return !divisors.Any(d => (i % d == 0));
 		}
 
-		// #linq #parallel  #pLinq #WithDegreeOfParallelism #rime
+		// #linq #parallel  #pLinq #WithDegreeOfParallelism #rime #asparallel
 		public static void TestParallelLinq()
 		{
 			var numbers = Enumerable.Range(10000000, 500).ToList();
