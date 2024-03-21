@@ -65,7 +65,7 @@ namespace C_Sharp.Language
                 List<int> l = new List<int>() {all[2 * i], all[(2 * i) + 1]};
                 foreach (int j in l)
                 {
-                    Console.WriteLine("1..6 as threeLists: List {0} Element {1} ", i, k++);
+                    Console.WriteLine("1..6 as two lists: List {0} Element {1}: {2} ", i, k++, j);
                     yield return j;
                 }
             }
