@@ -84,7 +84,7 @@ namespace C_Sharp.Language
         }
 
 
-        public static void Test()
+        public static void Yield()
         {
             Test(OneToSix());
             Test(OneToSixUnionOfLists());

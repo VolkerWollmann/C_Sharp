@@ -191,7 +191,7 @@ namespace UnitTest
         [TestMethod]
         public void Yield()
         {
-            MyYield.Test();
+            MyYield.Yield();
         }
 
         [TestMethod]
