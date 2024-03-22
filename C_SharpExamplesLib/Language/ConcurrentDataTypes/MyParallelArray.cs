@@ -107,7 +107,7 @@ namespace C_Sharp.Language.ConcurrentDataTypes
     {
         public static void Test()
         {
-            MyParallelArray myParallelArray = new MyParallelArray(30, 30);
+            MyParallelArray myParallelArray = new MyParallelArray(40, 40);
             myParallelArray.PerformTest(myParallelArray.SetToOne);
             myParallelArray.PerformTestFieldParallel(myParallelArray.SetToOne);
             myParallelArray.PerformTestColumnParallel(myParallelArray.SetToOneByColumn);
