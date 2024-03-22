@@ -2,6 +2,7 @@
 using C_Sharp.Language.ConcurrentDataTypes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using C_Sharp.Language.Task;
+using System.Reflection;
 
 
 namespace UnitTest
@@ -19,6 +20,8 @@ namespace UnitTest
         public void TestTheContext()
         {
             Console.WriteLine(TestContext.TestName);
+            var me = MethodBase.GetCurrentMethod().Name;
+            Assert.AreEqual(TestContext.TestName, me );
         }
 
 		[TestMethod]
