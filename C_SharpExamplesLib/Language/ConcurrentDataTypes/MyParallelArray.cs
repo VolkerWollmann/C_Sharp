@@ -33,16 +33,16 @@ namespace C_Sharp.Language.ConcurrentDataTypes
 
         internal void SetToOne(int x, int y)
         {
-            System.Threading.Thread.Sleep(1);
-            _theArray[x, y] = 1;
+            for(int z=0; z < 10000000; z++)
+                _theArray[x, y] = 1;
         }
 
-        internal void SetToOneByColumn(int x, int z)
+        internal void SetToOneByColumn(int x, int v)
         {
             for (int y = 0; y < _maxY; y++)
             {
-                System.Threading.Thread.Sleep(1);
-                _theArray[x, y] = 1;
+                for (int z = 0; z < 10000000; z++)
+                    _theArray[x, y] = 1;
             }
         }
 
@@ -107,12 +107,12 @@ namespace C_Sharp.Language.ConcurrentDataTypes
     {
         public static void Test()
         {
-            MyParallelArray myParallelArray = new MyParallelArray(40, 40);
+            MyParallelArray myParallelArray = new MyParallelArray(30, 30);
             myParallelArray.PerformTest(myParallelArray.SetToOne);
             myParallelArray.PerformTestFieldParallel(myParallelArray.SetToOne);
             myParallelArray.PerformTestColumnParallel(myParallelArray.SetToOneByColumn);
 
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 150; i++)
             {
                 System.Threading.Thread.Sleep(100);
                 
