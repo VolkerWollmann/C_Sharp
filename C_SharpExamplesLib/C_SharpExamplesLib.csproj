@@ -92,6 +92,7 @@
     <Compile Include="Language\ConcurrentDataTypes\MyConcurrentQueue.cs" />
     <Compile Include="Language\ConcurrentDataTypes\MyConcurrentStack.cs" />
     <Compile Include="Language\ConcurrentDataTypes\MyLock.cs" />
+    <Compile Include="Language\ConcurrentDataTypes\MyParallelArray.cs" />
     <Compile Include="Language\CSharp6.cs" />
     <Compile Include="Language\CSharp7.cs" />
     <Compile Include="Language\DataTypes\MyDate.cs" />

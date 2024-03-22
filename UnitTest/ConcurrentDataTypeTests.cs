@@ -38,6 +38,11 @@ namespace UnitTest
             MyConcurrentStack.Test_ConcurrentStack();
         }
 
-
+        [TestMethod]
+        public void ParallelArrayProcessing()
+        {
+            MyParallelArrayTest.Test();
+        }
+        
     }
 }
