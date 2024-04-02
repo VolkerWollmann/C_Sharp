@@ -145,7 +145,7 @@ namespace UnitTest
         }
 
         /// <summary>
-        /// Will fail for optimmized database integer set
+        /// Will fail for optimized database integer set
         /// </summary>
         [TestMethod]
         public void Test_IQueryable_Where_DatabaseIntegerSet_ComplexWhere()
