@@ -163,7 +163,16 @@ namespace NetCoreUnitTest
         [Fact]
         public void SelfHostestTest()
         {
-            
+           // ??? 
+        }
+    }
+
+    public class ProcessCommunication
+    {
+        [Fact]
+        public void NamedPipeTest()
+        {
+            NamedPipe.NamedPipeTest();
         }
     }
 }
