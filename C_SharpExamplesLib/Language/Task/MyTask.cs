@@ -36,12 +36,26 @@ namespace C_Sharp.Language.Task
 			int result = myTask2.Result;
 			Assert.AreEqual(16, result);
 
-		}
-		#endregion
+            Task<int> fast16 = System.Threading.Tasks.Task.FromResult(16);
 
-		#region Child Tasks
-		// #action #TaskCreationOptions #AttachedToParent
-		public static void TestChildTask()
+        }
+        #endregion
+
+        public static void ConstantTaskResult()
+        {
+            var fast16 = System.Threading.Tasks.Task.FromResult(16);
+			
+			if (!fast16.IsCompleted) // actually always true
+                fast16.Start();
+            fast16.Wait();
+			
+			Assert.AreEqual(16, fast16.Result);
+        }
+		
+
+        #region Child Tasks
+        // #action #TaskCreationOptions #AttachedToParent
+        public static void TestChildTask()
 		{
 			Action sleepAction = () => { System.Threading.Thread.Sleep(2000); };
 			Action parentAction1 = () =>

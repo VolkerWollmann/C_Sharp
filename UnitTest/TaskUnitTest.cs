@@ -30,7 +30,13 @@ namespace UnitTest
 			MyTask.TestContinueWith();
 		}
 
-		[TestMethod]
+        [TestMethod]
+        public void Task_ConstantTaskResult()
+        {
+            MyTask.ConstantTaskResult();
+        }
+
+        [TestMethod]
 		public void Task_ThreadSafetyViolation()
 		{
 			MyTask.Task_ThreadSafetyViolation();
