@@ -4,6 +4,7 @@ using Xunit.Abstractions;
 using CSharpCore;
 using CSharpCore.Roslyn;
 using CSharpNaming;
+using CSharpNew.ProcessCommunication;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 using LoadingAssembly;
 
@@ -173,6 +174,12 @@ namespace NetCoreUnitTest
         public void NamedPipeTest()
         {
             NamedPipe.NamedPipeTest();
+        }
+
+        [Fact]
+        public void MemoryMappedFileTest()
+        {
+            MemoryMappedFile.MemoryMappedFileTest();
         }
     }
 }

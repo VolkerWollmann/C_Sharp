@@ -41,7 +41,7 @@ namespace CSharpCore
         }
 
         // #stream
-        public static async void StreamTestFlush()
+        public static void StreamTestFlush()
         {
             using MemoryStream p2MemoryStream = new MemoryStream();
             // open p2File
@@ -61,7 +61,7 @@ namespace CSharpCore
         #endregion
 
         #region CountDownEventTest
-        public static async void CountDownEventTest()
+        public static void CountDownEventTest()
         {
             // Initialize a queue and a CountdownEvent
             ConcurrentQueue<int> queue = new ConcurrentQueue<int>(Enumerable.Range(0, 10000));
@@ -86,7 +86,7 @@ namespace CSharpCore
 
             // Proper form is to wait for the tasks to complete, even if you know that their work
             // is done already.
-            await Task.WhenAll(t1, t2);
+            Task.WaitAll(t1, t2);
 
             // Resetting will cause the CountdownEvent to un-set, and resets InitialCount/CurrentCount
             // to the specified value

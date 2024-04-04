@@ -78,14 +78,14 @@ namespace CSharpCore
             ss.WriteString("Donkey");
         }
 
-        public static async void NamedPipeTest()
+        public static void NamedPipeTest()
         {
             _result = "";
             
             Task t1 = Task.Factory.StartNew(NamedPipeReader);
             Task t2 = Task.Factory.StartNew(NamedPipeWriter);
-
-            await Task.WhenAll(t1, t2);
+            
+            Task.WaitAll(t1, t2);
             
             Assert.AreEqual("Donkey",_result);
         }
