@@ -103,6 +103,20 @@ namespace C_Sharp.Language
         }
         #endregion
 
+        #region class initializer code
+        private class ClassToBeInitialized
+        {
+            public int P;
+
+        }
+        public static void TestClassInitializer()
+        {
+            ClassToBeInitialized xxx = new ClassToBeInitialized() { P = 5 };
+            Assert.AreEqual(5, xxx.P);
+        }
+
+        #endregion
+
         #region CallerMember
         // #CompilerServices #CallerMemberName #GetCurrentMethod
         public static void ShowCompilerServices()

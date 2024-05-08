@@ -157,6 +157,13 @@ namespace UnitTest
 			CSharp.OptionalParameters();
 		}
 
+
+        [TestMethod]
+        public void TestClassInitializer()
+        {
+            CSharp.TestClassInitializer();
+        }
+
         [TestMethod]
 		public void ShowCompilerServices()
         {
