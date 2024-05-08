@@ -269,5 +269,27 @@ namespace C_Sharp.Language
 				.Where(p2 => (p2.City != ""))
 				.ToList().ForEach(p => { Console.WriteLine(p.ToString()); });
 		}
+
+
+        // #linq #index 
+		public static void LinqChuncking()
+		{
+			List<int> testList = new List<int>() { 1, 2, 3, 4, 5 };
+
+			var e1 = testList
+				.Select((value, index) => new { Value = value, Index = index / 2 })
+				.ToList();
+
+			var e2 = testList
+				.Select((value, index) => new { Value = value, Index = index / 2 })
+				.GroupBy(x => x.Index, y => y.Value)
+				.ToList();
+
+            var e3 = testList
+				.Select((value, index) => new { Value = value, Index = index / 2 })
+                .GroupBy(x => x.Index, y => y.Value)
+                .Select(g => g.ToList())
+                .ToList();
+        }
 	}
 }

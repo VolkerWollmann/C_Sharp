@@ -90,5 +90,11 @@ namespace UnitTest
         {
             MyLinq.Linq_LinkedList();
         }
+
+		[TestMethod]
+		public void LinqChuncking()
+		{
+			MyLinq.LinqChuncking();
+		}
 	}
 }
