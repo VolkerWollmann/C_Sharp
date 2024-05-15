@@ -272,7 +272,7 @@ namespace C_Sharp.Language
 
 
         // #linq #index #groupby
-		public static void LinqChuncking()
+		public static void LinqChunking()
 		{
 			List<int> testList = new List<int>() { 1, 2, 3, 4, 5 };
 

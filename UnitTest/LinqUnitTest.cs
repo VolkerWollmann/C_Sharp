@@ -92,9 +92,9 @@ namespace UnitTest
         }
 
 		[TestMethod]
-		public void LinqChuncking()
+		public void LinqChunking()
 		{
-			MyLinq.LinqChuncking();
+			MyLinq.LinqChunking();
 		}
 	}
 }
