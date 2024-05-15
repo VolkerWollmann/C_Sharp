@@ -290,6 +290,13 @@ namespace C_Sharp.Language
                 .GroupBy(x => x.Index, y => y.Value)
                 .Select(g => g.ToList())
                 .ToList();
+			
+			Assert.AreEqual(e3.Count, 3);
+            Assert.IsTrue(e3[0].Contains(1));
+            Assert.IsTrue(e3[0].Contains(2));
+            Assert.IsTrue(e3[1].Contains(3));
+            Assert.IsTrue(e3[1].Contains(4));
+            Assert.IsTrue(e3[2].Contains(5));
         }
 	}
 }
