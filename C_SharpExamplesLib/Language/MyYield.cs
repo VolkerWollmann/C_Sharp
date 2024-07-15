@@ -46,7 +46,16 @@ namespace C_Sharp.Language
             }
         }
 
-        private static IEnumerable<int> OneToSixUnionOfEnumerableToList()
+		private static IEnumerable<int> OneToSixUnionAsEnumerableOfUnion()
+		{
+			foreach (int i in OneToThree().ToList().Union(FourToSix()))
+			{
+				Console.WriteLine("1..6 as Enumerable of Union:" + i);
+				yield return i;
+			}
+		}
+
+		private static IEnumerable<int> OneToSixUnionOfEnumerableToList()
         {
             foreach (int i in OneToThree().Union(FourToSix()).ToList())
             {
@@ -90,7 +99,8 @@ namespace C_Sharp.Language
             Test(OneToSixUnionOfLists());
             Test(OneToSixUnionOfEnumerableToList());
             Test(OneToSixAsThreeLists());
-        }
+			Test(OneToSixUnionAsEnumerableOfUnion());
+		}
 
         public static void TestIEnumerableAssignment()
         {
