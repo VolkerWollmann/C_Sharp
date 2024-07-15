@@ -20,12 +20,11 @@ namespace C_Sharp.Language
 
         private static IEnumerable<int> FourToSix()
         {
-            Console.WriteLine("4..6: 4");
-            yield return 4;
-            Console.WriteLine("4..6: 5");
-            yield return 5;
-            Console.WriteLine("4..6: 6");
-            yield return 6;
+            for(int i = 4; i <= 6; i++)
+            {
+				Console.WriteLine("4..6: " + i);
+				yield return i;
+            }
         }
 
         private static IEnumerable<int> OneToSix()
