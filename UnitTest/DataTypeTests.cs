@@ -39,24 +39,6 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void XmlElement()
-        {
-            MyXml.TestXmlElement();
-        }
-
-        [TestMethod]
-        public void XmlFile()
-        {
-            MyXml.TestXmlFile();
-        }
-
-        [TestMethod]
-        public void XmlNodeVsElement()
-        {
-            MyXml.TestXmlNodeVsElement();
-        }
-
-        [TestMethod]
         public void ListCapacity()
         {
             MyListTest.Test();

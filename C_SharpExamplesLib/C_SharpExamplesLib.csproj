@@ -137,7 +137,7 @@
     <Compile Include="Language\Thread\MyThread.cs" />
     <Compile Include="Language\MyType.cs" />
     <Compile Include="Language\MyVirtual.cs" />
-    <Compile Include="Language\DataTypes\MyXML.cs" />
+    <Compile Include="Language\XML\MyXML.cs" />
     <Compile Include="Language\Scratch.cs" />
     <Compile Include="Language\Task\MyTaskEvent.cs" />
     <Compile Include="OhterExamples\DoHttpRequests.cs" />
