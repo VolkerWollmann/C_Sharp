@@ -24,5 +24,12 @@ namespace UnitTest
 		{
 			MyXml.TestXmlNodeVsElement();
 		}
+
+		[TestMethod]
+		public void CheckXmlFileWithXsdFile()
+		{
+			MyXml.CheckXmlFileWithXsdFile();
+		}
+		
 	}
 }
