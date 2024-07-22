@@ -59,14 +59,20 @@ namespace C_Sharp.Language
 
 		}
 
-		// #linq #orderBy
+		// #linq #orderBy #no comparer #key selector 
 		public static void Linq_OrderBy()
 		{
-			List<int> numbers = new List<int> { 2, 3, 1, 4 };
+			List<Tuple<int, string>> numbers = new List<Tuple<int,string>>
+			{
+				new Tuple<int, string>(2, "Dog"),
+				new Tuple<int, string>(3, "Cat"),
+				new Tuple<int, string>(1, "Donkey"),
+				new Tuple<int, string>(4, "Seagull"),
+			};
 
-			List<int> sortedNumbers = numbers.OrderBy(i => i).ToList();
+			List<Tuple<int, string>> sortedNumbers = numbers.OrderBy(tuple => tuple.Item1).ToList();
 
-			Assert.IsTrue(sortedNumbers.First() == 1);
+			Assert.IsTrue(sortedNumbers.First().Item1 == 1);
 		}
 
 		// #linq #FirstOrDefault
