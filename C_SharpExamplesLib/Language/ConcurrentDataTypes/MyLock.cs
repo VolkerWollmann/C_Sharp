@@ -11,11 +11,13 @@ namespace C_Sharp.Language.ConcurrentDataTypes
     {
         #region lock statement
 
+        private static int size = 20000001; // 50000001
+
         public class SimpleTotal
         {
             static long _sharedTotal;
 
-            static readonly int[] ItemsToAdd = Enumerable.Range(0, 50000001).ToArray();
+            static readonly int[] ItemsToAdd = Enumerable.Range(0, size).ToArray();
 
             static readonly object SharedTotalLock = new object();
 
@@ -58,12 +60,12 @@ namespace C_Sharp.Language.ConcurrentDataTypes
                 DateTime start = DateTime.Now;
                 AddAllInOneThread();
                 TimeSpan timeSpan = DateTime.Now.Subtract(start);
-                Console.WriteLine("Simple loop          : {0} in: {1,10:000.#####} ", _sharedTotal, timeSpan.TotalSeconds);
+                Console.WriteLine("Simple loop          : {0} in: {1,10:000.00000} ", _sharedTotal, timeSpan.TotalSeconds);
 
                 start = DateTime.Now;
                 AddMultiThreads();
                 timeSpan = DateTime.Now.Subtract(start);
-                Console.WriteLine("Values added parallel: {0} in: {1,10:000.#####} ", _sharedTotal, timeSpan.TotalSeconds);
+                Console.WriteLine("Values added parallel: {0} in: {1,10:000.00000} ", _sharedTotal, timeSpan.TotalSeconds);
             }
         }
 
@@ -73,7 +75,7 @@ namespace C_Sharp.Language.ConcurrentDataTypes
             static long _sharedTotal;
 
             // make an array that holds the values 0 to 50000000
-            static readonly int[] ItemsToAdd = Enumerable.Range(0, 50000001).ToArray();
+            static readonly int[] ItemsToAdd = Enumerable.Range(0, size).ToArray();
 
             static readonly object SharedTotalLock = new object();
 
@@ -124,7 +126,7 @@ namespace C_Sharp.Language.ConcurrentDataTypes
 
                 TimeSpan timeSpan = DateTime.Now.Subtract(start);
 
-                Console.WriteLine("Ranges added parallel: {0} in: {1,10:000.#####} ", _sharedTotal, timeSpan.TotalSeconds);
+                Console.WriteLine("Ranges added parallel: {0} in: {1,10:000.00000} ", _sharedTotal, timeSpan.TotalSeconds);
             }
         }
 
