@@ -273,7 +273,7 @@ namespace C_Sharp.Language
 		#endregion
 
 		#region override Comparsion Operators
-        // #overload #operator #less #<  
+        // #overload #operator #less #< #== #!=
 		public static bool operator ==(MyIEquatable obj1, MyIEquatable obj2) => !(obj1 is null) && obj1.Equals(obj2);
 
         public static bool operator !=(MyIEquatable obj1, MyIEquatable obj2) => !(obj1 is null) && !obj1.Equals(obj2);

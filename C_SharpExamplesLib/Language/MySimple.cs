@@ -25,9 +25,14 @@ namespace C_Sharp.Language
 		}
 
         //#call by reference
-		static void Method(ref string s)
+		static void MethodRef(ref string s)
 		{
 			s = s +"donkey";
+		}
+
+		static void Method(string s)
+		{
+			s = s + "donkey";
 		}
 
 		// #Enumerable #empty list 
@@ -40,9 +45,13 @@ namespace C_Sharp.Language
 		public static void Test()
 		{
 			string s=null;
-			Method(ref s);
+			MethodRef(ref s);
 			Assert.IsTrue(s == "donkey");
 
+			s = null;
+			Method(s);
+			Assert.AreEqual(null,s); ;
+			
 			IndexClass indexClass = new IndexClass();
 			for(int i=0; i<10; i++)
 			{
