@@ -118,9 +118,11 @@ namespace C_Sharp.Language
 			Assert.AreEqual(myClass.Name, "seagull");
 			
 			/* struct refrence */
-			MyStruct myStruct = new MyStruct();
-			myStruct.Name = "donkey";
-			
+			MyStruct myStruct = new MyStruct
+			{
+				Name = "donkey"
+			};
+
 			MethodStructRef(ref myStruct);
 			Assert.AreEqual(myStruct.Name, "dog");
 
