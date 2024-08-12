@@ -109,7 +109,13 @@ namespace UnitTest
 			MySimpleCSharp.Test();
 		}
 
-        [TestMethod]
+		[TestMethod]
+		public void CallByReference()
+		{
+			MySimpleCSharp.TestCallByReference();
+		}
+		
+		[TestMethod]
         public void RecursiveClassTest()
         {
             CSharp.MyRecursiveCLass.Test();
