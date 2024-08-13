@@ -35,6 +35,11 @@ namespace C_Sharp.OhterExamples
 			string json = JsonConvert.SerializeObject(person1, settings);
 
 			Assert.IsTrue(json.Contains("$id"));
+
+			var deserializedPerson = JsonConvert.DeserializeObject<Person>(json, settings);
+
+			Assert.AreEqual("Alice",deserializedPerson.Name);
+			Assert.AreEqual("Bob", deserializedPerson.Friend.Name);
 		}
 	}
 }
