@@ -141,6 +141,7 @@
     <Compile Include="Language\Scratch.cs" />
     <Compile Include="Language\Task\MyTaskEvent.cs" />
     <Compile Include="OhterExamples\DoHttpRequests.cs" />
+    <Compile Include="OhterExamples\Serialisation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

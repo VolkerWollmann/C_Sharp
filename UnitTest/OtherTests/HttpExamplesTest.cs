@@ -17,5 +17,11 @@ namespace UnitTest
         {
             DoHttpRequests.TestHttpRequestJSON();
         }
-    }
+
+		[TestMethod]
+		public void Serialisation()
+		{
+			SerialisationExample.DoSerialisation();
+		}
+	}
 }
