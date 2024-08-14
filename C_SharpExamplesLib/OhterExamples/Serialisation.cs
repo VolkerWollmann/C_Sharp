@@ -19,12 +19,18 @@ namespace C_Sharp.OhterExamples
 	{
 		public static void DoSerialisation()
 		{
-			var person1 = new Person {Name = "Alice"};
-			var person2 = new Person {Name = "Bob"};
+			var alice = new Person {Name = "Alice"};
+			var bob = new Person {Name = "Bob"};
 
 			// Create circular reference
-			person1.Friend = person2;
-			person2.Friend = person1;
+			alice.Friend = bob;
+			bob.Friend = alice;
+
+			List<Person> personList = new List<Person>
+			{
+				alice,
+				bob
+			};
 
 			JsonSerializerSettings settings = new JsonSerializerSettings
 			{
@@ -32,14 +38,20 @@ namespace C_Sharp.OhterExamples
 				Formatting = Formatting.Indented
 			};
 
-			string json = JsonConvert.SerializeObject(person1, settings);
+			string personListJson = JsonConvert.SerializeObject(personList, settings);
 
-			Assert.IsTrue(json.Contains("$id"));
+			Assert.IsTrue(personListJson.Contains("$id"));
 
-			var deserializedPerson = JsonConvert.DeserializeObject<Person>(json, settings);
+			var deserializedPersonList = JsonConvert.DeserializeObject<List<Person>>(personListJson, settings);
 
-			Assert.AreEqual("Alice",deserializedPerson.Name);
-			Assert.AreEqual("Bob", deserializedPerson.Friend.Name);
+			Person person3 = deserializedPersonList.First(p => p.Name == "Bob");
+			Assert.AreEqual("Bob", person3.Name);
+			Assert.AreEqual("Alice",person3.Friend.Name);
+			
+
+			Person person4 = deserializedPersonList.First(p => p.Name == "Alice");
+			Assert.AreEqual("Alice", person4.Name);
+			Assert.AreEqual("Bob", person4.Friend.Name);
 		}
 	}
 }
