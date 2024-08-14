@@ -44,14 +44,14 @@ namespace C_Sharp.OhterExamples
 
 			var deserializedPersonList = JsonConvert.DeserializeObject<List<Person>>(personListJson, settings);
 
-			Person person3 = deserializedPersonList.First(p => p.Name == "Bob");
-			Assert.AreEqual("Bob", person3.Name);
-			Assert.AreEqual("Alice",person3.Friend.Name);
+			Person bob2 = deserializedPersonList.First(p => p.Name == "Bob");
+			Assert.AreEqual("Bob", bob2.Name);
+			Assert.AreEqual("Alice",bob2.Friend.Name);
 			
 
-			Person person4 = deserializedPersonList.First(p => p.Name == "Alice");
-			Assert.AreEqual("Alice", person4.Name);
-			Assert.AreEqual("Bob", person4.Friend.Name);
+			Person alice2 = deserializedPersonList.First(p => p.Name == "Alice");
+			Assert.AreEqual("Alice", alice2.Name);
+			Assert.AreEqual("Bob", alice2.Friend.Name);
 		}
 	}
 }
