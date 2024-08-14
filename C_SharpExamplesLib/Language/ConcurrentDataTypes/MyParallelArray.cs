@@ -46,7 +46,7 @@ namespace C_Sharp.Language.ConcurrentDataTypes
             }
         }
 
-        internal async void PerformTest(FieldOperationDelegate theDelegate)
+        internal void PerformTest(FieldOperationDelegate theDelegate)
         {
             Console.WriteLine("Array size: {0} {1} ", _maxX, _maxY);
             _theOperation = theDelegate;

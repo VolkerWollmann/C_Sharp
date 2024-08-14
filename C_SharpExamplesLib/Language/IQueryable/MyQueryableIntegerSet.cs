@@ -88,7 +88,6 @@ namespace C_Sharp.Language.IQueryable
         bool Any(Expression<Func<int, bool>> predicate)
         {
             throw new NotImplementedException();
-            return true;
         }
 
         #region Constructors

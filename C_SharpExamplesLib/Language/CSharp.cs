@@ -291,19 +291,21 @@ namespace C_Sharp.Language
         }
         #endregion
 
-        static int one;
+        private static int _one;
 
         private static int GetOne()
         {
-            return one = 1;
+            return _one = 1;
         }
 
         // #return #assignment #expression
         public static void ReturnAssignment()
         {
-            int one;
+	        var lOne = GetOne();
+            Assert.AreEqual(1, lOne);
 
-            one = GetOne();
+            var lOne2 = _one;
+            Assert.AreEqual(1, lOne2);
         }
 
         // string operations
