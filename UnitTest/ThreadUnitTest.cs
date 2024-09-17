@@ -44,12 +44,13 @@ namespace UnitTest
 			MyThread.TestThreadLocalData();
 		}
 
-        [TestMethod]
+  //      [TestMethod]
 		//[Ignore("Only for debug purpose")]
-        public void ThreadPool_GradeOfParallelism()
-        {
-			//MyThread.TestTheadPoolWithPrimeSearch();
-        }
+  //      public void ThreadPool_GradeOfParallelism()
+  //      {
+		//	;
+		//	//MyThread.TestTheadPoolWithPrimeSearch();
+  //      }
 
         [TestMethod]
         public void ThreadPool_Configuration()
@@ -75,12 +76,13 @@ namespace UnitTest
 			MyThread.Thread_Join();
 		}
 
-		[TestMethod]
-        //[Ignore("Only for debug purpose")]
-        public void Thread_AdministrativeData()
-		{
-			//MyThread.Thread_AdministrativeData();
-		}
+		//[TestMethod]
+  //      [Ignore("Only for debug purpose")]
+  //      public void Thread_AdministrativeData()
+		//{
+		//	;
+		//	//MyThread.Thread_AdministrativeData();
+		//}
 
         [TestMethod]
 		public void Semaphore()
