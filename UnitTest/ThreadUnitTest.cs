@@ -45,10 +45,10 @@ namespace UnitTest
 		}
 
         [TestMethod]
-		[Ignore("Only for debug purpose")]
+		//[Ignore("Only for debug purpose")]
         public void ThreadPool_GradeOfParallelism()
         {
-			MyThread.TestTheadPoolWithPrimeSearch();
+			//MyThread.TestTheadPoolWithPrimeSearch();
         }
 
         [TestMethod]
@@ -76,10 +76,10 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-        [Ignore("Only for debug purpose")]
+        //[Ignore("Only for debug purpose")]
         public void Thread_AdministrativeData()
 		{
-			MyThread.Thread_AdministrativeData();
+			//MyThread.Thread_AdministrativeData();
 		}
 
         [TestMethod]
