@@ -12,7 +12,6 @@
     <ProjectReference Include="..\AccessibilityOtherProjectCore\AccessibilityOtherProjectCore.csproj" />
     <ProjectReference Include="..\AccessibilityProjectCore\AccessibilityProjectCore.csproj" />
     <ProjectReference Include="..\C_SharpExamplesLib\C_SharpExamplesLib.csproj" />
-    <ProjectReference Include="..\MyEnumerableIntegerRangeLibrary\MyEnumerableIntegerRangeLibrary.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />

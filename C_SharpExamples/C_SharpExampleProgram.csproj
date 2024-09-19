@@ -117,12 +117,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\C_SharpExamplesLib\C_SharpExamplesLib.csproj">
-      <Project>{71f15277-5f86-4de9-b9ec-e8214d414820}</Project>
-      <Name>C_SharpExamplesLib</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
