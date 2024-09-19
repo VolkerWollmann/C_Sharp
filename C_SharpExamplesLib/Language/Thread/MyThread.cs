@@ -263,23 +263,33 @@ namespace C_Sharp.Language.Thread
         {
             int cores = Environment.ProcessorCount;
             bool result;
-            
+
+			Console.WriteLine("ThreadPoolConfiguration 1");
+
             result = ThreadPool.SetMaxThreads(cores, cores);
 			Assert.IsTrue(result);
+
+            Console.WriteLine("ThreadPoolConfiguration 2");
 
             int a, b;
             ThreadPool.GetMaxThreads(out a, out b);
 			Assert.AreEqual(a, cores);
             Assert.AreEqual(b, cores);
 
+            Console.WriteLine("ThreadPoolConfiguration 3");
+
             // https://learn.microsoft.com/en-us/dotnet/api/system.threading.threadpool.setmaxthreads?view=net-7.0
             // Thread pool configuration cannot be smaller than cores in computer
             result = ThreadPool.SetMaxThreads(cores-1, cores-1);
 			Assert.IsFalse(result);
 
+            Console.WriteLine("ThreadPoolConfiguration 4");
+
             ThreadPool.GetMaxThreads(out a, out b);
             Assert.AreEqual(a, cores);
             Assert.AreEqual(b, cores);
+
+            Console.WriteLine("ThreadPoolConfiguration 5");
         }
 
         #endregion
@@ -300,6 +310,11 @@ namespace C_Sharp.Language.Thread
 			ThreadStart ts = SimpleThreadHello;
 			thread = new System.Threading.Thread(ts);
 			thread.Start();
+			while(thread.IsAlive)
+			{
+                System.Threading.Thread.Sleep(2000);
+            }
+
 		}
 		#endregion
 
@@ -330,13 +345,16 @@ namespace C_Sharp.Language.Thread
 		#region thread abort
 		// #thread #abort
 
-		public static void Thread_Abort()
+		public static void Thread_Cancelation()
 		{
-			System.Threading.Thread tickThread = new System.Threading.Thread(() =>
+            CancellationTokenSource cts = new CancellationTokenSource();
+            System.Threading.Thread tickThread = new System.Threading.Thread(() =>
 			{
 				int i = 0;
 				while (i<1000000000)
 				{
+					if (cts.Token.IsCancellationRequested)
+						return;
 					Console.WriteLine("Tick" + i++.ToString());
 					System.Threading.Thread.Sleep(1000);
 				}
@@ -344,8 +362,9 @@ namespace C_Sharp.Language.Thread
 
 			tickThread.Start();
 			System.Threading.Thread.Sleep(3500);
-			tickThread.Abort();
-		}
+            cts.Cancel();
+            System.Threading.Thread.Sleep(3500);
+        }
 		#endregion
 
 		#region thread join

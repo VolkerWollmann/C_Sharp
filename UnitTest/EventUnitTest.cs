@@ -15,10 +15,5 @@ namespace UnitTest
             MyEvent.ActionDelegate();
         }
 
-        [TestMethod]
-        public void WeakEventManager()
-        {
-            MyWeakEventManagerExample.Test();
-        }
     }
 }

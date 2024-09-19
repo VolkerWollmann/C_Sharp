@@ -65,9 +65,9 @@ namespace UnitTest
 		}
 
         [TestMethod]
-		public void Thread_Abort()
+		public void Thread_Cancelation()
 		{
-			MyThread.Thread_Abort();
+			MyThread.Thread_Cancelation();
 		}
 
 		[TestMethod]
