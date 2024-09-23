@@ -15,9 +15,15 @@ namespace C_Sharp.OhterExamples
 		public Person Friend { get; set; }
 	}
 
+	internal class Animal
+	{
+		public string Type { get; set; }
+		public string Name { get; set; } = "";
+	}
+
 	public class SerialisationExample
 	{
-		public static void DoSerialisation()
+		public static void DoSerialisationWithReferences()
 		{
 			var alice = new Person {Name = "Alice"};
 			var bob = new Person {Name = "Bob"};
@@ -52,6 +58,21 @@ namespace C_Sharp.OhterExamples
 			Person alice2 = deserializedPersonList.First(p => p.Name == "Alice");
 			Assert.AreEqual("Alice", alice2.Name);
 			Assert.AreEqual("Bob", alice2.Friend.Name);
+		}
+
+		public static void DeserializeFile()
+		{
+			var filePath = "..\\..\\..\\..\\C_SharpExamplesLib\\OhterExamples\\animals.json"; // Replace with the actual file path
+			var jsonContent = File.ReadAllText(filePath);
+
+			var settings = new JsonSerializerSettings
+			{
+				PreserveReferencesHandling = PreserveReferencesHandling.Objects, Formatting = Formatting.Indented
+			};
+
+			var deserializedAnimalList = JsonConvert.DeserializeObject<List<Animal>>(jsonContent, settings);
+
+			foreach (var animal in deserializedAnimalList) Console.WriteLine($"Name: {animal.Name}, Type: {animal.Type}");
 		}
 	}
 }

@@ -19,9 +19,15 @@ namespace UnitTest
         }
 
 		[TestMethod]
-		public void Serialisation()
+		public void SerialisationWithRefrences()
 		{
-			SerialisationExample.DoSerialisation();
+			SerialisationExample.DoSerialisationWithReferences();
+		}
+
+		[TestMethod]
+		public void DeserializeFile()
+		{
+			SerialisationExample.DeserializeFile();
 		}
 	}
 }
