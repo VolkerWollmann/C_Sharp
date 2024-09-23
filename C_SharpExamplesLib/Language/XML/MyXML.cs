@@ -120,8 +120,8 @@ namespace C_Sharp.Language.XML
 		{
 			bool isValid = true;
 			
-			string xsdFile = "..\\..\\..\\C_SharpExamplesLib\\Language\\XML\\TestData.xsd";
-			string xmlFile = "..\\..\\..\\C_SharpExamplesLib\\Language\\XML\\TestData.xml";
+			string xsdFile = "..\\..\\..\\..\\C_SharpExamplesLib\\Language\\XML\\TestData.xsd";
+			string xmlFile = "..\\..\\..\\..\\C_SharpExamplesLib\\Language\\XML\\TestData.xml";
 
 
 			XmlSchemaSet schemas = new XmlSchemaSet();

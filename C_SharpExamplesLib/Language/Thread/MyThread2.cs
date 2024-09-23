@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language.Thread
@@ -35,9 +34,9 @@ namespace C_Sharp.Language.Thread
         // #Invoke #Parallel #Dispatcher
         public static void Thread_Dispatcher()
         {
-            Dispatcher.CurrentDispatcher.Invoke(MyThread.Method);
-            Console.WriteLine("After asynchronous start of method within thread " +
-                              System.Threading.Thread.CurrentThread.ManagedThreadId);
+            //Dispatcher.CurrentDispatcher.Invoke(MyThread.Method);
+            //Console.WriteLine("After asynchronous start of method within thread " +
+            //                  System.Threading.Thread.CurrentThread.ManagedThreadId);
 
             Parallel.Invoke(Task1, Task2);
             Console.WriteLine("Finished processing within thread " +

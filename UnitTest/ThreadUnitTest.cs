@@ -44,15 +44,15 @@ namespace UnitTest
 			MyThread.TestThreadLocalData();
 		}
 
-  //      [TestMethod]
-		//[Ignore("Only for debug purpose")]
-  //      public void ThreadPool_GradeOfParallelism()
-  //      {
-		//	;
-		//	//MyThread.TestTheadPoolWithPrimeSearch();
-  //      }
+		[TestMethod]
+		[Ignore("Only for debug purpose")]
+		public void ThreadPool_GradeOfParallelism()
+		{
+			MyThread.TestTheadPoolWithPrimeSearch();
+		}
 
-        [TestMethod]
+		[TestMethod]
+        [Ignore("Only for debug purpose")]
         public void ThreadPool_Configuration()
         {
             MyThread.TestThreadPoolConfiguration();
@@ -65,9 +65,9 @@ namespace UnitTest
 		}
 
         [TestMethod]
-		public void Thread_Abort()
+		public void Thread_Cancelation()
 		{
-			MyThread.Thread_Abort();
+			MyThread.Thread_Cancelation();
 		}
 
 		[TestMethod]

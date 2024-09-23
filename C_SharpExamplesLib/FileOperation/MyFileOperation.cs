@@ -7,7 +7,7 @@ namespace C_Sharp.FileOperation
 {
 	public class MyFileOperation
 	{
-		private const string FileName = "FileOperation\\TextFile.txt";
+		private const string FileName = "C_SharpExamplesLib\\FileOperation\\TextFile.txt";
 
 		// comment in master branch
 		// #c# #file #read all lines
@@ -15,7 +15,7 @@ namespace C_Sharp.FileOperation
 		{
 			string directory = Directory.GetCurrentDirectory();
 
-			string fullName = directory + "\\" + FileName;
+			string fullName = directory + "\\..\\..\\..\\..\\" + FileName;
 
 			IEnumerable<string> animals = File.ReadAllLines(fullName);
 
