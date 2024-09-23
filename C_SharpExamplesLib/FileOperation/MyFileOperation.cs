@@ -9,6 +9,7 @@ namespace C_Sharp.FileOperation
 	{
 		private const string FileName = "FileOperation\\TextFile.txt";
 
+		// comment in master branch
 		// #c# #file #read all lines
 		public static void ReadLinesFromFile()
 		{
