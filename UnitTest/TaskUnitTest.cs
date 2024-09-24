@@ -16,15 +16,15 @@ namespace UnitTest
 		///</summary>
 		public TestContext TestContext { get; set; }
 
-        //[TestMethod]
-        //[Ignore("Only for debug purpose")]
-        //public void TestTheContext()
-        //{
-			
-        //    Console.WriteLine(TestContext.TestName);
-        //    var me = MethodBase.GetCurrentMethod().Name;
-        //    Assert.AreEqual(TestContext.TestName, me );
-        //}
+		[TestMethod]
+		//[Ignore("Only for debug purpose")]
+		public void TestTheContext()
+		{
+
+			Console.WriteLine(TestContext.TestName);
+			var me = MethodBase.GetCurrentMethod()?.Name;
+			Assert.AreEqual(TestContext.TestName, me);
+		}
 
 		[TestMethod]
 		public void Task_ContinueWith()
