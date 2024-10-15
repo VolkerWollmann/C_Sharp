@@ -148,7 +148,14 @@ namespace NetCoreUnitTest
         {
             CSharp8.Test_IDisposable();
         }
-    }
+
+        [Fact]
+        public void TestFloatingPointNumericTypes()
+        {
+	        CSharp.TestFloatingPointNumericTypes();
+        }
+
+	}
 
     public class RoslynUnitTest
     {

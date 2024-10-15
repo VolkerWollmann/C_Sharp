@@ -140,7 +140,23 @@ namespace CSharpCore
 
             ; // watch in ship in Debugger
         }
-        
+
+        #endregion
+
+        #region floating point numeric types
+
+        public static void TestFloatingPointNumericTypes()
+        {
+            Console.WriteLine("TestFloatingPointNumericTypes");
+
+            float f = (float) Math.Sqrt(2);
+            double d = Math.Sqrt(2);
+            decimal dec = (decimal)1.4142135623730950488016887242097m;
+
+			Console.WriteLine(f);
+			Console.WriteLine(d);
+            Console.WriteLine(dec);
+        }
         #endregion
 
     }
