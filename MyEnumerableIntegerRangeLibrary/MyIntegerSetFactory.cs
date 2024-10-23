@@ -98,6 +98,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             {
                 var myOptimizedDatabaseIntegerSet = new MyOptimizedDatabaseIntegerSet(_dataBaseConnection, new List<int> { 1, 2, 3 });
                 _myIntegerSets.Add(myOptimizedDatabaseIntegerSet);
+                result.Add(myOptimizedDatabaseIntegerSet);
             }
            
             return result;
