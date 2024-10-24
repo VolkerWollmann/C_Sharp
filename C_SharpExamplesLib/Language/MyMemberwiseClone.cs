@@ -31,9 +31,10 @@ namespace C_Sharp.Language
 
             public Person DeepCopy()
             {
-                Person other = (Person)this.MemberwiseClone();
+                Person other = new Person();
                 other.IdInfo = new IdInfo(IdInfo.IdNumber);
                 other.Name = new string(Name);
+                other.Age = Age;
                 return other;
             }
 
@@ -56,7 +57,7 @@ namespace C_Sharp.Language
             Person p2 = p1.ShallowCopy();
 
             // Display values of p1, p2
-            Console.WriteLine("Original values of p1 and p2:");
+            Console.WriteLine("Original values of p1 and shallow copy p2:");
             Console.WriteLine("   p1 instance values: ");
             DisplayValues(p1);
             Console.WriteLine("   p2 instance values:");
@@ -66,7 +67,7 @@ namespace C_Sharp.Language
             p1.Age = 32;
             p1.Name = "Frank";
             p1.IdInfo.IdNumber = 7878;
-            Console.WriteLine("\nValues of p1 and p2 after changes to p1:");
+            Console.WriteLine("\nValues of p1 and shallow copy p2 after changes to p1:");
             Console.WriteLine("   p1 instance values: ");
             DisplayValues(p1);
             Console.WriteLine("   p2 instance values:");
@@ -78,7 +79,7 @@ namespace C_Sharp.Language
             p1.Name = "George";
             p1.Age = 39;
             p1.IdInfo.IdNumber = 8641;
-            Console.WriteLine("\nValues of p1 and p3 after changes to p1:");
+            Console.WriteLine("\nValues of p1 and deep copy p3 after changes to p1:");
             Console.WriteLine("   p1 instance values: ");
             DisplayValues(p1);
             Console.WriteLine("   p3 instance values:");
