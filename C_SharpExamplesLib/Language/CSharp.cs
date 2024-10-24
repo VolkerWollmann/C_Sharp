@@ -122,7 +122,7 @@ namespace C_Sharp.Language
         public static void ShowCompilerServices()
         {
             // ReSharper disable once PossibleNullReferenceException
-            TraceMessage(System.Reflection.MethodBase.GetCurrentMethod().Name);
+            TraceMessage(System.Reflection.MethodBase.GetCurrentMethod()?.Name ?? "Nothing to trace" );
         }
 
         public static void TraceMessage(string message,

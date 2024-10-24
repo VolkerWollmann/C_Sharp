@@ -29,7 +29,7 @@ namespace C_Sharp.Language.ConcurrentDataTypes
 
         internal delegate void FieldOperationDelegate(int x, int y);
 
-        internal FieldOperationDelegate _theOperation;
+        internal FieldOperationDelegate? _theOperation =null;
 
         private static Action DoOperationAsyncParallel(int x, int y, FieldOperationDelegate operation)
         {

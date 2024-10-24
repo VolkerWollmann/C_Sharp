@@ -24,7 +24,7 @@ namespace UnitTest
         {
             myIntegerSetFactory = new MyIntegerSetFactory();
             ;
-            myIntegerSets = myIntegerSetFactory.GetTestData();
+            myIntegerSets = myIntegerSetFactory.GetIntegerSets();
         }
 
         [TestCleanup]
@@ -154,7 +154,7 @@ namespace UnitTest
         public void Test_IQueryable_AnyWithFunctionCallConditionAsExtension()
         {
             foreach (IMyIntegerSet myIntegerSet in
-                     myIntegerSetFactory.GetTestData(MyIntegerSetFactory.DesiredDatabases.Simple | MyIntegerSetFactory.DesiredDatabases.Database))
+                     myIntegerSetFactory.GetIntegerSets(MyIntegerSetFactory.DesiredDatabases.Simple | MyIntegerSetFactory.DesiredDatabases.Database))
             {
                 MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 

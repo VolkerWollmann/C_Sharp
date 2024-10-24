@@ -27,7 +27,7 @@ namespace C_Sharp.Language
 
 			// cast with #as
 			// cannot cast independent classes on each another, even if they look equal
-			MyCastClass2 t2 = x as MyCastClass2;
+			MyCastClass2? t2 = x as MyCastClass2;
 			Assert.IsNull(t2);
 
 			// check type with cast and assignment 

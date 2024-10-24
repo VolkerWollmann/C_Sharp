@@ -40,11 +40,11 @@ namespace C_Sharp.Language
 			catch (NullReferenceException ne)
 			{
 				Assert.IsTrue(ne.StackTrace?.Contains("InnerGet"));
-				Assert.IsTrue(ne.StackTrace?.Contains("GetFirstCharacter"));
+				Assert.IsTrue(ne.StackTrace?.Contains("GetFirstCharacter2"));
 				Assert.IsTrue(!ne.StackTrace?.Contains("Test"));
-                // ReSharper disable once PossibleIntendedRethrow
-                throw; //cuts the call stack below GetFirstCharacter2 :
-                       //             //in this case like throw new NullReferenceException();
+
+				throw new Exception("New Exception", ne); 
+                       
             }
 		}
 	}
@@ -75,7 +75,7 @@ namespace C_Sharp.Language
 			catch (Exception ne)
 			{
 				Assert.IsTrue(!ne.StackTrace?.Contains("InnerGet"));			//call stack does not contain InnerGet
-				Assert.IsTrue(ne.StackTrace?.Contains("GetFirstCharacter"));
+				Assert.IsTrue(ne.StackTrace?.Contains("GetFirstCharacter2"));
 				Assert.IsTrue(ne.StackTrace?.Contains("Test"));
 			}
 		}

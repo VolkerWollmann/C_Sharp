@@ -48,6 +48,9 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         private bool TestDatabaseConnection()
         {
+            if (_dataBaseConnection != null)
+                return true;
+
             try
             {
                 string connectionString = CreateConnectionString();
@@ -58,6 +61,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             }
             catch (Exception)
             {
+                _dataBaseConnection = null;
                 return false;
             }
             
@@ -73,7 +77,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             TestDatabaseConnection();
         }
 
-        public List<IMyIntegerSet> GetTestData(DesiredDatabases desiredDatabases)
+        public List<IMyIntegerSet> GetIntegerSets(DesiredDatabases desiredDatabases)
         {
             List<IMyIntegerSet> result = new List<IMyIntegerSet>();
             if (( desiredDatabases & DesiredDatabases.Simple) == DesiredDatabases.Simple)
@@ -84,7 +88,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
                 
             }
 
-            if ((DatabaseAvailable) || ( _dataBaseConnection == null ))
+            if (!DatabaseAvailable || ( _dataBaseConnection == null ))
                 return result;
 
             if ((desiredDatabases & DesiredDatabases.Database) == DesiredDatabases.Database)
@@ -104,14 +108,14 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             return result;
         }
 
-        public List<IMyIntegerSet> GetTestData()
+        public List<IMyIntegerSet> GetIntegerSets()
         {
-            return GetTestData(DesiredDatabases.Simple | DesiredDatabases.Database | DesiredDatabases.DatabaseOptimized);
+            return GetIntegerSets(DesiredDatabases.Simple | DesiredDatabases.Database | DesiredDatabases.DatabaseOptimized);
         }
 
         public bool DatabaseIntegerSetsAvailable()
         {
-            return TestDatabaseConnection();
+            return DatabaseAvailable;
         }
 
         public MyIntegerSet GetIntegerSet()
@@ -121,9 +125,9 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         public MyDatabaseIntegerSet GetDatabaseIntegerSet()
         {
-            if (TestDatabaseConnection())
+            if (DatabaseAvailable && (_dataBaseConnection != null))
             {
-                var result = new MyDatabaseIntegerSet(_dataBaseConnection, new List<int> { 1, 2, 3 });
+                var result = new MyDatabaseIntegerSet(_dataBaseConnection, [1, 2, 3]);
                 _myIntegerSets.Add(result);
                 return result;
             }
@@ -134,7 +138,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         public MyOptimizedDatabaseIntegerSet GetOptimizedDatabaseIntegerSet()
         {
-            if (TestDatabaseConnection())
+            if (DatabaseAvailable && (_dataBaseConnection != null))
             {
                 var result = new MyOptimizedDatabaseIntegerSet(_dataBaseConnection, new List<int> {1, 2, 3});
                 _myIntegerSets.Add(result);

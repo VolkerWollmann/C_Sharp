@@ -26,7 +26,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
             protected override Expression VisitConstant(ConstantExpression node)
             {
-                results[index++] = node.Value.ToString();
+                results[index++] = node.Value?.ToString() ?? "null";
                 return node;
             }
 

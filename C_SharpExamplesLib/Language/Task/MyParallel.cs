@@ -14,7 +14,7 @@ namespace C_Sharp.Language.Task
         #region prime search with parallel
 
         private static long _maxPrime = 1;
-        private static Semaphore _primeSemaphore;
+        private static Semaphore _primeSemaphore = new Semaphore(1, 1);
         private static void IsPrime(int candidate)
         {
             bool result = true;
@@ -37,8 +37,6 @@ namespace C_Sharp.Language.Task
 
         private static void FindPrimesWithNumberOfTasks(int numTasks)
         {
-            _primeSemaphore = new Semaphore(1, 1);
-            
             int waits = 0;
             DateTime start = DateTime.Now;
 

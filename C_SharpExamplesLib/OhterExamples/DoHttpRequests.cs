@@ -80,7 +80,7 @@ namespace C_Sharp.OhterExamples
                         JsonReader jr = new JsonTextReader( new StringReader(responseString));
                         var resultList = js.Deserialize<List<Post>>(jr);
 
-                        Assert.IsTrue(resultList.Any( e => e.Title == "eum et est occaecati"));
+                        Assert.IsTrue(resultList?.Any( e => e.Title == "eum et est occaecati"));
                         result = 1;
                     }
                 }

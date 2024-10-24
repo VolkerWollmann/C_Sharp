@@ -42,7 +42,7 @@ namespace C_Sharp.Language.Task
 
 		private class Producer
 		{
-			static event ProduceEventHandler ProduceEvent;
+			static event ProduceEventHandler? ProduceEvent;
 			public Producer(ProduceEventHandler produceEventHandler)
 			{
 				ProduceEvent += produceEventHandler;

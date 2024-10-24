@@ -22,7 +22,7 @@ namespace C_Sharp.Language.DataTypes
         // < 0 This instance precedes obj in the sort order.
         // = 0 This instance occurs in the same position in the sort order as obj.
         // > 0 This instance follows obj in the sort order.
-        public int CompareTo(MyPair other)
+        public int CompareTo(MyPair? other)
         {
             if (other == null)
                 return 1;

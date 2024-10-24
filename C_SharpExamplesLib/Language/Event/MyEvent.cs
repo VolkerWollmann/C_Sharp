@@ -12,7 +12,7 @@ namespace C_Sharp.Language.Event
             // Delegate for the alarm event
             // public Action OnAlarmRaised { get; set; } may work as well
             public event Action OnAlarmRaised = delegate { };
-            public Action OnAlarmRaised2 { get; set; }
+            public Action? OnAlarmRaised2 { get; set; } = delegate { };
 
             // Called to raise an alarm
             public void RaiseAlarm()
@@ -22,7 +22,8 @@ namespace C_Sharp.Language.Event
                 if (OnAlarmRaised != null)
                 {
                     OnAlarmRaised();
-                    OnAlarmRaised2();
+                    if (OnAlarmRaised2 != null)
+                        OnAlarmRaised2();
                 }
             }
         }
