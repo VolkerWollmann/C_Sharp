@@ -12,7 +12,7 @@ namespace C_Sharp.OhterExamples
 	{
 		public string Name { get; set; } = "";
 
-		public Person Friend { get; set; } = new Person();
+		public Person? Friend { get; set; } 
 	}
 
 	internal class Animal
@@ -53,12 +53,12 @@ namespace C_Sharp.OhterExamples
 
 			Person bob2 = deserializedPersonList.First(p => p.Name == "Bob");
 			Assert.AreEqual("Bob", bob2.Name);
-			Assert.AreEqual("Alice",bob2.Friend.Name);
+			Assert.AreEqual("Alice",bob2.Friend?.Name);
 			
 
 			Person alice2 = deserializedPersonList.First(p => p.Name == "Alice");
 			Assert.AreEqual("Alice", alice2.Name);
-			Assert.AreEqual("Bob", alice2.Friend.Name);
+			Assert.AreEqual("Bob", alice2.Friend?.Name);
 		}
 
 		public static void DeserializeFile()

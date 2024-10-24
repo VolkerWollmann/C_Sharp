@@ -21,6 +21,7 @@ namespace C_Sharp.OhterExamples
         {
             result = 0;
             string url = "https://www.random.org/integers/?num=1&min=1&max=6&col=1&base=10&format=plain&rnd=new";
+            
             using (HttpClient httpClient = new HttpClient())
             {
                 try
@@ -33,6 +34,12 @@ namespace C_Sharp.OhterExamples
                         string content = await response.Content.ReadAsStringAsync();
                         result = Convert.ToInt32(content);
                     }
+
+                    result = 2;
+                }
+                catch
+                {
+                    result = 1;
                 }
                 finally { }
             }
@@ -41,9 +48,20 @@ namespace C_Sharp.OhterExamples
         public static void TestHttpRequestSimple()
         {
             DoTheRequest();
-            while (result == 0)
+            int i = 0;
+            while (i < 50)
+            {
                 System.Threading.Thread.Sleep(1000);
+                if (result > 0)
+                    break;
+
+                i++;
+            }
+
+            Assert.AreEqual(result, 2, "Did not reach web page");
+            
             Console.WriteLine("Random number:" + result);
+
         }
 
         #region JSON Response
@@ -103,6 +121,8 @@ namespace C_Sharp.OhterExamples
                 System.Threading.Thread.Sleep(1000);
                 if (result > 0)
                     break;
+
+                i++;
             }
               
             Assert.AreEqual(result, 2, "Did not reach web page");
