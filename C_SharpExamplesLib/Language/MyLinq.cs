@@ -95,7 +95,7 @@ namespace C_Sharp.Language
 			Assert.AreEqual(43, j);
 
 			// #FirstOrDefault for non value types
-			string s = null;
+			string? s = null;
 			Assert.IsNull(s);
 			List<string> ls = new List<string>();
 			Assert.IsNotNull(ls);
@@ -223,6 +223,12 @@ namespace C_Sharp.Language
 		{
 			public string Name { get; set; }
 			public string City { get; set; }
+
+			internal Person() 
+			{
+				Name = "";
+				City = "";
+			}
 		}
 
 		public static void PLinqExceptions()

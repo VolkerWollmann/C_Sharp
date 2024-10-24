@@ -10,6 +10,11 @@ namespace C_Sharp.Language.Thread
 	{
 		#region private threads
 		private static Semaphore Bouncer { get; set; }
+
+		private MyThread()
+		{
+			Bouncer = new Semaphore(1, 1);
+		}
 		private static void Guest(object args)
 		{
 			// Wait to enter the nightclub (a semaphore to be released).

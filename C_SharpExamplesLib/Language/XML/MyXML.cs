@@ -105,7 +105,7 @@ namespace C_Sharp.Language.XML
             
         }
 
-        static void CheckXmlFileWithXsdFileValidationCallback(object sender, ValidationEventArgs e)
+        static void CheckXmlFileWithXsdFileValidationCallback(object? sender, ValidationEventArgs e)
         {
 	        if (e.Severity == XmlSeverityType.Warning)
 	        {

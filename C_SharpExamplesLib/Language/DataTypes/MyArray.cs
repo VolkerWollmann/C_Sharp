@@ -47,7 +47,7 @@ namespace C_Sharp.Language.DataTypes
 		// #array #extension
 		public static void ArrayExtension()
         {
-			string[] friends = new string[] { "Donkey", "Dog" };
+			string?[] friends = new string[] { "Donkey", "Dog" };
 
 			// will fail
 			//friends[2] = "Seagull";
@@ -56,7 +56,7 @@ namespace C_Sharp.Language.DataTypes
 			moreFriends.Add("Seagull");
             Assert.AreEqual(3, moreFriends.Count);
 
-			friends = moreFriends.ToArray<string>();
+			friends = moreFriends.ToArray<string?>();
 			Assert.IsTrue(friends.Contains("Seagull"));
 
             // #array : insert at #index

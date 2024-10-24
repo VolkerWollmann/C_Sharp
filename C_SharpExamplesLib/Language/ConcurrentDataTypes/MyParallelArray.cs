@@ -21,6 +21,12 @@ namespace C_Sharp.Language.ConcurrentDataTypes
 
         }
 
+        private MyParallelArray() 
+        { 
+            _maxX = 1; _maxY = 1;
+            _theArray = new int[1, 1];
+        }
+
         internal delegate void FieldOperationDelegate(int x, int y);
 
         internal FieldOperationDelegate _theOperation;

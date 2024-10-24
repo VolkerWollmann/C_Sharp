@@ -24,9 +24,9 @@ namespace C_Sharp.Language
 			}
 			catch (NullReferenceException ne)
 			{
-				Assert.IsTrue(ne.StackTrace.Contains("InnerGet"));
-				Assert.IsTrue(ne.StackTrace.Contains("GetFirstCharacter"));
-				Assert.IsTrue(!ne.StackTrace.Contains("Test"));
+				Assert.IsTrue(ne.StackTrace?.Contains("InnerGet"));
+				Assert.IsTrue(ne.StackTrace?.Contains("GetFirstCharacter"));
+				Assert.IsTrue(!ne.StackTrace?.Contains("Test"));
 				throw;
 			}
 		}
@@ -39,13 +39,13 @@ namespace C_Sharp.Language
 			}
 			catch (NullReferenceException ne)
 			{
-				Assert.IsTrue(ne.StackTrace.Contains("InnerGet"));
-				Assert.IsTrue(ne.StackTrace.Contains("GetFirstCharacter"));
-				Assert.IsTrue(!ne.StackTrace.Contains("Test"));
+				Assert.IsTrue(ne.StackTrace?.Contains("InnerGet"));
+				Assert.IsTrue(ne.StackTrace?.Contains("GetFirstCharacter"));
+				Assert.IsTrue(!ne.StackTrace?.Contains("Test"));
                 // ReSharper disable once PossibleIntendedRethrow
-                throw ne; //cuts the call stack below GetFirstCharacter2 :
-           //             //in this case like throw new NullReferenceException();
-			}
+                throw; //cuts the call stack below GetFirstCharacter2 :
+                       //             //in this case like throw new NullReferenceException();
+            }
 		}
 	}
 	public class MyException
@@ -57,26 +57,26 @@ namespace C_Sharp.Language
 				var s = new Sentence("Hallo");
 				Console.WriteLine($"The first character is {s.GetFirstCharacter()}");
 
-				var t = new Sentence(null);
+				var t = new Sentence(null!);
 				Console.WriteLine($"The first character is {t.GetFirstCharacter()}");
 			}
 			catch (Exception ne)
 			{
-				Assert.IsTrue(ne.StackTrace.Contains("InnerGet"));
-				Assert.IsTrue(ne.StackTrace.Contains("GetFirstCharacter"));
-				Assert.IsTrue(ne.StackTrace.Contains("Test"));
+				Assert.IsTrue(ne.StackTrace?.Contains("InnerGet"));
+				Assert.IsTrue(ne.StackTrace?.Contains("GetFirstCharacter"));
+				Assert.IsTrue(ne.StackTrace?.Contains("Test"));
 			}
 
 			try
 			{
-				var t = new Sentence(null);
+				var t = new Sentence(null!);
 				Console.WriteLine($"The first character is {t.GetFirstCharacter2()}");
 			}
 			catch (Exception ne)
 			{
-				Assert.IsTrue(!ne.StackTrace.Contains("InnerGet"));			//call stack does not contain InnerGet
-				Assert.IsTrue(ne.StackTrace.Contains("GetFirstCharacter"));
-				Assert.IsTrue(ne.StackTrace.Contains("Test"));
+				Assert.IsTrue(!ne.StackTrace?.Contains("InnerGet"));			//call stack does not contain InnerGet
+				Assert.IsTrue(ne.StackTrace?.Contains("GetFirstCharacter"));
+				Assert.IsTrue(ne.StackTrace?.Contains("Test"));
 			}
 		}
 	}

@@ -18,8 +18,8 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             DatabaseOptimized = 4
         }
 
-        private bool _databaseAvailable=false;
-        SqlConnection _dataBaseConnection=null;
+        private bool DatabaseAvailable => (_dataBaseConnection != null);
+        SqlConnection? _dataBaseConnection;
 
         private List<IMyIntegerSet> _myIntegerSets = new List<IMyIntegerSet>();
 
@@ -70,7 +70,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         }
         public MyIntegerSetFactory()
         {
-            _databaseAvailable = TestDatabaseConnection();
+            TestDatabaseConnection();
         }
 
         public List<IMyIntegerSet> GetTestData(DesiredDatabases desiredDatabases)
@@ -84,7 +84,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
                 
             }
 
-            if (!_databaseAvailable)
+            if ((DatabaseAvailable) || ( _dataBaseConnection == null ))
                 return result;
 
             if ((desiredDatabases & DesiredDatabases.Database) == DesiredDatabases.Database)
