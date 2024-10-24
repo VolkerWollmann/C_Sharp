@@ -53,6 +53,20 @@ namespace UnitTest
 
         }
 
+        #region Where
+
+        [TestMethod]
+        public void Test_IQueryable_Where()
+        {
+            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
+            {
+                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+                var expression = myQueryableIntegerSet.Where(i => (i == i - i + 2));
+                var result = expression.ToList();
+                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(2, result[0]);
+            }
+        }
 
         /// <summary>
         /// Test function for debugging purpose 
@@ -65,11 +79,11 @@ namespace UnitTest
         }
 
         /// <summary>
-        /// Shows, how the MyQueryableIntegerSet together with the inner most where clause is
+        /// Shows, how the MyQueryableIntegerSet together with the innermost where clause is
         /// evaluated first, before the result of this evaluation is provided to further linq query execution
         /// </summary>
         [TestMethod]
-        public void Test_IQueryable_Where()
+        public void Test_IQueryable_WhereComplex()
         {
             IMyIntegerSet myIntegerSet = myIntegerSetFactory.GetIntegerSet();
 
@@ -82,6 +96,46 @@ namespace UnitTest
 
         }
 
+        /// <summary>
+        /// Will fail for optimized database integer set
+        /// </summary>
+        [TestMethod]
+        public void Test_IQueryable_WhereComplex_DatabaseIntegerSet()
+        {
+            if ( !myIntegerSetFactory.DatabaseIntegerSetsAvailable() )
+                Assert.Inconclusive("No database connection");
+
+            IMyIntegerSet myIntegerSet = myIntegerSetFactory.GetOptimizedDatabaseIntegerSet();
+
+
+            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+            var expression = myQueryableIntegerSet.Where(i => TestForTwo(i));
+
+            Assert.ThrowsException <NotImplementedException>(() => expression.ToList());
+            //Assert.AreEqual(1, result.Count);
+            //Assert.AreEqual(2, result[0]);
+
+        }
+
+        /// <summary>
+        /// Shows, how the MyQueryableIntegerSet together with the innermost where clause is
+        /// evaluated first, before the result of this evaluation is provided to further linq query execution
+        /// </summary>
+        [TestMethod]
+        public void Test_IQueryable_Where_Where()
+        {
+            IMyIntegerSet myIntegerSet = myIntegerSetFactory.GetIntegerSet();
+
+            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+
+            var expression = myQueryableIntegerSet.Where(i => TestForTwo(i)).Where(i => TestForTwo(i));
+            var result = expression.ToList();
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(2, result[0]);
+        }
+        #endregion
+
+        #region Any
         [TestMethod]
         public void Test_IQueryable_AnyDelegated()
         {
@@ -99,8 +153,8 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable_AnyWithFunctionCallConditionAsExtension()
         {
-            foreach (IMyIntegerSet myIntegerSet in 
-                myIntegerSetFactory.GetTestData(MyIntegerSetFactory.DesiredDatabases.Simple | MyIntegerSetFactory.DesiredDatabases.Database))
+            foreach (IMyIntegerSet myIntegerSet in
+                     myIntegerSetFactory.GetTestData(MyIntegerSetFactory.DesiredDatabases.Simple | MyIntegerSetFactory.DesiredDatabases.Database))
             {
                 MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
@@ -118,71 +172,13 @@ namespace UnitTest
             {
                 MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
-                var expression = myQueryableIntegerSet.Any(i => i<2);
+                var expression = myQueryableIntegerSet.Any(i => i < 2);
                 var result = expression;
 
                 Assert.AreEqual(result, true);
             }
         }
-
-        [TestMethod]
-        public void Test_IQueryable_Where_DatabaseIntegerSet()
-        {
-            if (!myIntegerSets.Any(integerSet => (integerSet is MyDatabaseIntegerSet)))
-            {
-                Assert.Inconclusive("No database connection");
-            }
-
-            foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
-            {
-
-                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
-                var expression = myQueryableIntegerSet.Where(i => (i == i - i + 2));
-                var result = expression.ToList();
-                Assert.AreEqual(1, result.Count);
-                Assert.AreEqual(2, result[0]);
-            }
-        }
-
-        /// <summary>
-        /// Will fail for optimized database integer set
-        /// </summary>
-        [TestMethod]
-        public void Test_IQueryable_Where_DatabaseIntegerSet_ComplexWhere()
-        {
-            if (!myIntegerSets.Any(integerSet => (integerSet is MyDatabaseIntegerSet)))
-            {
-                Assert.Inconclusive("No database connection");
-            }
-
-            IMyIntegerSet myIntegerSet = myIntegerSetFactory.GetOptimizedDatabaseIntegerSet();
-
-
-            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
-            var expression = myQueryableIntegerSet.Where(i => TestForTwo(i));
-
-            Assert.ThrowsException <NotImplementedException>(() => expression.ToList());
-            //Assert.AreEqual(1, result.Count);
-            //Assert.AreEqual(2, result[0]);
-
-        }
-
-        /// <summary>
-        /// Shows, how the MyQueryableIntegerSet together with the inner most where clause is
-        /// evaluated first, before the result of this evaluation is provided to further linq query execution
-        /// </summary>
-        [TestMethod]
-        public void Test_IQueryable_WhereWhere()
-        {
-            IMyIntegerSet myIntegerSet = myIntegerSetFactory.GetIntegerSet();
-
-            MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
-
-            var expression = myQueryableIntegerSet.Where(i => TestForTwo(i)).Where(i => TestForTwo(i));
-            var result = expression.ToList();
-            Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(2, result[0]);
-        }
+        #endregion
 
         [TestMethod]
         public void Test_IQueryable_SumAsExtension()
@@ -212,6 +208,7 @@ namespace UnitTest
             }
         }
 
+        #region Select
         [TestMethod]
         //[Ignore]
         public void Test_IQueryable_Select_Simple()
@@ -293,5 +290,6 @@ namespace UnitTest
                     });
             }
         }
+        #endregion
     }
 } 
