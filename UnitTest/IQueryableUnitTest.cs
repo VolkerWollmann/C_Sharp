@@ -103,9 +103,7 @@ namespace UnitTest
         public void Test_IQueryable_WhereComplex_DatabaseIntegerSet()
         {
             if ( !myIntegerSetFactory.DatabaseIntegerSetsAvailable() )
-            {
                 Assert.Inconclusive("No database connection");
-            }
 
             IMyIntegerSet myIntegerSet = myIntegerSetFactory.GetOptimizedDatabaseIntegerSet();
 
