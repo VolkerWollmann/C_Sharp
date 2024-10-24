@@ -108,6 +108,10 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             return GetTestData(DesiredDatabases.Simple | DesiredDatabases.Database | DesiredDatabases.DatabaseOptimized);
         }
 
+        public bool DatabaseIntegerSetsAvailable()
+        {
+            return TestDatabaseConnection();
+        }
 
         public MyIntegerSet GetIntegerSet()
         {
