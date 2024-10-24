@@ -12,12 +12,12 @@ namespace C_Sharp.OhterExamples
 	{
 		public string Name { get; set; } = "";
 
-		public Person Friend { get; set; }
+		public Person Friend { get; set; } = new Person();
 	}
 
 	internal class Animal
 	{
-		public string Type { get; set; }
+		public string Type { get; set; } = "";
 		public string Name { get; set; } = "";
 	}
 
@@ -49,6 +49,7 @@ namespace C_Sharp.OhterExamples
 			Assert.IsTrue(personListJson.Contains("$id"));
 
 			var deserializedPersonList = JsonConvert.DeserializeObject<List<Person>>(personListJson, settings);
+			Assert.IsNotNull(deserializedPersonList);
 
 			Person bob2 = deserializedPersonList.First(p => p.Name == "Bob");
 			Assert.AreEqual("Bob", bob2.Name);
@@ -71,6 +72,7 @@ namespace C_Sharp.OhterExamples
 			};
 
 			var deserializedAnimalList = JsonConvert.DeserializeObject<List<Animal>>(jsonContent, settings);
+			Assert.IsNotNull(deserializedAnimalList);
 
 			foreach (var animal in deserializedAnimalList) Console.WriteLine($"Name: {animal.Name}, Type: {animal.Type}");
 		}

@@ -83,12 +83,12 @@ namespace C_Sharp.Language.DataTypes
 		private static List<T> GetShuffledList<T>(List<T> list)
 		{
 			List<T> result = new List<T>();
-			List<T> work = new List<T>();
+			List<T?> work = new List<T?>();
 			list.ForEach(e => work.Add(e));
 			while( work.Count > 0 )
 			{
 				int index = Random.Next(0, work.Count);
-				result.Add(work[index]);
+				result.Add(work[index]!);
 				work[index] = default(T);
 				work.RemoveAt(index);
 			}
@@ -190,6 +190,7 @@ namespace C_Sharp.Language.DataTypes
             //create dynamic valid generic class instance
             Type t4 = typeof(MyGenericClass<RefinedClassA>);
 			var t5 = Activator.CreateInstance(t4);
+			Assert.IsNotNull(t5);
 			Assert.AreEqual(42, ((MyGenericClass<RefinedClassA>)t5).GenericClassMethod());
 
 			//create dynamic invalid generic class instance

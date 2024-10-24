@@ -12,7 +12,7 @@ namespace C_Sharp.Language
 		public int Y { get; }
 
         #region IEqualityComparer<T>
-        bool IEqualityComparer<MyIEqualityComparer>.Equals(MyIEqualityComparer x, MyIEqualityComparer y)
+        bool IEqualityComparer<MyIEqualityComparer>.Equals(MyIEqualityComparer? x, MyIEqualityComparer? y)
 		{
 			return y != null && x != null && (x.X == y.X) && (x.Y == y.Y);
 		}
@@ -77,8 +77,11 @@ namespace C_Sharp.Language
 		#endregion
 
         
-		private int CompareInternal(MyIComparable other)
+		private int CompareInternal(MyIComparable? other)
         {
+            if (other == null)
+                return 1;
+
             if ((this.Animal == None) && (other.Animal == None))
                 return 0;
 
@@ -127,7 +130,7 @@ namespace C_Sharp.Language
         // </summary>
 
         // #IComparable
-        int IComparable<MyIComparable>.CompareTo(MyIComparable other)
+        int IComparable<MyIComparable>.CompareTo(MyIComparable? other)
         {
             return CompareInternal(other);
         }
@@ -137,9 +140,12 @@ namespace C_Sharp.Language
 
 		#region IComparer
 		// #IComparer
-        int IComparer<MyIComparable>.Compare(MyIComparable x, MyIComparable y)
+        int IComparer<MyIComparable>.Compare(MyIComparable? x, MyIComparable? y)
         {
-            // ReSharper disable once PossibleNullReferenceException
+            if (x == null && y == null) return 0;       // Consider nulls as equal
+            if (x == null) return -1;                   // Null is considered smaller
+            if (y == null) return 1;
+
             return x.CompareInternal(y);
         }
 		#endregion
@@ -253,7 +259,7 @@ namespace C_Sharp.Language
 		public string Animal { private set; get; }
 
 
-		public override bool Equals(object other)
+		public override bool Equals(object? other)
         {
 			return this.Equals(other as MyIEquatable); 
         }
@@ -262,7 +268,7 @@ namespace C_Sharp.Language
 
         #region IEquatable
 		//bool IEquatable<MyEquatable>.Equals(MyEquatable other)
-        public bool Equals(MyIEquatable other)
+        public bool Equals(MyIEquatable? other)
 		{
 			// #Object #ReferenceEquals 
 			if (Object.ReferenceEquals(other, null))

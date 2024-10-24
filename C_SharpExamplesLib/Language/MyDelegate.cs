@@ -28,16 +28,16 @@ namespace C_Sharp.Language
 		static readonly Predicate<int> LessThanTree = (i) => i < 3;
 
 		// #Function  #Func : function pointer ( and type )
-		Func<int, int> _funcIntInt;
+		Func<int, int>? _funcIntInt;
 
 		// #delegate : like a #function pointer type
 		delegate int IntegerFunction(int i);
 
 		// Delegate : like instance of typed function pointer
-		IntegerFunction _funcIntegerFunction;
+		IntegerFunction? _funcIntegerFunction;
 
 		// Delegate : like instance of untyped function pointer
-		Delegate _delegate;
+		Delegate? _delegate;
 
 		#region Integer Functions       
 		int Square(int i)
@@ -172,11 +172,11 @@ namespace C_Sharp.Language
 			MyDelegate myDelegate = new MyDelegate();
 
             myDelegate._delegate = Delegate.CreateDelegate(typeof(Func<int, int>), myDelegate, "Square" );
-			var delegateResult = (int)myDelegate._delegate.DynamicInvoke(3);
-			Assert.IsTrue(delegateResult == 9);
+			var delegateResult = Convert.ToInt32(myDelegate._delegate.DynamicInvoke(3));
+            Assert.IsTrue(delegateResult == 9);
 
 			myDelegate._delegate = Delegate.CreateDelegate(typeof(Func<int, int, int>), myDelegate, "BadFunction");
-			delegateResult = (int)myDelegate._delegate.DynamicInvoke(41,1);
+			delegateResult = Convert.ToInt32(myDelegate._delegate.DynamicInvoke(41,1));
 			Assert.IsTrue(delegateResult == 42);
 
 			myDelegate._funcIntInt = (Func<int,int>)Delegate.CreateDelegate(typeof(Func<int, int>), myDelegate, "Square");
@@ -204,38 +204,42 @@ namespace C_Sharp.Language
 
 		public static void TestDelegateAssignmentByMethodInfo()
 		{
+
 			MyDelegate myDelegate = new MyDelegate();
 
             Type t = myDelegate.GetType();
 			TypeInfo ti = t.GetTypeInfo();
-			MethodInfo mSquare = ti.GetDeclaredMethod("Square");
+			MethodInfo? mSquare = ti.GetDeclaredMethod("Square");
+			Assert.IsNotNull(mSquare);
 
 			myDelegate._delegate = Delegate.CreateDelegate(typeof(Func<int,int>), myDelegate, mSquare);
 			var fRawInvocationList = myDelegate._delegate.GetInvocationList();
 			Assert.IsNotNull(fRawInvocationList);
 
-			var delegateResult = (int)myDelegate._delegate.DynamicInvoke(3);
+			var delegateResult = Convert.ToInt32(myDelegate._delegate.DynamicInvoke(3));
 			Assert.IsTrue(delegateResult == 9);
 
 			myDelegate._delegate = Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, mSquare);
 			var fInvocationList = myDelegate._delegate.GetInvocationList();
 			Assert.IsNotNull(fInvocationList);
 
-			delegateResult = (int)myDelegate._delegate.DynamicInvoke(3);
+			delegateResult = Convert.ToInt32(myDelegate._delegate.DynamicInvoke(3));
 			Assert.IsTrue(delegateResult == 9);
 
-			MethodInfo mDouble = ti.GetDeclaredMethod("Double");
+			MethodInfo? mDouble = ti.GetDeclaredMethod("Double");
+			Assert.IsNotNull(mDouble);
 			myDelegate._delegate = Delegate.Combine(myDelegate._delegate,
 				Delegate.CreateDelegate(typeof(IntegerFunction), myDelegate, mDouble));
 			var f2InvocationList = myDelegate._delegate.GetInvocationList();
             Assert.IsNotNull(f2InvocationList);
 
-			delegateResult = (int)myDelegate._delegate.DynamicInvoke(3);
+			delegateResult = Convert.ToInt32(myDelegate._delegate.DynamicInvoke(3));
 			Assert.IsTrue(delegateResult == 6);
 
-			MethodInfo mStaticDouble = ti.GetDeclaredMethod("StaticDouble");
+			MethodInfo? mStaticDouble = ti.GetDeclaredMethod("StaticDouble");
+			Assert.IsNotNull(mStaticDouble);
 			myDelegate._delegate = Delegate.CreateDelegate(typeof(IntegerFunction), mStaticDouble);
-			delegateResult = (int)myDelegate._delegate.DynamicInvoke(4);
+			delegateResult = Convert.ToInt32(myDelegate._delegate.DynamicInvoke(4));
 			Assert.IsTrue(delegateResult == 8);
 		} 
 	}

@@ -9,14 +9,16 @@ namespace C_Sharp.Language.Thread
 	public partial class MyThread
 	{
 		#region private threads
-		private static Semaphore Bouncer { get; set; }
+		private static Semaphore Bouncer { get; set; } = new Semaphore(1, 1);
 
-		private MyThread()
+        private MyThread()
 		{
-			Bouncer = new Semaphore(1, 1);
+			
 		}
-		private static void Guest(object args)
+		private static void Guest(object? args)
 		{
+			Assert.IsNotNull(args);
+
 			// Wait to enter the nightclub (a semaphore to be released).
 			Console.WriteLine("Guest {0} is waiting to entering nightclub.", args);
 			Bouncer.WaitOne();
@@ -67,8 +69,9 @@ namespace C_Sharp.Language.Thread
 				for (int i = 0; i < 5; i++)
 				{
 					ThreadInt.Value = 5;
-					
-					Console.WriteLine("Thread 1: {0} {1}", RandomGenerator.Value.Next(10), ThreadInt.Value );
+
+                    Assert.IsNotNull(RandomGenerator.Value);
+                    Console.WriteLine("Thread 1: {0} {1}", RandomGenerator.Value.Next(10), ThreadInt.Value );
 					System.Threading.Thread.Sleep(500);
 				}
 			});
@@ -77,6 +80,7 @@ namespace C_Sharp.Language.Thread
 			{
 				for (int i = 0; i < 5; i++)
 				{
+					Assert.IsNotNull(RandomGenerator.Value);
 					Console.WriteLine("Thread 2: {0} {1}", RandomGenerator.Value.Next(10), ThreadInt.Value);
 					System.Threading.Thread.Sleep(500);
 				}
@@ -105,7 +109,7 @@ namespace C_Sharp.Language.Thread
 		private static int _atomicLocalState;
 
 		// common field for all threads : will be treated by semaphore
-		private static Semaphore _semaphore;
+		private static Semaphore _semaphore = new Semaphore(1, 1);
 		private static int _semaphoreProtectedLocalState;
 
 		private static void DoWork(object state)
@@ -153,8 +157,7 @@ namespace C_Sharp.Language.Thread
 			_threadStaticLocalState = 0;
 			_localState = 0;
 			_atomicLocalState = 0;
-			_semaphoreProtectedLocalState = 0;
-			_semaphore = new Semaphore(1, 1);
+			_semaphoreProtectedLocalState = 0; 
 			ThreadPool.SetMaxThreads(4, 4);
 
 			for (int i = 0; i < 50; i++)
@@ -174,7 +177,7 @@ namespace C_Sharp.Language.Thread
 		#region prime search with thread pool
 
         private static int _threadCount;
-        private static Semaphore _threadCountSemaphore;
+        private static Semaphore _threadCountSemaphore = new Semaphore(1, 1);
 
         private static void IncreaseThreadCount(int maxThreadNum, ref int waits)
         {
@@ -202,7 +205,7 @@ namespace C_Sharp.Language.Thread
         }
 
         private static long _maxPrime = 1;
-        private static Semaphore _primeSemaphore;
+        private static Semaphore _primeSemaphore = new Semaphore(1, 1);
         private static bool IsPrime(int candidate)
         {
             bool result = true;
@@ -225,9 +228,6 @@ namespace C_Sharp.Language.Thread
 
         private static void FindPrimesWithNumberOfThreads(int numThreads)
         {
-            _primeSemaphore = new Semaphore(1, 1);
-            _threadCountSemaphore = new Semaphore(1, 1);
-
             int waits = 0;
             DateTime start = DateTime.Now;
 
@@ -325,8 +325,9 @@ namespace C_Sharp.Language.Thread
 
 		#region ParameterizedThreadStart
 		// #thread #ParameterizedThreadStart
-		private static void WorkOnData(object data)
+		private static void WorkOnData(object? data)
 		{
+			Assert.IsNotNull(data);
 			Console.WriteLine("Working on: {0}", data);
 			System.Threading.Thread.Sleep(1000);
 		}

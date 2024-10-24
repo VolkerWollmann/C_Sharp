@@ -54,9 +54,9 @@ namespace C_Sharp.OhterExamples
            
             public int Id { get; set; }
             
-            public string Title { get; set; }
+            public string Title { get; set; } = string.Empty;
             
-            public string Body { get; set; }
+            public string Body { get; set; } = string.Empty;
         }
 
         private static async void DoRequestJSON()
@@ -81,8 +81,13 @@ namespace C_Sharp.OhterExamples
                         var resultList = js.Deserialize<List<Post>>(jr);
 
                         Assert.IsTrue(resultList?.Any( e => e.Title == "eum et est occaecati"));
-                        result = 1;
+                        result = 2;
                     }
+
+                }
+                catch
+                {
+                    result = 1;
                 }
                 finally { }
             }
@@ -92,8 +97,15 @@ namespace C_Sharp.OhterExamples
         public static void TestHttpRequestJSON()
         {  
             DoRequestJSON();
-            while (result == 0)
+            int i = 0;
+            while(i<50)
+            {
                 System.Threading.Thread.Sleep(1000);
+                if (result > 0)
+                    break;
+            }
+              
+            Assert.AreEqual(result, 2, "Did not reach web page");
         }
 
         #endregion

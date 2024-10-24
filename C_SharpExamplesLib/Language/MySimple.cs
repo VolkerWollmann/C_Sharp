@@ -34,13 +34,13 @@ namespace C_Sharp.Language
 
 		public static void Test()
 		{
-			string s = null;
+			string s = "";
 			MethodRef(ref s);
 			Assert.IsTrue(s == "donkey");
 
-			s = null;
-			Method(s);
-			Assert.AreEqual(null, s);
+			string? s2 = null;
+			Method(s2);
+			Assert.AreEqual(null, s2);
 
 			IndexClass indexClass = new IndexClass();
 			for (int i = 0; i < 10; i++)
@@ -57,7 +57,7 @@ namespace C_Sharp.Language
 			s = s + "donkey";
 		}
 
-		static void Method(string s)
+		static void Method(string? s)
 		{
 			s = s + "donkey";
 		}
@@ -101,13 +101,13 @@ namespace C_Sharp.Language
 		public static void TestCallByReference()
 		{
 			/* build in type string */
-			string s = null;
+			string s = "";
 			MethodRef(ref s);
 			Assert.IsTrue(s == "donkey");
 
-			s = null;
-			Method(s);
-			Assert.AreEqual(null, s);
+			string? s2 = null;
+			Method(s2);
+			Assert.AreEqual(null, s2);
 
 			/* class reference */ 
 			MyClass myClass = new MyClass("donkey");

@@ -50,10 +50,10 @@ namespace C_Sharp.Language
             Type tx3 = typeof(IntegerList2);
             Assert.AreNotEqual(tx, tx3);
 
-            object tx2O = Activator.CreateInstance(tx2);
+            object? tx2O = Activator.CreateInstance(tx2);
             Assert.IsInstanceOfType(tx2O, tx2);
 
-            object tx3O = Activator.CreateInstance(tx3);
+            object? tx3O = Activator.CreateInstance(tx3);
             Assert.IsInstanceOfType(tx3O, tx3);
 
             if (x is List<int> il)
@@ -72,16 +72,16 @@ namespace C_Sharp.Language
 
             // #Reading #types from #assembly
             Type myType2Type = typeof(MyType2);
-            string mytype2Name = myType2Type.FullName;
+            string? mytype2Name = myType2Type.FullName;
 
             // ReSharper disable once PossibleNullReferenceException
-            var ass = Type.GetType(mytype2Name).Assembly;
+            var ass = Type.GetType(mytype2Name!)?.Assembly;
             Assert.IsNotNull(ass);
 
             Type myType3Type = typeof(MyType3);
-            string mytype3Name = myType3Type.FullName;
-            // ReSharper disable once AssignNullToNotNullAttribute
-            Type testType = ass.GetType(mytype3Name);
+            string mytype3Name = myType3Type.FullName ?? "";
+            
+            Type? testType = ass.GetType(mytype3Name);
 
             Assert.AreEqual(myType3Type, testType);
         }
