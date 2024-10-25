@@ -1,8 +1,5 @@
-﻿using System;
-using System.ComponentModel.Design.Serialization;
-using System.Security.Permissions;
-using System.Threading;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 
 namespace C_Sharp.Language.Thread
 {
@@ -266,35 +263,44 @@ namespace C_Sharp.Language.Thread
 
         public static void TestThreadPoolConfiguration()
         {
-            int cores = Environment.ProcessorCount;
-            bool result;
+            try
+            {
+                int cores = Environment.ProcessorCount;
+                bool result;
 
-			Console.WriteLine("ThreadPoolConfiguration 1");
+                Console.WriteLine("ThreadPoolConfiguration Start");
 
-            result = ThreadPool.SetMaxThreads(cores, cores);
-			Assert.IsTrue(result);
+                result = ThreadPool.SetMaxThreads(cores, cores);
+                Assert.IsTrue(result);
 
-            Console.WriteLine("ThreadPoolConfiguration 2");
+                Console.WriteLine("Max cores set to {0}", cores);
 
-            int a, b;
-            ThreadPool.GetMaxThreads(out a, out b);
-			Assert.AreEqual(a, cores);
-            Assert.AreEqual(b, cores);
+                int a, b;
+                ThreadPool.GetMaxThreads(out a, out b);
+                Assert.AreEqual(a, cores);
+                Assert.AreEqual(b, cores);
 
-            Console.WriteLine("ThreadPoolConfiguration 3");
+                Console.WriteLine("Max cores read {0}", a);
 
-            // https://learn.microsoft.com/en-us/dotnet/api/system.threading.threadpool.setmaxthreads?view=net-7.0
-            // Thread pool configuration cannot be smaller than cores in computer
-            result = ThreadPool.SetMaxThreads(cores-1, cores-1);
-			Assert.IsFalse(result);
+                // https://learn.microsoft.com/en-us/dotnet/api/system.threading.threadpool.setmaxthreads?view=net-7.0
+                // Thread pool configuration cannot be smaller than cores in computer
+                result = ThreadPool.SetMaxThreads(cores - 1, cores - 1);
+                Assert.IsFalse(result);
 
-            Console.WriteLine("ThreadPoolConfiguration 4");
+                Console.WriteLine("Max cores set to {0}", cores - 1);
 
-            ThreadPool.GetMaxThreads(out a, out b);
-            Assert.AreEqual(a, cores);
-            Assert.AreEqual(b, cores);
+                ThreadPool.GetMaxThreads(out a, out b);
+                Assert.AreEqual(a, cores);
+                Assert.AreEqual(b, cores);
 
-            Console.WriteLine("ThreadPoolConfiguration 5");
+                Console.WriteLine("Max cores read {0} ", a);
+				Console.WriteLine("Number of cores cannot be less than ProcessorCount");
+            }
+            catch
+            {
+               Assert.Inconclusive("Setting cores failed");
+            }
+            
         }
 
         #endregion

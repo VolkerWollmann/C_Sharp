@@ -52,7 +52,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-        [Ignore("Only for debug purpose")]
+        //[Ignore("Only for debug purpose")]
         public void ThreadPool_Configuration()
         {
             MyThread.TestThreadPoolConfiguration();
