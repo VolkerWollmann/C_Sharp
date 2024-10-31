@@ -7,6 +7,7 @@ using CSharpNaming;
 using CSharpNew.ProcessCommunication;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 using LoadingAssembly;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace NetCoreUnitTest
 {
@@ -193,11 +194,19 @@ namespace NetCoreUnitTest
 
     public class MathTest
     {
+	    private double GetZero()
+	    {
+		    return 0;
+	    }
+
 	    [Fact]
 	    public void NaNUse()
 	    {
 		    double result = Math.Sqrt(-1);
 		    Assert.IsTrue(Double.IsNaN(result));
+
+		    double result2 = 1 / GetZero();
+			Assert.IsTrue(Double.IsInfinity(result2));
 	    }
     }
 }
