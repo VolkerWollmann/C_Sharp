@@ -175,7 +175,7 @@ namespace NetCoreUnitTest
         }
     }
 
-    public class ProcessCommunication
+    public class ProcessCommunicationTest
     {
         [Fact]
         public void NamedPipeTest()
@@ -188,5 +188,16 @@ namespace NetCoreUnitTest
         {
             MemoryMappedFile.MemoryMappedFileTest();
         }
+    }
+
+
+    public class MathTest
+    {
+	    [Fact]
+	    public void NaNUse()
+	    {
+		    double result = Math.Sqrt(-1);
+		    Assert.IsTrue(Double.IsNaN(result));
+	    }
     }
 }
