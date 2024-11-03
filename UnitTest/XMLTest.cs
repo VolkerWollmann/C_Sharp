@@ -30,6 +30,11 @@ namespace UnitTest
 		{
 			MyXml.CheckXmlFileWithXsdFile();
 		}
-		
+
+		[TestMethod]
+		public void SerializeClassToXml()
+		{
+			MyXml.SerializeClassToXml();
+		}
 	}
 }

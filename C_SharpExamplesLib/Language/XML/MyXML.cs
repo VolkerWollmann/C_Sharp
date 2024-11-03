@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
+using System.Xml.Serialization;
 using System.Xml.XPath;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.VisualStudio.TestPlatform.PlatformAbstractions.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language.XML
@@ -147,6 +151,47 @@ namespace C_Sharp.Language.XML
 			}
             
             Assert.AreEqual(true, isValid);
+		}
+
+		public class Animal
+		{
+            public string Name { get; set; }
+
+            public string Description;
+
+            public Animal(string name, string description)
+			{
+				Name = name;
+				Description = description;
+			}
+
+			public Animal()
+			{
+				Name = "";
+				Description = "";
+			}
+		}
+		public static void SerializeClassToXml()
+		{
+			Animal macchi = new Animal("Macchi", "Famous police donkey");
+
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(Animal));
+
+            MemoryStream memoryStream = new MemoryStream();
+
+			xmlSerializer.Serialize(memoryStream, macchi);
+
+			memoryStream.Position = 0;
+
+			StreamReader reader = new StreamReader(memoryStream);
+			
+            string result = reader.ReadToEnd();
+
+            reader.Close();
+
+            memoryStream.Close();
+
+            Assert.IsTrue(result.Contains(macchi.Description));
 		}
     }
 }
