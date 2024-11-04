@@ -182,7 +182,7 @@ namespace C_Sharp.Language.XML
 			Animal amica = new Animal("Amica", "Friend of Macchi");
             macchi.Friend = amica;
 
-			List<Animal> animals = new List<Animal>() {macchi, amica};
+			List<Animal> animals = [macchi, amica];
 
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Animal>));
 
