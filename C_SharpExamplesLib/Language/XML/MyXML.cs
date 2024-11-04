@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
@@ -12,6 +14,7 @@ using System.Xml.XPath;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualStudio.TestPlatform.PlatformAbstractions.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace C_Sharp.Language.XML
 {
@@ -165,33 +168,37 @@ namespace C_Sharp.Language.XML
 				Description = description;
 			}
 
+            public Animal? Friend { get; set; }
+
 			public Animal()
 			{
 				Name = "";
 				Description = "";
 			}
 		}
-		public static void SerializeClassToXml()
+		public static void XmlSearializerExample()
 		{
 			Animal macchi = new Animal("Macchi", "Famous police donkey");
+			Animal amica = new Animal("Amica", "Friend of Macchi");
+            macchi.Friend = amica;
 
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(Animal));
+			List<Animal> animals = new List<Animal>() {macchi, amica};
+
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Animal>));
 
             MemoryStream memoryStream = new MemoryStream();
 
-			xmlSerializer.Serialize(memoryStream, macchi);
+			xmlSerializer.Serialize(memoryStream, animals);
 
 			memoryStream.Position = 0;
 
 			StreamReader reader = new StreamReader(memoryStream);
-			
-            string result = reader.ReadToEnd();
+			string result = reader.ReadToEnd();
+			reader.Close();
+			memoryStream.Close();
 
-            reader.Close();
-
-            memoryStream.Close();
-
-            Assert.IsTrue(result.Contains(macchi.Description));
+            // Friend reference is resolved explicit
+            Assert.AreEqual(2, Regex.Matches(result, Regex.Escape(amica.Name)).Count);
 		}
     }
 }

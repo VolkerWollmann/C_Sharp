@@ -32,9 +32,9 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void SerializeClassToXml()
+		public void XmlSearializer()
 		{
-			MyXml.SerializeClassToXml();
+			MyXml.XmlSearializerExample();
 		}
 	}
 }
