@@ -198,7 +198,7 @@ namespace C_Sharp.Language.XML
 			memoryStream.Close();
 
             // Friend reference is resolved explicit
-            Assert.AreEqual(2, Regex.Matches(result, Regex.Escape(amica.Name)).Count);
+            Assert.AreEqual(2, Regex.Matches(result, amica.Name).Count);
 		}
     }
 }
