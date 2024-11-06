@@ -48,12 +48,18 @@ namespace C_Sharp.Language.Event
                 // Create a new alarm
                 Alarm alarm = new Alarm();
 
+                
+
                 // Connect the two listener methods
                 Console.WriteLine("Add two listeners");
                 alarm.OnAlarmRaised += AlarmListener1;
                 alarm.OnAlarmRaised += AlarmListener2;
 
-                alarm.OnAlarmRaised2 += AlarmListener1;
+                // does not compile, can only participate,
+                // but not disturb others
+                //alarm.OnAlarmRaised = AlarmListener1;
+
+                alarm.OnAlarmRaised2 = AlarmListener1;
                 alarm.OnAlarmRaised2 += AlarmListener2;
 
                 alarm.RaiseAlarm();
