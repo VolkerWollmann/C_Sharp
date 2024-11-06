@@ -22,8 +22,7 @@ namespace C_Sharp.Language.Event
                 if (OnAlarmRaised != null)
                 {
                     OnAlarmRaised();
-                    if (OnAlarmRaised2 != null)
-                        OnAlarmRaised2();
+                    OnAlarmRaised2?.Invoke();
                 }
             }
         }
