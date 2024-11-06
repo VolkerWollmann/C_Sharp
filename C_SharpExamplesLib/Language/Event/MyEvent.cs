@@ -56,7 +56,7 @@ namespace C_Sharp.Language.Event
                 alarm.OnAlarmRaised += AlarmListener2;
 
                 // does not compile, can only participate,
-                // but not disturb others
+                // but does not disturb others
                 //alarm.OnAlarmRaised = AlarmListener1;
 
                 alarm.OnAlarmRaised2 = AlarmListener1;
