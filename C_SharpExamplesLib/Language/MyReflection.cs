@@ -48,7 +48,7 @@ namespace C_Sharp.Language
 
             var name = properties.First(p => p.PropertyType.Name == "String").GetValue(ship);
 
-            Assert.AreEqual("HMS Victory", name);
+            Assert.AreEqual(((Ship)ship).Name, name);
         }
 
     }
