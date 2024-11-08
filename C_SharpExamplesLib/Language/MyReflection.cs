@@ -43,6 +43,12 @@ namespace C_Sharp.Language
             mi.Invoke(ship, new object[] {5});
 
             Assert.AreEqual(5, ((Ship)ship).Speed);
+
+            var properties = t.GetProperties();
+
+            var name = properties.First(p => p.PropertyType.Name == "String").GetValue(ship);
+
+            Assert.AreEqual("HMS Victory", name);
         }
 
     }
