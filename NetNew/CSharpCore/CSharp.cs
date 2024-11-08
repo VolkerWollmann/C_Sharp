@@ -159,27 +159,39 @@ namespace CSharpCore
         }
         #endregion
 
-        #region #override
+        #region #override #virtual #new
 
         private class BaseClass
         {
-	        internal readonly string Name = "BaseClass";
-        }
+	        internal readonly string V1 = "B1";
+
+	        public virtual string V2 => "B2";
+
+	        internal readonly string V3 = "B3";
+		}
 
         private class DerivedClass : BaseClass
         {
 			#pragma warning disable CS0108
-			internal readonly string Name = "DerivedClass";
+			internal readonly string V1 = "D1";
 			#pragma warning restore CS0108
+
+	        public override string V2 => "D2";
+
+	        internal new readonly string V3 = "D3";
 		}
 
         public static void TestFieldHiding()
         {
             DerivedClass derivedClass = new DerivedClass();
-            Assert.AreEqual("DerivedClass", derivedClass.Name);
-            BaseClass baseClass = (BaseClass) derivedClass;
-            Assert.AreEqual("BaseClass", baseClass.Name);
-        }
+            Assert.AreEqual("D1", derivedClass.V1);
+            Assert.AreEqual("D2", derivedClass.V2);
+            Assert.AreEqual("D3", derivedClass.V3);
+			BaseClass baseClass = (BaseClass) derivedClass;
+            Assert.AreEqual("B1", baseClass.V1);
+            Assert.AreEqual("D2", baseClass.V2);
+            Assert.AreEqual("B3", baseClass.V3);
+		}
 
         #endregion
     }
