@@ -159,5 +159,28 @@ namespace CSharpCore
         }
         #endregion
 
+        #region #override
+
+        private class BaseClass
+        {
+	        internal readonly string Name = "BaseClass";
+        }
+
+        private class DerivedClass : BaseClass
+        {
+			#pragma warning disable CS0108
+			internal readonly string Name = "DerivedClass";
+			#pragma warning restore CS0108
+		}
+
+        public static void TestFieldHiding()
+        {
+            DerivedClass derivedClass = new DerivedClass();
+            Assert.AreEqual("DerivedClass", derivedClass.Name);
+            BaseClass baseClass = (BaseClass) derivedClass;
+            Assert.AreEqual("BaseClass", baseClass.Name);
+        }
+
+        #endregion
     }
 }

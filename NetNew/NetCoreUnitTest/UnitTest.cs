@@ -151,11 +151,10 @@ namespace NetCoreUnitTest
         }
 
         [Fact]
-        public void TestFloatingPointNumericTypes()
+        public void TestFieldHiding()
         {
-	        CSharp.TestFloatingPointNumericTypes();
+            CSharp.TestFieldHiding();
         }
-
 	}
 
     public class RoslynUnitTest
@@ -208,5 +207,11 @@ namespace NetCoreUnitTest
 		    double result2 = 1 / GetZero();
 			Assert.IsTrue(Double.IsInfinity(result2));
 	    }
-    }
+
+	    [Fact]
+	    public void TestFloatingPointNumericTypes()
+	    {
+		    CSharp.TestFloatingPointNumericTypes();
+	    }
+	}
 }
