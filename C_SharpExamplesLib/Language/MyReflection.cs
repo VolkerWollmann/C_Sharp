@@ -46,7 +46,7 @@ namespace C_Sharp.Language
 
             var properties = t.GetProperties();
 
-            var name = properties.First(p => p.PropertyType.Name == "String").GetValue(ship);
+            var name = properties.First(p => p.Name == "Name").GetValue(ship);
 
             Assert.AreEqual(((Ship)ship).Name, name);
         }
