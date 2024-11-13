@@ -12,7 +12,7 @@ namespace C_Sharp.Language
     [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
     public class MyLinq
 	{
-		// #linq #range #where #take
+		// #linq #range #where #take #all
 		public static void List_Range_Where_Take()
 		{
 
