@@ -167,21 +167,21 @@ namespace C_Sharp.Language.DataTypes
 			Assert.AreEqual(42, tA.GenericClassMethod());
             Assert.AreEqual(42, tB.GenericClassMethod());
 
-            // #Type checks comparissom
+            // #Type checks comparison
             var tAType = tA.GetType();
             var tBType = tB.GetType();
-            Assert.IsFalse(tAType.Equals(tBType));
+            Assert.IsFalse(tAType == tBType);
 
             var tAGenericTypeDefinition = tA.GetType().GetGenericTypeDefinition();
             var tBGenericTypeDefinition = tB.GetType().GetGenericTypeDefinition();
-            Assert.IsTrue(tAGenericTypeDefinition.Equals(tBGenericTypeDefinition));
+            Assert.IsTrue(tAGenericTypeDefinition == tBGenericTypeDefinition);
 
             var tATypeGenericTypeArgument = tAType.GenericTypeArguments[0];
             var refinedClassAType = typeof(RefinedClassA);
-            Assert.IsTrue(tATypeGenericTypeArgument.Equals(refinedClassAType));
+            Assert.IsTrue(tATypeGenericTypeArgument == refinedClassAType);
 
             var myGenericClassTypeName = typeof(MyGenericClass<>);
-            Assert.IsTrue(tAGenericTypeDefinition.Equals(myGenericClassTypeName));
+            Assert.IsTrue(tAGenericTypeDefinition == myGenericClassTypeName);
 
 
             //will not Compile
