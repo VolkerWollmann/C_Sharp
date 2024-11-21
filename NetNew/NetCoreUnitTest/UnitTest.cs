@@ -106,6 +106,7 @@ namespace NetCoreUnitTest
             MyVector.Test();
         }
 
+        // #inline data  #data
         [Theory]
         [InlineData(0)]
         [InlineData(1)]
