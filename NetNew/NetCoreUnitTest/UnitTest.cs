@@ -110,14 +110,14 @@ namespace NetCoreUnitTest
         [Theory]
         [InlineData(0)]
         [InlineData(1)]
-        public void TestTheoryExample(int i)
+        public void TestTheoryExampleInLineData(int i)
         {
             Assert.IsTrue(i< 2);
         }
 
         [Theory]
         [InlineData(new int[] { 0, 1 })]
-        public void TestTheoryExampleMemberData1(int[] i)
+        public void TestTheoryExampleInLineData2(int[] i)
         {
             foreach (int i2 in i)
                 Assert.IsTrue(i2 < 2);
@@ -131,7 +131,7 @@ namespace NetCoreUnitTest
 
         [Theory]
         [MemberData(nameof(TestData))]
-        public void TestTheoryExampleMemberData2( int i)
+        public void TestTheoryExampleMemberData( int i)
         {
             Assert.IsTrue(i < 2);
           
