@@ -8,6 +8,7 @@ using CSharpNew.ProcessCommunication;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 using LoadingAssembly;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Collections.Generic;
 
 namespace NetCoreUnitTest
 {
@@ -111,6 +112,28 @@ namespace NetCoreUnitTest
         public void TestTheoryExample(int i)
         {
             Assert.IsTrue(i< 2);
+        }
+
+        [Theory]
+        [InlineData(new int[] { 0, 1 })]
+        public void TestTheoryExampleMemberData1(int[] i)
+        {
+            foreach (int i2 in i)
+                Assert.IsTrue(i2 < 2);
+        }
+
+        public static IEnumerable<object[]> TestData =>new List<object[]> 
+        {
+            new object[] {0},
+            new object[] {1} 
+        };
+
+        [Theory]
+        [MemberData(nameof(TestData))]
+        public void TestTheoryExampleMemberData2( int i)
+        {
+            Assert.IsTrue(i < 2);
+          
         }
 
         [Fact]
