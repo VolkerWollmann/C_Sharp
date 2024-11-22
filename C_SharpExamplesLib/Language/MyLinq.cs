@@ -78,7 +78,7 @@ namespace C_Sharp.Language
 		// #linq #FirstOrDefault
 		public static void Linq_FirstOrDefault()
 		{
-			// #FirstOrDefault for value type
+			// #FirstOrDefault for value type : defaults to 0
 			int i = 42;
 			Assert.AreEqual(42, i);
 			List<int> l = new List<int>();
@@ -94,15 +94,21 @@ namespace C_Sharp.Language
             Assert.ThrowsException<InvalidOperationException>(first);
 			Assert.AreEqual(43, j);
 
-			// #FirstOrDefault for non value types
+			// #FirstOrDefault for non value types : defaults to null
 			string? s = null;
 			Assert.IsNull(s);
 			List<string> ls = new List<string>();
 			Assert.IsNotNull(ls);
 
 			s = ls.FirstOrDefault();
-
 			Assert.AreEqual(null, s);
+
+			ls.Add("donkey");
+			s =ls.FirstOrDefault( s => (s == "donkey") );
+			Assert.IsNotNull(s);
+
+			s = ls.FirstOrDefault(s => (s == "dog"));
+			Assert.IsNull(s);
 		}
 
         /// #linq #all but last #pairs #linkedList
