@@ -184,11 +184,11 @@ namespace C_Sharp.Language.DataTypes
             Assert.IsTrue(tAGenericTypeDefinition == myGenericClassTypeName);
 
 
-            //will not Compile
-            //var t3 = new GenericClass<int>();
+			//will not Compile, because int is not derived from MyGenericClass
+			//var t3 = new MyGenericClass<int>();
 
-            //create dynamic valid generic class instance
-            Type t4 = typeof(MyGenericClass<RefinedClassA>);
+			//create dynamic valid generic class instance
+			Type t4 = typeof(MyGenericClass<RefinedClassA>);
 			var t5 = Activator.CreateInstance(t4);
 			Assert.IsNotNull(t5);
 			Assert.AreEqual(42, ((MyGenericClass<RefinedClassA>)t5).GenericClassMethod());
