@@ -21,7 +21,7 @@ namespace C_Sharp.Language.DataTypes
     // #generic
 	internal class MyIntegerRandomizer : IMyIntRandomizer
 	{
-        readonly Random _random = new Random();
+		private readonly Random _random = new Random();
 		public int GetRandomElement(List<int> list)
 		{
 			int index = _random.Next(0, list.Count);
@@ -30,8 +30,8 @@ namespace C_Sharp.Language.DataTypes
 
 		public List<int> GetShuffledList(List<int> list)
 		{
-			List<int> result = new List<int>();
-			List<int> work = new List<int>();
+			List<int> result = [];
+			List<int> work = [];
 			list.ForEach(e => work.Add(e));
 			while (work.Count > 0)
 			{
@@ -46,7 +46,7 @@ namespace C_Sharp.Language.DataTypes
 
 	internal class MyStringRandomizer : IMyRandomizer<string>
 	{
-        readonly Random _random = new Random();
+		private readonly Random _random = new Random();
 		public string GetRandomElement(List<string> list)
 		{
 			int index = _random.Next(0, list.Count);
@@ -55,8 +55,8 @@ namespace C_Sharp.Language.DataTypes
 
 		public List<string> GetShuffledList(List<string> list)
 		{
-			List<string> result = new List<string>();
-			List<string> work = new List<string>();
+			List<string> result = [];
+			List<string> work = [];
 			list.ForEach(e => work.Add(e));
 			while (work.Count > 0)
 			{
@@ -71,7 +71,7 @@ namespace C_Sharp.Language.DataTypes
 
 
     // #generic #method
-    public class MyGenericInterface
+    public abstract class MyGenericInterface
 	{
 		private static readonly Random Random = new Random();
 		private static T GetRandomElement<T>(List<T> list)
@@ -82,8 +82,8 @@ namespace C_Sharp.Language.DataTypes
 
 		private static List<T> GetShuffledList<T>(List<T> list)
 		{
-			List<T> result = new List<T>();
-			List<T?> work = new List<T?>();
+			List<T> result = [];
+			List<T?> work = [];
 			list.ForEach(e => work.Add(e));
 			while( work.Count > 0 )
 			{
@@ -98,16 +98,16 @@ namespace C_Sharp.Language.DataTypes
 
 		public static void Test()
 		{
-			List<string> animals = new List<string>{ "Donkey", "Dog", "Seagull", "Cat", "Goat" };
+			List<string> animals = ["Donkey", "Dog", "Seagull", "Cat", "Goat"];
 			var oneAnimal = GetRandomElement(animals);
 			Assert.IsNotNull(oneAnimal);
 
 			var shuffledAnimals = GetShuffledList(animals);
 			Assert.IsTrue(animals.Contains(shuffledAnimals.First()));
 
-			List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
+			List<int> numbers = [1, 2, 3, 4, 5];
 			var number = GetRandomElement(numbers);
-			Assert.IsTrue( number >=1 && number <= 5);
+			Assert.IsTrue( number is >= 1 and <= 5);
 			var shuffledNumbers = GetShuffledList(numbers);
             Assert.IsTrue(numbers.Contains(shuffledNumbers.First()));
 
@@ -157,7 +157,7 @@ namespace C_Sharp.Language.DataTypes
 
 	}
 
-    public class MyGenericClassTest
+    public abstract class MyGenericClassTest
     {
         public static void Test()
         {
