@@ -106,38 +106,38 @@ namespace NetCoreUnitTest
             MyVector.Test();
         }
 
-        // #inline data  #data
-        [Theory]
-        [InlineData(0)]
-        [InlineData(1)]
-        public void TestTheoryExampleInLineData(int i)
-        {
-            Assert.IsTrue(i< 2);
-        }
+		// #inline data  #data
+		[Theory]
+		[InlineData(0)]
+		[InlineData(1)]
+		public void TestTheoryExampleInLineData(int i)
+		{
+			Assert.IsTrue(i < 2);
+		}
 
-        [Theory]
-        [InlineData(new int[] { 0, 1 })]
-        public void TestTheoryExampleInLineData2(int[] i)
-        {
-            foreach (int i2 in i)
-                Assert.IsTrue(i2 < 2);
-        }
+		[Theory]
+		[InlineData(new int[] { 0, 1 })]
+		public void TestTheoryExampleInLineData2(int[] i)
+		{
+			foreach (int i2 in i)
+				Assert.IsTrue(i2 < 2);
+		}
 
-        public static IEnumerable<object[]> TestData =>new List<object[]> 
-        {
-            new object[] {0},
-            new object[] {1} 
-        };
+		public static IEnumerable<object[]> TestData => new List<object[]>
+		{
+			new object[] {0},
+			new object[] {1}
+		};
 
-        [Theory]
-        [MemberData(nameof(TestData))]
-        public void TestTheoryExampleMemberData( int i)
-        {
-            Assert.IsTrue(i < 2);
-          
-        }
+		[Theory]
+		[MemberData(nameof(TestData))]
+		public void TestTheoryExampleMemberData(int i)
+		{
+			Assert.IsTrue(i < 2);
 
-        [Fact]
+		}
+
+		[Fact]
         public void TestDynamicLoad()
         {
             LoadingClass.Execute();
