@@ -36,8 +36,6 @@ namespace C_Sharp.Language.Task
 			int result = myTask2.Result;
 			Assert.AreEqual(16, result);
 
-            Task<int> fast16 = System.Threading.Tasks.Task.FromResult(16);
-
         }
         #endregion
 
