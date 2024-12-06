@@ -17,6 +17,8 @@ namespace C_Sharp.Language.DataTypes
             integerHashSet.Add(1);
 
             Assert.AreEqual(2, integerHashSet.Count);
+            
+            Assert.IsTrue(integerHashSet.Contains(1));
         }
 
     }
