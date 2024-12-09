@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 {
-    public class MyOptimizedDatabaseIntegerSet : MyDatabaseIntegerSet
+    public class MyOptimizedDatabaseStatementIntegerSet : MyDatabaseStatementIntegerSet
     {
         #region primitive compiler
 
@@ -100,7 +100,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             string statement = $"select {TheValue} from {TableName} where " + visitor.GetCondition();
 
             List<int> result = new List<int>();
-            _dataBaseConnection.Open();
 
             SqlCommand cmd = new SqlCommand(statement, _dataBaseConnection);
             var reader = cmd.ExecuteReader();
@@ -109,8 +108,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
                 result.Add(reader.GetInt32(0));
             }
             reader.Close();
-            _dataBaseConnection.Close();
-
+            
             return new MyIntegerSet(result);
         }
 
@@ -128,8 +126,8 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         #endregion
 
         #region Constructor
-        public MyOptimizedDatabaseIntegerSet(SqlConnection dataBaseConnection, List<int> set) : 
-            base(dataBaseConnection, set)
+        public MyOptimizedDatabaseStatementIntegerSet(string connectionString, List<int> set) : 
+            base(connectionString, set)
         {
 
         }

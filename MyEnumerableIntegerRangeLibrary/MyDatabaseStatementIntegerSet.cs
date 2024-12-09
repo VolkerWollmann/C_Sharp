@@ -15,13 +15,13 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
     /// <summary>
     /// Simulate a source, which is worth to be encapsulated for lazy linq queries.
     /// </summary>
-    public class MyDatabaseIntegerSet : IMyIntegerSet
+    public class MyDatabaseStatementIntegerSet : IMyIntegerSet
     {
         internal readonly string TableName;
         internal const string TheIndex = "theIndex";
         internal const string TheValue = "theValue";
 
-        internal SqlConnection _dataBaseConnection;
+        internal SqlConnection? _dataBaseConnection;
 
         #region IntegerRangeData
         private int _i;
@@ -32,8 +32,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         private void ExecuteNonQuery(string statement)
         {
-            _dataBaseConnection.Open();
-
             using (TransactionScope scope = new TransactionScope())
             {
                 SqlCommand command = new SqlCommand(statement, _dataBaseConnection);
@@ -41,8 +39,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
                 scope.Complete();               // enforces the commit
                 
             }
-
-            _dataBaseConnection.Close();
         }
 
         /// <summary>
@@ -53,14 +49,12 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         internal int ExecuteScalarQuery(string statement)
         {
             int result = -1;
-            _dataBaseConnection.Open();
             SqlCommand command = new SqlCommand(statement, _dataBaseConnection);
             SqlDataReader reader = command.ExecuteReader();
             if ( reader.Read() && (!reader.IsDBNull(0)))
                 result = reader.GetInt32(0);
             reader.Close();
-            _dataBaseConnection.Close();
-
+            
             return result;
         }
 
@@ -110,10 +104,11 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         public void Dispose()
         {
             DeleteTable();
+            _dataBaseConnection?.Close();
         }
 
         /// <summary>
-        /// Simulate time consuming generation of next element
+        /// Simulate time-consuming generation of next element
         /// </summary>
         /// <returns>next value</returns>
         public bool MoveNext()
@@ -185,9 +180,11 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         #region Constructor
 
-        public MyDatabaseIntegerSet(SqlConnection dataBaseConnection, List<int> set)
+        public MyDatabaseStatementIntegerSet(string connectionString, List<int> set)
         {
-            _dataBaseConnection = dataBaseConnection;
+            _dataBaseConnection = _dataBaseConnection = new SqlConnection(connectionString); 
+            _dataBaseConnection.Open();
+            
             TableName = "MyDatabaseIntegerSet" + Guid.NewGuid().ToString("N").ToUpper();
 
             // create table

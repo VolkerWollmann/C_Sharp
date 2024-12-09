@@ -154,7 +154,10 @@ namespace UnitTest
         public void Test_IQueryable_AnyWithFunctionCallConditionAsExtension()
         {
             foreach (IMyIntegerSet myIntegerSet in
-                     myIntegerSetFactory.GetIntegerSets(MyIntegerSetFactory.DesiredDatabases.Simple | MyIntegerSetFactory.DesiredDatabases.Database))
+                     myIntegerSetFactory.GetIntegerSets(
+	                     MyIntegerSetFactory.DesiredDatabases.Simple | 
+	                     MyIntegerSetFactory.DesiredDatabases.DatabaseCursor |
+	                     MyIntegerSetFactory.DesiredDatabases.DatabaseStatement))
             {
                 MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 

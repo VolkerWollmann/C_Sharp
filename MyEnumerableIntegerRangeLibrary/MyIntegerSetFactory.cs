@@ -6,44 +6,53 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyEnumerableIntegerRangeLibrary;
+using System.Data.Common;
 
 namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 {
     public class MyIntegerSetFactory
     {
+        [Flags]
         public enum DesiredDatabases
         {
             Simple = 1,
-            Database = 2,
-            DatabaseOptimized = 4
+            DatabaseCursor = 2,
+            DatabaseStatement = 4,
+            DatabaseOptimizedStatement = 8,
         }
 
-        private bool DatabaseAvailable => (_dataBaseConnection != null);
+        private readonly bool _databaseAvailable = false;
+        private string _connectionString = "";
         SqlConnection? _dataBaseConnection;
 
         private List<IMyIntegerSet> _myIntegerSets = new List<IMyIntegerSet>();
 
-        private string CreateConnectionString()
+        private string GetConnectionString()
         {
-            Settings settings = new Settings();
-            
-            string databaseServer = settings.DatabaseServer;
+	        if (_connectionString == "")
+	        {
+		        Settings settings = new Settings();
 
-            var builder = new SqlConnectionStringBuilder
-            {
-                DataSource = settings.DatabaseServer, // server address
-                InitialCatalog = settings.DatabaseName, // database name
-                IntegratedSecurity = false, // server auth(false)/win auth(true)
-                MultipleActiveResultSets = false, // activate/deactivate MARS
-                PersistSecurityInfo = true, // hide login credentials
-                UserID = settings.DatabaseUser, // user name
-                Password = settings.DatabasePassword, // password
-                ApplicationName = this.GetType().Name,  // MyIntegerSetFactory
-                Encrypt = false,
-                TrustServerCertificate = true
-            };
-            return builder.ConnectionString;
+		        string databaseServer = settings.DatabaseServer;
 
+		        var builder = new SqlConnectionStringBuilder
+		        {
+			        DataSource = settings.DatabaseServer, // server address
+			        InitialCatalog = settings.DatabaseName, // database name
+			        IntegratedSecurity = false, // server auth(false)/win auth(true)
+			        MultipleActiveResultSets = false, // activate/deactivate MARS
+			        PersistSecurityInfo = true, // hide login credentials
+			        UserID = settings.DatabaseUser, // user name
+			        Password = settings.DatabasePassword, // password
+			        ApplicationName = this.GetType().Name, // MyIntegerSetFactory
+			        Encrypt = false,
+			        TrustServerCertificate = true
+		        };
+
+		        _connectionString = builder.ConnectionString;
+	        }
+
+	        return _connectionString;
         }
 
         private bool TestDatabaseConnection()
@@ -53,12 +62,11 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
             try
             {
-                string connectionString = CreateConnectionString();
+                string connectionString = GetConnectionString();
                 _dataBaseConnection = new SqlConnection(connectionString);
                 _dataBaseConnection.Open();
-                _dataBaseConnection.Close();
-
-            }
+				_dataBaseConnection.Close();
+			}
             catch (Exception)
             {
                 _dataBaseConnection = null;
@@ -71,36 +79,47 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         public void Dispose()
         {
             _myIntegerSets.ForEach( mdis => mdis.Dispose() );
+            _dataBaseConnection = null;
         }
         public MyIntegerSetFactory()
         {
-            TestDatabaseConnection();
+            _databaseAvailable = TestDatabaseConnection();
         }
 
-        public List<IMyIntegerSet> GetIntegerSets(DesiredDatabases desiredDatabases)
+        public List<IMyIntegerSet> GetIntegerSets(DesiredDatabases desiredDatabases = DesiredDatabases.Simple |
+                                                                                      DesiredDatabases.DatabaseCursor | 
+                                                                                      DesiredDatabases.DatabaseStatement |
+                                                                                      DesiredDatabases.DatabaseOptimizedStatement)
         {
             List<IMyIntegerSet> result = new List<IMyIntegerSet>();
             if (( desiredDatabases & DesiredDatabases.Simple) == DesiredDatabases.Simple)
             {
-                var myIntegerSet = new MyIntegerSet(new List<int> { 1, 2, 3 });
+                var myIntegerSet = new MyIntegerSet([1, 2, 3]);
                 _myIntegerSets.Add(myIntegerSet);
                 result.Add(myIntegerSet);
                 
             }
 
-            if (!DatabaseAvailable || ( _dataBaseConnection == null ))
+            if (!_databaseAvailable) 
                 return result;
 
-            if ((desiredDatabases & DesiredDatabases.Database) == DesiredDatabases.Database)
-            {
-                var myDatabaseIntegerSet = new MyDatabaseIntegerSet(_dataBaseConnection, new List<int> { 1, 2, 3 });
+			if ((desiredDatabases & DesiredDatabases.DatabaseCursor) == DesiredDatabases.DatabaseCursor)
+			{
+                var myDatabaseIntegerSet = new MyDatabaseCursorIntegerSet( _connectionString, [1, 2, 3]);
                 _myIntegerSets.Add(myDatabaseIntegerSet);
                 result.Add(myDatabaseIntegerSet);
             }
 
-            if ((desiredDatabases & DesiredDatabases.DatabaseOptimized) == DesiredDatabases.DatabaseOptimized)
+			if ((desiredDatabases & DesiredDatabases.DatabaseStatement) == DesiredDatabases.DatabaseStatement)
+			{
+				var myDatabaseIntegerSet = new MyDatabaseStatementIntegerSet(_connectionString, [1, 2, 3]);
+				_myIntegerSets.Add(myDatabaseIntegerSet);
+				result.Add(myDatabaseIntegerSet);
+			}
+
+			if ((desiredDatabases & DesiredDatabases.DatabaseOptimizedStatement) == DesiredDatabases.DatabaseOptimizedStatement)
             {
-                var myOptimizedDatabaseIntegerSet = new MyOptimizedDatabaseIntegerSet(_dataBaseConnection, new List<int> { 1, 2, 3 });
+                var myOptimizedDatabaseIntegerSet = new MyOptimizedDatabaseStatementIntegerSet(_connectionString, new List<int> { 1, 2, 3 });
                 _myIntegerSets.Add(myOptimizedDatabaseIntegerSet);
                 result.Add(myOptimizedDatabaseIntegerSet);
             }
@@ -108,39 +127,21 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             return result;
         }
 
-        public List<IMyIntegerSet> GetIntegerSets()
-        {
-            return GetIntegerSets(DesiredDatabases.Simple | DesiredDatabases.Database | DesiredDatabases.DatabaseOptimized);
-        }
-
         public bool DatabaseIntegerSetsAvailable()
         {
-            return DatabaseAvailable;
+            return _databaseAvailable;
         }
 
         public MyIntegerSet GetIntegerSet()
         {
-            return new MyIntegerSet(new List<int> { 1, 2, 3 });
+            return new MyIntegerSet([1, 2, 3]);
         }
 
-        public MyDatabaseIntegerSet GetDatabaseIntegerSet()
+        public MyOptimizedDatabaseStatementIntegerSet GetOptimizedDatabaseIntegerSet()
         {
-            if (DatabaseAvailable && (_dataBaseConnection != null))
+            if (_databaseAvailable)
             {
-                var result = new MyDatabaseIntegerSet(_dataBaseConnection, [1, 2, 3]);
-                _myIntegerSets.Add(result);
-                return result;
-            }
-
-            throw new Exception("No database connection");
-        }
-
-
-        public MyOptimizedDatabaseIntegerSet GetOptimizedDatabaseIntegerSet()
-        {
-            if (DatabaseAvailable && (_dataBaseConnection != null))
-            {
-                var result = new MyOptimizedDatabaseIntegerSet(_dataBaseConnection, new List<int> {1, 2, 3});
+                var result = new MyOptimizedDatabaseStatementIntegerSet(_connectionString, [1, 2, 3]);
                 _myIntegerSets.Add(result);
                 return result;
             }
