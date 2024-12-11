@@ -132,7 +132,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             return _databaseAvailable;
         }
 
-        public MyMemoryIntegerSet GetIntegerSet()
+        public MyMemoryIntegerSet GetMemoryIntegerSet()
         {
             return new MyMemoryIntegerSet([1, 2, 3]);
         }

@@ -91,7 +91,7 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable_WhereComplex()
         {
-            IMyIntegerSet myIntegerSet = myIntegerSetFactory.GetIntegerSet();
+            IMyIntegerSet myIntegerSet = myIntegerSetFactory.GetMemoryIntegerSet();
 
             MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
@@ -130,7 +130,7 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable_Where_Where()
         {
-            IMyIntegerSet myIntegerSet = myIntegerSetFactory.GetIntegerSet();
+            IMyIntegerSet myIntegerSet = myIntegerSetFactory.GetMemoryIntegerSet();
 
             MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 
@@ -145,7 +145,7 @@ namespace UnitTest
         [TestMethod]
         public void Test_IQueryable_AnyDelegated()
         {
-            IMyIntegerSet myIntegerSet = myIntegerSetFactory.GetIntegerSet();
+            IMyIntegerSet myIntegerSet = myIntegerSetFactory.GetMemoryIntegerSet();
 
             MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
 

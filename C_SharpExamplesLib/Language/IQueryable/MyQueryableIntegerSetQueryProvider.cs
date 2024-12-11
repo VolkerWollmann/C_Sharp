@@ -127,7 +127,7 @@ namespace C_Sharp.Language.IQueryable
             throw new Exception("Cannot evaluate constant expression");
         }
 
-        private object ExecuteNonWhereExpression(Expression expression, bool isEnumerable)
+        private object ExecuteNonWhereExpression(Expression expression, bool enumerableNeeded)
         {
             // is something, that we do not want to do on our own
             // so we provide an expression with explicit integer set within instead of MyQueryAbleIntegerSet  
@@ -137,8 +137,10 @@ namespace C_Sharp.Language.IQueryable
             ExpressionTreeModifier treeCopier = new ExpressionTreeModifier(queryableIntegers);
             Expression newExpressionTree = treeCopier.Visit(expression);
 
-            if (isEnumerable)
-                return queryableIntegers.Provider.CreateQuery(newExpressionTree);
+            if (enumerableNeeded)
+            {
+	            return queryableIntegers.Provider.CreateQuery(newExpressionTree);
+            }
             else
                 return queryableIntegers.Provider.Execute(newExpressionTree);
         }
@@ -172,7 +174,7 @@ namespace C_Sharp.Language.IQueryable
 
         #endregion
         // Executes the expression tree that is passed to it. 
-        internal object Execute(Expression expression, bool isEnumerable)
+        internal object Execute(Expression expression, bool enumerableNeeded)
         {
             ConstantExpression constantExpression = expression as ConstantExpression;
             if (constantExpression != null)
@@ -187,7 +189,7 @@ namespace C_Sharp.Language.IQueryable
             if (whereExpression != null)
                 return ExecuteWhereExpression(expression, whereExpression);
 
-            return ExecuteNonWhereExpression(expression, isEnumerable);
+            return ExecuteNonWhereExpression(expression, enumerableNeeded);
         }
 
         internal MyQueryableIntegerSetQueryContext(MyQueryableIntegerSet<TOutputType> myQueryableIntegerSet)
@@ -251,13 +253,13 @@ namespace C_Sharp.Language.IQueryable
 
         public TResult Execute<TResult>(Expression expression)
         {
-            bool isEnumerable = (typeof(TResult).Name == "IEnumerable`1");
+            bool enumerableNeeded = (typeof(TResult).Name == "IEnumerable`1");
 
             MyQueryableIntegerSetQueryContext<TOutputType> myQueryableIntegerSetQueryContext =
                 new MyQueryableIntegerSetQueryContext<TOutputType>(MyQueryableIntegerSet);
 
             
-            var result =  (TResult)myQueryableIntegerSetQueryContext.Execute(expression, isEnumerable);
+            var result =  (TResult)myQueryableIntegerSetQueryContext.Execute(expression, enumerableNeeded);
             return result;
         }
         #endregion
