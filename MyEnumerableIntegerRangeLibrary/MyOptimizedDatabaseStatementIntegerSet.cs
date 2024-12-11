@@ -109,7 +109,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             }
             reader.Close();
             
-            return new MyIntegerSet(result);
+            return new MyMemoryIntegerSet(result);
         }
 
         public override int Sum()

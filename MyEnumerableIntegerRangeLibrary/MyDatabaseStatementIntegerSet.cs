@@ -141,7 +141,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
                     result.Add(Current);
             }
 
-            return new MyIntegerSet(result);
+            return new MyMemoryIntegerSet(result);
         }
 
         public virtual int Sum()

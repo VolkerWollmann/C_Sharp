@@ -155,7 +155,7 @@ namespace UnitTest
         {
             foreach (IMyIntegerSet myIntegerSet in
                      myIntegerSetFactory.GetIntegerSets(
-	                     MyIntegerSetFactory.DesiredDatabases.Simple | 
+	                     MyIntegerSetFactory.DesiredDatabases.Memory | 
 	                     MyIntegerSetFactory.DesiredDatabases.DatabaseCursor |
 	                     MyIntegerSetFactory.DesiredDatabases.DatabaseStatement))
             {

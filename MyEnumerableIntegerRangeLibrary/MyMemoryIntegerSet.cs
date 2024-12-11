@@ -12,7 +12,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
     /// <summary>
     /// Simulate a source, which is worth to be encapsulated for lazy linq queries.
     /// </summary>
-    public class MyIntegerSet : IMyIntegerSet
+    public class MyMemoryIntegerSet : IMyIntegerSet
     {
         Guid guid = Guid.NewGuid();
 
@@ -65,7 +65,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
                     result.Add(Current);
             }
 
-            return new MyIntegerSet(result);
+            return new MyMemoryIntegerSet(result);
         }
 
         public int Sum()
@@ -104,7 +104,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         #region Constructor
 
-            public MyIntegerSet(List<int> set)
+            public MyMemoryIntegerSet(List<int> set)
         {
             _set = set;
             Reset();

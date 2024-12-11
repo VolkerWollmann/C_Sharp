@@ -15,7 +15,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         [Flags]
         public enum DesiredDatabases
         {
-            Simple = 1,
+            Memory = 1,
             DatabaseCursor = 2,
             DatabaseStatement = 4,
             DatabaseOptimizedStatement = 8,
@@ -86,15 +86,15 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             _databaseAvailable = TestDatabaseConnection();
         }
 
-        public List<IMyIntegerSet> GetIntegerSets(DesiredDatabases desiredDatabases = DesiredDatabases.Simple |
+        public List<IMyIntegerSet> GetIntegerSets(DesiredDatabases desiredDatabases = DesiredDatabases.Memory |
                                                                                       DesiredDatabases.DatabaseCursor | 
                                                                                       DesiredDatabases.DatabaseStatement |
                                                                                       DesiredDatabases.DatabaseOptimizedStatement)
         {
             List<IMyIntegerSet> result = new List<IMyIntegerSet>();
-            if (( desiredDatabases & DesiredDatabases.Simple) == DesiredDatabases.Simple)
+            if (( desiredDatabases & DesiredDatabases.Memory) == DesiredDatabases.Memory)
             {
-                var myIntegerSet = new MyIntegerSet([1, 2, 3]);
+                var myIntegerSet = new MyMemoryIntegerSet([1, 2, 3]);
                 _myIntegerSets.Add(myIntegerSet);
                 result.Add(myIntegerSet);
                 
@@ -132,9 +132,9 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             return _databaseAvailable;
         }
 
-        public MyIntegerSet GetIntegerSet()
+        public MyMemoryIntegerSet GetIntegerSet()
         {
-            return new MyIntegerSet([1, 2, 3]);
+            return new MyMemoryIntegerSet([1, 2, 3]);
         }
 
         public MyOptimizedDatabaseStatementIntegerSet GetOptimizedDatabaseIntegerSet()
