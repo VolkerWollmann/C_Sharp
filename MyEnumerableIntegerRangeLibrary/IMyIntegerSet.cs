@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 {
-    public interface IMyIntegerSet : IEnumerator<int>
-    {
+    public interface IMyIntegerSet : IEnumerator<int>, IEnumerable<int>
+	{
         IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression);
 
         int Sum();

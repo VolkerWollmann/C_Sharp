@@ -89,10 +89,10 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             }
         }
 
-        #endregion
+		#endregion
 
-        #region IMyIntegerSet
-        public override IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
+		#region IMyIntegerSet
+		public override IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
         {
             ExpressionCompileVisitor visitor = new ExpressionCompileVisitor();
             visitor.Visit(lambdaExpression);

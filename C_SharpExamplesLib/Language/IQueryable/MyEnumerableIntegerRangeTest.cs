@@ -51,5 +51,19 @@ namespace C_Sharp.Language.IQueryable
             var d = myIntegerRange.ToList();
             Assert.IsNotNull(d);
         }
-    }
+
+        public static void Test_IEnumerable_FromMemoryIntegerSet()
+        {
+	        MyMemoryIntegerSet myMemoryIntegerSet = new MyMemoryIntegerSet([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+			int test = 0;
+			foreach (int i in myMemoryIntegerSet)
+			{
+				test++;
+				if (i > 5)
+					break;
+				Assert.IsTrue(test < 6);
+			}
+		}
+
+	}
 }

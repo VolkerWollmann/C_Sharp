@@ -49,11 +49,18 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         public int Current => _set[_i];
 
         object IEnumerator.Current => ((IEnumerator<int>)this).Current;
-        #endregion
+		#endregion
 
-        #region IMyIntegerSet
+		#region IEnumerable<int>
+        // bad implementation because only one iterator possible
+		IEnumerator IEnumerable.GetEnumerator() => this;
 
-        public IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
+		public IEnumerator<int> GetEnumerator() => this;
+		#endregion
+
+		#region IMyIntegerSet
+
+		public IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
         {
             List<int> result = new List<int>();
             Func<int, bool> compiledExpression = (Func<int, bool>)lambdaExpression.Compile();

@@ -39,7 +39,13 @@ namespace UnitTest
             MyEnumerableIntegerRangeTest.Test_IEnumerable();
         }
 
-        [TestMethod]
+		[TestMethod]
+		public void Test_IEnumerable_FromMemoryIntegerSet()
+		{
+			MyEnumerableIntegerRangeTest.Test_IEnumerable_FromMemoryIntegerSet();
+		}
+
+		[TestMethod]
         public void Test_IQueryable()
         {
             foreach (IMyIntegerSet myIntegerSet in myIntegerSets)

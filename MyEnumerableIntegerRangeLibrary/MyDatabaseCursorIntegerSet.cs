@@ -111,6 +111,13 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 		object IEnumerator.Current => ((IEnumerator<int>)this).Current;
 		#endregion
 
+		#region IEnumerable<int>
+		// bad implementation because only one iterator possible
+		IEnumerator IEnumerable.GetEnumerator() => this;
+
+		public IEnumerator<int> GetEnumerator() => this;
+		#endregion
+
 		#region IMyIntegerSet
 
 		public virtual IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
