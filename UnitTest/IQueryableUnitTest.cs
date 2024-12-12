@@ -74,12 +74,26 @@ namespace UnitTest
             }
         }
 
-        /// <summary>
-        /// Test function for debugging purpose 
-        /// </summary>
-        /// <param name="i">number to test</param>
-        /// <returns>true, if i == 2</returns>
-        private bool TestForTwo(int i)
+		[TestMethod]
+		public void Test_IQueryable_Where_ForEach()
+		{
+			foreach (IMyIntegerSet myIntegerSet in myIntegerSets)
+			{
+				MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+				var expression = myQueryableIntegerSet.Where(i => i < 2);
+				foreach (var i in expression)
+				{
+					Assert.IsTrue(i < 2);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Test function for debugging purpose 
+		/// </summary>
+		/// <param name="i">number to test</param>
+		/// <returns>true, if i == 2</returns>
+		private bool TestForTwo(int i)
         {
             return i == 2;
         }
