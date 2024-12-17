@@ -221,7 +221,7 @@ namespace C_Sharp.Language.IQueryable
             }
             catch (System.Reflection.TargetInvocationException tie)
             {
-                throw tie.InnerException;
+                throw tie.InnerException ?? tie;
             }
         }
 
