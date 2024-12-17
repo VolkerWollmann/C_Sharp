@@ -80,7 +80,7 @@ namespace C_Sharp.Language.IQueryable
             {
                 if (!done)
                 {
-                    ConstantExpression c = expression.Arguments[0] as ConstantExpression;
+                    ConstantExpression? c = expression.Arguments[0] as ConstantExpression;
                     if (c != null)
                     {
                         done = true;
@@ -118,8 +118,7 @@ namespace C_Sharp.Language.IQueryable
 
         private object EvaluateConstantExpression(ConstantExpression constantExpression)
         {
-            MyQueryableIntegerSet<TOutputType> myQueryableIntegerSet = (MyQueryableIntegerSet<TOutputType>)constantExpression.Value;
-            if (myQueryableIntegerSet != null)
+            if (constantExpression.Value is MyQueryableIntegerSet<TOutputType> myQueryableIntegerSet)
             {
                 return myQueryableIntegerSet.ToList();
             }
@@ -176,7 +175,7 @@ namespace C_Sharp.Language.IQueryable
         // Executes the expression tree that is passed to it. 
         internal object Execute(Expression expression, bool enumerableNeeded)
         {
-            ConstantExpression constantExpression = expression as ConstantExpression;
+            ConstantExpression? constantExpression = expression as ConstantExpression;
             if (constantExpression != null)
                 return EvaluateConstantExpression(constantExpression);
            
@@ -185,7 +184,7 @@ namespace C_Sharp.Language.IQueryable
 
             // Find the call to Where() and get the lambda expression predicate.
             InnermostExpressionFinder whereFinder = new InnermostExpressionFinder( "Where");
-            MethodCallExpression whereExpression = whereFinder.GetInnermostExpression(expression);
+            MethodCallExpression? whereExpression = whereFinder.GetInnermostExpression(expression);
             if (whereExpression != null)
                 return ExecuteWhereExpression(expression, whereExpression);
 
