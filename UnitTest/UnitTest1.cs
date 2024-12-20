@@ -41,6 +41,12 @@ namespace UnitTest
         }
 
 		[TestMethod]
+		public void DictionaryDoubleUsage()
+		{
+			CSharp6.DictionaryDoubleUsage();
+		}
+
+		[TestMethod]
 		public void Assert_Test()
 		{
 			CSharp6.Assert_Test();

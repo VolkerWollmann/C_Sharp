@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language
@@ -57,6 +58,7 @@ namespace C_Sharp.Language
 			return new Dictionary<string, int> { ["X"] = 5, ["Y"] = 6 };
 		}
 
+		
 		private static void NullableType()
 		{
 			// #nullable : b might be true, false, null 
@@ -145,6 +147,29 @@ namespace C_Sharp.Language
             //string? t = null;
             //TODO nullable references
         }
+
+		// #Dictionary double usage
+		public static void DictionaryDoubleUsage()
+		{
+			Tuple<int, string> macchi = new Tuple<int, string>(1, "Macchi");
+			Tuple<int, string> amica = new Tuple<int, string>(2, "Amcia");
+			Tuple<int, string> heidi = new Tuple<int, string>(3, "Heidi");
+
+			List<Tuple<int, string>> friends = new List<Tuple<int, string>>() {macchi, amica, heidi};
+
+			Dictionary<int, Tuple<int, string>> friendsByNumber = new Dictionary<int, Tuple<int, string>>();
+			Dictionary<string, Tuple<int, string>> friendsByName = new Dictionary<string, Tuple<int, string>>();
+
+			foreach (var friend in friends)
+			{
+				friendsByNumber.Add(friend.Item1, friend);
+				friendsByName.Add(friend.Item2, friend);
+			}
+			
+			Assert.AreEqual( macchi, friendsByNumber[1] );
+			Assert.AreEqual(amica, friendsByName["Amcia"]);
+		}
+
 
 	}
 }
