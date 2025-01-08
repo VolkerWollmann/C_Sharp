@@ -157,7 +157,7 @@ namespace C_Sharp.Language.XML
 								break;
 							case XmlNodeType.EndElement:
 								indent = indent.Substring(0, indent.Length - 3);
-								Console.WriteLine($"{indent}/{reader.Name}");
+								Console.WriteLine($"{indent} /{reader.Name}");
 								break;
 						}
 					}
