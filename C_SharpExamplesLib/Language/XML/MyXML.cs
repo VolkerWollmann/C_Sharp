@@ -143,7 +143,24 @@ namespace C_Sharp.Language.XML
 			{
 				try
 				{
-					while (reader.Read()) { }
+					string indent = "";
+					while (reader.Read())
+					{
+						switch (reader.NodeType)
+						{
+							case XmlNodeType.Element:
+								Console.WriteLine($"{indent} {reader.Name}");
+                                indent = indent + "   ";
+								break;
+							case XmlNodeType.Text:
+								Console.WriteLine($"{indent}{reader.Value}");
+								break;
+							case XmlNodeType.EndElement:
+								indent = indent.Substring(0, indent.Length - 3);
+								Console.WriteLine($"{indent}/{reader.Name}");
+								break;
+						}
+					}
 					Console.WriteLine("XML file is valid.");
 				}
 				catch (XmlException ex)
