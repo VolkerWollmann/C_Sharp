@@ -10,22 +10,28 @@ namespace C_Sharp.Language.IQueryable
     public class MyEnumerableIntegerRangeTest
     {
 
-        public static void Test_IEnumerable()
-        {
-            // uses public IEnumerator<int> GetEnumerator()
-            // uses public bool MoveNext()
-            // uses int IEnumerator<int>.Current
-            MyEnumerableIntegerRange myIntegerRange = new MyEnumerableIntegerRange(1, 10);
-            int test = 0;
-            foreach (int i in myIntegerRange)
-            {
-                test++;
-                if (i > 5)
-                    break;
-                Assert.IsTrue(test < 6);
-            }
+	    public static void Test_IEnumerable()
+	    {
+		    // uses public IEnumerator<int> GetEnumerator()
+		    // uses public bool MoveNext()
+		    // uses int IEnumerator<int>.Current
+		    MyEnumerableIntegerRange myIntegerRange = new MyEnumerableIntegerRange(1, 10);
+		    int test = 0;
+		    foreach (int i in myIntegerRange)
+		    {
+			    test++;
+			    if (i > 5)
+				    break;
+			    Assert.IsTrue(test < 6);
+		    }
 
-            foreach (int i in myIntegerRange)
+	    }
+
+		public static void Test_TwoEnumeratorsOnIEnumerable()
+		{
+			MyEnumerableIntegerRange myIntegerRange = new MyEnumerableIntegerRange(1, 10);
+			int test = 0;
+			foreach (int i in myIntegerRange)
             {
                 test = i;
                 foreach (int j in myIntegerRange)
@@ -52,7 +58,19 @@ namespace C_Sharp.Language.IQueryable
             Assert.IsNotNull(d);
         }
 
-        public static void Test_IEnumerable_FromMemoryIntegerSet()
+		public static void Test_IEnumerable_Where()
+		{
+			MyEnumerableIntegerRange myIntegerRange = new MyEnumerableIntegerRange(1, 10);
+
+			List<int> test = [2, 4, 6, 8, 10];
+			foreach (int i in myIntegerRange.Where( i => ( i % 2 == 0 )))
+			{
+				Assert.IsTrue( test.Contains(i) );
+			}
+		}
+
+
+		public static void Test_IEnumerable_FromMemoryIntegerSet()
         {
 	        MyMemoryIntegerSet myMemoryIntegerSet = new MyMemoryIntegerSet([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 			int test = 0;
