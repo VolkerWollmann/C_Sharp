@@ -11,7 +11,10 @@ using System.IO.MemoryMappedFiles;
 
 namespace CSharpNew.ProcessCommunication
 {
-    public class MemoryMappedFile
+	/// <summary>
+	/// #MemoryMappedFile
+	/// </summary>
+	public class MemoryMappedFile
     {
         private static Siommf.MemoryMappedFile _memoryMappedFile;
         private static void MemoryMappedFileWriter()
