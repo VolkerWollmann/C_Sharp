@@ -73,7 +73,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		#endregion
 
-		#region IEnumerator<int>
+		#region IEnumerator<int> support
 		public void Dispose()
 		{
 			_reader?.Close();
@@ -109,18 +109,24 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 		}
 
 		object IEnumerator.Current => ((IEnumerator<int>)this).Current;
-		#endregion
+        #endregion
 
-		#region IEnumerable<int>
-		// bad implementation because only one iterator possible
-		IEnumerator IEnumerable.GetEnumerator() => this;
+        #region IEnumerable<int>
+        public IEnumerator<int> GetEnumerator()
+        {
+            return new MyDatabaseCursorIntegerSetEnumerator(this);
+        }
 
-		public IEnumerator<int> GetEnumerator() => this;
-		#endregion
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return new MyDatabaseCursorIntegerSetEnumerator(this);
+        }
 
-		#region IMyIntegerSet
+        #endregion
 
-		public virtual IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
+        #region IMyIntegerSet
+
+        public virtual IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
 		{
 			List<int> result = new List<int>();
 			Func<int, bool> compiledExpression = (Func<int, bool>)lambdaExpression.Compile();
@@ -189,4 +195,41 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 		#endregion
 
 	}
+
+    public class MyDatabaseCursorIntegerSetEnumerator : IEnumerator<int>
+    {
+        private readonly MyDatabaseCursorIntegerSet _myDatabaseCursorIntegerSet;
+        private int _i = -1;
+        #region IEnumerator<int>
+        public void Dispose()
+        {
+        }
+
+        public bool MoveNext()
+        {
+            return _myDatabaseCursorIntegerSet.MoveNext();
+        }
+
+        public void Reset()
+        {
+            _i = -1;
+        }
+
+        public int Current => _myDatabaseCursorIntegerSet.Current;
+
+        object IEnumerator.Current => Current;
+
+        #endregion
+
+        #region Constructor
+
+        public MyDatabaseCursorIntegerSetEnumerator(MyDatabaseCursorIntegerSet set)
+        {
+            _myDatabaseCursorIntegerSet = set;
+            _i = -1;
+        }
+        #endregion
+
+
+    }
 }
