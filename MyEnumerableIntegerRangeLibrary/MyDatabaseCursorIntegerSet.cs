@@ -108,7 +108,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 			}
 		}
 
-		object IEnumerator.Current => ((IEnumerator<int>)this).Current;
         #endregion
 
         #region IEnumerable<int>
@@ -199,7 +198,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
     public class MyDatabaseCursorIntegerSetEnumerator : IEnumerator<int>
     {
         private readonly MyDatabaseCursorIntegerSet _myDatabaseCursorIntegerSet;
-        private int _i = -1;
+        
         #region IEnumerator<int>
         public void Dispose()
         {
@@ -212,7 +211,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         public void Reset()
         {
-            _i = -1;
+			_myDatabaseCursorIntegerSet.Reset();
         }
 
         public int Current => _myDatabaseCursorIntegerSet.Current;
@@ -226,7 +225,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         public MyDatabaseCursorIntegerSetEnumerator(MyDatabaseCursorIntegerSet set)
         {
             _myDatabaseCursorIntegerSet = set;
-            _i = -1;
         }
         #endregion
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 {
-    public interface IMyIntegerSet : IEnumerator<int>, IEnumerable<int>
+    public interface IMyIntegerSet :  IEnumerable<int>
 	{
         IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression);
 
@@ -18,6 +18,8 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         bool Any(LambdaExpression lambdaExpression);
 
         bool Any();
+
+        void Dispose();
 
     }
 }

@@ -48,19 +48,25 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         public int Current => _set[_i];
 
-        object IEnumerator.Current => ((IEnumerator<int>)this).Current;
-		#endregion
 
-		#region IEnumerable<int>
+        #endregion
+
+        #region IEnumerable<int>
         // bad implementation because only one iterator possible
-		IEnumerator IEnumerable.GetEnumerator() => this;
+        public IEnumerator<int> GetEnumerator()
+        {
+            return new MyMemoryIntegerSetEnumerator(this);
+        }
 
-		public IEnumerator<int> GetEnumerator() => this;
-		#endregion
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return new MyMemoryIntegerSetEnumerator(this);
+        }
+        #endregion
 
-		#region IMyIntegerSet
+        #region IMyIntegerSet
 
-		public IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
+        public IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
         {
             List<int> result = new List<int>();
             Func<int, bool> compiledExpression = (Func<int, bool>)lambdaExpression.Compile();
@@ -118,6 +124,42 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         }
         #endregion
+
+    }
+
+    public class MyMemoryIntegerSetEnumerator : IEnumerator<int>
+    {
+        private readonly MyMemoryIntegerSet _myMemoryIntegerSet;
+
+        #region IEnumerator<int>
+        public void Dispose()
+        {
+        }
+
+        public bool MoveNext()
+        {
+            return _myMemoryIntegerSet.MoveNext();
+        }
+
+        public void Reset()
+        {
+            _myMemoryIntegerSet.Reset();
+        }
+
+        public int Current => _myMemoryIntegerSet.Current;
+
+        object IEnumerator.Current => Current;
+
+        #endregion
+
+        #region Constructor
+
+        public MyMemoryIntegerSetEnumerator(MyMemoryIntegerSet set)
+        {
+            _myMemoryIntegerSet = set;
+        }
+        #endregion
+
 
     }
 }

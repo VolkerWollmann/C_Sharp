@@ -14,13 +14,14 @@ using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 namespace C_Sharp.Language.IQueryable
 {
     
-    public class MyQueryableIntegerSet<TOutputType> : IQueryable<TOutputType>
+    public class MyQueryableIntegerSet<TOutputType> : IQueryable<int>
     {
         private IMyIntegerSet _myIntegerSet;
+        private IEnumerator<int> _myIntegerSetEnumerator;
 
-        public IEnumerator<TOutputType> GetEnumerator()
+        public IEnumerator<int> GetEnumerator()
         {
-            return (Provider.Execute<IEnumerable<TOutputType>>(Expression)).GetEnumerator();
+            return (Provider.Execute<IEnumerable<int>>(Expression)).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -40,16 +41,15 @@ namespace C_Sharp.Language.IQueryable
 
         #region IList<int>
 
-        public List<TOutputType> ToList()
+        public List<int> ToList()
         {
-            List<TOutputType> result = new List<TOutputType>();
+            List<int> result = new List<int>();
 
-            _myIntegerSet.Reset();
-            while (_myIntegerSet.MoveNext())
-            {
-                int current = _myIntegerSet.Current;
-                TOutputType castCurrent = (TOutputType)Convert.ChangeType(current, typeof(TOutputType));
-                result.Add(castCurrent);
+            _myIntegerSetEnumerator.Reset();
+            while (_myIntegerSetEnumerator.MoveNext())
+            { 
+                TOutputType castCurrent = (TOutputType)Convert.ChangeType(_myIntegerSetEnumerator.Current, typeof(TOutputType));
+                result.Add(_myIntegerSetEnumerator.Current);
             }
 
             return result;
@@ -59,10 +59,12 @@ namespace C_Sharp.Language.IQueryable
         {
             List<int> result = new List<int>();
 
-            _myIntegerSet.Reset();
-            while (_myIntegerSet.MoveNext())
+            _myIntegerSetEnumerator.Reset();
+            while (_myIntegerSetEnumerator.MoveNext())
             {
-                result.Add(_myIntegerSet.Current);
+                TOutputType castCurrent = (TOutputType)Convert.ChangeType(_myIntegerSetEnumerator.Current, typeof(TOutputType));
+                int currentInt = Convert.ToInt32(castCurrent);
+                result.Add(currentInt);
             }
 
             return result;
@@ -95,6 +97,8 @@ namespace C_Sharp.Language.IQueryable
         public MyQueryableIntegerSet(IMyIntegerSet myIntegerSet)
         {
             _myIntegerSet = myIntegerSet;
+            _myIntegerSetEnumerator = (IEnumerator<int>?)myIntegerSet.GetEnumerator();
+
             Provider = new MyQueryableIntegerSetQueryProvider<TOutputType>(this);
             Expression = Expression.Constant(this);
         }
