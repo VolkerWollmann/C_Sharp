@@ -255,7 +255,10 @@ namespace UnitTest
 
                 var result = myQueryableIntegerSet.Select(e => e);
 
-                Assert.IsTrue(result.All(e => (e.GetType()) == typeof(int)));
+                foreach (var e in result)
+                {
+	                Assert.IsTrue(e is int);
+                }
             }
         }
 
@@ -269,8 +272,16 @@ namespace UnitTest
 
                 var result = myQueryableIntegerSet.Select(e => e * 2);
 
-                // #Assert #list #equal
-                CollectionAssert.AreEqual(result.ToList(), new List<int> {2, 4, 6});
+                var controlSet = new List<int> {2, 4, 6};
+
+                var resultList = new List<int> { };
+                foreach (var e in result)
+                {
+					resultList.Add(e);
+
+				}
+				// #Assert #list #equal
+				CollectionAssert.AreEqual(resultList, controlSet);
             }
         }
 
