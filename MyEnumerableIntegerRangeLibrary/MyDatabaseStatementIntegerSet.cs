@@ -188,11 +188,17 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             return MoveNext();
         }
 
-        #endregion
+		public IEnumerable<int> AsEnumerable()
+		{
+			return this;
+		}
 
-        #region Constructor
 
-        public MyDatabaseStatementIntegerSet(string connectionString, List<int> set)
+		#endregion
+
+		#region Constructor
+
+		public MyDatabaseStatementIntegerSet(string connectionString, List<int> set)
         {
             _dataBaseConnection = _dataBaseConnection = new SqlConnection(connectionString); 
             _dataBaseConnection.Open();

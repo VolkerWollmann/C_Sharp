@@ -113,11 +113,16 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             return MoveNext();
         }
 
-        #endregion
+		public IEnumerable<int> AsEnumerable()
+		{
+			return this;
+		}
 
-        #region Constructor
+		#endregion
 
-            public MyMemoryIntegerSet(List<int> set)
+		#region Constructor
+
+		public MyMemoryIntegerSet(List<int> set)
         {
             _set = set;
             Reset();

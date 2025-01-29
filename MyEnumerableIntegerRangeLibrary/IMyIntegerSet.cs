@@ -21,5 +21,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         void Dispose();
 
-    }
+        IEnumerable<int> AsEnumerable();
+
+	}
 }

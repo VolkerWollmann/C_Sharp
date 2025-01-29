@@ -199,7 +199,7 @@ namespace C_Sharp.Language.IQueryable
 
     public class MyQueryableIntegerSetQueryProvider<TOutputType> : IQueryProvider
     {
-        public readonly MyQueryableIntegerSet<TOutputType> MyQueryableIntegerSet;
+	    private readonly MyQueryableIntegerSet<TOutputType> MyQueryableIntegerSet;
 
         #region private Methods
         // Executes the expression tree that is passed to it. 
