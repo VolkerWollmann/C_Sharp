@@ -63,13 +63,13 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 		{
 			_myBaseEnumerator = enumerator;
 			_whereExpression = whereExpression;
-
-			// apply lambda/where on the items and get a filtered MyIntegerSet
-			// get lambda expression
-			_lambdaExpression = (LambdaExpression)((UnaryExpression)(whereExpression.Arguments[1])).Operand;
+			if (whereExpression != null)
+			{
+				// apply lambda/where on the items and get a filtered MyIntegerSet
+				// get lambda expression
+				_lambdaExpression = (LambdaExpression) ((UnaryExpression) (whereExpression.Arguments[1])).Operand;
+			}
 		}
 		#endregion
-
-
 	}
 }
