@@ -12,12 +12,12 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace C_Sharp.Language.IQueryable2
 {
-	public class MyQueryableIntegerSetQueryProvider2<TOutputType> : IQueryProvider
+	public class MyQueryableIntegerEnumeratorQueryProvider2<TOutputType> : IQueryProvider
 	{
-		private MyQueryableIntegerSet2<TOutputType> _myQueryableIntegerSet;
-		public MyQueryableIntegerSetQueryProvider2(MyQueryableIntegerSet2<TOutputType> QueryableIntegerSet)
+		private MyQueryableIntegerEnumerator2<TOutputType> _myQueryableIntegerEnumerator;
+		public MyQueryableIntegerEnumeratorQueryProvider2(MyQueryableIntegerEnumerator2<TOutputType> queryableIntegerEnumerator)
 		{
-			_myQueryableIntegerSet = QueryableIntegerSet;
+			_myQueryableIntegerEnumerator = queryableIntegerEnumerator;
 		}
 
 		public System.Linq.IQueryable CreateQuery(Expression expression)
@@ -33,11 +33,8 @@ namespace C_Sharp.Language.IQueryable2
 			InnermostExpressionFinder whereFinder = new InnermostExpressionFinder("Where");
 			MethodCallExpression? whereExpression = whereFinder.GetInnermostExpression(expression);
 
-			MyQueryableIntegerEnumerator2<int> x = new MyQueryableIntegerEnumerator2<int>(
-				(IEnumerator<int>)_myQueryableIntegerSet.GetEnumerator(), whereExpression);
-			
 			//return new MyQueryableIntegerSet2<TElement>(_myQueryableIntegerSet2);
-			return (IQueryable<TElement>)x;
+			throw new NotImplementedException();
 		}
 
 		public object Execute(Expression expression)
