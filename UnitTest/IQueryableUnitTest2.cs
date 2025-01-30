@@ -87,5 +87,34 @@ namespace UnitTest
 
 			CollectionAssert.AreEqual( new List<int>{1,2}, result);
 		}
+
+
+		/// <summary>
+		/// Test function for debugging purpose 
+		/// </summary>
+		/// <param name="i">number to test</param>
+		/// <returns>true, if i == 2</returns>
+		private bool TestForTwo(int i)
+		{
+			return i == 2;
+		}
+
+		private bool TestFuerZwei(int i)
+		{
+			return i == 2;
+		}
+
+		[TestMethod]
+		public void Test_IQueryable_Where_Where()
+		{
+			IMyIntegerSet myIntegerSet = _myIntegerSetFactory.GetMemoryIntegerSet();
+
+			MyQueryableIntegerSet2<int> myQueryableIntegerSet = new MyQueryableIntegerSet2<int>(myIntegerSet);
+
+			var expression = myQueryableIntegerSet.Where(i => TestForTwo(i)).Where(i => TestFuerZwei(i));
+			var result = expression.ToList();
+			Assert.AreEqual(1, result.Count);
+			Assert.AreEqual(2, result[0]);
+		}
 	}
 }

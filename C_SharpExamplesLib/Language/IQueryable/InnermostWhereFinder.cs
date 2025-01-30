@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using C_Sharp.Language.IQueryable2;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace C_Sharp.Language.IQueryable
@@ -16,6 +17,13 @@ namespace C_Sharp.Language.IQueryable
 		private string _innerMostExpressionName = "Where";
 		private MethodCallExpression? _innermostExpression = null;
 
+		private List<Type> _innerMostTypes = new List<Type>()
+		{
+			typeof(MyQueryableIntegerSet<int>),
+			typeof(MyQueryableIntegerSet2<int>),
+			typeof(MyQueryableIntegerEnumerator2<int>)
+		};
+		
 		public MethodCallExpression? GetInnermostExpression(Expression expression)
 		{
 			Visit(expression);
@@ -24,8 +32,9 @@ namespace C_Sharp.Language.IQueryable
 
 		protected override Expression VisitMethodCall(MethodCallExpression expression)
 		{
+			bool x = _innerMostTypes.Contains(expression.Arguments[0].Type);
 			if (expression.Method.Name == "Where" &&
-			    expression.Arguments[0].Type.Name.StartsWith("MyQueryableIntegerSet"))
+			    _innerMostTypes.Contains(expression.Arguments[0].Type))
 				_innermostExpression = expression;
 
 			Visit(expression.Arguments[0]);

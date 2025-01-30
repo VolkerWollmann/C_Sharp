@@ -33,8 +33,10 @@ namespace C_Sharp.Language.IQueryable2
 			InnermostExpressionFinder whereFinder = new InnermostExpressionFinder("Where");
 			MethodCallExpression? whereExpression = whereFinder.GetInnermostExpression(expression);
 
-			//return new MyQueryableIntegerSet2<TElement>(_myQueryableIntegerSet2);
-			throw new NotImplementedException();
+			MyQueryableIntegerEnumerator2<int> x = new MyQueryableIntegerEnumerator2<int>(
+				(IEnumerator<int>)_myQueryableIntegerEnumerator.GetEnumerator(), whereExpression);
+
+			return (IQueryable<TElement>)x;
 		}
 
 		public object Execute(Expression expression)
