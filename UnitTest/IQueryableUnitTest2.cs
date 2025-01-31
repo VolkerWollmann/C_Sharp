@@ -62,26 +62,29 @@ namespace UnitTest
 		[TestMethod]
 		public void Test_IQueryable_ForEach()
 		{
-			IMyIntegerSet myIntegerSet = _myIntegerSetFactory.GetMemoryIntegerSet();
-
-			MyQueryableIntegerSet2<int> myQueryableIntegerSet = new MyQueryableIntegerSet2<int>(myIntegerSet);
-			foreach (var i in myQueryableIntegerSet)
+			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
-				Assert.IsTrue(i < 4);
+				MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+				var expression = myQueryableIntegerSet.Where(i => i < 2);
+				foreach (var i in expression)
+				{
+					Assert.IsTrue(i < 2);
+				}
 			}
 
 		}
 
-		[TestMethod]
+	    [TestMethod]
 		public void Test_IQueryable_Where_ForEach()
 		{
-			IMyIntegerSet myIntegerSet = _myIntegerSetFactory.GetMemoryIntegerSet();
-
-			MyQueryableIntegerSet2<int> myQueryableIntegerSet = new MyQueryableIntegerSet2<int>(myIntegerSet);
-			var expression = myQueryableIntegerSet.Where(i => i < 2);
-			foreach (var i in expression)
+			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
-				Assert.IsTrue(i < 4);
+				MyQueryableIntegerSet2<int> myQueryableIntegerSet = new MyQueryableIntegerSet2<int>(myIntegerSet);
+				var expression = myQueryableIntegerSet.Where(i => i < 2);
+				foreach (var i in expression)
+				{
+					Assert.IsTrue(i < 4);
+				}
 			}
 		}
 
@@ -139,5 +142,24 @@ namespace UnitTest
 			Assert.AreEqual(1, result.Count);
 			Assert.AreEqual(2, result[0]);
 		}
+
+		[TestMethod]
+		//[Ignore]
+		public void Test_IQueryable_Select_Simple()
+		{
+			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+			{
+
+				MyQueryableIntegerSet2<int> myQueryableIntegerSet = new MyQueryableIntegerSet2<int>(myIntegerSet);
+
+				var result = myQueryableIntegerSet.Select(e => e);
+
+				foreach (var e in result)
+				{
+					Assert.IsTrue(e is int);
+				}
+			}
+		}
+
 	}
 }
