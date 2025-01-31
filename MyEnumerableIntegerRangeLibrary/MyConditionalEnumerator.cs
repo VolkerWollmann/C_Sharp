@@ -19,7 +19,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 	public class MyConditionalEnumerator : IEnumerator<int>
 	{
 		private readonly IEnumerator<int> _myBaseEnumerator;
-		private readonly Expression? _whereExpression = null;
+		private readonly Expression? _expression = null;
 		private readonly LambdaExpression? _lambdaExpression =null;
 
 		#region IEnumerator<int>
@@ -59,15 +59,29 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		#region Constructor
 
-		public MyConditionalEnumerator(IEnumerator<int> enumerator, MethodCallExpression? whereExpression)
+		public MyConditionalEnumerator(IEnumerator<int> enumerator, Expression? expression)
 		{
 			_myBaseEnumerator = enumerator;
-			_whereExpression = whereExpression;
-			if (whereExpression != null)
+			_expression = expression;
+			if (_expression != null)
 			{
-				// apply lambda/where on the items and get a filtered MyIntegerSet
-				// get lambda expression
-				_lambdaExpression = (LambdaExpression) ((UnaryExpression) (whereExpression.Arguments[1])).Operand;
+				if (_expression is MethodCallExpression methodCallExpression)
+				{
+					// apply lambda/where on the items and get a filtered MyIntegerSet
+					// get lambda expression
+					_lambdaExpression =
+						(LambdaExpression) ((UnaryExpression) (methodCallExpression.Arguments[1])).Operand;
+				}
+				else if (_expression is UnaryExpression unaryExpression)
+				{
+					_lambdaExpression = (LambdaExpression)unaryExpression.Operand;
+					;
+				}
+				else
+				{
+					throw new ArgumentException(
+						"whereExpression must be a method call expression with a lambda expression as the second argument.");
+				}
 			}
 		}
 		#endregion

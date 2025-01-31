@@ -52,6 +52,13 @@ namespace C_Sharp.Language.IQueryable2
 			using var enumerator = _myQueryableIntegerSet.GetEnumerator();
 			return enumerator.MoveNext();
 		}
+
+		private bool Any(Expression conditionExpression)
+		{
+			using var enumerator = _myQueryableIntegerSet.GetEnumerator();
+			using var enumerator2 = new MyConditionalEnumerator((IEnumerator<int>)enumerator, conditionExpression);
+			return enumerator2.MoveNext();
+		}
 		#endregion
 
 		public TResult Execute<TResult>(Expression expression)
@@ -59,8 +66,15 @@ namespace C_Sharp.Language.IQueryable2
 			// Check for any
 			if (expression is MethodCallExpression methodCallExpression)
 			{
-				if ( typeof(TResult) == typeof(bool))
-					return (TResult)(object)Any();
+				if (typeof(TResult) == typeof(bool))
+				{
+					if ( methodCallExpression.Arguments.Count == 1 )
+						return (TResult) (object) Any();
+					else
+					{
+						return (TResult) (object)Any(methodCallExpression.Arguments[1]);
+					}
+				}
 			}
 			throw new NotImplementedException();
 		}

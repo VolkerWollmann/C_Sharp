@@ -188,7 +188,6 @@ namespace UnitTest
 				var result = expression;
 
 				Assert.AreEqual(result, true);
-				Assert.Fail("Not implemented");
 			}
 		}
 
