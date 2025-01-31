@@ -164,14 +164,48 @@ namespace UnitTest
 		[TestMethod]
 		public void Test_IQueryable_Any()
 		{
-			IMyIntegerSet myIntegerSet = _myIntegerSetFactory.GetMemoryIntegerSet();
+			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+			{
 
-			MyQueryableIntegerSet2<int> myQueryableIntegerSet = new MyQueryableIntegerSet2<int>(myIntegerSet);
+				MyQueryableIntegerSet2<int> myQueryableIntegerSet = new MyQueryableIntegerSet2<int>(myIntegerSet);
 
-			var expression = myQueryableIntegerSet.Any();
-			var result = expression;
+				var expression = myQueryableIntegerSet.Any();
+				var result = expression;
 
-			Assert.AreEqual(result, true);
+				Assert.AreEqual(result, true);
+			}
+
+		}
+
+		[TestMethod]
+		public void Test_IQueryable_AnyWithSimpleExpressionConditionAsExtension()
+		{
+			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+			{
+				MyQueryableIntegerSet2<int> myQueryableIntegerSet = new MyQueryableIntegerSet2<int>(myIntegerSet);
+
+				var expression = myQueryableIntegerSet.Any(i => i < 2);
+				var result = expression;
+
+				Assert.AreEqual(result, true);
+				Assert.Fail("Not implemented");
+			}
+		}
+
+		[TestMethod]
+		public void Test_IQueryable_Where_Any()
+		{
+			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+			{
+
+				MyQueryableIntegerSet2<int> myQueryableIntegerSet = new MyQueryableIntegerSet2<int>(myIntegerSet);
+
+				// ReSharper disable once ReplaceWithSingleCallToAny
+				var expression = myQueryableIntegerSet.Where( i => i<2).Any();
+				var result = expression;
+
+				Assert.AreEqual(result, true);
+			}
 
 		}
 	}

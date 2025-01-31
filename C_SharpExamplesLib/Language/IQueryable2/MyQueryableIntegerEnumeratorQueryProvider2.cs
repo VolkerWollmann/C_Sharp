@@ -44,8 +44,20 @@ namespace C_Sharp.Language.IQueryable2
 			throw new NotImplementedException();
 		}
 
+		private bool Any()
+		{
+			using var enumerator = _myQueryableIntegerEnumerator.GetEnumerator();
+			return enumerator.MoveNext();
+		}
+
 		public TResult Execute<TResult>(Expression expression)
 		{
+			// Check for any
+			if (expression is MethodCallExpression methodCallExpression)
+			{
+				if (typeof(TResult) == typeof(bool))
+					return (TResult)(object)Any();
+			}
 			throw new NotImplementedException();
 		}
 	}
