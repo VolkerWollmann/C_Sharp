@@ -74,6 +74,24 @@ namespace C_Sharp.Language.IQueryable2
 		}
 		#endregion
 
+		#region Max
+
+		private int Max()
+		{
+			using var enumerator = _myQueryableIntegerEnumerator.GetEnumerator();
+			enumerator.Reset();
+			int max = Int32.MinValue;
+			while (enumerator.MoveNext())
+			{
+				int value = (int)(object)enumerator.Current!;
+				max = Math.Max(max, value);
+			}
+
+			return max;
+		}
+
+		#endregion
+
 		public TResult Execute<TResult>(Expression expression)
 		{
 			// Check for any
@@ -88,7 +106,11 @@ namespace C_Sharp.Language.IQueryable2
 			// Check for sum
 			if (expression is MethodCallExpression { Method.Name: "Sum", Arguments.Count: 1 })
 				return (TResult)(object)Sum();
-			
+
+			// Check for max
+			if (expression is MethodCallExpression { Method.Name: "Max", Arguments.Count: 1 })
+				return (TResult)(object)Max();
+
 			throw new NotImplementedException();
 		}
 	}
