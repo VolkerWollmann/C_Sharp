@@ -61,21 +61,38 @@ namespace C_Sharp.Language.IQueryable2
 		}
 		#endregion
 
+		#region Sum
+
+		private int Sum()
+		{
+			using var enumerator = _myQueryableIntegerSet.GetEnumerator();
+			enumerator.Reset();
+			int sum = 0;
+			while (enumerator.MoveNext())
+			{
+				sum += (int)(object)enumerator.Current!;
+			}
+
+			return sum;
+		}
+
+		#endregion
+
 		public TResult Execute<TResult>(Expression expression)
 		{
 			// Check for any
-			if (expression is MethodCallExpression methodCallExpression)
+			if (expression is MethodCallExpression {Method.Name: "Any"} anyCallExpression)
 			{
-				if (typeof(TResult) == typeof(bool))
-				{
-					if ( methodCallExpression.Arguments.Count == 1 )
-						return (TResult) (object) Any();
-					else
-					{
-						return (TResult) (object)Any(methodCallExpression.Arguments[1]);
-					}
-				}
+				if (anyCallExpression.Arguments.Count == 1)
+					return (TResult) (object) Any();
+					
+				return (TResult) (object) Any(anyCallExpression.Arguments[1]);
 			}
+
+			// Check for sum
+			if (expression is MethodCallExpression { Method.Name: "Sum", Arguments.Count: 1}) 
+				return (TResult)(object)Sum();
+			
 			throw new NotImplementedException();
 		}
 	}

@@ -207,5 +207,19 @@ namespace UnitTest
 			}
 
 		}
+
+		[TestMethod]
+		public void Test_IQueryable_Sum()
+		{
+			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+			{
+
+				MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+
+				var sum = myQueryableIntegerSet.Sum();
+
+				Assert.IsTrue(sum == 6);
+			}
+		}
 	}
 }
