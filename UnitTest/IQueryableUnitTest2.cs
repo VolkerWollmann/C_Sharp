@@ -161,5 +161,18 @@ namespace UnitTest
 			}
 		}
 
+		[TestMethod]
+		public void Test_IQueryable_Any()
+		{
+			IMyIntegerSet myIntegerSet = _myIntegerSetFactory.GetMemoryIntegerSet();
+
+			MyQueryableIntegerSet2<int> myQueryableIntegerSet = new MyQueryableIntegerSet2<int>(myIntegerSet);
+
+			var expression = myQueryableIntegerSet.Any();
+			var result = expression;
+
+			Assert.AreEqual(result, true);
+
+		}
 	}
 }
