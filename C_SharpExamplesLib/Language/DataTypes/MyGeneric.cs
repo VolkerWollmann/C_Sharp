@@ -176,6 +176,7 @@ namespace C_Sharp.Language.DataTypes
             var tBGenericTypeDefinition = tB.GetType().GetGenericTypeDefinition();
             Assert.IsTrue(tAGenericTypeDefinition == tBGenericTypeDefinition);
 
+			// #generic type information
             var tATypeGenericTypeArgument = tAType.GenericTypeArguments[0];
             var refinedClassAType = typeof(RefinedClassA);
             Assert.IsTrue(tATypeGenericTypeArgument == refinedClassAType);
