@@ -138,6 +138,29 @@ namespace UnitTest
 		}
 
 		[TestMethod]
+		public void Test_IQueryable_Select_IntegerFunction()
+		{
+			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+			{
+
+				MyQueryableIntegerSet2<int> myQueryableIntegerSet = new MyQueryableIntegerSet2<int>(myIntegerSet);
+
+				var result = myQueryableIntegerSet.Select(e => e * 2);
+
+				var controlSet = new List<int> { 2, 4, 6 };
+
+				var resultList = new List<int> { };
+				foreach (var e in result)
+				{
+					resultList.Add(e);
+
+				}
+				// #Assert #list #equal
+				CollectionAssert.AreEqual(resultList, controlSet);
+			}
+		}
+
+		[TestMethod]
 		public void Test_IQueryable_Any()
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
