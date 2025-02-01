@@ -32,8 +32,7 @@ namespace C_Sharp.Language.IQueryable
 
 		protected override Expression VisitMethodCall(MethodCallExpression expression)
 		{
-			bool x = _innerMostTypes.Contains(expression.Arguments[0].Type);
-			if (expression.Method.Name == "Where" &&
+			if (expression.Method.Name == _innerMostExpressionName &&
 			    _innerMostTypes.Contains(expression.Arguments[0].Type))
 				_innermostExpression = expression;
 

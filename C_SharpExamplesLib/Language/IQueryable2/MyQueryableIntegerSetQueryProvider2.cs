@@ -27,8 +27,8 @@ namespace C_Sharp.Language.IQueryable2
 
 		public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
 		{
-			if (typeof(TElement) != typeof(int))
-				throw new NotImplementedException();
+			//if (typeof(TElement) != typeof(int))
+			//	throw new NotImplementedException();
 
 			InnermostExpressionFinder whereFinder = new InnermostExpressionFinder("Where");
 			MethodCallExpression? whereExpression = whereFinder.GetInnermostExpression(expression);
@@ -36,10 +36,28 @@ namespace C_Sharp.Language.IQueryable2
 			if (whereExpression != null)
 			{
 				MyQueryableIntegerEnumerator2<int> x = new MyQueryableIntegerEnumerator2<int>(
-					(IEnumerator<int>) _myQueryableIntegerSet.GetEnumerator(), whereExpression);
+					_myQueryableIntegerSet.GetEnumerator(), whereExpression);
 
 				//return new MyQueryableIntegerSet2<TElement>(_myQueryableIntegerSet2);
 				return (IQueryable<TElement>) x;
+			}
+
+			InnermostExpressionFinder selectFinder = new InnermostExpressionFinder("Select");
+			MethodCallExpression? selectExpression = selectFinder.GetInnermostExpression(expression);
+			if (selectExpression != null)
+			{
+				UnaryExpression unaryExpression = (UnaryExpression) (selectExpression.Arguments[1]);
+				var x3 = unaryExpression.Type;
+				var x31 = x3.GetGenericArguments();
+				var x321 = x31[0].GenericTypeArguments[0].GetType();
+				var x322 = x31[0].GenericTypeArguments[1];
+
+				// Get the runtime type
+				Type tt = typeof(int);
+				// Create a generic List<T> dynamically
+				Type listType = typeof(List<>).MakeGenericType(tt);
+				object listInstance = Activator.CreateInstance(listType);
+				;
 			}
 
 			throw new NotImplementedException("CreateQuery");
