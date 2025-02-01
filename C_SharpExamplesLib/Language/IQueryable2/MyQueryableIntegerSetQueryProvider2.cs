@@ -12,10 +12,10 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace C_Sharp.Language.IQueryable2
 {
-	public class MyQueryableIntegerSetQueryProvider2<TOutputType> : IQueryProvider
+	public class MyQueryableIntegerSetQueryProvider2 : IQueryProvider
 	{
-		private MyQueryableIntegerSet2<TOutputType> _myQueryableIntegerSet;
-		public MyQueryableIntegerSetQueryProvider2(MyQueryableIntegerSet2<TOutputType> QueryableIntegerSet)
+		private MyQueryableIntegerSet2 _myQueryableIntegerSet;
+		public MyQueryableIntegerSetQueryProvider2(MyQueryableIntegerSet2 QueryableIntegerSet)
 		{
 			_myQueryableIntegerSet = QueryableIntegerSet;
 		}
