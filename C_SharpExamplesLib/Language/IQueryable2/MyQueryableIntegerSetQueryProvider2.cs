@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using C_Sharp.Language.IQueryable;
 using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using MyEnumerableIntegerRangeLibrary;
 
 namespace C_Sharp.Language.IQueryable2
 {
@@ -47,18 +48,21 @@ namespace C_Sharp.Language.IQueryable2
 			if (selectExpression != null)
 			{
 				UnaryExpression unaryExpression = (UnaryExpression) (selectExpression.Arguments[1]);
-				var x3 = unaryExpression.Type;
-				var x31 = x3.GetGenericArguments();
-				var x321 = x31[0].GenericTypeArguments[0].GetType();
-				var x322 = x31[0].GenericTypeArguments[1];
+				var unaryExpressionType = unaryExpression.Type;
+				var parametersTypes = unaryExpressionType.GetGenericArguments();
+				var argumentType = parametersTypes[0].GenericTypeArguments[0];
+				var resultType = parametersTypes[0].GenericTypeArguments[1];
+				
+                IEnumerator<int> enumerator = _myQueryableIntegerSet.GetEnumerator();
 
-				// Get the runtime type
-				Type tt = typeof(int);
-				// Create a generic List<T> dynamically
-				Type listType = typeof(List<>).MakeGenericType(tt);
-				object listInstance = Activator.CreateInstance(listType);
-				;
-			}
+                Type genericType = typeof(MySelectEnumerator<,>).MakeGenericType(resultType,argumentType);
+                object instance = Activator.CreateInstance(genericType, enumerator, (Expression)unaryExpression);
+
+                MyQueryableIntegerEnumerator2<int> x = new MyQueryableIntegerEnumerator2<int>(
+                    _myQueryableIntegerSet.GetEnumerator(), whereExpression);
+
+                return (IQueryable<TElement>)instance;
+            }
 
 			throw new NotImplementedException("CreateQuery");
 		}
