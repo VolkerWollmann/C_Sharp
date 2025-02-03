@@ -14,9 +14,9 @@ using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 
 namespace C_Sharp.Language.IQueryable2
 {
-    public class MyQueryableIntegerSet2Factory
+    public class MyQueryableFactory
     {
-        public static IQueryable<int> GetMyQueryableQueryableSet(IMyIntegerSet myIntegerSet)
+        public static IQueryable<int> GetMyQueryable(IMyIntegerSet myIntegerSet)
         {
             return new MyQueryableIntegerSet2<int>(myIntegerSet);
         }
