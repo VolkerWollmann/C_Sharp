@@ -12,7 +12,7 @@ namespace MyEnumerableIntegerRangeLibrary.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.11.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.12.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -49,7 +49,7 @@ namespace MyEnumerableIntegerRangeLibrary.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("anw")]
+        [global::System.Configuration.DefaultSettingValueAttribute("!Esel1111")]
         public string DatabasePassword {
             get {
                 return ((string)(this["DatabasePassword"]));
@@ -61,7 +61,7 @@ namespace MyEnumerableIntegerRangeLibrary.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("BONN\\SQLEXPRESS")]
+        [global::System.Configuration.DefaultSettingValueAttribute("VM-WO-VS2022\\SQLEXPRESS")]
         public string DatabaseServer {
             get {
                 return ((string)(this["DatabaseServer"]));
