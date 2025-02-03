@@ -13,10 +13,10 @@ using MyEnumerableIntegerRangeLibrary;
 
 namespace C_Sharp.Language.IQueryable2
 {
-	public class MyQueryableIntegerSetQueryProvider2 : IQueryProvider
+	public class MyQueryableIntegerSetQueryProvider2<BaseType> : IQueryProvider
 	{
-		private MyQueryableIntegerSet2 _myQueryableIntegerSet;
-		public MyQueryableIntegerSetQueryProvider2(MyQueryableIntegerSet2 QueryableIntegerSet)
+		private IEnumerable<BaseType> _myQueryableIntegerSet;
+		public MyQueryableIntegerSetQueryProvider2(IEnumerable<BaseType> QueryableIntegerSet)
 		{
 			_myQueryableIntegerSet = QueryableIntegerSet;
 		}
@@ -37,7 +37,7 @@ namespace C_Sharp.Language.IQueryable2
 			if (whereExpression != null)
 			{
 				MyQueryableIntegerEnumerator2<int> x = new MyQueryableIntegerEnumerator2<int>(
-					_myQueryableIntegerSet.GetEnumerator(), whereExpression);
+                    ((IEnumerable<int>)_myQueryableIntegerSet).GetEnumerator(), whereExpression);
 
 				//return new MyQueryableIntegerSet2<TElement>(_myQueryableIntegerSet2);
 				return (IQueryable<TElement>) x;
@@ -53,13 +53,13 @@ namespace C_Sharp.Language.IQueryable2
 				var argumentType = parametersTypes[0].GenericTypeArguments[0];
 				var resultType = parametersTypes[0].GenericTypeArguments[1];
 				
-                IEnumerator<int> enumerator = _myQueryableIntegerSet.GetEnumerator();
+                IEnumerator<int> enumerator = (IEnumerator<int>)_myQueryableIntegerSet.GetEnumerator();
 
                 Type genericType = typeof(MySelectEnumerator<,>).MakeGenericType(resultType,argumentType);
                 object instance = Activator.CreateInstance(genericType, enumerator, (Expression)unaryExpression);
 
-                MyQueryableIntegerEnumerator2<int> x = new MyQueryableIntegerEnumerator2<int>(
-                    _myQueryableIntegerSet.GetEnumerator(), whereExpression);
+                //MyQueryableIntegerEnumerator2<int> x = new MyQueryableIntegerEnumerator2<int>(
+                //    _myQueryableIntegerSet.GetEnumerator(), whereExpression);
 
                 return (IQueryable<TElement>)instance;
             }
