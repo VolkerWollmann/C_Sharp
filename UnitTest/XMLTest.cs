@@ -32,7 +32,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void XmlSearializer()
+		public void XmlSerializer()
 		{
 			MyXml.XmlSearializerExample();
 		}

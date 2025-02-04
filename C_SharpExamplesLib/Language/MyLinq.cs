@@ -178,7 +178,7 @@ namespace C_Sharp.Language
 			return !divisors.Any(d => (i % d == 0));
 		}
 
-		// #linq #parallel  #pLinq #WithDegreeOfParallelism #rime #asparallel
+		// #linq #parallel  #pLinq #WithDegreeOfParallelism #rime #as parallel
 		public static void TestParallelLinq()
 		{
 			var numbers = Enumerable.Range(10000000, 500).ToList();
@@ -286,7 +286,7 @@ namespace C_Sharp.Language
 		}
 
 
-        // #linq #index #groupby
+        // #linq #index #group by
 		public static void LinqChunking()
 		{
 			List<int> testList = new List<int>() { 1, 2, 3, 4, 5 };

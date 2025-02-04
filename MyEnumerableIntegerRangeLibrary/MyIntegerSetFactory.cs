@@ -71,7 +71,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         public void Dispose()
         {
-            _myIntegerSets.ForEach( mdis => mdis.Dispose() );
+            _myIntegerSets.ForEach( integerSet => integerSet.Dispose() );
             _dataBaseConnection = null;
         }
         public MyIntegerSetFactory()

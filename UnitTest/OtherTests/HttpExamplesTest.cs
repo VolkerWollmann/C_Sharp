@@ -19,7 +19,7 @@ namespace UnitTest
         }
 
 		[TestMethod]
-		public void SerialisationWithRefrences()
+		public void SerialisationWithReferences()
 		{
 			SerialisationExample.DoSerialisationWithReferences();
 		}
