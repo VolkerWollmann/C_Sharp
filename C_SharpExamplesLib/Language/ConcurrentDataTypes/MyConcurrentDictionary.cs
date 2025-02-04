@@ -18,10 +18,10 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
             for (int i = 1; i < 10; i++)
                 dictionary.TryAdd(i, "A");
 
-            var tasks = new List<System.Threading.Tasks.Task>();
+            var tasks = new List<Task>();
             foreach (string t in new List<string> { "Cosumer1", "Consumer2" })
             {
-                tasks.Add(new System.Threading.Tasks.Task(
+                tasks.Add(new Task(
                     () =>
                     {
                         Random random = new Random();
@@ -31,7 +31,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
                             {
                                 Console.WriteLine($"{t} updated {i}");
                             }
-                            System.Threading.Thread.Sleep(random.Next(0, 10));
+                            Thread.Sleep(random.Next(0, 10));
                         }
                     }
                 ));
@@ -40,7 +40,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
             tasks[0].Start();
             tasks[1].Start();
 
-            System.Threading.Tasks.Task.WhenAll(tasks).Wait();
+            Task.WhenAll(tasks).Wait();
 
             Console.WriteLine("Test_ConcurrentDictionary end");
         }
