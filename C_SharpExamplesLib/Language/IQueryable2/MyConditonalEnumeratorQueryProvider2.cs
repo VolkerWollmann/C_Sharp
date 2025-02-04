@@ -30,7 +30,30 @@ namespace C_Sharp.Language.IQueryable2
 				return (IQueryable<TElement>) x;
 			}
 
-			throw new NotImplementedException("CreateQuery");
+            InnermostExpressionFinder selectFinder = new InnermostExpressionFinder("Select");
+            MethodCallExpression? selectExpression = selectFinder.GetInnermostExpression(expression);
+            if (selectExpression != null)
+            {
+                UnaryExpression unaryExpression = (UnaryExpression)(selectExpression.Arguments[1]);
+                var unaryExpressionType = unaryExpression.Type;
+                var parametersTypes = unaryExpressionType.GetGenericArguments();
+                var argumentType = parametersTypes[0].GenericTypeArguments[0];
+                var resultType = parametersTypes[0].GenericTypeArguments[1];
+
+                IEnumerator<TType> enumerator = (IEnumerator<TType>)_myQueryableIntegerEnumerator.GetEnumerator();
+
+                MySelectorEnumerator<TElement, TType> e = new MySelectorEnumerator<TElement, TType>(enumerator, selectExpression);
+                //Type genericType = typeof(MySelectorEnumerator<,>).MakeGenericType(resultType,argumentType);
+                //object instance = Activator.CreateInstance(genericType, enumerator, (Expression)unaryExpression);
+
+                var x = new MySelectorEnumeratorQueryable2<TElement, TType>(e);
+                //MyQueryableIntegerEnumerator2<int> x = new MyQueryableIntegerEnumerator2<int>(
+                //    _myQueryableIntegerSet.GetEnumerator(), whereExpression);
+
+                return (IQueryable<TElement>)x;
+            }
+
+            throw new NotImplementedException("CreateQuery");
 		}
 
 		public object Execute(Expression expression)

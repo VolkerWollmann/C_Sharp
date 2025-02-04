@@ -176,6 +176,29 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void Test_IQueryable_Where_Select_String()
+        {
+            List<int> l = [1, 2, 3];
+            MyMemoryIntegerSet myIntegerSet = new MyMemoryIntegerSet(l);
+
+            var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+
+            var result = myQueryableIntegerSet.Where(x => ( x==1 || x == 3 ) ).Select(e => "Donkey_" + e);
+
+            var controlSet = new List<string> { "Donkey_1", "Donkey_3" };
+
+            var resultList = new List<string> { };
+            foreach (var e in result)
+            {
+                resultList.Add(e);
+
+            }
+            // #Assert #list #equal
+            CollectionAssert.AreEqual(resultList, controlSet);
+        }
+
+
+        [TestMethod]
         public void Test_IQueryable_Select_Tuple()
         {
             foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
