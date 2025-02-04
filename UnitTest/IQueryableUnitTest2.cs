@@ -187,7 +187,7 @@ namespace UnitTest
         {
             foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
             {
-                MyQueryableIntegerSet<int> myQueryableIntegerSet = new MyQueryableIntegerSet<int>(myIntegerSet);
+                var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
 
                 var result = myQueryableIntegerSet.Select(e => Tuple.Create("A", e));
 
