@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace AccessibilityProject
+namespace AccessibilityProjectCore
 {
     /// <summary>
     /// #internal	: current assembly

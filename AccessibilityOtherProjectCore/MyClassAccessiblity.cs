@@ -1,16 +1,16 @@
-﻿using AccessibilityProject;
+﻿using AccessibilityProjectCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace AccessibilityOtherProject
-{ 
-	public static class MyClassAccessibilityTest
-	{
+namespace AccessibilityOtherProjectCore
+{
+    public static class MyClassAccessibilityTest
+    {
         /// <summary>
         /// Accesses classes from referenced project AccessibilityProject.
         /// </summary>
 		public static void Test()
-		{
-            MyClassAccessibility mcaA = new MyClassAccessibility {MyPublicNumber = 42};
+        {
+            MyClassAccessibility mcaA = new MyClassAccessibility { MyPublicNumber = 42 };
 
             MyClassAccessibilityTestB mcaB = new MyClassAccessibilityTestB
             {
@@ -23,5 +23,5 @@ namespace AccessibilityOtherProject
             Assert.IsNotNull(mcaA);
             Assert.IsNotNull(mcaB);
         }
-	}
-} 
+    }
+}

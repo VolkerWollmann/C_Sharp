@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
-using ThisAccessibilityProject = AccessibilityProject;
-using OtherAccessibilityProject = AccessibilityOtherProject;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using C_Sharp.Language.IQueryable;
 using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
