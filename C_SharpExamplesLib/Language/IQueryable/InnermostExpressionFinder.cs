@@ -8,7 +8,7 @@ namespace C_Sharp.Language.IQueryable
 	/// </summary>
 	internal class InnermostExpressionFinder : ExpressionVisitor
 	{
-		private string _innerMostExpressionName = "Where";
+		private readonly string _innerMostExpressionName;
 		private MethodCallExpression? _innermostExpression = null;
 
 		private List<Type> _innerMostTypes = new List<Type>()

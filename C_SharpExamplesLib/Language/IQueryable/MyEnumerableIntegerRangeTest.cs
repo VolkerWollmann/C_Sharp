@@ -26,7 +26,7 @@ namespace C_Sharp.Language.IQueryable
 		public static void Test_TwoEnumeratorsOnIEnumerable()
 		{
 			MyEnumerableIntegerRange myIntegerRange = new MyEnumerableIntegerRange(1, 10);
-			int test = 0;
+			int test;
 			foreach (int i in myIntegerRange)
             {
                 test = i;
