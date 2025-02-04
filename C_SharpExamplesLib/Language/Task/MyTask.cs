@@ -18,7 +18,7 @@ namespace C_Sharp.Language.Task
 
 			//Task<int> myTask = new Task<int>(ConstFunctionEight);
             int eight = constFunctionEight();
-			Task<int> myTask = new Task<int>(constFunction, eight);
+			Task<int> myTask = new Task<int>(constFunction!, eight);
 
 			Func<Task<int>, int> multiplyByTwo = (previous) => previous.Result * 2;
 			Task<int> myTask2 = myTask.ContinueWith(multiplyByTwo, TaskContinuationOptions.OnlyOnRanToCompletion);
@@ -587,7 +587,7 @@ namespace C_Sharp.Language.Task
         }
         #endregion
 
-        private static void SchedulerWork(object data)
+        private static void SchedulerWork(object? data)
         {
 			int? taskId = System.Threading.Tasks.Task.CurrentId;
             System.Threading.Thread thread = System.Threading.Thread.CurrentThread;
@@ -644,7 +644,7 @@ namespace C_Sharp.Language.Task
         {
             DateTime start = GetNextStartDateTime();
             WaitUntil("Start:", start);
-            Timer t = new Timer(SchedulerStart, null, 0, 10000);
+            Timer t = new Timer(SchedulerStart!, null, 0, 10000);
             System.Threading.Thread.Sleep(30 * 1000);
         }
 
