@@ -41,7 +41,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 
             static void AddMultiThreads()
             {
-                List<Task> tasks = new List<Task>();
+                List<Task> tasks = [];
                 int i = 0;
                 _sharedTotal = 0;
                 while (i < ItemsToAdd.Length)
@@ -101,7 +101,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
             /// </summary>
             public static void TestTaskObjectLock()
             {
-                List<Task> tasks = new List<Task>();
+                List<Task> tasks = [];
 
                 int rangeSize = 1000000;
                 int rangeStart = 0;

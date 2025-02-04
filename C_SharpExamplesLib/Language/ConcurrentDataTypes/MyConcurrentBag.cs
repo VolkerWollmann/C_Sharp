@@ -15,7 +15,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
         // #Parallel access to #list(bag)  #ConcurrentBag #concurrent list
         public static void ParallelInsert()
         {
-            ConcurrentBag<int> bag = new ConcurrentBag<int>();
+            ConcurrentBag<int> bag = [];
             Random random = new Random();
 
             DateTime start = DateTime.Now;
