@@ -58,7 +58,7 @@ namespace C_Sharp.OhterExamples
 
 		public static void DeserializeFile()
 		{
-			var filePath = "..\\..\\..\\..\\C_SharpExamplesLib\\OhterExamples\\animals.json"; // Replace with the actual file path
+			var filePath = "..\\..\\..\\..\\C_SharpExamplesLib\\OtherExamples\\animals.json"; // Replace with the actual file path
 			var jsonContent = File.ReadAllText(filePath);
 
 			var settings = new JsonSerializerSettings

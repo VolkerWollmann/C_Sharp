@@ -32,7 +32,7 @@
     <ProjectReference Include="..\MyEnumerableIntegerRangeLibrary\MyEnumerableIntegerRangeLibrary.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="OhterExamples\animals.json">
+    <None Update="OtherExamples\animals.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
