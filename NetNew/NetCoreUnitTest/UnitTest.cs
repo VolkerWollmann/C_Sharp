@@ -7,7 +7,6 @@ using CSharpNaming;
 using CSharpNew.ProcessCommunication;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 using LoadingAssembly;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 
 namespace NetCoreUnitTest

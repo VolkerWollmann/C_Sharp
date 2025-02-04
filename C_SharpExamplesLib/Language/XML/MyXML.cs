@@ -1,20 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlTypes;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 using System.Xml.XPath;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.VisualStudio.TestPlatform.PlatformAbstractions.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace C_Sharp.Language.XML
 {

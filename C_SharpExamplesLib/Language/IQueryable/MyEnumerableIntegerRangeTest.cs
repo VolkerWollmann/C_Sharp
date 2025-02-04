@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
+﻿using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language.IQueryable

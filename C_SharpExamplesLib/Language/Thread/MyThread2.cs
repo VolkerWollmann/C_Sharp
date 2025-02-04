@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace C_Sharp.Language.Thread
+﻿namespace C_Sharp.Language.Thread
 {
     /// <summary>
     /// #partial class

@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 using C_Sharp.Language.IQueryable;
 using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace C_Sharp.Language.IQueryable2
 {

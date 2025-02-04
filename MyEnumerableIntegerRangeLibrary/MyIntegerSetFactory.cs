@@ -1,12 +1,5 @@
 ﻿using MyEnumerableIntegerRangeLibrary.Properties;
-using System;
-using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MyEnumerableIntegerRangeLibrary;
-using System.Data.Common;
 
 namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 {

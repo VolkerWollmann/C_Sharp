@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections;
 using Microsoft.Data.SqlClient;
-using System.Globalization;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 
 namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary

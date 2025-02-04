@@ -1,5 +1,4 @@
 ﻿using System.Configuration;
-using System.IO;
 using C_Sharp.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

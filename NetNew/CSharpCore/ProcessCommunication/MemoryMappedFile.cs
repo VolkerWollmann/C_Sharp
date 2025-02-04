@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Siommf = System.IO.MemoryMappedFiles;
-using System.Linq;
-using System.Text;
+﻿using Siommf = System.IO.MemoryMappedFiles;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO.MemoryMappedFiles;
 
 namespace CSharpNew.ProcessCommunication
 {

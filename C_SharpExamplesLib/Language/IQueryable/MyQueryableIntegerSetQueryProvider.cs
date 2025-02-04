@@ -1,13 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using System.Linq.Expressions;
 
 namespace C_Sharp.Language.IQueryable
 {
