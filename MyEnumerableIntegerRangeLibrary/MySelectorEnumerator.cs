@@ -25,12 +25,17 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 			if (expression != null)
 			{
-				if (expression is UnaryExpression unaryExpression)
+				if (expression is MethodCallExpression methodCallExpression)
                 {
-                    _castFunction = (Func<TParameter, TResult>)((LambdaExpression)unaryExpression.Operand).Compile();
+                    _castFunction = (Func<TParameter, TResult>)(
+						(LambdaExpression)((UnaryExpression)methodCallExpression.Arguments[1]).Operand).Compile();
                     //Func<int, bool> compiledExpression = (Func<int, bool>)_lambdaExpression.Compile();
                     //_lambdaExpression =
                     //    (LambdaExpression)((UnaryExpression)(methodCallExpression.Arguments[1])).Operand;
+                }
+                else
+                {
+                    throw new ArgumentException("Expression is no method call expression");
                 }
 
 			}
