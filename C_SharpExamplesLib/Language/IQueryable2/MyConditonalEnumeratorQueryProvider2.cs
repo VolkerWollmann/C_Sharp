@@ -12,10 +12,10 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace C_Sharp.Language.IQueryable2
 {
-	public class MyConditonalEnumeratorQueryProvider2<TOutputType> : IQueryProvider
+	public class MyConditonalEnumeratorQueryProvider2<TType> : IQueryProvider
 	{
-		private MyConditonalEnumeratorQueryable2<TOutputType> _myQueryableIntegerEnumerator;
-		public MyConditonalEnumeratorQueryProvider2(MyConditonalEnumeratorQueryable2<TOutputType> queryableIntegerEnumerator)
+		private MyConditonalEnumeratorQueryable2<TType> _myQueryableIntegerEnumerator;
+		public MyConditonalEnumeratorQueryProvider2(MyConditonalEnumeratorQueryable2<TType> queryableIntegerEnumerator)
 		{
 			_myQueryableIntegerEnumerator = queryableIntegerEnumerator;
 		}
@@ -27,16 +27,13 @@ namespace C_Sharp.Language.IQueryable2
 
 		public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
 		{
-			if (typeof(TElement) != typeof(int))
-				throw new NotImplementedException();
-
 			InnermostExpressionFinder whereFinder = new InnermostExpressionFinder("Where");
 			MethodCallExpression? whereExpression = whereFinder.GetInnermostExpression(expression);
 
 			if (whereExpression != null)
 			{
-				MyConditonalEnumeratorQueryable2<int> x = new MyConditonalEnumeratorQueryable2<int>(
-					(IEnumerator<int>) _myQueryableIntegerEnumerator.GetEnumerator(), whereExpression);
+				MyConditonalEnumeratorQueryable2<TType> x = new MyConditonalEnumeratorQueryable2<TType>(
+					_myQueryableIntegerEnumerator.GetEnumerator(), whereExpression);
 
 				return (IQueryable<TElement>) x;
 			}
@@ -59,7 +56,7 @@ namespace C_Sharp.Language.IQueryable2
 		private bool Any(Expression conditionExpression)
 		{
 			using var enumerator = _myQueryableIntegerEnumerator.GetEnumerator();
-			using var enumerator2 = new MyConditionalEnumerator((IEnumerator<int>)enumerator, conditionExpression);
+			using var enumerator2 = new MyConditionalEnumerator<TType>(enumerator, conditionExpression);
 			return enumerator2.MoveNext();
 		}
 		#endregion

@@ -14,35 +14,35 @@ using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 
 namespace C_Sharp.Language.IQueryable2
 {
-
-	public class MyConditonalEnumeratorQueryable2<TOutputType> : IQueryable<TOutputType>
+	/// <summary>
+	/// T
+	/// </summary>
+	/// <typeparam name="TOutputType"></typeparam>
+	public class MyConditonalEnumeratorQueryable2<TType> : IQueryable<TType>
 	{
-		private MyConditionalEnumerator  _myIntegerEnumerator;
+		private MyConditionalEnumerator<TType> _myIntegerEnumerator;
 
-		public MyConditonalEnumeratorQueryable2(IEnumerator<int> integerEnumerator)
+		public MyConditonalEnumeratorQueryable2(IEnumerator<TType> integerEnumerator)
 		{
 			
-			_myIntegerEnumerator = new MyConditionalEnumerator(integerEnumerator,null);
+			_myIntegerEnumerator = new MyConditionalEnumerator<TType>(integerEnumerator,null);
 			Expression = Expression.Constant(this);
 
-			Provider = new MyConditonalEnumeratorQueryProvider2<TOutputType>(this);
+			Provider = new MyConditonalEnumeratorQueryProvider2<TType>(this);
 		}
 
-		public MyConditonalEnumeratorQueryable2(IEnumerator<int> integerEnumerator, MethodCallExpression? expression)
+		public MyConditonalEnumeratorQueryable2(IEnumerator<TType> integerEnumerator, MethodCallExpression? expression)
 			
 		{
-			_myIntegerEnumerator = new MyConditionalEnumerator(integerEnumerator, expression);
+			_myIntegerEnumerator = new MyConditionalEnumerator<TType>(integerEnumerator, expression);
 			Expression = Expression.Constant(this);
 
-			Provider = new MyConditonalEnumeratorQueryProvider2<TOutputType>(this);
+			Provider = new MyConditonalEnumeratorQueryProvider2<TType>(this);
 		}
 
-		public IEnumerator<TOutputType> GetEnumerator()
+		public IEnumerator<TType> GetEnumerator()
 		{
-			if (typeof(TOutputType) != typeof(int))
-				throw new NotImplementedException();
-
-			return (IEnumerator<TOutputType>)_myIntegerEnumerator;
+			return (IEnumerator<TType>)_myIntegerEnumerator;
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()
@@ -50,7 +50,7 @@ namespace C_Sharp.Language.IQueryable2
 			return _myIntegerEnumerator;
 		}
 
-		public Type ElementType => typeof(TOutputType);
+		public Type ElementType => typeof(TType);
 		public Expression Expression { get; }
 		public IQueryProvider Provider { get; }
 	}

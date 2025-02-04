@@ -16,9 +16,9 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 	/// Simulate a source, which is worth to be encapsulated for lazy linq queries.
 	/// </summary>
 
-	public class MyConditionalEnumerator : IEnumerator<int>
+	public class MyConditionalEnumerator<TType> : IEnumerator<TType>
 	{
-		private readonly IEnumerator<int> _myBaseEnumerator;
+		private readonly IEnumerator<TType> _myBaseEnumerator;
 		private readonly Expression? _expression = null;
 		private readonly LambdaExpression? _lambdaExpression =null;
 
@@ -32,7 +32,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 			bool baseEnumeratorMoveResult = _myBaseEnumerator.MoveNext();
 			if (_lambdaExpression == null)
 				return baseEnumeratorMoveResult;
-			Func<int, bool> compiledExpression = (Func<int, bool>)_lambdaExpression.Compile();
+			Func<TType, bool> compiledExpression = (Func<TType, bool>)_lambdaExpression.Compile();
 
 			while (baseEnumeratorMoveResult && !compiledExpression(Current))
 			{
@@ -51,7 +51,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 			_myBaseEnumerator.Reset();
 		}
 
-		public int Current => _myBaseEnumerator.Current;
+		public TType Current => _myBaseEnumerator.Current;
 
 		object IEnumerator.Current => Current;
 
@@ -59,7 +59,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		#region Constructor
 
-		public MyConditionalEnumerator(IEnumerator<int> enumerator, Expression? expression)
+		public MyConditionalEnumerator(IEnumerator<TType> enumerator, Expression? expression)
 		{
 			_myBaseEnumerator = enumerator;
 			_expression = expression;

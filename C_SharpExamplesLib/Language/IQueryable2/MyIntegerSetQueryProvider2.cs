@@ -83,7 +83,7 @@ namespace C_Sharp.Language.IQueryable2
 		private bool Any(Expression conditionExpression)
 		{
 			using var enumerator = _myEmumerableIntegerSet.GetEnumerator();
-			using var enumerator2 = new MyConditionalEnumerator((IEnumerator<int>)enumerator, conditionExpression);
+			using var enumerator2 = new MyConditionalEnumerator<int>(enumerator, conditionExpression);
 			return enumerator2.MoveNext();
 		}
 		#endregion
