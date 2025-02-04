@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace C_Sharp.Language.ConcurrentDataTypes
+namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 {
     [SuppressMessage("ReSharper", "ConvertToLocalFunction")]
     [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
@@ -15,17 +15,17 @@ namespace C_Sharp.Language.ConcurrentDataTypes
             // #BlockingCollection #whenAll #wait #ConcurrentStack
             Console.WriteLine("Test_ConcurrentStack start");
 
-            var tasks = new List<System.Threading.Tasks.Task>();
+            var tasks = new List<Task>();
             // Blocking collection(ConcurrentStack) that can hold 5 items
             BlockingCollection<int> data = new BlockingCollection<int>(new ConcurrentStack<int>(), 5);
 
-            System.Threading.Tasks.Task producer = new System.Threading.Tasks.Task(() =>
+            Task producer = new Task(() =>
             {
-                System.Threading.Thread.CurrentThread.Name = "Producer";
+                Thread.CurrentThread.Name = "Producer";
                 // attempt to add 10 items to the collection - blocks after 5th
                 for (int i = 0; i < 10; i++)
                 {
-                    System.Threading.Thread.Sleep(10);
+                    Thread.Sleep(10);
                     data.Add(i);
                     Console.WriteLine("Data {0} added successfully.", i);
                 }
@@ -33,14 +33,14 @@ namespace C_Sharp.Language.ConcurrentDataTypes
                 data.CompleteAdding();
             });
 
-            System.Threading.Tasks.Task consumer = new System.Threading.Tasks.Task(() =>
+            Task consumer = new Task(() =>
             {
-                System.Threading.Thread.CurrentThread.Name = "Consumer";
+                Thread.CurrentThread.Name = "Consumer";
                 while (!data.IsCompleted)
                 {
                     try
                     {
-                        System.Threading.Thread.Sleep(20);
+                        Thread.Sleep(20);
                         var v = data.Take();
                         Console.WriteLine("Data {0} taken successfully.", v);
                     }
@@ -53,11 +53,11 @@ namespace C_Sharp.Language.ConcurrentDataTypes
             producer.Start();
             consumer.Start();
 
-            System.Threading.Tasks.Task.WhenAll(tasks).Wait();
+            Task.WhenAll(tasks).Wait();
 
             Console.WriteLine("Test_ConcurrentStack end");
 
         }
         #endregion
-	}
+    }
 }

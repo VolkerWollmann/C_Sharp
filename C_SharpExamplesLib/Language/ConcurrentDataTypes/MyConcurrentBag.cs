@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Language.ConcurrentDataTypes
+namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 {
     [SuppressMessage("ReSharper", "ConvertToLocalFunction")]
     [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
@@ -22,7 +22,7 @@ namespace C_Sharp.Language.ConcurrentDataTypes
             var items = Enumerable.Range(0, 500);
             foreach (var item in items)
             {
-                System.Threading.Thread.Sleep(random.Next(5, 15));
+                Thread.Sleep(random.Next(5, 15));
                 if (random.Next(0, 100) < 50)
                     bag.Add(item);
             }
@@ -33,7 +33,7 @@ namespace C_Sharp.Language.ConcurrentDataTypes
             items = Enumerable.Range(0, 500);
             Parallel.ForEach(items, parallelItem => // also works with Parallel.For(0, 500, ...
             {
-                System.Threading.Thread.Sleep(random.Next(5, 15));
+                Thread.Sleep(random.Next(5, 15));
                 if (random.Next(0, 100) < 50)
                     bag.Add(parallelItem);
             });

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-namespace C_Sharp.Language.ConcurrentDataTypes
+namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 {
     [SuppressMessage("ReSharper", "ConvertToLocalFunction")]
     [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
@@ -41,17 +41,17 @@ namespace C_Sharp.Language.ConcurrentDataTypes
 
             static void AddMultiThreads()
             {
-                List<System.Threading.Tasks.Task> tasks = new List<System.Threading.Tasks.Task>();
+                List<Task> tasks = new List<Task>();
                 int i = 0;
                 _sharedTotal = 0;
                 while (i < ItemsToAdd.Length)
                 {
                     int j = i;
-                    tasks.Add(System.Threading.Tasks.Task.Run(() => AddOneThread(j)));
+                    tasks.Add(Task.Run(() => AddOneThread(j)));
                     i++;
                 }
 
-                System.Threading.Tasks.Task.WaitAll(tasks.ToArray());
+                Task.WaitAll(tasks.ToArray());
 
             }
 
@@ -101,7 +101,7 @@ namespace C_Sharp.Language.ConcurrentDataTypes
             /// </summary>
             public static void TestTaskObjectLock()
             {
-                List<System.Threading.Tasks.Task> tasks = new List<System.Threading.Tasks.Task>();
+                List<Task> tasks = new List<Task>();
 
                 int rangeSize = 1000000;
                 int rangeStart = 0;
@@ -118,11 +118,11 @@ namespace C_Sharp.Language.ConcurrentDataTypes
                     int rs = rangeStart;
                     int re = rangeEnd;
 
-                    tasks.Add(System.Threading.Tasks.Task.Run(() => AddRangeOfValuesObjectLock(rs, re)));
+                    tasks.Add(Task.Run(() => AddRangeOfValuesObjectLock(rs, re)));
                     rangeStart = rangeEnd;
                 }
 
-                System.Threading.Tasks.Task.WaitAll(tasks.ToArray());
+                Task.WaitAll(tasks.ToArray());
 
                 TimeSpan timeSpan = DateTime.Now.Subtract(start);
 

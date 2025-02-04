@@ -1,4 +1,4 @@
-﻿using C_Sharp.Language.ConcurrentDataTypes;
+﻿using C_SharpExamplesLib.Language.ConcurrentDataTypes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTest

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 
-namespace C_Sharp.Language.ConcurrentDataTypes
+namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 {
     [SuppressMessage("ReSharper", "ConvertToLocalFunction")]
     [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
