@@ -192,7 +192,7 @@ namespace NetCoreUnitTest
     public class HTTPListnerTest
     {
         [Fact]
-        public void SelfHostestTest()
+        public void SelfHostedTest()
         {
            // ??? 
         }
