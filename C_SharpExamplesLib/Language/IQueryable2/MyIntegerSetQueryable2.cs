@@ -15,29 +15,21 @@ using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 namespace C_Sharp.Language.IQueryable2
 {
 
-	public class MyIntegerSetQueryable2<TBaseType> : IQueryable<TBaseType>
+	public class MyIntegerSetQueryable2 : IQueryable<int>
 	{
-		private IEnumerable<TBaseType> _myIEnumerable;
+		private IEnumerable<int> _myIEnumerable;
 
 		public MyIntegerSetQueryable2(IMyIntegerSet myIntegerSet)
 		{
-			_myIEnumerable = (IEnumerable<TBaseType>)myIntegerSet;
+			_myIEnumerable = myIntegerSet;
 			Expression = Expression.Constant(this);
 			
-			Provider = new MyIntegerSetQueryProvider2<TBaseType>(this);
+			Provider = new MyIntegerSetQueryProvider2(this);
 		}
 
-        public MyIntegerSetQueryable2(IEnumerable<TBaseType> iEnumerable)
-        {
-            _myIEnumerable = iEnumerable;
-            Expression = Expression.Constant(this);
-
-            Provider = new MyIntegerSetQueryProvider2<TBaseType>(this);
-        }
-
-        public IEnumerator<TBaseType> GetEnumerator()
+        public IEnumerator<int> GetEnumerator()
 		{
-			return (IEnumerator <TBaseType>)_myIEnumerable.GetEnumerator();
+			return _myIEnumerable.GetEnumerator();
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()
@@ -45,7 +37,7 @@ namespace C_Sharp.Language.IQueryable2
 			return _myIEnumerable.GetEnumerator();
 		}
 
-		public Type ElementType => typeof(TBaseType);
+		public Type ElementType => typeof(int);
 		public Expression Expression { get; }
 		public IQueryProvider Provider { get; }
 	}

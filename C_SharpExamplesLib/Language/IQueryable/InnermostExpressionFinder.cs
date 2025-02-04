@@ -20,7 +20,7 @@ namespace C_Sharp.Language.IQueryable
 		private List<Type> _innerMostTypes = new List<Type>()
 		{
 			typeof(MyQueryableIntegerSet<int>),
-			typeof(MyIntegerSetQueryable2<int>),
+			typeof(MyIntegerSetQueryable2),
 			typeof(MyConditonalEnumeratorQueryable2<int>)
 		};
 		

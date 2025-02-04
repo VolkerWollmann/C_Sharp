@@ -18,7 +18,7 @@ namespace C_Sharp.Language.IQueryable2
     {
         public static IQueryable<int> GetMyQueryable(IMyIntegerSet myIntegerSet)
         {
-            return new MyIntegerSetQueryable2<int>(myIntegerSet);
+            return new MyIntegerSetQueryable2(myIntegerSet);
         }
     }
 }

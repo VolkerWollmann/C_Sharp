@@ -13,12 +13,12 @@ using MyEnumerableIntegerRangeLibrary;
 
 namespace C_Sharp.Language.IQueryable2
 {
-	public class MyIntegerSetQueryProvider2<BaseType> : IQueryProvider
+	public class MyIntegerSetQueryProvider2 : IQueryProvider
 	{
-		private IEnumerable<BaseType> _myQueryableIntegerSet;
-		public MyIntegerSetQueryProvider2(IEnumerable<BaseType> QueryableIntegerSet)
+		private IEnumerable<int> _myEmumerableIntegerSet;
+		public MyIntegerSetQueryProvider2(IEnumerable<int> emumerableIntegerSet)
 		{
-			_myQueryableIntegerSet = QueryableIntegerSet;
+            _myEmumerableIntegerSet = emumerableIntegerSet;
 		}
 
 		public System.Linq.IQueryable CreateQuery(Expression expression)
@@ -37,7 +37,7 @@ namespace C_Sharp.Language.IQueryable2
 			if (whereExpression != null)
 			{
 				MyConditonalEnumeratorQueryable2<int> x = new MyConditonalEnumeratorQueryable2<int>(
-                    ((IEnumerable<int>)_myQueryableIntegerSet).GetEnumerator(), whereExpression);
+                    ((IEnumerable<int>)_myEmumerableIntegerSet).GetEnumerator(), whereExpression);
 
 				//return new MyQueryableIntegerSet2<TElement>(_myQueryableIntegerSet2);
 				return (IQueryable<TElement>) x;
@@ -53,7 +53,7 @@ namespace C_Sharp.Language.IQueryable2
 				var argumentType = parametersTypes[0].GenericTypeArguments[0];
 				var resultType = parametersTypes[0].GenericTypeArguments[1];
 				
-                IEnumerator<int> enumerator = (IEnumerator<int>)_myQueryableIntegerSet.GetEnumerator();
+                IEnumerator<int> enumerator = (IEnumerator<int>)_myEmumerableIntegerSet.GetEnumerator();
 
                 Type genericType = typeof(MySelectEnumerator<,>).MakeGenericType(resultType,argumentType);
                 object instance = Activator.CreateInstance(genericType, enumerator, (Expression)unaryExpression);
@@ -76,13 +76,13 @@ namespace C_Sharp.Language.IQueryable2
 
 		private bool Any()
 		{
-			using var enumerator = _myQueryableIntegerSet.GetEnumerator();
+			using var enumerator = _myEmumerableIntegerSet.GetEnumerator();
 			return enumerator.MoveNext();
 		}
 
 		private bool Any(Expression conditionExpression)
 		{
-			using var enumerator = _myQueryableIntegerSet.GetEnumerator();
+			using var enumerator = _myEmumerableIntegerSet.GetEnumerator();
 			using var enumerator2 = new MyConditionalEnumerator((IEnumerator<int>)enumerator, conditionExpression);
 			return enumerator2.MoveNext();
 		}
@@ -92,7 +92,7 @@ namespace C_Sharp.Language.IQueryable2
 
 		private int Sum()
 		{
-			using var enumerator = _myQueryableIntegerSet.GetEnumerator();
+			using var enumerator = _myEmumerableIntegerSet.GetEnumerator();
 			enumerator.Reset();
 			int sum = 0;
 			while (enumerator.MoveNext())
@@ -109,7 +109,7 @@ namespace C_Sharp.Language.IQueryable2
 
 		private int Max()
 		{
-			using var enumerator = _myQueryableIntegerSet.GetEnumerator();
+			using var enumerator = _myEmumerableIntegerSet.GetEnumerator();
 			enumerator.Reset();
 			int max = Int32.MinValue;
 			while (enumerator.MoveNext())
