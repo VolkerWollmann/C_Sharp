@@ -123,7 +123,10 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 
                 TimeSpan timeSpan = DateTime.Now.Subtract(start);
 
-                Console.WriteLine("Ranges added parallel: {0} in: {1,10:000.00000} ", _sharedTotal, timeSpan.TotalSeconds);
+                lock (SharedTotalLock)
+                {
+                    Console.WriteLine("Ranges added parallel: {0} in: {1,10:000.00000} ", _sharedTotal, timeSpan.TotalSeconds);
+                }
             }
         }
 

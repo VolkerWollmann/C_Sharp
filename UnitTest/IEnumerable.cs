@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using C_Sharp.Language.IQueryable;
 using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 
@@ -10,14 +9,13 @@ namespace UnitTest
 	public class IEnumerable
 	{
 		private MyIntegerSetFactory _myIntegerSetFactory;
-		List<IMyIntegerSet> _myIntegerSets;
 
-		[TestInitialize]
+        [TestInitialize]
 		public void Initialize()
 		{
 			_myIntegerSetFactory = new MyIntegerSetFactory();
 			;
-			_myIntegerSets = _myIntegerSetFactory.GetIntegerSets();
+			_myIntegerSetFactory.GetIntegerSets();
 		}
 
 		[TestCleanup]

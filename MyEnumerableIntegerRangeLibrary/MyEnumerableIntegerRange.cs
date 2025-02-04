@@ -75,7 +75,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
     public class MyEnumerableIntegerRangeEnumerator : IEnumerator<int>
     {
         private readonly MyEnumerableIntegerRange _myEnumerableIntegerRange;
-        private int _i = -1;
+        private int _i;
         #region IEnumerator<int>
         public void Dispose()
         {
