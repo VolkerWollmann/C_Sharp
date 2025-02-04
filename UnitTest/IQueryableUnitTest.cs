@@ -33,30 +33,6 @@ namespace UnitTest
             myIntegerSetFactory.Dispose();
         }
 
-        [TestMethod]
-        public void Test_IEnumerable()
-        {
-            MyEnumerableIntegerRangeTest.Test_IEnumerable();
-        }
-
-        [TestMethod]
-        public void Test_IEnumerable_TwoEnumeratorsOnIEnumerable()
-        {
-	        MyEnumerableIntegerRangeTest.Test_TwoEnumeratorsOnIEnumerable();
-        }
-
-        [TestMethod]
-        public void Test_IEnumerable_Where()
-        {
-	        MyEnumerableIntegerRangeTest.Test_IEnumerable_Where();
-        }
-
-		[TestMethod]
-		public void Test_IEnumerable_FromMemoryIntegerSet()
-		{
-			MyEnumerableIntegerRangeTest.Test_IEnumerable_FromMemoryIntegerSet();
-		}
-
 		[TestMethod]
         public void Test_IQueryable()
         {

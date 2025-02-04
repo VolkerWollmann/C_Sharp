@@ -172,6 +172,11 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 			return MoveNext();
 		}
 
+		public IEnumerable<int> AsEnumerable()
+		{
+			return this;
+		}
+
 		#endregion
 
 		#region Constructor
