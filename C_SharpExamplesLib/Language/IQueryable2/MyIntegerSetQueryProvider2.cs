@@ -13,10 +13,10 @@ using MyEnumerableIntegerRangeLibrary;
 
 namespace C_Sharp.Language.IQueryable2
 {
-	public class MyQueryableIntegerSetQueryProvider2<BaseType> : IQueryProvider
+	public class MyIntegerSetQueryProvider2<BaseType> : IQueryProvider
 	{
 		private IEnumerable<BaseType> _myQueryableIntegerSet;
-		public MyQueryableIntegerSetQueryProvider2(IEnumerable<BaseType> QueryableIntegerSet)
+		public MyIntegerSetQueryProvider2(IEnumerable<BaseType> QueryableIntegerSet)
 		{
 			_myQueryableIntegerSet = QueryableIntegerSet;
 		}
@@ -36,7 +36,7 @@ namespace C_Sharp.Language.IQueryable2
 
 			if (whereExpression != null)
 			{
-				MyQueryableIntegerEnumerator2<int> x = new MyQueryableIntegerEnumerator2<int>(
+				MyConditonalEnumeratorQueryable2<int> x = new MyConditonalEnumeratorQueryable2<int>(
                     ((IEnumerable<int>)_myQueryableIntegerSet).GetEnumerator(), whereExpression);
 
 				//return new MyQueryableIntegerSet2<TElement>(_myQueryableIntegerSet2);

@@ -15,24 +15,24 @@ using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 namespace C_Sharp.Language.IQueryable2
 {
 
-	public class MyQueryableIntegerSet2<TBaseType> : IQueryable<TBaseType>
+	public class MyIntegerSetQueryable2<TBaseType> : IQueryable<TBaseType>
 	{
 		private IEnumerable<TBaseType> _myIEnumerable;
 
-		public MyQueryableIntegerSet2(IMyIntegerSet myIntegerSet)
+		public MyIntegerSetQueryable2(IMyIntegerSet myIntegerSet)
 		{
 			_myIEnumerable = (IEnumerable<TBaseType>)myIntegerSet;
 			Expression = Expression.Constant(this);
 			
-			Provider = new MyQueryableIntegerSetQueryProvider2<TBaseType>(this);
+			Provider = new MyIntegerSetQueryProvider2<TBaseType>(this);
 		}
 
-        public MyQueryableIntegerSet2(IEnumerable<TBaseType> iEnumerable)
+        public MyIntegerSetQueryable2(IEnumerable<TBaseType> iEnumerable)
         {
             _myIEnumerable = iEnumerable;
             Expression = Expression.Constant(this);
 
-            Provider = new MyQueryableIntegerSetQueryProvider2<TBaseType>(this);
+            Provider = new MyIntegerSetQueryProvider2<TBaseType>(this);
         }
 
         public IEnumerator<TBaseType> GetEnumerator()

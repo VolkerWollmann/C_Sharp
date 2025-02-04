@@ -20,8 +20,8 @@ namespace C_Sharp.Language.IQueryable
 		private List<Type> _innerMostTypes = new List<Type>()
 		{
 			typeof(MyQueryableIntegerSet<int>),
-			typeof(MyQueryableIntegerSet2<int>),
-			typeof(MyQueryableIntegerEnumerator2<int>)
+			typeof(MyIntegerSetQueryable2<int>),
+			typeof(MyConditonalEnumeratorQueryable2<int>)
 		};
 		
 		public MethodCallExpression? GetInnermostExpression(Expression expression)

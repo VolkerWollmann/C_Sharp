@@ -12,10 +12,10 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace C_Sharp.Language.IQueryable2
 {
-	public class MyQueryableIntegerEnumeratorQueryProvider2<TOutputType> : IQueryProvider
+	public class MyConditonalEnumeratorQueryProvider2<TOutputType> : IQueryProvider
 	{
-		private MyQueryableIntegerEnumerator2<TOutputType> _myQueryableIntegerEnumerator;
-		public MyQueryableIntegerEnumeratorQueryProvider2(MyQueryableIntegerEnumerator2<TOutputType> queryableIntegerEnumerator)
+		private MyConditonalEnumeratorQueryable2<TOutputType> _myQueryableIntegerEnumerator;
+		public MyConditonalEnumeratorQueryProvider2(MyConditonalEnumeratorQueryable2<TOutputType> queryableIntegerEnumerator)
 		{
 			_myQueryableIntegerEnumerator = queryableIntegerEnumerator;
 		}
@@ -35,7 +35,7 @@ namespace C_Sharp.Language.IQueryable2
 
 			if (whereExpression != null)
 			{
-				MyQueryableIntegerEnumerator2<int> x = new MyQueryableIntegerEnumerator2<int>(
+				MyConditonalEnumeratorQueryable2<int> x = new MyConditonalEnumeratorQueryable2<int>(
 					(IEnumerator<int>) _myQueryableIntegerEnumerator.GetEnumerator(), whereExpression);
 
 				return (IQueryable<TElement>) x;

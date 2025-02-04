@@ -15,26 +15,26 @@ using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 namespace C_Sharp.Language.IQueryable2
 {
 
-	public class MyQueryableIntegerEnumerator2<TOutputType> : IQueryable<TOutputType>
+	public class MyConditonalEnumeratorQueryable2<TOutputType> : IQueryable<TOutputType>
 	{
 		private MyConditionalEnumerator  _myIntegerEnumerator;
 
-		public MyQueryableIntegerEnumerator2(IEnumerator<int> integerEnumerator)
+		public MyConditonalEnumeratorQueryable2(IEnumerator<int> integerEnumerator)
 		{
 			
 			_myIntegerEnumerator = new MyConditionalEnumerator(integerEnumerator,null);
 			Expression = Expression.Constant(this);
 
-			Provider = new MyQueryableIntegerEnumeratorQueryProvider2<TOutputType>(this);
+			Provider = new MyConditonalEnumeratorQueryProvider2<TOutputType>(this);
 		}
 
-		public MyQueryableIntegerEnumerator2(IEnumerator<int> integerEnumerator, MethodCallExpression? expression)
+		public MyConditonalEnumeratorQueryable2(IEnumerator<int> integerEnumerator, MethodCallExpression? expression)
 			
 		{
 			_myIntegerEnumerator = new MyConditionalEnumerator(integerEnumerator, expression);
 			Expression = Expression.Constant(this);
 
-			Provider = new MyQueryableIntegerEnumeratorQueryProvider2<TOutputType>(this);
+			Provider = new MyConditonalEnumeratorQueryProvider2<TOutputType>(this);
 		}
 
 		public IEnumerator<TOutputType> GetEnumerator()
