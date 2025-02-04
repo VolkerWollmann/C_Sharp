@@ -318,6 +318,10 @@ namespace C_Sharp.Language
         {
             List<int> l = new List<int>() {3, 4, 8, 2, 1, 2, 4, 5, 2, 7,};
             l.Sort();
+            Assert.IsTrue(l.SequenceEqual(new List<int>()
+            {
+                1, 2, 2, 2, 3, 4, 4, 5, 7, 8
+            }));
         }
 
         #endregion
