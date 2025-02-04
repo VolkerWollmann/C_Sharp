@@ -355,8 +355,8 @@ namespace C_Sharp.Language
             Assert.AreEqual(40, myBitArray.Length);
             PrintBitArrayValues(myBitArray, 32);
 
-            int[] ints = new int[1] {-1};
-            BitArray myBitArray2 = new BitArray(ints);
+            int[] integers = new int[1] {-1};
+            BitArray myBitArray2 = new BitArray(integers);
             Assert.AreEqual(32, myBitArray2.Count);
             Assert.AreEqual(32, myBitArray2.Length);
             PrintBitArrayValues(myBitArray2, 32);

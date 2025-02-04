@@ -15,7 +15,7 @@ namespace C_Sharp.Language.IQueryable
 		{
 			typeof(MyQueryableIntegerSet<int>),
 			typeof(MyIntegerSetQueryable2),
-			typeof(MyConditonalEnumeratorQueryable2<int>)
+			typeof(MyConditionalEnumeratorQueryable2<int>)
 		};
 		
 		public MethodCallExpression? GetInnermostExpression(Expression expression)

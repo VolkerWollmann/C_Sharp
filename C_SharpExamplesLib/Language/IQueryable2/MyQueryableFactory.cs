@@ -13,7 +13,7 @@ namespace C_Sharp.Language.IQueryable2
         public static IQueryable<TType> GetMyConditionalEnumeratorQueryable2<TType>(
             IEnumerator<TType> enumerator, MethodCallExpression? whereExpression)
         {
-            MyConditonalEnumeratorQueryable2<TType> x = new MyConditonalEnumeratorQueryable2<TType>(
+            MyConditionalEnumeratorQueryable2<TType> x = new MyConditionalEnumeratorQueryable2<TType>(
                     enumerator, whereExpression);
             return x;
         }

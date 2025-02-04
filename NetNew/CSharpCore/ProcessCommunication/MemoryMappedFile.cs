@@ -1,4 +1,4 @@
-﻿using Siommf = System.IO.MemoryMappedFiles;
+﻿using SysIOMem = System.IO.MemoryMappedFiles;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,7 +10,7 @@ namespace CSharpNew.ProcessCommunication
 	/// </summary>
 	public class MemoryMappedFile
     {
-        private static Siommf.MemoryMappedFile _memoryMappedFile;
+        private static SysIOMem.MemoryMappedFile _memoryMappedFile;
         private static void MemoryMappedFileWriter()
         {
                 using (var accessor = _memoryMappedFile.CreateViewAccessor(0, 100))
@@ -39,7 +39,7 @@ namespace CSharpNew.ProcessCommunication
 
         public static void MemoryMappedFileTest()
         {
-            _memoryMappedFile = Siommf.MemoryMappedFile.CreateOrOpen("MyMemoryMappedFile", 5000);
+            _memoryMappedFile = SysIOMem.MemoryMappedFile.CreateOrOpen("MyMemoryMappedFile", 5000);
             Task t1 = Task.Factory.StartNew(MemoryMappedFileWriter);
             Task t2 = Task.Factory.StartNew(MemoryMappedFileReader);
 

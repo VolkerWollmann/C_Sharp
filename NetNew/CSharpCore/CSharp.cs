@@ -29,7 +29,7 @@ namespace CSharpCore
             }
 
             fileWriter.Close();
-            fileWriter.Close();    // rendundant, bit does not hurt
+            fileWriter.Close();    // redundant, bit does not hurt
 
             using StreamReader fileReader = new("WriteLines2.txt");
             while (!fileReader.EndOfStream)

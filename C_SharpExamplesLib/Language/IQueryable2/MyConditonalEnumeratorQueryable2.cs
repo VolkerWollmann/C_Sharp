@@ -9,27 +9,27 @@ namespace C_Sharp.Language.IQueryable2
 	///      to   IQueryable<TType>(IEnumerator<TType>) 
 	///           with only those elements, which match the expression
     /// </summary>
-    /// <typeparam name="TType">Type of the elments</typeparam>
-    public class MyConditonalEnumeratorQueryable2<TType> : IQueryable<TType>
+    /// <typeparam name="TType">Type of the elements</typeparam>
+    public class MyConditionalEnumeratorQueryable2<TType> : IQueryable<TType>
 	{
 		private MyConditionalEnumerator<TType> _myIntegerEnumerator;
 
-		public MyConditonalEnumeratorQueryable2(IEnumerator<TType> integerEnumerator)
+		public MyConditionalEnumeratorQueryable2(IEnumerator<TType> integerEnumerator)
 		{
 			
 			_myIntegerEnumerator = new MyConditionalEnumerator<TType>(integerEnumerator,null);
 			Expression = Expression.Constant(this);
 
-			Provider = new MyConditonalEnumeratorQueryProvider2<TType>(this);
+			Provider = new MyConditionalEnumeratorQueryProvider2<TType>(this);
 		}
 
-		public MyConditonalEnumeratorQueryable2(IEnumerator<TType> integerEnumerator, MethodCallExpression? expression)
+		public MyConditionalEnumeratorQueryable2(IEnumerator<TType> integerEnumerator, MethodCallExpression? expression)
 			
 		{
 			_myIntegerEnumerator = new MyConditionalEnumerator<TType>(integerEnumerator, expression);
 			Expression = Expression.Constant(this);
 
-			Provider = new MyConditonalEnumeratorQueryProvider2<TType>(this);
+			Provider = new MyConditionalEnumeratorQueryProvider2<TType>(this);
 		}
 
 		public IEnumerator<TType> GetEnumerator()

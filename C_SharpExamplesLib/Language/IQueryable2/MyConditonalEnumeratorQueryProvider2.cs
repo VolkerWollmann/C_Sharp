@@ -4,10 +4,10 @@ using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 
 namespace C_Sharp.Language.IQueryable2
 {
-	public class MyConditonalEnumeratorQueryProvider2<TType> : IQueryProvider
+	public class MyConditionalEnumeratorQueryProvider2<TType> : IQueryProvider
 	{
-		private MyConditonalEnumeratorQueryable2<TType> _myQueryableIntegerEnumerator;
-		public MyConditonalEnumeratorQueryProvider2(MyConditonalEnumeratorQueryable2<TType> queryableIntegerEnumerator)
+		private MyConditionalEnumeratorQueryable2<TType> _myQueryableIntegerEnumerator;
+		public MyConditionalEnumeratorQueryProvider2(MyConditionalEnumeratorQueryable2<TType> queryableIntegerEnumerator)
 		{
 			_myQueryableIntegerEnumerator = queryableIntegerEnumerator;
 		}
@@ -24,7 +24,7 @@ namespace C_Sharp.Language.IQueryable2
 
 			if (whereExpression != null)
 			{
-				MyConditonalEnumeratorQueryable2<TType> x = new MyConditonalEnumeratorQueryable2<TType>(
+				MyConditionalEnumeratorQueryable2<TType> x = new MyConditionalEnumeratorQueryable2<TType>(
 					_myQueryableIntegerEnumerator.GetEnumerator(), whereExpression);
 
 				return (IQueryable<TElement>) x;

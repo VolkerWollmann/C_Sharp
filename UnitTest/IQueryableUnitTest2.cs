@@ -95,7 +95,7 @@ namespace UnitTest
 			return i == 2;
 		}
 
-		private bool TestFuerZwei(int i)
+		private bool SecondTestForTwo(int i)
 		{
 			return i == 2;
 		}
@@ -107,7 +107,7 @@ namespace UnitTest
 
 			var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
 
-			var expression = myQueryableIntegerSet.Where(i => TestForTwo(i)).Where(i => TestFuerZwei(i));
+			var expression = myQueryableIntegerSet.Where(i => TestForTwo(i)).Where(i => SecondTestForTwo(i));
 			var result = expression.ToList();
 			Assert.AreEqual(1, result.Count);
 			Assert.AreEqual(2, result[0]);

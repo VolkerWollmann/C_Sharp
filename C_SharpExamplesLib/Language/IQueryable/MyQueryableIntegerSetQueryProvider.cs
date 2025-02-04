@@ -69,7 +69,7 @@ namespace C_Sharp.Language.IQueryable
         public MyQueryableIntegerSet<TOutputType> MyQueryableIntegerSet;
         private bool IsQueryOverDataSource(Expression expression)
         {
-            // If expression represents an unqueried IQueryable data source instance, 
+            // If expression represents a not queried IQueryable data source instance, 
             // expression is of type ConstantExpression, not MethodCallExpression. 
             return (expression is MethodCallExpression);
         }

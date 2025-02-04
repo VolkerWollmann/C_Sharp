@@ -9,7 +9,7 @@ namespace C_Sharp.Language.IQueryable2
     ///      to   IQueryable<int>(IEnumerator<int>) 
     ///           with the elements of the integer set
     /// </summary>
-    /// <typeparam name="TType">Type of the elments</typeparam>
+    /// <typeparam name="TType">Type of the elements</typeparam>
     public class MyIntegerSetQueryable2 : IQueryable<int>
 	{
 		private IEnumerable<int> _myIEnumerable;
