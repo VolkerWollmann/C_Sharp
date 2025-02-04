@@ -14,11 +14,13 @@ using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 
 namespace C_Sharp.Language.IQueryable2
 {
-	/// <summary>
-	/// T
-	/// </summary>
-	/// <typeparam name="TOutputType"></typeparam>
-	public class MyConditonalEnumeratorQueryable2<TType> : IQueryable<TType>
+    /// <summary>
+    /// Maps from IQueryable<TType>(IEnumerator<TType>)
+	///      to   IQueryable<TType>(IEnumerator<TType>) 
+	///           with only those elements, which match the expression
+    /// </summary>
+    /// <typeparam name="TType">Type of the elments</typeparam>
+    public class MyConditonalEnumeratorQueryable2<TType> : IQueryable<TType>
 	{
 		private MyConditionalEnumerator<TType> _myIntegerEnumerator;
 

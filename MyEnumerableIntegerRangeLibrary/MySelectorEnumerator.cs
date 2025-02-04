@@ -7,14 +7,19 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Identity.Client.Extensibility;
 
-namespace MyEnumerableIntegerRangeLibrary
+namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 {
-	public class MySelectEnumerator<TResult, TParameter> : IEnumerator<TResult>
+	/// <summary>
+	/// Enumerate base enumerator with a cast function
+	/// </summary>
+	/// <typeparam name="TResult"></typeparam>
+	/// <typeparam name="TParameter"></typeparam>
+	public class MySelectorEnumerator<TResult, TParameter> : IEnumerator<TResult>
 	{
 		private readonly IEnumerator<TParameter> _baseEnumerator;
 		private readonly Func<TParameter, TResult> _castFunction;
 
-		public MySelectEnumerator(IEnumerator<TParameter> baseEnumerator, Expression? expression)
+		public MySelectorEnumerator(IEnumerator<TParameter> baseEnumerator, Expression? expression)
 		{
 			_baseEnumerator = baseEnumerator;
 

@@ -20,5 +20,13 @@ namespace C_Sharp.Language.IQueryable2
         {
             return new MyIntegerSetQueryable2(myIntegerSet);
         }
+
+        public static IQueryable<TType> GetMyConditonalEnumeratorQueryable2<TType>(
+            IEnumerator<TType> enumerator, MethodCallExpression? whereExpression)
+        {
+            MyConditonalEnumeratorQueryable2<TType> x = new MyConditonalEnumeratorQueryable2<TType>(
+                    enumerator, whereExpression);
+            return x;
+        }
     }
 }

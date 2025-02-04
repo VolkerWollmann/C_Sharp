@@ -14,8 +14,13 @@ using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 
 namespace C_Sharp.Language.IQueryable2
 {
-
-	public class MyIntegerSetQueryable2 : IQueryable<int>
+    /// <summary>
+    /// Maps from IMyIntegerSet myIntegerSet
+    ///      to   IQueryable<int>(IEnumerator<int>) 
+    ///           with the elements of the integer set
+    /// </summary>
+    /// <typeparam name="TType">Type of the elments</typeparam>
+    public class MyIntegerSetQueryable2 : IQueryable<int>
 	{
 		private IEnumerable<int> _myIEnumerable;
 

@@ -28,16 +28,16 @@ namespace C_Sharp.Language.IQueryable2
 
 		public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
 		{
-			//if (typeof(TElement) != typeof(int))
-			//	throw new NotImplementedException();
+			if (typeof(TElement) != typeof(int))
+				throw new NotImplementedException();
 
 			InnermostExpressionFinder whereFinder = new InnermostExpressionFinder("Where");
 			MethodCallExpression? whereExpression = whereFinder.GetInnermostExpression(expression);
 
 			if (whereExpression != null)
 			{
-				MyConditonalEnumeratorQueryable2<int> x = new MyConditonalEnumeratorQueryable2<int>(
-                    ((IEnumerable<int>)_myEmumerableIntegerSet).GetEnumerator(), whereExpression);
+				var x = MyQueryableFactory.GetMyConditonalEnumeratorQueryable2<int>(
+                    _myEmumerableIntegerSet.GetEnumerator(), whereExpression);
 
 				//return new MyQueryableIntegerSet2<TElement>(_myQueryableIntegerSet2);
 				return (IQueryable<TElement>) x;
@@ -55,13 +55,15 @@ namespace C_Sharp.Language.IQueryable2
 				
                 IEnumerator<int> enumerator = (IEnumerator<int>)_myEmumerableIntegerSet.GetEnumerator();
 
-                Type genericType = typeof(MySelectEnumerator<,>).MakeGenericType(resultType,argumentType);
+				MySelectorEnumerator<TElement, int> e = new MySelectorEnumerator<TElement, int>(enumerator, selectExpression);
+                Type genericType = typeof(MySelectorEnumerator<,>).MakeGenericType(resultType,argumentType);
                 object instance = Activator.CreateInstance(genericType, enumerator, (Expression)unaryExpression);
 
+				var x = new MySelectorEnumeratorQueryable2<TElement, int>(e, selectExpression);
                 //MyQueryableIntegerEnumerator2<int> x = new MyQueryableIntegerEnumerator2<int>(
                 //    _myQueryableIntegerSet.GetEnumerator(), whereExpression);
 
-                return (IQueryable<TElement>)instance;
+                return (IQueryable<TElement>)x;
             }
 
 			throw new NotImplementedException("CreateQuery");
