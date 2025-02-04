@@ -24,7 +24,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         }
 
         /// <summary>
-        /// Simulate time consuming generation of next element
+        /// Simulate time-consuming generation of next element
         /// </summary>
         /// <returns>next value</returns>
         public bool MoveNext()

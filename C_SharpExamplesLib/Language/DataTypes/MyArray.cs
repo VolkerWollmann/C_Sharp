@@ -8,7 +8,7 @@ namespace C_Sharp.Language.DataTypes
 
 		public static void Test()
 		{
-			// does not work for two dimensional array
+			// does not work for two-dimensional array
 			int[] xxx = new int[5];
 			var y = xxx.AsQueryable().First();
 			Assert.AreEqual(0, y);
@@ -45,7 +45,7 @@ namespace C_Sharp.Language.DataTypes
 		// #array #extension
 		public static void ArrayExtension()
         {
-			string?[] friends = new string[] { "Donkey", "Dog" };
+			string?[] friends = ["Donkey", "Dog"];
 
 			// will fail
 			//friends[2] = "Seagull";

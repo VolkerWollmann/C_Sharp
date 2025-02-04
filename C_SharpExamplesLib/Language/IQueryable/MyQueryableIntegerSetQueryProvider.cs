@@ -116,7 +116,7 @@ namespace C_Sharp.Language.IQueryable
             // create filtered MyQueryableIntegerSet
             var filteredMyQueryableIntegerSet = new MyQueryableIntegerSet<TOutputType>(filteredMyIntegerSet);
 
-            // Lesson : Create an List<int> instead of MyQueryableIntegerSet and use that for replacement
+            // Lesson : Create a List<int> instead of MyQueryableIntegerSet and use that for replacement
             //          MyQueryableIntegerSet is used, so that still MoveNext in an 'integer list' could be observed 
 
             // replace innermost where clause with calculated MyQueryableIntegerSet

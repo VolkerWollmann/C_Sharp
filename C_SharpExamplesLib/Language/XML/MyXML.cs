@@ -31,7 +31,7 @@ namespace C_Sharp.Language.XML
             return myAnimals;
         }
 
-        // xml 3.0 an lower
+        // xml 3.0 and lower
         public static XmlDocument Create_MyAnimals_as_XmlDocument()
         {
             XmlDocument xmlDocument = new XmlDocument();

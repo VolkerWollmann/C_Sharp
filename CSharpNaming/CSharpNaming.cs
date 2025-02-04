@@ -79,7 +79,7 @@ namespace CSharpNaming
         {
             #region V. Avoid using Abbreviations: UserGroup userGroup;     Avoid UserGroup usrGrp;
 
-            //    Exceptions: abbreviations commonly used as names, such as Id, Xml, Ftp, Uri
+            //    Exceptions: abbreviations commonly used as names, such as ID, Xml, Ftp, Uri
 
             // Correct
             UserGroup userGroup;
@@ -160,7 +160,7 @@ namespace CSharpNaming
         #endregion
 
         #region IX. Do use implicit type var for local variable declarations: var stream = File.Create("");
-        // Exception: primitive types (int, string, double, etc) use predefined names.
+        // Exception: primitive types (int, string, double, ...) use predefined names.
         private void Test()
         {
             var stream = File.Create("");

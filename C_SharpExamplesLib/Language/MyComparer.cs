@@ -109,8 +109,8 @@ namespace C_Sharp.Language
 
         #region IComparable<MyIComparable>
         // <summary>
-        // Sort order is by Version, than by Animal
-        // Except NONE, which has lowest priority.
+        // Sort order is by Version, then by Animal
+        // Except NONE, which has the lowest priority.
         // Important: There must be only one NONE to make order total.
         //
         // ![CDATA[
@@ -167,7 +167,7 @@ namespace C_Sharp.Language
             for (int i = 0; i < l.Count - 1; i++)
                 Assert.IsTrue(((IComparable<MyIComparable>)l[i]).CompareTo(l[i + 1]) <= 0);
 
-            // #pre order works for one NONE
+            // #pre-order works for one NONE
             List<MyIComparable> l2 = new List<MyIComparable>
             {
                 new MyIComparable(2, Cat),
@@ -185,7 +185,7 @@ namespace C_Sharp.Language
                 Assert.IsTrue(((IComparable<MyIComparable>)l2[i]).CompareTo(l2[i + 1]) <= 0);
 
 
-            // #pre order works for three NONE
+            // #pre-order works for three NONE
             List<MyIComparable> l3 = new List<MyIComparable>
             {
                 new MyIComparable(2, Cat),
