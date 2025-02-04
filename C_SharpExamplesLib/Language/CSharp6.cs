@@ -152,7 +152,7 @@ namespace C_Sharp.Language
 			Tuple<int, string> amica = new Tuple<int, string>(2, "Amcia");
 			Tuple<int, string> heidi = new Tuple<int, string>(3, "Heidi");
 
-			List<Tuple<int, string>> friends = new List<Tuple<int, string>>() {macchi, amica, heidi};
+			List<Tuple<int, string>> friends = [macchi, amica, heidi];
 
 			Dictionary<int, Tuple<int, string>> friendsByNumber = new Dictionary<int, Tuple<int, string>>();
 			Dictionary<string, Tuple<int, string>> friendsByName = new Dictionary<string, Tuple<int, string>>();
