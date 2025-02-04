@@ -11,7 +11,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 	public class MySelectorEnumerator<TResult, TParameter> : IEnumerator<TResult>
 	{
 		private readonly IEnumerator<TParameter> _baseEnumerator;
-		private readonly Func<TParameter, TResult> _castFunction;
+		private readonly Func<TParameter, TResult>? _castFunction;
 
 		public MySelectorEnumerator(IEnumerator<TParameter> baseEnumerator, Expression? expression)
 		{
@@ -31,7 +31,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
                 {
                     throw new ArgumentException("Expression is no method call expression");
                 }
-
 			}
 		}
 
@@ -40,7 +39,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             return _castFunction(_baseEnumerator.Current);
 		}
 		public TResult Current => ApplyCast();
-		object IEnumerator.Current => Current;
+		object IEnumerator.Current => Current!;
 		public bool MoveNext()
 		{
 			return _baseEnumerator.MoveNext();
