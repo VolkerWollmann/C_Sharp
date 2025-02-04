@@ -183,7 +183,7 @@ namespace C_Sharp.Language.XML
 				Description = "";
 			}
 		}
-		public static void XmlSearializerExample()
+		public static void XmlSerializerExample()
 		{
 			Animal macchi = new Animal("Macchi", "Famous police donkey");
 			Animal amica = new Animal("Amica", "Friend of Macchi");
