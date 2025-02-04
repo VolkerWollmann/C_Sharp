@@ -357,7 +357,7 @@ namespace C_Sharp.Language.Thread
 		#region thread abort
 		// #thread #abort
 
-		public static void Thread_Cancelation()
+		public static void Thread_Canceling()
 		{
             CancellationTokenSource cts = new CancellationTokenSource();
             System.Threading.Thread tickThread = new System.Threading.Thread(() =>

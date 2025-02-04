@@ -594,8 +594,8 @@ namespace C_Sharp.Language.Task
 			
 			Console.WriteLine("Scheduler Work Start:" + DateTime.Now.ToString("hh:mm:ss.fff") + " Task:" + taskId + " Thread:" + thread.ManagedThreadId);
             Random random = new Random();
-            int worktime = random.Next(1, 50);
-            System.Threading.Thread.Sleep(worktime);
+            int workTime = random.Next(1, 50);
+            System.Threading.Thread.Sleep(workTime);
             Console.WriteLine("Scheduler Work End  :" + DateTime.Now.ToString("hh:mm:ss.fff"));
         }
 

@@ -229,7 +229,7 @@ namespace UnitTest
 
                 foreach (var e in result)
                 {
-	                Assert.IsTrue(e is int);
+	                Assert.IsTrue(e <= 3);
                 }
             }
         }

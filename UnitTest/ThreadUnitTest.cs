@@ -67,7 +67,7 @@ namespace UnitTest
         [TestMethod]
 		public void Thread_Cancelation()
 		{
-			MyThread.Thread_Cancelation();
+			MyThread.Thread_Canceling();
 		}
 
 		[TestMethod]
