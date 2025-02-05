@@ -11,14 +11,35 @@ namespace C_Sharp.Language.IQueryable
 		private readonly string _innerMostExpressionName;
 		private MethodCallExpression? _innermostExpression = null;
 
-		private List<Type> _innerMostTypes = new List<Type>()
+		private List<Type> _innerMostGenericTypes = new List<Type>()
 		{
-			typeof(MyQueryableIntegerSet<int>),
+			typeof(MyQueryableIntegerSet<>),
 			typeof(MyIntegerSetQueryable2),
-			typeof(MyConditionalEnumeratorQueryable2<int>)
-		};
-		
-		public MethodCallExpression? GetInnermostExpression(Expression expression)
+			typeof(MyConditionalEnumeratorQueryable2<>),
+            typeof(MySelectorEnumeratorQueryable2<,>)
+        };
+
+        //public static bool IsMyType(object obj)
+        //{
+        //    Type type = obj.GetType();
+        //    return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(MyType<>);
+        //}
+
+		private bool BaseTypeFits(Type typeToCheck)
+		{
+			if (typeToCheck == typeof(MyIntegerSetQueryable2))
+				return true;
+
+			foreach( var tt in _innerMostGenericTypes)
+			{
+				if (typeToCheck.IsGenericType && typeToCheck.GetGenericTypeDefinition() == tt) 
+					return true;
+			}
+
+            return false;
+		}
+
+        public MethodCallExpression? GetInnermostExpression(Expression expression)
 		{
 			Visit(expression);
 			return _innermostExpression;
@@ -27,7 +48,7 @@ namespace C_Sharp.Language.IQueryable
 		protected override Expression VisitMethodCall(MethodCallExpression expression)
 		{
 			if (expression.Method.Name == _innerMostExpressionName &&
-			    _innerMostTypes.Contains(expression.Arguments[0].Type))
+				BaseTypeFits(expression.Arguments[0].Type))
 				_innermostExpression = expression;
 
 			Visit(expression.Arguments[0]);

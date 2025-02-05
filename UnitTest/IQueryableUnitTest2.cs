@@ -131,7 +131,25 @@ namespace UnitTest
 			}
 		}
 
-		[TestMethod]
+        [TestMethod]
+        //[Ignore]
+        public void Test_IQueryable_Select_Select()
+        {
+            foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+            {
+
+                var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+
+                var result = myQueryableIntegerSet.Select(e => e).Select(e=>e);
+
+                foreach (var e in result)
+                {
+                    Assert.IsTrue(e <= 3);
+                }
+            }
+        }
+
+        [TestMethod]
         public void Test_IQueryable_Select_IntegerFunction()
         {
             List<int> l = [1, 2, 3];

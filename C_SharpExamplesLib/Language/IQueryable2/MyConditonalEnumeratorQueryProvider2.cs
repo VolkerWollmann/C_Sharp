@@ -24,33 +24,23 @@ namespace C_Sharp.Language.IQueryable2
 
 			if (whereExpression != null)
 			{
-				MyConditionalEnumeratorQueryable2<TType> x = new MyConditionalEnumeratorQueryable2<TType>(
+				var newQueryableEnumerator = new MyConditionalEnumeratorQueryable2<TType>(
 					_myQueryableIntegerEnumerator.GetEnumerator(), whereExpression);
 
-				return (IQueryable<TElement>) x;
+				return (IQueryable<TElement>)newQueryableEnumerator;
 			}
 
             InnermostExpressionFinder selectFinder = new InnermostExpressionFinder("Select");
             MethodCallExpression? selectExpression = selectFinder.GetInnermostExpression(expression);
             if (selectExpression != null)
             {
-                UnaryExpression unaryExpression = (UnaryExpression)(selectExpression.Arguments[1]);
-                var unaryExpressionType = unaryExpression.Type;
-                var parametersTypes = unaryExpressionType.GetGenericArguments();
-                var argumentType = parametersTypes[0].GenericTypeArguments[0];
-                var resultType = parametersTypes[0].GenericTypeArguments[1];
+				IEnumerator<TType> enumerator = _myQueryableIntegerEnumerator.GetEnumerator();
 
-                IEnumerator<TType> enumerator = (IEnumerator<TType>)_myQueryableIntegerEnumerator.GetEnumerator();
-
-                MySelectorEnumerator<TElement, TType> e = new MySelectorEnumerator<TElement, TType>(enumerator, selectExpression);
-                //Type genericType = typeof(MySelectorEnumerator<,>).MakeGenericType(resultType,argumentType);
-                //object instance = Activator.CreateInstance(genericType, enumerator, (Expression)unaryExpression);
-
-                var x = new MySelectorEnumeratorQueryable2<TElement, TType>(e);
-                //MyQueryableIntegerEnumerator2<int> x = new MyQueryableIntegerEnumerator2<int>(
-                //    _myQueryableIntegerSet.GetEnumerator(), whereExpression);
-
-                return (IQueryable<TElement>)x;
+                var selectorEnumerator = new MySelectorEnumerator<TElement, TType>(enumerator, selectExpression);
+                
+                var newQueryableEnumerator = new MySelectorEnumeratorQueryable2<TElement, TType>(selectorEnumerator);
+                
+                return newQueryableEnumerator;
             }
 
             throw new NotImplementedException("CreateQuery");

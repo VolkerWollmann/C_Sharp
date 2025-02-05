@@ -19,43 +19,32 @@ namespace C_Sharp.Language.IQueryable2
 
 		public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
 		{
-			InnermostExpressionFinder whereFinder = new InnermostExpressionFinder("Where");
-			MethodCallExpression? whereExpression = whereFinder.GetInnermostExpression(expression);
+            InnermostExpressionFinder whereFinder = new InnermostExpressionFinder("Where");
+            MethodCallExpression? whereExpression = whereFinder.GetInnermostExpression(expression);
 
-			if (whereExpression != null)
-			{
-				var x = MyQueryableFactory.GetMyConditionalEnumeratorQueryable2<int>(
+            if (whereExpression != null)
+            {
+                var newQueryableEnumerator = new MyConditionalEnumeratorQueryable2<int>(
                     _myEnumerableIntegerSet.GetEnumerator(), whereExpression);
 
-				//return new MyQueryableIntegerSet2<TElement>(_myQueryableIntegerSet2);
-				return (IQueryable<TElement>) x;
-			}
-
-			InnermostExpressionFinder selectFinder = new InnermostExpressionFinder("Select");
-			MethodCallExpression? selectExpression = selectFinder.GetInnermostExpression(expression);
-			if (selectExpression != null)
-			{
-				UnaryExpression unaryExpression = (UnaryExpression) (selectExpression.Arguments[1]);
-				var unaryExpressionType = unaryExpression.Type;
-				var parametersTypes = unaryExpressionType.GetGenericArguments();
-				var argumentType = parametersTypes[0].GenericTypeArguments[0];
-				var resultType = parametersTypes[0].GenericTypeArguments[1];
-				
-                IEnumerator<int> enumerator = (IEnumerator<int>)_myEnumerableIntegerSet.GetEnumerator();
-
-				MySelectorEnumerator<TElement, int> e = new MySelectorEnumerator<TElement, int>(enumerator, selectExpression);
-                //Type genericType = typeof(MySelectorEnumerator<,>).MakeGenericType(resultType,argumentType);
-                //object instance = Activator.CreateInstance(genericType, enumerator, (Expression)unaryExpression);
-
-				var x = new MySelectorEnumeratorQueryable2<TElement, int>(e);
-                //MyQueryableIntegerEnumerator2<int> x = new MyQueryableIntegerEnumerator2<int>(
-                //    _myQueryableIntegerSet.GetEnumerator(), whereExpression);
-
-                return (IQueryable<TElement>)x;
+                return (IQueryable<TElement>)newQueryableEnumerator;
             }
 
-			throw new NotImplementedException("CreateQuery");
-		}
+            InnermostExpressionFinder selectFinder = new InnermostExpressionFinder("Select");
+            MethodCallExpression? selectExpression = selectFinder.GetInnermostExpression(expression);
+            if (selectExpression != null)
+            {
+                IEnumerator<int> enumerator = _myEnumerableIntegerSet.GetEnumerator();
+
+                var selectorEnumerator = new MySelectorEnumerator<TElement, int>(enumerator, selectExpression);
+
+                var newQueryableEnumerator = new MySelectorEnumeratorQueryable2<TElement, int>(selectorEnumerator);
+
+                return newQueryableEnumerator;
+            }
+
+            throw new NotImplementedException("CreateQuery");
+        }
 
 		public object Execute(Expression expression)
 		{
