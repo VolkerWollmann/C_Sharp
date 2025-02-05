@@ -42,6 +42,10 @@ namespace C_Sharp.Language.IQueryable2
 			Provider = new MyConditionalEnumeratorQueryProvider2<TType>(this);
 		}
 
+		/// <summary>
+		/// used if type is known at compile time
+		/// </summary>
+		/// <returns></returns>
 		public IEnumerator<TType> GetEnumerator()
 		{
 			return _myIntegerEnumerator;
