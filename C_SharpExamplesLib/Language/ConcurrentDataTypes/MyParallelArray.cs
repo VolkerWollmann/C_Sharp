@@ -1,4 +1,6 @@
-﻿namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 {
     internal class MyParallelArray
     {
@@ -11,18 +13,14 @@
             _maxY = y;
 
             _theArray = new int[x, y];
+            
+            Assert.IsNotNull(_theArray);
 
-        }
-
-        private MyParallelArray() 
-        { 
-            _maxX = 1; _maxY = 1;
-            _theArray = new int[1, 1];
         }
 
         internal delegate void FieldOperationDelegate(int x, int y);
 
-        internal FieldOperationDelegate? _theOperation =null;
+        internal FieldOperationDelegate? _theOperation;
 
         private static Action DoOperationAsyncParallel(int x, int y, FieldOperationDelegate operation)
         {
@@ -54,7 +52,7 @@
             {
                 for (int y = 0; y < _maxY; y++)
                 {
-                    this._theOperation(x, y);
+                    _theOperation(x, y);
                 }
             }
 
@@ -63,39 +61,39 @@
             Console.WriteLine("Non parallel   : {0} ", t1);
         }
 
-        internal async void PerformTestFieldParallel(FieldOperationDelegate theDelegate)
+        internal async Task PerformTestFieldParallel(FieldOperationDelegate theDelegate)
         {
             _theOperation = theDelegate;
             DateTime pStart = DateTime.Now;
-            var tasks = new List<System.Threading.Tasks.Task>();
+            var tasks = new List<Task>();
             for (int x = 0; x < _maxX; x++)
             {
                 for (int y = 0; y < _maxY; y++)
                 {
                     tasks.Add(
-                        System.Threading.Tasks.Task.Run(DoOperationAsyncParallel(x, y, _theOperation)));
+                        Task.Run(DoOperationAsyncParallel(x, y, _theOperation)));
                 }
             }
 
-            await System.Threading.Tasks.Task.WhenAll(tasks);
+            await Task.WhenAll(tasks);
             TimeSpan t2 = DateTime.Now.Subtract(pStart);
             Console.WriteLine("Field parallel : {0} ", t2);
 
         }
 
-        internal async void PerformTestColumnParallel(FieldOperationDelegate theDelegate)
+        internal async Task PerformTestColumnParallel(FieldOperationDelegate theDelegate)
         {
             _theOperation = theDelegate;
             DateTime pStart = DateTime.Now;
-            var tasks = new List<System.Threading.Tasks.Task>();
+            var tasks = new List<Task>();
             for (int x = 0; x < _maxX; x++)
             {
                 tasks.Add(
-                    System.Threading.Tasks.Task.Run(DoOperationAsyncParallel(x, 0,_theOperation)));
+                    Task.Run(DoOperationAsyncParallel(x, 0,_theOperation)));
 
             }
 
-            await System.Threading.Tasks.Task.WhenAll(tasks);
+            await Task.WhenAll(tasks);
             TimeSpan t2 = DateTime.Now.Subtract(pStart);
             Console.WriteLine("Column parallel: {0} ", t2);
 
@@ -108,12 +106,12 @@
         {
             MyParallelArray myParallelArray = new MyParallelArray(30, 30);
             myParallelArray.PerformTest(myParallelArray.SetToOne);
-            myParallelArray.PerformTestFieldParallel(myParallelArray.SetToOne);
-            myParallelArray.PerformTestColumnParallel(myParallelArray.SetToOneByColumn);
+            _ = myParallelArray.PerformTestFieldParallel(myParallelArray.SetToOne);
+            _ = myParallelArray.PerformTestColumnParallel(myParallelArray.SetToOneByColumn);
 
             for (int i = 0; i < 150; i++)
             {
-                System.Threading.Thread.Sleep(100);
+                Thread.Sleep(100);
                 
             }
         }

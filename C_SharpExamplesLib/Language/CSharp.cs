@@ -11,14 +11,16 @@ namespace C_Sharp.Language
         /// </summary>
         public static void LocalFunction()
         {
+            var one = GetOne();
+
+            Assert.AreEqual(1, one);
+            return;
+
+            // ReSharper disable once LocalFunctionHidesMethod
             int GetOne()
             {
                 return 1;
             }
-
-            var one = GetOne();
-
-            Assert.AreEqual(1, one);
         }
 
         public static void MultiLineStringConstant()
@@ -41,7 +43,7 @@ namespace C_Sharp.Language
                 {
                     throw new ArgumentOutOfRangeException(nameof(digit), "Digit cannot be greater than nine.");
                 }
-                this._digit = digit;
+                _digit = digit;
             }
 
             public static implicit operator byte(Digit d) => d._digit;
@@ -195,7 +197,7 @@ namespace C_Sharp.Language
         {
             public static MyRecursiveCLass Anchor = new MyRecursiveCLass();
             public static int Counter = 1;
-            public int MyCounter=0;
+            public int MyCounter;
 
             public MyRecursiveCLass()
             {

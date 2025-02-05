@@ -3,11 +3,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Language.Task
+namespace C_SharpExamplesLib.Language.Tasks
 {
 	[SuppressMessage("ReSharper", "ConvertToLocalFunction")]
     [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
-    public class MyTask
+    public class MyTasks
 	{
 		#region Task Continue with
 		// #task #ContinueWith #TaskContinuationOptions
@@ -35,7 +35,7 @@ namespace C_Sharp.Language.Task
 
         public static void ConstantTaskResult()
         {
-            var fast16 = System.Threading.Tasks.Task.FromResult(16);
+            var fast16 = Task.FromResult(16);
 			
 			if (!fast16.IsCompleted) // actually always true
                 fast16.Start();
@@ -49,14 +49,14 @@ namespace C_Sharp.Language.Task
         // #action #TaskCreationOptions #AttachedToParent
         public static void TestChildTask()
 		{
-			Action sleepAction = () => { System.Threading.Thread.Sleep(2000); };
+			Action sleepAction = () => { Thread.Sleep(2000); };
 			Action parentAction1 = () =>
 			{
-				System.Threading.Tasks.Task childTask = new System.Threading.Tasks.Task(sleepAction, TaskCreationOptions.AttachedToParent);
+				Task childTask = new Task(sleepAction, TaskCreationOptions.AttachedToParent);
 				childTask.Start();
 			};
 
-			System.Threading.Tasks.Task parentTask1 = new System.Threading.Tasks.Task(parentAction1);
+			Task parentTask1 = new Task(parentAction1);
 
 			Console.WriteLine("Start child task attached to parent " + DateTime.Now.ToString(CultureInfo.InvariantCulture));
 			parentTask1.Start();
@@ -65,11 +65,11 @@ namespace C_Sharp.Language.Task
 
 			Action parentAction2 = () =>
 			{
-				System.Threading.Tasks.Task childTask = new System.Threading.Tasks.Task(sleepAction);
+				Task childTask = new Task(sleepAction);
 				childTask.Start();
 			};
 
-			System.Threading.Tasks.Task parentTask2 = new System.Threading.Tasks.Task(parentAction2);
+			Task parentTask2 = new Task(parentAction2);
 
 			Console.WriteLine("Start child task unattached to parent " + DateTime.Now.ToString(CultureInfo.InvariantCulture));
 			parentTask2.Start();
@@ -97,7 +97,7 @@ namespace C_Sharp.Language.Task
 
 		public static void Task_ThreadSafetyViolation()
 		{
-			List<System.Threading.Tasks.Task> tasks = new List<System.Threading.Tasks.Task>();
+			List<Task> tasks = new List<Task>();
 
 			for (int i = 0; i < 3; i++)
 			{
@@ -116,11 +116,11 @@ namespace C_Sharp.Language.Task
 					int rs = rangeStart;
 					int re = rangeEnd;
 
-					tasks.Add(System.Threading.Tasks.Task.Run(() => AddRangeOfValuesThreadSafeViolation(rs, re)));
+					tasks.Add(Task.Run(() => AddRangeOfValuesThreadSafeViolation(rs, re)));
 					rangeStart = rangeEnd;
 				}
 
-				System.Threading.Tasks.Task.WaitAll(tasks.ToArray());
+				Task.WaitAll(tasks.ToArray());
 
 				Console.WriteLine("{0}.Run The total is: {1}", i, _sharedTotalThreadSafetyViolation);
 			}
@@ -154,15 +154,15 @@ namespace C_Sharp.Language.Task
 				if (Monitor.TryEnter(SharedTotalMonitorLock))
 				{
 					_sharedTotalMonitor = _sharedTotalMonitor + subTotal;
-					System.Threading.Thread.Sleep(random.Next(0, 10));
-					Console.WriteLine($"{System.Threading.Tasks.Task.CurrentId} : Adding subtotal ");
+					Thread.Sleep(random.Next(0, 10));
+					Console.WriteLine($"{Task.CurrentId} : Adding subtotal ");
 					Monitor.Exit(SharedTotalMonitorLock);
 					done = true;
 				}
 				else
 				{
-					Console.WriteLine($"{System.Threading.Tasks.Task.CurrentId} : Have to wait for adding subtotal");
-					System.Threading.Thread.Sleep(random.Next(190, 210));
+					Console.WriteLine($"{Task.CurrentId} : Have to wait for adding subtotal");
+					Thread.Sleep(random.Next(190, 210));
 				}
 			}
 		}
@@ -173,7 +173,7 @@ namespace C_Sharp.Language.Task
 		/// </summary>
 		public static void TestTaskMonitor()
 		{
-			List<System.Threading.Tasks.Task> tasks = new List<System.Threading.Tasks.Task>();
+			List<Task> tasks = new List<Task>();
 
 			int rangeSize = 2000000;
 			int rangeStart = 0;
@@ -189,11 +189,11 @@ namespace C_Sharp.Language.Task
 				int rs = rangeStart;
 				int re = rangeEnd;
 
-				tasks.Add(System.Threading.Tasks.Task.Run(() => AddRangeOfValuesMonitor(rs, re)));
+				tasks.Add(Task.Run(() => AddRangeOfValuesMonitor(rs, re)));
 				rangeStart = rangeEnd;
 			}
 
-			System.Threading.Tasks.Task.WaitAll(tasks.ToArray());
+			Task.WaitAll(tasks.ToArray());
 
 			Console.WriteLine("The total is: {0}", _sharedTotalMonitor);
 		}
@@ -216,9 +216,9 @@ namespace C_Sharp.Language.Task
 				start++;
 			}
 
-			Console.WriteLine($"{System.Threading.Tasks.Task.CurrentId} : Before adding subtotal ");
+			Console.WriteLine($"{Task.CurrentId} : Before adding subtotal ");
 			Interlocked.Add(ref _sharedTotalInterlocked, subTotal);
-			Console.WriteLine($"{System.Threading.Tasks.Task.CurrentId} : After adding subtotal ");
+			Console.WriteLine($"{Task.CurrentId} : After adding subtotal ");
 		}
 
 		/// <summary>
@@ -227,7 +227,7 @@ namespace C_Sharp.Language.Task
 		/// </summary>
 		public static void TestTaskInterlocked()
 		{
-			List<System.Threading.Tasks.Task> tasks = new List<System.Threading.Tasks.Task>();
+			List<Task> tasks = new List<Task>();
 
 			int rangeSize = 2000000;
 			int rangeStart = 0;
@@ -243,11 +243,11 @@ namespace C_Sharp.Language.Task
 				int rs = rangeStart;
 				int re = rangeEnd;
 
-				tasks.Add(System.Threading.Tasks.Task.Run(() => AddRangeOfValuesInterlocked(rs, re)));
+				tasks.Add(Task.Run(() => AddRangeOfValuesInterlocked(rs, re)));
 				rangeStart = rangeEnd;
 			}
 
-			System.Threading.Tasks.Task.WaitAll(tasks.ToArray());
+			Task.WaitAll(tasks.ToArray());
 
 			Console.WriteLine("The total is: {0}", _sharedTotalInterlocked);
 		}
@@ -259,26 +259,26 @@ namespace C_Sharp.Language.Task
 		private static int DoSomethingAsync()
 		{
 			Console.WriteLine("Something async started");
-			System.Threading.Thread.Sleep(1000);
+			Thread.Sleep(1000);
 			Console.WriteLine("Something async finished");
 
 			return 1;
 		}
 
-		private static async void PerformSomethingAsync()
+		private static async Task PerformSomethingAsync()
 		{
 			Console.WriteLine("Perform Something async started");
-			int result = await (System.Threading.Tasks.Task.Run(DoSomethingAsync));
+			int result = await (Task.Run(DoSomethingAsync));
 			Assert.AreEqual(1, result);
 			Console.WriteLine("Perform Something async finished");
 		}
 
 		public static void Test_AsyncAwait()
 		{
-			PerformSomethingAsync();
+			_ = PerformSomethingAsync();
 			for (int i = 0; i < 10; i++)
 			{
-				System.Threading.Thread.Sleep(200);
+				Thread.Sleep(200);
 				Console.WriteLine($"Test_AsyncAwait:{i}");
 			}
 
@@ -290,7 +290,7 @@ namespace C_Sharp.Language.Task
 		private static int RaiseException()
 		{
 			Console.WriteLine("Raise Exception started");
-			System.Threading.Thread.Sleep(1000);
+			Thread.Sleep(1000);
 			throw new Exception("Bang");
 			//Console.WriteLine("Raise Exception finished");
 			//return 1;
@@ -300,7 +300,7 @@ namespace C_Sharp.Language.Task
 			try
 			{
 				Console.WriteLine("Perform Exception started");
-				int result = await (System.Threading.Tasks.Task.Run(RaiseException));
+				int result = await (Task.Run(RaiseException));
 				Assert.AreEqual(result, 2, "This assert must not occur");
 				Console.WriteLine("Perform Exception finished");
 			}
@@ -315,7 +315,7 @@ namespace C_Sharp.Language.Task
 			PerformException();
 			for (int i = 0; i < 10; i++)
 			{
-				System.Threading.Thread.Sleep(200);
+				Thread.Sleep(200);
 				Console.WriteLine($"Test_AsyncAwaitException:{i}");
 			}
 		}
@@ -330,14 +330,14 @@ namespace C_Sharp.Language.Task
 				() =>
 				{
 					Console.WriteLine($"Do Something Async Parallel started {input}");
-					System.Threading.Thread.Sleep(delay);
+					Thread.Sleep(delay);
 					Console.WriteLine($"Do Something Async Parallel finished {input}");
 
 					return 1;
 				};
 		}
 
-		private static async void PerformSomethingAsyncParallel()
+		private static async Task PerformSomethingAsyncParallel()
 		{
 			var tasks = new List<Task<int>>();
 			Console.WriteLine("Perform Something Async Parallel started");
@@ -345,18 +345,18 @@ namespace C_Sharp.Language.Task
 
             foreach (KeyValuePair<string, int> k in d.ToList())
 			{
-				tasks.Add(System.Threading.Tasks.Task.Run(DoSomethingAsyncParallel(k.Key, k.Value)));
+				tasks.Add(Task.Run(DoSomethingAsyncParallel(k.Key, k.Value)));
 			}
-			await System.Threading.Tasks.Task.WhenAll(tasks);
+			await Task.WhenAll(tasks);
 			Console.WriteLine("Perform Something Async Parallel finished");
 		}
 
 		public static void Test_AsyncAwaitWhenAll()
 		{
-			PerformSomethingAsyncParallel();
+			_ = PerformSomethingAsyncParallel();
 			for (int i = 0; i < 10; i++)
 			{
-				System.Threading.Thread.Sleep(100);
+				Thread.Sleep(100);
 				Console.WriteLine($"Test_AsyncAwait:{i}");
 			}
 
@@ -369,17 +369,17 @@ namespace C_Sharp.Language.Task
 			// #BlockingCollection #whenAll #wait
 			Console.WriteLine("Test_BlockingCollection start");
 
-			var tasks = new List<System.Threading.Tasks.Task>();
+			var tasks = new List<Task>();
 			// Blocking collection that can hold 5 items
 			BlockingCollection<int> data = new BlockingCollection<int>(5);
 
-			System.Threading.Tasks.Task producer = new System.Threading.Tasks.Task(() =>
+			Task producer = new Task(() =>
 			{
-				System.Threading.Thread.CurrentThread.Name = "Producer";
+				Thread.CurrentThread.Name = "Producer";
 				// attempt to add 10 items to the collection - blocks after 5th
 				for (int i = 0; i < 10; i++)
 				{
-					System.Threading.Thread.Sleep(10);
+					Thread.Sleep(10);
 					data.Add(i);
 					Console.WriteLine("Data {0} added successfully.", i);
 				}
@@ -387,14 +387,14 @@ namespace C_Sharp.Language.Task
 				data.CompleteAdding();
 			});
 
-			System.Threading.Tasks.Task consumer = new System.Threading.Tasks.Task(() =>
+			Task consumer = new Task(() =>
 		   {
-               System.Threading.Thread.CurrentThread.Name = "Consumer";
+               Thread.CurrentThread.Name = "Consumer";
 			   while (!data.IsCompleted)
 			   {
 				   try
 				   {
-					   System.Threading.Thread.Sleep(20);
+					   Thread.Sleep(20);
 					   var v = data.Take();
 					   Console.WriteLine("Data {0} taken successfully.", v);
 				   }
@@ -407,7 +407,7 @@ namespace C_Sharp.Language.Task
 			producer.Start();
 			consumer.Start();
 
-			System.Threading.Tasks.Task.WhenAll(tasks).Wait();
+			Task.WhenAll(tasks).Wait();
 
 			Console.WriteLine("Test_BlockingCollection end");
 
@@ -427,7 +427,7 @@ namespace C_Sharp.Language.Task
 			lock (Lock1)
 			{
 				Console.WriteLine("Method 1 got lock 1");
-				System.Threading.Thread.Sleep(500);
+				Thread.Sleep(500);
 				Console.WriteLine("Method 1 waiting for lock 2");
 				lock (Lock2)
 				{
@@ -444,7 +444,7 @@ namespace C_Sharp.Language.Task
 			lock (Lock2)
 			{
 				Console.WriteLine("Method 2 got lock 2");
-				System.Threading.Thread.Sleep(500);
+				Thread.Sleep(500);
 				Console.WriteLine("Method 2 waiting for lock 1");
 				lock (Lock1)
 				{
@@ -458,13 +458,13 @@ namespace C_Sharp.Language.Task
 
 		public static void TaskDeadLock()
 		{
-            List<System.Threading.Tasks.Task> allTasks = new List<System.Threading.Tasks.Task>
+            List<Task> allTasks = new List<Task>
             {
-                System.Threading.Tasks.Task.Run(Method1), System.Threading.Tasks.Task.Run(Method2)
+                Task.Run(Method1), Task.Run(Method2)
             };
             Console.WriteLine("waiting for tasks");
 
-			System.Threading.Tasks.Task.WhenAll(allTasks).Wait(2000);
+			Task.WhenAll(allTasks).Wait(2000);
 
 			Assert.IsFalse(_done1);
 			Assert.IsFalse(_done2);
@@ -488,16 +488,16 @@ namespace C_Sharp.Language.Task
 			while (!CancellationTokenSource.IsCancellationRequested)
 			{
 				Console.WriteLine("Tick");
-				System.Threading.Thread.Sleep(500);
+				Thread.Sleep(500);
 			}
 		}
 
 		public static void Task_Cancellation()
 		{
-			System.Threading.Tasks.Task.Run(Clock);
+			Task.Run(Clock);
 			Console.WriteLine("Cancel clock after random time");
 			Random random = new Random();
-			System.Threading.Thread.Sleep(random.Next(1000, 3000));
+			Thread.Sleep(random.Next(1000, 3000));
 			CancellationTokenSource.Cancel();
 			Console.WriteLine("Clock stopped");
 
@@ -514,7 +514,7 @@ namespace C_Sharp.Language.Task
 			{
 				tickCount++;
 				Console.WriteLine("Tick");
-				System.Threading.Thread.Sleep(500);
+				Thread.Sleep(500);
 			}
 
 			cancellationToken.ThrowIfCancellationRequested();
@@ -524,9 +524,9 @@ namespace C_Sharp.Language.Task
 		{
 			CancellationTokenSource localCancellationTokenSource = new CancellationTokenSource();
 
-			System.Threading.Tasks.Task clock = System.Threading.Tasks.Task.Run(() => Clock(localCancellationTokenSource.Token), localCancellationTokenSource.Token);
+			Task clock = Task.Run(() => Clock(localCancellationTokenSource.Token), localCancellationTokenSource.Token);
 
-			System.Threading.Thread.Sleep(500);
+			Thread.Sleep(500);
 			try
 			{
 				localCancellationTokenSource.Cancel();
@@ -576,26 +576,26 @@ namespace C_Sharp.Language.Task
         private static void WaitUntil(string label, DateTime next)
         {
             int calculatedWaitTime = (int)((next - DateTime.Now).TotalMilliseconds + 1);
-            System.Threading.Thread.Sleep(calculatedWaitTime);
+            Thread.Sleep(calculatedWaitTime);
             Console.WriteLine(label + DateTime.Now.ToString("hh:mm:ss.fff"));
         }
 
         private static void WaitForTask(Action action)
         {
-            List<System.Threading.Tasks.Task> tasks = new List<System.Threading.Tasks.Task> { System.Threading.Tasks.Task.Run(action) };
-            System.Threading.Tasks.Task.WaitAll(tasks.ToArray());
+            List<Task> tasks = new List<Task> { Task.Run(action) };
+            Task.WaitAll(tasks.ToArray());
         }
         #endregion
 
         private static void SchedulerWork(object? data)
         {
-			int? taskId = System.Threading.Tasks.Task.CurrentId;
-            System.Threading.Thread thread = System.Threading.Thread.CurrentThread;
+			int? taskId = Task.CurrentId;
+            Thread thread = Thread.CurrentThread;
 			
 			Console.WriteLine("Scheduler Work Start:" + DateTime.Now.ToString("hh:mm:ss.fff") + " Task:" + taskId + " Thread:" + thread.ManagedThreadId);
             Random random = new Random();
             int workTime = random.Next(1, 50);
-            System.Threading.Thread.Sleep(workTime);
+            Thread.Sleep(workTime);
             Console.WriteLine("Scheduler Work End  :" + DateTime.Now.ToString("hh:mm:ss.fff"));
         }
 
@@ -615,6 +615,7 @@ namespace C_Sharp.Language.Task
                 start = IncrementStartTime(start, 10);
 
             }
+            // ReSharper disable once FunctionNeverReturns
         }
 
         public static void SchedulerStart(object data)
@@ -627,9 +628,9 @@ namespace C_Sharp.Language.Task
 
         public static void Task_SchedulerTest_AsInfiniteLoop()
         {
-            System.Threading.Tasks.Task.Run(() => { SchedulerInfiniteLoop(); });
+            Task.Run(() => { SchedulerInfiniteLoop(); });
 
-            System.Threading.Thread.Sleep(30 * 1000);
+            Thread.Sleep(30 * 1000);
         }
 
         public static void Task_SchedulerTest_Timer()
@@ -637,7 +638,7 @@ namespace C_Sharp.Language.Task
             DateTime start = GetNextStartDateTime();
             WaitUntil("Start:", start);
             Timer t = new Timer(SchedulerWork, null, 0, 10000);
-            System.Threading.Thread.Sleep(30 * 1000);
+            Thread.Sleep(30 * 1000);
         }
 
         public static void Task_SchedulerTest_Timer_Task()
@@ -645,7 +646,7 @@ namespace C_Sharp.Language.Task
             DateTime start = GetNextStartDateTime();
             WaitUntil("Start:", start);
             Timer t = new Timer(SchedulerStart!, null, 0, 10000);
-            System.Threading.Thread.Sleep(30 * 1000);
+            Thread.Sleep(30 * 1000);
         }
 
        

@@ -20,7 +20,7 @@
 
             public Person ShallowCopy()
             {
-                return (Person)this.MemberwiseClone();
+                return (Person)MemberwiseClone();
             }
 
             public Person DeepCopy()
@@ -82,7 +82,7 @@
 
         internal static void DisplayValues(Person p)
         {
-            Console.WriteLine("      Name: {0:s}, Age: {1:d}", p.Name, p.Age);
+            Console.WriteLine("      Name: {0}, Age: {1:d}", p.Name, p.Age);
             Console.WriteLine("      IdInfo.IdNumber: {0:d}", p.IdInfo.IdNumber);
         }
     }

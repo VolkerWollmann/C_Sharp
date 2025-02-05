@@ -400,11 +400,11 @@ namespace CSharpNaming
             s = SHIPPINGTYPE;
             Assert.AreEqual(SHIPPINGTYPE, s);
 
-            this.ClientAppointment = DateTime.Now;
-            this.TimeLeft = TimeSpan.Zero;
+            ClientAppointment = DateTime.Now;
+            TimeLeft = TimeSpan.Zero;
 
-            this.client_Appointment = DateTime.Now;
-            this.time_Left = TimeSpan.Zero;
+            client_Appointment = DateTime.Now;
+            time_Left = TimeSpan.Zero;
 
             if ((counter == 0) || (iCounter == 0))
                 return;

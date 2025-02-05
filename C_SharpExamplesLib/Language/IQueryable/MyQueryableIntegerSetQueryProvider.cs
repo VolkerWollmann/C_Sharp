@@ -28,7 +28,7 @@ namespace C_Sharp.Language.IQueryable
     internal class ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor<TOutputType> : ExpressionVisitor
     {
         private readonly MyQueryableIntegerSet<TOutputType> _myQueryableIntegerSet;
-        private bool done=false;
+        private bool done;
 
         internal ExpressionTreeMyQueryableIntegerSetWhereClauseReplaceVisitor(MyQueryableIntegerSet<TOutputType> myQueryableIntegerSet)
         {

@@ -37,7 +37,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 			        PersistSecurityInfo = true, // hide login credentials
 			        UserID = settings.DatabaseUser, // user name
 			        Password = settings.DatabasePassword, // password
-			        ApplicationName = this.GetType().Name, // MyIntegerSetFactory
+			        ApplicationName = GetType().Name, // MyIntegerSetFactory
 			        Encrypt = false,
 			        TrustServerCertificate = true
 		        };

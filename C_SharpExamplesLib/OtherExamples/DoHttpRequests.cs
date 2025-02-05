@@ -9,7 +9,7 @@ namespace C_Sharp.OhterExamples
     public class DoHttpRequests
     {
         private static int result = 0;
-        private static async void DoTheRequest()
+        private static async Task DoTheRequest()
         {
             result = 0;
             string url = "https://www.random.org/integers/?num=1&min=1&max=6&col=1&base=10&format=plain&rnd=new";
@@ -39,11 +39,11 @@ namespace C_Sharp.OhterExamples
 
         public static void TestHttpRequestSimple()
         {
-            DoTheRequest();
+            _ = DoTheRequest();
             int i = 0;
             while (i < 50)
             {
-                System.Threading.Thread.Sleep(1000);
+                Thread.Sleep(1000);
                 if (result > 0)
                     break;
 
@@ -69,7 +69,7 @@ namespace C_Sharp.OhterExamples
             public string Body { get; set; } = string.Empty;
         }
 
-        private static async void DoRequestJSON()
+        private static async Task DoRequestJSON()
         {
             result = 0;
 
@@ -106,11 +106,11 @@ namespace C_Sharp.OhterExamples
 
         public static void TestHttpRequestJSON()
         {  
-            DoRequestJSON();
+            _ = DoRequestJSON();
             int i = 0;
             while(i<50)
             {
-                System.Threading.Thread.Sleep(1000);
+                Thread.Sleep(1000);
                 if (result > 0)
                     break;
 

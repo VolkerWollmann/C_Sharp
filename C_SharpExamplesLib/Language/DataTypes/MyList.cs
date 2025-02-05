@@ -25,16 +25,16 @@ namespace C_Sharp.Language.DataTypes
             if (other == null)
                 return 1;
 
-            if (this.X > other.X)
+            if (X > other.X)
                 return 1;
 
-            if (this.X < other.X)
+            if (X < other.X)
                 return -1;
 
-            if (this.Y > other.Y)
+            if (Y > other.Y)
                 return 1;
 
-            if (this.Y < other.Y)
+            if (Y < other.Y)
                 return -1;
 
             return 0;

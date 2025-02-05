@@ -10,7 +10,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         /// <summary>
         /// very primitive compiler to retrieve the values form the database,
         /// which match the lambda expression
-        /// only evaluates = 2, should evaluate [<|>|=] e.g. 3-4, ...
+        /// only evaluates = 2, should evaluate [less|>|=] e.g. 3-4, ...
         /// </summary>
         public class ExpressionCompileVisitor : ExpressionVisitor
         {
@@ -107,7 +107,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         public override int Sum()
         {
-            int sum = base.ExecuteScalarQuery($"select Sum({TheValue}) from {TableName}");
+            int sum = ExecuteScalarQuery($"select Sum({TheValue}) from {TableName}");
             return sum;
         }
 

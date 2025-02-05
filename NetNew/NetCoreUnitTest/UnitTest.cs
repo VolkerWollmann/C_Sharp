@@ -72,7 +72,7 @@ namespace NetCoreUnitTest
 
         public CSharp9UnitTest(ITestOutputHelper output)
         {
-            this._output = output;
+            _output = output;
         }
 
         [Fact]
@@ -84,7 +84,7 @@ namespace NetCoreUnitTest
         [Fact]
         public void ContentEquality()
         {
-            CSharp9.ContentEquality(this._output);
+            CSharp9.ContentEquality(_output);
         }
 
         [Fact]
@@ -145,7 +145,7 @@ namespace NetCoreUnitTest
         [Fact]
         public void StreamTestUnconventionalUsage()
         {
-            CSharp.StreamTestUnconventionalUsage();
+            _ = CSharp.StreamTestUnconventionalUsage();
         }
 
 

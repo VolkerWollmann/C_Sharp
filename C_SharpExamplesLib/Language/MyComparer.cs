@@ -80,19 +80,19 @@ namespace C_Sharp.Language
             if (other == null)
                 return 1;
 
-            if ((this.Animal == None) && (other.Animal == None))
+            if ((Animal == None) && (other.Animal == None))
                 return 0;
 
-            if (this.Animal == None)
+            if (Animal == None)
                 return -1;
 
             if (other.Animal == None)
                 return 1;
 
-            if (this.Version < other.Version)
+            if (Version < other.Version)
                 return -1;
 
-            if (this.Version > other.Version)
+            if (Version > other.Version)
                 return 1;
 
             Dictionary<string, int> animalOrder = new Dictionary<string, int> { [Donkey] = 1, [Dog] = 2, [Seagull] = 3, [Cat] = 4 };
@@ -259,7 +259,7 @@ namespace C_Sharp.Language
 
 		public override bool Equals(object? other)
         {
-			return this.Equals(other as MyIEquatable); 
+			return Equals(other as MyIEquatable); 
         }
 
 		public override int GetHashCode() => Number;
@@ -269,10 +269,10 @@ namespace C_Sharp.Language
         public bool Equals(MyIEquatable? other)
 		{
 			// #Object #ReferenceEquals 
-			if (Object.ReferenceEquals(other, null))
+			if (ReferenceEquals(other, null))
 				return false;
 
-			return  this.Number == other.Number && this.Animal == other.Animal;
+			return  Number == other.Number && Animal == other.Animal;
 		}
 		#endregion
 

@@ -16,7 +16,7 @@ namespace CSharpCore
 
             public StreamString(Stream ioStream)
             {
-                this._ioStream = ioStream;
+                _ioStream = ioStream;
                 _streamEncoding = new UnicodeEncoding();
             }
 

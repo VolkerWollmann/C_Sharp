@@ -15,10 +15,10 @@ namespace CSharpCore
     {
         #region stream
         // #Stream
-        public static async void StreamTestUnconventionalUsage()
+        public static async Task StreamTestUnconventionalUsage()
         {
             string[] lines = { "First line", "Second line", "Third line" };
-            using StreamWriter fileWriter = new("WriteLines2.txt"); // works without brackets in C# 8.0
+            await using StreamWriter fileWriter = new("WriteLines2.txt"); // works without brackets in C# 8.0
 
             foreach (string line in lines)
             {
@@ -71,6 +71,7 @@ namespace CSharpCore
             {
                 int local;
                 // decrement CDE count once for each element consumed from queue
+                // ReSharper disable once AccessToDisposedClosure
                 while (queue.TryDequeue(out local)) cde.Signal();
             };
 

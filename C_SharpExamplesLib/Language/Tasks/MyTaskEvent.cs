@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 
-namespace C_Sharp.Language.Task
+namespace C_SharpExamplesLib.Language.Tasks
 {
 	/// <summary>
 	/// #task #event
@@ -24,12 +24,12 @@ namespace C_Sharp.Language.Task
 
 			public void Run()
 			{
-				System.Threading.Thread.CurrentThread.Name = "Consumer";
+				Thread.CurrentThread.Name = "Consumer";
 				while (!_data.IsCompleted)
 				{
 					try
 					{
-						System.Threading.Thread.Sleep(Random.Next(100, 200));
+						Thread.Sleep(Random.Next(100, 200));
 						int v = _data.Take();
 						Console.WriteLine("Data {0} taken successfully.", v);
 					}
@@ -48,13 +48,13 @@ namespace C_Sharp.Language.Task
 
 			public void Run()
 			{ 
-				System.Threading.Thread.CurrentThread.Name = "Producer";
+				Thread.CurrentThread.Name = "Producer";
 
 				int max = 10;
 
 				for (int i = 0; i < max; i++)
 				{
-					System.Threading.Thread.Sleep(Random.Next(100, 150));
+					Thread.Sleep(Random.Next(100, 150));
                     ProduceEvent?.Invoke(i, (i == (max - 1)));
                     Console.WriteLine("Data {0} produced successfully.", i);
 				}
@@ -66,10 +66,10 @@ namespace C_Sharp.Language.Task
 			Consumer consumer = new Consumer();
 			Producer producer = new Producer(consumer.AddData);
 
-			var tasks = new List<System.Threading.Tasks.Task>();
+			var tasks = new List<Task>();
 			
-			System.Threading.Tasks.Task producerTask = new System.Threading.Tasks.Task(() => producer.Run());
-			System.Threading.Tasks.Task consumerTask = new System.Threading.Tasks.Task(() => consumer.Run());
+			Task producerTask = new Task(() => producer.Run());
+			Task consumerTask = new Task(() => consumer.Run());
 
 			tasks.Add(producerTask);
 			tasks.Add(consumerTask);
@@ -77,7 +77,7 @@ namespace C_Sharp.Language.Task
 			producerTask.Start();
 			consumerTask.Start();
 
-			System.Threading.Tasks.Task.WhenAll(tasks).Wait();
+			Task.WhenAll(tasks).Wait();
 			Console.WriteLine("Test_BlockingCollection end");
 		}
 	}

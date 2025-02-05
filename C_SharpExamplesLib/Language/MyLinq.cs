@@ -101,10 +101,10 @@ namespace C_Sharp.Language
 			Assert.AreEqual(null, s);
 
 			ls.Add("donkey");
-			s =ls.FirstOrDefault( s => (s == "donkey") );
+			s =ls.FirstOrDefault( s1 => (s1 == "donkey") );
 			Assert.IsNotNull(s);
 
-			s = ls.FirstOrDefault(s => (s == "dog"));
+			s = ls.FirstOrDefault(s1 => (s1 == "dog"));
 			Assert.IsNull(s);
 		}
 
@@ -165,7 +165,7 @@ namespace C_Sharp.Language
 			Assert.IsTrue(oneElementSet.Single() == 1);
 
             IEnumerable<int> twoElementSet = Enumerable.Range(1, 2);
-			Assert.ThrowsException<InvalidOperationException>( () => { twoElementSet.Single(); });
+			Assert.ThrowsException<InvalidOperationException>( () => { _ = twoElementSet.Single(); });
         }
 
 

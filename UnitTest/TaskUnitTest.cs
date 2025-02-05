@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using C_Sharp.Language.Task;
+using C_SharpExamplesLib.Language.Tasks;
 using System.Reflection;
 using C_SharpExamplesLib.Language.ConcurrentDataTypes;
 
@@ -29,19 +29,19 @@ namespace UnitTest
 		[TestMethod]
 		public void Task_ContinueWith()
 		{
-			MyTask.TestContinueWith();
+			MyTasks.TestContinueWith();
 		}
 
         [TestMethod]
         public void Task_ConstantTaskResult()
         {
-            MyTask.ConstantTaskResult();
+            MyTasks.ConstantTaskResult();
         }
 
         [TestMethod]
 		public void Task_ThreadSafetyViolation()
 		{
-			MyTask.Task_ThreadSafetyViolation();
+			MyTasks.Task_ThreadSafetyViolation();
 		}
 
 		[TestMethod]
@@ -53,79 +53,79 @@ namespace UnitTest
 		[TestMethod]
 		public void Task_Monitor()
 		{
-			MyTask.TestTaskMonitor();
+			MyTasks.TestTaskMonitor();
 		}
 
 		[TestMethod]
 		public void Task_Interlocked()
 		{
-			MyTask.TestTaskInterlocked();
+			MyTasks.TestTaskInterlocked();
 		}
 
 		[TestMethod]
 		public void Task_DeadLock()
         {
-			MyTask.TaskDeadLock();
+			MyTasks.TaskDeadLock();
         }
 
 		[TestMethod]
 		public void Task_ChildTask()
 		{
-			MyTask.TestChildTask();
+			MyTasks.TestChildTask();
 		}
 
 		[TestMethod]
 		public void Task_AsyncAwait()
         {
-			MyTask.Test_AsyncAwait(); 
+			MyTasks.Test_AsyncAwait(); 
         }
 
 		[TestMethod]
 		public void Task_AsyncAwaitException()
 		{
-			MyTask.Test_AsyncAwaitException();
+			MyTasks.Test_AsyncAwaitException();
 		}
 
 		[TestMethod]
 		public void Task_AsyncAwaitWhenAll()
 		{
-			MyTask.Test_AsyncAwaitWhenAll();
+			MyTasks.Test_AsyncAwaitWhenAll();
 		}
 
 		[TestMethod]
 		public void Task_BlockingCollection()
         {
-			MyTask.Test_BlockingCollection();
+			MyTasks.Test_BlockingCollection();
         }
 
 		[TestMethod]
 		public void Task_Cancellation()
         {
-			MyTask.Task_Cancellation();
+			MyTasks.Task_Cancellation();
         }
 
 		[TestMethod]
 		public void Task_OperationCanceledException()
 		{
-			MyTask.Task_OperationCanceledException();
+			MyTasks.Task_OperationCanceledException();
 		}
 
         [TestMethod]
         public void Task_SchedulerTest_AsInfiniteLoop()
         {
-            MyTask.Task_SchedulerTest_AsInfiniteLoop();
+            MyTasks.Task_SchedulerTest_AsInfiniteLoop();
         }
 
         [TestMethod]
         public void Task_SchedulerTest_Timer()
         {
-            MyTask.Task_SchedulerTest_Timer();
+            MyTasks.Task_SchedulerTest_Timer();
         }
 
         [TestMethod]
         public void Task_SchedulerTest_Timer_Task()
         {
-            MyTask.Task_SchedulerTest_Timer_Task();
+            MyTasks.Task_SchedulerTest_Timer_Task();
         }
 
         [TestMethod]

@@ -30,7 +30,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         public bool MoveNext()
         {
             _i = _i + 1;
-            System.Threading.Thread.Sleep(100);
+            Thread.Sleep(100);
 
             return _i < _set.Count;
         }

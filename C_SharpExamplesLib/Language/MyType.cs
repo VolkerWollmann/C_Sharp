@@ -54,10 +54,10 @@ namespace C_Sharp.Language
             object? tx3O = Activator.CreateInstance(tx3);
             Assert.IsInstanceOfType(tx3O, tx3);
 
-            if (x is List<int> il)
+            if (x is { } il)
                 Assert.IsTrue(il != null);
 
-            if (x is List<int> il2)
+            if (x is { } il2)
                 Assert.IsTrue(il2 != null);
 
             if (y is List<int> il3)

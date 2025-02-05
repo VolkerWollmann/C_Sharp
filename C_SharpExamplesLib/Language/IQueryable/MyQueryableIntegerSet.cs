@@ -122,7 +122,7 @@ namespace C_Sharp.Language.IQueryable
         public MyQueryableIntegerSet<TBaseType2> CreateMyQueryableIntegerSet<TBaseType2>(MyQueryableIntegerSetQueryProvider<TBaseType2> provider,
             Expression expression)
         {
-            return new MyQueryableIntegerSet<TBaseType2>(this._myIntegerSet, provider, expression);
+            return new MyQueryableIntegerSet<TBaseType2>(_myIntegerSet, provider, expression);
         }
 
         #endregion

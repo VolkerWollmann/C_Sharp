@@ -134,7 +134,7 @@ namespace C_Sharp.Language
 			// Does not compile 
 			// Assert.IsNotNull(cs6.ClassProperty); 
 
-			Assert.IsNotNull(CSharp6.ClassProperty);
+			Assert.IsNotNull(ClassProperty);
         }
 
         // Get nur mit c# 8.0 ( .NET Core 3 or .NET Standard 2.1)

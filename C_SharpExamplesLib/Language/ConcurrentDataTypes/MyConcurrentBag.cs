@@ -39,6 +39,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
             Console.WriteLine("Non parallel:" + t1);
             Console.WriteLine("Parallel:" + t2);
 
+            Assert.IsTrue(bag.Count>0);
             Assert.IsTrue(t2 < t1);
 
         }

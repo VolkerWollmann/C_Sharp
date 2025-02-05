@@ -3,15 +3,15 @@
 namespace C_Sharp.Language
 {
     // #class attribute
-    [System.AttributeUsage(System.AttributeTargets.Class)]
-    public class AuthorAttribute : System.Attribute
+    [AttributeUsage(AttributeTargets.Class)]
+    public class AuthorAttribute : Attribute
     {
         private readonly string _name;
         public double Version;
 
         public AuthorAttribute(string name)
         {
-            this._name = name;
+            _name = name;
             Version = 1.0;
         }
 
@@ -31,10 +31,10 @@ namespace C_Sharp.Language
     {
         public static void Test()
         {
-            System.Attribute[] attrs = System.Attribute.GetCustomAttributes(typeof(MyAttributedClass)); // Reflection.  
+            Attribute[] attrs = Attribute.GetCustomAttributes(typeof(MyAttributedClass)); // Reflection.  
 
             // Displaying output
-            foreach (System.Attribute attr in attrs)
+            foreach (Attribute attr in attrs)
             {
                 if (attr is AuthorAttribute attribute)
                 {
