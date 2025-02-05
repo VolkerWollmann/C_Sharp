@@ -8,8 +8,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
     /// </summary>
     public class MyMemoryIntegerSet : IMyIntegerSet
     {
-        Guid guid = Guid.NewGuid();
-
         #region IntegerRangeData
         
         private readonly List<int> _set;

@@ -16,7 +16,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		
 		private readonly SqlConnection? _dataBaseConnection;
-		private SqlDataReader? _reader = null;
+		private SqlDataReader? _reader;
 
 		#region IntegerRangeData
 

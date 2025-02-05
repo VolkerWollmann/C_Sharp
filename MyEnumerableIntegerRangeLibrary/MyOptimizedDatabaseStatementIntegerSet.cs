@@ -14,12 +14,12 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         /// </summary>
         public class ExpressionCompileVisitor : ExpressionVisitor
         {
-            private string[] results = new string[50];
-            private int index = 0;
+            private string[] _results = new string[50];
+            private int _index;
 
             protected override Expression VisitConstant(ConstantExpression node)
             {
-                results[index++] = node.Value?.ToString() ?? "null";
+                _results[_index++] = node.Value?.ToString() ?? "null";
                 return node;
             }
 
@@ -30,7 +30,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             /// <returns></returns>
             protected override Expression VisitParameter(ParameterExpression node)
             {
-                results[index++] = TheValue;
+                _results[_index++] = TheValue;
                 return node;
             }
 
@@ -69,16 +69,16 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
                 else
                     throw new Exception("Compile error");
 
-                string s = results[index-2] + " " + operation + " " + results[index - 1];
-                index -= 2;
-                results[index++] = s;
+                string s = _results[_index-2] + " " + operation + " " + _results[_index - 1];
+                _index -= 2;
+                _results[_index++] = s;
 
                 return node;
             }
 
             internal string GetCondition()
             {
-                return results[0];
+                return _results[0];
             }
         }
 
