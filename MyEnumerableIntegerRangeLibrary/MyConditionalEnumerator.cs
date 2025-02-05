@@ -44,7 +44,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		public TType Current => _myBaseEnumerator.Current;
 
-		object IEnumerator.Current => Current;
+		object IEnumerator.Current => Current!;
 
 		#endregion
 

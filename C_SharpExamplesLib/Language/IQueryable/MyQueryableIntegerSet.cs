@@ -88,7 +88,7 @@ namespace C_Sharp.Language.IQueryable
         public MyQueryableIntegerSet(IMyIntegerSet myIntegerSet)
         {
             _myIntegerSet = myIntegerSet;
-            _myIntegerSetEnumerator = (IEnumerator<int>?)myIntegerSet.GetEnumerator();
+            _myIntegerSetEnumerator = ((IEnumerator<int>?)myIntegerSet.GetEnumerator())!;
 
             Provider = new MyQueryableIntegerSetQueryProvider<TOutputType>(this);
             Expression = Expression.Constant(this);

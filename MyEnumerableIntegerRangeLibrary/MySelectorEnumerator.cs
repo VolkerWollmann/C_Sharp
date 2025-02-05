@@ -36,7 +36,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		private TResult ApplyCast()
 		{
-            return _castFunction(_baseEnumerator.Current);
+            return _castFunction!(_baseEnumerator.Current);
 		}
 		public TResult Current => ApplyCast();
 		object IEnumerator.Current => Current!;

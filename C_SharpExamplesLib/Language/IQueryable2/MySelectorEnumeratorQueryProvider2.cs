@@ -80,7 +80,7 @@ namespace C_SharpExamplesLib.Language.IQueryable2
 
         public TResult Execute<TResult>(Expression expression)
         {
-            return (TResult) this.Execute(expression);
+            return (TResult) this.Execute(expression)!;
         }
 
     }

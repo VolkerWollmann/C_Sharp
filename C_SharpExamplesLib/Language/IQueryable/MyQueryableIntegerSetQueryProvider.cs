@@ -101,7 +101,7 @@ namespace C_Sharp.Language.IQueryable
 	            return queryableIntegers.Provider.CreateQuery(newExpressionTree);
             }
             else
-                return queryableIntegers.Provider.Execute(newExpressionTree);
+                return queryableIntegers.Provider.Execute(newExpressionTree)!;
         }
 
         private object ExecuteWhereExpression(Expression expression, MethodCallExpression whereExpression)

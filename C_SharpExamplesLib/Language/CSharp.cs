@@ -237,6 +237,7 @@ namespace C_Sharp.Language
                 goto Label2;
 
             // ReSharper disable once HeuristicUnreachableCode
+            #pragma warning disable CS0162 // Unreachable code detected
             throw new Exception("That must not happen");
 
             Label1:
@@ -249,6 +250,7 @@ namespace C_Sharp.Language
 
             // ReSharper disable once HeuristicUnreachableCode
             throw new Exception("That must not happen");
+#pragma warning restore CS0162 // Unreachable code detected
 
             Label3:
                 Console.WriteLine("Test end.");
