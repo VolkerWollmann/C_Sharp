@@ -14,22 +14,12 @@ namespace C_Sharp.Language.IQueryable
 		private List<Type> _innerMostGenericTypes = new List<Type>()
 		{
 			typeof(MyQueryableIntegerSet<>),
-			typeof(MyIntegerSetQueryable2),
 			typeof(MyConditionalEnumeratorQueryable2<>),
             typeof(MySelectorEnumeratorQueryable2<,>)
         };
 
-        //public static bool IsMyType(object obj)
-        //{
-        //    Type type = obj.GetType();
-        //    return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(MyType<>);
-        //}
-
 		private bool BaseTypeFits(Type typeToCheck)
 		{
-			if (typeToCheck == typeof(MyIntegerSetQueryable2))
-				return true;
-
 			foreach( var tt in _innerMostGenericTypes)
 			{
 				if (typeToCheck.IsGenericType && typeToCheck.GetGenericTypeDefinition() == tt) 

@@ -28,12 +28,17 @@ namespace UnitTest
 			_myIntegerSetFactory.Dispose();
 		}
 
-		[TestMethod]
+        private IQueryable<int> GetMyQueryable(IMyIntegerSet myIntegerSet)
+        {
+            return new MyConditionalEnumeratorQueryable2<int>(myIntegerSet.GetEnumerator());
+        }
+
+        [TestMethod]
 		public void Test_IQueryable_ForEach()
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
             {
-                var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+                var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
                 
 				var expression = myQueryableIntegerSet.Where(i => i < 2);
 				foreach (var i in expression)
@@ -49,7 +54,7 @@ namespace UnitTest
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
-				var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+				var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
 				var expression = myQueryableIntegerSet.Where(i => i < 2);
 				foreach (var i in expression)
 				{
@@ -64,7 +69,7 @@ namespace UnitTest
 			List<int> l = [1, 2, 3];
 			MyMemoryIntegerSet myIntegerSet = new MyMemoryIntegerSet(l);
 
-			    var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+			    var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
 
 			List<int> result = myQueryableIntegerSet.ToList();
 			CollectionAssert.AreEqual(l, result);
@@ -77,7 +82,7 @@ namespace UnitTest
 			List<int> l = [1, 2, 3];
 			MyMemoryIntegerSet myIntegerSet = new MyMemoryIntegerSet(l);
 
-			var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+			var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
 			var expression = myQueryableIntegerSet.Where(i => i <= 2);
 			var result = expression.ToList();
 
@@ -105,7 +110,7 @@ namespace UnitTest
 		{
 			IMyIntegerSet myIntegerSet = _myIntegerSetFactory.GetMemoryIntegerSet();
 
-			var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+			var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
 
 			var expression = myQueryableIntegerSet.Where(i => TestForTwo(i)).Where(i => SecondTestForTwo(i));
 			var result = expression.ToList();
@@ -120,7 +125,7 @@ namespace UnitTest
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
 
-				var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+				var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
 
 				var result = myQueryableIntegerSet.Select(e => e);
 
@@ -137,8 +142,7 @@ namespace UnitTest
         {
             foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
             {
-
-                var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+                var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
 
                 var result = myQueryableIntegerSet.Select(e => e).Select(e=>e);
 
@@ -155,7 +159,7 @@ namespace UnitTest
             List<int> l = [1, 2, 3];
             MyMemoryIntegerSet myIntegerSet = new MyMemoryIntegerSet(l);
 
-            var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+            var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
 
             var result = myQueryableIntegerSet.Select(e => e * 2);
 
@@ -177,7 +181,7 @@ namespace UnitTest
             List<int> l = [1, 2, 3];
             MyMemoryIntegerSet myIntegerSet = new MyMemoryIntegerSet(l);
 
-            var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+            var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
 
             var result = myQueryableIntegerSet.Select(e => "Donkey_" + e);
 
@@ -199,7 +203,7 @@ namespace UnitTest
             List<int> l = [1, 2, 3];
             MyMemoryIntegerSet myIntegerSet = new MyMemoryIntegerSet(l);
 
-            var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+            var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
 
             var result = myQueryableIntegerSet.Where(x => ( x==1 || x == 3 ) ).Select(e => "Donkey_" + e);
 
@@ -221,7 +225,7 @@ namespace UnitTest
         {
             foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
             {
-                var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+                var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
 
                 var result = myQueryableIntegerSet.Select(e => Tuple.Create("A", e));
 
@@ -242,7 +246,7 @@ namespace UnitTest
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
 
-				var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+				var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
 
 				var expression = myQueryableIntegerSet.Any();
 				var result = expression;
@@ -257,7 +261,7 @@ namespace UnitTest
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
-				var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+				var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
 
 				var expression = myQueryableIntegerSet.Any(i => i < 2);
 				var result = expression;
@@ -271,7 +275,7 @@ namespace UnitTest
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
-                var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+                var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
 
 				var expression = myQueryableIntegerSet.Any(i => TestForTwo(i));
 				var result = expression;
@@ -286,7 +290,7 @@ namespace UnitTest
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
 
-				var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+				var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
 
 				// ReSharper disable once ReplaceWithSingleCallToAny
 				var expression = myQueryableIntegerSet.Where( i => i<2).Any();
@@ -303,7 +307,7 @@ namespace UnitTest
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
 
-				var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+				var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
 
 				var sum = myQueryableIntegerSet.Sum();
 
@@ -317,7 +321,7 @@ namespace UnitTest
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
 
-                var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+                var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
 
                 var max = myQueryableIntegerSet.Max();
 
