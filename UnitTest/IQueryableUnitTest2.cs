@@ -241,6 +241,19 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void Test_IQueryable_Select_Tuple_Any()
+        {
+            foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+            {
+                var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+
+                var result = myQueryableIntegerSet.Select(e => Tuple.Create("A", e)).Any();
+
+                Assert.IsTrue(result);
+            }
+        }
+
+        [TestMethod]
 		public void Test_IQueryable_Any()
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)

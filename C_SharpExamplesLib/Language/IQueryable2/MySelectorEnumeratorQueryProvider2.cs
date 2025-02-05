@@ -49,14 +49,39 @@ namespace C_SharpExamplesLib.Language.IQueryable2
             throw new NotImplementedException("CreateQuery");
         }
 
+        #region Any
+        private bool Any()
+        {
+            using var enumerator = _mySelectorEnumerator.GetEnumerator();
+            return enumerator.MoveNext();
+        }
+
+        private bool Any(Expression conditionExpression)
+        {
+            using var enumerator = _mySelectorEnumerator.GetEnumerator();
+            using var enumerator2 = new MyConditionalEnumerator<TResultType>(enumerator, conditionExpression);
+            return enumerator2.MoveNext();
+        }
+        #endregion
+
         public object? Execute(Expression expression)
         {
+            // Check for any
+            if (expression is MethodCallExpression { Method.Name: "Any" } methodCallExpression)
+            {
+                if (methodCallExpression.Arguments.Count == 1)
+                    return Any();
+
+                return Any(methodCallExpression.Arguments[1]);
+            }
+
             throw new NotImplementedException();
         }
 
         public TResult Execute<TResult>(Expression expression)
         {
-            throw new NotImplementedException();
+            return (TResult) this.Execute(expression);
         }
+
     }
 }
