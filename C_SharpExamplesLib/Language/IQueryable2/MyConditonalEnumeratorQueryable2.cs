@@ -14,6 +14,11 @@ namespace C_Sharp.Language.IQueryable2
 	{
 		private MyConditionalEnumerator<TType> _myIntegerEnumerator;
 
+
+		/// <summary>
+		/// empty condition : acts like identical list
+		/// </summary>
+		/// <param name="integerEnumerator">the base enumerator</param>
 		public MyConditionalEnumeratorQueryable2(IEnumerator<TType> integerEnumerator)
 		{
 			
@@ -23,6 +28,11 @@ namespace C_Sharp.Language.IQueryable2
 			Provider = new MyConditionalEnumeratorQueryProvider2<TType>(this);
 		}
 
+		/// <summary>
+		/// Filters out objects, which do not match the condition 
+		/// </summary>
+		/// <param name="integerEnumerator">the base enumerator</param>
+		/// <param name="expression">condition</param>
 		public MyConditionalEnumeratorQueryable2(IEnumerator<TType> integerEnumerator, MethodCallExpression? expression)
 			
 		{
@@ -34,7 +44,7 @@ namespace C_Sharp.Language.IQueryable2
 
 		public IEnumerator<TType> GetEnumerator()
 		{
-			return (IEnumerator<TType>)_myIntegerEnumerator;
+			return _myIntegerEnumerator;
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()
