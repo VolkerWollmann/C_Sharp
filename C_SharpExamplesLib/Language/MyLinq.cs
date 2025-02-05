@@ -295,10 +295,14 @@ namespace C_Sharp.Language
 				.Select((value, index) => new { Value = value, Index = index / 2 })
 				.ToList();
 
+			Assert.IsTrue(e1.Count>0);
+			
 			var e2 = testList
 				.Select((value, index) => new { Value = value, Index = index / 2 })
 				.GroupBy(x => x.Index, y => y.Value)
 				.ToList();
+
+            Assert.IsTrue(e2.Count > 0);
 
             var e3 = testList
 				.Select((value, index) => new { Value = value, Index = index / 2 })
