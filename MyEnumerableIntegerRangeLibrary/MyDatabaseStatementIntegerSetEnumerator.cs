@@ -11,21 +11,24 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 		private readonly MyDatabaseStatementIntegerSet _myDatabaseStatementIntegerSet;
 
 		#region IEnumerator<int>
+		int _index = -1;
+
 		public void Dispose()
 		{
 		}
 
 		public bool MoveNext()
 		{
-			return _myDatabaseStatementIntegerSet.MoveNext();
+			_index = _myDatabaseStatementIntegerSet.GetNextIndex(_index);
+			return _index > 0;
 		}
 
 		public void Reset()
 		{
-			_myDatabaseStatementIntegerSet.Reset();
+			_index = -1;
 		}
 
-		public int Current => _myDatabaseStatementIntegerSet.Current;
+		public int Current => _myDatabaseStatementIntegerSet.GetValueAtIndex(_index);
 
 		object IEnumerator.Current => Current;
 

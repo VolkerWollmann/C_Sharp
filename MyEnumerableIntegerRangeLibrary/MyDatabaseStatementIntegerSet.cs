@@ -79,13 +79,13 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             ExecuteNonQuery(statement);
         }
 
-        private int GetNextIndex(int i)
+        public int GetNextIndex(int i)
         {
             string statement = $"select min({TheIndex}) from {TableName} where {TheIndex} > {i}";
             return ExecuteScalarQuery(statement);
         }
 
-        private int GetValueAtIndex(int i)
+        public int GetValueAtIndex(int i)
         {
             string statement = $"select {TheValue} from {TableName} where {TheIndex} = {i}";
             return ExecuteScalarQuery(statement);
@@ -136,17 +136,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         public virtual IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
         {
-            List<int> result = new List<int>();
-            Func<int, bool> compiledExpression = (Func<int, bool>)lambdaExpression.Compile();
-
-            Reset();
-            while (MoveNext())
-            {
-                if (compiledExpression(Current))
-                    result.Add(Current);
-            }
-
-            return new MyMemoryIntegerSet(result);
+            throw new NotImplementedException();
         }
 
         public virtual int Sum()
