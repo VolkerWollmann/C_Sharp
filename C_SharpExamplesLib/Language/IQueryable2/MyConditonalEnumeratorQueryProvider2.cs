@@ -1,10 +1,10 @@
 ﻿using System.Linq.Expressions;
-using C_Sharp.Language.IQueryable;
 using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
+using C_SharpExamplesLib.Language.IQueryable2;
 
 namespace C_Sharp.Language.IQueryable2
 {
-	public class MyConditionalEnumeratorQueryProvider2<TType> : IQueryProvider
+    public class MyConditionalEnumeratorQueryProvider2<TType> : IQueryProvider
 	{
 		private MyConditionalEnumeratorQueryable2<TType> _myQueryableIntegerEnumerator;
 		public MyConditionalEnumeratorQueryProvider2(MyConditionalEnumeratorQueryable2<TType> queryableIntegerEnumerator)
