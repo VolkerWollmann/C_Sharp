@@ -100,23 +100,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             _dataBaseConnection?.Close();
         }
 
-        /// <summary>
-        /// Simulate time-consuming generation of next element
-        /// </summary>
-        /// <returns>next value</returns>
-        public bool MoveNext()
-        {
-            _i = GetNextIndex(_i);
-            return _i > 0;
-        }
-
-        public void Reset()
-        {
-            _i = -1;
-        }
-
-        public int Current => GetValueAtIndex(_i);
-
+       
         #endregion
 
         #region IEnumerable<int>
@@ -141,34 +125,17 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         public virtual int Sum()
         {
-            int sum=0;
-            Reset();
-            while (MoveNext())
-            {
-                sum = sum + Current;
-            }
-
-            return sum;
+            throw new NotImplementedException();
         }
 
         public virtual bool Any(LambdaExpression lambdaExpression)
         {
-            Func<int, bool> compiledExpression = (Func<int, bool>)lambdaExpression.Compile();
-
-            Reset();
-            while (MoveNext())
-            {
-                if (compiledExpression(Current))
-                    return true;
-            }
-
-            return false;
+            throw new NotImplementedException();
         }
 
         public virtual bool Any()
         {
-            Reset();
-            return MoveNext();
+            throw new NotImplementedException();
         }
 
 		public IEnumerable<int> AsEnumerable()
@@ -194,7 +161,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             // insert values
             InsertValues(set);
 
-            Reset();
         }
         #endregion
 
