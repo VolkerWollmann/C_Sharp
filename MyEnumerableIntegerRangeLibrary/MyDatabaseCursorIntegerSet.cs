@@ -179,7 +179,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 			_dataBaseConnection = _dataBaseConnection = new SqlConnection(connectionString);
 			_dataBaseConnection.Open();
 			
-			_tableName = "MyDatabaseIntegerSet" + Guid.NewGuid().ToString("N").ToUpper();
+			_tableName = "MyDatabaseIntegerSet_" + Guid.NewGuid().ToString("N").ToUpper();
 
 			// create table
 			CreateTable();
