@@ -4,7 +4,11 @@ using C_SharpExamplesLib.Language.IQueryable2;
 
 namespace C_Sharp.Language.IQueryable2
 {
+<<<<<<< Updated upstream
     public class MyConditionalEnumeratorQueryProvider2<TType> : IQueryProvider
+=======
+	public class MyConditionalEnumeratorQueryProvider2<TType> : IQueryProvider
+>>>>>>> Stashed changes
 	{
 		private MyConditionalEnumeratorQueryable2<TType> _myQueryableIntegerEnumerator;
 		public MyConditionalEnumeratorQueryProvider2(MyConditionalEnumeratorQueryable2<TType> queryableIntegerEnumerator)
@@ -24,7 +28,11 @@ namespace C_Sharp.Language.IQueryable2
 
 			if (whereExpression != null)
 			{
+<<<<<<< Updated upstream
 				var newQueryableEnumerator = new MyConditionalEnumeratorQueryable2<TType>(
+=======
+				MyConditionalEnumeratorQueryable2<TType> x = new MyConditionalEnumeratorQueryable2<TType>(
+>>>>>>> Stashed changes
 					_myQueryableIntegerEnumerator.GetEnumerator(), whereExpression);
 
 				return (IQueryable<TElement>)newQueryableEnumerator;
