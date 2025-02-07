@@ -71,43 +71,24 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 			ExecuteNonQuery(statement);
 		}
 
-		#endregion
+		public SqlDataReader? GetReader()
+		{
+			SqlDataReader? _reader =null;
 
-		#region IEnumerator<int> support
-		public void Dispose()
+            SqlCommand command = new SqlCommand($"select {TheValue} from {_tableName} order by {TheIndex}", _dataBaseConnection);
+            _reader = command.ExecuteReader();
+			
+            return _reader;
+		}
+        #endregion
+
+        #region IEnumerator<int> support
+        public void Dispose()
 		{
 			_reader?.Close();
 			DeleteTable();
 			_dataBaseConnection?.Close();
 		}
-
-		/// <summary>
-		/// Simulate time-consuming generation of next element
-		/// </summary>
-		/// <returns>next value</returns>
-		public bool MoveNext()
-		{
-			return _reader != null && _reader.Read();
-		}
-
-		public void Reset()
-		{
-			if (_reader != null ) 
-				_reader.Close();
-			
-			SqlCommand command = new SqlCommand($"select {TheValue} from {_tableName} order by {TheIndex}", _dataBaseConnection);
-			_reader = command.ExecuteReader();
-		}
-
-		public int Current
-		{
-			get
-			{
-				if (_reader != null) return _reader.GetInt32(0);
-				throw new InvalidOperationException("Reader is null or not open.");
-			}
-		}
-
         #endregion
 
         #region IEnumerable<int>
@@ -127,50 +108,23 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         public virtual IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
 		{
-			List<int> result = new List<int>();
-			Func<int, bool> compiledExpression = (Func<int, bool>)lambdaExpression.Compile();
-
-			Reset();
-			while (MoveNext())
-			{
-				if (compiledExpression(Current))
-					result.Add(Current);
-			}
-
-			return new MyMemoryIntegerSet(result);
+			throw new NotImplementedException();
 		}
 
 		public virtual int Sum()
 		{
-			int sum = 0;
-			Reset();
-			while (MoveNext())
-			{
-				sum = sum + Current;
-			}
-
-			return sum;
-		}
+            throw new NotImplementedException();
+        }
 
 		public virtual bool Any(LambdaExpression lambdaExpression)
 		{
-			Func<int, bool> compiledExpression = (Func<int, bool>)lambdaExpression.Compile();
-
-			Reset();
-			while (MoveNext())
-			{
-				if (compiledExpression(Current))
-					return true;
-			}
-
-			return false;
-		}
+            throw new NotImplementedException();
+        }
 
 		public virtual bool Any()
 		{
-			Reset();
-			return MoveNext();
-		}
+            throw new NotImplementedException();
+        }
 
 		public IEnumerable<int> AsEnumerable()
 		{
@@ -194,7 +148,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 			// insert values
 			InsertValues(set);
 
-			Reset();
 		}
 		#endregion
 

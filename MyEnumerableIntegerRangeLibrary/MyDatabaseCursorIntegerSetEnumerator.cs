@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,25 +19,46 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 	public class MyDatabaseCursorIntegerSetEnumerator : IEnumerator<int>
 	{
 		private readonly MyDatabaseCursorIntegerSet _myDatabaseCursorIntegerSet;
+        private SqlDataReader? _reader = null;
 
-		#region IEnumerator<int>
-		public void Dispose()
+        #region IEnumerator<int>
+        public void Dispose()
 		{
-		}
+			_reader?.Close();
+
+        }
 
 		public bool MoveNext()
 		{
-			return _myDatabaseCursorIntegerSet.MoveNext();
-		}
+			if (_reader != null)
+			{
+				var wo = _reader.Read();
+				return wo;
+			}
+
+			return false;
+        }
 
 		public void Reset()
 		{
-			_myDatabaseCursorIntegerSet.Reset();
+			if (_reader != null)
+				_reader.Close();
+
+			_reader = _myDatabaseCursorIntegerSet.GetReader();
+		
+        }
+
+
+		public int Current => (int)Current;
+
+		object IEnumerator.Current
+		{
+			get
+			{
+                if (_reader != null) return (object)_reader.GetInt32(0);
+                throw new InvalidOperationException("Reader is null or not open.");
+            }
 		}
-
-		public int Current => _myDatabaseCursorIntegerSet.Current;
-
-		object IEnumerator.Current => Current;
 
 		#endregion
 
@@ -46,7 +67,8 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 		public MyDatabaseCursorIntegerSetEnumerator(MyDatabaseCursorIntegerSet set)
 		{
 			_myDatabaseCursorIntegerSet = set;
-		}
+			Reset();
+        }
 		#endregion
 
 

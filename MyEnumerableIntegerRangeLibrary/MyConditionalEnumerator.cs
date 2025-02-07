@@ -25,7 +25,8 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 		#region IEnumerator<int>
 		public void Dispose()
 		{
-		}
+			_myBaseEnumerator.Dispose();
+        }
 
 		internal bool MoveNextConditional()
 		{ 
@@ -34,9 +35,17 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 				return baseEnumeratorMoveResult;
 			Func<TType, bool> compiledExpression = (Func<TType, bool>)_lambdaExpression.Compile();
 
-			while (baseEnumeratorMoveResult && !compiledExpression(Current))
+			try
 			{
-				baseEnumeratorMoveResult = _myBaseEnumerator.MoveNext();
+				var wo = Current;
+				while (baseEnumeratorMoveResult && !compiledExpression(Current))
+				{
+					baseEnumeratorMoveResult = _myBaseEnumerator.MoveNext();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw ;
 			}
 
 			return baseEnumeratorMoveResult;
@@ -51,7 +60,14 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 			_myBaseEnumerator.Reset();
 		}
 
-		public TType Current => _myBaseEnumerator.Current;
+		public TType Current
+		{
+			get
+			{
+				TType wo = _myBaseEnumerator.Current;
+				return wo;
+			}
+		}
 
 		object IEnumerator.Current => Current;
 

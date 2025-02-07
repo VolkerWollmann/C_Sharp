@@ -194,7 +194,7 @@ namespace UnitTest
 				var expression = myQueryableIntegerSet.Any();
 				var result = expression;
 
-				Assert.AreEqual(result, true);
+                Assert.AreEqual(result, true);
 			}
 
 		}

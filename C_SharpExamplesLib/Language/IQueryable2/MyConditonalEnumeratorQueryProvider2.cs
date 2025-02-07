@@ -20,6 +20,11 @@ namespace C_Sharp.Language.IQueryable2
 			_myQueryableIntegerEnumerator = queryableIntegerEnumerator;
 		}
 
+		public void Dispose()
+		{
+            _myQueryableIntegerEnumerator?.Dispose();
+        }
+
 		public System.Linq.IQueryable CreateQuery(Expression expression)
 		{
 			throw new NotImplementedException();
@@ -50,14 +55,18 @@ namespace C_Sharp.Language.IQueryable2
 		private bool Any()
 		{
 			using var enumerator = _myQueryableIntegerEnumerator.GetEnumerator();
-			return enumerator.MoveNext();
+			{
+				return enumerator.MoveNext();
+			}
 		}
 
 		private bool Any(Expression conditionExpression)
 		{
-			using var enumerator = _myQueryableIntegerEnumerator.GetEnumerator();
+            using var enumerator = _myQueryableIntegerEnumerator.GetEnumerator();
 			using var enumerator2 = new MyConditionalEnumerator<TType>(enumerator, conditionExpression);
-			return enumerator2.MoveNext();
+			{ 
+				return enumerator2.MoveNext();
+			}
 		}
 		#endregion
 
@@ -65,14 +74,16 @@ namespace C_Sharp.Language.IQueryable2
 		private int Sum()
 		{
 			using var enumerator = _myQueryableIntegerEnumerator.GetEnumerator();
-			enumerator.Reset();
-			int sum = 0;
-			while (enumerator.MoveNext())
 			{
-				sum += (int)(object)enumerator.Current!;
-			}
+				enumerator.Reset();
+				int sum = 0;
+				while (enumerator.MoveNext())
+				{
+					sum += (int)(object)enumerator.Current!;
+				}
 
-			return sum;
+				return sum;
+			}
 		}
 		#endregion
 
@@ -81,15 +92,17 @@ namespace C_Sharp.Language.IQueryable2
 		private int Max()
 		{
 			using var enumerator = _myQueryableIntegerEnumerator.GetEnumerator();
-			enumerator.Reset();
-			int max = Int32.MinValue;
-			while (enumerator.MoveNext())
 			{
-				int value = (int)(object)enumerator.Current!;
-				max = Math.Max(max, value);
-			}
+				enumerator.Reset();
+				int max = Int32.MinValue;
+				while (enumerator.MoveNext())
+				{
+					int value = (int)(object)enumerator.Current!;
+					max = Math.Max(max, value);
+				}
 
-			return max;
+				return max;
+			}
 		}
 
 		#endregion

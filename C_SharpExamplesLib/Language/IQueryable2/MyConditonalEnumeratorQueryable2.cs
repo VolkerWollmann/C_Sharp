@@ -24,7 +24,16 @@ namespace C_Sharp.Language.IQueryable2
 	{
 		private MyConditionalEnumerator<TType> _myIntegerEnumerator;
 
-		public MyConditonalEnumeratorQueryable2(IEnumerator<TType> integerEnumerator)
+
+		public void Dispose()
+		{
+            _myIntegerEnumerator?.Dispose();
+        }
+		/// <summary>
+		/// empty condition : acts like identical list
+		/// </summary>
+		/// <param name="integerEnumerator">the base enumerator</param>
+		public MyConditionalEnumeratorQueryable2(IEnumerator<TType> integerEnumerator)
 		{
 			
 			_myIntegerEnumerator = new MyConditionalEnumerator<TType>(integerEnumerator,null);
