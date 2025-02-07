@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Linq.Expressions;
 using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
+using C_SharpExamplesLib.Language.IQueryable2;
 
 namespace C_Sharp.Language.IQueryable2
 {
@@ -10,7 +11,7 @@ namespace C_Sharp.Language.IQueryable2
 	///           with only those elements, which match the expression
     /// </summary>
     /// <typeparam name="TType">Type of the elements</typeparam>
-    public class MyConditionalEnumeratorQueryable2<TType> : IQueryable<TType>
+    public class MyConditionalEnumeratorQueryable2<TType> : IMyDisposeQueryable<TType>
 	{
 		private MyConditionalEnumerator<TType> _myIntegerEnumerator;
 
@@ -54,6 +55,11 @@ namespace C_Sharp.Language.IQueryable2
 		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return _myIntegerEnumerator;
+		}
+
+		public void Dispose()
+		{
+			_myIntegerEnumerator.Dispose();
 		}
 
 		public Type ElementType => typeof(TType);

@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 using C_Sharp.Language.IQueryable2;
+using C_SharpExamplesLib.Language.IQueryable2;
 
 namespace UnitTest
 {
@@ -28,7 +29,7 @@ namespace UnitTest
 			_myIntegerSetFactory.Dispose();
 		}
 
-        private IQueryable<int> GetMyQueryable(IMyIntegerSet myIntegerSet)
+        private IMyDisposeQueryable<int> GetMyQueryable(IMyIntegerSet myIntegerSet)
         {
             return new MyConditionalEnumeratorQueryable2<int>(myIntegerSet.GetEnumerator());
         }
@@ -38,14 +39,16 @@ namespace UnitTest
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
             {
-                var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
-                
-				var expression = myQueryableIntegerSet.Where(i => i < 2);
-				foreach (var i in expression)
-				{
-					Assert.IsTrue(i < 2);
-				}
-			}
+	            using (var myQueryableIntegerSet = GetMyQueryable(myIntegerSet))
+	            {
+
+		            var expression = myQueryableIntegerSet.Where(i => i < 2);
+		            foreach (var i in expression)
+		            {
+			            Assert.IsTrue(i < 2);
+		            }
+	            }
+            }
 
 		}
 
@@ -54,11 +57,13 @@ namespace UnitTest
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
-				var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
-				var expression = myQueryableIntegerSet.Where(i => i < 2);
-				foreach (var i in expression)
+				using (var myQueryableIntegerSet = GetMyQueryable(myIntegerSet))
 				{
-					Assert.IsTrue(i < 4);
+					var expression = myQueryableIntegerSet.Where(i => i < 2);
+					foreach (var i in expression)
+					{
+						Assert.IsTrue(i < 4);
+					}
 				}
 			}
 		}
@@ -69,10 +74,11 @@ namespace UnitTest
 			List<int> l = [1, 2, 3];
 			MyMemoryIntegerSet myIntegerSet = new MyMemoryIntegerSet(l);
 
-			    var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
-
-			List<int> result = myQueryableIntegerSet.ToList();
-			CollectionAssert.AreEqual(l, result);
+			using (var myQueryableIntegerSet = GetMyQueryable(myIntegerSet))
+			{
+				List<int> result = myQueryableIntegerSet.ToList();
+				CollectionAssert.AreEqual(l, result);
+			}
 
 		}
 
@@ -82,11 +88,13 @@ namespace UnitTest
 			List<int> l = [1, 2, 3];
 			MyMemoryIntegerSet myIntegerSet = new MyMemoryIntegerSet(l);
 
-			var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
-			var expression = myQueryableIntegerSet.Where(i => i <= 2);
-			var result = expression.ToList();
+			using (var myQueryableIntegerSet = GetMyQueryable(myIntegerSet))
+			{
+				var expression = myQueryableIntegerSet.Where(i => i <= 2);
+				var result = expression.ToList();
 
-			CollectionAssert.AreEqual( new List<int>{1,2}, result);
+				CollectionAssert.AreEqual(new List<int> {1, 2}, result);
+			}
 		}
 
 
@@ -110,12 +118,14 @@ namespace UnitTest
 		{
 			IMyIntegerSet myIntegerSet = _myIntegerSetFactory.GetMemoryIntegerSet();
 
-			var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+			using (var myQueryableIntegerSet = GetMyQueryable(myIntegerSet))
+			{
 
-			var expression = myQueryableIntegerSet.Where(i => TestForTwo(i)).Where(i => SecondTestForTwo(i));
-			var result = expression.ToList();
-			Assert.AreEqual(1, result.Count);
-			Assert.AreEqual(2, result[0]);
+				var expression = myQueryableIntegerSet.Where(i => TestForTwo(i)).Where(i => SecondTestForTwo(i));
+				var result = expression.ToList();
+				Assert.AreEqual(1, result.Count);
+				Assert.AreEqual(2, result[0]);
+			}
 		}
 
 		[TestMethod]
@@ -124,14 +134,15 @@ namespace UnitTest
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
-
-				var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
-
-				var result = myQueryableIntegerSet.Select(e => e);
-
-				foreach (var e in result)
+				using (var myQueryableIntegerSet = GetMyQueryable(myIntegerSet))
 				{
-					Assert.IsTrue(e <= 3);
+
+					var result = myQueryableIntegerSet.Select(e => e);
+
+					foreach (var e in result)
+					{
+						Assert.IsTrue(e <= 3);
+					}
 				}
 			}
 		}
@@ -142,14 +153,16 @@ namespace UnitTest
         {
             foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
             {
-                var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+	            using (var myQueryableIntegerSet = GetMyQueryable(myIntegerSet))
+	            {
 
-                var result = myQueryableIntegerSet.Select(e => e).Select(e=>e);
+		            var result = myQueryableIntegerSet.Select(e => e).Select(e => e);
 
-                foreach (var e in result)
-                {
-                    Assert.IsTrue(e <= 3);
-                }
+		            foreach (var e in result)
+		            {
+			            Assert.IsTrue(e <= 3);
+		            }
+	            }
             }
         }
 
@@ -159,20 +172,23 @@ namespace UnitTest
             List<int> l = [1, 2, 3];
             MyMemoryIntegerSet myIntegerSet = new MyMemoryIntegerSet(l);
 
-            var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
-
-            var result = myQueryableIntegerSet.Select(e => e * 2);
-
-            var controlSet = new List<int> { 2, 4, 6 };
-
-            var resultList = new List<int> { };
-            foreach (var e in result)
+            using (var myQueryableIntegerSet = GetMyQueryable(myIntegerSet))
             {
-                resultList.Add(e);
 
+	            var result = myQueryableIntegerSet.Select(e => e * 2);
+
+	            var controlSet = new List<int> {2, 4, 6};
+
+	            var resultList = new List<int> { };
+	            foreach (var e in result)
+	            {
+		            resultList.Add(e);
+
+	            }
+
+	            // #Assert #list #equal
+	            CollectionAssert.AreEqual(resultList, controlSet);
             }
-            // #Assert #list #equal
-            CollectionAssert.AreEqual(resultList, controlSet);
         }
 
 		[TestMethod]
@@ -181,20 +197,23 @@ namespace UnitTest
             List<int> l = [1, 2, 3];
             MyMemoryIntegerSet myIntegerSet = new MyMemoryIntegerSet(l);
 
-            var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
-
-            var result = myQueryableIntegerSet.Select(e => "Donkey_" + e);
-
-            var controlSet = new List<string> { "Donkey_1", "Donkey_2", "Donkey_3" };
-
-            var resultList = new List<string> { };
-            foreach (var e in result)
+            using (var myQueryableIntegerSet = GetMyQueryable(myIntegerSet))
             {
-                resultList.Add(e);
 
+	            var result = myQueryableIntegerSet.Select(e => "Donkey_" + e);
+
+	            var controlSet = new List<string> {"Donkey_1", "Donkey_2", "Donkey_3"};
+
+	            var resultList = new List<string> { };
+	            foreach (var e in result)
+	            {
+		            resultList.Add(e);
+
+	            }
+
+	            // #Assert #list #equal
+	            CollectionAssert.AreEqual(resultList, controlSet);
             }
-            // #Assert #list #equal
-            CollectionAssert.AreEqual(resultList, controlSet);
         }
 
         [TestMethod]
@@ -203,20 +222,23 @@ namespace UnitTest
             List<int> l = [1, 2, 3];
             MyMemoryIntegerSet myIntegerSet = new MyMemoryIntegerSet(l);
 
-            var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
-
-            var result = myQueryableIntegerSet.Where(x => ( x==1 || x == 3 ) ).Select(e => "Donkey_" + e);
-
-            var controlSet = new List<string> { "Donkey_1", "Donkey_3" };
-
-            var resultList = new List<string> { };
-            foreach (var e in result)
+            using (var myQueryableIntegerSet = GetMyQueryable(myIntegerSet))
             {
-                resultList.Add(e);
 
+	            var result = myQueryableIntegerSet.Where(x => (x == 1 || x == 3)).Select(e => "Donkey_" + e);
+
+	            var controlSet = new List<string> {"Donkey_1", "Donkey_3"};
+
+	            var resultList = new List<string> { };
+	            foreach (var e in result)
+	            {
+		            resultList.Add(e);
+
+	            }
+
+	            // #Assert #list #equal
+	            CollectionAssert.AreEqual(resultList, controlSet);
             }
-            // #Assert #list #equal
-            CollectionAssert.AreEqual(resultList, controlSet);
         }
 
 
@@ -225,18 +247,20 @@ namespace UnitTest
         {
             foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
             {
-                var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+	            using (var myQueryableIntegerSet = GetMyQueryable(myIntegerSet))
+	            {
 
-                var result = myQueryableIntegerSet.Select(e => Tuple.Create("A", e));
+		            var result = myQueryableIntegerSet.Select(e => Tuple.Create("A", e));
 
-                // #Assert #list #equal
-                CollectionAssert.AreEqual(result.ToList(),
-                    new List<Tuple<string, int>>
-                    {
-                        Tuple.Create("A", 1),
-                        Tuple.Create("A", 2),
-                        Tuple.Create("A", 3)
-                    });
+		            // #Assert #list #equal
+		            CollectionAssert.AreEqual(result.ToList(),
+			            new List<Tuple<string, int>>
+			            {
+				            Tuple.Create("A", 1),
+				            Tuple.Create("A", 2),
+				            Tuple.Create("A", 3)
+			            });
+	            }
             }
         }
 
@@ -245,11 +269,13 @@ namespace UnitTest
         {
             foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
             {
-                var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+	            using (var myQueryableIntegerSet = GetMyQueryable(myIntegerSet))
+	            {
 
-                var result = myQueryableIntegerSet.Select(e => Tuple.Create("A", e)).Any();
+		            var result = myQueryableIntegerSet.Select(e => Tuple.Create("A", e)).Any();
 
-                Assert.IsTrue(result);
+		            Assert.IsTrue(result);
+	            }
             }
         }
 
@@ -258,15 +284,14 @@ namespace UnitTest
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
+				using (var myQueryableIntegerSet = GetMyQueryable(myIntegerSet))
+				{
+					var expression = myQueryableIntegerSet.Any();
+					var result = expression;
 
-				var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
-
-				var expression = myQueryableIntegerSet.Any();
-				var result = expression;
-
-				Assert.AreEqual(result, true);
+					Assert.AreEqual(result, true);
+				}
 			}
-
 		}
 
 		[TestMethod]
@@ -274,12 +299,13 @@ namespace UnitTest
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
-				var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+				using (var myQueryableIntegerSet = GetMyQueryable(myIntegerSet))
+				{
+					var expression = myQueryableIntegerSet.Any(i => i < 2);
+					var result = expression;
 
-				var expression = myQueryableIntegerSet.Any(i => i < 2);
-				var result = expression;
-
-				Assert.AreEqual(result, true);
+					Assert.AreEqual(result, true);
+				}
 			}
 		}
 
@@ -288,12 +314,13 @@ namespace UnitTest
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
-                var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+				using (var myQueryableIntegerSet = GetMyQueryable(myIntegerSet))
+				{
+					var expression = myQueryableIntegerSet.Any(i => TestForTwo(i));
+					var result = expression;
 
-				var expression = myQueryableIntegerSet.Any(i => TestForTwo(i));
-				var result = expression;
-
-				Assert.AreEqual(result, true);
+					Assert.AreEqual(result, true);
+				}
 			}
 		}
 
@@ -302,14 +329,15 @@ namespace UnitTest
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
+				using (var myQueryableIntegerSet = GetMyQueryable(myIntegerSet))
+				{
 
-				var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+					// ReSharper disable once ReplaceWithSingleCallToAny
+					var expression = myQueryableIntegerSet.Where(i => i < 2).Any();
+					var result = expression;
 
-				// ReSharper disable once ReplaceWithSingleCallToAny
-				var expression = myQueryableIntegerSet.Where( i => i<2).Any();
-				var result = expression;
-
-				Assert.AreEqual(result, true);
+					Assert.AreEqual(result, true);
+				}
 			}
 
 		}
@@ -320,11 +348,13 @@ namespace UnitTest
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
 
-				var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+				using (var myQueryableIntegerSet = GetMyQueryable(myIntegerSet))
+				{
 
-				var sum = myQueryableIntegerSet.Sum();
+					var sum = myQueryableIntegerSet.Sum();
 
-				Assert.IsTrue(sum == 6);
+					Assert.IsTrue(sum == 6);
+				}
 			}
 		}
 
@@ -334,11 +364,13 @@ namespace UnitTest
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
 
-                var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+				using (var myQueryableIntegerSet = GetMyQueryable(myIntegerSet))
+				{
 
-                var max = myQueryableIntegerSet.Max();
+					var max = myQueryableIntegerSet.Max();
 
-				Assert.IsTrue(max == 3);
+					Assert.IsTrue(max == 3);
+				}
 			}
 		}
 	}

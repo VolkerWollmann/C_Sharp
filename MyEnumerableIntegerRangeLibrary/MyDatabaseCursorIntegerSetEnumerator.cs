@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Microsoft.Data.SqlClient;
 
 namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 {
@@ -9,64 +10,52 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 	public class MyDatabaseCursorIntegerSetEnumerator : IEnumerator<int>
 	{
 		private readonly MyDatabaseCursorIntegerSet _myDatabaseCursorIntegerSet;
-<<<<<<< Updated upstream
-=======
 		private SqlDataReader? _reader = null;
->>>>>>> Stashed changes
 
 		#region IEnumerator<int>
 		public void Dispose()
 		{
-<<<<<<< Updated upstream
-=======
 			_reader?.Close();
-
->>>>>>> Stashed changes
 		}
 
+		private int _currentValue = -1;
 		public bool MoveNext()
 		{
-<<<<<<< Updated upstream
-			return _myDatabaseCursorIntegerSet.MoveNext();
-=======
+			bool wo = false;
 			if (_reader != null)
 			{
-				var wo = _reader.Read();
-				return wo;
+				wo = _reader.Read();
+				if (wo)
+					_currentValue = _reader.GetInt32(0);
 			}
 
-			return false;
->>>>>>> Stashed changes
+			return wo;
 		}
 
 		public void Reset()
 		{
-<<<<<<< Updated upstream
-			_myDatabaseCursorIntegerSet.Reset();
-=======
 			if (_reader != null)
 				_reader.Close();
 
 			_reader = _myDatabaseCursorIntegerSet.GetReader();
-
 		}
 
 
-		public int Current => (int)Current;
+		public int Current
+		{
+			get
+			{
+				return _currentValue;
+			}
+		}
 
 		object IEnumerator.Current
 		{
 			get
 			{
-				if (_reader != null) return (object)_reader.GetInt32(0);
-				throw new InvalidOperationException("Reader is null or not open.");
+				return _currentValue;
 			}
->>>>>>> Stashed changes
 		}
-
-		public int Current => _myDatabaseCursorIntegerSet.Current;
-
-		object IEnumerator.Current => Current;
 
 		#endregion
 
@@ -75,10 +64,8 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 		public MyDatabaseCursorIntegerSetEnumerator(MyDatabaseCursorIntegerSet set)
 		{
 			_myDatabaseCursorIntegerSet = set;
-<<<<<<< Updated upstream
-=======
+			_reader = _myDatabaseCursorIntegerSet.GetReader();
 			Reset();
->>>>>>> Stashed changes
 		}
 		#endregion
 

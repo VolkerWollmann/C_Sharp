@@ -16,6 +16,7 @@ namespace C_Sharp.Language.IQueryable2
 		#region IEnumerator<int>
 		public void Dispose()
 		{
+			_myBaseEnumerator.Dispose();
 		}
 
 		internal bool MoveNextConditional()

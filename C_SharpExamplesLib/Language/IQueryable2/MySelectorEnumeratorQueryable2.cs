@@ -5,7 +5,7 @@ using C_SharpExamplesLib.Language.IQueryable2;
 
 namespace C_Sharp.Language.IQueryable2
 {
-    public class MySelectorEnumeratorQueryable2<TResultType, TBaseType> : IQueryable<TResultType>
+    public class MySelectorEnumeratorQueryable2<TResultType, TBaseType> : IMyDisposeQueryable<TResultType>
     {
         private MySelectorEnumerator<TResultType, TBaseType> mySelectorEnumerator;
 
@@ -22,7 +22,12 @@ namespace C_Sharp.Language.IQueryable2
 
         public IQueryProvider Provider { get; }
 
-        public IEnumerator<TResultType> GetEnumerator()
+		public void Dispose()
+		{
+			mySelectorEnumerator.Dispose();
+		}
+
+		public IEnumerator<TResultType> GetEnumerator()
         {
             return mySelectorEnumerator;
         }

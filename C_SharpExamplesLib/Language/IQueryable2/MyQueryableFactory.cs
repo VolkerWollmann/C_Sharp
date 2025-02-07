@@ -9,19 +9,20 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using C_Sharp.Language.IQueryable;
+using C_Sharp.Language.IQueryable2;
 using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
+using C_SharpExamplesLib.Language.IQueryable2;
 
 namespace C_Sharp.Language.IQueryable2
 {
     public class MyQueryableFactory
     {
-        public static IQueryable<int> GetMyQueryable(IMyIntegerSet myIntegerSet)
+        public static IMyDisposeQueryable<int> GetMyQueryable(IMyIntegerSet myIntegerSet)
         {
-            return new MyIntegerSetQueryable2(myIntegerSet);
+            return new MyConditionalEnumeratorQueryable2<int>(myIntegerSet.GetEnumerator());
         }
 
-        public static IQueryable<TType> GetMyConditionalEnumeratorQueryable2<TType>(
+        public static IMyDisposeQueryable<TType> GetMyConditionalEnumeratorQueryable2<TType>(
             IEnumerator<TType> enumerator, MethodCallExpression? whereExpression)
         {
             MyConditionalEnumeratorQueryable2<TType> x = new MyConditionalEnumeratorQueryable2<TType>(

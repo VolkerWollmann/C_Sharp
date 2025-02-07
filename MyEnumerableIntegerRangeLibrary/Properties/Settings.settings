@@ -9,10 +9,10 @@
       <Value Profile="(Default)">anw</Value>
     </Setting>
     <Setting Name="DatabasePassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">!Esel1111</Value>
+      <Value Profile="(Default)">anw</Value>
     </Setting>
     <Setting Name="DatabaseServer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">VM-WO-VS2022\SQLEXPRESS</Value>
+      <Value Profile="(Default)">BONN\SQLEXPRESS</Value>
     </Setting>
   </Settings>
 </SettingsFile>
