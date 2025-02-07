@@ -19,8 +19,7 @@ namespace C_Sharp.Language.IQueryable2
     {
         private MySelectorEnumerator<TResultType, TBaseType> mySelectorEnumerator;
 
-        public MySelectorEnumeratorQueryable2(MySelectorEnumerator<TResultType, TBaseType> selectorEnumerator, MethodCallExpression? expression)
-
+        public MySelectorEnumeratorQueryable2(MySelectorEnumerator<TResultType, TBaseType> selectorEnumerator )
         {
             mySelectorEnumerator = selectorEnumerator;
             Expression = Expression.Constant(this);
@@ -35,12 +34,12 @@ namespace C_Sharp.Language.IQueryable2
 
         public IEnumerator<TResultType> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return mySelectorEnumerator;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return mySelectorEnumerator;
         }
     }
 }

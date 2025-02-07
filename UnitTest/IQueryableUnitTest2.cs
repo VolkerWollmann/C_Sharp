@@ -161,16 +161,16 @@ namespace UnitTest
         }
 
 		[TestMethod]
-        public void Test_IQueryable_Select_StringFunction()
+        public void Test_IQueryable_Select_String()
         {
             List<int> l = [1, 2, 3];
             MyMemoryIntegerSet myIntegerSet = new MyMemoryIntegerSet(l);
 
             var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
 
-            var result = myQueryableIntegerSet.Select(e => "Esel_" + e);
+            var result = myQueryableIntegerSet.Select(e => "Donkey_" + e);
 
-            var controlSet = new List<string> { "Esel_1", "Esel_2", "Esel_3" };
+            var controlSet = new List<string> { "Donkey_1", "Donkey_2", "Donkey_3" };
 
             var resultList = new List<string> { };
             foreach (var e in result)
@@ -182,6 +182,25 @@ namespace UnitTest
             CollectionAssert.AreEqual(resultList, controlSet);
         }
 
+        [TestMethod]
+        public void Test_IQueryable_Select_Tuple()
+        {
+            foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+            {
+                var myQueryableIntegerSet = MyQueryableFactory.GetMyQueryable(myIntegerSet);
+
+                var result = myQueryableIntegerSet.Select(e => Tuple.Create("A", e));
+
+                // #Assert #list #equal
+                CollectionAssert.AreEqual(result.ToList(),
+                    new List<Tuple<string, int>>
+                    {
+                        Tuple.Create("A", 1),
+                        Tuple.Create("A", 2),
+                        Tuple.Create("A", 3)
+                    });
+            }
+        }
 
         [TestMethod]
 		public void Test_IQueryable_Any()
