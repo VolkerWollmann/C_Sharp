@@ -91,21 +91,25 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             return ExecuteScalarQuery(statement);
         }
 
-        #endregion
+		#endregion
 
-        #region IEnumerator<int> support
-        public void Dispose()
+		#region IMyIntegerSet IEnumerator<int> support
+		public void Dispose()
         {
             DeleteTable();
             _dataBaseConnection?.Close();
         }
 
-       
-        #endregion
+        public IEnumerable<int> AsEnumerable()
+        {
+	        return this;
+        }
 
-        #region IEnumerable<int>
-        // bad implementation because only one iterator possible
-        public IEnumerator<int> GetEnumerator()
+		#endregion
+
+		#region IEnumerable<int>
+		// bad implementation because only one iterator possible
+		public IEnumerator<int> GetEnumerator()
         {
             return new MyDatabaseStatementIntegerSetEnumerator(this);
         }
@@ -116,36 +120,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         }
         #endregion
 
-        #region IMyIntegerSet
-
-        public virtual IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual int Sum()
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual bool Any(LambdaExpression lambdaExpression)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual bool Any()
-        {
-            throw new NotImplementedException();
-        }
-
-		public IEnumerable<int> AsEnumerable()
-		{
-			return this;
-		}
-
-
-		#endregion
-
+        
 		#region Constructor
 
 		public MyDatabaseStatementIntegerSet(string connectionString, List<int> set)

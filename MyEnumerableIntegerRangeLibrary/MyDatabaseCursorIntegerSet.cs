@@ -66,15 +66,23 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		#endregion
 
+		#region IMyIntegerSet IEnumerator<int> support
 		public void Dispose()
 		{
 			_reader?.Close();
 			DeleteTable();
 			_dataBaseConnection?.Close();
 		}
+		
+		public IEnumerable<int> AsEnumerable()
+		{
+			return this;
+		}
 
-        #region IEnumerable<int>
-        public IEnumerator<int> GetEnumerator()
+		#endregion
+
+		#region IEnumerable<int>
+		public IEnumerator<int> GetEnumerator()
         {
             return new MyDatabaseCursorIntegerSetEnumerator(this);
         }
@@ -84,7 +92,10 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             return new MyDatabaseCursorIntegerSetEnumerator(this);
         }
 
-        public SqlDataReader? GetReader()
+		#endregion
+
+
+		public SqlDataReader? GetReader()
         {
 	        SqlDataReader? _reader = null;
 
@@ -93,37 +104,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 	        return _reader;
         }
-
-		#endregion
-
-		#region IMyIntegerSet
-
-		public virtual IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
-        {
-	        throw new NotImplementedException();
-        }
-
-		public virtual int Sum()
-		{
-			throw new NotImplementedException();
-		}
-
-		public virtual bool Any(LambdaExpression lambdaExpression)
-		{
-			throw new NotImplementedException();
-		}
-
-		public virtual bool Any()
-		{
-			throw new NotImplementedException();
-		}
-
-		public IEnumerable<int> AsEnumerable()
-		{
-			return this;
-		}
-
-		#endregion
 
 		#region Constructor
 
