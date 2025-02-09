@@ -11,6 +11,17 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         {
 
         }
-        #endregion
-    }
+
+        public int GetNextIndex(int i, string _whereClause)
+        {
+	        string statement = $"select min({TheIndex}) from {TableName} where {TheIndex} > {i} and {_whereClause}";
+	        return ExecuteScalarQuery(statement);
+        }
+
+		public MyOptimizedDatabaseStatementIntegerSet(MyDatabaseStatementIntegerSet myDSIS) :
+			base(myDSIS)
+        {
+        }
+		#endregion
+	}
 }

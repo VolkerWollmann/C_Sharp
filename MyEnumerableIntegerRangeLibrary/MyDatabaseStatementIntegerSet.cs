@@ -137,7 +137,15 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             InsertValues(set);
 
         }
-        #endregion
 
-    }
+        public MyDatabaseStatementIntegerSet(MyDatabaseStatementIntegerSet origin )
+        {
+	        _dataBaseConnection = origin._dataBaseConnection!;
+	        _dataBaseConnection.Open();
+
+	        TableName = origin.TableName;
+        }
+		#endregion
+
+	}
 }
