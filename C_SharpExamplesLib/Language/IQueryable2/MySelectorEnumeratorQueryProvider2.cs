@@ -26,10 +26,10 @@ namespace C_SharpExamplesLib.Language.IQueryable2
 
             if (whereExpression != null)
             {
-                var newQueryableEnumerator = new MyConditionalEnumeratorQueryable2<TResultType>(
-                    _mySelectorEnumerator.GetEnumerator(), whereExpression);
+				var result = MyQueryableFactory.GetMyConditionalEnumeratorQueryable2<TResultType>(
+					_mySelectorEnumerator.GetEnumerator(), whereExpression);
 
-                return (IQueryable<TElement>)newQueryableEnumerator;
+				return (IQueryable<TElement>)result;
             }
 
             InnermostExpressionFinder selectFinder = new InnermostExpressionFinder("Select");

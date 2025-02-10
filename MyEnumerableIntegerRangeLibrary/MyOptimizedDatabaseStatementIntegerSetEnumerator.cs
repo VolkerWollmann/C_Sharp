@@ -37,11 +37,12 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		#region Constructor
 
-		public MyOptimizedDatabaseStatementIntegerSetEnumerator(MyOptimizedDatabaseStatementIntegerSet set, string whereClause)
+		public MyOptimizedDatabaseStatementIntegerSetEnumerator(MyDatabaseStatementIntegerSet set, string whereClause)
 		{
-			_myDatabaseStatementIntegerSet = set;
+			_myDatabaseStatementIntegerSet = new MyOptimizedDatabaseStatementIntegerSet(set);
 			_whereClause = whereClause;
 		}
+		
 		#endregion
 
 

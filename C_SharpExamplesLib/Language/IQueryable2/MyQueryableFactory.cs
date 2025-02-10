@@ -25,9 +25,16 @@ namespace C_Sharp.Language.IQueryable2
         public static IMyDisposeQueryable<TType> GetMyConditionalEnumeratorQueryable2<TType>(
             IEnumerator<TType> enumerator, MethodCallExpression? whereExpression)
         {
+	        if (enumerator is MyDatabaseStatementIntegerSetEnumerator)
+	        {
+                // Optimize
+		        ;
+	        }
+            
             MyConditionalEnumeratorQueryable2<TType> x = new MyConditionalEnumeratorQueryable2<TType>(
                     enumerator, whereExpression);
             return x;
         }
+        
     }
 }
