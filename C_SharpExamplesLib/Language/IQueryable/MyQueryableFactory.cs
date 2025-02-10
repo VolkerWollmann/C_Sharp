@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using C_Sharp.Language.IQueryable;
+﻿using System.Linq.Expressions;
 using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
-using C_SharpExamplesLib.Language.IQueryable;
 using MyEnumerableIntegerRangeLibrary;
 
-namespace C_Sharp.Language.IQueryable
+namespace C_SharpExamplesLib.Language.IQueryable
 {
-    public class MyQueryableFactory
+    public abstract class MyQueryableFactory
     {
         public static IMyDisposeQueryable<TType> GetMyConditionalEnumeratorQueryable2<TType>(
             IEnumerator<TType> enumerator, MethodCallExpression whereExpressionClaCallExpression)

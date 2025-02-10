@@ -1,5 +1,4 @@
 ﻿using System.Linq.Expressions;
-using C_Sharp.Language.IQueryable;
 
 namespace C_SharpExamplesLib.Language.IQueryable
 {

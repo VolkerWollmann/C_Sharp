@@ -33,7 +33,7 @@ namespace UnitTest
             // uses public IEnumerator<int> GetEnumerator()
             // uses public bool MoveNext()
             // uses int IEnumerator<int>.Current
-            MyEnumerableIntegerRange myIntegerRange = new MyEnumerableIntegerRange(1, 10);
+            MyEnumerableIntegerRange myIntegerRange = new MyEnumerableIntegerRange(1, 10, "Macchi");
             int test = 0;
             foreach (int i in myIntegerRange)
             {
@@ -42,6 +42,8 @@ namespace UnitTest
                     break;
                 Assert.IsTrue(test < 6);
             }
+            
+            Assert.AreEqual("Macchi", myIntegerRange.Name);
         }
 
 		[TestMethod]
