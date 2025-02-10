@@ -8,7 +8,8 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 	/// <summary>
 	/// Simulate a source, which is worth to be encapsulated for lazy linq queries.
 	/// </summary>
-	public class MyOptimizedDatabaseCursorIntegerSet : MyDatabaseCursorIntegerSet
+	public class MyOptimizedDatabaseCursorIntegerSet(MyDatabaseCursorIntegerSet mdcis)
+		: MyDatabaseCursorIntegerSet(mdcis)
 	{
 		
 		public SqlDataReader? GetReader(string whereClause)
@@ -23,10 +24,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		#region Constructor
 
-		public MyOptimizedDatabaseCursorIntegerSet(MyDatabaseCursorIntegerSet mdcis):base(mdcis)
-		{
-
-		}
 		#endregion
 
 	}

@@ -22,8 +22,8 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 		public bool MoveNext()
 		{
 			bool wo = false;
-			if (_reader == null )
-				_reader = _myDatabaseCursorIntegerSet.GetReader();
+			//# the null-coalescing assignment 
+			_reader ??= _myDatabaseCursorIntegerSet.GetReader();
 			if (_reader != null)
 			{
 				wo = _reader.Read();

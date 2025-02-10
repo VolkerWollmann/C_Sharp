@@ -34,6 +34,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         #region Constructor
 
+        // ReSharper disable once ConvertToPrimaryConstructor
         public MyEnumerableIntegerRangeEnumerator(MyEnumerableIntegerRange range)
         {
             _myEnumerableIntegerRange = range;

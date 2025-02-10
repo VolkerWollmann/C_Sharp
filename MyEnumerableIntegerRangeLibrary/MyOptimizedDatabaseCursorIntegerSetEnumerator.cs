@@ -23,8 +23,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 		public bool MoveNext()
 		{
 			bool wo = false;
-			if (_reader == null)
-				_reader = _myOptimizedDatabaseCursorIntegerSet.GetReader(_whereClause);
+			_reader ??= _myOptimizedDatabaseCursorIntegerSet.GetReader(_whereClause);
 			if (_reader != null)
 			{
 				wo = _reader.Read();

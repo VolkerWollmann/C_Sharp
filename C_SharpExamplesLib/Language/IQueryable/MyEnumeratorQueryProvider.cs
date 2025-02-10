@@ -7,6 +7,7 @@ namespace C_Sharp.Language.IQueryable2
 	public class MyEnumeratorQueryProvider<TType> : IQueryProvider
 	{
 		private readonly MyEnumeratorQueryable<TType> _myQueryableIntegerEnumerator;
+		// ReSharper disable once ConvertToPrimaryConstructor
 		public MyEnumeratorQueryProvider(MyEnumeratorQueryable<TType> queryableIntegerEnumerator)
 		{
 			_myQueryableIntegerEnumerator = queryableIntegerEnumerator;

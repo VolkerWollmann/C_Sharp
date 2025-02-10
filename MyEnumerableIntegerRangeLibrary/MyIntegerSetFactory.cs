@@ -19,7 +19,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         private string _connectionString = "";
         SqlConnection? _dataBaseConnection;
 
-        private List<IMyIntegerSet> _myIntegerSets = new List<IMyIntegerSet>();
+        private List<IMyIntegerSet> _myIntegerSets = [];
 
         private string GetConnectionString()
         {
@@ -86,7 +86,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
                                                                                       DesiredDatabases.DatabaseStatement |
                                                                                       DesiredDatabases.DatabaseOptimizedStatement)
         {
-            List<IMyIntegerSet> result = new List<IMyIntegerSet>();
+            List<IMyIntegerSet> result = [];
             if (( desiredDatabases & DesiredDatabases.Memory) == DesiredDatabases.Memory)
             {
                 var myIntegerSet = new MyMemoryIntegerSet([1, 2, 3]);
@@ -114,7 +114,8 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 			if ((desiredDatabases & DesiredDatabases.DatabaseOptimizedStatement) == DesiredDatabases.DatabaseOptimizedStatement)
             {
-                var myOptimizedDatabaseIntegerSet = new MyOptimizedDatabaseStatementIntegerSet(_connectionString, new List<int> { 1, 2, 3 });
+                var myOptimizedDatabaseIntegerSet = new MyOptimizedDatabaseStatementIntegerSet(_connectionString,
+	                [1, 2, 3]);
                 _myIntegerSets.Add(myOptimizedDatabaseIntegerSet);
                 result.Add(myOptimizedDatabaseIntegerSet);
             }

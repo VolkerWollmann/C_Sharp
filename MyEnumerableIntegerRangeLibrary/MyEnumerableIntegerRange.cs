@@ -44,7 +44,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         private MyEnumerableIntegerRange(string name)
         {
             Name = name;
-            _range = new List<int>();
+            _range = [];
         }
 
         public MyEnumerableIntegerRange(int start, int range, string name) : this(name)

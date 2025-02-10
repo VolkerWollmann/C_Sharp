@@ -36,6 +36,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		#region Constructor
 
+		// ReSharper disable once ConvertToPrimaryConstructor
 		public MyDatabaseStatementIntegerSetEnumerator(MyDatabaseStatementIntegerSet set)
 		{
 			_myDatabaseStatementIntegerSet = set;

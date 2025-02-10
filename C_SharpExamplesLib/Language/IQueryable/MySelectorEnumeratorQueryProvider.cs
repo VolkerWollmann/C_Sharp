@@ -8,6 +8,7 @@ namespace C_SharpExamplesLib.Language.IQueryable2
     {
         private readonly MySelectorEnumeratorQueryable<TResultType, TBaseType> _mySelectorEnumerator;
 
+        // ReSharper disable once ConvertToPrimaryConstructor
         public MySelectorEnumeratorQueryProvider(MySelectorEnumeratorQueryable<TResultType, TBaseType> selectorEnumerator)
         {
             _mySelectorEnumerator = selectorEnumerator;

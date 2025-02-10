@@ -2,10 +2,8 @@
 
 namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 {
-	public class MyMemoryIntegerSetEnumerator : IEnumerator<int>
+	public class MyMemoryIntegerSetEnumerator(MyMemoryIntegerSet set) : IEnumerator<int>
 	{
-		private readonly MyMemoryIntegerSet _myMemoryIntegerSet;
-
 		#region IEnumerator<int>
 		public void Dispose()
 		{
@@ -13,15 +11,15 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		public bool MoveNext()
 		{
-			return _myMemoryIntegerSet.MoveNext();
+			return set.MoveNext();
 		}
 
 		public void Reset()
 		{
-			_myMemoryIntegerSet.Reset();
+			set.Reset();
 		}
 
-		public int Current => _myMemoryIntegerSet.Current;
+		public int Current => set.Current;
 
 		object IEnumerator.Current => Current;
 
@@ -29,10 +27,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		#region Constructor
 
-		public MyMemoryIntegerSetEnumerator(MyMemoryIntegerSet set)
-		{
-			_myMemoryIntegerSet = set;
-		}
 		#endregion
 
 

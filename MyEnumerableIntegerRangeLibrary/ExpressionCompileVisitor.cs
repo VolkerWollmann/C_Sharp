@@ -14,17 +14,11 @@ namespace MyEnumerableIntegerRangeLibrary
 	/// which match the lambda expression
 	/// only evaluates = 2, should evaluate [less|>|=] e.g. 3-4, ...
 	/// </summary>
-	public class ExpressionCompileVisitor : ExpressionVisitor
+	public class ExpressionCompileVisitor(string theValue) : ExpressionVisitor
 	{
-		private string[] _results = new string[50];
+		private readonly string[] _results = new string[50];
 		private int _index;
 
-		private string _theValue;
-
-		public ExpressionCompileVisitor(string theValue)
-		{
-			_theValue = theValue;
-		}
 		protected override Expression VisitConstant(ConstantExpression node)
 		{
 			_results[_index++] = node.Value?.ToString() ?? "null";
@@ -38,7 +32,7 @@ namespace MyEnumerableIntegerRangeLibrary
 		/// <returns></returns>
 		protected override Expression VisitParameter(ParameterExpression node)
 		{
-			_results[_index++] = _theValue;
+			_results[_index++] = theValue;
 			return node;
 		}
 

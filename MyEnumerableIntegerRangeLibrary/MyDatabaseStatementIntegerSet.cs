@@ -24,13 +24,10 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         private void ExecuteNonQuery(string statement)
         {
-            using (TransactionScope scope = new TransactionScope())
-            {
-                SqlCommand command = new SqlCommand(statement, _dataBaseConnection);
-                command.ExecuteNonQuery();
-                scope.Complete();               // enforces the commit
-                
-            }
+	        using var scope = new TransactionScope();
+	        SqlCommand command = new SqlCommand(statement, _dataBaseConnection);
+	        command.ExecuteNonQuery();
+	        scope.Complete();               // enforces the commit
         }
 
         /// <summary>
