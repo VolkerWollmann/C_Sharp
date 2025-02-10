@@ -52,6 +52,13 @@ namespace UnitTest
 		}
 
 		[TestMethod]
+		[Ignore("Only for debug purpose")]
+		public void ThreadAdministrativeData()
+		{
+			MyThread.Thread_AdministrativeData();
+		}
+
+		[TestMethod]
         //[Ignore("Only for debug purpose")]
         public void ThreadPool_Configuration()
         {

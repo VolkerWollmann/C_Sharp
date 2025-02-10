@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.IdentityModel.Tokens;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
 namespace C_Sharp.OhterExamples
@@ -8,7 +9,7 @@ namespace C_Sharp.OhterExamples
     /// </summary>
     public class DoHttpRequests
     {
-        private static int result = 0;
+        private static int result;
         private static async Task DoTheRequest()
         {
             result = 0;
@@ -91,7 +92,10 @@ namespace C_Sharp.OhterExamples
                         var resultList = js.Deserialize<List<Post>>(jr);
 
                         Assert.IsTrue(resultList?.Any( e => e.Title == "eum et est occaecati"));
-                        result = 2;
+                        Assert.IsTrue(resultList?.Any( e => ( e.Id >= 0)));
+                        Assert.IsTrue(resultList?.Any(e => (e.UserId >= 0)));
+						Assert.IsTrue(resultList?.Any(e => (!e.Body.IsNullOrEmpty())));
+						result = 2;
                     }
 
                 }

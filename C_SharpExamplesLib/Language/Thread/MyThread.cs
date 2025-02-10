@@ -160,7 +160,7 @@ namespace C_Sharp.Language.Thread
 			for (int i = 0; i < 50; i++)
 			{
 				int stateNumber = i;
-				ThreadPool.QueueUserWorkItem(state => DoWork(stateNumber));
+				ThreadPool.QueueUserWorkItem(_ => DoWork(stateNumber));
 			}
 
 			WaitForThreads();
@@ -239,13 +239,15 @@ namespace C_Sharp.Language.Thread
             
             int a, b;
             ThreadPool.GetMaxThreads(out a, out b );
+			Assert.IsTrue( a >= 0);
+			Assert.IsTrue( b >= 0 );
 			
             
             for (int i = 1; i < 100000; i++)
             {
                 IncreaseThreadCount(numThreads, ref waits);
                 int stateNumber = i;
-                ThreadPool.QueueUserWorkItem(state => IsPrime(stateNumber));
+                ThreadPool.QueueUserWorkItem(_ => IsPrime(stateNumber));
             }
             TimeSpan t = DateTime.Now.Subtract(start);
             Console.WriteLine("Time with {0} threads: {1} Waits:{2} MaxPrime:{3}", t, numThreads, waits, _maxPrime);
@@ -253,6 +255,8 @@ namespace C_Sharp.Language.Thread
 
         public static void TestTheadPoolWithPrimeSearch()
         {
+	        bool test = IsPrime(1);
+			Assert.AreEqual(true, test);
             FindPrimesWithNumberOfThreads(4);
             FindPrimesWithNumberOfThreads(8);
         }
