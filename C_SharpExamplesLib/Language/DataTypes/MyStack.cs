@@ -1,34 +1,26 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Language.DataTypes
+namespace C_SharpExamplesLib.Language.DataTypes
 { 
-    public class MyStackTest
+    public abstract class MyStackTest
     {
         // #stack #struct
-        internal struct MyStackElement
-        {
-            public int X;
-            public int Y;
-            public MyStackElement(int x, int y)
-            {
-                X = x;
-                Y = y;
-            }
-        }
-        internal class MyStack : Stack<MyStackElement>
-        {
-            public MyStack(int capacity) : base(capacity)
-            {
+        private struct MyStackElement(int x, int y)
+		{
+            public readonly int X = x;
+            public readonly int Y = y;
+		}
 
-            }
-        }
-        
-        public static void Test()
+		private class MyStack(int capacity) : Stack<MyStackElement>(capacity);
+
+		public static void Test()
         {
 
             MyStack stack = new MyStack(5);
 
             MyStackElement pair = new MyStackElement(1, 42);
+            Assert.AreEqual(1,pair.X);
+            Assert.AreEqual(42, pair.Y);
             stack.Push(pair);
 
             Assert.AreEqual(1, stack.Count);

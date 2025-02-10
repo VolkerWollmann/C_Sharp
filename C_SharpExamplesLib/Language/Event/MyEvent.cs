@@ -15,13 +15,10 @@
             // Called to raise an alarm
             public void RaiseAlarm()
             {
-                // Only raise the alarm if someone has
+	            // Only raise the alarm if someone has
                 // subscribed. 
-                if (OnAlarmRaised != null)
-                {
-                    OnAlarmRaised();
-                    OnAlarmRaised2?.Invoke();
-                }
+                OnAlarmRaised();
+                OnAlarmRaised2?.Invoke();
             }
         }
 

@@ -7,7 +7,7 @@ namespace C_Sharp.Language
 	{
 		public enum Dog { Lessie, KomissarRex, Cerberus};
 
-		public enum Cat { Duchesse, OMailey, Garfield};
+		private enum Cat { Duchesse, OMailey, Garfield};
 
 		private static void ShowAllElement<TSpecies>( Array array )
 		{

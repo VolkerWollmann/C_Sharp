@@ -195,7 +195,7 @@ namespace C_Sharp.Language
 
         public class MyRecursiveCLass
         {
-            public static MyRecursiveCLass Anchor = new MyRecursiveCLass();
+	        private static MyRecursiveCLass _anchor = new MyRecursiveCLass();
             public static int Counter = 1;
             public int MyCounter;
 
@@ -209,11 +209,11 @@ namespace C_Sharp.Language
                 Console.WriteLine("MyCounter:" + MyCounter);
 
                 // Don't comment this out
-                if (Anchor == this)
+                if (_anchor == this)
                     return;
 
                 // Cycle
-                Anchor.WriteData();
+                _anchor.WriteData();
             }
 
             /// <summary>
