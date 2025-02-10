@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 using C_SharpExamplesLib.Language.IQueryable;
+using MyEnumerableIntegerRangeLibrary;
 
 namespace UnitTest
 {

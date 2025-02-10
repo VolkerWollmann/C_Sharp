@@ -1,6 +1,4 @@
-﻿using System.Linq.Expressions;
-
-namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
+﻿namespace MyEnumerableIntegerRangeLibrary
 {
     public interface IMyIntegerSet :  IEnumerable<int>
 	{

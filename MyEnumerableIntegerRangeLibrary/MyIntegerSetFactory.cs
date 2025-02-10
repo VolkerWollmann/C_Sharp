@@ -1,8 +1,8 @@
-﻿using MyEnumerableIntegerRangeLibrary.Properties;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MyEnumerableIntegerRangeLibrary.Properties;
 
-namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
+namespace MyEnumerableIntegerRangeLibrary
 {
     public class MyIntegerSetFactory
     {

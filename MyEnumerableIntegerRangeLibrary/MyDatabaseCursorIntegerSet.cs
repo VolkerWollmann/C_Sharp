@@ -1,9 +1,8 @@
 ﻿using System.Collections;
-using Microsoft.Data.SqlClient;
-using System.Linq.Expressions;
 using System.Transactions;
+using Microsoft.Data.SqlClient;
 
-namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
+namespace MyEnumerableIntegerRangeLibrary
 {
 	/// <summary>
 	/// Simulate a source, which is worth to be encapsulated for lazy linq queries.
@@ -15,7 +14,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 		internal const string TheValue = "theValue";
 
 		
-		internal readonly SqlConnection? _dataBaseConnection;
+		internal readonly SqlConnection? DataBaseConnection;
 
 		#region IntegerRangeData
 
@@ -26,7 +25,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 		private void ExecuteNonQuery(string statement)
 		{
 			using var scope = new TransactionScope();
-			SqlCommand command = new SqlCommand(statement, _dataBaseConnection);
+			SqlCommand command = new SqlCommand(statement, DataBaseConnection);
 			command.ExecuteNonQuery();
 			scope.Complete();               // enforces the commit
 		}
@@ -65,7 +64,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 		public void Dispose()
 		{
 			DeleteTable();
-			_dataBaseConnection?.Close();
+			DataBaseConnection?.Close();
 		}
 		
 		#endregion
@@ -86,20 +85,20 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		public SqlDataReader? GetReader()
         {
-	        SqlDataReader? _reader = null;
+	        SqlDataReader? reader = null;
 
-	        SqlCommand command = new SqlCommand($"select {TheValue} from {TableName} order by {TheIndex}", _dataBaseConnection);
-	        _reader = command.ExecuteReader();
+	        SqlCommand command = new SqlCommand($"select {TheValue} from {TableName} order by {TheIndex}", DataBaseConnection);
+	        reader = command.ExecuteReader();
 
-	        return _reader;
+	        return reader;
         }
 
 		#region Constructor
 
 		public MyDatabaseCursorIntegerSet(string connectionString, List<int> set)
 		{
-			_dataBaseConnection = new SqlConnection(connectionString);
-			_dataBaseConnection.Open();
+			DataBaseConnection = new SqlConnection(connectionString);
+			DataBaseConnection.Open();
 			
 			TableName = "MyDatabaseIntegerSet_" + Guid.NewGuid().ToString("N").ToUpper();
 
@@ -113,7 +112,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		protected MyDatabaseCursorIntegerSet(MyDatabaseCursorIntegerSet origin)
 		{
-			_dataBaseConnection = origin._dataBaseConnection!;
+			DataBaseConnection = origin.DataBaseConnection!;
 			//_dataBaseConnection.Open();
 
 			TableName = origin.TableName;

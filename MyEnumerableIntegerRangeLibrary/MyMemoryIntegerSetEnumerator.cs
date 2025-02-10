@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
+namespace MyEnumerableIntegerRangeLibrary
 {
 	public class MyMemoryIntegerSetEnumerator(MyMemoryIntegerSet set) : IEnumerator<int>
 	{

@@ -1,7 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-using System.Linq.Expressions;
-
-namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
+﻿namespace MyEnumerableIntegerRangeLibrary
 {
     public class MyOptimizedDatabaseStatementIntegerSet : MyDatabaseStatementIntegerSet
     {

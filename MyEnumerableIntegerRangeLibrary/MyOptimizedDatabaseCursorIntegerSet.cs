@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using Microsoft.Data.SqlClient;
-using System.Linq.Expressions;
-using System.Transactions;
+﻿using Microsoft.Data.SqlClient;
 
-namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
+namespace MyEnumerableIntegerRangeLibrary
 {
 	/// <summary>
 	/// Simulate a source, which is worth to be encapsulated for lazy linq queries.
@@ -16,7 +13,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 		{
 			SqlDataReader? _reader = null;
 
-			SqlCommand command = new SqlCommand($"select {TheValue} from {TableName} where {whereClause} order by {TheIndex}", _dataBaseConnection);
+			SqlCommand command = new SqlCommand($"select {TheValue} from {TableName} where {whereClause} order by {TheIndex}", DataBaseConnection);
 			_reader = command.ExecuteReader();
 
 			return _reader;

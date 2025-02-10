@@ -1,5 +1,4 @@
 ﻿using System.Linq.Expressions;
-using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 using MyEnumerableIntegerRangeLibrary;
 
 namespace C_SharpExamplesLib.Language.IQueryable

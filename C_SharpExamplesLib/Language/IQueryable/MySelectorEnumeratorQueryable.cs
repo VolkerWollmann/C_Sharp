@@ -5,11 +5,11 @@ namespace C_SharpExamplesLib.Language.IQueryable
 {
     public class MySelectorEnumeratorQueryable<TResultType, TBaseType> : IMyDisposeQueryable<TResultType>
     {
-        private MySelectorEnumerator<TResultType, TBaseType> mySelectorEnumerator;
+        private MySelectorEnumerator<TResultType, TBaseType> _mySelectorEnumerator;
 
         public MySelectorEnumeratorQueryable(MySelectorEnumerator<TResultType, TBaseType> selectorEnumerator )
         {
-            mySelectorEnumerator = selectorEnumerator;
+            _mySelectorEnumerator = selectorEnumerator;
             Expression = Expression.Constant(this);
 
             Provider = new MySelectorEnumeratorQueryProvider<TResultType, TBaseType>(this);
@@ -22,17 +22,17 @@ namespace C_SharpExamplesLib.Language.IQueryable
 
 		public void Dispose()
 		{
-			mySelectorEnumerator.Dispose();
+			_mySelectorEnumerator.Dispose();
 		}
 
 		public IEnumerator<TResultType> GetEnumerator()
         {
-            return mySelectorEnumerator;
+            return _mySelectorEnumerator;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return mySelectorEnumerator;
+            return _mySelectorEnumerator;
         }
     }
 }

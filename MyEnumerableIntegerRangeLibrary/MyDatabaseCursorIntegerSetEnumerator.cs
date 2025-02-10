@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using Microsoft.Data.SqlClient;
 
-namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
+namespace MyEnumerableIntegerRangeLibrary
 {
 	/// <summary>
 	/// Simulate a source, which is worth to be encapsulated for lazy linq queries.
