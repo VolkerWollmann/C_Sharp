@@ -66,8 +66,8 @@ namespace MyEnumerableIntegerRangeLibrary
 						{ ExpressionType.Subtract, "-" },
 				};
 
-			if (knownOperations.ContainsKey(node.NodeType))
-				operation = knownOperations[node.NodeType];
+			if (knownOperations.TryGetValue(node.NodeType, out var knownOperation))
+				operation = knownOperation;
 			else
 				throw new Exception("Compile error");
 

@@ -9,7 +9,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 	public class MyOptimizedDatabaseStatementIntegerSetEnumerator : IEnumerator<int>
 	{
 		private readonly MyOptimizedDatabaseStatementIntegerSet _myDatabaseStatementIntegerSet;
-		private string _whereClause;
+		private readonly string _whereClause;
 
 		#region IEnumerator<int>
 		int _index = -1;

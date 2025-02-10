@@ -111,7 +111,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		}
 
-		public MyDatabaseCursorIntegerSet(MyDatabaseCursorIntegerSet origin)
+		protected MyDatabaseCursorIntegerSet(MyDatabaseCursorIntegerSet origin)
 		{
 			_dataBaseConnection = origin._dataBaseConnection!;
 			//_dataBaseConnection.Open();

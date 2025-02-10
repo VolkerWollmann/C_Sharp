@@ -16,8 +16,8 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         private static int _counter = 1;
 
         public string Name { get; }
-        public int Start { get; }
-        public int Range { get; }
+        private int Start { get; }
+        private int Range { get; }
         private readonly List<int> _range;
 
         internal int Count => _range.Count;

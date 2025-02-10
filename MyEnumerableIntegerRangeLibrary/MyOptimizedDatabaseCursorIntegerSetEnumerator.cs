@@ -11,7 +11,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 	{
 		private readonly MyOptimizedDatabaseCursorIntegerSet _myOptimizedDatabaseCursorIntegerSet;
 		private SqlDataReader? _reader;
-		private string _whereClause;
+		private readonly string _whereClause;
 
 		#region IEnumerator<int>
 		public void Dispose()

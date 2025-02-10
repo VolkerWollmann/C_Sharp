@@ -19,7 +19,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         private string _connectionString = "";
         SqlConnection? _dataBaseConnection;
 
-        private List<IMyIntegerSet> _myIntegerSets = [];
+        private readonly List<IMyIntegerSet> _myIntegerSets = [];
 
         private string GetConnectionString()
         {
@@ -130,7 +130,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         //{
         //}
 
-        public bool DatabaseIntegerSetsAvailable()
+        private bool DatabaseIntegerSetsAvailable()
         {
             return _databaseAvailable;
         }

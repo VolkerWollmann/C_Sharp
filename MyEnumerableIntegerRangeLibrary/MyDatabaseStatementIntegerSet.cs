@@ -11,10 +11,10 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
     public class MyDatabaseStatementIntegerSet : IMyIntegerSet
     {
         internal readonly string TableName;
-        public const string TheIndex = "theIndex";
+        protected const string TheIndex = "theIndex";
         public const string TheValue = "theValue";
 
-        internal SqlConnection? _dataBaseConnection;
+        private readonly SqlConnection? _dataBaseConnection;
 
         #region IntegerRangeData
 
@@ -129,7 +129,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         }
 
-        public MyDatabaseStatementIntegerSet(MyDatabaseStatementIntegerSet origin )
+        protected MyDatabaseStatementIntegerSet(MyDatabaseStatementIntegerSet origin )
         {
 	        _dataBaseConnection = origin._dataBaseConnection!;
 	        //_dataBaseConnection.Open();
