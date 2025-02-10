@@ -73,15 +73,15 @@ namespace C_Sharp.Language.DataTypes
 		public static void Test()
         {
             SortedList<MyPair, MyPair> sortedList = new SortedList<MyPair, MyPair>();
-            List<MyPair> data = new List<MyPair>()
-            {
-                new MyPair(4,7),
-                new MyPair(3,8),
-                new MyPair(3,5),
-                new MyPair(4,1),
-                new MyPair(2,2),
-                new MyPair(5,5),
-            };
+            List<MyPair> data =
+			[
+				new(4,7),
+                new(3,8),
+                new(3,5),
+                new(4,1),
+                new(2,2),
+                new(5,5),
+            ];
 
             foreach (MyPair myPair in data)
             {
