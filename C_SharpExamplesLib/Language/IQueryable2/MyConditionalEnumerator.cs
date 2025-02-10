@@ -10,8 +10,7 @@ namespace C_Sharp.Language.IQueryable2
 	public class MyConditionalEnumerator<TType> : IEnumerator<TType>
 	{
 		private readonly IEnumerator<TType> _myBaseEnumerator;
-		private readonly Expression? _expression = null;
-		private readonly LambdaExpression? _lambdaExpression =null;
+		private readonly LambdaExpression _lambdaExpression;
 
 		#region IEnumerator<int>
 		public void Dispose()
@@ -22,8 +21,7 @@ namespace C_Sharp.Language.IQueryable2
 		internal bool MoveNextConditional()
 		{ 
 			bool baseEnumeratorMoveResult = _myBaseEnumerator.MoveNext();
-			if (_lambdaExpression == null)
-				return baseEnumeratorMoveResult;
+			
 			Func<TType, bool> compiledExpression = (Func<TType, bool>)_lambdaExpression.Compile();
 
 			while (baseEnumeratorMoveResult && !compiledExpression(Current))
@@ -54,27 +52,24 @@ namespace C_Sharp.Language.IQueryable2
 		public MyConditionalEnumerator(IEnumerator<TType> enumerator, Expression? expression)
 		{
 			_myBaseEnumerator = enumerator;
-			_expression = expression;
-			if (_expression != null)
+
+			if (expression is MethodCallExpression methodCallExpression)
 			{
-				if (_expression is MethodCallExpression methodCallExpression)
-				{
-					// apply lambda/where on the items and get a filtered MyIntegerSet
-					// get lambda expression
-					_lambdaExpression =
-						(LambdaExpression) ((UnaryExpression) (methodCallExpression.Arguments[1])).Operand;
-				}
-				else if (_expression is UnaryExpression unaryExpression)
-				{
-					_lambdaExpression = (LambdaExpression)unaryExpression.Operand;
-					;
-				}
-				else
-				{
-					throw new ArgumentException(
-						"whereExpression must be a method call expression with a lambda expression as the second argument.");
-				}
+				// apply lambda/where on the items and get a filtered MyIntegerSet
+				// get lambda expression
+				_lambdaExpression =
+					(LambdaExpression)((UnaryExpression)(methodCallExpression.Arguments[1])).Operand;
 			}
+			else if (expression is UnaryExpression unaryExpression)
+			{
+				_lambdaExpression = (LambdaExpression)unaryExpression.Operand;
+			}
+			else
+			{
+				throw new ArgumentException(
+					"whereExpression must be a method call expression with a lambda expression as the second argument.");
+			}
+
 		}
 		#endregion
 	}
