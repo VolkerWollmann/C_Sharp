@@ -18,7 +18,7 @@ namespace UnitTest
 		public void Initialize()
 		{
 			_myIntegerSetFactory = new MyIntegerSetFactory();
-			;
+			
 			_myIntegerSets = _myIntegerSetFactory.GetIntegerSets();
 		}
 

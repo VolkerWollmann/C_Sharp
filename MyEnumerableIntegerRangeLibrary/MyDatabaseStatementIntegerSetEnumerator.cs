@@ -8,7 +8,7 @@ namespace MyEnumerableIntegerRangeLibrary
 	
 	public class MyDatabaseStatementIntegerSetEnumerator : IEnumerator<int>
 	{
-		internal readonly MyDatabaseStatementIntegerSet _myDatabaseStatementIntegerSet;
+		internal readonly MyDatabaseStatementIntegerSet MyDatabaseStatementIntegerSet;
 
 		#region IEnumerator<int>
 		int _index = -1;
@@ -19,7 +19,7 @@ namespace MyEnumerableIntegerRangeLibrary
 
 		public bool MoveNext()
 		{
-			_index = _myDatabaseStatementIntegerSet.GetNextIndex(_index);
+			_index = MyDatabaseStatementIntegerSet.GetNextIndex(_index);
 			return _index > 0;
 		}
 
@@ -28,7 +28,7 @@ namespace MyEnumerableIntegerRangeLibrary
 			_index = -1;
 		}
 
-		public int Current => _myDatabaseStatementIntegerSet.GetValueAtIndex(_index);
+		public int Current => MyDatabaseStatementIntegerSet.GetValueAtIndex(_index);
 
 		object IEnumerator.Current => Current;
 
@@ -39,7 +39,7 @@ namespace MyEnumerableIntegerRangeLibrary
 		// ReSharper disable once ConvertToPrimaryConstructor
 		public MyDatabaseStatementIntegerSetEnumerator(MyDatabaseStatementIntegerSet set)
 		{
-			_myDatabaseStatementIntegerSet = set;
+			MyDatabaseStatementIntegerSet = set;
 		}
 		#endregion
 

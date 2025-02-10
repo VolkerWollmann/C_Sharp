@@ -25,10 +25,5 @@ namespace MyEnumerableIntegerRangeLibrary
 
 		#endregion
 
-		#region Constructor
-
-		#endregion
-
-
 	}
 }

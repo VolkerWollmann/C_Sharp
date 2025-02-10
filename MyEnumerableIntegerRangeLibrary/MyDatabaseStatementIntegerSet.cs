@@ -15,10 +15,6 @@ namespace MyEnumerableIntegerRangeLibrary
 
         private readonly SqlConnection? _dataBaseConnection;
 
-        #region IntegerRangeData
-
-        #endregion
-
         #region database operations
 
         private void ExecuteNonQuery(string statement)

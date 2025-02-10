@@ -23,7 +23,7 @@ namespace C_SharpExamplesLib.Language.IQueryable
 
 			if (whereExpression != null)
 			{
-				var result = MyQueryableFactory.GetMyConditionalEnumeratorQueryable<TType>(_myQueryableIntegerEnumerator.GetEnumerator(), whereExpression);
+				var result = MyQueryableFactory.GetMyConditionalEnumeratorQueryable(_myQueryableIntegerEnumerator.GetEnumerator(), whereExpression);
 
 				return (IQueryable<TElement>)result;
 			}

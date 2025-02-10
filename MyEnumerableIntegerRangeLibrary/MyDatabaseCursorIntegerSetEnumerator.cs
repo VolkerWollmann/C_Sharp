@@ -9,7 +9,7 @@ namespace MyEnumerableIntegerRangeLibrary
 
 	public class MyDatabaseCursorIntegerSetEnumerator : IEnumerator<int>
 	{
-		internal readonly MyDatabaseCursorIntegerSet _myDatabaseCursorIntegerSet;
+		internal readonly MyDatabaseCursorIntegerSet MyDatabaseCursorIntegerSet;
 		private SqlDataReader? _reader;
 
 		#region IEnumerator<int>
@@ -23,7 +23,7 @@ namespace MyEnumerableIntegerRangeLibrary
 		{
 			bool wo = false;
 			//# the null-coalescing assignment 
-			_reader ??= _myDatabaseCursorIntegerSet.GetReader();
+			_reader ??= MyDatabaseCursorIntegerSet.GetReader();
 			if (_reader != null)
 			{
 				wo = _reader.Read();
@@ -41,21 +41,9 @@ namespace MyEnumerableIntegerRangeLibrary
 		}
 
 
-		public int Current
-		{
-			get
-			{
-				return _currentValue;
-			}
-		}
+		public int Current => _currentValue;
 
-		object IEnumerator.Current
-		{
-			get
-			{
-				return _currentValue;
-			}
-		}
+		object IEnumerator.Current => _currentValue;
 
 		#endregion
 
@@ -63,7 +51,7 @@ namespace MyEnumerableIntegerRangeLibrary
 
 		public MyDatabaseCursorIntegerSetEnumerator(MyDatabaseCursorIntegerSet set)
 		{
-			_myDatabaseCursorIntegerSet = set;
+			MyDatabaseCursorIntegerSet = set;
 			Reset();
 		}
 		#endregion

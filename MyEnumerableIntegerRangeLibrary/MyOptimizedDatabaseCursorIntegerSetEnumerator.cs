@@ -41,21 +41,9 @@ namespace MyEnumerableIntegerRangeLibrary
 		}
 
 
-		public int Current
-		{
-			get
-			{
-				return _currentValue;
-			}
-		}
+		public int Current => _currentValue;
 
-		object IEnumerator.Current
-		{
-			get
-			{
-				return _currentValue;
-			}
-		}
+		object IEnumerator.Current => _currentValue;
 
 		#endregion
 
@@ -63,7 +51,7 @@ namespace MyEnumerableIntegerRangeLibrary
 
 		public MyOptimizedDatabaseCursorIntegerSetEnumerator(MyDatabaseCursorIntegerSetEnumerator enumerator, string whereClause)
 		{
-			_myOptimizedDatabaseCursorIntegerSet = new MyOptimizedDatabaseCursorIntegerSet(enumerator._myDatabaseCursorIntegerSet);
+			_myOptimizedDatabaseCursorIntegerSet = new MyOptimizedDatabaseCursorIntegerSet(enumerator.MyDatabaseCursorIntegerSet);
 			_whereClause = whereClause;
 			Reset();
 		}

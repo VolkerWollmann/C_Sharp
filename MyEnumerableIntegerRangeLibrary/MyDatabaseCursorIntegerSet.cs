@@ -16,10 +16,6 @@ namespace MyEnumerableIntegerRangeLibrary
 		
 		internal readonly SqlConnection? DataBaseConnection;
 
-		#region IntegerRangeData
-
-		#endregion
-
 		#region database operations
 
 		private void ExecuteNonQuery(string statement)
@@ -85,7 +81,7 @@ namespace MyEnumerableIntegerRangeLibrary
 
 		public SqlDataReader? GetReader()
         {
-	        SqlDataReader? reader = null;
+	        SqlDataReader? reader;
 
 	        SqlCommand command = new SqlCommand($"select {TheValue} from {TableName} order by {TheIndex}", DataBaseConnection);
 	        reader = command.ExecuteReader();

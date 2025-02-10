@@ -40,7 +40,7 @@ namespace MyEnumerableIntegerRangeLibrary
 		// ReSharper disable once ConvertToPrimaryConstructor
 		public MyOptimizedDatabaseStatementIntegerSetEnumerator(MyDatabaseStatementIntegerSetEnumerator enumerator, string whereClause)
 		{
-			_myDatabaseStatementIntegerSet = new MyOptimizedDatabaseStatementIntegerSet(enumerator._myDatabaseStatementIntegerSet);
+			_myDatabaseStatementIntegerSet = new MyOptimizedDatabaseStatementIntegerSet(enumerator.MyDatabaseStatementIntegerSet);
 			_whereClause = whereClause;
 		}
 		

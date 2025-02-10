@@ -55,10 +55,6 @@ namespace MyEnumerableIntegerRangeLibrary
         }
         #endregion
 
-        #region IMyIntegerSet
-
-		#endregion
-
 		#region Constructor
 
 		public MyMemoryIntegerSet(List<int> set)
