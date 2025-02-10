@@ -7,10 +7,11 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 	/// Simulate a source, which is worth to be encapsulated for lazy linq queries.
 	/// </summary>
 
-	public class MyDatabaseCursorIntegerSetEnumerator : IEnumerator<int>
+	public class MyOptimizedDatabaseCursorIntegerSetEnumerator : IEnumerator<int>
 	{
-		internal readonly MyDatabaseCursorIntegerSet _myDatabaseCursorIntegerSet;
+		private readonly MyOptimizedDatabaseCursorIntegerSet _myOptimizedDatabaseCursorIntegerSet;
 		private SqlDataReader? _reader = null;
+		private string _whereClause;
 
 		#region IEnumerator<int>
 		public void Dispose()
@@ -22,8 +23,8 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 		public bool MoveNext()
 		{
 			bool wo = false;
-			if (_reader == null )
-				_reader = _myDatabaseCursorIntegerSet.GetReader();
+			if (_reader == null)
+				_reader = _myOptimizedDatabaseCursorIntegerSet.GetReader(_whereClause);
 			if (_reader != null)
 			{
 				wo = _reader.Read();
@@ -61,9 +62,10 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		#region Constructor
 
-		public MyDatabaseCursorIntegerSetEnumerator(MyDatabaseCursorIntegerSet set)
+		public MyOptimizedDatabaseCursorIntegerSetEnumerator(MyDatabaseCursorIntegerSetEnumerator enumerator, string whereClause)
 		{
-			_myDatabaseCursorIntegerSet = set;
+			_myOptimizedDatabaseCursorIntegerSet = new MyOptimizedDatabaseCursorIntegerSet(enumerator._myDatabaseCursorIntegerSet);
+			_whereClause = whereClause;
 			Reset();
 		}
 		#endregion

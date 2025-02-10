@@ -10,12 +10,12 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 	/// </summary>
 	public class MyDatabaseCursorIntegerSet : IMyIntegerSet
 	{
-		private readonly string _tableName;
-		private const string TheIndex = "theIndex";
-		private const string TheValue = "theValue";
+		internal readonly string TableName;
+		internal const string TheIndex = "theIndex";
+		internal const string TheValue = "theValue";
 
 		
-		private readonly SqlConnection? _dataBaseConnection;
+		internal readonly SqlConnection? _dataBaseConnection;
 		private SqlDataReader? _reader;
 
 		#region IntegerRangeData
@@ -38,13 +38,13 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		private void CreateTable()
 		{
-			string statement = $"create table {_tableName}(theIndex int, theValue int)";
+			string statement = $"create table {TableName}(theIndex int, theValue int)";
 			ExecuteNonQuery(statement);
 		}
 
 		private void InsertValues(List<int> set)
 		{
-			string statement = $"insert into {_tableName} values ";
+			string statement = $"insert into {TableName} values ";
 			int i = 1;
 			foreach (int v in set)
 			{
@@ -60,7 +60,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		private void DeleteTable()
 		{
-			string statement = $"drop table {_tableName}";
+			string statement = $"drop table {TableName}";
 			ExecuteNonQuery(statement);
 		}
 
@@ -99,7 +99,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         {
 	        SqlDataReader? _reader = null;
 
-	        SqlCommand command = new SqlCommand($"select {TheValue} from {_tableName} order by {TheIndex}", _dataBaseConnection);
+	        SqlCommand command = new SqlCommand($"select {TheValue} from {TableName} order by {TheIndex}", _dataBaseConnection);
 	        _reader = command.ExecuteReader();
 
 	        return _reader;
@@ -112,7 +112,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 			_dataBaseConnection = new SqlConnection(connectionString);
 			_dataBaseConnection.Open();
 			
-			_tableName = "MyDatabaseIntegerSet_" + Guid.NewGuid().ToString("N").ToUpper();
+			TableName = "MyDatabaseIntegerSet_" + Guid.NewGuid().ToString("N").ToUpper();
 
 			// create table
 			CreateTable();
@@ -120,6 +120,14 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 			// insert values
 			InsertValues(set);
 
+		}
+
+		public MyDatabaseCursorIntegerSet(MyDatabaseCursorIntegerSet origin)
+		{
+			_dataBaseConnection = origin._dataBaseConnection!;
+			//_dataBaseConnection.Open();
+
+			TableName = origin.TableName;
 		}
 		#endregion
 
