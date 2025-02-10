@@ -13,7 +13,7 @@ namespace C_Sharp.Language.IQueryable2
     /// <typeparam name="TType">Type of the elements</typeparam>
     public class MyConditionalEnumeratorQueryable<TType> : IMyDisposeQueryable<TType>
 	{
-		private MyConditionalEnumerator<TType> _myIntegerEnumerator;
+		private readonly MyConditionalEnumerator<TType> _myIntegerEnumerator;
 
 		/// <summary>
 		/// Filters out objects, which do not match the condition 

@@ -6,7 +6,7 @@ namespace C_Sharp.Language.IQueryable2
 {
 	public class MyEnumeratorQueryProvider<TType> : IQueryProvider
 	{
-		private MyEnumeratorQueryable<TType> _myQueryableIntegerEnumerator;
+		private readonly MyEnumeratorQueryable<TType> _myQueryableIntegerEnumerator;
 		public MyEnumeratorQueryProvider(MyEnumeratorQueryable<TType> queryableIntegerEnumerator)
 		{
 			_myQueryableIntegerEnumerator = queryableIntegerEnumerator;

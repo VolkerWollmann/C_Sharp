@@ -6,7 +6,7 @@ namespace C_SharpExamplesLib.Language.IQueryable2
 {
     public class MySelectorEnumeratorQueryProvider<TResultType, TBaseType> : IQueryProvider
     {
-        private MySelectorEnumeratorQueryable<TResultType, TBaseType> _mySelectorEnumerator;
+        private readonly MySelectorEnumeratorQueryable<TResultType, TBaseType> _mySelectorEnumerator;
 
         public MySelectorEnumeratorQueryProvider(MySelectorEnumeratorQueryable<TResultType, TBaseType> selectorEnumerator)
         {

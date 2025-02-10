@@ -6,17 +6,16 @@ namespace C_SharpExamplesLib.Language.IQueryable2
     /// <summary>
     /// used to find an expression that could be evaluated by MyQueryableIntegerSet and MyQueryableIntegerSetQueryProvider
     /// </summary>
-    internal class InnermostExpressionFinder : ExpressionVisitor
+    internal class InnermostExpressionFinder(string expressionName) : ExpressionVisitor
     {
-        private readonly string _innerMostExpressionName;
-        private MethodCallExpression? _innermostExpression;
+	    private MethodCallExpression? _innermostExpression;
 
-        private List<Type> _innerMostGenericTypes = new List<Type>()
-        {
-            typeof(MyConditionalEnumeratorQueryable<>),
-            typeof(MySelectorEnumeratorQueryable<,>),
-            typeof(MyEnumeratorQueryable<>)
-        };
+        private List<Type> _innerMostGenericTypes =
+        [
+	        typeof(MyConditionalEnumeratorQueryable<>),
+	        typeof(MySelectorEnumeratorQueryable<,>),
+	        typeof(MyEnumeratorQueryable<>)
+        ];
 
         private bool BaseTypeFits(Type typeToCheck)
         {
@@ -37,18 +36,13 @@ namespace C_SharpExamplesLib.Language.IQueryable2
 
         protected override Expression VisitMethodCall(MethodCallExpression expression)
         {
-            if (expression.Method.Name == _innerMostExpressionName &&
+            if (expression.Method.Name == expressionName &&
                 BaseTypeFits(expression.Arguments[0].Type))
                 _innermostExpression = expression;
 
             Visit(expression.Arguments[0]);
 
             return expression;
-        }
-
-        public InnermostExpressionFinder(string expressionName)
-        {
-            _innerMostExpressionName = expressionName;
         }
     }
 
