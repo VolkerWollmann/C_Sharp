@@ -177,7 +177,8 @@ namespace C_Sharp.Language.XML
 
             public Animal? Friend { get; set; }
 
-			public Animal()
+            // ReSharper disable once UnusedMember.Global
+            public Animal()
 			{
 				Name = "";
 				Description = "";

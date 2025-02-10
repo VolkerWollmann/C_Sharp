@@ -18,11 +18,6 @@ namespace C_Sharp.Language.IQueryable2
 {
     public class MyQueryableFactory
     {
-        public static IMyDisposeQueryable<int> GetMyQueryable(IMyIntegerSet myIntegerSet)
-        {
-            return new MyEnumeratorQueryable<int>(myIntegerSet.GetEnumerator());
-        }
-
         public static IMyDisposeQueryable<TType> GetMyConditionalEnumeratorQueryable2<TType>(
             IEnumerator<TType> enumerator, MethodCallExpression whereExpressionClaCallExpression)
         {

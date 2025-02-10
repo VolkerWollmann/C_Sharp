@@ -17,7 +17,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         internal SqlConnection? _dataBaseConnection;
 
         #region IntegerRangeData
-        private int _i;
 
         #endregion
 
@@ -98,11 +97,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         {
             DeleteTable();
             _dataBaseConnection?.Close();
-        }
-
-        public IEnumerable<int> AsEnumerable()
-        {
-	        return this;
         }
 
 		#endregion

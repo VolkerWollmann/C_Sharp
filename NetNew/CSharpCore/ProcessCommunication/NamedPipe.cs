@@ -75,7 +75,8 @@ namespace CSharpCore
             
             var ss = new StreamString(pipeClient);
 
-            ss.WriteString("Donkey");
+            int result = ss.WriteString("Donkey");
+            Assert.IsTrue(result > 0);
         }
 
         public static void NamedPipeTest()

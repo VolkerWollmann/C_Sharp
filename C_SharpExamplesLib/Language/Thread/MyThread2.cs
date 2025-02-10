@@ -5,13 +5,6 @@
     /// </summary>
     public partial class MyThread
     {
-
-        private static void Method()
-        {
-            System.Threading.Thread.Sleep(100);
-            Console.WriteLine("Method in thread " + System.Threading.Thread.CurrentThread.ManagedThreadId);
-        }
-
         static void Task1()
         {
             Console.WriteLine("Task 1 starting in thread " + System.Threading.Thread.CurrentThread.ManagedThreadId);

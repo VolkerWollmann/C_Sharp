@@ -10,7 +10,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 	public class MyDatabaseCursorIntegerSetEnumerator : IEnumerator<int>
 	{
 		internal readonly MyDatabaseCursorIntegerSet _myDatabaseCursorIntegerSet;
-		private SqlDataReader? _reader = null;
+		private SqlDataReader? _reader;
 
 		#region IEnumerator<int>
 		public void Dispose()

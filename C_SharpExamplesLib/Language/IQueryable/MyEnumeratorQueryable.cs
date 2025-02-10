@@ -24,20 +24,6 @@ namespace C_Sharp.Language.IQueryable2
 		}
 
 		/// <summary>
-		/// Filters out objects, which do not match the condition 
-		/// </summary>
-		/// <param name="integerEnumerator">the base enumerator</param>
-		/// <param name="expression">condition</param>
-		public MyEnumeratorQueryable(IEnumerator<TType> integerEnumerator, MethodCallExpression? expression)
-
-		{
-			_myIntegerEnumerator = new MyConditionalEnumerator<TType>(integerEnumerator, expression);
-			Expression = Expression.Constant(this);
-
-			Provider = new MyEnumeratorQueryProvider<TType>(this);
-		}
-
-		/// <summary>
 		/// used if type is known at compile time
 		/// </summary>
 		/// <returns></returns>

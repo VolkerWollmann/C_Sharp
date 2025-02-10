@@ -16,7 +16,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		
 		internal readonly SqlConnection? _dataBaseConnection;
-		private SqlDataReader? _reader;
 
 		#region IntegerRangeData
 
@@ -69,7 +68,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 		#region IMyIntegerSet IEnumerator<int> support
 		public void Dispose()
 		{
-			_reader?.Close();
 			DeleteTable();
 			_dataBaseConnection?.Close();
 		}

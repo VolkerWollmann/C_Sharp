@@ -10,7 +10,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 	public class MyOptimizedDatabaseCursorIntegerSetEnumerator : IEnumerator<int>
 	{
 		private readonly MyOptimizedDatabaseCursorIntegerSet _myOptimizedDatabaseCursorIntegerSet;
-		private SqlDataReader? _reader = null;
+		private SqlDataReader? _reader;
 		private string _whereClause;
 
 		#region IEnumerator<int>
