@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
-using C_Sharp.Language.IQueryable2;
+using C_Sharp.Language.IQueryable;
 
-namespace C_SharpExamplesLib.Language.IQueryable2
+namespace C_SharpExamplesLib.Language.IQueryable
 {
     /// <summary>
     /// used to find an expression that could be evaluated by MyQueryableIntegerSet and MyQueryableIntegerSetQueryProvider

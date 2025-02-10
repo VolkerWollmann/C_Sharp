@@ -1,8 +1,8 @@
 ﻿using System.Linq.Expressions;
 using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
-using C_SharpExamplesLib.Language.IQueryable2;
+using C_SharpExamplesLib.Language.IQueryable;
 
-namespace C_Sharp.Language.IQueryable2
+namespace C_Sharp.Language.IQueryable
 {
 	public class MyEnumeratorQueryProvider<TType> : IQueryProvider
 	{

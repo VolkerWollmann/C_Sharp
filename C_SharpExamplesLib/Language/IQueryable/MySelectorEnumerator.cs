@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Linq.Expressions;
 
-namespace C_Sharp.Language.IQueryable2
+namespace C_Sharp.Language.IQueryable
 {
 	/// <summary>
 	/// Enumerate base enumerator with a cast function

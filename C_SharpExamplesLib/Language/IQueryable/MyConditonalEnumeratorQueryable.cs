@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Linq.Expressions;
 using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
-using C_SharpExamplesLib.Language.IQueryable2;
+using C_SharpExamplesLib.Language.IQueryable;
 
-namespace C_Sharp.Language.IQueryable2
+namespace C_Sharp.Language.IQueryable
 {
     /// <summary>
     /// Maps from IQueryable TType (IEnumerator TType )

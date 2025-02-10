@@ -1,8 +1,8 @@
 ﻿using System.Linq.Expressions;
-using C_Sharp.Language.IQueryable2;
+using C_Sharp.Language.IQueryable;
 using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 
-namespace C_SharpExamplesLib.Language.IQueryable2
+namespace C_SharpExamplesLib.Language.IQueryable
 {
     public class MySelectorEnumeratorQueryProvider<TResultType, TBaseType> : IQueryProvider
     {
@@ -14,7 +14,7 @@ namespace C_SharpExamplesLib.Language.IQueryable2
             _mySelectorEnumerator = selectorEnumerator;
         }
 
-        public IQueryable CreateQuery(Expression expression)
+        public System.Linq.IQueryable CreateQuery(Expression expression)
         {
             throw new NotImplementedException();
             

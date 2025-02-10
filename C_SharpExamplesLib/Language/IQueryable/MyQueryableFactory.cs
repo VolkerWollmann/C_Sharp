@@ -9,12 +9,12 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using C_Sharp.Language.IQueryable2;
+using C_Sharp.Language.IQueryable;
 using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
-using C_SharpExamplesLib.Language.IQueryable2;
+using C_SharpExamplesLib.Language.IQueryable;
 using MyEnumerableIntegerRangeLibrary;
 
-namespace C_Sharp.Language.IQueryable2
+namespace C_Sharp.Language.IQueryable
 {
     public class MyQueryableFactory
     {
