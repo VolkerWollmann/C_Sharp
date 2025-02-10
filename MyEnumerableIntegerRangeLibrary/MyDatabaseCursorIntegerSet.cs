@@ -72,11 +72,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 			_dataBaseConnection?.Close();
 		}
 		
-		public IEnumerable<int> AsEnumerable()
-		{
-			return this;
-		}
-
 		#endregion
 
 		#region IEnumerable<int>

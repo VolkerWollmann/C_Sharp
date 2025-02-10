@@ -1,5 +1,6 @@
 ﻿using MyEnumerableIntegerRangeLibrary.Properties;
 using Microsoft.Data.SqlClient;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 {
@@ -14,7 +15,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             DatabaseOptimizedStatement = 8,
         }
 
-        private readonly bool _databaseAvailable = false;
+        private readonly bool _databaseAvailable;
         private string _connectionString = "";
         SqlConnection? _dataBaseConnection;
 
@@ -27,7 +28,8 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 		        Settings settings = new Settings();
 
 		        string databaseServer = settings.DatabaseServer;
-
+		        Assert.IsNotNull(databaseServer);
+                
 		        var builder = new SqlConnectionStringBuilder
 		        {
 			        DataSource = settings.DatabaseServer, // server address
@@ -93,7 +95,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
                 
             }
 
-            if (!_databaseAvailable) 
+            if (!DatabaseIntegerSetsAvailable()) 
                 return result;
 
 			if ((desiredDatabases & DesiredDatabases.DatabaseCursor) == DesiredDatabases.DatabaseCursor)
@@ -135,18 +137,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         public MyMemoryIntegerSet GetMemoryIntegerSet()
         {
             return new MyMemoryIntegerSet([1, 2, 3]);
-        }
-
-        public MyOptimizedDatabaseStatementIntegerSet GetOptimizedDatabaseIntegerSet()
-        {
-            if (_databaseAvailable)
-            {
-                var result = new MyOptimizedDatabaseStatementIntegerSet(_connectionString, [1, 2, 3]);
-                _myIntegerSets.Add(result);
-                return result;
-            }
-
-            throw new Exception("No database connection");
         }
 
     }

@@ -58,58 +58,6 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
         #region IMyIntegerSet
 
-        public IMyIntegerSet GetFilteredSet(LambdaExpression lambdaExpression)
-        {
-            List<int> result = new List<int>();
-            Func<int, bool> compiledExpression = (Func<int, bool>)lambdaExpression.Compile();
-            
-            Reset();
-            while (MoveNext())
-            {
-                if (compiledExpression(Current))
-                    result.Add(Current);
-            }
-
-            return new MyMemoryIntegerSet(result);
-        }
-
-        public int Sum()
-        {
-            int sum = 0;
-            Reset();
-            while (MoveNext())
-            {
-                sum = sum + Current;
-            }
-
-            return sum;
-        }
-
-        public virtual bool Any(LambdaExpression lambdaExpression)
-        {
-            Func<int, bool> compiledExpression = (Func<int, bool>)lambdaExpression.Compile();
-
-            Reset();
-            while (MoveNext())
-            {
-                if (compiledExpression(Current))
-                    return true;
-            }
-
-            return false;
-        }
-
-        public virtual bool Any()
-        {
-            Reset();
-            return MoveNext();
-        }
-
-		public IEnumerable<int> AsEnumerable()
-		{
-			return this;
-		}
-
 		#endregion
 
 		#region Constructor
