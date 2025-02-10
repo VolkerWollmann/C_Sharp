@@ -31,7 +31,7 @@ namespace UnitTest
 
         private IMyDisposeQueryable<int> GetMyQueryable(IMyIntegerSet myIntegerSet)
         {
-            return new MyConditionalEnumeratorQueryable2<int>(myIntegerSet.GetEnumerator());
+            return new MyEnumeratorQueryable2<int>(myIntegerSet.GetEnumerator());
         }
 
         [TestMethod]

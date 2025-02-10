@@ -19,7 +19,7 @@ namespace C_Sharp.Language.IQueryable2
     {
         public static IMyDisposeQueryable<int> GetMyQueryable(IMyIntegerSet myIntegerSet)
         {
-            return new MyConditionalEnumeratorQueryable2<int>(myIntegerSet.GetEnumerator());
+            return new MyEnumeratorQueryable2<int>(myIntegerSet.GetEnumerator());
         }
 
         public static IMyDisposeQueryable<TType> GetMyConditionalEnumeratorQueryable2<TType>(

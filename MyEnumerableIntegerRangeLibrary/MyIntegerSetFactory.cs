@@ -120,6 +120,13 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
             return result;
         }
 
+        //public List<IMyIntegerSet> GetIntegerSets(DesiredDatabases desiredDatabases = DesiredDatabases.Memory |
+	       // DesiredDatabases.DatabaseCursor |
+	       // DesiredDatabases.DatabaseStatement |
+	       // DesiredDatabases.DatabaseOptimizedStatement)
+        //{
+        //}
+
         public bool DatabaseIntegerSetsAvailable()
         {
             return _databaseAvailable;
