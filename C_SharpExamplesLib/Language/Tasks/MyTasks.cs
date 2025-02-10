@@ -637,7 +637,7 @@ namespace C_SharpExamplesLib.Language.Tasks
         {
             DateTime start = GetNextStartDateTime();
             WaitUntil("Start:", start);
-            Timer t = new Timer(SchedulerWork, null, 0, 10000);
+            Timer unused = new Timer(SchedulerWork, null, 0, 10000);
             Thread.Sleep(30 * 1000);
         }
 
@@ -645,12 +645,10 @@ namespace C_SharpExamplesLib.Language.Tasks
         {
             DateTime start = GetNextStartDateTime();
             WaitUntil("Start:", start);
-            Timer t = new Timer(SchedulerStart!, null, 0, 10000);
+            Timer unused = new Timer(SchedulerStart!, null, 0, 10000);
             Thread.Sleep(30 * 1000);
         }
-
-       
-
+		
         #endregion
     }
 }

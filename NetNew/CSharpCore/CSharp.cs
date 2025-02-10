@@ -72,7 +72,11 @@ namespace CSharpCore
                 int local;
                 // decrement CDE count once for each element consumed from queue
                 // ReSharper disable once AccessToDisposedClosure
-                while (queue.TryDequeue(out local)) cde.Signal();
+                while (queue.TryDequeue(out local))
+                {
+                    Assert.IsTrue(local >= 0);
+	                cde.Signal();
+                }
             };
 
             // Now empty the queue with a couple of asynchronous tasks
@@ -137,6 +141,7 @@ namespace CSharpCore
         public static void TestDebuggerDisplay()
         {
             Ship ship = new Ship("SMS rubber boat", 5);
+            Assert.IsTrue(ship != null);
 
             ; // watch in ship in Debugger
         }

@@ -100,8 +100,6 @@ namespace CSharpCore
         // #switch #pattern matching #recursive #structured #property pattern
         // https://docs.microsoft.com/en-us/archive/msdn-magazine/2019/may/csharp-8-0-pattern-matching-in-csharp-8-0
         // https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/proposals/csharp-8.0/patterns
-        [SuppressMessage("ReSharper", "RedundantAlwaysMatchSubpattern")]
-        [SuppressMessage("ReSharper", "RedundantTypeCheckInPattern")]
         private static string PersonMatch(Person person)
         {
             return person switch
@@ -130,6 +128,11 @@ namespace CSharpCore
         public static void PropertyPatternMatching()
         {
             Person wolfgang1 = new Person("Polizia", "Wolfgang", 35, null);
+            
+            wolfgang1.Deconstruct(out _, out _, out int age, out Animal animal);
+            Assert.AreEqual(35, age);
+            Assert.AreEqual(null, animal);
+            
             Assert.AreEqual( "Wolfgang ohne Macchi", PersonMatch(wolfgang1));
 
             Person wolfgang2 = new Person("Polizia", "Wolfgang", 35, new Animal("Macchi"));
@@ -182,6 +185,7 @@ namespace CSharpCore
         {
             // ! #null forgiving operator : will suppress compiler warning
             var person = new NullablePerson(null!);
+            Assert.IsNotNull(person);
         }
         #endregion
 
@@ -202,7 +206,7 @@ namespace CSharpCore
 
         #region IDisposable
         //#IDisposable
-        static int step = 0;
+        static int step;
 
         private class MyData : IDisposable
         {
