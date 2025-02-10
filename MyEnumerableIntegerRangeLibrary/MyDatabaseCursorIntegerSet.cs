@@ -81,10 +81,8 @@ namespace MyEnumerableIntegerRangeLibrary
 
 		public SqlDataReader? GetReader()
         {
-	        SqlDataReader? reader;
-
 	        SqlCommand command = new SqlCommand($"select {TheValue} from {TableName} order by {TheIndex}", DataBaseConnection);
-	        reader = command.ExecuteReader();
+	        var reader = command.ExecuteReader();
 
 	        return reader;
         }

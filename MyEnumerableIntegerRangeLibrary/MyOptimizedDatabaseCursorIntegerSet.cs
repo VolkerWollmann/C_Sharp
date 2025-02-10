@@ -11,10 +11,8 @@ namespace MyEnumerableIntegerRangeLibrary
 		
 		public SqlDataReader? GetReader(string whereClause)
 		{
-			SqlDataReader? reader;
-
 			SqlCommand command = new SqlCommand($"select {TheValue} from {TableName} where {whereClause} order by {TheIndex}", DataBaseConnection);
-			reader = command.ExecuteReader();
+			var reader = command.ExecuteReader();
 
 			return reader;
 		}
