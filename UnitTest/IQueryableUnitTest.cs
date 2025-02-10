@@ -54,10 +54,10 @@ namespace UnitTest
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
 				using var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
-				var expression = myQueryableIntegerSet.Where(i => i < 2);
+				var expression = myQueryableIntegerSet.Where(i => i <= 2);
 				foreach (var i in expression)
 				{
-					Assert.IsTrue(i < 4);
+					Assert.IsTrue(i <= 2);
 				}
 			}
 		}
