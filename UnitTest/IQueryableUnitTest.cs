@@ -10,7 +10,7 @@ namespace UnitTest
 {
 	[TestClass]
 	// ReSharper disable once InconsistentNaming
-	public class IQueryableUnitTest2
+	public class IQueryableUnitTest
 	{
 		private MyIntegerSetFactory _myIntegerSetFactory;
 		List<IMyIntegerSet> _myIntegerSets;
@@ -31,7 +31,7 @@ namespace UnitTest
 
         private IMyDisposeQueryable<int> GetMyQueryable(IMyIntegerSet myIntegerSet)
         {
-            return new MyEnumeratorQueryable2<int>(myIntegerSet.GetEnumerator());
+            return new MyEnumeratorQueryable<int>(myIntegerSet.GetEnumerator());
         }
 
         [TestMethod]

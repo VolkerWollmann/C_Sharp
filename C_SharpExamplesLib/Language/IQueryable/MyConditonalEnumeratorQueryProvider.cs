@@ -4,10 +4,10 @@ using C_SharpExamplesLib.Language.IQueryable2;
 
 namespace C_Sharp.Language.IQueryable2
 {
-	public class MyConditionalEnumeratorQueryProvider2<TType> : IQueryProvider
+	public class MyConditionalEnumeratorQueryProvider<TType> : IQueryProvider
 	{
-		private MyConditionalEnumeratorQueryable2<TType> _myQueryableIntegerEnumerator;
-		public MyConditionalEnumeratorQueryProvider2(MyConditionalEnumeratorQueryable2<TType> queryableIntegerEnumerator)
+		private MyConditionalEnumeratorQueryable<TType> _myQueryableIntegerEnumerator;
+		public MyConditionalEnumeratorQueryProvider(MyConditionalEnumeratorQueryable<TType> queryableIntegerEnumerator)
 		{
 			_myQueryableIntegerEnumerator = queryableIntegerEnumerator;
 		}
@@ -37,7 +37,7 @@ namespace C_Sharp.Language.IQueryable2
 
                 var selectorEnumerator = new MySelectorEnumerator<TElement, TType>(enumerator, selectExpression);
                 
-                var newQueryableEnumerator = new MySelectorEnumeratorQueryable2<TElement, TType>(selectorEnumerator);
+                var newQueryableEnumerator = new MySelectorEnumeratorQueryable<TElement, TType>(selectorEnumerator);
                 
                 return newQueryableEnumerator;
             }

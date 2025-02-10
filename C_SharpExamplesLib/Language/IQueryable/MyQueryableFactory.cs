@@ -20,7 +20,7 @@ namespace C_Sharp.Language.IQueryable2
     {
         public static IMyDisposeQueryable<int> GetMyQueryable(IMyIntegerSet myIntegerSet)
         {
-            return new MyEnumeratorQueryable2<int>(myIntegerSet.GetEnumerator());
+            return new MyEnumeratorQueryable<int>(myIntegerSet.GetEnumerator());
         }
 
         public static IMyDisposeQueryable<TType> GetMyConditionalEnumeratorQueryable2<TType>(
@@ -33,11 +33,11 @@ namespace C_Sharp.Language.IQueryable2
                 ecv.Visit(whereExpressionClaCallExpression.Arguments[1]);
 				string whereClause = ecv.GetCondition();
 				var r1 = new MyOptimizedDatabaseStatementIntegerSetEnumerator(x2, whereClause);
-				var r2 = new MyEnumeratorQueryable2<int>(r1);
+				var r2 = new MyEnumeratorQueryable<int>(r1);
 				return (IMyDisposeQueryable<TType>)r2;
 	        }
             
-            MyConditionalEnumeratorQueryable2<TType> x = new MyConditionalEnumeratorQueryable2<TType>(
+            MyConditionalEnumeratorQueryable<TType> x = new MyConditionalEnumeratorQueryable<TType>(
                     enumerator, whereExpressionClaCallExpression);
             return x;
         }

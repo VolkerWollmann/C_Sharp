@@ -4,11 +4,11 @@ using C_Sharp.Language.MyEnumerableIntegerRangeLibrary;
 
 namespace C_SharpExamplesLib.Language.IQueryable2
 {
-    public class MySelectorEnumeratorQueryProvider2<TResultType, TBaseType> : IQueryProvider
+    public class MySelectorEnumeratorQueryProvider<TResultType, TBaseType> : IQueryProvider
     {
-        private MySelectorEnumeratorQueryable2<TResultType, TBaseType> _mySelectorEnumerator;
+        private MySelectorEnumeratorQueryable<TResultType, TBaseType> _mySelectorEnumerator;
 
-        public MySelectorEnumeratorQueryProvider2(MySelectorEnumeratorQueryable2<TResultType, TBaseType> selectorEnumerator)
+        public MySelectorEnumeratorQueryProvider(MySelectorEnumeratorQueryable<TResultType, TBaseType> selectorEnumerator)
         {
             _mySelectorEnumerator = selectorEnumerator;
         }
@@ -40,7 +40,7 @@ namespace C_SharpExamplesLib.Language.IQueryable2
 
                 var selectorEnumerator = new MySelectorEnumerator<TElement, TResultType>(enumerator, selectExpression);
 
-                var newQueryableEnumerator = new MySelectorEnumeratorQueryable2<TElement, TResultType>(selectorEnumerator);
+                var newQueryableEnumerator = new MySelectorEnumeratorQueryable<TElement, TResultType>(selectorEnumerator);
 
                 return newQueryableEnumerator;
             }

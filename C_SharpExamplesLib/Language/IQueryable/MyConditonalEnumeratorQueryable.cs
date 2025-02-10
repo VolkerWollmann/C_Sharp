@@ -11,7 +11,7 @@ namespace C_Sharp.Language.IQueryable2
 	///           with only those elements, which match the expression
     /// </summary>
     /// <typeparam name="TType">Type of the elements</typeparam>
-    public class MyConditionalEnumeratorQueryable2<TType> : IMyDisposeQueryable<TType>
+    public class MyConditionalEnumeratorQueryable<TType> : IMyDisposeQueryable<TType>
 	{
 		private MyConditionalEnumerator<TType> _myIntegerEnumerator;
 
@@ -20,13 +20,13 @@ namespace C_Sharp.Language.IQueryable2
 		/// </summary>
 		/// <param name="integerEnumerator">the base enumerator</param>
 		/// <param name="expression">condition</param>
-		public MyConditionalEnumeratorQueryable2(IEnumerator<TType> integerEnumerator, MethodCallExpression? expression)
+		public MyConditionalEnumeratorQueryable(IEnumerator<TType> integerEnumerator, MethodCallExpression? expression)
 			
 		{
 			_myIntegerEnumerator = new MyConditionalEnumerator<TType>(integerEnumerator, expression);
 			Expression = Expression.Constant(this);
 
-			Provider = new MyConditionalEnumeratorQueryProvider2<TType>(this);
+			Provider = new MyConditionalEnumeratorQueryProvider<TType>(this);
 		}
 
 		/// <summary>

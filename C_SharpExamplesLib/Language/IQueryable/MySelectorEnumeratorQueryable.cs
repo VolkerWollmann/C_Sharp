@@ -5,16 +5,16 @@ using C_SharpExamplesLib.Language.IQueryable2;
 
 namespace C_Sharp.Language.IQueryable2
 {
-    public class MySelectorEnumeratorQueryable2<TResultType, TBaseType> : IMyDisposeQueryable<TResultType>
+    public class MySelectorEnumeratorQueryable<TResultType, TBaseType> : IMyDisposeQueryable<TResultType>
     {
         private MySelectorEnumerator<TResultType, TBaseType> mySelectorEnumerator;
 
-        public MySelectorEnumeratorQueryable2(MySelectorEnumerator<TResultType, TBaseType> selectorEnumerator )
+        public MySelectorEnumeratorQueryable(MySelectorEnumerator<TResultType, TBaseType> selectorEnumerator )
         {
             mySelectorEnumerator = selectorEnumerator;
             Expression = Expression.Constant(this);
 
-            Provider = new MySelectorEnumeratorQueryProvider2<TResultType, TBaseType>(this);
+            Provider = new MySelectorEnumeratorQueryProvider<TResultType, TBaseType>(this);
         }
         public Type ElementType => typeof(TResultType);
 

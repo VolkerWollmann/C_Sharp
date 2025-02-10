@@ -5,7 +5,7 @@ using C_SharpExamplesLib.Language.IQueryable2;
 
 namespace C_Sharp.Language.IQueryable2
 {
-	public class MyEnumeratorQueryable2<TType> : IMyDisposeQueryable<TType>
+	public class MyEnumeratorQueryable<TType> : IMyDisposeQueryable<TType>
 	{
 		private IEnumerator<TType> _myIntegerEnumerator;
 
@@ -14,13 +14,13 @@ namespace C_Sharp.Language.IQueryable2
 		/// empty condition : acts like identical list
 		/// </summary>
 		/// <param name="integerEnumerator">the base enumerator</param>
-		public MyEnumeratorQueryable2(IEnumerator<TType> integerEnumerator)
+		public MyEnumeratorQueryable(IEnumerator<TType> integerEnumerator)
 		{
 
 			_myIntegerEnumerator = integerEnumerator;
 			Expression = Expression.Constant(this);
 
-			Provider = new MyEnumeratorQueryProvider2<TType>(this);
+			Provider = new MyEnumeratorQueryProvider<TType>(this);
 		}
 
 		/// <summary>
@@ -28,13 +28,13 @@ namespace C_Sharp.Language.IQueryable2
 		/// </summary>
 		/// <param name="integerEnumerator">the base enumerator</param>
 		/// <param name="expression">condition</param>
-		public MyEnumeratorQueryable2(IEnumerator<TType> integerEnumerator, MethodCallExpression? expression)
+		public MyEnumeratorQueryable(IEnumerator<TType> integerEnumerator, MethodCallExpression? expression)
 
 		{
 			_myIntegerEnumerator = new MyConditionalEnumerator<TType>(integerEnumerator, expression);
 			Expression = Expression.Constant(this);
 
-			Provider = new MyEnumeratorQueryProvider2<TType>(this);
+			Provider = new MyEnumeratorQueryProvider<TType>(this);
 		}
 
 		/// <summary>

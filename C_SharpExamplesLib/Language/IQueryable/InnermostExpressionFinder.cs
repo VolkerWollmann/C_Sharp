@@ -13,9 +13,9 @@ namespace C_SharpExamplesLib.Language.IQueryable2
 
         private List<Type> _innerMostGenericTypes = new List<Type>()
         {
-            typeof(MyConditionalEnumeratorQueryable2<>),
-            typeof(MySelectorEnumeratorQueryable2<,>),
-            typeof(MyEnumeratorQueryable2<>)
+            typeof(MyConditionalEnumeratorQueryable<>),
+            typeof(MySelectorEnumeratorQueryable<,>),
+            typeof(MyEnumeratorQueryable<>)
         };
 
         private bool BaseTypeFits(Type typeToCheck)
