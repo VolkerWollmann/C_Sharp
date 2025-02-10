@@ -84,7 +84,7 @@ namespace MyEnumerableIntegerRangeLibrary
 			return node;
 		}
 
-		internal string GetCondition()
+		public string GetCondition()
 		{
 			return _results[0];
 		}

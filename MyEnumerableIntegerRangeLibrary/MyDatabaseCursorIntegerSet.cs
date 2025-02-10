@@ -109,7 +109,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 
 		public MyDatabaseCursorIntegerSet(string connectionString, List<int> set)
 		{
-			_dataBaseConnection = _dataBaseConnection = new SqlConnection(connectionString);
+			_dataBaseConnection = new SqlConnection(connectionString);
 			_dataBaseConnection.Open();
 			
 			_tableName = "MyDatabaseIntegerSet_" + Guid.NewGuid().ToString("N").ToUpper();

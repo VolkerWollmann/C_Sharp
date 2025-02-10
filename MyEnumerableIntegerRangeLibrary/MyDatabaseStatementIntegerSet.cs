@@ -11,8 +11,8 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
     public class MyDatabaseStatementIntegerSet : IMyIntegerSet
     {
         internal readonly string TableName;
-        internal const string TheIndex = "theIndex";
-        internal const string TheValue = "theValue";
+        public const string TheIndex = "theIndex";
+        public const string TheValue = "theValue";
 
         internal SqlConnection? _dataBaseConnection;
 
@@ -141,7 +141,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
         public MyDatabaseStatementIntegerSet(MyDatabaseStatementIntegerSet origin )
         {
 	        _dataBaseConnection = origin._dataBaseConnection!;
-	        _dataBaseConnection.Open();
+	        //_dataBaseConnection.Open();
 
 	        TableName = origin.TableName;
         }

@@ -8,7 +8,7 @@ namespace C_Sharp.Language.MyEnumerableIntegerRangeLibrary
 	
 	public class MyDatabaseStatementIntegerSetEnumerator : IEnumerator<int>
 	{
-		private readonly MyDatabaseStatementIntegerSet _myDatabaseStatementIntegerSet;
+		internal readonly MyDatabaseStatementIntegerSet _myDatabaseStatementIntegerSet;
 
 		#region IEnumerator<int>
 		int _index = -1;
