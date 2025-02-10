@@ -97,7 +97,7 @@ namespace C_Sharp.Language
             int cpiv = cpi.GetValue();
             Assert.AreEqual(1, cpiv);
 
-            IInheritanceInterface iCpi = (IInheritanceInterface) cpi;
+            IInheritanceInterface iCpi = cpi;
             Assert.AreEqual(42, iCpi.GetValue2());
 
 			ClassPublicImplDerivedPartialImpl cpidpi = new ClassPublicImplDerivedPartialImpl();

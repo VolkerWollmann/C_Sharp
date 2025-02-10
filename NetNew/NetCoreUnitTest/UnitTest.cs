@@ -115,7 +115,7 @@ namespace NetCoreUnitTest
 		}
 
 		[Theory]
-		[InlineData(new int[] { 0, 1 })]
+		[InlineData(new[] { 0, 1 })]
 		public void TestTheoryExampleInLineData2(int[] i)
 		{
 			foreach (int i2 in i)

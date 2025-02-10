@@ -8,10 +8,7 @@ namespace C_Sharp.Language
     public class MyType
     {
         // Defining a type as class based on base type
-        public class IntegerList2 : List<int>
-        {
-
-        }
+        public class IntegerList2 : List<int>;
 
         public class MyType2
         {

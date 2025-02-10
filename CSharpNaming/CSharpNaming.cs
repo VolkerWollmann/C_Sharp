@@ -29,6 +29,7 @@ namespace CSharpNaming
     /// https://www.dofactory.com/reference/csharp-coding-standards
     /// </summary>
 
+    // ReSharper disable once EmptyRegion
     #region I. PascalCasing for classes : public class NamingConvention
     #endregion
     [SuppressMessage("ReSharper", "InconsistentNaming")]

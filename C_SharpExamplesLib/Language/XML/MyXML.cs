@@ -127,7 +127,7 @@ namespace C_Sharp.Language.XML
 			XmlReaderSettings settings = new XmlReaderSettings();
 			settings.Schemas = schemas;
 			settings.ValidationType = ValidationType.Schema;
-			settings.ValidationEventHandler += new ValidationEventHandler(CheckXmlFileWithXsdFileValidationCallback);
+			settings.ValidationEventHandler += CheckXmlFileWithXsdFileValidationCallback;
 
 			using (XmlReader reader = XmlReader.Create(xmlFile, settings))
 			{

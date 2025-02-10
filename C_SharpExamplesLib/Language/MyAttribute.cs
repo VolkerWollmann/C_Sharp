@@ -22,10 +22,7 @@ namespace C_Sharp.Language
     }
 
     [Author("Me", Version = 1.1)]
-    public class MyAttributedClass
-    {
-
-    }
+    public class MyAttributedClass;
 
     public class MyAttributedClassTest
     {

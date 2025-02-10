@@ -56,7 +56,8 @@ namespace C_Sharp.Language
 
 		static void Method(string? s)
 		{
-			s = s + "donkey";
+			var x = $"{s}donkey";
+			Assert.IsTrue(x.Contains("donkey"));
 		}
 
 		private class MyClass

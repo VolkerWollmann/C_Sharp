@@ -14,9 +14,7 @@ namespace C_Sharp.Language
 
     }
 
-    public class MyConcrete1 : MyVirtual
-    {
-    }
+    public class MyConcrete1 : MyVirtual;
 
     public class MyConcrete2 : MyVirtual
     {

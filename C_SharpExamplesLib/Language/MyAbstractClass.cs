@@ -34,7 +34,7 @@ namespace C_Sharp.Language
 
 			// create instance of concrete class by using type information
 			object myConcreteClassInstance = Activator.CreateInstance(myConcreteClassType)!;
-			Assert.IsNotNull(((MyConcreteClass)myConcreteClassInstance!).InstanceProperty);
+			Assert.IsNotNull(((MyConcreteClass)myConcreteClassInstance).InstanceProperty);
 
 			// check type with is operator and assign as base class
 			if (myConcreteClassInstance is MyAbstractClass myConcreteClassBaseClassInstance)
