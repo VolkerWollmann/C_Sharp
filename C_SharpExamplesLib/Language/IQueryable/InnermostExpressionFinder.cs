@@ -10,7 +10,7 @@ namespace C_SharpExamplesLib.Language.IQueryable
     {
 	    private MethodCallExpression? _innermostExpression;
 
-        private List<Type> _innerMostGenericTypes =
+        private readonly List<Type> _innerMostGenericTypes =
         [
 	        typeof(MyConditionalEnumeratorQueryable<>),
 	        typeof(MySelectorEnumeratorQueryable<,>),

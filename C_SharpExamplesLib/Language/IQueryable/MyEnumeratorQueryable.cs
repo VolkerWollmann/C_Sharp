@@ -7,7 +7,7 @@ namespace C_Sharp.Language.IQueryable
 {
 	public class MyEnumeratorQueryable<TType> : IMyDisposeQueryable<TType>
 	{
-		private IEnumerator<TType> _myIntegerEnumerator;
+		private readonly IEnumerator<TType> _myIntegerEnumerator;
 
 
 		/// <summary>

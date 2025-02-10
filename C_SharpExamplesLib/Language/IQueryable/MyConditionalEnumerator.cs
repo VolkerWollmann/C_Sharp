@@ -18,7 +18,7 @@ namespace C_Sharp.Language.IQueryable
 			_myBaseEnumerator.Dispose();
 		}
 
-		internal bool MoveNextConditional()
+		private bool MoveNextConditional()
 		{ 
 			bool baseEnumeratorMoveResult = _myBaseEnumerator.MoveNext();
 			
