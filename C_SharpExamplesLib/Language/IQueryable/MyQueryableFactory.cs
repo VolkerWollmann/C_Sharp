@@ -6,7 +6,7 @@ namespace C_SharpExamplesLib.Language.IQueryable
 {
     public abstract class MyQueryableFactory
     {
-        public static IMyDisposeQueryable<TType> GetMyConditionalEnumeratorQueryable2<TType>(
+        public static IMyDisposeQueryable<TType> GetMyConditionalEnumeratorQueryable<TType>(
             IEnumerator<TType> enumerator, MethodCallExpression whereExpressionClaCallExpression)
         {
 	        if (enumerator is MyDatabaseStatementIntegerSetEnumerator x2)
