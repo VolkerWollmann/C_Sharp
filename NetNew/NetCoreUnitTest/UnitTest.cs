@@ -66,16 +66,9 @@ namespace NetNewUnitTest
             CSharp8.NullCoalescingExample();
         }
     }
-    public class CSharp9UnitTest
+    public class CSharp9UnitTest(ITestOutputHelper output)
     {
-        private readonly ITestOutputHelper _output;
-
-        public CSharp9UnitTest(ITestOutputHelper output)
-        {
-            _output = output;
-        }
-
-        [Fact]
+	    [Fact]
         public void TestRecord()
         {
             CSharp9.TestRecord();
@@ -84,7 +77,7 @@ namespace NetNewUnitTest
         [Fact]
         public void ContentEquality()
         {
-            CSharp9.ContentEquality(_output);
+            CSharp9.ContentEquality(output);
         }
 
         [Fact]

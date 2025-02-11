@@ -97,7 +97,7 @@ namespace C_SharpExamplesLib.Language.Tasks
 
 		public static void Task_ThreadSafetyViolation()
 		{
-			List<Task> tasks = new List<Task>();
+			List<Task> tasks = [];
 
 			for (int i = 0; i < 3; i++)
 			{
@@ -173,7 +173,7 @@ namespace C_SharpExamplesLib.Language.Tasks
 		/// </summary>
 		public static void TestTaskMonitor()
 		{
-			List<Task> tasks = new List<Task>();
+			List<Task> tasks = [];
 
 			int rangeSize = 2000000;
 			int rangeStart = 0;
@@ -227,7 +227,7 @@ namespace C_SharpExamplesLib.Language.Tasks
 		/// </summary>
 		public static void TestTaskInterlocked()
 		{
-			List<Task> tasks = new List<Task>();
+			List<Task> tasks = [];
 
 			int rangeSize = 2000000;
 			int rangeStart = 0;
@@ -458,10 +458,7 @@ namespace C_SharpExamplesLib.Language.Tasks
 
 		public static void TaskDeadLock()
 		{
-            List<Task> allTasks = new List<Task>
-            {
-                Task.Run(Method1), Task.Run(Method2)
-            };
+            List<Task> allTasks = [Task.Run(Method1), Task.Run(Method2)];
             Console.WriteLine("waiting for tasks");
 
 			Task.WhenAll(allTasks).Wait(2000);
@@ -582,7 +579,7 @@ namespace C_SharpExamplesLib.Language.Tasks
 
         private static void WaitForTask(Action action)
         {
-            List<Task> tasks = new List<Task> { Task.Run(action) };
+            List<Task> tasks = [Task.Run(action)];
             Task.WaitAll(tasks.ToArray());
         }
         #endregion

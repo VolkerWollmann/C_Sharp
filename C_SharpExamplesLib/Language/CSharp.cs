@@ -141,11 +141,7 @@ namespace C_SharpExamplesLib.Language
         // #lazy
         private class LazyClass
         {
-            readonly int[] _array;
-            public LazyClass()
-            {
-                _array = new int[10];
-            }
+            readonly int[] _array = new int[10];
             public int Length => _array.Length;
         }
 
@@ -313,13 +309,13 @@ namespace C_SharpExamplesLib.Language
         // #string #join #list of integers to a string
         public static void StringJoin()
         {
-            List<int> ids1 = new List<int> {1, 2, 3};
+            List<int> ids1 = [1, 2, 3];
 
             string commaSeparatedIds1 = string.Join(", ", ids1);
 
             Assert.AreEqual("1, 2, 3", commaSeparatedIds1);
 
-            List<int> ids2 = new List<int> { 1 };
+            List<int> ids2 = [1];
 
             string commaSeparatedIds2 = string.Join(", ", ids2);
 

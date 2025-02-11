@@ -9,12 +9,12 @@ namespace C_SharpExamplesLib.Language
 		public static void List_Range_Where_Take()
 		{
 
-			List<int> favorites = new List<int> { 0, 7, 14, 21, 28, 35, 42, 49 };
+			List<int> favorites = [0, 7, 14, 21, 28, 35, 42, 49];
 			List<int> all = Enumerable.Range(0, 100).ToList();
 			List<int> favoritesFirst = favorites;
 			favoritesFirst.AddRange(all.Where(i => !favorites.Contains(i))); // {0, 7, ... 49, 1, 2, ... }
 
-			List<int> allowed = new List<int> { 1, 8, 7, 50, 42, 13, 85, 2, 14, 67 };
+			List<int> allowed = [1, 8, 7, 50, 42, 13, 85, 2, 14, 67];
 
 			List<int> result = favoritesFirst.Where(i => allowed.Contains(i)).ToList(); // { 7, 14, ... 42, 1, ... }
 			Assert.IsTrue(result.All( i => allowed.Contains(i)));
@@ -42,8 +42,8 @@ namespace C_SharpExamplesLib.Language
 		public static void Linq_Zip()
 		{
 			// #Zip
-			int[] numbers = { 1, 2, 3, 4 };
-			string[] words = { "one", "two", "three" };
+			int[] numbers = [1, 2, 3, 4];
+			string[] words = ["one", "two", "three"];
 
 			var numbersAndWords = numbers.Zip(words, (first, second) => first + " " + second).ToList();
 
@@ -55,13 +55,13 @@ namespace C_SharpExamplesLib.Language
 		// #linq #orderBy #no comparer #key selector 
 		public static void Linq_OrderBy()
 		{
-			List<Tuple<int, string>> numbers = new List<Tuple<int,string>>
-			{
+			List<Tuple<int, string>> numbers =
+			[
 				new(2, "Dog"),
 				new(3, "Cat"),
 				new(1, "Donkey"),
-				new(4, "Seagull"),
-			};
+				new(4, "Seagull")
+			];
 
 			List<Tuple<int, string>> sortedNumbers = numbers.OrderBy(tuple => tuple.Item1).ToList();
 
@@ -74,7 +74,7 @@ namespace C_SharpExamplesLib.Language
 			// #FirstOrDefault for value type : defaults to 0
 			int i = 42;
 			Assert.AreEqual(42, i);
-			List<int> l = new List<int>();
+			List<int> l = [];
 			Assert.IsNotNull(l);
 
 			i = l.FirstOrDefault();
@@ -90,7 +90,7 @@ namespace C_SharpExamplesLib.Language
 			// #FirstOrDefault for non value types : defaults to null
 			string? s = null;
 			Assert.IsNull(s);
-			List<string> ls = new List<string>();
+			List<string> ls = [];
 			Assert.IsNotNull(ls);
 
 			s = ls.FirstOrDefault();
@@ -289,7 +289,7 @@ namespace C_SharpExamplesLib.Language
         // #linq #index #group by
 		public static void LinqChunking()
 		{
-			List<int> testList = new List<int>() { 1, 2, 3, 4, 5 };
+			List<int> testList = [1, 2, 3, 4, 5];
 
 			var e1 = testList
 				.Select((value, index) => new { Value = value, Index = index / 2 })

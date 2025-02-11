@@ -2,14 +2,9 @@
 
 namespace C_SharpExamplesLib.Language
 {
-	internal class Sentence
+	internal class Sentence(string s)
 	{
-		public Sentence(string s)
-		{
-			Value = s;
-		}
-
-		public string Value { get; set; }
+		public string Value { get; set; } = s;
 
 		private char InnerGet()
 		{

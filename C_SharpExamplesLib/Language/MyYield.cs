@@ -67,7 +67,7 @@ namespace C_SharpExamplesLib.Language
 
             for (int i = 0; i <= 2; i++)
             {
-                List<int> l = new List<int>() {all[2 * i], all[(2 * i) + 1]};
+                List<int> l = [all[2 * i], all[(2 * i) + 1]];
                 foreach (int j in l)
                 {
                     Console.WriteLine("1..6 as two lists: List {0} Element {1}: {2} ", i, k++, j);

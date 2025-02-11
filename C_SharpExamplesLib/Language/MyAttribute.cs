@@ -4,20 +4,13 @@ namespace C_SharpExamplesLib.Language
 {
     // #class attribute
     [AttributeUsage(AttributeTargets.Class)]
-    public class AuthorAttribute : Attribute
+    public class AuthorAttribute(string name) : Attribute
     {
-        private readonly string _name;
-        public double Version;
-
-        public AuthorAttribute(string name)
-        {
-            _name = name;
-            Version = 1.0;
-        }
+	    public double Version = 1.0;
 
         public string GetName()
         {
-            return _name;
+            return name;
         }
     }
 

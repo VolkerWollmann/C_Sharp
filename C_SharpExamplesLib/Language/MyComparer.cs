@@ -4,12 +4,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace C_SharpExamplesLib.Language
 {
 	// #comparer #IEqualityComparer
-	public class MyIEqualityComparer : IEqualityComparer<MyIEqualityComparer>
+	public class MyIEqualityComparer(int x, int y) : IEqualityComparer<MyIEqualityComparer>
 	{
-		public int X { get; }
-		public int Y { get; }
+		public int X { get; } = x;
+		public int Y { get; } = y;
 
-        #region IEqualityComparer<T>
+		#region IEqualityComparer<T>
         bool IEqualityComparer<MyIEqualityComparer>.Equals(MyIEqualityComparer? x, MyIEqualityComparer? y)
 		{
 			return y != null && x != null && (x.X == y.X) && (x.Y == y.Y);
@@ -21,13 +21,7 @@ namespace C_SharpExamplesLib.Language
 		}
         #endregion
 
-        public MyIEqualityComparer(int x, int y)
-		{
-			X = x;
-			Y = y;
-		}
-
-		public static void Test()
+        public static void Test()
 		{
 			MyIEqualityComparer myA = new MyIEqualityComparer(1, 1);
 			MyIEqualityComparer myB = new MyIEqualityComparer(1, 2);
@@ -152,15 +146,15 @@ namespace C_SharpExamplesLib.Language
 
         public static void TestIComparable()
         {
-            List<MyIComparable> l = new List<MyIComparable>
-            {
-                new(1, Donkey),
-                new(3, Donkey),
-                new(2, Cat),
-                new(3, Cat),
-                new(2, Dog),
-                new(5, None),
-            };
+            List<MyIComparable> l =
+            [
+	            new(1, Donkey),
+	            new(3, Donkey),
+	            new(2, Cat),
+	            new(3, Cat),
+	            new(2, Dog),
+	            new(5, None)
+            ];
 
             l.Sort();
 
@@ -168,17 +162,17 @@ namespace C_SharpExamplesLib.Language
                 Assert.IsTrue(((IComparable<MyIComparable>)l[i]).CompareTo(l[i + 1]) <= 0);
 
             // #pre-order works for one NONE
-            List<MyIComparable> l2 = new List<MyIComparable>
-            {
-                new(2, Cat),
-                new(1, Donkey),
-                new(3, Donkey),
-                new(2, Cat),
-                new(3, Cat),
-                new(3, Donkey),
-                new(2, Dog),
-                new(5, None),
-            };
+            List<MyIComparable> l2 =
+            [
+	            new(2, Cat),
+	            new(1, Donkey),
+	            new(3, Donkey),
+	            new(2, Cat),
+	            new(3, Cat),
+	            new(3, Donkey),
+	            new(2, Dog),
+	            new(5, None)
+            ];
 
             l2.Sort();
             for (int i = 0; i < l2.Count - 1; i++)
@@ -186,19 +180,19 @@ namespace C_SharpExamplesLib.Language
 
 
             // #pre-order works for three NONE
-            List<MyIComparable> l3 = new List<MyIComparable>
-            {
-                new(2, Cat),
-                new(1, Donkey),
-                new(3, Donkey),
-                new(3, None),
-                new(5, None),
-                new(2, Cat),
-                new(3, Cat),
-                new(3, Donkey),
-                new(2, Dog),
-                new(5, None),
-            };
+            List<MyIComparable> l3 =
+            [
+	            new(2, Cat),
+	            new(1, Donkey),
+	            new(3, Donkey),
+	            new(3, None),
+	            new(5, None),
+	            new(2, Cat),
+	            new(3, Cat),
+	            new(3, Donkey),
+	            new(2, Dog),
+	            new(5, None)
+            ];
 
             l3.Sort();
             for (int i = 0; i < l3.Count - 1; i++)
@@ -208,15 +202,15 @@ namespace C_SharpExamplesLib.Language
 
         public static void TestIComparer()
         {
-            List<MyIComparable> l = new List<MyIComparable>
-            {
-                new(1, Donkey),
-                new(3, Donkey),
-                new(2, Cat),
-                new(3, Cat),
-                new(2, Dog),
-                new(5, None),
-            };
+            List<MyIComparable> l =
+            [
+	            new(1, Donkey),
+	            new(3, Donkey),
+	            new(2, Cat),
+	            new(3, Cat),
+	            new(2, Dog),
+	            new(5, None)
+            ];
 
             // #IComparer
 			IComparer<MyIComparable>comparer = new MyIComparable(0, None);
@@ -252,10 +246,10 @@ namespace C_SharpExamplesLib.Language
 
 	// #comparer #IEquatable #override #== #<, #>, #!=
 	[DebuggerDisplay("Number={Number}, Animal={Animal}")]
-	public class MyIEquatable : IEquatable<MyIEquatable>
-    {
-		public int Number { get; }
-		public string Animal { private set; get; }
+	public class MyIEquatable(int number, string animal) : IEquatable<MyIEquatable>
+	{
+		public int Number { get; } = number;
+		public string Animal { private set; get; } = animal;
 
 
 		public override bool Equals(object? other)
@@ -289,14 +283,6 @@ namespace C_SharpExamplesLib.Language
 
 		#endregion
 
-		#region Constructor
-		public MyIEquatable(int number, string animal)
-        {
-			Number = number;
-			Animal = animal;
-        }
-		#endregion
-
 		#region Test
 		public static void Test()
         {
@@ -317,7 +303,7 @@ namespace C_SharpExamplesLib.Language
 
 		public static void PartialOrderTest()
         {
-            List<int> l = new List<int>() {3, 4, 8, 2, 1, 2, 4, 5, 2, 7,};
+            List<int> l = [3, 4, 8, 2, 1, 2, 4, 5, 2, 7];
             l.Sort();
             Assert.IsTrue(l.SequenceEqual(new List<int>()
             {

@@ -2,14 +2,9 @@
 {
     public class MyMemberwiseClone
     {
-        internal class IdInfo
+        internal class IdInfo(int idNumber)
         {
-            public int IdNumber;
-
-            public IdInfo(int idNumber)
-            {
-                this.IdNumber = idNumber;
-            }
+            public int IdNumber = idNumber;
         }
 
         internal class Person

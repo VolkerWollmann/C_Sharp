@@ -51,8 +51,8 @@ namespace UnitTest
 
         private static IEnumerable<object[]> GetDynamicData()
         {
-            yield return new object[] { "a", "b" };
-            yield return new object[] { " ", "b" };
+            yield return ["a", "b"];
+            yield return [" ", "b"];
         }
 
         // #DynamicData #UintTest #Parameter

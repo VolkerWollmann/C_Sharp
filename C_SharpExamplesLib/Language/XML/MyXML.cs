@@ -163,30 +163,23 @@ namespace C_SharpExamplesLib.Language.XML
             Assert.AreEqual(true, isValid);
 		}
 
-		public class Animal
+		public class Animal(string name, string description)
 		{
-            public string Name { get; set; }
+            public string Name { get; set; } = name;
 
-            public string Description;
-
-            public Animal(string name, string description)
-			{
-				Name = name;
-				Description = description;
-			}
+            public string Description = description;
 
             public Animal? Friend { get; set; }
 
             // ReSharper disable once UnusedMember.Global
-            public Animal()
-			{
-				Name = "";
-				Description = "";
+            public Animal() : this("", "")
+            {
 			}
 		}
 		public static void XmlSerializerExample()
 		{
 			Animal macchi = new Animal("Macchi", "Famous police donkey");
+            Assert.AreEqual("Famous police donkey", macchi.Description);
 			Animal amica = new Animal("Amica", "Friend of Macchi");
             macchi.Friend = amica;
 

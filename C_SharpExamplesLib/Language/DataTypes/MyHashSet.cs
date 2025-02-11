@@ -7,13 +7,12 @@ namespace C_SharpExamplesLib.Language.DataTypes
         public static void Test()
         {
             // ReSharper disable once UseObjectOrCollectionInitializer
-            HashSet<int> integerHashSet = new HashSet<int>
-            {
-                1,
-                2
-            };
-
-            integerHashSet.Add(1);
+            HashSet<int> integerHashSet =
+            [
+	            1,
+	            2,
+	            1
+            ];
 
             Assert.AreEqual(2, integerHashSet.Count);
             

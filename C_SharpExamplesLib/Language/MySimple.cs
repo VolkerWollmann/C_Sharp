@@ -25,7 +25,7 @@ namespace C_SharpExamplesLib.Language
 		// #Enumerable #empty list 
 		static void EnumerableTest()
 		{
-			IEnumerable<int> emptyIntegerList = Enumerable.Empty<int>();
+			IEnumerable<int> emptyIntegerList = [];
 			Assert.IsFalse(emptyIntegerList.Any());
 		}
 

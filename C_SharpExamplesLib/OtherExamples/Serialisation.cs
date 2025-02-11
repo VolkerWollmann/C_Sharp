@@ -27,11 +27,11 @@ namespace C_SharpExamplesLib.OtherExamples
 			alice.Friend = bob;
 			bob.Friend = alice;
 
-			List<Person> personList = new List<Person>
-			{
+			List<Person> personList =
+			[
 				alice,
 				bob
-			};
+			];
 
 			JsonSerializerSettings settings = new JsonSerializerSettings
 			{

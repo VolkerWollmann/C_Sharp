@@ -9,25 +9,18 @@ namespace CSharpNew.ProcessCommunication
 {
     public class NamedPipe
     {
-        private class StreamString
+        private class StreamString(Stream ioStream)
         {
-            private readonly Stream _ioStream;
-            private readonly UnicodeEncoding _streamEncoding;
-
-            public StreamString(Stream ioStream)
-            {
-                _ioStream = ioStream;
-                _streamEncoding = new UnicodeEncoding();
-            }
+	        private readonly UnicodeEncoding _streamEncoding = new();
 
             public string ReadString()
             {
                 int len;
 
-                len = _ioStream.ReadByte() * 256;
-                len += _ioStream.ReadByte();
+                len = ioStream.ReadByte() * 256;
+                len += ioStream.ReadByte();
                 byte[] inBuffer = new byte[len];
-                _ioStream.Read(inBuffer, 0, len);
+                ioStream.Read(inBuffer, 0, len);
 
                 return _streamEncoding.GetString(inBuffer);
             }
@@ -40,10 +33,10 @@ namespace CSharpNew.ProcessCommunication
                 {
                     len = UInt16.MaxValue;
                 }
-                _ioStream.WriteByte((byte)(len / 256));
-                _ioStream.WriteByte((byte)(len & 255));
-                _ioStream.Write(outBuffer, 0, len);
-                _ioStream.Flush();
+                ioStream.WriteByte((byte)(len / 256));
+                ioStream.WriteByte((byte)(len & 255));
+                ioStream.Write(outBuffer, 0, len);
+                ioStream.Flush();
 
                 return outBuffer.Length + 2;
             }

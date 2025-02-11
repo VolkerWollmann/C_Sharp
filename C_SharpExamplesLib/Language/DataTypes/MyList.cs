@@ -3,20 +3,14 @@
 namespace C_SharpExamplesLib.Language.DataTypes
 {
     // Data types : #List #IComparable
-    public class MyPair : IComparable<MyPair>
-	{
+    public class MyPair(int x, int y) : IComparable<MyPair>
+    {
 		
-		public int X;
-		public int Y;
-		public MyPair(int x, int y)
-		{
-			X = x;
-			Y = y;
-		}
+		public int X = x;
+		public int Y = y;
 
 
-
-        // Needed by MySortedListTest
+		// Needed by MySortedListTest
         // < 0 This instance precedes obj in the sort order.
         // = 0 This instance occurs in the same position in the sort order as obj.
         // > 0 This instance follows obj in the sort order.
@@ -40,13 +34,7 @@ namespace C_SharpExamplesLib.Language.DataTypes
             return 0;
         }
     }
-	public class MyList : List<MyPair>
-	{
-		public MyList(int capacity): base(capacity)
-		{
-
-		}
-	}
+	public class MyList(int capacity) : List<MyPair>(capacity);
 	public class MyListTest
 	{
 		public static MyPair F(MyList li, int index, int offset)

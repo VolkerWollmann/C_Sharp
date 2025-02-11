@@ -16,7 +16,7 @@ namespace CSharpNew
         // #Stream
         public static async Task StreamTestUnconventionalUsage()
         {
-            string[] lines = { "First line", "Second line", "Third line" };
+            string[] lines = ["First line", "Second line", "Third line"];
             await using StreamWriter fileWriter = new("WriteLines2.txt"); // works without brackets in C# 8.0
 
             foreach (string line in lines)

@@ -23,7 +23,7 @@ namespace C_SharpExamplesLib.Language
         {
             public static void Test3()
             {
-                List<int> x = new List<int> { 1 };
+                List<int> x = [1];
                 Assert.IsNotNull(x);
 
             }
@@ -31,8 +31,8 @@ namespace C_SharpExamplesLib.Language
 
         public static void Test()
         {
-            List<int> x = new List<int>();
-            IntegerList2 y = new IntegerList2();
+            List<int> x = [];
+            IntegerList2 y = [];
 
             Assert.IsTrue(x.GetType() == typeof(List<int>));
 

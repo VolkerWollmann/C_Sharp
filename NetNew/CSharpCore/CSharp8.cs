@@ -21,12 +21,10 @@ namespace CSharpNew
         }
 
         #region switch case guards
-        private readonly struct Point
+        private readonly struct Point(int x, int y)
         {
-            public Point(int x, int y) => (X, Y) = (x, y);
-
-            public int X { get; }
-            public int Y { get; }
+	        public int X { get; } = x;
+            public int Y { get; } = y;
         }
 
         private static Point Transform(Point point) => point switch
@@ -173,15 +171,15 @@ namespace CSharpNew
 
         #region null forgiving operator
 #nullable enable
-        public class NullablePerson
+        public class NullablePerson(string name)
         {
-            public NullablePerson(string name) => Name = name ?? throw new ArgumentNullException(name);
-
-            public string Name { get; }
+	        public string Name { get; } = name ?? throw new ArgumentNullException(name);
         }
 
         public static void NullNameShouldThrowTest()
         {
+	        var heinz = new NullablePerson("Heinz");
+            Assert.AreEqual("Heinz", heinz.Name);
             // ! #null forgiving operator : will suppress compiler warning
             var person = new NullablePerson(null!);
             Assert.IsNotNull(person);

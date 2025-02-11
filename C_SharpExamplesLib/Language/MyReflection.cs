@@ -4,9 +4,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace C_SharpExamplesLib.Language
 {
     // #reflection #GetMethod #GetConstructors #Invoke
-    internal class Ship
+    internal class Ship(string name)
     {
-        public string Name { get; }
+        public string Name { get; } = name;
         public int Speed { private set; get; }
 
         // ReSharper disable once UnusedMember.Global
@@ -19,11 +19,6 @@ namespace C_SharpExamplesLib.Language
 
             return true;
         }
-
-        public Ship(string name)
-        {
-            Name = name;
-        }
     }
 
     public class MyReflection
@@ -34,11 +29,11 @@ namespace C_SharpExamplesLib.Language
 
             ConstructorInfo[] ci =  t.GetConstructors();
 
-            object ship = ci[0].Invoke(new object[] {"HMS Victory"});
+            object ship = ci[0].Invoke(["HMS Victory"]);
 
             MethodInfo mi = t.GetMethods().First(m => m.Name == "SetSpeed");
 
-            mi.Invoke(ship, new object[] {5});
+            mi.Invoke(ship, [5]);
 
             Assert.AreEqual(5, ((Ship)ship).Speed);
 
