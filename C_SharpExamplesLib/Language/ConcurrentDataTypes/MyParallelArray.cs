@@ -20,7 +20,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 
         internal delegate void FieldOperationDelegate(int x, int y);
 
-        internal FieldOperationDelegate? _theOperation;
+        internal FieldOperationDelegate? TheOperation;
 
         private static Action DoOperationAsyncParallel(int x, int y, FieldOperationDelegate operation)
         {
@@ -46,13 +46,13 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
         internal void PerformTest(FieldOperationDelegate theDelegate)
         {
             Console.WriteLine("Array size: {0} {1} ", _maxX, _maxY);
-            _theOperation = theDelegate;
+            TheOperation = theDelegate;
             DateTime start = DateTime.Now;
             for (int x = 0; x < _maxX; x++)
             {
                 for (int y = 0; y < _maxY; y++)
                 {
-                    _theOperation(x, y);
+                    TheOperation(x, y);
                 }
             }
 
@@ -63,7 +63,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 
         internal async Task PerformTestFieldParallel(FieldOperationDelegate theDelegate)
         {
-            _theOperation = theDelegate;
+            TheOperation = theDelegate;
             DateTime pStart = DateTime.Now;
             var tasks = new List<Task>();
             for (int x = 0; x < _maxX; x++)
@@ -71,7 +71,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
                 for (int y = 0; y < _maxY; y++)
                 {
                     tasks.Add(
-                        Task.Run(DoOperationAsyncParallel(x, y, _theOperation)));
+                        Task.Run(DoOperationAsyncParallel(x, y, TheOperation)));
                 }
             }
 
@@ -83,13 +83,13 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 
         internal async Task PerformTestColumnParallel(FieldOperationDelegate theDelegate)
         {
-            _theOperation = theDelegate;
+            TheOperation = theDelegate;
             DateTime pStart = DateTime.Now;
             var tasks = new List<Task>();
             for (int x = 0; x < _maxX; x++)
             {
                 tasks.Add(
-                    Task.Run(DoOperationAsyncParallel(x, 0,_theOperation)));
+                    Task.Run(DoOperationAsyncParallel(x, 0,TheOperation)));
 
             }
 

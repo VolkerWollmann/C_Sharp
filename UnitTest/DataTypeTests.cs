@@ -1,5 +1,4 @@
-﻿using C_Sharp.Language.DataTypes;
-using C_SharpExamplesLib.Language.DataTypes;
+﻿using C_SharpExamplesLib.Language.DataTypes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTest

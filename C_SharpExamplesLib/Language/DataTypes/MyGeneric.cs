@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Language.DataTypes
+namespace C_SharpExamplesLib.Language.DataTypes
 {
 	#region Generic Interface 
 	// #interface #generic #default
