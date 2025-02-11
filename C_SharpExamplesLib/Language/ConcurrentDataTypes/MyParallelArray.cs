@@ -4,8 +4,9 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 {
     internal class MyParallelArray
     {
-        int _maxX, _maxY;
-        int[,] _theArray;
+	    readonly int _maxX;
+	    readonly int _maxY;
+	    readonly int[,] _theArray;
 
         internal MyParallelArray(int x, int y)
         {

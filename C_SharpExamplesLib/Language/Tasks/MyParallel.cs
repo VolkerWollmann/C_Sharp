@@ -7,7 +7,7 @@ namespace C_SharpExamplesLib.Language.Tasks
         #region prime search with parallel
 
         private static long _maxPrime = 1;
-        private static Semaphore _primeSemaphore = new(1, 1);
+        private static readonly Semaphore PrimeSemaphore = new(1, 1);
         private static void IsPrime(int candidate)
         {
             bool result = true;
@@ -21,10 +21,10 @@ namespace C_SharpExamplesLib.Language.Tasks
 
             if (result)
             {
-                _primeSemaphore.WaitOne();
+                PrimeSemaphore.WaitOne();
                 if (candidate > _maxPrime)
                     _maxPrime = candidate;
-                _primeSemaphore.Release();
+                PrimeSemaphore.Release();
             }
         }
 

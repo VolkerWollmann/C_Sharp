@@ -103,7 +103,7 @@ namespace C_SharpExamplesLib.Language.Threads
 		private static int _atomicLocalState;
 
 		// common field for all threads : will be treated by semaphore
-		private static Semaphore _semaphore = new(1, 1);
+		private static readonly Semaphore Semaphore = new(1, 1);
 		private static int _semaphoreProtectedLocalState;
 
 		private static void DoWork(object state)
@@ -114,11 +114,11 @@ namespace C_SharpExamplesLib.Language.Threads
 			_threadStaticLocalState += 1;
 			Interlocked.Increment(ref _atomicLocalState);
 
-			_semaphore.WaitOne();
+			Semaphore.WaitOne();
 			Console.WriteLine("Entering");
 			_semaphoreProtectedLocalState += 1;
 			Console.WriteLine("Leaving");
-			_semaphore.Release();
+			Semaphore.Release();
 
 			Console.WriteLine($"Local: {_localState} AtomicLocal: {_atomicLocalState} ThreadStatic Local : {_threadStaticLocalState} Semaphore Local: {_semaphoreProtectedLocalState} ",
 				_threadStaticLocalState, _localState, _atomicLocalState, _semaphoreProtectedLocalState);
@@ -171,35 +171,35 @@ namespace C_SharpExamplesLib.Language.Threads
 		#region prime search with thread pool
 
         private static int _threadCount;
-        private static Semaphore _threadCountSemaphore = new(1, 1);
+        private static readonly Semaphore ThreadCountSemaphore = new(1, 1);
 
         private static void IncreaseThreadCount(int maxThreadNum, ref int waits)
         {
             while (true)
             {
-                _threadCountSemaphore.WaitOne();
+                ThreadCountSemaphore.WaitOne();
                 if (_threadCount < maxThreadNum)
                 {
                     _threadCount++;
-                    _threadCountSemaphore.Release();
+                    ThreadCountSemaphore.Release();
                     return;
                 }
 				waits++;
-                _threadCountSemaphore.Release();
+                ThreadCountSemaphore.Release();
                 Thread.Sleep(10);
             }
         }
 
         private static void DecreaseThreadCount()
         {
-            _threadCountSemaphore.WaitOne();
+            ThreadCountSemaphore.WaitOne();
             _threadCount--;
-            _threadCountSemaphore.Release();
+            ThreadCountSemaphore.Release();
             
         }
 
         private static long _maxPrime = 1;
-        private static Semaphore _primeSemaphore = new(1, 1);
+        private static readonly Semaphore PrimeSemaphore = new(1, 1);
         private static bool IsPrime(int candidate)
         {
             bool result = true;
@@ -211,10 +211,10 @@ namespace C_SharpExamplesLib.Language.Threads
                     result = false;
                 }
             }
-            _primeSemaphore.WaitOne();
+            PrimeSemaphore.WaitOne();
 			if (candidate > _maxPrime)
 				_maxPrime = candidate;
-            _primeSemaphore.Release();
+            PrimeSemaphore.Release();
 
             DecreaseThreadCount();
             return result;

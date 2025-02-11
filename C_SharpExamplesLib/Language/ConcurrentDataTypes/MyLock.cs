@@ -8,13 +8,13 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
     {
         #region lock statement
 
-        private static int _size = 20000001; // 50000001
+        private static readonly int Size = 20000001; // 50000001
 
         public class SimpleTotal
         {
             static long _sharedTotal;
 
-            static readonly int[] ItemsToAdd = Enumerable.Range(0, _size).ToArray();
+            static readonly int[] ItemsToAdd = Enumerable.Range(0, Size).ToArray();
 
             static readonly object SharedTotalLock = new();
 
@@ -72,7 +72,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
             static long _sharedTotal;
 
             // make an array that holds the values 0 to 50000000
-            static readonly int[] ItemsToAdd = Enumerable.Range(0, _size).ToArray();
+            static readonly int[] ItemsToAdd = Enumerable.Range(0, Size).ToArray();
 
             static readonly object SharedTotalLock = new();
 

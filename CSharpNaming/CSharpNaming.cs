@@ -59,12 +59,12 @@ namespace CSharpNaming
         #region III. Do use camelCasing for local variables and method arguments: int counter=0
         //      do not use Hungarian notation or any other type identification in identifiers
         // Correct
-        int counter = 0;
-        string name = "";
+        readonly int counter = 0;
+        readonly string name = "";
 
         // Avoid
-        int iCounter = 0;
-        string strName = "";
+        readonly int iCounter = 0;
+        readonly string strName = "";
         #endregion
 
         #region IV. Do not use Screaming Caps for constants or readonly variables:  const string ShippingType = "DropShip";   Avoid: const string SHIPPINGTYPE = "DropShip";
@@ -150,14 +150,14 @@ namespace CSharpNaming
 
         #region VIII. Do use predefined type names instead of system type names like Int16, Single, UInt64, etc
         // Correct
-        string firstName = "";
-        int lastIndex = 0;
-        bool isSaved = false;
+        readonly string firstName = "";
+        readonly int lastIndex = 0;
+        readonly bool isSaved = false;
 
         // Avoid
-        String lastName = "";
-        Int32 firstIndex = 0;
-        Boolean isDeleted = false;
+        readonly String lastName = "";
+        readonly Int32 firstIndex = 0;
+        readonly Boolean isDeleted = false;
         #endregion
 
         #region IX. Do use implicit type var for local variable declarations: var stream = File.Create("");
