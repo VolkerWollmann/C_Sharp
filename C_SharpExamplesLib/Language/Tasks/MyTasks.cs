@@ -135,7 +135,7 @@ namespace C_SharpExamplesLib.Language.Tasks
 		// make an array that holds the values 0 to 50000000
 		static readonly int[] ItemsMonitor = Enumerable.Range(0, 50000001).ToArray();
 
-		static readonly object SharedTotalMonitorLock = new object();
+		static readonly object SharedTotalMonitorLock = new();
 
 		static void AddRangeOfValuesMonitor(int start, int end)
 		{
@@ -419,8 +419,8 @@ namespace C_SharpExamplesLib.Language.Tasks
 		// #deadlock
 		static bool _done1;  // by default false
 		static bool _done2;
-		static readonly object Lock1 = new object();
-		static readonly object Lock2 = new object();
+		static readonly object Lock1 = new();
+		static readonly object Lock2 = new();
 
 		static void Method1()
 		{
@@ -481,7 +481,7 @@ namespace C_SharpExamplesLib.Language.Tasks
 
 		#region cancellation
 		// #CancellationToken
-		static readonly CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
+		static readonly CancellationTokenSource CancellationTokenSource = new();
 
 		static void Clock()
 		{

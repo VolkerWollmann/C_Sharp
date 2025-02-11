@@ -47,7 +47,7 @@ namespace C_SharpExamplesLib.Language
             }
 
             public static implicit operator byte(Digit d) => d._digit;
-            public static explicit operator Digit(byte b) => new Digit(b);
+            public static explicit operator Digit(byte b) => new(b);
 
             public override string ToString() => $"{_digit}";
         }
@@ -195,7 +195,7 @@ namespace C_SharpExamplesLib.Language
 
         public class MyRecursiveCLass
         {
-	        private static MyRecursiveCLass _anchor = new MyRecursiveCLass();
+	        private static MyRecursiveCLass _anchor = new();
             public static int Counter = 1;
             public int MyCounter;
 

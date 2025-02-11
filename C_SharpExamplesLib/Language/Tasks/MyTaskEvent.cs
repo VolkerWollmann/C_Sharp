@@ -7,13 +7,13 @@ namespace C_SharpExamplesLib.Language.Tasks
 	/// </summary>
 	public class MyTaskEvent
 	{
-		static readonly Random Random = new Random();
+		static readonly Random Random = new();
 
 		public delegate void ProduceEventHandler(int e, bool final);
 
 		private class Consumer
         {
-            readonly BlockingCollection<int> _data = new BlockingCollection<int>();
+            readonly BlockingCollection<int> _data = new();
 
 			public void AddData(int i, bool final)
 			{

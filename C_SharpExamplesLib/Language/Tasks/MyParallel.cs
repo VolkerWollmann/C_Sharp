@@ -7,7 +7,7 @@ namespace C_SharpExamplesLib.Language.Tasks
         #region prime search with parallel
 
         private static long _maxPrime = 1;
-        private static Semaphore _primeSemaphore = new Semaphore(1, 1);
+        private static Semaphore _primeSemaphore = new(1, 1);
         private static void IsPrime(int candidate)
         {
             bool result = true;

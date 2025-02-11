@@ -5,7 +5,7 @@ namespace C_SharpExamplesLib.Language.Threads
 	public partial class MyThread
 	{
 		#region private threads
-		private static Semaphore Bouncer { get; set; } = new Semaphore(1, 1);
+		private static Semaphore Bouncer { get; set; } = new(1, 1);
 
         private MyThread()
 		{
@@ -52,11 +52,9 @@ namespace C_SharpExamplesLib.Language.Threads
 		/// <summary>
 		/// both threads work on thread local data
 		/// </summary>
-		public static ThreadLocal<Random> RandomGenerator =
-		new ThreadLocal<Random>(() => new Random(2));
+		public static ThreadLocal<Random> RandomGenerator = new(() => new Random(2));
 
-		public static ThreadLocal<int> ThreadInt =
-			new ThreadLocal<int>();
+		public static ThreadLocal<int> ThreadInt = new();
 
 		public static void TestThreadLocalData()
 		{
@@ -105,7 +103,7 @@ namespace C_SharpExamplesLib.Language.Threads
 		private static int _atomicLocalState;
 
 		// common field for all threads : will be treated by semaphore
-		private static Semaphore _semaphore = new Semaphore(1, 1);
+		private static Semaphore _semaphore = new(1, 1);
 		private static int _semaphoreProtectedLocalState;
 
 		private static void DoWork(object state)
@@ -173,7 +171,7 @@ namespace C_SharpExamplesLib.Language.Threads
 		#region prime search with thread pool
 
         private static int _threadCount;
-        private static Semaphore _threadCountSemaphore = new Semaphore(1, 1);
+        private static Semaphore _threadCountSemaphore = new(1, 1);
 
         private static void IncreaseThreadCount(int maxThreadNum, ref int waits)
         {
@@ -201,7 +199,7 @@ namespace C_SharpExamplesLib.Language.Threads
         }
 
         private static long _maxPrime = 1;
-        private static Semaphore _primeSemaphore = new Semaphore(1, 1);
+        private static Semaphore _primeSemaphore = new(1, 1);
         private static bool IsPrime(int candidate)
         {
             bool result = true;

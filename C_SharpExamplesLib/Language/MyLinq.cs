@@ -57,10 +57,10 @@ namespace C_SharpExamplesLib.Language
 		{
 			List<Tuple<int, string>> numbers = new List<Tuple<int,string>>
 			{
-				new Tuple<int, string>(2, "Dog"),
-				new Tuple<int, string>(3, "Cat"),
-				new Tuple<int, string>(1, "Donkey"),
-				new Tuple<int, string>(4, "Seagull"),
+				new(2, "Dog"),
+				new(3, "Cat"),
+				new(1, "Donkey"),
+				new(4, "Seagull"),
 			};
 
 			List<Tuple<int, string>> sortedNumbers = numbers.OrderBy(tuple => tuple.Item1).ToList();
@@ -234,16 +234,16 @@ namespace C_SharpExamplesLib.Language
 		{
 			Person[] people =
 			[
-				new Person { Name = "Alan", City = "Hull" },
-				new Person { Name = "Beryl", City = "Seattle" },
-				new Person { Name = "Charles", City = "London" },
-				new Person { Name = "David", City = "Seattle" },
-				new Person { Name = "Eddy", City = "" },
-				new Person { Name = "Fred", City = "" },
-				new Person { Name = "Gordon", City = "Hull" },
-				new Person { Name = "Henry", City = "Seattle" },
-				new Person { Name = "Isaac", City = "Seattle" },
-				new Person { Name = "James", City = "London" }
+				new() { Name = "Alan", City = "Hull" },
+				new() { Name = "Beryl", City = "Seattle" },
+				new() { Name = "Charles", City = "London" },
+				new() { Name = "David", City = "Seattle" },
+				new() { Name = "Eddy", City = "" },
+				new() { Name = "Fred", City = "" },
+				new() { Name = "Gordon", City = "Hull" },
+				new() { Name = "Henry", City = "Seattle" },
+				new() { Name = "Isaac", City = "Seattle" },
+				new() { Name = "James", City = "London" }
 			];
 
 			try

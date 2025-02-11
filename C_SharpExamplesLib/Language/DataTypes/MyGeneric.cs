@@ -15,7 +15,7 @@ namespace C_SharpExamplesLib.Language.DataTypes
     // #generic
 	internal class MyIntegerRandomizer : IMyIntRandomizer
 	{
-		private readonly Random _random = new Random();
+		private readonly Random _random = new();
 		public int GetRandomElement(List<int> list)
 		{
 			int index = _random.Next(0, list.Count);
@@ -40,7 +40,7 @@ namespace C_SharpExamplesLib.Language.DataTypes
 
 	internal class MyStringRandomizer : IMyRandomizer<string>
 	{
-		private readonly Random _random = new Random();
+		private readonly Random _random = new();
 		public string GetRandomElement(List<string> list)
 		{
 			int index = _random.Next(0, list.Count);
@@ -67,7 +67,7 @@ namespace C_SharpExamplesLib.Language.DataTypes
     // #generic #method
     public abstract class MyGenericInterface
 	{
-		private static readonly Random Random = new Random();
+		private static readonly Random Random = new();
 		private static T GetRandomElement<T>(List<T> list)
 		{
 			int index = Random.Next(0, list.Count );
@@ -137,7 +137,7 @@ namespace C_SharpExamplesLib.Language.DataTypes
     // be aware of type variable TGenericClassInstanceType in debugger
     internal class MyGenericClass<TGenericClassInstanceType> where TGenericClassInstanceType : MyBaseClass, new()
     {
-        private readonly TGenericClassInstanceType _internalClass = new TGenericClassInstanceType();
+        private readonly TGenericClassInstanceType _internalClass = new();
 		public int GenericClassMethod()
         {
             return _internalClass.BaseClassMethod();

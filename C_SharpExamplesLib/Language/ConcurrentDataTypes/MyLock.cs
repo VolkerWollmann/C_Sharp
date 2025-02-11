@@ -16,7 +16,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 
             static readonly int[] ItemsToAdd = Enumerable.Range(0, _size).ToArray();
 
-            static readonly object SharedTotalLock = new object();
+            static readonly object SharedTotalLock = new();
 
             static void AddAllInOneThread()
             {
@@ -74,7 +74,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
             // make an array that holds the values 0 to 50000000
             static readonly int[] ItemsToAdd = Enumerable.Range(0, _size).ToArray();
 
-            static readonly object SharedTotalLock = new object();
+            static readonly object SharedTotalLock = new();
 
             static void AddRangeOfValuesObjectLock(int start, int end)
             {

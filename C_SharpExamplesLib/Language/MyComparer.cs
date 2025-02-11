@@ -154,12 +154,12 @@ namespace C_SharpExamplesLib.Language
         {
             List<MyIComparable> l = new List<MyIComparable>
             {
-                new MyIComparable(1, Donkey),
-                new MyIComparable(3, Donkey),
-                new MyIComparable(2, Cat),
-                new MyIComparable(3, Cat),
-                new MyIComparable(2, Dog),
-                new MyIComparable(5, None),
+                new(1, Donkey),
+                new(3, Donkey),
+                new(2, Cat),
+                new(3, Cat),
+                new(2, Dog),
+                new(5, None),
             };
 
             l.Sort();
@@ -170,14 +170,14 @@ namespace C_SharpExamplesLib.Language
             // #pre-order works for one NONE
             List<MyIComparable> l2 = new List<MyIComparable>
             {
-                new MyIComparable(2, Cat),
-                new MyIComparable(1, Donkey),
-                new MyIComparable(3, Donkey),
-                new MyIComparable(2, Cat),
-                new MyIComparable(3, Cat),
-                new MyIComparable(3, Donkey),
-                new MyIComparable(2, Dog),
-                new MyIComparable(5, None),
+                new(2, Cat),
+                new(1, Donkey),
+                new(3, Donkey),
+                new(2, Cat),
+                new(3, Cat),
+                new(3, Donkey),
+                new(2, Dog),
+                new(5, None),
             };
 
             l2.Sort();
@@ -188,16 +188,16 @@ namespace C_SharpExamplesLib.Language
             // #pre-order works for three NONE
             List<MyIComparable> l3 = new List<MyIComparable>
             {
-                new MyIComparable(2, Cat),
-                new MyIComparable(1, Donkey),
-                new MyIComparable(3, Donkey),
-                new MyIComparable(3, None),
-                new MyIComparable(5, None),
-                new MyIComparable(2, Cat),
-                new MyIComparable(3, Cat),
-                new MyIComparable(3, Donkey),
-                new MyIComparable(2, Dog),
-                new MyIComparable(5, None),
+                new(2, Cat),
+                new(1, Donkey),
+                new(3, Donkey),
+                new(3, None),
+                new(5, None),
+                new(2, Cat),
+                new(3, Cat),
+                new(3, Donkey),
+                new(2, Dog),
+                new(5, None),
             };
 
             l3.Sort();
@@ -210,12 +210,12 @@ namespace C_SharpExamplesLib.Language
         {
             List<MyIComparable> l = new List<MyIComparable>
             {
-                new MyIComparable(1, Donkey),
-                new MyIComparable(3, Donkey),
-                new MyIComparable(2, Cat),
-                new MyIComparable(3, Cat),
-                new MyIComparable(2, Dog),
-                new MyIComparable(5, None),
+                new(1, Donkey),
+                new(3, Donkey),
+                new(2, Cat),
+                new(3, Cat),
+                new(2, Dog),
+                new(5, None),
             };
 
             // #IComparer
