@@ -1,4 +1,4 @@
-﻿using C_Sharp.Language.Roslyn;
+﻿using C_SharpExamplesLib.Language.Roslyn;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTest

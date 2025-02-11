@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Language
+namespace C_SharpExamplesLib.Language
 {
     /// <summary>
     /// #Defining a #alias type

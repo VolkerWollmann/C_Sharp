@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace C_Sharp.Language.Roslyn
+namespace C_SharpExamplesLib.Language.Roslyn
 {
     public class MyRoslyn
     {
