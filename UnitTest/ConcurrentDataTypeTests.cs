@@ -43,6 +43,12 @@ namespace UnitTest
         {
             MyParallelArrayTest.Test();
         }
-        
-    }
+
+        [TestMethod]
+		public void BlockingCollection()
+		{
+			MyBlockingCollection.BlockingCollection();
+		}
+
+	}
 }
