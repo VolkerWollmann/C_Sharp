@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Language
+namespace C_SharpExamplesLib.Language
 {
 	// #comparer #IEqualityComparer
 	public class MyIEqualityComparer : IEqualityComparer<MyIEqualityComparer>

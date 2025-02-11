@@ -1,4 +1,4 @@
-﻿namespace C_Sharp.Language
+﻿namespace C_SharpExamplesLib.Language
 {
     public class MyMemberwiseClone
     {
@@ -6,9 +6,9 @@
         {
             public int IdNumber;
 
-            public IdInfo(int IdNumber)
+            public IdInfo(int idNumber)
             {
-                this.IdNumber = IdNumber;
+                this.IdNumber = idNumber;
             }
         }
 

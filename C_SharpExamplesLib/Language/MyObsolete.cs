@@ -1,4 +1,4 @@
-﻿namespace C_Sharp.Language
+﻿namespace C_SharpExamplesLib.Language
 {
     internal class MyObsoleteUsed
     {

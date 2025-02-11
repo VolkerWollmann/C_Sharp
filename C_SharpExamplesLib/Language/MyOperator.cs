@@ -1,12 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Language
+namespace C_SharpExamplesLib.Language
 {
 	// #Operator ?. (Null-Conditional Operator) ??
-	[SuppressMessage("ReSharper", "ConstantNullCoalescingCondition")]
-    [SuppressMessage("ReSharper", "ExpressionIsAlwaysNull")]
-    [SuppressMessage("ReSharper", "ConstantConditionalAccessQualifier")]
     public class MyOperator
 	{
 		public string Donkey = "Donkey";
@@ -16,6 +12,7 @@ namespace C_Sharp.Language
 			var t = st ?? "Rabbit";
 			Assert.IsTrue(t == "Rabbit");
 			st = "Hedgehog";
+			// ReSharper disable once ConstantNullCoalescingCondition
 			var u = st ?? "Donkey";
 			Assert.IsTrue(u == "Hedgehog");
 
@@ -24,8 +21,8 @@ namespace C_Sharp.Language
 			Assert.IsTrue(e1 == null);
 
 			myOperator11 = new MyOperator();
-			string? e2 = myOperator11?.Donkey;
-			Assert.IsTrue(e2 == myOperator11?.Donkey);
+			string? e2 = myOperator11.Donkey;
+			Assert.IsTrue(e2 == myOperator11.Donkey);
 
 			string e3 = e1 + e2;
 			Assert.AreEqual("Donkey", e3);

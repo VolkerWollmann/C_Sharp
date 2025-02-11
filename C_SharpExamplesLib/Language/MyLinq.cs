@@ -1,12 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
+﻿using System.Globalization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
-namespace C_Sharp.Language
+namespace C_SharpExamplesLib.Language
 {
-	[SuppressMessage("ReSharper", "ConvertToLocalFunction")]
-    [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
     public class MyLinq
 	{
 		// #linq #range #where #take #all

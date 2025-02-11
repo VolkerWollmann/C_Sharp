@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Language
+namespace C_SharpExamplesLib.Language
 {
     // #interface #implementation #explicit
     internal interface IInheritanceInterface

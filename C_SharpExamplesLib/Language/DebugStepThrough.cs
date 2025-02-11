@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace C_Sharp.Language
+namespace C_SharpExamplesLib.Language
 {
     public class DebugStepThrough
     {

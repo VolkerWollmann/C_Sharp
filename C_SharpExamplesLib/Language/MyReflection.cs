@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Language
+namespace C_SharpExamplesLib.Language
 {
     // #reflection #GetMethod #GetConstructors #Invoke
     internal class Ship

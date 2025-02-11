@@ -1,4 +1,4 @@
-﻿namespace C_Sharp.Language.Event
+﻿namespace C_SharpExamplesLib.Language.Event
 {
     public class MyEvent
     {
