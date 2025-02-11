@@ -149,7 +149,7 @@ namespace C_SharpExamplesLib.Language
         private static List<Expression> GetExpressionList()
         {
             //#Expression #Linq
-            List<Expression> expressions = new List<Expression>();
+            List<Expression> expressions = [];
 
             ConstantExpression i42 = Expression.Constant(42, typeof(int));
             expressions.Add(i42);

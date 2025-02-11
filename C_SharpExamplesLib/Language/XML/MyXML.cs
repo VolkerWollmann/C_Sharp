@@ -124,9 +124,11 @@ namespace C_SharpExamplesLib.Language.XML
 			XmlSchemaSet schemas = new XmlSchemaSet();
 			schemas.Add("", xsdFile);
 
-			XmlReaderSettings settings = new XmlReaderSettings();
-			settings.Schemas = schemas;
-			settings.ValidationType = ValidationType.Schema;
+			XmlReaderSettings settings = new XmlReaderSettings
+			{
+				Schemas = schemas,
+				ValidationType = ValidationType.Schema
+			};
 			settings.ValidationEventHandler += CheckXmlFileWithXsdFileValidationCallback;
 
 			using (XmlReader reader = XmlReader.Create(xmlFile, settings))

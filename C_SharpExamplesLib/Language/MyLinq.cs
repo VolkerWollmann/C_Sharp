@@ -1,8 +1,11 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable ConvertToLocalFunction
 
 namespace C_SharpExamplesLib.Language
 {
+    [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
     public class MyLinq
 	{
 		// #linq #range #where #take #all

@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_SharpExamplesLib.Language
@@ -6,7 +7,10 @@ namespace C_SharpExamplesLib.Language
 	/// <summary>
 	/// #delegate
 	/// </summary>
-    public class MyDelegate
+    [SuppressMessage("ReSharper", "ConvertToLambdaExpression")]
+	[SuppressMessage("ReSharper", "ConvertToLocalFunction")]
+	[SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
+	public class MyDelegate
 	{
 		// #empty #action #no parameter
         private static readonly Action EmptyAction = () => { };

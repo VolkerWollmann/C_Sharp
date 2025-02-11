@@ -548,10 +548,8 @@ namespace C_SharpExamplesLib.Language.Tasks
 
             DateTime start = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, 0);
 
-            if (now.Second > 50)
-                ts = new TimeSpan(0, 1, 0);
-            else
-                ts = new TimeSpan(0, 0, ((now.Second / 10) + 1) * 10);
+            ts = now.Second > 50 ? new TimeSpan(0, 1, 0) : 
+	            new TimeSpan(0, 0, ((now.Second / 10) + 1) * 10);
 
             start += ts;
 

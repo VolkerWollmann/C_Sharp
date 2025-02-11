@@ -233,9 +233,8 @@ namespace C_SharpExamplesLib.Language.Threads
             //
             bool result = ThreadPool.SetMaxThreads(numThreads, numThreads);
 			Assert.IsTrue(result, "Cannot restrict thread count to 4 or 8");
-            
-            int a, b;
-            ThreadPool.GetMaxThreads(out a, out b );
+
+			ThreadPool.GetMaxThreads(out var a, out var b );
 			Assert.IsTrue( a >= 0);
 			Assert.IsTrue( b >= 0 );
 			
@@ -276,8 +275,7 @@ namespace C_SharpExamplesLib.Language.Threads
 
                 Console.WriteLine("Max cores set to {0}", cores);
 
-                int a, b;
-                ThreadPool.GetMaxThreads(out a, out b);
+                ThreadPool.GetMaxThreads(out var a, out var b);
                 Assert.AreEqual(a, cores);
                 Assert.AreEqual(b, cores);
 

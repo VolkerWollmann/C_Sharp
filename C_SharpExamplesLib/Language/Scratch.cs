@@ -10,7 +10,7 @@ namespace C_SharpExamplesLib.Language
 			string qName = "/A/B/";
 
 			List<string> qNameElems = qName.Split('/').Where(s => !string.IsNullOrEmpty(s)).ToList();
-			List<string> qNameIterated = new List<string>();
+			List<string> qNameIterated = [];
 			string newQName = "/";
 			foreach (var t in qNameElems)
             {

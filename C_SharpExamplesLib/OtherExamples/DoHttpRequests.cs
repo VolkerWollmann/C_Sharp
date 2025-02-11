@@ -14,26 +14,24 @@ namespace C_SharpExamplesLib.OtherExamples
         {
             _result = 0;
             string url = "https://www.random.org/integers/?num=1&min=1&max=6&col=1&base=10&format=plain&rnd=new";
-            
-            using (HttpClient httpClient = new HttpClient())
+
+            using HttpClient httpClient = new HttpClient();
+            try
             {
-                try
-                {
-                    // Make a GET request
-                    HttpResponseMessage response = await httpClient.GetAsync(url);
+	            // Make a GET request
+	            HttpResponseMessage response = await httpClient.GetAsync(url);
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string content = await response.Content.ReadAsStringAsync();
-                        _result = Convert.ToInt32(content);
-                    }
+	            if (response.IsSuccessStatusCode)
+	            {
+		            string content = await response.Content.ReadAsStringAsync();
+		            _result = Convert.ToInt32(content);
+	            }
 
-                    _result = 2;
-                }
-                catch
-                {
-                    _result = 1;
-                }
+	            _result = 2;
+            }
+            catch
+            {
+	            _result = 1;
             }
         }
 
@@ -76,32 +74,30 @@ namespace C_SharpExamplesLib.OtherExamples
             // Request posts by user 1
             string url = "https://jsonplaceholder.typicode.com/posts?userId=1";
 
-            using (HttpClient httpClient = new HttpClient())
+            using HttpClient httpClient = new HttpClient();
+            try
             {
-                try
-                {
-                    HttpResponseMessage response = await httpClient.GetAsync(url);
+	            HttpResponseMessage response = await httpClient.GetAsync(url);
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string responseString = await response.Content.ReadAsStringAsync();
+	            if (response.IsSuccessStatusCode)
+	            {
+		            string responseString = await response.Content.ReadAsStringAsync();
 
-                        JsonSerializer js = JsonSerializer.Create();
-                        JsonReader jr = new JsonTextReader( new StringReader(responseString));
-                        var resultList = js.Deserialize<List<Post>>(jr);
+		            JsonSerializer js = JsonSerializer.Create();
+		            JsonReader jr = new JsonTextReader( new StringReader(responseString));
+		            var resultList = js.Deserialize<List<Post>>(jr);
 
-                        Assert.IsTrue(resultList?.Any( e => e.Title == "eum et est occaecati"));
-                        Assert.IsTrue(resultList?.Any( e => ( e.Id >= 0)));
-                        Assert.IsTrue(resultList?.Any(e => (e.UserId >= 0)));
-						Assert.IsTrue(resultList?.Any(e => (!e.Body.IsNullOrEmpty())));
-						_result = 2;
-                    }
+		            Assert.IsTrue(resultList?.Any( e => e.Title == "eum et est occaecati"));
+		            Assert.IsTrue(resultList?.Any( e => ( e.Id >= 0)));
+		            Assert.IsTrue(resultList?.Any(e => (e.UserId >= 0)));
+		            Assert.IsTrue(resultList?.Any(e => (!e.Body.IsNullOrEmpty())));
+		            _result = 2;
+	            }
 
-                }
-                catch
-                {
-                    _result = 1;
-                }
+            }
+            catch
+            {
+	            _result = 1;
             }
         }
 

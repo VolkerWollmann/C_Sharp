@@ -68,10 +68,9 @@ namespace CSharpNew
             // This is the logic for all queue consumers
             Action consumer = () =>
             {
-                int local;
-                // decrement CDE count once for each element consumed from queue
+	            // decrement CDE count once for each element consumed from queue
                 // ReSharper disable once AccessToDisposedClosure
-                while (queue.TryDequeue(out local))
+                while (queue.TryDequeue(out var local))
                 {
                     Assert.IsTrue(local >= 0);
 	                cde.Signal();
