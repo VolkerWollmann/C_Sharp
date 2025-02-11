@@ -1,7 +1,7 @@
-﻿using C_Sharp.OhterExamples;
+﻿using C_SharpExamplesLib.OtherExamples;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace UnitTest
+namespace UnitTest.OtherTests
 {
     [TestClass]
     public class HttpExamplesTest
@@ -13,9 +13,9 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void HttpRequestJSON()
+        public void HttpRequestJson()
         {
-            DoHttpRequests.TestHttpRequestJSON();
+            DoHttpRequests.TestHttpRequestJson();
         }
 
 		[TestMethod]

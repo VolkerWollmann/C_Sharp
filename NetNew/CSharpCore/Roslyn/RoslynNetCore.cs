@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace CSharpCore.Roslyn
+namespace CSharpNew.Roslyn
 {
     internal class CustomWalker : CSharpSyntaxWalker
     {
@@ -13,8 +13,15 @@ namespace CSharpCore.Roslyn
         {
             _tabs++;
             var indents = new String(' ', _tabs);
-            Debug.WriteLine(indents + $"{node.Kind(),-20}" + ":" + MyRoslynNextCore.ProgramText.Substring(node.FullSpan.Start, node.FullSpan.Length).Substring(0, Math.Min(100, node.FullSpan.Length)).Replace("  ", " ").Replace("\r\n", string.Empty));
-            base.Visit(node);
+            if (node != null)
+            {
+	            Debug.WriteLine(indents + $"{node.Kind(),-20}" + ":" + MyRoslynNextCore.ProgramText
+		            .Substring(node.FullSpan.Start, node.FullSpan.Length)
+		            .Substring(0, Math.Min(100, node.FullSpan.Length)).Replace("  ", " ")
+		            .Replace("\r\n", string.Empty));
+	            base.Visit(node);
+            }
+
             --_tabs;
         }
     }

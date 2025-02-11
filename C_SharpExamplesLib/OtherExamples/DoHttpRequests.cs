@@ -2,17 +2,17 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
-namespace C_Sharp.OhterExamples
+namespace C_SharpExamplesLib.OtherExamples
 {
     /// <summary>
     /// #random #http client
     /// </summary>
     public class DoHttpRequests
     {
-        private static int result;
+        private static int _result;
         private static async Task DoTheRequest()
         {
-            result = 0;
+            _result = 0;
             string url = "https://www.random.org/integers/?num=1&min=1&max=6&col=1&base=10&format=plain&rnd=new";
             
             using (HttpClient httpClient = new HttpClient())
@@ -25,14 +25,14 @@ namespace C_Sharp.OhterExamples
                     if (response.IsSuccessStatusCode)
                     {
                         string content = await response.Content.ReadAsStringAsync();
-                        result = Convert.ToInt32(content);
+                        _result = Convert.ToInt32(content);
                     }
 
-                    result = 2;
+                    _result = 2;
                 }
                 catch
                 {
-                    result = 1;
+                    _result = 1;
                 }
             }
         }
@@ -44,15 +44,15 @@ namespace C_Sharp.OhterExamples
             while (i < 50)
             {
                 Thread.Sleep(1000);
-                if (result > 0)
+                if (_result > 0)
                     break;
 
                 i++;
             }
 
-            Assert.AreEqual(result, 2, "Did not reach web page");
+            Assert.AreEqual(_result, 2, "Did not reach web page");
             
-            Console.WriteLine("Random number:" + result);
+            Console.WriteLine("Random number:" + _result);
 
         }
 
@@ -69,9 +69,9 @@ namespace C_Sharp.OhterExamples
             public string Body { get; set; } = string.Empty;
         }
 
-        private static async Task DoRequestJSON()
+        private static async Task DoRequestJson()
         {
-            result = 0;
+            _result = 0;
 
             // Request posts by user 1
             string url = "https://jsonplaceholder.typicode.com/posts?userId=1";
@@ -94,32 +94,32 @@ namespace C_Sharp.OhterExamples
                         Assert.IsTrue(resultList?.Any( e => ( e.Id >= 0)));
                         Assert.IsTrue(resultList?.Any(e => (e.UserId >= 0)));
 						Assert.IsTrue(resultList?.Any(e => (!e.Body.IsNullOrEmpty())));
-						result = 2;
+						_result = 2;
                     }
 
                 }
                 catch
                 {
-                    result = 1;
+                    _result = 1;
                 }
             }
         }
 
 
-        public static void TestHttpRequestJSON()
+        public static void TestHttpRequestJson()
         {  
-            _ = DoRequestJSON();
+            _ = DoRequestJson();
             int i = 0;
             while(i<50)
             {
                 Thread.Sleep(1000);
-                if (result > 0)
+                if (_result > 0)
                     break;
 
                 i++;
             }
               
-            Assert.AreEqual(result, 2, "Did not reach web page");
+            Assert.AreEqual(_result, 2, "Did not reach web page");
         }
 
         #endregion

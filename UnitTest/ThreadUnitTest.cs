@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using C_Sharp.Language.Thread;
+using MyThread = C_SharpExamplesLib.Language.Threads.MyThread;
 
 namespace UnitTest
 {

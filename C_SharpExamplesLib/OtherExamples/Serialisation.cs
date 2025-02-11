@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
-namespace C_Sharp.OhterExamples
+namespace C_SharpExamplesLib.OtherExamples
 {
 	internal class Person
 	{

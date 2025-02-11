@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using C_Sharp.Language.Task;
+﻿using C_SharpExamplesLib.Language.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
 namespace UnitTest

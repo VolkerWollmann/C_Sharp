@@ -1,10 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics.CodeAnalysis;
 
-namespace C_Sharp.Language.Task
+namespace C_SharpExamplesLib.Language.Tasks
 {
-    [SuppressMessage("ReSharper", "ConvertToLocalFunction")]
-    [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
     public class MyParallel
     {
         #region prime search with parallel
@@ -71,8 +68,8 @@ namespace C_Sharp.Language.Task
         static void WorkOnItem(object item)
         {
             Console.WriteLine("Started working on: " + item + " within thread " +
-                              System.Threading.Thread.CurrentThread.ManagedThreadId);
-            System.Threading.Thread.Sleep(100);
+                              Thread.CurrentThread.ManagedThreadId);
+            Thread.Sleep(100);
             Console.WriteLine("Finished working on: " + item);
         }
 

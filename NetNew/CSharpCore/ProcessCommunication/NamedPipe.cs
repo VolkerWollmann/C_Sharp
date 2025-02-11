@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO.Pipes;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CSharpCore
+namespace CSharpNew.ProcessCommunication
 {
     public class NamedPipe
     {

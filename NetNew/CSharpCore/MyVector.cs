@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CSharpCore
+namespace CSharpNew
 {
     public class MyVector
     {

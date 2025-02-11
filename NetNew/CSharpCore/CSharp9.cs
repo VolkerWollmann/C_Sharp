@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Xunit.Abstractions;
 
-namespace CSharpCore
+namespace CSharpNew
 {
     public class CSharp9
     {

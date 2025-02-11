@@ -1,15 +1,15 @@
 using System;
+using System.Collections.Generic;
+using CSharpNaming;
+using CSharpNew;
+using CSharpNew.ProcessCommunication;
+using CSharpNew.Roslyn;
+using LoadingAssembly;
 using Xunit;
 using Xunit.Abstractions;
-using CSharpCore;
-using CSharpCore.Roslyn;
-using CSharpNaming;
-using CSharpNew.ProcessCommunication;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
-using LoadingAssembly;
-using System.Collections.Generic;
 
-namespace NetCoreUnitTest
+namespace NetNewUnitTest
 {
     public class CSharp8UnitTest
     {
@@ -189,7 +189,7 @@ namespace NetCoreUnitTest
         }
     }
 
-    public class HTTPListnerTest
+    public class HttpListenerTest
     {
         [Fact]
         public void SelfHostedTest()

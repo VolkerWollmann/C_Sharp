@@ -1,11 +1,11 @@
-﻿using C_Sharp.Language.XML;
+﻿using C_SharpExamplesLib.Language.XML;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
 namespace UnitTest
 {
 	[TestClass]
-	public class XMLTest
+	public class XmlTest
 	{
 		[TestMethod]
 		public void XmlElement()

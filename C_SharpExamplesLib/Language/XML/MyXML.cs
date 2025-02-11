@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 using System.Xml.XPath;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp.Language.XML
+namespace C_SharpExamplesLib.Language.XML
 {
     // #xml
     public class MyXml

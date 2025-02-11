@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CSharpCore
+namespace CSharpNew
 {
     // Karlsruhe, VS2022, 09.03.22, 2
     public class CSharp8
@@ -205,26 +205,26 @@ namespace CSharpCore
 
         #region IDisposable
         //#IDisposable
-        static int step;
+        static int _step;
 
         private class MyData : IDisposable
         {
             public void Dispose()
             {
-                step = 1;
+                _step = 1;
             }
         }
 
         private static void Use_MyData()
         {
             using MyData data = new MyData();
-            Assert.AreEqual(0, step);
+            Assert.AreEqual(0, _step);
         }
         public static void Test_IDisposable()
         {
-            step = 0;
+            _step = 0;
             Use_MyData();
-            Assert.AreEqual(1, step);
+            Assert.AreEqual(1, _step);
         }
 
         #endregion
