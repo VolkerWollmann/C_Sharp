@@ -52,9 +52,9 @@ namespace C_SharpExamplesLib.Language.Threads
 		/// <summary>
 		/// both threads work on thread local data
 		/// </summary>
-		public static ThreadLocal<Random> RandomGenerator = new(() => new Random(2));
+		private static readonly ThreadLocal<Random> RandomGenerator = new(() => new Random(2));
 
-		public static ThreadLocal<int> ThreadInt = new();
+		private static readonly ThreadLocal<int> ThreadInt = new();
 
 		public static void TestThreadLocalData()
 		{
@@ -266,11 +266,10 @@ namespace C_SharpExamplesLib.Language.Threads
             try
             {
                 int cores = Environment.ProcessorCount;
-                bool result;
 
                 Console.WriteLine("ThreadPoolConfiguration Start");
 
-                result = ThreadPool.SetMaxThreads(cores, cores);
+                var result = ThreadPool.SetMaxThreads(cores, cores);
                 Assert.IsTrue(result);
 
                 Console.WriteLine("Max cores set to {0}", cores);

@@ -6,8 +6,8 @@ namespace C_SharpExamplesLib.Language
 	// #comparer #IEqualityComparer
 	public class MyIEqualityComparer(int x, int y) : IEqualityComparer<MyIEqualityComparer>
 	{
-		public int X { get; } = x;
-		public int Y { get; } = y;
+		private int X { get; } = x;
+		private int Y { get; } = y;
 
 		#region IEqualityComparer<T>
         bool IEqualityComparer<MyIEqualityComparer>.Equals(MyIEqualityComparer? x, MyIEqualityComparer? y)
@@ -56,8 +56,8 @@ namespace C_SharpExamplesLib.Language
 		private const string Seagull = "Möwe";
 		private const string Cat = "Katze";
 
-		public int Version { get; private set; }
-		public string Animal { get; private set; }
+		public int Version { get; private init; }
+		public string Animal { get; private init; }
 
 		#region Constructor 
 		internal MyIComparable(int version, string animal)
@@ -249,7 +249,7 @@ namespace C_SharpExamplesLib.Language
 	public class MyIEquatable(int number, string animal) : IEquatable<MyIEquatable>
 	{
 		public int Number { get; } = number;
-		public string Animal { private set; get; } = animal;
+		public string Animal { private init; get; } = animal;
 
 
 		public override bool Equals(object? other)

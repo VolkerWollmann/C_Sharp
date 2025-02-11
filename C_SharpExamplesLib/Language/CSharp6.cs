@@ -8,50 +8,50 @@ namespace C_SharpExamplesLib.Language
 		/// <summary>
 		/// Const #class property. Must be accessed by class.
 		/// </summary>
-		public const string ClassProperty = "42";
+		private const string ClassProperty = "42";
 
 		/// <summary>
 		/// #public field
 		/// </summary>
-		public int Y;
+		private int _y;
 
 		/// <summary>
 		/// #public property #setter #getter
 		/// </summary>
-		public int X { get; } = 7; // Only Setter
+		private int X { get; } = 7; // Only Setter
 
-		internal CSharp6(int x)
+		private CSharp6(int x)
 		{
 			Assert.AreEqual(7,X);
-			Assert.AreEqual(0,Y);
+			Assert.AreEqual(0,_y);
 			X = x;
 		}
 
-		internal double SquareRoot(int i)
+		private double SquareRoot(int i)
         {
             var result = Math.Sqrt(i);
             return result;
         }
 
-		internal double SquareRoot2(int i) => Math.Sqrt(i);
+		private double SquareRoot2(int i) => Math.Sqrt(i);
 
 		// #string interpolation
-		internal string StringInterpolation()
+		private string StringInterpolation()
 		{
 			return $"({X})";
 		}
 
-		internal string StringInterpolation2() => $"({X})";
+		private string StringInterpolation2() => $"({X})";
 
         // #string #interpolation #alignment
 		private const string InternalRabbit = "Rabbit";
-		internal string StringInterpolation3() => $"({InternalRabbit}:{InternalRabbit, 10}:{InternalRabbit,3}:{InternalRabbit,-10}:)";
+		private string StringInterpolation3() => $"({InternalRabbit}:{InternalRabbit, 10}:{InternalRabbit,3}:{InternalRabbit,-10}:)";
 
 
-		internal (int Zahl, bool Wahrheit) GetTuple() => (1,true);
+		private (int Zahl, bool Wahrheit) GetTuple() => (1,true);
 
 		// #Dictionary #initialization
-		internal Dictionary<string,int> GetDictionary()
+		private Dictionary<string,int> GetDictionary()
 		{
 			return new Dictionary<string, int> { ["X"] = 5, ["Y"] = 6 };
 		}
@@ -130,7 +130,7 @@ namespace C_SharpExamplesLib.Language
 
 			NullableType();
 
-            cs6.Y = 42;
+            cs6._y = 42;
 
 			// Does not compile 
 			// Assert.IsNotNull(cs6.ClassProperty); 

@@ -56,7 +56,7 @@ namespace C_SharpExamplesLib.OtherExamples
 
         #region JSON Response
 
-        internal class Post
+        private class Post
         {
             public int UserId { get; set; }
            
@@ -101,15 +101,20 @@ namespace C_SharpExamplesLib.OtherExamples
             }
         }
 
-        internal static void UsePostExplicit()
+        private static void UsePostExplicit()
         {
-			Post p = new Post
-			{
-				UserId = 1,
-				Body = "Body",
-				Id = 1,
-				Title = "Title"
-			};
+	        Post p = new Post();
+
+	        Assert.IsNotNull(p);
+	        Assert.AreEqual(0, p.UserId);
+	        Assert.AreEqual("", p.Body);
+	        Assert.AreEqual(0, p.Id);
+	        Assert.AreEqual("", p.Title);
+
+			p.UserId = 1;
+	        p.Body = "Body";
+	        p.Id = 1;
+	        p.Title = "Title";
 
 			Assert.IsNotNull(p);
 			Assert.AreEqual(1, p.UserId);

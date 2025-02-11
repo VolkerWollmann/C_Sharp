@@ -124,7 +124,7 @@ namespace C_SharpExamplesLib.Language
             TraceMessage(System.Reflection.MethodBase.GetCurrentMethod()?.Name ?? "Nothing to trace" );
         }
 
-        public static void TraceMessage(string message,
+        private static void TraceMessage(string message,
                 [System.Runtime.CompilerServices.CallerMemberName] string memberName = "",
                 [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = "",
                 [System.Runtime.CompilerServices.CallerLineNumber] int sourceLineNumber = 0)
@@ -193,17 +193,17 @@ namespace C_SharpExamplesLib.Language
         public class MyRecursiveCLass
         {
 	        private static readonly MyRecursiveCLass Anchor = new();
-            public static int Counter = 1;
-            public int MyCounter;
+	        private static int _counter = 1;
+	        private readonly int _myCounter;
 
-            public MyRecursiveCLass()
+	        private MyRecursiveCLass()
             {
-                MyCounter = Counter++;
+                _myCounter = _counter++;
             }
 
-            public void WriteData()
+	        private void WriteData()
             {
-                Console.WriteLine("MyCounter:" + MyCounter);
+                Console.WriteLine("MyCounter:" + _myCounter);
 
                 // Don't comment this out
                 if (Anchor == this)
@@ -330,7 +330,7 @@ namespace C_SharpExamplesLib.Language
         /// </summary>
         /// <param name="myList">the bits</param>
         /// <param name="myWidth">bits per line</param>
-        public static void PrintBitArrayValues(BitArray myList, int myWidth)
+        private static void PrintBitArrayValues(BitArray myList, int myWidth)
         {
             Console.WriteLine("   Values:");
             int i = myWidth;
