@@ -33,7 +33,7 @@ namespace CSharpNew
             using StreamReader fileReader = new("WriteLines2.txt");
             while (!fileReader.EndOfStream)
             {
-                string line = fileReader.ReadLine();
+                string line = await fileReader.ReadLineAsync();
                 Assert.IsTrue(lines.Contains(line));
             }
         }
@@ -126,8 +126,8 @@ namespace CSharpNew
         [DebuggerDisplay("Ship: Name = {Name}, Tonnage = {Tonnage}" )]
         private class Ship
         {
-            internal string Name { get; private set; }
-            internal int  Tonnage { get; private set; }
+            internal string Name { get; private init; }
+            internal int  Tonnage { get; private init; }
 
             internal Ship(string name, int tonnage)
             {
@@ -141,7 +141,7 @@ namespace CSharpNew
             Ship ship = new Ship("SMS rubber boat", 5);
             Assert.IsTrue(ship != null);
 
-            ; // watch in ship in Debugger
+            // watch here ship in Debugger
         }
 
         #endregion

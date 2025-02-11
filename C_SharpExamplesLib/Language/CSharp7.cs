@@ -5,10 +5,10 @@ namespace C_SharpExamplesLib.Language
 {
     public abstract class CSharp7
     {
-        internal class Person
+	    private class Person
         {
-            internal string FirstName { get; set; }
-            internal string LastName { get; set; }
+	        private string FirstName { get; }
+	        private string LastName { get; }
 
             internal Person(string firstName, string lastName)
             {
