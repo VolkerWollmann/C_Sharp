@@ -79,7 +79,7 @@
             DisplayValues(p3);
         }
 
-        internal static void DisplayValues(Person p)
+        private static void DisplayValues(Person p)
         {
             Console.WriteLine("      Name: {0}, Age: {1:d}", p.Name, p.Age);
             Console.WriteLine("      IdInfo.IdNumber: {0:d}", p.IdInfo.IdNumber);

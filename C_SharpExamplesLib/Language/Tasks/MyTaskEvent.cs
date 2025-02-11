@@ -9,7 +9,7 @@ namespace C_SharpExamplesLib.Language.Tasks
 	{
 		static readonly Random Random = new();
 
-		public delegate void ProduceEventHandler(int e, bool final);
+		private delegate void ProduceEventHandler(int e, bool final);
 
 		private class Consumer
         {

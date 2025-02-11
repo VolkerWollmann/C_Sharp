@@ -36,7 +36,9 @@ namespace C_SharpExamplesLib.Language
 
 		public static void Test()
 		{
-			MyMath m = new MyMath(3, 4);
+			MyMath m = new MyMath(2, 4);
+			Assert.AreEqual(2,m.A);
+			m.A = 3;
 			
             int result = m.Add();
 			Assert.AreEqual(7, result);

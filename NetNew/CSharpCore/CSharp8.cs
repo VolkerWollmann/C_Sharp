@@ -171,7 +171,7 @@ namespace CSharpNew
 
         #region null forgiving operator
 #nullable enable
-        public class NullablePerson(string name)
+	    private class NullablePerson(string name)
         {
 	        public string Name { get; } = name ?? throw new ArgumentNullException(name);
         }
