@@ -543,12 +543,11 @@ namespace C_SharpExamplesLib.Language.Tasks
         #region Time
         private static DateTime GetNextStartDateTime()
         {
-            TimeSpan ts;
-            DateTime now = DateTime.Now;
+	        DateTime now = DateTime.Now;
 
             DateTime start = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, 0);
 
-            ts = now.Second > 50 ? new TimeSpan(0, 1, 0) : 
+            var ts = now.Second > 50 ? new TimeSpan(0, 1, 0) : 
 	            new TimeSpan(0, 0, ((now.Second / 10) + 1) * 10);
 
             start += ts;
@@ -613,7 +612,7 @@ namespace C_SharpExamplesLib.Language.Tasks
             // ReSharper disable once FunctionNeverReturns
         }
 
-        public static void SchedulerStart(object data)
+        private static void SchedulerStart(object data)
         {
             WaitForTask(() =>
             {

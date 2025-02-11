@@ -32,7 +32,7 @@ namespace C_SharpExamplesLib.Language.XML
         }
 
         // xml 3.0 and lower
-        public static XmlDocument Create_MyAnimals_as_XmlDocument()
+        private static XmlDocument Create_MyAnimals_as_XmlDocument()
         {
             XmlDocument xmlDocument = new XmlDocument();
             
@@ -167,7 +167,8 @@ namespace C_SharpExamplesLib.Language.XML
 
 		public class Animal(string name, string description)
 		{
-            public string Name { get; set; } = name;
+			// ReSharper disable once PropertyCanBeMadeInitOnly.Global
+			public string Name { get; set; } = name;
 
             public readonly string Description = description;
 

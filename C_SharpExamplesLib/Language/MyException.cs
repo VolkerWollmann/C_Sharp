@@ -4,7 +4,7 @@ namespace C_SharpExamplesLib.Language
 {
 	internal class Sentence(string s)
 	{
-		public string Value { get; set; } = s;
+		private string Value { get; } = s;
 
 		private char InnerGet()
 		{

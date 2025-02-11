@@ -15,13 +15,11 @@ namespace CSharpNew.ProcessCommunication
 
             public string ReadString()
             {
-                int len;
-
-                len = ioStream.ReadByte() * 256;
+	            var len = ioStream.ReadByte() * 256;
                 len += ioStream.ReadByte();
                 byte[] inBuffer = new byte[len];
-                ioStream.Read(inBuffer, 0, len);
-
+                int r = ioStream.Read(inBuffer, 0, len);
+                Assert.IsTrue(r>=0);
                 return _streamEncoding.GetString(inBuffer);
             }
 

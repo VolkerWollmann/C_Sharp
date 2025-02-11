@@ -9,7 +9,7 @@ namespace CSharpNew
         // Visual Studio 2022 : comment test change
 
         // #record 
-        protected record Person(string FirstName, string LastName);
+        private record Person(string FirstName, string LastName);
 
         public static void TestRecord()
         {
@@ -37,7 +37,7 @@ namespace CSharpNew
         }
 
         // #property #init #accessor
-        protected class Point
+        private class Point
         {
             public int X { get; init; }
 

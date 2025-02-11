@@ -16,7 +16,7 @@ namespace UnitTest
 		public void Initialize()
 		{
 			_myIntegerSetFactory = new MyIntegerSetFactory();
-			;
+			
 			_myIntegerSetFactory.GetIntegerSets();
 		}
 
@@ -49,10 +49,9 @@ namespace UnitTest
 		public void Test_IEnumerable_TwoEnumeratorsOnIEnumerable()
 		{
             MyEnumerableIntegerRange myIntegerRange = new MyEnumerableIntegerRange(1, 10);
-            int test;
             foreach (int i in myIntegerRange)
             {
-                test = i;
+                var test = i;
                 foreach (int j in myIntegerRange)
                 {
                     Assert.AreEqual(test, i);

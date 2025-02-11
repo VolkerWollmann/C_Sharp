@@ -4,7 +4,7 @@
     {
         #region ActionDelegate
         // #action
-        protected class Alarm
+        private class Alarm
         {
             // #delegate #event
             // Delegate for the alarm event
@@ -22,7 +22,7 @@
             }
         }
 
-        protected abstract class AlarmUser
+        private abstract class AlarmUser
         {
             //#delegate
             // Method that must run when the alarm is raised
