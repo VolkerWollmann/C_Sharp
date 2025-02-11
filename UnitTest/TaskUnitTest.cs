@@ -96,8 +96,8 @@ namespace UnitTest
 		[TestMethod]
 		public void Task_BlockingCollection()
         {
-			MyTasks.Test_BlockingCollection();
-        }
+	        MyBlockingCollection.BlockingCollection();
+		}
 
 		[TestMethod]
 		public void Task_Cancellation()

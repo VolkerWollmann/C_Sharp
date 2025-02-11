@@ -9,7 +9,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 		// #ConcurrentQueue
 		public static void BlockingCollection()
 		{
-			// Create a BlockingCollection with a bounded capacity of 5
+			// Create a #BlockingCollection with a bounded capacity of 5
 			BlockingCollection<int> collection = new BlockingCollection<int>(5);
 			// Producer Task
 			Task producer = Task.Run(() =>
