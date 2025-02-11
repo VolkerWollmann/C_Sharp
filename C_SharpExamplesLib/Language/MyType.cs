@@ -8,9 +8,9 @@ namespace C_SharpExamplesLib.Language
     public abstract class MyType
     {
         // Defining a type as class based on base type
-        public class IntegerList2 : List<int>;
+        private class IntegerList2 : List<int>;
 
-        public class MyType2
+        private class MyType2
         {
             public static void Test2()
             {
@@ -19,7 +19,7 @@ namespace C_SharpExamplesLib.Language
             }
         }
 
-        public class MyType3
+        private class MyType3
         {
             public static void Test3()
             {

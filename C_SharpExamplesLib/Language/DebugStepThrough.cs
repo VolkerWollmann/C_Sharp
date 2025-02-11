@@ -4,14 +4,15 @@ namespace C_SharpExamplesLib.Language
 {
     public abstract class DebugStepThrough
     {
-        public static void Level2()
+	    private static void Level2()
         {
             // Put Breakpoint here
+            // ReSharper disable once EmptyStatement
             ;
         }
 
         [DebuggerStepThrough]
-        public static void Level1()
+        private static void Level1()
         {
             Level2();
         }

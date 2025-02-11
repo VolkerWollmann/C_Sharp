@@ -6,8 +6,8 @@ namespace C_SharpExamplesLib.Language.DataTypes
     public class MyPair(int x, int y) : IComparable<MyPair>
     {
 		
-		public int X = x;
-		public int Y = y;
+		public readonly int X = x;
+		public readonly int Y = y;
 
 
 		// Needed by MySortedListTest
@@ -37,7 +37,7 @@ namespace C_SharpExamplesLib.Language.DataTypes
 	public class MyList(int capacity) : List<MyPair>(capacity);
 	public abstract class MyListTest
 	{
-		public static MyPair F(MyList li, int index, int offset)
+		private static MyPair F(MyList li, int index, int offset)
 		{
 			return li[index-offset];
 		}

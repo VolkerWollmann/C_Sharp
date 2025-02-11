@@ -214,7 +214,8 @@ namespace C_SharpExamplesLib.Language
 		#endregion
 
 		#region PLinqException
-		public static bool CheckCity(string name)
+
+		private static bool CheckCity(string name)
 		{
 			if (name == "")
 				throw new ArgumentException(name);
@@ -235,6 +236,14 @@ namespace C_SharpExamplesLib.Language
 
 		public static void PLinqExceptions()
 		{
+			Person johnDoe = new Person();
+			Assert.AreEqual("", johnDoe.City);
+			Assert.AreEqual("",johnDoe.City);
+			johnDoe.City = "Seattle";
+			johnDoe.Name = "John Doe";
+			Assert.AreEqual("Seattle",johnDoe.City);
+			Assert.AreEqual("John Doe", johnDoe.Name);
+			
 			Person[] people =
 			[
 				new() { Name = "Alan", City = "Hull" },
