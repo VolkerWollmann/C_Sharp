@@ -3,15 +3,9 @@
 namespace C_Sharp.Language
 {
 
-    class BaseClassA
-    {
+    class BaseClassA;
 
-    }
-
-    class BaseClassB
-    {
-
-    }
+    class BaseClassB;
 
     // TODO : https://stackoverflow.com/questions/178333/multiple-inheritance-in-c-sharp
     // Does not Compile

@@ -4,15 +4,9 @@ namespace C_Sharp.Language
 {
 	public class MyCast
 	{
-		private class MyCastClass1
-        {
+		private class MyCastClass1;
 
-        }
-
-		private class MyCastClass2
-		{
-
-		}
+		private class MyCastClass2;
 
 		// #type-testing #cast #is #as #is variable name
 		private static void DoCasts(object x)

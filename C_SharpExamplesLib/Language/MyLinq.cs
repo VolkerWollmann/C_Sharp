@@ -236,7 +236,8 @@ namespace C_Sharp.Language
 
 		public static void PLinqExceptions()
 		{
-			Person[] people = new Person[] {
+			Person[] people =
+			[
 				new Person { Name = "Alan", City = "Hull" },
 				new Person { Name = "Beryl", City = "Seattle" },
 				new Person { Name = "Charles", City = "London" },
@@ -246,7 +247,8 @@ namespace C_Sharp.Language
 				new Person { Name = "Gordon", City = "Hull" },
 				new Person { Name = "Henry", City = "Seattle" },
 				new Person { Name = "Isaac", City = "Seattle" },
-				new Person { Name = "James", City = "London" }};
+				new Person { Name = "James", City = "London" }
+			];
 
 			try
 			{
@@ -268,17 +270,19 @@ namespace C_Sharp.Language
 		// #linq #select implicit type
 		public static void SelectImplicitType()
 		{
-			Person[] people = new Person[] {
-				new Person { Name = "Alan", City = "Hull" },
-				new Person { Name = "Beryl", City = "Seattle" },
-				new Person { Name = "Charles", City = "London" },
-				new Person { Name = "David", City = "Seattle" },
-				new Person { Name = "Eddy", City = "" },
-				new Person { Name = "Fred", City = "" },
-				new Person { Name = "Gordon", City = "Hull" },
-				new Person { Name = "Henry", City = "Seattle" },
-				new Person { Name = "Isaac", City = "Seattle" },
-				new Person { Name = "James", City = "London" }};
+			Person[] people =
+			[
+				new() { Name = "Alan", City = "Hull" },
+				new() { Name = "Beryl", City = "Seattle" },
+				new() { Name = "Charles", City = "London" },
+				new() { Name = "David", City = "Seattle" },
+				new() { Name = "Eddy", City = "" },
+				new() { Name = "Fred", City = "" },
+				new() { Name = "Gordon", City = "Hull" },
+				new() { Name = "Henry", City = "Seattle" },
+				new() { Name = "Isaac", City = "Seattle" },
+				new() { Name = "James", City = "London" }
+			];
 
 			people.Select(p => new { p.City, p.Name })
 				.Where(p2 => (p2.City != ""))

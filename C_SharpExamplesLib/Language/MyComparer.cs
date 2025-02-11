@@ -228,13 +228,14 @@ namespace C_Sharp.Language
 
 		public static void TestComparison()
 		{ 
-			MyIComparable[] a = new MyIComparable[] { 
-				new MyIComparable(1, Donkey),
-				new MyIComparable(5, Donkey),
-				new MyIComparable(2, Cat),
-				new MyIComparable(4, Cat),
-				new MyIComparable(3, Dog),
-			};
+			MyIComparable[] a =
+			[
+				new(1, Donkey),
+				new(5, Donkey),
+				new(2, Cat),
+				new(4, Cat),
+				new(3, Dog)
+			];
 
 			// Sort array with #Comparison
             // ReSharper disable once ConvertToLocalFunction
@@ -278,9 +279,9 @@ namespace C_Sharp.Language
 
 		#region override Comparsion Operators
         // #overload #operator #less #< #== #!=
-		public static bool operator ==(MyIEquatable obj1, MyIEquatable obj2) => !(obj1 is null) && obj1.Equals(obj2);
+		public static bool operator ==(MyIEquatable obj1, MyIEquatable obj2) =>  obj1.Equals(obj2);
 
-        public static bool operator !=(MyIEquatable obj1, MyIEquatable obj2) => !(obj1 is null) && !obj1.Equals(obj2);
+        public static bool operator !=(MyIEquatable obj1, MyIEquatable obj2) =>  !obj1.Equals(obj2);
 
         public static bool operator <(MyIEquatable obj1, MyIEquatable obj2) => (obj1.Number < obj2.Number);
 

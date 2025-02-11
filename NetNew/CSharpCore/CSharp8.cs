@@ -103,10 +103,10 @@ namespace CSharpCore
         {
             return person switch
             {
-                (Person { FamilyName: "Polizia", FirstName: { } firstName, Age: _, Pet: null })
+                ( { FamilyName: "Polizia", FirstName: { } firstName, Pet: null })
                     => S(firstName + " ohne Macchi"),
                 
-                (Person { FamilyName: "Polizia", FirstName: { } firstName, Age: _, Pet: (Animal { Name: { } petName }) })
+                ( { FamilyName: "Polizia", FirstName: { } firstName, Pet: ( { Name: { } petName }) })
                     => S(firstName + " mit " + petName),
                 _ => throw new NotImplementedException(),
             };

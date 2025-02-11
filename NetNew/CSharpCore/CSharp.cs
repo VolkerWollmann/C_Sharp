@@ -99,7 +99,7 @@ namespace CSharpCore
             // AddCount will affect the CurrentCount, but not the InitialCount
             cde.AddCount(2);
 
-            int path=0;
+            int path;
             // Now try waiting with cancellation
             CancellationTokenSource cts = new CancellationTokenSource();
             cts.Cancel(); // cancels the CancellationTokenSource
@@ -156,7 +156,7 @@ namespace CSharpCore
 
             float f = (float) Math.Sqrt(2);
             double d = Math.Sqrt(2);
-            decimal dec = (decimal)1.4142135623730950488016887242097m;
+            decimal dec = 1.4142135623730950488016887242097m;
 
 			Console.WriteLine(f);
 			Console.WriteLine(d);
@@ -192,7 +192,7 @@ namespace CSharpCore
             Assert.AreEqual("D1", derivedClass.V1);
             Assert.AreEqual("D2", derivedClass.V2);
             Assert.AreEqual("D3", derivedClass.V3);
-			BaseClass baseClass = (BaseClass) derivedClass;
+			BaseClass baseClass = derivedClass;
             Assert.AreEqual("B1", baseClass.V1);
             Assert.AreEqual("D2", baseClass.V2);
             Assert.AreEqual("B3", baseClass.V3);

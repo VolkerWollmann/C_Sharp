@@ -281,12 +281,12 @@ namespace C_Sharp.Language
 
         public static void ParamsTest()
         {
-            Assert.AreEqual(12, ParamSumSimple(new int[3] { 2, 4, 6 }));
+            Assert.AreEqual(12, ParamSumSimple([2, 4, 6]));
 
             // will not compile
             //Assert.AreEqual(9, ParamSumSimple(1, 3, 5));
 
-            Assert.AreEqual(12, ParamsSum(new int[3] { 2, 4, 6 }));
+            Assert.AreEqual(12, ParamsSum( 2, 4, 6 ));
             Assert.AreEqual(9, ParamsSum(1,3,5));
 
         }
@@ -352,14 +352,14 @@ namespace C_Sharp.Language
         
         public static void ShowBitArray()
         {
-            byte[] myBytes = new byte[5] { 1, 2, 3, 4, 5 };
+            byte[] myBytes = [1, 2, 3, 4, 5];
             BitArray myBitArray = new BitArray(myBytes);    // Internal representation is in integer
             
             Assert.AreEqual(40, myBitArray.Count);
             Assert.AreEqual(40, myBitArray.Length);
             PrintBitArrayValues(myBitArray, 32);
 
-            int[] integers = new int[1] {-1};
+            int[] integers = [-1];
             BitArray myBitArray2 = new BitArray(integers);
             Assert.AreEqual(32, myBitArray2.Count);
             Assert.AreEqual(32, myBitArray2.Length);

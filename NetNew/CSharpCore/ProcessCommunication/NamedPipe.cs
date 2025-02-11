@@ -22,7 +22,7 @@ namespace CSharpCore
 
             public string ReadString()
             {
-                int len = 0;
+                int len;
 
                 len = _ioStream.ReadByte() * 256;
                 len += _ioStream.ReadByte();
@@ -38,7 +38,7 @@ namespace CSharpCore
                 int len = outBuffer.Length;
                 if (len > UInt16.MaxValue)
                 {
-                    len = (int)UInt16.MaxValue;
+                    len = UInt16.MaxValue;
                 }
                 _ioStream.WriteByte((byte)(len / 256));
                 _ioStream.WriteByte((byte)(len & 255));

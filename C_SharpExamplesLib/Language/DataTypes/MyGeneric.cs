@@ -10,10 +10,7 @@ namespace C_Sharp.Language.DataTypes
 		List<T> GetShuffledList(List<T> list);
 	}
 
-    internal interface IMyIntRandomizer : IMyRandomizer<int>
-    {
-
-    }
+    internal interface IMyIntRandomizer : IMyRandomizer<int>;
 
     // #generic
 	internal class MyIntegerRandomizer : IMyIntRandomizer
@@ -133,15 +130,9 @@ namespace C_Sharp.Language.DataTypes
         }
     }
 
-    internal class RefinedClassA : MyBaseClass
-	{
+    internal class RefinedClassA : MyBaseClass;
 
-    }
-
-    internal class RefinedClassB : MyBaseClass
-	{
-
-    }
+    internal class RefinedClassB : MyBaseClass;
 
     // be aware of type variable TGenericClassInstanceType in debugger
     internal class MyGenericClass<TGenericClassInstanceType> where TGenericClassInstanceType : MyBaseClass, new()

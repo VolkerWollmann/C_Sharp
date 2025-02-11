@@ -34,7 +34,6 @@ namespace C_Sharp.OhterExamples
                 {
                     result = 1;
                 }
-                finally { }
             }
         }
 
@@ -103,7 +102,6 @@ namespace C_Sharp.OhterExamples
                 {
                     result = 1;
                 }
-                finally { }
             }
         }
 
