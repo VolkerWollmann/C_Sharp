@@ -2,7 +2,7 @@
 
 namespace C_SharpExamplesLib.Language.DataTypes
 {
-    public class MyHashSet
+    public abstract class MyHashSet
     {
         public static void Test()
         {
@@ -11,6 +11,7 @@ namespace C_SharpExamplesLib.Language.DataTypes
             [
 	            1,
 	            2,
+	            // ReSharper disable once DuplicateKeyCollectionInitialization
 	            1
             ];
 

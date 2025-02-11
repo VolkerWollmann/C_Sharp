@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CSharpNew.ProcessCommunication
 {
-    public class NamedPipe
+    public abstract class NamedPipe
     {
         private class StreamString(Stream ioStream)
         {

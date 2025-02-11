@@ -35,7 +35,7 @@ namespace C_SharpExamplesLib.Language.DataTypes
         }
     }
 	public class MyList(int capacity) : List<MyPair>(capacity);
-	public class MyListTest
+	public abstract class MyListTest
 	{
 		public static MyPair F(MyList li, int index, int offset)
 		{
@@ -56,7 +56,7 @@ namespace C_SharpExamplesLib.Language.DataTypes
 	}
 
     // Data types : #SortedList
-	public class MySortedListTest
+	public abstract class MySortedListTest
     {
 		public static void Test()
         {

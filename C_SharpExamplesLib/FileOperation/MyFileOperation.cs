@@ -3,7 +3,7 @@
 
 namespace C_SharpExamplesLib.FileOperation
 {
-    public class MyFileOperation
+    public abstract class MyFileOperation
     {
         private const string FileName = "C_SharpExamplesLib\\FileOperation\\TextFile.txt";
 

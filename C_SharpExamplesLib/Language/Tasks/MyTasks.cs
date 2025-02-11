@@ -7,7 +7,7 @@ namespace C_SharpExamplesLib.Language.Tasks
 {
 	[SuppressMessage("ReSharper", "ConvertToLocalFunction")]
     [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
-    public class MyTasks
+    public abstract class MyTasks
 	{
 		#region Task Continue with
 		// #task #ContinueWith #TaskContinuationOptions

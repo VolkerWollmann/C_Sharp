@@ -2,7 +2,7 @@
 
 namespace C_SharpExamplesLib.Language
 {
-	public class Scratch
+	public abstract class Scratch
 	{
 
 		public static void Test()

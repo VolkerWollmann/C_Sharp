@@ -7,7 +7,7 @@ namespace C_SharpExamplesLib.OtherExamples
     /// <summary>
     /// #random #http client
     /// </summary>
-    public class DoHttpRequests
+    public abstract class DoHttpRequests
     {
         private static int _result;
         private static async Task DoTheRequest()
@@ -101,9 +101,26 @@ namespace C_SharpExamplesLib.OtherExamples
             }
         }
 
+        internal static void UsePostExplicit()
+        {
+			Post p = new Post
+			{
+				UserId = 1,
+				Body = "Body",
+				Id = 1,
+				Title = "Title"
+			};
+
+			Assert.IsNotNull(p);
+			Assert.AreEqual(1, p.UserId);
+			Assert.AreEqual("Body", p.Body);
+			Assert.AreEqual(1, p.Id);
+			Assert.AreEqual("Title", p.Title);
+		}
 
         public static void TestHttpRequestJson()
-        {  
+        {
+	        UsePostExplicit();
             _ = DoRequestJson();
             int i = 0;
             while(i<50)

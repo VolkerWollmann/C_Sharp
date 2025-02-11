@@ -21,7 +21,7 @@ namespace C_SharpExamplesLib.Language
 			Assert.IsTrue(e1 == null);
 
 			myOperator11 = new MyOperator();
-			string? e2 = myOperator11.Donkey;
+			string e2 = myOperator11.Donkey;
 			Assert.IsTrue(e2 == myOperator11.Donkey);
 
 			string e3 = e1 + e2;

@@ -1,6 +1,6 @@
 ﻿namespace C_SharpExamplesLib.Language.Event
 {
-    public class MyEvent
+    public abstract class MyEvent
     {
         #region ActionDelegate
         // #action
@@ -22,7 +22,7 @@
             }
         }
 
-        protected class AlarmUser
+        protected abstract class AlarmUser
         {
             //#delegate
             // Method that must run when the alarm is raised

@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CSharpNew
 {
     
-    public class CSharp
+    public abstract class CSharp
     {
         #region stream
         // #Stream

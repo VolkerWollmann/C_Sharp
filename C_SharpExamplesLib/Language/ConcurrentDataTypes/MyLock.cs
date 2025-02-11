@@ -4,13 +4,13 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 {
     [SuppressMessage("ReSharper", "ConvertToLocalFunction")]
     [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
-    public class MyLock
+    public abstract class MyLock
     {
         #region lock statement
 
         private static readonly int Size = 20000001; // 50000001
 
-        public class SimpleTotal
+        public abstract class SimpleTotal
         {
             static long _sharedTotal;
 
@@ -66,7 +66,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
             }
         }
 
-        public class SharedTotal
+        public abstract class SharedTotal
         {
             //#lock #task #waitall
             static long _sharedTotal;

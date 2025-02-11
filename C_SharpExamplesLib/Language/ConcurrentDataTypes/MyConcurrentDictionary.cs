@@ -5,7 +5,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 {
     [SuppressMessage("ReSharper", "ConvertToLocalFunction")]
     [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
-    public class MyConcurrentDictionary
+    public abstract class MyConcurrentDictionary
     {
         #region ConcurrentDictionary
         // #Concurrent ConcurrentDictionary

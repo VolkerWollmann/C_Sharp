@@ -2,7 +2,7 @@
 
 namespace C_SharpExamplesLib.Language.Tasks
 {
-    public class MyParallel
+    public abstract class MyParallel
     {
         #region prime search with parallel
 

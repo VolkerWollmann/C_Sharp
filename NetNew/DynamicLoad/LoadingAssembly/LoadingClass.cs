@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace LoadingAssembly
 {
-    public class LoadingClass
+    public abstract class LoadingClass
     {
         public static void Execute()
         {

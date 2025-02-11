@@ -25,7 +25,7 @@ namespace CSharpNew.Roslyn
             --_tabs;
         }
     }
-    public class MyRoslynNextCore
+    public abstract class MyRoslynNextCore
     {
         public const string ProgramText =
             @"  using System;

@@ -5,7 +5,7 @@ namespace C_SharpExamplesLib.Language
     /// <summary>
     /// #Defining a #alias type
     /// </summary>
-    public class MyType
+    public abstract class MyType
     {
         // Defining a type as class based on base type
         public class IntegerList2 : List<int>;

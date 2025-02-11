@@ -5,7 +5,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 {
     [SuppressMessage("ReSharper", "ConvertToLocalFunction")]
     [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
-    public class MyConcurrentStack
+    public abstract class MyConcurrentStack
     {
         #region ConcurrentStack
         public static void Test_ConcurrentStack()

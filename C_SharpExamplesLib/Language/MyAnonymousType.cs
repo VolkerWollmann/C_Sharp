@@ -2,7 +2,7 @@
 
 namespace C_SharpExamplesLib.Language
 {
-	public class MyAnonymousType
+	public abstract class MyAnonymousType
 	{
 		// #AnonymousType
 		public static void AnonymousType_Test()

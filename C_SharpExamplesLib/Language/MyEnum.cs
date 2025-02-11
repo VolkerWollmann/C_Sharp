@@ -3,7 +3,7 @@
 namespace C_SharpExamplesLib.Language
 {
 	// #enum #number of members
-	public class MyEnum
+	public abstract class MyEnum
 	{
 		public enum Dog { Lessie, KomissarRex, Cerberus};
 

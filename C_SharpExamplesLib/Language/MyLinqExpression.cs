@@ -144,7 +144,7 @@ namespace C_SharpExamplesLib.Language
             _indent = _indent - 5;
         }
     }
-    public class MyLinqExpression
+    public abstract class MyLinqExpression
     {
         private static List<Expression> GetExpressionList()
         {

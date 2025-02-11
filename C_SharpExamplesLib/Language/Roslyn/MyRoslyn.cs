@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace C_SharpExamplesLib.Language.Roslyn
 {
-    public class MyRoslyn
+    public abstract class MyRoslyn
     {
         public static void Test()
         {

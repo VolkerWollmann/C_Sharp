@@ -24,7 +24,7 @@ namespace C_SharpExamplesLib.Language
         }
     }
 
-    public class VirtualTest
+    public abstract class VirtualTest
     {
         public static void Test()
         {

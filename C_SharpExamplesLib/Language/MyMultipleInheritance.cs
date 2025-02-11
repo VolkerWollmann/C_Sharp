@@ -14,7 +14,7 @@ namespace C_SharpExamplesLib.Language
 		
 	//}
 
-    public class MyMultipleInheritanceTest
+    public abstract class MyMultipleInheritanceTest
     {
         public static void Test()
         {

@@ -2,7 +2,7 @@
 
 namespace C_SharpExamplesLib.Language
 {
-    public class DebugStepThrough
+    public abstract class DebugStepThrough
     {
         public static void Level2()
         {

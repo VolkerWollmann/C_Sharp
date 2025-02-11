@@ -22,7 +22,7 @@ namespace C_SharpExamplesLib.Language
         }
     }
 
-	public class AbstractClassTest
+	public abstract class AbstractClassTest
 	{
 		public static void Test()
 		{

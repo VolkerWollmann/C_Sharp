@@ -6,7 +6,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 {
     [SuppressMessage("ReSharper", "ConvertToLocalFunction")]
     [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
-    public class MyConcurrentBag
+    public abstract class MyConcurrentBag
     {
         #region #ConcurrentBag #concurrent list
         // #Parallel access to #list(bag)  #ConcurrentBag #concurrent list

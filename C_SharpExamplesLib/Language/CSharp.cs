@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_SharpExamplesLib.Language
 {
-    public class CSharp
+    public abstract class CSharp
     {
         /// <summary>
         /// test
@@ -141,8 +141,8 @@ namespace C_SharpExamplesLib.Language
         // #lazy
         private class LazyClass
         {
-            readonly int[] _array = new int[10];
-            public int Length => _array.Length;
+            internal readonly int[] Array = [1,2,3,4,5,6,7,8,9,10];
+            internal int Length => Array.Length;
         }
 
         public static void LazyClassTest()
@@ -153,7 +153,7 @@ namespace C_SharpExamplesLib.Language
             // Show that IsValueCreated is false.
             Assert.IsFalse(lazy.IsValueCreated);
 
-            // Get the Value.
+            // Get the Value
             // ... This executes Test().
             LazyClass test = lazy.Value;
 
@@ -162,6 +162,7 @@ namespace C_SharpExamplesLib.Language
 
             // The object can be used.
             Assert.IsTrue( test.Length > 0);
+            Assert.AreEqual(1, test.Array[0] );
         }
 
         #endregion

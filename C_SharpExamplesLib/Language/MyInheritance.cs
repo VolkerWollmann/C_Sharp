@@ -87,7 +87,7 @@ namespace C_SharpExamplesLib.Language
     //    }
     //}
 
-    public class MyInheritanceInterfaceTest
+    public abstract class MyInheritanceInterfaceTest
     {
         [SuppressMessage("ReSharper", "IdentifierTypo")]
         [SuppressMessage("ReSharper", "CommentTypo")]

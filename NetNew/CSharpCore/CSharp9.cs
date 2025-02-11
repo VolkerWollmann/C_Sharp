@@ -4,7 +4,7 @@ using Xunit.Abstractions;
 
 namespace CSharpNew
 {
-    public class CSharp9
+    public abstract class CSharp9
     {
         // Visual Studio 2022 : comment test change
 
@@ -47,6 +47,7 @@ namespace CSharpNew
         {
             var m = new Point { X = 41, Y = 42 };
             Assert.IsTrue( m.X == 41);
+            Assert.IsTrue(m.Y == 42);
 
             //Will not compile
             //m.X = 43;

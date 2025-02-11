@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CSharpNew
 {
-    public class MyVector
+    public abstract class MyVector
     {
         // #vector
         public static void Test()

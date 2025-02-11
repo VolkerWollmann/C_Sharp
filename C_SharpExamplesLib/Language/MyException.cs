@@ -42,7 +42,7 @@ namespace C_SharpExamplesLib.Language
             }
 		}
 	}
-	public class MyException
+	public abstract class MyException
 	{
 		public static void Exception_Test()
 		{

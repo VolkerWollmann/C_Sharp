@@ -69,10 +69,10 @@ namespace CSharpNaming
 
         #region IV. Do not use Screaming Caps for constants or readonly variables:  const string ShippingType = "DropShip";   Avoid: const string SHIPPINGTYPE = "DropShip";
         // Correct : PascalCasing
-        public const string ShippingType = "DropShip";
+        private const string ShippingType = "DropShip";
 
         // Avoid : Screaming caps
-        public const string SHIPPINGTYPE = "DropShip";
+        private const string SHIPPINGTYPE = "DropShip";
         #endregion
 
         [SuppressMessage("ReSharper", "JoinDeclarationAndInitializer")]
@@ -137,12 +137,12 @@ namespace CSharpNaming
         #region VII. Do not use Underscores in identifiers: public DateTime clientAppointment;    Avoid: client_Appointment;
         //      Exception: you can prefix private static variables with an underscore.
         // Correct
-        public DateTime ClientAppointment;
-        public TimeSpan TimeLeft;
+        private DateTime ClientAppointment;
+        private TimeSpan TimeLeft;
 
         // Avoid
-        public DateTime client_Appointment;
-        public TimeSpan time_Left;
+        private DateTime client_Appointment;
+        private TimeSpan time_Left;
 
         // Exception : private static
         private static DateTime _registrationDate = DateTime.Now;
@@ -194,27 +194,31 @@ namespace CSharpNaming
         #endregion
 
         #region X. Do use noun or noun phrases to name a class: public class Employee, public class DocumentCollection
-        public class Employee
+
+        private class Employee
         {
         }
-        public class BusinessLocation
+
+        private class BusinessLocation
         {
         }
-        public class DocumentCollection
+
+        private class DocumentCollection
         {
         }
         #endregion
 
         #region XI. Do prefix interfaces with the letter I: public interface IShape 
         //     Interface names are noun (phrases) or adjectives.
-        public interface IShape
+        private interface IShape
         {
         }
-        public interface IShapeCollection
+
+        private interface IShapeCollection
         {
         }
         // ReSharper disable once IdentifierTypo
-        public interface IGroupable
+        private interface IGroupable
         {
         }
         #endregion
@@ -273,7 +277,7 @@ namespace CSharpNaming
 
         #region XV. Do use singular names for enums.Exception: bit field enums: public enum Color { Red, ... 
         // Correct
-        public enum Color
+        private enum Color
         {
             Red,
             Green,
@@ -282,7 +286,7 @@ namespace CSharpNaming
         // Exception
         [Flags]
         // ReSharper disable once IdentifierTypo
-        public enum Dockings
+        private enum Dockings
         {
             None = 0,
             Top = 1,
@@ -294,7 +298,7 @@ namespace CSharpNaming
         //      (except bit fields)
         
         // Don't
-        public enum WrongDirection : long
+        private enum WrongDirection : long
         {
             North = 1,
             East = 2,
@@ -303,7 +307,7 @@ namespace CSharpNaming
         }
 
         // Correct
-        public enum Direction
+        private enum Direction
         {
             North,
             East,
@@ -314,14 +318,14 @@ namespace CSharpNaming
 
         #region XVII. Do notsuffix enum names with Enum : enum Coin   Avoid: enum CoinEnum
         // Don't
-        public enum CoinEnum
+        private enum CoinEnum
         {
             Penny,
             Nickel
         }
 
         // Correct
-        public enum Coin
+        private enum Coin
         {
             Penny,
             Nickel,
@@ -336,6 +340,11 @@ namespace CSharpNaming
 
         private void ConsumeVariables()
         {
+            Assert.IsNotNull(ClientAppointment);
+            Assert.IsNotNull(TimeLeft);
+            Assert.IsNotNull(client_Appointment);
+            Assert.IsNotNull(time_Left);
+            
             FunctionII();
             FunctionV();
             FunctionVI();

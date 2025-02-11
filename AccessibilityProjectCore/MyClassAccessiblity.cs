@@ -23,9 +23,13 @@ namespace AccessibilityProjectCore
             int i = _myPrivateNumber;
             _myPrivateNumber = i;
             MyInternalNumber = 42;
+            Assert.AreEqual(42, MyInternalNumber);
             MyProtectedNumber = 42;
+            Assert.AreEqual(42, MyProtectedNumber);
             MyPublicNumber = 42;
+            Assert.AreEqual(42, MyPublicNumber);
             MyInternalProtected = 42;
+            Assert.AreEqual(42, MyInternalProtected);
         }
     }
 
@@ -103,7 +107,7 @@ namespace AccessibilityProjectCore
     }
 
 
-    public class MyInterfaceVisibility
+    public abstract class MyInterfaceVisibility
     {
         public static void ExplicitImplicitInterfaceImplementation()
         {

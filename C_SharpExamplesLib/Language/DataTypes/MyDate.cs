@@ -2,7 +2,7 @@
 
 namespace C_SharpExamplesLib.Language.DataTypes
 {
-    public class MyDate
+    public abstract class MyDate
     {
         /// <summary>
         /// #DateTime #equal #comparison

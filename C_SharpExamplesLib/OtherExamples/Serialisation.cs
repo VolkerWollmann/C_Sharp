@@ -5,7 +5,7 @@ namespace C_SharpExamplesLib.OtherExamples
 {
 	internal class Person
 	{
-		public string Name { get; set; } = "";
+		public string Name { get; init; } = "";
 
 		public Person? Friend { get; set; } 
 	}
@@ -16,7 +16,7 @@ namespace C_SharpExamplesLib.OtherExamples
 		public string Name { get; set; } = "";
 	}
 
-	public class SerialisationExample
+	public abstract class SerialisationExample
 	{
 		public static void DoSerialisationWithReferences()
 		{
@@ -58,6 +58,15 @@ namespace C_SharpExamplesLib.OtherExamples
 
 		public static void DeserializeFile()
 		{
+			Animal test = new Animal
+			{
+				Name = "Test",
+				Type = "Type"
+			};
+			Assert.IsNotNull(test);
+			Assert.AreEqual("Test", test.Name);
+			Assert.AreEqual("Type", test.Type);
+			
 			var filePath = "..\\..\\..\\..\\C_SharpExamplesLib\\OtherExamples\\animals.json"; // Replace with the actual file path
 			var jsonContent = File.ReadAllText(filePath);
 
@@ -68,6 +77,7 @@ namespace C_SharpExamplesLib.OtherExamples
 
 			var deserializedAnimalList = JsonConvert.DeserializeObject<List<Animal>>(jsonContent, settings);
 			Assert.IsNotNull(deserializedAnimalList);
+			Assert.AreEqual("Donkey", deserializedAnimalList[0].Type);
 
 			foreach (var animal in deserializedAnimalList) Console.WriteLine($"Name: {animal.Name}, Type: {animal.Type}");
 		}

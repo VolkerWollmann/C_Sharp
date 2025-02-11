@@ -101,7 +101,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
         }
     }
 
-    public class MyParallelArrayTest
+    public abstract class MyParallelArrayTest
     {
         public static void Test()
         {

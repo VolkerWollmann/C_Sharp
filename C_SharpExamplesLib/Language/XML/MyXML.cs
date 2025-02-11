@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace C_SharpExamplesLib.Language.XML
 {
     // #xml
-    public class MyXml
+    public abstract class MyXml
     {
         // #linq to #xml
         private static XElement Create_MyAnimals_as_XElements_1()
@@ -169,7 +169,7 @@ namespace C_SharpExamplesLib.Language.XML
 		{
             public string Name { get; set; } = name;
 
-            public string Description = description;
+            public readonly string Description = description;
 
             public Animal? Friend { get; set; }
 
@@ -180,10 +180,18 @@ namespace C_SharpExamplesLib.Language.XML
 		}
 		public static void XmlSerializerExample()
 		{
+			Animal parserTest = new Animal
+			{
+				Name = "ParserTest"
+			};
+			Assert.AreEqual("ParserTest", parserTest.Name);
+            
+            
 			Animal macchi = new Animal("Macchi", "Famous police donkey");
             Assert.AreEqual("Famous police donkey", macchi.Description);
 			Animal amica = new Animal("Amica", "Friend of Macchi");
             macchi.Friend = amica;
+            Assert.IsNotNull(macchi.Friend);
 
 			List<Animal> animals = [macchi, amica];
 

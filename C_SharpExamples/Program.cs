@@ -1,6 +1,7 @@
 ﻿namespace C_SharpExampleProgram
 {
-	class Program
+	
+	abstract class Program
 	{
 		static void Main()
         {

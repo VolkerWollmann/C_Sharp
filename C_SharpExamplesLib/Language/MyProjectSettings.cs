@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_SharpExamplesLib.Language
 {
-    public class MyProjectSettings
+    public abstract class MyProjectSettings
     {
         // #Project #setting
         public static void ReadSettings()

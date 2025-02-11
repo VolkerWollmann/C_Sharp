@@ -21,7 +21,7 @@ namespace C_SharpExamplesLib.Language
         }
     }
 
-    public class MyReflection
+    public abstract class MyReflection
     {
         public static void Test()
         {

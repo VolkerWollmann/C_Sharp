@@ -23,6 +23,7 @@ namespace C_SharpExamplesLib.Language
 		internal CSharp6(int x)
 		{
 			Assert.AreEqual(7,X);
+			Assert.AreEqual(0,Y);
 			X = x;
 		}
 

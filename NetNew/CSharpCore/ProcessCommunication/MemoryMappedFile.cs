@@ -8,7 +8,7 @@ namespace CSharpNew.ProcessCommunication
 	/// <summary>
 	/// #MemoryMappedFile
 	/// </summary>
-	public class MemoryMappedFile
+	public abstract class MemoryMappedFile
     {
         private static SysIOMem.MemoryMappedFile _memoryMappedFile;
         private static void MemoryMappedFileWriter()

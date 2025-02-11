@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_SharpExamplesLib.Language
 {
-    public class CSharp7
+    public abstract class CSharp7
     {
         internal class Person
         {

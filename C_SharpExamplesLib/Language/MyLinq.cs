@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace C_SharpExamplesLib.Language
 {
     [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
-    public class MyLinq
+    public abstract class MyLinq
 	{
 		// #linq #range #where #take #all
 		public static void List_Range_Where_Take()

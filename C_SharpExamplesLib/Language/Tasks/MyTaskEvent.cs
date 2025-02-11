@@ -5,7 +5,7 @@ namespace C_SharpExamplesLib.Language.Tasks
 	/// <summary>
 	/// #task #event
 	/// </summary>
-	public class MyTaskEvent
+	public abstract class MyTaskEvent
 	{
 		static readonly Random Random = new();
 

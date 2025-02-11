@@ -17,7 +17,7 @@ namespace C_SharpExamplesLib.Language
     [Author("Me", Version = 1.1)]
     public class MyAttributedClass;
 
-    public class MyAttributedClassTest
+    public abstract class MyAttributedClassTest
     {
         public static void Test()
         {

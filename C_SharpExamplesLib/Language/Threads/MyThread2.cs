@@ -3,7 +3,7 @@
     /// <summary>
     /// #partial class
     /// </summary>
-    public partial class MyThread
+    public abstract partial class MyThread
     {
         static void Task1()
         {

@@ -2,7 +2,7 @@
 
 namespace C_SharpExamplesLib.Language.Threads
 {
-	public partial class MyThread
+	public abstract partial class MyThread
 	{
 		#region private threads
 		private static Semaphore Bouncer { get; set; } = new(1, 1);

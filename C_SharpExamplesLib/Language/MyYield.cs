@@ -3,7 +3,7 @@
 namespace C_SharpExamplesLib.Language
 {
     // #yield
-    public class MyYield
+    public abstract class MyYield
     {
         private static IEnumerable<int> OneToThree()
         {

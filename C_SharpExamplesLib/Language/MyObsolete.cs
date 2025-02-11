@@ -21,7 +21,7 @@
 
         }
     }
-    public  class MyObsolete
+    public abstract class MyObsolete
     {
         public static void Test()
         {

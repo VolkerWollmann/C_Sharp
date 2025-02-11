@@ -2,7 +2,7 @@
 
 namespace C_SharpExamplesLib.Language
 {
-	public class MySimpleCSharp
+	public abstract class MySimpleCSharp
 	{
 		// #index operator, #indexer, #range
 		private class IndexClass

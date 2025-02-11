@@ -2,7 +2,7 @@
 
 namespace C_SharpExamplesLib.Language
 {
-	public class MyCast
+	public abstract class MyCast
 	{
 		private class MyCastClass1;
 

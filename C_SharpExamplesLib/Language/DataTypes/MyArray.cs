@@ -3,7 +3,7 @@
 namespace C_SharpExamplesLib.Language.DataTypes
 {
     // #array #all elements
-	public class MyArray
+	public abstract class MyArray
 	{
 
 		public static void Test()

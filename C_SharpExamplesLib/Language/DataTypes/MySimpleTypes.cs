@@ -2,7 +2,7 @@
 
 namespace C_SharpExamplesLib.Language.DataTypes
 {
-    public class MySimpleTypes
+    public abstract class MySimpleTypes
     {
         public static void Test()
         {

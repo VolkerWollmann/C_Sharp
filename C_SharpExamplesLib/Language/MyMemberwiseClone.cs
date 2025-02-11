@@ -1,6 +1,6 @@
 ﻿namespace C_SharpExamplesLib.Language
 {
-    public class MyMemberwiseClone
+    public abstract class MyMemberwiseClone
     {
         internal class IdInfo(int idNumber)
         {
