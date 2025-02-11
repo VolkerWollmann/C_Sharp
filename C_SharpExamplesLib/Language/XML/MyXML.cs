@@ -151,6 +151,23 @@ namespace C_SharpExamplesLib.Language.XML
 								indent = indent.Substring(0, indent.Length - 3);
 								Console.WriteLine($"{indent} /{reader.Name}");
 								break;
+							case XmlNodeType.None:
+							case XmlNodeType.Attribute:
+							case XmlNodeType.CDATA:
+							case XmlNodeType.EntityReference:
+							case XmlNodeType.Entity:
+							case XmlNodeType.ProcessingInstruction:
+							case XmlNodeType.Comment:
+							case XmlNodeType.Document:
+							case XmlNodeType.DocumentType:
+							case XmlNodeType.DocumentFragment:
+							case XmlNodeType.Notation:
+							case XmlNodeType.Whitespace:
+							case XmlNodeType.SignificantWhitespace:
+							case XmlNodeType.EndEntity:
+							case XmlNodeType.XmlDeclaration:
+							default:
+								throw new NotImplementedException();
 						}
 					}
 					Console.WriteLine("XML file is valid.");
