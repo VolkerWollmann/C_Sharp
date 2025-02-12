@@ -10,23 +10,6 @@ namespace UnitTest
     [TestClass]
     public class TaskUnitTest
     {
-        /// <summary>
-		///  Gets or sets the test context which provides
-		///  information about and functionality for the current test run.
-		///</summary>
-		// ReSharper disable once UnusedAutoPropertyAccessor.Global
-		public TestContext TestContext { get; set; }
-
-		[TestMethod]
-		//[Ignore("Only for debug purpose")]
-		public void TestTheContext()
-		{
-
-			Console.WriteLine(TestContext.TestName);
-			var me = MethodBase.GetCurrentMethod()?.Name;
-			Assert.AreEqual(TestContext.TestName, me);
-		}
-
 		[TestMethod]
 		public void Task_ContinueWith()
 		{

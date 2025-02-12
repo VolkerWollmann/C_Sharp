@@ -7,20 +7,7 @@ namespace UnitTest
 	[TestClass]
 	public class CompareUnitTest
     {
-        /// <summary>
-		///  Gets or sets the test context which provides
-		///  information about and functionality for the current test run.
-		///</summary>
-		// ReSharper disable once UnusedAutoPropertyAccessor.Global
-		public TestContext TestContext { get; set; }
-
-        [TestMethod]
-        public void TestTheContext()
-        {
-            Console.WriteLine(TestContext.TestName);
-        }
-
-		[TestMethod]
+	    [TestMethod]
 		public void TestIComparer()
 		{
 			MyIComparable.TestIComparer();

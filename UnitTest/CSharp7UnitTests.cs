@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Reflection;
 using C_SharpExamplesLib.Language;
 
 namespace UnitTest
@@ -18,8 +19,10 @@ namespace UnitTest
         [TestMethod]
         public void TestTheContext()
         {
-			Console.WriteLine(TestContext.TestName);
-        }
+	        Console.WriteLine(TestContext.TestName);
+	        var me = MethodBase.GetCurrentMethod()?.Name;
+	        Assert.AreEqual(TestContext.TestName, me);
+		}
 
 		[TestMethod]
 		public void Deconstruct()
