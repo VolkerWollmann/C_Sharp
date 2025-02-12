@@ -9,10 +9,10 @@ namespace C_SharpExamplesLib.Language.DataTypes
             HashSet<int> integerHashSet =
             [
 	            1,
-	            2,
-	            // ReSharper disable once DuplicateKeyCollectionInitialization
-	            1
+	            2
             ];
+
+            Assert.IsFalse(integerHashSet.Add(1));
 
             Assert.AreEqual(2, integerHashSet.Count);
             
