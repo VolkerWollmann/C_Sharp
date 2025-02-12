@@ -166,6 +166,7 @@ namespace C_SharpExamplesLib.Language.XML
 							case XmlNodeType.SignificantWhitespace:
 							case XmlNodeType.EndEntity:
 							case XmlNodeType.XmlDeclaration:
+								break;
 							default:
 								throw new NotImplementedException();
 						}
