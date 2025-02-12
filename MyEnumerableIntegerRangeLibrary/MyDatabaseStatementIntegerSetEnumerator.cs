@@ -6,9 +6,9 @@ namespace MyEnumerableIntegerRangeLibrary
 	/// Simulate a source, which is worth to be encapsulated for lazy linq queries.
 	/// </summary>
 	
-	public class MyDatabaseStatementIntegerSetEnumerator : IEnumerator<int>
+	public class MyDatabaseStatementIntegerSetEnumerator(MyDatabaseStatementIntegerSet set) : IEnumerator<int>
 	{
-		internal readonly MyDatabaseStatementIntegerSet MyDatabaseStatementIntegerSet;
+		internal readonly MyDatabaseStatementIntegerSet MyDatabaseStatementIntegerSet = set;
 
 		#region IEnumerator<int>
 		int _index = -1;
@@ -33,16 +33,6 @@ namespace MyEnumerableIntegerRangeLibrary
 		object IEnumerator.Current => Current;
 
 		#endregion
-
-		#region Constructor
-
-		// ReSharper disable once ConvertToPrimaryConstructor
-		public MyDatabaseStatementIntegerSetEnumerator(MyDatabaseStatementIntegerSet set)
-		{
-			MyDatabaseStatementIntegerSet = set;
-		}
-		#endregion
-
 
 	}
 }

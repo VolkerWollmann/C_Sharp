@@ -6,10 +6,12 @@ namespace MyEnumerableIntegerRangeLibrary
 	/// Simulate a source, which is worth to be encapsulated for lazy linq queries.
 	/// </summary>
 
-	public class MyOptimizedDatabaseStatementIntegerSetEnumerator : IEnumerator<int>
+	public class MyOptimizedDatabaseStatementIntegerSetEnumerator(
+		MyDatabaseStatementIntegerSetEnumerator enumerator,
+		string whereClause)
+		: IEnumerator<int>
 	{
-		private readonly MyOptimizedDatabaseStatementIntegerSet _myDatabaseStatementIntegerSet;
-		private readonly string _whereClause;
+		private readonly MyOptimizedDatabaseStatementIntegerSet _myDatabaseStatementIntegerSet = new(enumerator.MyDatabaseStatementIntegerSet);
 
 		#region IEnumerator<int>
 		int _index = -1;
@@ -20,7 +22,7 @@ namespace MyEnumerableIntegerRangeLibrary
 
 		public bool MoveNext()
 		{
-			_index = _myDatabaseStatementIntegerSet.GetNextIndex(_index,_whereClause);
+			_index = _myDatabaseStatementIntegerSet.GetNextIndex(_index,whereClause);
 			return _index > 0;
 		}
 
@@ -34,18 +36,5 @@ namespace MyEnumerableIntegerRangeLibrary
 		object IEnumerator.Current => Current;
 
 		#endregion
-
-		#region Constructor
-
-		// ReSharper disable once ConvertToPrimaryConstructor
-		public MyOptimizedDatabaseStatementIntegerSetEnumerator(MyDatabaseStatementIntegerSetEnumerator enumerator, string whereClause)
-		{
-			_myDatabaseStatementIntegerSet = new MyOptimizedDatabaseStatementIntegerSet(enumerator.MyDatabaseStatementIntegerSet);
-			_whereClause = whereClause;
-		}
-		
-		#endregion
-
-
 	}
 }
