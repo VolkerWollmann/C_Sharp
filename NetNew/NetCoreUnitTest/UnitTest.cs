@@ -176,7 +176,7 @@ namespace NetNewUnitTest
     public class CSharp12UnitTest(ITestOutputHelper output)
     {
 	    [Fact]
-	    public void TestRecord()
+	    public void PrimaryConstructor()
 	    {
 		    CSharp12.TestPrimaryConstructor();
 	    }
