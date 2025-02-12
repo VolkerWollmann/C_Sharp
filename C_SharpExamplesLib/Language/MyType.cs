@@ -69,7 +69,6 @@ namespace C_SharpExamplesLib.Language
             Type myType2Type = typeof(MyType2);
             string? mytype2Name = myType2Type.FullName;
 
-            // ReSharper disable once PossibleNullReferenceException
             var ass = Type.GetType(mytype2Name!)?.Assembly;
             Assert.IsNotNull(ass);
 
