@@ -83,8 +83,7 @@ namespace MyEnumerableIntegerRangeLibrary
 
         public List<IMyIntegerSet> GetIntegerSets(DesiredDatabases desiredDatabases = DesiredDatabases.Memory |
                                                                                       DesiredDatabases.DatabaseCursor | 
-                                                                                      DesiredDatabases.DatabaseStatement |
-                                                                                      DesiredDatabases.DatabaseOptimizedStatement)
+                                                                                      DesiredDatabases.DatabaseStatement )
         {
             List<IMyIntegerSet> result = [];
             if (( desiredDatabases & DesiredDatabases.Memory) == DesiredDatabases.Memory)
