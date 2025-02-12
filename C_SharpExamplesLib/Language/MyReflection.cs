@@ -9,7 +9,6 @@ namespace C_SharpExamplesLib.Language
         public string Name { get; } = name;
         public int Speed { private set; get; }
 
-        // ReSharper disable once UnusedMember.Global
         public bool SetSpeed(int speed)
         {
             if (speed < -5 || speed > 20)
@@ -33,9 +32,12 @@ namespace C_SharpExamplesLib.Language
 
             MethodInfo mi = t.GetMethods().First(m => m.Name == "SetSpeed");
 
-            mi.Invoke(ship, [5]);
+            bool speedSet1 = ((Ship) ship).SetSpeed(4);
+			Assert.AreEqual(true, speedSet1);
 
+			bool speedSet2 = (bool)(mi.Invoke(ship, [5]) ?? false);
             Assert.AreEqual(5, ((Ship)ship).Speed);
+            Assert.AreEqual(true,speedSet2);
 
             var properties = t.GetProperties();
 
