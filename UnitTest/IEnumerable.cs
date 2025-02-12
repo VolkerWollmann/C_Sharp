@@ -7,7 +7,6 @@ using MyEnumerableIntegerRangeLibrary;
 namespace UnitTest
 {
     [TestClass]
-	// ReSharper disable once InconsistentNaming
 	public class IEnumerable
 	{
 		private MyIntegerSetFactory _myIntegerSetFactory;
