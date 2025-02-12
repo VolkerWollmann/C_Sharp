@@ -290,13 +290,13 @@ namespace C_SharpExamplesLib.Language
 			MyIEquatable me2 = new MyIEquatable(2, "Donkey");
 			MyIEquatable me3 = new MyIEquatable(1, "Donkey");
 
-            // ReSharper disable once UnusedVariable
-            MyIComparable me4 = new MyIComparable(1, "Donkey");
-
+            
 			Assert.IsTrue(me1 == me3);
 			Assert.IsTrue(me1 != me2);
 			Assert.IsTrue(me1 < me2);
 
+			MyIComparable me4 = new MyIComparable(1, "Donkey");
+			Assert.IsNotNull(me4);
 			//Does not compile, because of type check during compilation
 			//Assert.IsTrue(me1 != me4);
 		}

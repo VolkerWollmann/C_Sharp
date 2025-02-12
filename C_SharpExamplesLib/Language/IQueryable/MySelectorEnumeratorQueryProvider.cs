@@ -60,10 +60,10 @@ namespace C_SharpExamplesLib.Language.IQueryable
             using var enumerator2 = new MyConditionalEnumerator<TResultType>(enumerator, conditionExpression);
             return enumerator2.MoveNext();
         }
-        #endregion
+		#endregion
 
-        // ReSharper disable once ReturnTypeCanBeNotNullable
-        public object? Execute(Expression expression)
+		// actual interface is  public object? Execute(Expression expression)
+		public object Execute(Expression expression)
         {
             // Check for any
             if (expression is MethodCallExpression { Method.Name: "Any" } methodCallExpression)
@@ -79,7 +79,7 @@ namespace C_SharpExamplesLib.Language.IQueryable
 
         public TResult Execute<TResult>(Expression expression)
         {
-            return (TResult) Execute(expression)!;
+            return (TResult) Execute(expression);
         }
 
     }
