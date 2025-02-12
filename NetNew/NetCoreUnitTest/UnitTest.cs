@@ -173,6 +173,15 @@ namespace NetNewUnitTest
         }
 	}
 
+    public class CSharp12UnitTest(ITestOutputHelper output)
+    {
+	    [Fact]
+	    public void TestRecord()
+	    {
+		    CSharp12.TestPrimaryConstructor();
+	    }
+    }
+
     public class RoslynUnitTest
     {
         [Fact]

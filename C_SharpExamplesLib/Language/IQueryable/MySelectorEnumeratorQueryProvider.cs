@@ -2,17 +2,11 @@
 
 namespace C_SharpExamplesLib.Language.IQueryable
 {
-    public class MySelectorEnumeratorQueryProvider<TResultType, TBaseType> : IQueryProvider
+    public class MySelectorEnumeratorQueryProvider<TResultType, TBaseType>(
+	    MySelectorEnumeratorQueryable<TResultType, TBaseType> mySelectorEnumerator)
+	    : IQueryProvider
     {
-        private readonly MySelectorEnumeratorQueryable<TResultType, TBaseType> _mySelectorEnumerator;
-
-        // ReSharper disable once ConvertToPrimaryConstructor
-        public MySelectorEnumeratorQueryProvider(MySelectorEnumeratorQueryable<TResultType, TBaseType> selectorEnumerator)
-        {
-            _mySelectorEnumerator = selectorEnumerator;
-        }
-
-        public System.Linq.IQueryable CreateQuery(Expression expression)
+	    public System.Linq.IQueryable CreateQuery(Expression expression)
         {
             throw new NotImplementedException();
             
@@ -26,7 +20,7 @@ namespace C_SharpExamplesLib.Language.IQueryable
             if (whereExpression != null)
             {
 				var result = MyQueryableFactory.GetMyConditionalEnumeratorQueryable(
-					_mySelectorEnumerator.GetEnumerator(), whereExpression);
+					mySelectorEnumerator.GetEnumerator(), whereExpression);
 
 				return (IQueryable<TElement>)result;
             }
@@ -35,7 +29,7 @@ namespace C_SharpExamplesLib.Language.IQueryable
             MethodCallExpression? selectExpression = selectFinder.GetInnermostExpression(expression);
             if (selectExpression != null)
             {
-                IEnumerator<TResultType> enumerator = _mySelectorEnumerator.GetEnumerator();
+                IEnumerator<TResultType> enumerator = mySelectorEnumerator.GetEnumerator();
 
                 var selectorEnumerator = new MySelectorEnumerator<TElement, TResultType>(enumerator, selectExpression);
 
@@ -50,13 +44,13 @@ namespace C_SharpExamplesLib.Language.IQueryable
         #region Any
         private bool Any()
         {
-            using var enumerator = _mySelectorEnumerator.GetEnumerator();
+            using var enumerator = mySelectorEnumerator.GetEnumerator();
             return enumerator.MoveNext();
         }
 
         private bool Any(Expression conditionExpression)
         {
-            using var enumerator = _mySelectorEnumerator.GetEnumerator();
+            using var enumerator = mySelectorEnumerator.GetEnumerator();
             using var enumerator2 = new MyConditionalEnumerator<TResultType>(enumerator, conditionExpression);
             return enumerator2.MoveNext();
         }

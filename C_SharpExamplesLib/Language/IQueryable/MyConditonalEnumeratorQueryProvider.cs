@@ -2,15 +2,10 @@
 
 namespace C_SharpExamplesLib.Language.IQueryable
 {
-	public class MyConditionalEnumeratorQueryProvider<TType> : IQueryProvider
+	public class MyConditionalEnumeratorQueryProvider<TType>(
+		MyConditionalEnumeratorQueryable<TType> queryableIntegerEnumerator)
+		: IQueryProvider
 	{
-		private readonly MyConditionalEnumeratorQueryable<TType> _myQueryableIntegerEnumerator;
-		// ReSharper disable once ConvertToPrimaryConstructor
-		public MyConditionalEnumeratorQueryProvider(MyConditionalEnumeratorQueryable<TType> queryableIntegerEnumerator)
-		{
-			_myQueryableIntegerEnumerator = queryableIntegerEnumerator;
-		}
-
 		public System.Linq.IQueryable CreateQuery(Expression expression)
 		{
 			throw new NotImplementedException();
@@ -23,7 +18,7 @@ namespace C_SharpExamplesLib.Language.IQueryable
 
 			if (whereExpression != null)
 			{
-				var result = MyQueryableFactory.GetMyConditionalEnumeratorQueryable(_myQueryableIntegerEnumerator.GetEnumerator(), whereExpression);
+				var result = MyQueryableFactory.GetMyConditionalEnumeratorQueryable(queryableIntegerEnumerator.GetEnumerator(), whereExpression);
 
 				return (IQueryable<TElement>)result;
 			}
@@ -32,7 +27,7 @@ namespace C_SharpExamplesLib.Language.IQueryable
             MethodCallExpression? selectExpression = selectFinder.GetInnermostExpression(expression);
             if (selectExpression != null)
             {
-				IEnumerator<TType> enumerator = _myQueryableIntegerEnumerator.GetEnumerator();
+				IEnumerator<TType> enumerator = queryableIntegerEnumerator.GetEnumerator();
 
                 var selectorEnumerator = new MySelectorEnumerator<TElement, TType>(enumerator, selectExpression);
                 
@@ -52,13 +47,13 @@ namespace C_SharpExamplesLib.Language.IQueryable
 		#region Any
 		private bool Any()
 		{
-			using var enumerator = _myQueryableIntegerEnumerator.GetEnumerator();
+			using var enumerator = queryableIntegerEnumerator.GetEnumerator();
 			return enumerator.MoveNext();
 		}
 
 		private bool Any(Expression conditionExpression)
 		{
-			using var enumerator = _myQueryableIntegerEnumerator.GetEnumerator();
+			using var enumerator = queryableIntegerEnumerator.GetEnumerator();
 			using var enumerator2 = new MyConditionalEnumerator<TType>(enumerator, conditionExpression);
 			return enumerator2.MoveNext();
 		}
@@ -67,7 +62,7 @@ namespace C_SharpExamplesLib.Language.IQueryable
 		#region Sum
 		private int Sum()
 		{
-			using var enumerator = _myQueryableIntegerEnumerator.GetEnumerator();
+			using var enumerator = queryableIntegerEnumerator.GetEnumerator();
 			enumerator.Reset();
 			int sum = 0;
 			while (enumerator.MoveNext())
@@ -83,7 +78,7 @@ namespace C_SharpExamplesLib.Language.IQueryable
 
 		private int Max()
 		{
-			using var enumerator = _myQueryableIntegerEnumerator.GetEnumerator();
+			using var enumerator = queryableIntegerEnumerator.GetEnumerator();
 			enumerator.Reset();
 			int max = Int32.MinValue;
 			while (enumerator.MoveNext())
