@@ -7,8 +7,7 @@ namespace C_SharpExamplesLib.Language
 	    private static void Level2()
         {
             // Put Breakpoint here
-            // ReSharper disable once EmptyStatement
-            ;
+            // ;
         }
 
         [DebuggerStepThrough]

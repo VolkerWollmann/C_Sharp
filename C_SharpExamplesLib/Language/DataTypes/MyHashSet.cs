@@ -6,7 +6,6 @@ namespace C_SharpExamplesLib.Language.DataTypes
     {
         public static void Test()
         {
-            // ReSharper disable once UseObjectOrCollectionInitializer
             HashSet<int> integerHashSet =
             [
 	            1,

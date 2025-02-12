@@ -427,7 +427,6 @@ namespace C_SharpExamplesLib.Language.Threads
 		{
 			Console.WriteLine("Name: {0}", t.Name);
 			Console.WriteLine("Culture: {0}", t.CurrentCulture);
-            // ReSharper disable once StringLiteralTypo
             Console.WriteLine("Culture IetfLanguageTag: {0}", t.CurrentCulture.IetfLanguageTag);
             Console.WriteLine("Culture EnglishName: {0}", t.CurrentCulture.EnglishName);
             Console.WriteLine("Culture TwoLetterISOLanguageName: {0}", t.CurrentCulture.TwoLetterISOLanguageName);

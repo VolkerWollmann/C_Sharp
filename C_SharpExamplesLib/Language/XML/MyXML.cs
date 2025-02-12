@@ -185,14 +185,12 @@ namespace C_SharpExamplesLib.Language.XML
 
 		public class Animal(string name, string description)
 		{
-			// ReSharper disable once PropertyCanBeMadeInitOnly.Global
-			public string Name { get; set; } = name;
+			public string Name { get; init; } = name;
 
             public readonly string Description = description;
 
             public Animal? Friend { get; set; }
 
-            // ReSharper disable once UnusedMember.Global
             public Animal() : this("", "")
             {
 			}

@@ -12,10 +12,9 @@ namespace C_SharpExamplesLib.OtherExamples
 
 	internal class Animal
 	{
-		// ReSharper disable once PropertyCanBeMadeInitOnly.Global
-		public string Type { get; set; } = "";
-		// ReSharper disable once PropertyCanBeMadeInitOnly.Global
-		public string Name { get; set; } = "";
+		
+		public string Type { get; init; } = "";
+		public string Name { get; init; } = "";
 	}
 
 	public abstract class SerialisationExample
