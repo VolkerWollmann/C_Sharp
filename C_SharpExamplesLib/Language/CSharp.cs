@@ -120,7 +120,6 @@ namespace C_SharpExamplesLib.Language
         // #CompilerServices #CallerMemberName #GetCurrentMethod
         public static void ShowCompilerServices()
         {
-            // ReSharper disable once PossibleNullReferenceException
             TraceMessage(System.Reflection.MethodBase.GetCurrentMethod()?.Name ?? "Nothing to trace" );
         }
 

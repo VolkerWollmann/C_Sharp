@@ -183,8 +183,7 @@ namespace C_SharpExamplesLib.Language.DataTypes
 			Assert.AreEqual(42, ((MyGenericClass<RefinedClassA>)t5).GenericClassMethod());
 
 			//create dynamic invalid generic class instance
-            // ReSharper disable once UnusedVariable
-            Assert.ThrowsException<ArgumentException>(() => { Type t6 = typeof(MyGenericClass<>).MakeGenericType(typeof(int)); });
+            Assert.ThrowsException<ArgumentException>(() => { Type t6 = typeof(MyGenericClass<>).MakeGenericType(typeof(int)); Assert.IsNotNull(t6); });
 
 		}
     }
