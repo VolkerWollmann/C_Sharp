@@ -173,7 +173,17 @@ namespace NetNewUnitTest
         }
 	}
 
-    public class CSharp12UnitTest(ITestOutputHelper output)
+    public class CSharp11UnitTest
+    {
+	    [Fact]
+	    public void FileClasses()
+	    {
+            CSharp11.TestFileClasses1();
+            CSharp11.TestFileClasses2();
+	    }
+    }
+
+    public class CSharp12UnitTest()
     {
 	    [Fact]
 	    public void PrimaryConstructor()
