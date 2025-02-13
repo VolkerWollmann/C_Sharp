@@ -4,7 +4,7 @@ using Xunit.Abstractions;
 
 namespace CSharpNew
 {
-    public abstract class CSharp9
+    public abstract class CSharp09
     {
         // Visual Studio 2022 : comment test change
 

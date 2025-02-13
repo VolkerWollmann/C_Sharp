@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CSharpNew
 {
     // Karlsruhe, VS2022, 09.03.22, 2
-    public abstract class CSharp8
+    public abstract class CSharp08
     {
         public static void RangeOperators()
         {

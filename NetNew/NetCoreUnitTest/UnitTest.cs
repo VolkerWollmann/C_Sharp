@@ -11,36 +11,36 @@ using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace NetNewUnitTest
 {
-    public class CSharp8UnitTest
+    public class CSharp08UnitTest
     {
         [Fact]
         public void RangeOperators()
         {
-            CSharp8.RangeOperators();
+            CSharp08.RangeOperators();
         }
 
         [Fact]
         public void SwitchWithCaseGuards()
         {
-            CSharp8.CaseGuards();
+            CSharp08.CaseGuards();
         }
 
         [Fact]
         public void PropertyPatternMatching()
         {
-            CSharp8.PropertyPatternMatching();
+            CSharp08.PropertyPatternMatching();
         }
 
         [Fact]
         public void PositionalPatternMatching()
         {
-            CSharp8.PositionalPatternMatching();
+            CSharp08.PositionalPatternMatching();
         }
 
         [Fact]
         public void TuplePatternMatching()
         {
-            CSharp8.TuplePatternMatching();
+            CSharp08.TuplePatternMatching();
         }
 
         // seems to not work, see unit 
@@ -50,7 +50,7 @@ namespace NetNewUnitTest
         {
             try
             {
-                CSharp8.NullNameShouldThrowTest();
+                CSharp08.NullNameShouldThrowTest();
             }
             catch (ArgumentNullException ane)
             {
@@ -63,27 +63,27 @@ namespace NetNewUnitTest
         [Fact]
         public void NullCoalescingExample()
         {
-            CSharp8.NullCoalescingExample();
+            CSharp08.NullCoalescingExample();
         }
     }
-    public class CSharp9UnitTest(ITestOutputHelper output)
+    public class CSharp09UnitTest(ITestOutputHelper output)
     {
 	    [Fact]
         public void TestRecord()
         {
-            CSharp9.TestRecord();
+            CSharp09.TestRecord();
         }
 
         [Fact]
         public void ContentEquality()
         {
-            CSharp9.ContentEquality(output);
+            CSharp09.ContentEquality(output);
         }
 
         [Fact]
         public void TestInit()
         {
-            CSharp9.TestInit();
+            CSharp09.TestInit();
         }
 
         [Fact]
@@ -163,7 +163,7 @@ namespace NetNewUnitTest
         [Fact]
         public void Test_IDisposable()
         {
-            CSharp8.Test_IDisposable();
+            CSharp08.Test_IDisposable();
         }
 
         [Fact]
