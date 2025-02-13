@@ -183,7 +183,7 @@ namespace NetNewUnitTest
 	    }
     }
 
-    public class CSharp12UnitTest()
+    public class CSharp12UnitTest
     {
 	    [Fact]
 	    public void PrimaryConstructor()

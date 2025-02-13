@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -156,9 +157,10 @@ namespace CSharpNew
             double d = Math.Sqrt(2);
             decimal dec = 1.4142135623730950488016887242097m;
 
-			Console.WriteLine(f);
-			Console.WriteLine(d);
-            Console.WriteLine(dec);
+            Assert.IsTrue(f.ToString(CultureInfo.InvariantCulture).StartsWith("1.414213"));
+            Assert.IsTrue(d.ToString(CultureInfo.InvariantCulture).StartsWith("1.414213562373095"));
+            Assert.IsTrue(dec.ToString(CultureInfo.InvariantCulture).StartsWith("1.414213562373095048801688724"));
+            
         }
         #endregion
 
