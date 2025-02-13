@@ -173,6 +173,14 @@ namespace NetNewUnitTest
         }
 	}
 
+    public class CSharp10UnitTest
+    {
+	    [Fact]
+	    public void FromFileScopedNamespace()
+	    {
+            CSharp10.DefinedInFileScopedNameSpace();
+		}
+    }
     public class CSharp11UnitTest
     {
 	    [Fact]
