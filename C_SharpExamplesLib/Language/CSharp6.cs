@@ -47,7 +47,7 @@ namespace C_SharpExamplesLib.Language
 		private const string InternalRabbit = "Rabbit";
 		private string StringInterpolation3() => $"({InternalRabbit}:{InternalRabbit, 10}:{InternalRabbit,3}:{InternalRabbit,-10}:)";
 
-
+		// Method with return type #Tuple
 		private (int Zahl, bool Wahrheit) GetTuple() => (1,true);
 
 		// #Dictionary #initialization
@@ -101,6 +101,10 @@ namespace C_SharpExamplesLib.Language
 			CSharp6 cs6 = new CSharp6(5);
 			var r = cs6.GetTuple();
 			Assert.IsTrue(r.Wahrheit);
+
+			var myTuple2 = Tuple.Create(1, false);
+			Assert.IsInstanceOfType(myTuple2.Item2, typeof(bool));
+			
 
 			var t = (1, "Rabbit", true);
 			var (_, tier, _) = t;
