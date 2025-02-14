@@ -21,17 +21,17 @@ namespace MyEnumerableIntegerRangeLibrary
 		private int _currentValue = -1;
 		public bool MoveNext()
 		{
-			bool wo = false;
+			bool moveNextResult = false;
 			//# the null-coalescing assignment 
 			_reader ??= MyDatabaseCursorIntegerSet.GetReader();
 			if (_reader != null)
 			{
-				wo = _reader.Read();
-				if (wo)
+				moveNextResult = _reader.Read();
+				if (moveNextResult)
 					_currentValue = _reader.GetInt32(0);
 			}
 
-			return wo;
+			return moveNextResult;
 		}
 
 		public void Reset()
