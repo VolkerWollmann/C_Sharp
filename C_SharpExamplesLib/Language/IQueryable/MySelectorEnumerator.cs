@@ -34,6 +34,13 @@ namespace C_SharpExamplesLib.Language.IQueryable
 			}
 		}
 
+		public MySelectorEnumerator(IEnumerator<TParameter> baseEnumerator, Func<TParameter, TResult> castFunction)
+		{
+			_baseEnumerator = baseEnumerator;
+			_castFunction = castFunction;
+		}
+
+
 		private TResult ApplyCast()
 		{
             return _castFunction!(_baseEnumerator.Current);
