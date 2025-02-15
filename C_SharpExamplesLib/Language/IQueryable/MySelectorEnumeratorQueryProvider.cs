@@ -41,8 +41,9 @@ namespace C_SharpExamplesLib.Language.IQueryable
             throw new NotImplementedException("CreateQuery");
         }
 
-        #region Any
-        private bool Any()
+		#region aggregate functions
+		#region Any
+		private bool Any()
         {
             using var enumerator = mySelectorEnumerator.GetEnumerator();
             return enumerator.MoveNext();
@@ -54,10 +55,11 @@ namespace C_SharpExamplesLib.Language.IQueryable
             using var enumerator2 = new MyConditionalEnumerator<TResultType>(enumerator, conditionExpression);
             return enumerator2.MoveNext();
         }
-		#endregion
+        #endregion
+        #endregion
 
-		// actual interface is  public object? Execute(Expression expression)
-		public object Execute(Expression expression)
+        // actual interface is  public object? Execute(Expression expression)
+        public object Execute(Expression expression)
         {
             // Check for any
             if (expression is MethodCallExpression { Method.Name: "Any" } methodCallExpression)

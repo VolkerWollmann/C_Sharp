@@ -44,6 +44,7 @@ namespace C_SharpExamplesLib.Language.IQueryable
 			throw new NotImplementedException();
 		}
 
+		#region aggregate functions
 		#region Any
 		private bool Any()
 		{
@@ -91,6 +92,7 @@ namespace C_SharpExamplesLib.Language.IQueryable
 		}
 
 		#endregion
+		#endregion 
 
 		public TResult Execute<TResult>(Expression expression)
 		{
