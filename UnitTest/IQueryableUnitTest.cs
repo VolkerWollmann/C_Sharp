@@ -283,6 +283,17 @@ namespace UnitTest
 		}
 
 		[TestMethod]
+		public void Test_Square()
+		{
+			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+			{
+				using var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+				var squaredNumbers = myQueryableIntegerSet.Square().ToList();
+				CollectionAssert.AreEqual(new[] { 1, 4, 9 }, squaredNumbers);
+			}
+		}
+
+		[TestMethod]
 		public void Test_IQueryable_Where_Any()
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
