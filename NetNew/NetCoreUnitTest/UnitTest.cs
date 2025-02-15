@@ -256,5 +256,13 @@ namespace NetNewUnitTest
 	    {
 		    CSharp.TestFloatingPointNumericTypes();
 	    }
+
+	    [Fact]
+	    public void TestRounding()
+	    {
+		    Assert.AreEqual(Math.Ceiling(1.2), 2);
+			Assert.AreEqual(Math.Floor(1.5), 1);
+            Assert.AreEqual(Math.Round(1.5, MidpointRounding.ToEven),2);
+		}
 	}
 }
