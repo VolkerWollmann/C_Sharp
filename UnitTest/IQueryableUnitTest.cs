@@ -292,7 +292,7 @@ namespace UnitTest
 				CollectionAssert.AreEqual(new[] { 1, 4 }, squaredNumbers);
 
                 var squaredNumbers1 = myQueryableIntegerSet.Where(i => i <= 2).Square().ToList();
-                CollectionAssert.AreEqual(new[] { 1, 4 }, squaredNumbers);
+                CollectionAssert.AreEqual(new[] { 1, 4 }, squaredNumbers1);
 
             }
         }

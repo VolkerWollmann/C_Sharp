@@ -7,16 +7,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CSharpNaming
 {
     #region supporter classes
-    internal class UserGroup { }
-    internal class Assignment { }
-    internal class CustomerId { }
+    internal class UserGroup;
+    internal class Assignment;
+    internal class CustomerId;
 
-    internal class HtmlHelper { }
+    internal class HtmlHelper;
 
-    internal class FtpTransfer { }
+    internal class FtpTransfer;
 
     // ReSharper disable once InconsistentNaming
-    internal class UIControl { }
+    internal class UIControl;
 
     #endregion
 
@@ -195,32 +195,20 @@ namespace CSharpNaming
 
         #region X. Do use noun or noun phrases to name a class: public class Employee, public class DocumentCollection
 
-        private class Employee
-        {
-        }
+        private class Employee;
 
-        private class BusinessLocation
-        {
-        }
+        private class BusinessLocation;
 
-        private class DocumentCollection
-        {
-        }
+        private class DocumentCollection;
         #endregion
 
         #region XI. Do prefix interfaces with the letter I: public interface IShape 
         //     Interface names are noun (phrases) or adjectives.
-        private interface IShape
-        {
-        }
+        private interface IShape;
 
-        private interface IShapeCollection
-        {
-        }
+        private interface IShapeCollection;
         // ReSharper disable once IdentifierTypo
-        private interface IGroupable
-        {
-        }
+        private interface IGroupable;
         #endregion
 
         #region XII. Organize namespaces with a clearly defined structure: namespace Company.Product.Module.SubModule
@@ -334,9 +322,7 @@ namespace CSharpNaming
 
         #region suppress warnings
 
-        private class Master : IShape, IShapeCollection, IGroupable
-        {
-        }
+        private class Master : IShape, IShapeCollection, IGroupable;
 
         private void ConsumeVariables()
         {
