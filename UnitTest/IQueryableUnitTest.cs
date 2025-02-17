@@ -291,14 +291,9 @@ namespace UnitTest
 				var squaredNumbers = myQueryableIntegerSet.Square().Where(i => i <= 4).ToList();
 				CollectionAssert.AreEqual(new[] { 1, 4 }, squaredNumbers);
 
-                // CS1929 : 'IQueryable<int>' does not contain a definition for 'Square'
-                // and the best extension method overload 'MyQueryableExtension.Square(IMyDisposeQueryable<int>)'
-                // requires a receiver of type 'C_SharpExamplesLib.Language.IQueryable.IMyDisposeQueryable<int>'
-                //var squaredNumbers2 = myQueryableIntegerSet.Where(i => i <= 2).Square().ToList();
-                //CollectionAssert.AreEqual(new[] { 1, 4 }, squaredNumbers);
-
-                var squaredNumbers2 = ((IMyDisposeQueryable<int>)myQueryableIntegerSet.Where(i => i <= 2)).Square().ToList();
+                var squaredNumbers1 = myQueryableIntegerSet.Where(i => i <= 2).Square().ToList();
                 CollectionAssert.AreEqual(new[] { 1, 4 }, squaredNumbers);
+
             }
         }
 
