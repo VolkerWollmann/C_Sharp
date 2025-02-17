@@ -1,5 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+// #custom type alias
+using IntegerPairs = System.Tuple<int, int>;
+
 namespace C_SharpExamplesLib.Language
 {
 	//C-Sharp 6 features
@@ -94,7 +97,7 @@ namespace C_SharpExamplesLib.Language
         // #Tuple
 		public static void TupleTest()
         {
-            Tuple<int, int> myTuple = new Tuple<int, int> (1, 42);
+            var myTuple = new IntegerPairs (1, 42);
 			Assert.AreEqual(1, myTuple.Item1);
 			Assert.AreEqual(42, myTuple.Item2);
 
