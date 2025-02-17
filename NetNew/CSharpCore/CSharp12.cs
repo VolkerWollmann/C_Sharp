@@ -23,5 +23,15 @@ namespace CSharpNew
 			Assert.AreEqual("Macchi", macchi.Name);
 			Assert.AreEqual("Carrot", macchi.Food);
 		}
+
+        public static void Swap()
+        {
+            int a = 5, b = 10;
+            // Swap using tuple deconstruction
+            (a, b) = (b, a);
+			
+			Assert.AreEqual(10,a);
+			Assert.AreEqual(5,b);
+        }
 	}
 }

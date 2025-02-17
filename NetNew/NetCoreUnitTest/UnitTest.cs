@@ -198,6 +198,12 @@ namespace NetNewUnitTest
 	    {
 		    CSharp12.TestPrimaryConstructor();
 	    }
+
+        [Fact]
+        public void Swap()
+        {
+            CSharp12.Swap();
+        }
     }
 
     public class RoslynUnitTest
