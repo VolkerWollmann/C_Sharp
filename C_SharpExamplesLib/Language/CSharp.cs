@@ -248,7 +248,7 @@ namespace C_SharpExamplesLib.Language
 
             // ReSharper disable once HeuristicUnreachableCode
             throw new Exception("That must not happen");
-#pragma warning restore CS0162 // Unreachable code detected
+            #pragma warning restore CS0162 // Unreachable code detected
 
             Label3:
                 Console.WriteLine("Test end.");
