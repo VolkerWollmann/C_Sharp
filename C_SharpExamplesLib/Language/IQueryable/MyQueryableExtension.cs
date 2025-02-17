@@ -23,7 +23,7 @@ namespace C_SharpExamplesLib.Language.IQueryable
 
 		public static IQueryable<int> Square(this IQueryable<int> myEnumeratorQueryable)
 		{
-			return (IQueryable<int>) GetSquareQueryable(myEnumeratorQueryable.GetEnumerator());
+			return GetSquareQueryable(myEnumeratorQueryable.GetEnumerator());
 		}
 	}
 }
