@@ -16,6 +16,12 @@ namespace UnitTest
 			MyEnum.Enum_Test();
 		}
 
+        [TestMethod]
+        public void LoopInvariant()
+        {
+			MyLoopInvariant.LoopInvariant();
+        }
+        
 		[TestMethod]
 		public void Operator_Test()
 		{
