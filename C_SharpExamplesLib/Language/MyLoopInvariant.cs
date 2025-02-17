@@ -31,10 +31,12 @@ namespace C_SharpExamplesLib.Language
 
                 // Loop invariant holds: After each iteration of the outer loop,
                 // the largest unsorted element is moved to its correct position.
-                // In my words all elements up to i are smaller or equal than the elements from i onwards 
+                
+                // Loop invariant in my words:
+                // all elements up to i are smaller or equal than the elements from i onwards 
                 var unsortedSet = rn.Take(rn.Length - i).ToList();
                 var sortedSet = rn.Skip(rn.Length - i).ToList();
-                Assert.IsTrue(unsortedSet.All(n => sortedSet.All(m => n <= m)));
+                Assert.IsTrue(sortedSet.All( n => unsortedSet.Max() <= n ));
             }
 
         }
