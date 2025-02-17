@@ -33,7 +33,7 @@ namespace UnitTest
         }
 
         [TestMethod]
-		public void Test_IQueryable_ForEach()
+		public void Test_ForEach()
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
@@ -48,7 +48,7 @@ namespace UnitTest
 		}
 
 	    [TestMethod]
-		public void Test_IQueryable_Where_ForEach()
+		public void Test_Where_ForEach()
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
@@ -62,7 +62,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void Test_IQueryable_ToList()
+		public void Test_ToList()
 		{
 			List<int> l = [1, 2, 3];
 			MyMemoryIntegerSet myIntegerSet = new MyMemoryIntegerSet(l);
@@ -73,7 +73,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void Test_IQueryable_Where_ToList()
+		public void Test_Where_ToList()
 		{
 			List<int> l = [1, 2, 3];
 			MyMemoryIntegerSet myIntegerSet = new MyMemoryIntegerSet(l);
@@ -102,7 +102,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void Test_IQueryable_Where_Where()
+		public void Test_Where_Where()
 		{
 			IMyIntegerSet myIntegerSet = _myIntegerSetFactory.GetMemoryIntegerSet();
 
@@ -115,7 +115,7 @@ namespace UnitTest
 
 		[TestMethod]
 		//[Ignore]
-		public void Test_IQueryable_Select_Simple()
+		public void Test_Select_Simple()
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
@@ -131,7 +131,7 @@ namespace UnitTest
 
         [TestMethod]
         //[Ignore]
-        public void Test_IQueryable_Select_Select()
+        public void Test_Select_Select()
         {
             foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
             {
@@ -146,7 +146,7 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void Test_IQueryable_Select_IntegerFunction()
+        public void Test_Select_IntegerFunction()
         {
             List<int> l = [1, 2, 3];
             MyMemoryIntegerSet myIntegerSet = new MyMemoryIntegerSet(l);
@@ -168,7 +168,7 @@ namespace UnitTest
         }
 
 		[TestMethod]
-        public void Test_IQueryable_Select_String()
+        public void Test_Select_String()
         {
             List<int> l = [1, 2, 3];
             MyMemoryIntegerSet myIntegerSet = new MyMemoryIntegerSet(l);
@@ -190,7 +190,7 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void Test_IQueryable_Where_Select_String()
+        public void Test_Where_Select_String()
         {
             List<int> l = [1, 2, 3];
             MyMemoryIntegerSet myIntegerSet = new MyMemoryIntegerSet(l);
@@ -213,7 +213,7 @@ namespace UnitTest
 
 
         [TestMethod]
-        public void Test_IQueryable_Select_Tuple()
+        public void Test_Select_Tuple()
         {
             foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
             {
@@ -232,7 +232,7 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void Test_IQueryable_Select_Tuple_Any()
+        public void Test_Select_Tuple_Any()
         {
             foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
             {
@@ -244,7 +244,7 @@ namespace UnitTest
         }
 
         [TestMethod]
-		public void Test_IQueryable_Any()
+		public void Test_Any()
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
@@ -257,7 +257,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void Test_IQueryable_AnyExpression()
+		public void Test_AnyExpression()
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
@@ -270,7 +270,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void Test_IQueryable_AnyWithFunctionCallExpression()
+		public void Test_AnyWithFunctionCallExpression()
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
@@ -298,7 +298,7 @@ namespace UnitTest
         }
 
 		[TestMethod]
-		public void Test_IQueryable_Where_Any()
+		public void Test_Where_Any()
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
@@ -313,7 +313,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void Test_IQueryable_Sum()
+		public void Test_Sum()
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
@@ -325,7 +325,7 @@ namespace UnitTest
 		}
 
 		[TestMethod]
-		public void Test_IQueryable_Max()
+		public void Test_Max()
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
 			{
