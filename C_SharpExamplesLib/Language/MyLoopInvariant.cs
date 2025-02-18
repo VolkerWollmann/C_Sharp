@@ -60,8 +60,8 @@ namespace C_SharpExamplesLib.Language
                 Assert.IsTrue(rn[n-i-1] < rn[n-i] );
             }
 
-            int[] index = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-            Assert.IsTrue(index.All(i => i > (n-1) || rn[i] < rn[i + 1]));
+            Assert.IsTrue(rn.Zip(rn.Skip(1), (ri, ri1) => ri < ri1).All(x => x));
+
         }
     }
 }
