@@ -33,6 +33,7 @@ namespace C_SharpExamplesLib.Language
                 Assert.IsTrue(rn.Take(i+1).All( rni => rni <= max));
             }
 
+            // Loop invariant: The maximum element found is stored in 'max'.
             Assert.IsTrue(rn.All(rni => rni <= max));
         }
         public static void LoopInvariant2()
