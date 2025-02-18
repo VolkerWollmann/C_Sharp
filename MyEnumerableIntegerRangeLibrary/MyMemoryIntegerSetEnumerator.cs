@@ -2,8 +2,11 @@
 
 namespace MyEnumerableIntegerRangeLibrary
 {
-	public class MyMemoryIntegerSetEnumerator(MyMemoryIntegerSet set) : IEnumerator<int>
+	public class MyMemoryIntegerSetEnumerator: IEnumerator<int>
 	{
+		private readonly MyMemoryIntegerSet _set;
+		int _index = -1;
+		
 		#region IEnumerator<int>
 		public void Dispose()
 		{
@@ -11,19 +14,25 @@ namespace MyEnumerableIntegerRangeLibrary
 
 		public bool MoveNext()
 		{
-			return set.MoveNext();
+			_index =  _set.GetNextIndex(_index);
+			return _index >= 0;
 		}
 
 		public void Reset()
 		{
-			set.Reset();
+			_index = -1;
 		}
 
-		public int Current => set.Current;
+		public int Current => _set.GetValueAtIndex(_index);
 
 		object IEnumerator.Current => Current;
 
 		#endregion
 
+		public MyMemoryIntegerSetEnumerator(MyMemoryIntegerSet set)
+		{
+			this._set = set;
+			Reset();
+		}
 	}
 }

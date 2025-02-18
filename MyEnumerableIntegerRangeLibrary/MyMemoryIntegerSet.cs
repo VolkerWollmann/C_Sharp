@@ -12,39 +12,33 @@ namespace MyEnumerableIntegerRangeLibrary
         private readonly List<int> _set;
         private int _i;
 
-        #endregion
+		#endregion
 
-        #region IEnumerator<int>
-        public void Dispose()
+		#region IMyIntegerSet
+		public void Dispose()
         {
             
         }
 
-        /// <summary>
-        /// Simulate time-consuming generation of next element
-        /// </summary>
-        /// <returns>next value</returns>
-        public bool MoveNext()
-        {
-            _i = _i + 1;
-            Thread.Sleep(100);
+		#endregion
 
-            return _i < _set.Count;
-        }
+		public int GetNextIndex(int i)
+		{
+			int result = i + 1;
+			if (result < _set.Count)
+				return result;
+            
+			return -1;
+		}
 
-        public void Reset()
-        {
-            _i = -1;
-        }
+		public int GetValueAtIndex(int i)
+		{
+			return _set[i];
+		}
 
-        public int Current => _set[_i];
-
-
-        #endregion
-
-        #region IEnumerable<int>
-        // bad implementation because only one iterator possible
-        public IEnumerator<int> GetEnumerator()
+		#region IEnumerable<int>
+		// bad implementation because only one iterator possible
+		public IEnumerator<int> GetEnumerator()
         {
             return new MyMemoryIntegerSetEnumerator(this);
         }
@@ -60,8 +54,6 @@ namespace MyEnumerableIntegerRangeLibrary
 		public MyMemoryIntegerSet(List<int> set)
         {
             _set = set;
-            Reset();
-
         }
         #endregion
 
