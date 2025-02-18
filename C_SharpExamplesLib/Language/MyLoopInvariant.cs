@@ -45,29 +45,30 @@ namespace C_SharpExamplesLib.Language
             for (int i = 0; i < n; i++)
             {
                 // Outer loop invariant:
-                for (int i2 = 0; i2 < i-1; i2++) { Assert.IsTrue(rn[n - i2 - 1] < rn[n - i2]); }
+                for (int i2 = 0; i2 < i-1; i2++) { Assert.IsTrue(rn[i2] < rn[i2+1]); }
                 
-                for (int j = 0; j < n - i; j++)
+                for (int j = n; j > i; j--)
                 {
-                    if (rn[j] > rn[j + 1])
+                    if (rn[j-1] > rn[j])
                     {
                         // Swap elements
-                        (rn[j], rn[j + 1]) = (rn[j + 1], rn[j]);
+                        (rn[j], rn[j -1]) = (rn[j-1], rn[j]);
                     }
 
                     // Inner loop invariant
-                    Assert.IsTrue(rn[j] < rn[j+1]); 
+                    Assert.IsTrue(rn[j-1] < rn[j]); 
                 }
 
                 // Inner loop invariant
-                Assert.IsTrue(rn[n - i - 1 ] < rn[n-i]);
+                Assert.IsTrue(rn[i+1-1] < rn[i+1]);
+                Assert.IsTrue(rn[i] < rn[i + 1]);
 
                 // Outer loop invariant:
-                for(int i2 = 0; i2 < i; i2++) { Assert.IsTrue(rn[n - i2 - 1] < rn[n - i2]); }
+                for(int i2 = 0; i2 < i; i2++) { Assert.IsTrue(rn[i2] < rn[i2+1]); }
             }
 
             // Outer loop invariant: the list is sorted
-            for (int i =0; i < n; i++) { Assert.IsTrue(rn[n - i - 1] < rn[n - i]); }
+            for (int i2 =0; i2 < n; i2++) { Assert.IsTrue(rn[i2] < rn[i2+1]); }
 
 
             {
