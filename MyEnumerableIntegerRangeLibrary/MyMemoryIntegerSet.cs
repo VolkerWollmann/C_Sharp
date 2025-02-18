@@ -6,15 +6,8 @@ namespace MyEnumerableIntegerRangeLibrary
     /// <summary>
     /// Simulate a source, which is worth to be encapsulated for lazy linq queries.
     /// </summary>
-    public class MyMemoryIntegerSet : IMyIntegerSet
+    public class MyMemoryIntegerSet(List<int> set) : IMyIntegerSet
     {
-        #region IntegerRangeData
-        
-        private readonly List<int> _set;
-        private int _i;
-
-		#endregion
-
 		#region IMyIntegerSet
 		public void Dispose()
         {
@@ -29,7 +22,7 @@ namespace MyEnumerableIntegerRangeLibrary
 			Thread.Sleep(100);
             
 			int result = i + 1;
-			if (result < _set.Count)
+			if (result < set.Count)
 				return result;
             
 			return -1;
@@ -37,7 +30,7 @@ namespace MyEnumerableIntegerRangeLibrary
 
 		public int GetValueAtIndex(int i)
 		{
-			return _set[i];
+			return set[i];
 		}
 
 		#region IEnumerable<int>
@@ -50,14 +43,6 @@ namespace MyEnumerableIntegerRangeLibrary
         IEnumerator IEnumerable.GetEnumerator()
         {
             return new MyMemoryIntegerSetEnumerator(this);
-        }
-        #endregion
-
-		#region Constructor
-
-		public MyMemoryIntegerSet(List<int> set)
-        {
-            _set = set;
         }
         #endregion
 
