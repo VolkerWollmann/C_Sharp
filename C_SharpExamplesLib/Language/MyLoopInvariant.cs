@@ -43,7 +43,6 @@ namespace C_SharpExamplesLib.Language
             
             for (int i = 0; i < n; i++)
             {
-                // Inner loop: Compares adjacent elements and swaps them if needed
                 for (int j = 0; j < n - i; j++)
                 {
                     if (rn[j] > rn[j + 1])
@@ -51,15 +50,22 @@ namespace C_SharpExamplesLib.Language
                         // Swap elements
                         (rn[j], rn[j + 1]) = (rn[j + 1], rn[j]);
                     }
+
+                    // Inner loop invariant
+                    Assert.IsTrue(rn[j] < rn[j+1]); 
                 }
 
-                // Loop invariant holds: After each iteration of the outer loop,
-                // the largest unsorted element is moved to its correct position.
+                // Inner loop invariant
+                Assert.IsTrue(rn[n - i - 1 ] < rn[n-i]);
                 
-                // Loop invariant in my words:
+                // Outer loop invariant:
                 Assert.IsTrue(rn[n-i-1] < rn[n-i] );
             }
 
+            // Outer loop invariant:
+            for (int i =0; i < n; i++) { Assert.IsTrue(rn[n - i - 1] < rn[n - i]); }
+            
+            // Outer loop invariant: as LINQ expression
             Assert.IsTrue(rn.Zip(rn.Skip(1), (rni, rni1) => rni < rni1).All(x => x));
 
         }
