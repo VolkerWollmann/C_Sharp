@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Threading;
 
 namespace MyEnumerableIntegerRangeLibrary
 {
@@ -24,6 +25,9 @@ namespace MyEnumerableIntegerRangeLibrary
 
 		public int GetNextIndex(int i)
 		{
+			// simulate time-consuming operation
+			Thread.Sleep(100);
+            
 			int result = i + 1;
 			if (result < _set.Count)
 				return result;
