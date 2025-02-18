@@ -19,7 +19,8 @@ namespace UnitTest
         [TestMethod]
         public void LoopInvariant()
         {
-			MyLoopInvariant.LoopInvariant();
+            MyLoopInvariant.LoopInvariant1();
+			MyLoopInvariant.LoopInvariant2();
         }
         
 		[TestMethod]

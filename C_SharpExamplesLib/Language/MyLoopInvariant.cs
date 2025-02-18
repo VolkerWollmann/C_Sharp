@@ -4,23 +4,47 @@ namespace C_SharpExamplesLib.Language
 {
     public abstract class MyLoopInvariant
     {
-        public static void LoopInvariant()
+        private static int[] InitArray()
         {
             Random random = new Random();
-            int[] rn = new int[10];
-            for (int i = 0; i < rn.Length; i++)
+            int[] rn = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            for (int m = 0; m < 10; m++)
             {
-                rn[i] = random.Next(1, 100); // Generates a positive random integer
+                int i1 = random.Next(0, 10);
+                int i2 = random.Next(0, 10);
+                (rn[i1], rn[i2]) = (rn[i2], rn[i1]);
             }
 
-            for (int i = 0; i < rn.Length - 1; i++)
+            return rn;
+        }
+
+        public static void LoopInvariant1()
+        {
+            int[] rn = InitArray();
+            int n = rn.Length - 1;
+
+            int max = rn[0];
+            for (int i = 0; i <= n; i++)
             {
-                // Loop invariant: At the start of each iteration of the outer loop,
-                // the last `i` elements of the array are sorted and in their final positions.
+                if (rn[i] > max)
+                    max = rn[i];
                 
-                
+                // Loop invariant: The maximum element found so far is stored in 'max'.
+                Assert.IsTrue(rn.Take(i+1).All( rni => rni <= max));
+            }
+
+            Assert.IsTrue(rn.All(rni => rni <= max));
+        }
+        public static void LoopInvariant2()
+        {
+            
+            int[] rn = InitArray();
+            int n = rn.Length - 1;
+            
+            for (int i = 0; i < n; i++)
+            {
                 // Inner loop: Compares adjacent elements and swaps them if needed
-                for (int j = 0; j < rn.Length - i - 1; j++)
+                for (int j = 0; j < n - i; j++)
                 {
                     if (rn[j] > rn[j + 1])
                     {
@@ -33,12 +57,11 @@ namespace C_SharpExamplesLib.Language
                 // the largest unsorted element is moved to its correct position.
                 
                 // Loop invariant in my words:
-                // all elements up to i are smaller or equal than the elements from i onwards 
-                var unsortedSet = rn.Take(rn.Length - i).ToList();
-                var sortedSet = rn.Skip(rn.Length - i).ToList();
-                Assert.IsTrue(sortedSet.All( n => unsortedSet.Max() <= n ));
+                Assert.IsTrue(rn[n-i-1] < rn[n-i] );
             }
 
+            int[] index = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            Assert.IsTrue(index.All(i => i > (n-1) || rn[i] < rn[i + 1]));
         }
     }
 }
