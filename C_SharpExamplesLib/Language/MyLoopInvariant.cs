@@ -24,13 +24,16 @@ namespace C_SharpExamplesLib.Language
             int n = rn.Length - 1;
 
             int max = rn[0];
-            for (int i = 0; i <= n; i++)
+            int i = 0;
+            while(i <= n)
             {
                 if (rn[i] > max)
                     max = rn[i];
+
+                i++;
                 
                 // Loop invariant: The maximum element found so far is stored in 'max'.
-                Assert.IsTrue(rn.Take(i+1).All( rni => rni <= max));
+                Assert.IsTrue(rn.Take(i).All( rni => rni <= max));
             }
 
             // Loop invariant: The maximum element found is stored in 'max'.
@@ -41,13 +44,15 @@ namespace C_SharpExamplesLib.Language
             
             int[] rn = InitArray();
             int n = rn.Length - 1;
-            
-            for (int i = 0; i < n; i++)
+
+            int i = 0;
+            while( i < n)
             {
                 // Outer loop invariant:
                 for (int i2 = 0; i2 < i-1; i2++) { Assert.IsTrue(rn[i2] < rn[i2+1]); }
-                
-                for (int j = n; j > i; j--)
+
+                int j = n;
+                while(j > i)
                 {
                     if (rn[j-1] > rn[j])
                     {
@@ -55,16 +60,20 @@ namespace C_SharpExamplesLib.Language
                         (rn[j], rn[j -1]) = (rn[j-1], rn[j]);
                     }
 
+                    j--;
                     // Inner loop invariant
-                    Assert.IsTrue(rn[j-1] < rn[j]); 
+                    Assert.IsTrue(rn[j] < rn[j+1]);
+
                 }
 
                 // Inner loop invariant
-                Assert.IsTrue(rn[i+1-1] < rn[i+1]);
+                Assert.IsTrue(j == i);
                 Assert.IsTrue(rn[i] < rn[i + 1]);
 
                 // Outer loop invariant:
                 for(int i2 = 0; i2 < i; i2++) { Assert.IsTrue(rn[i2] < rn[i2+1]); }
+
+                i++;
             }
 
             // Outer loop invariant: the list is sorted
