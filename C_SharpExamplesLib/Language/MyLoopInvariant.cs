@@ -65,12 +65,17 @@ namespace C_SharpExamplesLib.Language
                 for(int i2 = 0; i2 < i; i2++) { Assert.IsTrue(rn[n - i2 - 1] < rn[n - i2]); }
             }
 
-            // Outer loop invariant:
+            // Outer loop invariant: the list is sorted
             for (int i =0; i < n; i++) { Assert.IsTrue(rn[n - i - 1] < rn[n - i]); }
-            
-            // Outer loop invariant: as LINQ expression
-            Assert.IsTrue(rn.Zip(rn.Skip(1), (rni, rni1) => rni < rni1).All(x => x));
 
+
+            {
+                // Outer loop invariant: as LINQ expression
+                Assert.IsTrue(rn.Zip(rn.Skip(1), (rni, rni1) => rni < rni1).All(x => x));
+
+                // Test with LINQ
+                Assert.IsTrue(rn.OrderBy(rni => rni).SequenceEqual(rn));
+            }
         }
     }
 }
