@@ -71,9 +71,13 @@ namespace C_SharpExamplesLib.Language
                 Assert.IsTrue(rn[i] < rn[i + 1]);
 
                 // Outer loop invariant:
-                for(int i2 = 0; i2 < i; i2++) { Assert.IsTrue(rn[i2] < rn[i2+1]); }
+                for (int i2 = 0; i2 < i; i2++) { Assert.IsTrue(rn[i2] < rn[i2 + 1]); }
 
                 i++;
+                
+                // Outer loop invariant:
+                for (int i2 = 0; i2 < i-1; i2++) { Assert.IsTrue(rn[i2] < rn[i2+1]); }
+
             }
 
             // Outer loop invariant: the list is sorted
