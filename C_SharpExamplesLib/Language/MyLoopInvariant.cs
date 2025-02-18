@@ -43,6 +43,9 @@ namespace C_SharpExamplesLib.Language
             
             for (int i = 0; i < n; i++)
             {
+                // Outer loop invariant:
+                for (int i2 = 0; i2 < i-1; i2++) { Assert.IsTrue(rn[n - i2 - 1] < rn[n - i2]); }
+                
                 for (int j = 0; j < n - i; j++)
                 {
                     if (rn[j] > rn[j + 1])
@@ -57,9 +60,9 @@ namespace C_SharpExamplesLib.Language
 
                 // Inner loop invariant
                 Assert.IsTrue(rn[n - i - 1 ] < rn[n-i]);
-                
+
                 // Outer loop invariant:
-                Assert.IsTrue(rn[n-i-1] < rn[n-i] );
+                for(int i2 = 0; i2 < i; i2++) { Assert.IsTrue(rn[n - i2 - 1] < rn[n - i2]); }
             }
 
             // Outer loop invariant:
