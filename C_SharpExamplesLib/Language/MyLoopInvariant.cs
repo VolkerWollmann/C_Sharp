@@ -60,7 +60,7 @@ namespace C_SharpExamplesLib.Language
                 Assert.IsTrue(rn[n-i-1] < rn[n-i] );
             }
 
-            Assert.IsTrue(rn.Zip(rn.Skip(1), (ri, ri1) => ri < ri1).All(x => x));
+            Assert.IsTrue(rn.Zip(rn.Skip(1), (rni, rni1) => rni < rni1).All(x => x));
 
         }
     }
