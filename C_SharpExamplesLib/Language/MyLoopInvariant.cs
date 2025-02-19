@@ -2,7 +2,7 @@
 
 namespace C_SharpExamplesLib.Language
 {
-    public abstract class MyLoopInvariant
+	public abstract class MyLoopInvariant
     {
         private static int[] InitArray()
         {
