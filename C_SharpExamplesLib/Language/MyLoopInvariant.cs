@@ -53,7 +53,7 @@ namespace C_SharpExamplesLib.Language
             while( i < n)
             {
                 // Outer loop invariant:
-                for (int k = 0; k < i-1; k++) { Assert.IsTrue(rn[k] < rn[k+1]); }
+                for (int k=0; k<i-1; k++) { Assert.IsTrue(rn[k] < rn[k+1]); }
 
                 int j = n;
                 while(j > i)
@@ -75,18 +75,18 @@ namespace C_SharpExamplesLib.Language
                 Assert.IsTrue(rn[i] < rn[i + 1]);
 
 				// Outer loop invariant:
-				for (int k = 0; k < i ; k++) { Assert.IsTrue(rn[k] < rn[k + 1]); }
+				for (int k=0; k<i ; k++) { Assert.IsTrue(rn[k] < rn[k+1]); }
 
 				i++;
 
 				// Outer loop invariant:
-				for (int k = 0; k < i - 1; k++) { Assert.IsTrue(rn[k] < rn[k + 1]); }
+				for (int k=0; k<i-1; k++) { Assert.IsTrue(rn[k] < rn[k+1]); }
 
 			}
 
             // Outer loop invariant: the list is sorted
             Assert.IsTrue( i == n);
-			for (int k = 0; k < n - 1; k++) { Assert.IsTrue(rn[k] < rn[k + 1]); }
+			for (int k=0; k<n-1; k++) { Assert.IsTrue(rn[k] < rn[k+1]); }
 
 
 			{
