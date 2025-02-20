@@ -36,6 +36,12 @@ namespace UnitTest
             CSharp7.TestBigInteger();
         }
 
+        [TestMethod]
+        public void ReturnTuple()
+        {
+            CSharp7.ReturnTuple();
+        }
+
         // #ExpectedException
         [TestMethod, ExpectedException(typeof(OutOfMemoryException), "Expected OutOfMemoryException" )]
         public void ExpectedException()

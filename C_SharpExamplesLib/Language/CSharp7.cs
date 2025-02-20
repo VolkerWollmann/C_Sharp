@@ -40,5 +40,18 @@ namespace C_SharpExamplesLib.Language
             string bis = bi.ToString();
             Assert.AreEqual("12345678901234567890123456789012345678901234567891", bis);
         }
+
+        private static (int, string) ReturnMacchi()
+        {
+            return (1, "Macchi");
+        }
+        // #return tuple
+        public static void ReturnTuple()
+        {
+            var (number, macchi) = ReturnMacchi();
+
+            Assert.AreEqual(1, number);
+            Assert.AreEqual("Macchi", macchi);
+        }
     }
 }
