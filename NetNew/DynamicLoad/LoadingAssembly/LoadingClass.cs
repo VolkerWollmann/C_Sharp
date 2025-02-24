@@ -27,7 +27,7 @@ namespace LoadingAssembly
 
         public static void TestDllVersion()
         {
-            // #Load the #assembly #dynamically
+            // #assembly #version info defined in csproj-File
             Assembly assembly = Assembly.Load("AssemblyToLoad");
 
             // Get version information
