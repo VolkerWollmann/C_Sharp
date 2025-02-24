@@ -136,6 +136,12 @@ namespace NetNewUnitTest
         }
 
         [Fact]
+        public void TestDllVersion()
+        {
+            LoadingClass.TestDllVersion();
+        }
+
+        [Fact]
         public void StreamTestUnconventionalUsage()
         {
             _ = CSharp.StreamTestUnconventionalUsage();
