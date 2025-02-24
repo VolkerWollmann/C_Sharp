@@ -7,6 +7,14 @@
 	  <AssemblyVersion>1.2.3.4</AssemblyVersion>
 	  <FileVersion>1.2.3.4</FileVersion>
 	  <InformationalVersion>1.2.3-UnitTestInfo</InformationalVersion>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <PackageId>MyAssemblyToLoad</PackageId>
+	  <Version>1.2.3</Version>
+	  <Authors>VolkerWollmann</Authors>
+	  <Description>For testing nuget packaging.</Description>
+	  <PackageTags>MyNugetPackageTest</PackageTags>
+	  <RepositoryUrl>//https://github.com/VolkerWollmann/C_Sharp</RepositoryUrl>
+	  <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +24,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DynamicLoadInterface\DynamicLoadInterface.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="readme.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
