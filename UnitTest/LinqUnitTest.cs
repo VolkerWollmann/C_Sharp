@@ -43,6 +43,12 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void Linq_Select_Index()
+        {
+            MyLinq.Linq_Select_Index();
+        }
+        
+        [TestMethod]
 		public void ParallelLinq()
 		{
 			MyLinq.TestParallelLinq();

@@ -167,6 +167,15 @@ namespace C_SharpExamplesLib.Language
 			Assert.ThrowsException<InvalidOperationException>( () => { _ = twoElementSet.Single(); });
         }
 
+        public static void Linq_Select_Index()
+        {
+            List<string> l = ["Donkey", "Dog", "Goat"];
+            var result = l.Select((s, i) => new {s, i}).ToList();
+            Assert.IsTrue(result[0].s == "Donkey" && result[0].i == 0);
+            Assert.IsTrue(result[1].s == "Dog" && result[1].i == 1);
+            Assert.IsTrue(result[2].s == "Goat" && result[2].i == 2);
+        }
+
 
         #region PLINQ
         private static bool IsPrime(int i)
