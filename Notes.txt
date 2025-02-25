@@ -1,2 +1,29 @@
 Bonn:
+use strong naming tool in powershell:
 & "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\sn.exe"
+
+set up local nuget package store:
+dotnet nuget add source "D:\C_Sharp\Nuget" -n "LocalNuGetStore"
+
+--- Test programm
+// See https://aka.ms/new-console-template for more information
+using AssemblyToLoad;
+using DynamicLoadInterface;
+
+Console.WriteLine("Hello, World!");
+int i = 5;
+int j = 10;
+
+
+ClassToLoad test = new ClassToLoad();
+DynamicLoadInterface.IDynamicLoadInterface ti = (DynamicLoadInterface.IDynamicLoadInterface) test;
+
+
+int result = test.ClassToLoadAdd(i, j);
+int result2 = ti.Add(i, j);
+
+Console.WriteLine(result);
+Console.WriteLine(result2);
+Console.WriteLine("Press any key to exit...");
+Console.ReadKey();
+
