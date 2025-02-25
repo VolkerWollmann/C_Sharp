@@ -1,9 +1,13 @@
 Bonn:
+-- Strong naming
 use strong naming tool in powershell:
 & "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\sn.exe"
 
 set up local nuget package store:
 dotnet nuget add source "D:\C_Sharp\Nuget" -n "LocalNuGetStore"
+
+-- Signing
+seems to not work simtanously with strong naming in the project file
 
 --- Test programm
 // See https://aka.ms/new-console-template for more information
