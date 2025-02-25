@@ -15,6 +15,9 @@
 	  <PackageTags>MyNugetPackageTest</PackageTags>
 	  <RepositoryUrl>//https://github.com/VolkerWollmann/C_Sharp</RepositoryUrl>
 	  <PackageReadmeFile>readme.md</PackageReadmeFile>
+	  <SignAssembly>true</SignAssembly>
+	  <AssemblyOriginatorKeyFile>..\AssemblyToLoad.snk</AssemblyOriginatorKeyFile>
+	  <PublicSign>false</PublicSign>
   </PropertyGroup>
 
   <ItemGroup>

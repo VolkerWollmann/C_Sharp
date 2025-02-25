@@ -20,6 +20,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpNaming", "CSharpNaming\CSharpNaming.csproj", "{E2D0B6BD-92E5-4CE8-B73F-DF6EE94A0DED}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DynamicLoad", "DynamicLoad", "{BEE55E80-8D55-4E9A-89C3-10BFFB2E9DB4}"
+	ProjectSection(SolutionItems) = preProject
+		NetNew\DynamicLoad\AssemblyToLoad.snk = NetNew\DynamicLoad\AssemblyToLoad.snk
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssemblyToLoad", "NetNew\DynamicLoad\AssemblyToLoad\AssemblyToLoad.csproj", "{16B194A1-92A0-49A5-8A73-3AB6FB01B406}"
 EndProject
