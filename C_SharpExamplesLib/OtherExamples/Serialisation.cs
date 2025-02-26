@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Text.Json;
+using System.Text.Json.Nodes;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
 namespace C_SharpExamplesLib.OtherExamples
@@ -57,7 +59,8 @@ namespace C_SharpExamplesLib.OtherExamples
 			Assert.AreEqual("Bob", alice2.Friend?.Name);
 		}
 
-		public static void DeserializeFile()
+		private static readonly string FilePath = "..\\..\\..\\..\\C_SharpExamplesLib\\OtherExamples\\animals.json"; // Replace with the actual file path
+        public static void DeserializeFile()
 		{
 			Animal test = new Animal
 			{
@@ -67,9 +70,8 @@ namespace C_SharpExamplesLib.OtherExamples
 			Assert.IsNotNull(test);
 			Assert.AreEqual("Test", test.Name);
 			Assert.AreEqual("Type", test.Type);
-			
-			var filePath = "..\\..\\..\\..\\C_SharpExamplesLib\\OtherExamples\\animals.json"; // Replace with the actual file path
-			var jsonContent = File.ReadAllText(filePath);
+            
+			var jsonContent = File.ReadAllText(FilePath);
 
 			var settings = new JsonSerializerSettings
 			{
@@ -82,5 +84,13 @@ namespace C_SharpExamplesLib.OtherExamples
 
 			foreach (var animal in deserializedAnimalList) Console.WriteLine($"Name: {animal.Name}, Type: {animal.Type}");
 		}
-	}
+
+        public static void GenericDeserializeFile()
+        {
+            var jsonContent = File.ReadAllText(FilePath);
+			using JsonDocument animalArray = JsonDocument.Parse(jsonContent);
+
+            Assert.AreEqual("Macchi", animalArray.RootElement[0].GetProperty("Name").GetString());
+        }
+    }
 }

@@ -2,30 +2,29 @@
 using System.Diagnostics;
 using System.Reflection;
 using IMyCalculatorInterface;
-using MyCalculator;
 
 namespace LoadingAssembly
 {
     public abstract class LoadingClass
     {
-        // Enforce, that dll is near by
-        private static MyCalculator.MyCalculator dummy = new MyCalculator.MyCalculator();
+        // Enforce, that dll is nearby
+        private static readonly MyCalculator.MyCalculator Dummy = new();
         public static void Execute()
         {
-            Assert.IsNotNull(dummy);
+            Assert.IsNotNull(Dummy);
             
             // #Load the #assembly #dynamically
             Assembly assembly = Assembly.Load("MyCalculator");
 
             // get the classes by interface
-            Type dli = typeof(IMyCalculatorInterface.IMyCalculator);
+            Type dli = typeof(IMyCalculator);
             Type desiredClass = assembly
                 .GetTypes()
                 .First(c => dli.IsAssignableFrom(c));
 
-            IMyCalculatorInterface.IMyCalculator? dynamicCreatedInstance
+            IMyCalculator? dynamicCreatedInstance
                 = Activator.CreateInstance(desiredClass)
-                    as IMyCalculatorInterface.IMyCalculator;
+                    as IMyCalculator;
 
             int result = dynamicCreatedInstance!.Add(1, 2);
             Assert.IsTrue(result == 3);

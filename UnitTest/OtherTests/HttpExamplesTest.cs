@@ -29,5 +29,11 @@ namespace UnitTest.OtherTests
 		{
 			SerialisationExample.DeserializeFile();
 		}
-	}
+
+        [TestMethod]
+        public void GenericDeserializeFile()
+        {
+            SerialisationExample.GenericDeserializeFile();
+        }
+    }
 }
