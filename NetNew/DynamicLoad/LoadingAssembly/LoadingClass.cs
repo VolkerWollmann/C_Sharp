@@ -1,14 +1,15 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
 using System.Reflection;
-using AssemblyToLoad;
+using IMyCalculatorInterface;
+using MyCalculator;
 
 namespace LoadingAssembly
 {
     public abstract class LoadingClass
     {
         // Enforce, that dll is near by
-        private static MyCalculator dummy = new MyCalculator();
+        private static MyCalculator.MyCalculator dummy = new MyCalculator.MyCalculator();
         public static void Execute()
         {
             Assert.IsNotNull(dummy);
@@ -17,14 +18,14 @@ namespace LoadingAssembly
             Assembly assembly = Assembly.Load("MyCalculator");
 
             // get the classes by interface
-            Type dli = typeof(DynamicLoadInterface.IMyCalculator);
+            Type dli = typeof(IMyCalculatorInterface.IMyCalculator);
             Type desiredClass = assembly
                 .GetTypes()
                 .First(c => dli.IsAssignableFrom(c));
 
-            DynamicLoadInterface.IMyCalculator? dynamicCreatedInstance
+            IMyCalculatorInterface.IMyCalculator? dynamicCreatedInstance
                 = Activator.CreateInstance(desiredClass)
-                    as DynamicLoadInterface.IMyCalculator;
+                    as IMyCalculatorInterface.IMyCalculator;
 
             int result = dynamicCreatedInstance!.Add(1, 2);
             Assert.IsTrue(result == 3);

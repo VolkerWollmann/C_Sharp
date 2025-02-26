@@ -1,15 +1,15 @@
-﻿namespace AssemblyToLoad
+﻿namespace MyCalculator
 {
     // ReSharper disable once UnusedMember.Global
     // ReSharper disable once UnusedType.Global
-    public class MyCalculator : DynamicLoadInterface.IMyCalculator
+    public class MyCalculator : IMyCalculatorInterface.IMyCalculator
     {
-        int DynamicLoadInterface.IMyCalculator.Add(int value1, int value2)
+        int IMyCalculatorInterface.IMyCalculator.Add(int value1, int value2)
         {
             return value1 + value2;
         }
 
-        public int ClassToLoadAdd(int value1, int value2)
+        public int MyCalculatorAdd(int value1, int value2)
         {
             return value1 + value2;
         }

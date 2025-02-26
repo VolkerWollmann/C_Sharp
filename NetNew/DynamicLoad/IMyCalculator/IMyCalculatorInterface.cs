@@ -1,4 +1,4 @@
-﻿namespace DynamicLoadInterface
+﻿namespace IMyCalculatorInterface
 {
     public interface IMyCalculator
     {
