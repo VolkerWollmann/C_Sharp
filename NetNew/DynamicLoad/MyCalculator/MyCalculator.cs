@@ -2,9 +2,9 @@
 {
     // ReSharper disable once UnusedMember.Global
     // ReSharper disable once UnusedType.Global
-    public class ClassToLoad : DynamicLoadInterface.IDynamicLoadInterface
+    public class MyCalculator : DynamicLoadInterface.IMyCalculator
     {
-        int DynamicLoadInterface.IDynamicLoadInterface.Add(int value1, int value2)
+        int DynamicLoadInterface.IMyCalculator.Add(int value1, int value2)
         {
             return value1 + value2;
         }

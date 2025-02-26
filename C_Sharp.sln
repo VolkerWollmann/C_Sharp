@@ -21,14 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpNaming", "CSharpNamin
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DynamicLoad", "DynamicLoad", "{BEE55E80-8D55-4E9A-89C3-10BFFB2E9DB4}"
 	ProjectSection(SolutionItems) = preProject
-		NetNew\DynamicLoad\AssemblyToLoad.snk = NetNew\DynamicLoad\AssemblyToLoad.snk
+		NetNew\DynamicLoad\MyCalculatorStrongName.snk = NetNew\DynamicLoad\MyCalculatorStrongName.snk
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssemblyToLoad", "NetNew\DynamicLoad\AssemblyToLoad\AssemblyToLoad.csproj", "{16B194A1-92A0-49A5-8A73-3AB6FB01B406}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicLoadInterface", "NetNew\DynamicLoad\DynamicLoadInterface\DynamicLoadInterface.csproj", "{B517C7F5-E52A-467C-BC5A-A2FCA7626EAD}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoadingAssembly", "NetNew\DynamicLoad\LoadingAssembly\LoadingAssembly.csproj", "{31C41DCF-9A80-4015-AAFB-F7717D7F2CBC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpNew", "NetNew\CSharpCore\CSharpNew.csproj", "{FF517035-411F-4AB0-80BC-08B581B8D1BF}"
 EndProject
@@ -41,6 +35,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyEnumerableIntegerRangeLibrary", "MyEnumerableIntegerRangeLibrary\MyEnumerableIntegerRangeLibrary.csproj", "{37BAE7E9-B10B-4D9F-8BFD-7295AE3EEE90}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C_SharpExampleProgram", "C_SharpExamples\C_SharpExampleProgram.csproj", "{6EB9C40D-507E-414E-9DC4-B36E1FF91211}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMyCalculatorInterface", "NetNew\DynamicLoad\IMyCalculator\IMyCalculatorInterface.csproj", "{F66CAE6B-8862-294B-44B5-5908F4E55045}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCalculator", "NetNew\DynamicLoad\MyCalculator\MyCalculator.csproj", "{6628AF4F-302E-5754-2842-21D0D433DBA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadingAssembly", "NetNew\DynamicLoad\LoadingAssembly\LoadingAssembly.csproj", "{3DE63A18-DA51-2FED-5DCA-6DB367FFAAFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,18 +60,6 @@ Global
 		{E2D0B6BD-92E5-4CE8-B73F-DF6EE94A0DED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2D0B6BD-92E5-4CE8-B73F-DF6EE94A0DED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2D0B6BD-92E5-4CE8-B73F-DF6EE94A0DED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16B194A1-92A0-49A5-8A73-3AB6FB01B406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16B194A1-92A0-49A5-8A73-3AB6FB01B406}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16B194A1-92A0-49A5-8A73-3AB6FB01B406}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16B194A1-92A0-49A5-8A73-3AB6FB01B406}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B517C7F5-E52A-467C-BC5A-A2FCA7626EAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B517C7F5-E52A-467C-BC5A-A2FCA7626EAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B517C7F5-E52A-467C-BC5A-A2FCA7626EAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B517C7F5-E52A-467C-BC5A-A2FCA7626EAD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31C41DCF-9A80-4015-AAFB-F7717D7F2CBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31C41DCF-9A80-4015-AAFB-F7717D7F2CBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31C41DCF-9A80-4015-AAFB-F7717D7F2CBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31C41DCF-9A80-4015-AAFB-F7717D7F2CBC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FF517035-411F-4AB0-80BC-08B581B8D1BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FF517035-411F-4AB0-80BC-08B581B8D1BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF517035-411F-4AB0-80BC-08B581B8D1BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -96,17 +84,29 @@ Global
 		{6EB9C40D-507E-414E-9DC4-B36E1FF91211}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EB9C40D-507E-414E-9DC4-B36E1FF91211}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EB9C40D-507E-414E-9DC4-B36E1FF91211}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F66CAE6B-8862-294B-44B5-5908F4E55045}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F66CAE6B-8862-294B-44B5-5908F4E55045}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F66CAE6B-8862-294B-44B5-5908F4E55045}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F66CAE6B-8862-294B-44B5-5908F4E55045}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6628AF4F-302E-5754-2842-21D0D433DBA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6628AF4F-302E-5754-2842-21D0D433DBA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6628AF4F-302E-5754-2842-21D0D433DBA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6628AF4F-302E-5754-2842-21D0D433DBA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DE63A18-DA51-2FED-5DCA-6DB367FFAAFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DE63A18-DA51-2FED-5DCA-6DB367FFAAFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DE63A18-DA51-2FED-5DCA-6DB367FFAAFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DE63A18-DA51-2FED-5DCA-6DB367FFAAFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BEE55E80-8D55-4E9A-89C3-10BFFB2E9DB4} = {B32A1DBE-FB06-4CAE-8DBC-FF58AA59D061}
-		{16B194A1-92A0-49A5-8A73-3AB6FB01B406} = {BEE55E80-8D55-4E9A-89C3-10BFFB2E9DB4}
-		{B517C7F5-E52A-467C-BC5A-A2FCA7626EAD} = {BEE55E80-8D55-4E9A-89C3-10BFFB2E9DB4}
-		{31C41DCF-9A80-4015-AAFB-F7717D7F2CBC} = {BEE55E80-8D55-4E9A-89C3-10BFFB2E9DB4}
 		{FF517035-411F-4AB0-80BC-08B581B8D1BF} = {B32A1DBE-FB06-4CAE-8DBC-FF58AA59D061}
 		{A9CE382A-6660-4D12-8EF8-2F72D5DBAE1E} = {B32A1DBE-FB06-4CAE-8DBC-FF58AA59D061}
+		{F66CAE6B-8862-294B-44B5-5908F4E55045} = {BEE55E80-8D55-4E9A-89C3-10BFFB2E9DB4}
+		{6628AF4F-302E-5754-2842-21D0D433DBA5} = {BEE55E80-8D55-4E9A-89C3-10BFFB2E9DB4}
+		{3DE63A18-DA51-2FED-5DCA-6DB367FFAAFB} = {BEE55E80-8D55-4E9A-89C3-10BFFB2E9DB4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EF76469A-F964-487D-9866-B74BE4116053}

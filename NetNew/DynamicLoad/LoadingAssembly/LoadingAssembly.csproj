@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AssemblyToLoad\AssemblyToLoad.csproj" />
-    <ProjectReference Include="..\DynamicLoadInterface\DynamicLoadInterface.csproj" />
+    <ProjectReference Include="..\IMyCalculator\IMyCalculatorInterface.csproj" />
+    <ProjectReference Include="..\MyCalculator\MyCalculator.csproj" />
   </ItemGroup>
 
 </Project>
