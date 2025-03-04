@@ -46,6 +46,9 @@ namespace C_SharpExamplesLib.Language
 
 		private string StringInterpolation2() => $"({X})";
 
+        // ReSharper disable once UseStringInterpolation
+        private string StringFormat() => string.Format("({0})", X);
+
         // #string #interpolation #alignment
 		private const string InternalRabbit = "Rabbit";
 		private string StringInterpolation3() => $"({InternalRabbit}:{InternalRabbit, 10}:{InternalRabbit,3}:{InternalRabbit,-10}:)";
@@ -117,7 +120,10 @@ namespace C_SharpExamplesLib.Language
 		{
 			CSharp6 cs6 = new CSharp6(5);
 
-			string s = cs6.StringInterpolation();
+            string s1 = cs6.StringFormat();
+            Assert.IsTrue(s1 == "(5)");
+			
+            string s = cs6.StringInterpolation();
 			Assert.IsTrue(s == "(5)");
 
             string t = cs6.StringInterpolation2();
