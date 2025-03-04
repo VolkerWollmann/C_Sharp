@@ -47,6 +47,7 @@ namespace C_SharpExamplesLib.Language
 		private string StringInterpolation2() => $"({X})";
 
         // ReSharper disable once UseStringInterpolation
+		// This shows, how the string was formatted before c sharp 6
         private string StringFormat() => string.Format("({0})", X);
 
         // #string #interpolation #alignment
