@@ -597,8 +597,11 @@ namespace C_SharpExamplesLib.Language.Tasks
 
         static void DoWork()
         {
-            // Simulate work by sleeping for 1 second
-            Task.Delay(1000).Wait();
+			int sum = 0;
+            for( int i=0; i<1000000; i++ )
+			{
+				sum = sum + i;
+			}
         }
 
         private static async Task MeasureTaskTimes()
@@ -613,7 +616,7 @@ namespace C_SharpExamplesLib.Language.Tasks
             Stopwatch executionStopwatch = Stopwatch.StartNew();
             await task;
             executionStopwatch.Stop();
-            Console.WriteLine($"Task execution time: {executionStopwatch.ElapsedMilliseconds} ms");
+            Console.WriteLine($"Task execution time: {executionStopwatch.ElapsedTicks} ticks ( ms : {executionStopwatch.ElapsedTicks / 10000} )");
         }
 
        
