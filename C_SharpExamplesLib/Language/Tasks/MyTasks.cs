@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -589,7 +590,42 @@ namespace C_SharpExamplesLib.Language.Tasks
             Timer unused = new Timer(SchedulerStart!, null, 0, 10000);
             Thread.Sleep(30 * 1000);
         }
-		
+
+        #endregion
+
+        #region task setup time vs execution time
+
+        static void DoWork()
+        {
+            // Simulate work by sleeping for 1 second
+            Task.Delay(1000).Wait();
+        }
+
+        private static async Task MeasureTaskTimes()
+        {
+            // Measure task setup time
+            Stopwatch setupStopwatch = Stopwatch.StartNew();
+            Task task = Task.Run(() => DoWork());
+            setupStopwatch.Stop();
+            Console.WriteLine($"Task setup time: {setupStopwatch.ElapsedTicks} ticks ( ms : {setupStopwatch.ElapsedTicks/10000} ) ");
+
+            // Measure task execution time
+            Stopwatch executionStopwatch = Stopwatch.StartNew();
+            await task;
+            executionStopwatch.Stop();
+            Console.WriteLine($"Task execution time: {executionStopwatch.ElapsedMilliseconds} ms");
+        }
+
+       
+        public static void Task_Times()
+        {
+            _ = MeasureTaskTimes();
+            for (int i = 0; i < 10; i++)
+            {
+                Thread.Sleep(200);
+            }
+        }
+
         #endregion
     }
 }

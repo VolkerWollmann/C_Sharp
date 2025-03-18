@@ -116,5 +116,11 @@ namespace UnitTest
 			MyTaskEvent.TaskEvent();
 		}
 
+		[TestMethod]
+		public void Task_Times()
+		{
+			MyTasks.Task_Times();
+		}
+
     }
 }
