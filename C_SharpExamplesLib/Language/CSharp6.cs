@@ -38,7 +38,7 @@ namespace C_SharpExamplesLib.Language
 
 		private double SquareRoot2(int i) => Math.Sqrt(i);
 
-		// #string interpolation
+		// #string interpolation $""
 		private string StringInterpolation()
 		{
 			return $"({X})";
