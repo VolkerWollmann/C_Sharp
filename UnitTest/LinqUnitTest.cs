@@ -92,6 +92,12 @@ namespace UnitTest
 		}
 
         [TestMethod]
+        public void CompileLambda()
+        {
+            MyLinqExpression.CompileLambda();
+        }
+       
+        [TestMethod]
         public void LinkedList()
         {
             MyLinq.Linq_LinkedList();

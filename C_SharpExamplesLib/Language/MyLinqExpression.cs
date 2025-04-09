@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_SharpExamplesLib.Language
 {
@@ -207,6 +208,26 @@ namespace C_SharpExamplesLib.Language
                 myExpressionWriter2.Write(expression);
                 Console.WriteLine("----");
             });
+        }
+
+        public static void CompileLambda()
+        {
+            // Define a parameter for the lambda expression (x)
+            ParameterExpression parameter = Expression.Parameter(typeof(int), "x");
+            
+            // Define the body of the lambda expression (x * x)
+            Expression body = Expression.Multiply(parameter, parameter);
+            
+            // Create the lambda expression (x => x * x)
+            LambdaExpression lambda = Expression.Lambda(body, parameter);
+            
+            // Compile the lambda expression into a delegate
+            var compiledLambda = (Func<int, int>)lambda.Compile();
+            
+            // Use the compiled lambda expression
+            int result = compiledLambda(5);
+            
+            Assert.AreEqual(25,result);
         }
     }
 }
