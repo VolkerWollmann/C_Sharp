@@ -21,11 +21,9 @@ namespace C_SharpExamplesLib.Language.IQueryable
 			{
 				if (expression is MethodCallExpression methodCallExpression)
                 {
-                    _castFunction = (Func<TParameter, TResult>)(
-						(LambdaExpression)((UnaryExpression)methodCallExpression.Arguments[1]).Operand).Compile();
-                    //Func<int, bool> compiledExpression = (Func<int, bool>)_lambdaExpression.Compile();
-                    //_lambdaExpression =
-                    //    (LambdaExpression)((UnaryExpression)(methodCallExpression.Arguments[1])).Operand;
+                    LambdaExpression lambda =
+                        (LambdaExpression) ((UnaryExpression) methodCallExpression.Arguments[1]).Operand;
+                    _castFunction = (Func<TParameter, TResult>)lambda.Compile();
                 }
                 else
                 {
