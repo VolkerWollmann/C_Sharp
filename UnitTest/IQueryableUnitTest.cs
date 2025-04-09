@@ -148,23 +148,23 @@ namespace UnitTest
         [TestMethod]
         public void Test_Select_IntegerFunction()
         {
-            List<int> l = [1, 2, 3];
-            MyMemoryIntegerSet myIntegerSet = new MyMemoryIntegerSet(l);
-
-            using var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
-            var result = myQueryableIntegerSet.Select(e => e * 2);
-
-            var controlSet = new List<int> {2, 4, 6};
-
-            var resultList = new List<int>();
-            foreach (var e in result)
+            foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
             {
-	            resultList.Add(e);
+                using var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+                var result = myQueryableIntegerSet.Select(e => e * 2);
 
+                var controlSet = new List<int> {2, 4, 6};
+
+                var resultList = new List<int>();
+                foreach (var e in result)
+                {
+                    resultList.Add(e);
+                }
+
+                // #Assert #list #equal
+                CollectionAssert.AreEqual(resultList, controlSet);
             }
 
-            // #Assert #list #equal
-            CollectionAssert.AreEqual(resultList, controlSet);
         }
 
 		[TestMethod]
