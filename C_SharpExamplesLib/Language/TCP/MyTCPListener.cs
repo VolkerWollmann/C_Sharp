@@ -12,37 +12,37 @@ namespace C_SharpExamplesLib.Language.TCP
 {
     internal class MyTCPListener
     {
-        internal static string ReceivedMessage;
+        internal static string ReceivedMessage = "";
         internal static void Listener()
         {
-        // Define the port to listen on
-        int port = 5000;
-        // Create a TcpListener to listen for incoming connections
-        TcpListener listener = new TcpListener(IPAddress.Any, port);
+            // Define the port to listen on
+            int port = 5000;
+            // Create a TcpListener to listen for incoming connections
+            TcpListener listener = new TcpListener(IPAddress.Any, port);
             try
-        {
-            // Start the listener
-            listener.Start();
-            Console.WriteLine($"Server is listening on port {port}...");
-            while (true)
             {
-                // Accept an incoming connection
-                TcpClient client = listener.AcceptTcpClient();
-                Console.WriteLine("Client connected!");
-                // Handle the client in a separate method
-                HandleClient(client);
+                // Start the listener
+                listener.Start();
+                Console.WriteLine($"Server is listening on port {port}...");
+                while (true)
+                {
+                    // Accept an incoming connection
+                    TcpClient client = listener.AcceptTcpClient();
+                    Console.WriteLine("Client connected!");
+                    // Handle the client in a separate method
+                    _ = Task.Run(() => HandleClient(client));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+            finally
+            {
+                // Stop the listener
+                listener.Stop();
             }
         }
-        catch (Exception ex)
-    {
-        Console.WriteLine($"An error occurred: {ex.Message}");
-    }
-    finally
-    {
-        // Stop the listener
-        listener.Stop();
-    }
-}
         private static void HandleClient(TcpClient client)
         {
             try
@@ -54,9 +54,9 @@ namespace C_SharpExamplesLib.Language.TCP
                 int bytesRead = stream.Read(buffer, 0, buffer.Length);
                 string receivedMessage = Encoding.UTF8.GetString(buffer, 0, bytesRead);
                 Console.WriteLine($"Received: {receivedMessage}");
-                
+
                 ReceivedMessage = receivedMessage;
-                
+
                 // Send a response to the client
                 string responseMessage = "Hello from the server!";
                 byte[] responseBytes = Encoding.UTF8.GetBytes(responseMessage);
@@ -77,7 +77,7 @@ namespace C_SharpExamplesLib.Language.TCP
 
     internal class MyTCPCaller
     {
-        internal static string ReceivedMessage;
+        internal static string ReceivedMessage = "";
         internal static async void UseListener()
         {
             using var client = new TcpClient();
@@ -100,10 +100,10 @@ namespace C_SharpExamplesLib.Language.TCP
                 var buffer = new byte[1024];
                 var bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
                 var response = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                
+
                 ReceivedMessage = response;
-                
-                
+
+
                 Console.WriteLine($"Response from server: {response}");
             }
             catch (Exception)
@@ -122,17 +122,14 @@ namespace C_SharpExamplesLib.Language.TCP
                 var listenerTask = Task.Run(MyTCPListener.Listener);
 
                 // Give the listener some time to start
-                await Task.Delay(500);
+                await Task.Delay(1000);
 
                 await Task.Run(MyTCPCaller.UseListener);
 
-                await Task.Delay(500);
-
-                Assert.AreEqual("Hello from the client!", MyTCPListener.ReceivedMessage);
-                Assert.AreEqual("Hello from the server!", MyTCPCaller.ReceivedMessage);
+                await Task.Delay(1000);
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw; // TODO handle exception
             }
@@ -140,6 +137,10 @@ namespace C_SharpExamplesLib.Language.TCP
         public static void Test()
         {
             PerformTest();
+            Thread.Sleep(3000);
+            Assert.AreEqual("Hello from the client!", MyTCPListener.ReceivedMessage);
+            Assert.AreEqual("Hello from the server!", MyTCPCaller.ReceivedMessage);
+
         }
     }
 }
