@@ -29,7 +29,7 @@ namespace C_SharpExamplesLib.Language.DataTypes
             Assert.IsFalse(result);
 
             // better use for inbstances/classes
-            C2 c2 = new C2();
+            C2 c2 = new();
             C1 c1 = c2;
 
             result = typeof(C1).IsAssignableFrom(typeof(C2));
