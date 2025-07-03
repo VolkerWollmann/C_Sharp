@@ -67,5 +67,11 @@ namespace UnitTest
         {
             MyDate.DateTimeComparison();
         }
+
+        [TestMethod]
+        public void Assignable()
+        {
+            MyAssignable.AssignChecks();
+        }
     }
 }
