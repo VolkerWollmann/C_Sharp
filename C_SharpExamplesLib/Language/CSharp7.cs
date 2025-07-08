@@ -41,12 +41,13 @@ namespace C_SharpExamplesLib.Language
             Assert.AreEqual("12345678901234567890123456789012345678901234567891", bis);
         }
 
+        // c# 7 : value tuple
         private static (int, string) ReturnMacchi()
         {
             return (1, "Macchi");
         }
-        // #return tuple
-        public static void ReturnTuple()
+        // #return value tuple
+        public static void ReturnValueTuple()
         {
             var (number, macchi) = ReturnMacchi();
 
