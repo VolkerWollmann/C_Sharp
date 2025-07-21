@@ -1,8 +1,12 @@
 ﻿using System.Numerics;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_SharpExamplesLib.Language
 {
+    // #type alias for value tuple type
+    using MyValueTupleType = (int, string);
+
     public abstract class CSharp7
     {
 	    private class Person
@@ -42,6 +46,7 @@ namespace C_SharpExamplesLib.Language
         }
 
         // c# 7 : value tuple
+        
         private static (int, string) ReturnMacchi()
         {
             return (1, "Macchi");
@@ -53,6 +58,10 @@ namespace C_SharpExamplesLib.Language
 
             Assert.AreEqual(1, number);
             Assert.AreEqual("Macchi", macchi);
+
+            MyValueTupleType result = ReturnMacchi();
+            Assert.AreEqual(1, result.Item1);
+            Assert.AreEqual("Macchi", result.Item2);
         }
     }
 }
