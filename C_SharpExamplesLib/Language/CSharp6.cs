@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-// #custom type alias
+// #custom type alias : Tuple class
 using IntegerPairs = System.Tuple<int, int>;
 
 namespace C_SharpExamplesLib.Language

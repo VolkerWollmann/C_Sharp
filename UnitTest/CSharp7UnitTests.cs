@@ -37,9 +37,9 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void ReturnTuple()
+        public void ReturnValueTuple()
         {
-            CSharp7.ReturnTuple();
+            CSharp7.ReturnValueTuple();
         }
 
         // #ExpectedException
