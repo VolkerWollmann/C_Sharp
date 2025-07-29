@@ -254,7 +254,7 @@ namespace NetNewUnitTest
 	    }
 
 	    [Fact]
-	    public void NaNUse()
+	    public void Use_NaN_IsInfinity()
 	    {
 		    double result = Math.Sqrt(-1);
 		    Assert.IsTrue(Double.IsNaN(result));
