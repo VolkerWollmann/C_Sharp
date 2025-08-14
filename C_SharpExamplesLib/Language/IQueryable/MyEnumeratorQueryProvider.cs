@@ -90,10 +90,24 @@ namespace C_SharpExamplesLib.Language.IQueryable
 			return max;
 		}
 
-		#endregion
-		#endregion
+        private int First()
+        {
+            using var enumerator = queryableIntegerEnumerator.GetEnumerator();
+            enumerator.Reset();
+            int max = Int32.MinValue;
+            if (enumerator.MoveNext())
+            {
+                return (int)(object)enumerator.Current!;
+               
+            }
 
-		public TResult Execute<TResult>(Expression expression)
+            throw new InvalidOperationException("Sequence contains no elements.");
+        }
+
+        #endregion
+        #endregion
+
+        public TResult Execute<TResult>(Expression expression)
 		{
 			// Check for any
 			if (expression is MethodCallExpression { Method.Name: "Any" } methodCallExpression)
@@ -112,7 +126,11 @@ namespace C_SharpExamplesLib.Language.IQueryable
 			if (expression is MethodCallExpression { Method.Name: "Max", Arguments.Count: 1 })
 				return (TResult)(object)Max();
 
-			throw new NotImplementedException();
+            // Check for first
+            if (expression is MethodCallExpression { Method.Name: "First" })
+                return (TResult)(object)First();
+
+            throw new NotImplementedException();
 		}
 	}
 }
