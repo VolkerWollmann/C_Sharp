@@ -33,6 +33,17 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void Test_First()
+        {
+            foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+            {
+                using var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+                int first = myQueryableIntegerSet.First();
+                Assert.AreEqual(1, first);
+            }
+        }
+
+        [TestMethod]
 		public void Test_ForEach()
 		{
 			foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
