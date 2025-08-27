@@ -1,7 +1,8 @@
-﻿using System.Text.Json;
-using System.Text.Json.Nodes;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Xml.Linq;
 
 namespace C_SharpExamplesLib.OtherExamples
 {
@@ -9,12 +10,12 @@ namespace C_SharpExamplesLib.OtherExamples
 	{
 		public string Name { get; init; } = "";
 
-		public Person? Friend { get; set; } 
+		public Person? Friend { get; set; }
 	}
 
 	internal class Animal
 	{
-		
+
 		public string Type { get; init; } = "";
 		public string Name { get; init; } = "";
 	}
@@ -23,8 +24,8 @@ namespace C_SharpExamplesLib.OtherExamples
 	{
 		public static void DoSerialisationWithReferences()
 		{
-			var alice = new Person {Name = "Alice"};
-			var bob = new Person {Name = "Bob"};
+			var alice = new Person { Name = "Alice" };
+			var bob = new Person { Name = "Bob" };
 
 			// Create circular reference
 			alice.Friend = bob;
@@ -51,8 +52,8 @@ namespace C_SharpExamplesLib.OtherExamples
 
 			Person bob2 = deserializedPersonList.First(p => p.Name == "Bob");
 			Assert.AreEqual("Bob", bob2.Name);
-			Assert.AreEqual("Alice",bob2.Friend?.Name);
-			
+			Assert.AreEqual("Alice", bob2.Friend?.Name);
+
 
 			Person alice2 = deserializedPersonList.First(p => p.Name == "Alice");
 			Assert.AreEqual("Alice", alice2.Name);
@@ -60,7 +61,7 @@ namespace C_SharpExamplesLib.OtherExamples
 		}
 
 		private static readonly string FilePath = "..\\..\\..\\..\\C_SharpExamplesLib\\OtherExamples\\animals.json"; // Replace with the actual file path
-        public static void DeserializeFile()
+		public static void DeserializeFile()
 		{
 			Animal test = new Animal
 			{
@@ -70,12 +71,13 @@ namespace C_SharpExamplesLib.OtherExamples
 			Assert.IsNotNull(test);
 			Assert.AreEqual("Test", test.Name);
 			Assert.AreEqual("Type", test.Type);
-            
+
 			var jsonContent = File.ReadAllText(FilePath);
 
 			var settings = new JsonSerializerSettings
 			{
-				PreserveReferencesHandling = PreserveReferencesHandling.Objects, Formatting = Formatting.Indented
+				PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+				Formatting = Formatting.Indented
 			};
 
 			var deserializedAnimalList = JsonConvert.DeserializeObject<List<Animal>>(jsonContent, settings);
@@ -85,12 +87,27 @@ namespace C_SharpExamplesLib.OtherExamples
 			foreach (var animal in deserializedAnimalList) Console.WriteLine($"Name: {animal.Name}, Type: {animal.Type}");
 		}
 
-        public static void GenericDeserializeFile()
-        {
-            var jsonContent = File.ReadAllText(FilePath);
+		public static void GenericDeserializeFile()
+		{
+			var jsonContent = File.ReadAllText(FilePath);
 			using JsonDocument animalArray = JsonDocument.Parse(jsonContent);
 
-            Assert.AreEqual("Macchi", animalArray.RootElement[0].GetProperty("Name").GetString());
-        }
-    }
+			Assert.AreEqual("Macchi", animalArray.RootElement[0].GetProperty("Name").GetString());
+		}
+	}
+
+	public class XMLToJson
+	{
+		public static void ConvertXmlToJson()
+		{
+			string xml = @"<florence>
+                 <police>Macchi</police>
+                 <police>Amica</police>
+               </florence>";
+
+			XDocument doc = XDocument.Parse(xml);
+			string json = JsonConvert.SerializeXNode(doc, Formatting.Indented);
+			Console.WriteLine(json);
+		}
+	}
 }

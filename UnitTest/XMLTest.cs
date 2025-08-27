@@ -1,4 +1,5 @@
 ﻿using C_SharpExamplesLib.Language.XML;
+using C_SharpExamplesLib.OtherExamples;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
@@ -36,5 +37,11 @@ namespace UnitTest
 		{
 			MyXml.XmlSerializerExample();
 		}
-	}
+
+        [TestMethod]
+        public void XmlToJson()
+        {
+            XMLToJson.ConvertXmlToJson();
+        }
+    }
 }
