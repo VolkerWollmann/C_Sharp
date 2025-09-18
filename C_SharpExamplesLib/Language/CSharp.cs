@@ -362,6 +362,23 @@ namespace C_SharpExamplesLib.Language
             PrintBitArrayValues(myBitArray2, 32);
 
         }
+
+        public static void DynamicType()
+        {
+            dynamic myDynamic = 1;
+            Assert.AreEqual(1, myDynamic);
+
+            myDynamic = "String";
+            Assert.AreEqual("String", myDynamic);
+
+            //will not compile
+            //var myDynamic2 = 1;
+            //Assert.AreEqual(1, myDynamic2);
+
+            //myDynamic2 = "String";
+            //Assert.AreEqual("String", myDynamic2);
+        }
+        
         #endregion
     }
 

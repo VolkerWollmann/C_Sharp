@@ -239,6 +239,12 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void DynamicType()
+        {
+            CSharp.DynamicType();
+        }
+
+        [TestMethod]
         public void ObsoleteMethod()
         {
 			MyObsolete.Test();
