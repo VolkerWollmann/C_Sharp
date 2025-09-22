@@ -212,7 +212,7 @@ namespace C_SharpExamplesLib.Language.XML
 
 			List<Animal> animals = [macchi, amica];
 
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Animal>));
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Animal>), "MyCSharpDefaultNameSpace");
 
             MemoryStream memoryStream = new MemoryStream();
 
