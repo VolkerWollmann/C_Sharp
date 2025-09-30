@@ -36,7 +36,7 @@ namespace CSharpNew
             Assert.AreEqual(p1, p2);
         }
 
-        // #property #init #accessor
+        // #property #init #accessor #object initializer
         private class Point
         {
             public int X { get; init; }
