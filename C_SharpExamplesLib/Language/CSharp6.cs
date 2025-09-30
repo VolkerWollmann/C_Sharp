@@ -94,7 +94,7 @@ namespace C_SharpExamplesLib.Language
 				Assert.IsInstanceOfType(e, typeof(DivideByZeroException)); 
 			}
 
-			Assert.ThrowsException<DivideByZeroException>(badAction, "Exception DivideByZeroException expected");
+			Assert.ThrowsExactly<DivideByZeroException>(badAction, "Exception DivideByZeroException expected");
 
 		}
 
