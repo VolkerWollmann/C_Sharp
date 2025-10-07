@@ -12,14 +12,14 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights" Version="2.23.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
-    <PackageReference Include="Microsoft.Testing.Extensions.Telemetry" Version="1.8.4" />
-    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport.Abstractions" Version="1.8.4" />
-    <PackageReference Include="Microsoft.Testing.Extensions.VSTestBridge" Version="1.8.4" />
-    <PackageReference Include="Microsoft.Testing.Platform" Version="1.8.4" />
-    <PackageReference Include="Microsoft.Testing.Platform.MSBuild" Version="1.8.4" />
-    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.14.1" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.10.4" />
-    <PackageReference Include="MSTest.TestFramework" Version="3.10.4" />
+    <PackageReference Include="Microsoft.Testing.Extensions.Telemetry" Version="1.9.0" />
+    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport.Abstractions" Version="1.9.0" />
+    <PackageReference Include="Microsoft.Testing.Extensions.VSTestBridge" Version="1.9.0" />
+    <PackageReference Include="Microsoft.Testing.Platform" Version="1.9.0" />
+    <PackageReference Include="Microsoft.Testing.Platform.MSBuild" Version="1.9.0" />
+    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="18.0.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.11.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.11.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.9" />
   </ItemGroup>
   <ItemGroup>
