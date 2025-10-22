@@ -261,7 +261,10 @@ namespace NetNewUnitTest
 
 		    double result2 = 1 / GetZero();
 			Assert.IsTrue(Double.IsInfinity(result2));
-	    }
+
+            double positiveInfinity = double.PositiveInfinity;
+            Assert.IsTrue(Double.IsInfinity(positiveInfinity));
+        }
 
 	    [Fact]
 	    public void TestFloatingPointNumericTypes()
