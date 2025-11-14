@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AssemblyTitle>C_SharpExamplesLib</AssemblyTitle>
@@ -17,16 +17,16 @@
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.14.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
-    <PackageReference Include="Microsoft.Testing.Extensions.Telemetry" Version="1.9.0" />
-    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport.Abstractions" Version="1.9.0" />
-    <PackageReference Include="Microsoft.Testing.Extensions.VSTestBridge" Version="1.9.0" />
-    <PackageReference Include="Microsoft.Testing.Platform" Version="1.9.0" />
-    <PackageReference Include="Microsoft.Testing.Platform.MSBuild" Version="1.9.0" />
-    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="18.0.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.11.0" />
-    <PackageReference Include="MSTest.TestFramework" Version="3.11.0" />
+    <PackageReference Include="Microsoft.Testing.Extensions.Telemetry" Version="2.0.2" />
+    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport.Abstractions" Version="2.0.2" />
+    <PackageReference Include="Microsoft.Testing.Extensions.VSTestBridge" Version="2.0.2" />
+    <PackageReference Include="Microsoft.Testing.Platform" Version="2.0.2" />
+    <PackageReference Include="Microsoft.Testing.Platform.MSBuild" Version="2.0.2" />
+    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="18.0.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="4.0.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="4.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.9" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyEnumerableIntegerRangeLibrary\MyEnumerableIntegerRangeLibrary.csproj" />

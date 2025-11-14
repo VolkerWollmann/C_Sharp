@@ -18,17 +18,17 @@ namespace UnitTest.OtherTests
             DoHttpRequests.TestHttpRequestJson();
         }
 
-		[TestMethod]
-		public void SerialisationWithReferences()
-		{
-			SerialisationExample.DoSerialisationWithReferences();
-		}
+        [TestMethod]
+        public void SerialisationWithReferences()
+        {
+            SerialisationExample.DoSerialisationWithReferences();
+        }
 
-		[TestMethod]
-		public void DeserializeFile()
-		{
-			SerialisationExample.DeserializeFile();
-		}
+        [TestMethod]
+        public void DeserializeFile()
+        {
+            SerialisationExample.DeserializeFile();
+        }
 
         [TestMethod]
         public void GenericDeserializeFile()

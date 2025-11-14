@@ -18,14 +18,14 @@ namespace C_SharpExamplesLib.Language
             //var appSettings = ConfigurationManager.AppSettings["UnitTestSetting"];
 
             // #ConfigurationManager
-            Configuration configuration =  ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            Assert.IsTrue(configuration.FilePath.Contains("UnitTest"));
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            Assert.Contains("UnitTest", configuration.FilePath);
         }
 
         public static void CurrentDirectory()
         {
             var directory = Directory.GetCurrentDirectory();
-            Assert.IsTrue(directory.Contains("bin"));
+            Assert.Contains("bin", directory);
         }
     }
 }

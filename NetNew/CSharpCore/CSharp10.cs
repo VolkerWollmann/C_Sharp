@@ -3,9 +3,9 @@ namespace CSharpNew;
 
 public abstract class CSharp10
 {
-	public static void DefinedInFileScopedNameSpace()
-	{
-		
-	}
+    public static void DefinedInFileScopedNameSpace()
+    {
+
+    }
 }
 

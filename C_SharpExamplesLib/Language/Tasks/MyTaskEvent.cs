@@ -2,83 +2,83 @@
 
 namespace C_SharpExamplesLib.Language.Tasks
 {
-	/// <summary>
-	/// #task #event
-	/// </summary>
-	public abstract class MyTaskEvent
-	{
-		static readonly Random Random = new();
+    /// <summary>
+    /// #task #event
+    /// </summary>
+    public abstract class MyTaskEvent
+    {
+        static readonly Random Random = new();
 
-		private delegate void ProduceEventHandler(int e, bool final);
+        private delegate void ProduceEventHandler(int e, bool final);
 
-		private class Consumer
+        private class Consumer
         {
             readonly BlockingCollection<int> _data = new();
 
-			public void AddData(int i, bool final)
-			{
-				_data.Add(i);
-				if (final)
-					_data.CompleteAdding();
-			}
+            public void AddData(int i, bool final)
+            {
+                _data.Add(i);
+                if (final)
+                    _data.CompleteAdding();
+            }
 
-			public void Run()
-			{
-				Thread.CurrentThread.Name = "Consumer";
-				while (!_data.IsCompleted)
-				{
-					try
-					{
-						Thread.Sleep(Random.Next(100, 200));
-						int v = _data.Take();
-						Console.WriteLine("Data {0} taken successfully.", v);
-					}
-					catch (InvalidOperationException) { }
-				}
-			}
-		}
+            public void Run()
+            {
+                Thread.CurrentThread.Name = "Consumer";
+                while (!_data.IsCompleted)
+                {
+                    try
+                    {
+                        Thread.Sleep(Random.Next(100, 200));
+                        int v = _data.Take();
+                        Console.WriteLine("Data {0} taken successfully.", v);
+                    }
+                    catch (InvalidOperationException) { }
+                }
+            }
+        }
 
-		private class Producer
-		{
-			static event ProduceEventHandler? ProduceEvent;
-			public Producer(ProduceEventHandler produceEventHandler)
-			{
-				ProduceEvent += produceEventHandler;
-			}
+        private class Producer
+        {
+            static event ProduceEventHandler? ProduceEvent;
+            public Producer(ProduceEventHandler produceEventHandler)
+            {
+                ProduceEvent += produceEventHandler;
+            }
 
-			public void Run()
-			{ 
-				Thread.CurrentThread.Name = "Producer";
+            public void Run()
+            {
+                Thread.CurrentThread.Name = "Producer";
 
-				int max = 10;
+                int max = 10;
 
-				for (int i = 0; i < max; i++)
-				{
-					Thread.Sleep(Random.Next(100, 150));
+                for (int i = 0; i < max; i++)
+                {
+                    Thread.Sleep(Random.Next(100, 150));
                     ProduceEvent?.Invoke(i, (i == (max - 1)));
                     Console.WriteLine("Data {0} produced successfully.", i);
-				}
-			}
+                }
+            }
 
-		}
-		public static void TaskEvent()
+        }
+        public static void TaskEvent()
         {
-			Consumer consumer = new Consumer();
-			Producer producer = new Producer(consumer.AddData);
+            Consumer consumer = new Consumer();
+            Producer producer = new Producer(consumer.AddData);
 
-			var tasks = new List<Task>();
-			
-			Task producerTask = new Task(() => producer.Run());
-			Task consumerTask = new Task(() => consumer.Run());
+            var tasks = new List<Task>();
 
-			tasks.Add(producerTask);
-			tasks.Add(consumerTask);
+            Task producerTask = new Task(() => producer.Run());
+            Task consumerTask = new Task(() => consumer.Run());
 
-			producerTask.Start();
-			consumerTask.Start();
+            tasks.Add(producerTask);
+            tasks.Add(consumerTask);
 
-			Task.WhenAll(tasks).Wait();
-			Console.WriteLine("Test_BlockingCollection end");
-		}
-	}
+            producerTask.Start();
+            consumerTask.Start();
+
+            Task.WhenAll(tasks).Wait();
+            Console.WriteLine("Test_BlockingCollection end");
+        }
+    }
 }

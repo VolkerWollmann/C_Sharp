@@ -100,7 +100,7 @@ namespace C_SharpExamplesLib.Language
             IInheritanceInterface iCpi = cpi;
             Assert.AreEqual(42, iCpi.GetValue2());
 
-			ClassPublicImplDerivedPartialImpl cpidpi = new ClassPublicImplDerivedPartialImpl();
+            ClassPublicImplDerivedPartialImpl cpidpi = new ClassPublicImplDerivedPartialImpl();
             int cpidpiv = cpidpi.GetValue();
             Assert.AreEqual(1, cpidpiv);
 

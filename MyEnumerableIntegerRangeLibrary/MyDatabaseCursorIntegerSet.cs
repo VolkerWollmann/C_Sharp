@@ -4,69 +4,69 @@ using Microsoft.Data.SqlClient;
 
 namespace MyEnumerableIntegerRangeLibrary
 {
-	/// <summary>
-	/// Simulate a source, which is worth to be encapsulated for lazy linq queries.
-	/// </summary>
-	public class MyDatabaseCursorIntegerSet : IMyIntegerSet
-	{
-		internal readonly string TableName;
-		internal const string TheIndex = "theIndex";
-		internal const string TheValue = "theValue";
+    /// <summary>
+    /// Simulate a source, which is worth to be encapsulated for lazy linq queries.
+    /// </summary>
+    public class MyDatabaseCursorIntegerSet : IMyIntegerSet
+    {
+        internal readonly string TableName;
+        internal const string TheIndex = "theIndex";
+        internal const string TheValue = "theValue";
 
-		
-		internal readonly SqlConnection? DataBaseConnection;
 
-		#region database operations
+        internal readonly SqlConnection? DataBaseConnection;
 
-		private void ExecuteNonQuery(string statement)
-		{
-			using var scope = new TransactionScope();
-			SqlCommand command = new SqlCommand(statement, DataBaseConnection);
-			command.ExecuteNonQuery();
-			scope.Complete();               // enforces the commit
-		}
+        #region database operations
 
-		private void CreateTable()
-		{
-			string statement = $"create table {TableName}(theIndex int, theValue int)";
-			ExecuteNonQuery(statement);
-		}
+        private void ExecuteNonQuery(string statement)
+        {
+            using var scope = new TransactionScope();
+            SqlCommand command = new SqlCommand(statement, DataBaseConnection);
+            command.ExecuteNonQuery();
+            scope.Complete();               // enforces the commit
+        }
 
-		private void InsertValues(List<int> set)
-		{
-			string statement = $"insert into {TableName} values ";
-			int i = 1;
-			foreach (int v in set)
-			{
-				string indexValuePair = $"({i},{v})";
-				statement += indexValuePair;
-				if (i < set.Count)
-					statement += ",";
-				i++;
-			}
+        private void CreateTable()
+        {
+            string statement = $"create table {TableName}(theIndex int, theValue int)";
+            ExecuteNonQuery(statement);
+        }
 
-			ExecuteNonQuery(statement);
-		}
+        private void InsertValues(List<int> set)
+        {
+            string statement = $"insert into {TableName} values ";
+            int i = 1;
+            foreach (int v in set)
+            {
+                string indexValuePair = $"({i},{v})";
+                statement += indexValuePair;
+                if (i < set.Count)
+                    statement += ",";
+                i++;
+            }
 
-		private void DeleteTable()
-		{
-			string statement = $"drop table {TableName}";
-			ExecuteNonQuery(statement);
-		}
+            ExecuteNonQuery(statement);
+        }
 
-		#endregion
+        private void DeleteTable()
+        {
+            string statement = $"drop table {TableName}";
+            ExecuteNonQuery(statement);
+        }
 
-		#region IMyIntegerSet IEnumerator<int> support
-		public void Dispose()
-		{
-			DeleteTable();
-			DataBaseConnection?.Close();
-		}
-		
-		#endregion
+        #endregion
 
-		#region IEnumerable<int>
-		public IEnumerator<int> GetEnumerator()
+        #region IMyIntegerSet IEnumerator<int> support
+        public void Dispose()
+        {
+            DeleteTable();
+            DataBaseConnection?.Close();
+        }
+
+        #endregion
+
+        #region IEnumerable<int>
+        public IEnumerator<int> GetEnumerator()
         {
             return new MyDatabaseCursorIntegerSetEnumerator(this);
         }
@@ -76,43 +76,43 @@ namespace MyEnumerableIntegerRangeLibrary
             return new MyDatabaseCursorIntegerSetEnumerator(this);
         }
 
-		#endregion
+        #endregion
 
 
-		public SqlDataReader? GetReader()
+        public SqlDataReader? GetReader()
         {
-	        SqlCommand command = new SqlCommand($"select {TheValue} from {TableName} order by {TheIndex}", DataBaseConnection);
-	        var reader = command.ExecuteReader();
+            SqlCommand command = new SqlCommand($"select {TheValue} from {TableName} order by {TheIndex}", DataBaseConnection);
+            var reader = command.ExecuteReader();
 
-	        return reader;
+            return reader;
         }
 
-		#region Constructor
+        #region Constructor
 
-		public MyDatabaseCursorIntegerSet(string connectionString, List<int> set)
-		{
-			DataBaseConnection = new SqlConnection(connectionString);
-			DataBaseConnection.Open();
-			
-			TableName = "MyDatabaseCursorIntegerSet_" + Guid.NewGuid().ToString("N").ToUpper();
+        public MyDatabaseCursorIntegerSet(string connectionString, List<int> set)
+        {
+            DataBaseConnection = new SqlConnection(connectionString);
+            DataBaseConnection.Open();
 
-			// create table
-			CreateTable();
+            TableName = "MyDatabaseCursorIntegerSet_" + Guid.NewGuid().ToString("N").ToUpper();
 
-			// insert values
-			InsertValues(set);
+            // create table
+            CreateTable();
 
-		}
+            // insert values
+            InsertValues(set);
 
-		protected MyDatabaseCursorIntegerSet(MyDatabaseCursorIntegerSet origin)
-		{
-			DataBaseConnection = origin.DataBaseConnection!;
-			//_dataBaseConnection.Open();
+        }
 
-			TableName = origin.TableName;
-		}
-		#endregion
+        protected MyDatabaseCursorIntegerSet(MyDatabaseCursorIntegerSet origin)
+        {
+            DataBaseConnection = origin.DataBaseConnection!;
+            //_dataBaseConnection.Open();
 
-	}
+            TableName = origin.TableName;
+        }
+        #endregion
+
+    }
 
 }

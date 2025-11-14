@@ -3,35 +3,35 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_SharpExamplesLib.Language
 {
-	// #comparer #IEqualityComparer
-	public class MyIEqualityComparer(int x, int y) : IEqualityComparer<MyIEqualityComparer>
-	{
-		private int X { get; } = x;
-		private int Y { get; } = y;
+    // #comparer #IEqualityComparer
+    public class MyIEqualityComparer(int x, int y) : IEqualityComparer<MyIEqualityComparer>
+    {
+        private int X { get; } = x;
+        private int Y { get; } = y;
 
-		#region IEqualityComparer<T>
+        #region IEqualityComparer<T>
         bool IEqualityComparer<MyIEqualityComparer>.Equals(MyIEqualityComparer? x, MyIEqualityComparer? y)
-		{
-			return y != null && x != null && (x.X == y.X) && (x.Y == y.Y);
-		}
+        {
+            return y != null && x != null && (x.X == y.X) && (x.Y == y.Y);
+        }
 
-		int IEqualityComparer<MyIEqualityComparer>.GetHashCode(MyIEqualityComparer obj)
-		{
-			return (obj.X | obj.Y);
-		}
+        int IEqualityComparer<MyIEqualityComparer>.GetHashCode(MyIEqualityComparer obj)
+        {
+            return (obj.X | obj.Y);
+        }
         #endregion
 
         public static void Test()
-		{
-			MyIEqualityComparer myA = new MyIEqualityComparer(1, 1);
-			MyIEqualityComparer myB = new MyIEqualityComparer(1, 2);
-			MyIEqualityComparer myC = new MyIEqualityComparer(1, 2);
+        {
+            MyIEqualityComparer myA = new MyIEqualityComparer(1, 1);
+            MyIEqualityComparer myB = new MyIEqualityComparer(1, 2);
+            MyIEqualityComparer myC = new MyIEqualityComparer(1, 2);
 
             // Use reference comparer
             Dictionary<MyIEqualityComparer, string> dictionary1 =
                 new Dictionary<MyIEqualityComparer, string> { { myA, "Test1" }, { myB, "Test2" } };
 
-			// Fails, since myC != myA and myC != myB due to reference comparer
+            // Fails, since myC != myA and myC != myB due to reference comparer
             Assert.IsFalse(dictionary1.ContainsKey(myC));
 
             // Create a comparer
@@ -39,37 +39,37 @@ namespace C_SharpExamplesLib.Language
 
             //Use comparer for the dictionary
             Dictionary<MyIEqualityComparer, string> dictionary2 =
-                new Dictionary<MyIEqualityComparer, string>(myIEqualityComparer){{myA, "Test1"}, {myB, "Test2"}};
+                new Dictionary<MyIEqualityComparer, string>(myIEqualityComparer) { { myA, "Test1" }, { myB, "Test2" } };
 
             // True, since myC == myB due to my MyIEqualityComparer
             Assert.IsTrue(dictionary2.ContainsKey(myC));
-		}
-	}
+        }
+    }
 
-	// #comparer #IComparable #order #DebuggerDisplay
-	[DebuggerDisplay("Version={Version}, Animal={Animal}")]
-	public class MyIComparable : IComparable<MyIComparable>, IComparer<MyIComparable>
-	{
-		private const string None = "None";
-		private const string Donkey = "Esel";
-		private const string Dog = "Hund";
-		private const string Seagull = "Möwe";
-		private const string Cat = "Katze";
+    // #comparer #IComparable #order #DebuggerDisplay
+    [DebuggerDisplay("Version={Version}, Animal={Animal}")]
+    public class MyIComparable : IComparable<MyIComparable>, IComparer<MyIComparable>
+    {
+        private const string None = "None";
+        private const string Donkey = "Esel";
+        private const string Dog = "Hund";
+        private const string Seagull = "Möwe";
+        private const string Cat = "Katze";
 
-		public int Version { get; private init; }
-		public string Animal { get; private init; }
+        public int Version { get; private init; }
+        public string Animal { get; private init; }
 
-		#region Constructor 
-		internal MyIComparable(int version, string animal)
-		{
-			Animal = animal;
-			Version = version;
+        #region Constructor 
+        internal MyIComparable(int version, string animal)
+        {
+            Animal = animal;
+            Version = version;
 
-		}
-		#endregion
+        }
+        #endregion
 
-        
-		private int CompareInternal(MyIComparable? other)
+
+        private int CompareInternal(MyIComparable? other)
         {
             if (other == null)
                 return 1;
@@ -128,10 +128,10 @@ namespace C_SharpExamplesLib.Language
         }
 
 
-		#endregion
+        #endregion
 
-		#region IComparer
-		// #IComparer
+        #region IComparer
+        // #IComparer
         int IComparer<MyIComparable>.Compare(MyIComparable? x, MyIComparable? y)
         {
             if (x == null && y == null) return 0;       // Consider nulls as equal
@@ -140,63 +140,63 @@ namespace C_SharpExamplesLib.Language
 
             return x.CompareInternal(y);
         }
-		#endregion
+        #endregion
 
-		#region Tests
+        #region Tests
 
         public static void TestIComparable()
         {
             List<MyIComparable> l =
             [
-	            new(1, Donkey),
-	            new(3, Donkey),
-	            new(2, Cat),
-	            new(3, Cat),
-	            new(2, Dog),
-	            new(5, None)
+                new(1, Donkey),
+                new(3, Donkey),
+                new(2, Cat),
+                new(3, Cat),
+                new(2, Dog),
+                new(5, None)
             ];
 
             l.Sort();
 
             for (int i = 0; i < l.Count - 1; i++)
-                Assert.IsTrue(((IComparable<MyIComparable>)l[i]).CompareTo(l[i + 1]) <= 0);
+                Assert.IsLessThanOrEqualTo(0, ((IComparable<MyIComparable>)l[i]).CompareTo(l[i + 1]));
 
             // #pre-order works for one NONE
             List<MyIComparable> l2 =
             [
-	            new(2, Cat),
-	            new(1, Donkey),
-	            new(3, Donkey),
-	            new(2, Cat),
-	            new(3, Cat),
-	            new(3, Donkey),
-	            new(2, Dog),
-	            new(5, None)
+                new(2, Cat),
+                new(1, Donkey),
+                new(3, Donkey),
+                new(2, Cat),
+                new(3, Cat),
+                new(3, Donkey),
+                new(2, Dog),
+                new(5, None)
             ];
 
             l2.Sort();
             for (int i = 0; i < l2.Count - 1; i++)
-                Assert.IsTrue(((IComparable<MyIComparable>)l2[i]).CompareTo(l2[i + 1]) <= 0);
+                Assert.IsLessThanOrEqualTo(0, ((IComparable<MyIComparable>)l2[i]).CompareTo(l2[i + 1]));
 
 
             // #pre-order works for three NONE
             List<MyIComparable> l3 =
             [
-	            new(2, Cat),
-	            new(1, Donkey),
-	            new(3, Donkey),
-	            new(3, None),
-	            new(5, None),
-	            new(2, Cat),
-	            new(3, Cat),
-	            new(3, Donkey),
-	            new(2, Dog),
-	            new(5, None)
+                new(2, Cat),
+                new(1, Donkey),
+                new(3, Donkey),
+                new(3, None),
+                new(5, None),
+                new(2, Cat),
+                new(3, Cat),
+                new(3, Donkey),
+                new(2, Dog),
+                new(5, None)
             ];
 
             l3.Sort();
             for (int i = 0; i < l3.Count - 1; i++)
-                Assert.IsTrue(((IComparable<MyIComparable>)l3[i]).CompareTo(l3[i + 1]) <= 0);
+                Assert.IsLessThanOrEqualTo(0, ((IComparable<MyIComparable>)l3[i]).CompareTo(l3[i + 1]));
 
         }
 
@@ -204,104 +204,104 @@ namespace C_SharpExamplesLib.Language
         {
             List<MyIComparable> l =
             [
-	            new(1, Donkey),
-	            new(3, Donkey),
-	            new(2, Cat),
-	            new(3, Cat),
-	            new(2, Dog),
-	            new(5, None)
+                new(1, Donkey),
+                new(3, Donkey),
+                new(2, Cat),
+                new(3, Cat),
+                new(2, Dog),
+                new(5, None)
             ];
 
             // #IComparer
-			IComparer<MyIComparable>comparer = new MyIComparable(0, None);
-			l.Sort(comparer);
+            IComparer<MyIComparable> comparer = new MyIComparable(0, None);
+            l.Sort(comparer);
 
             for (int i = 0; i < l.Count - 1; i++)
-                Assert.IsTrue(((IComparable<MyIComparable>)l[i]).CompareTo(l[i + 1]) <= 0);
-		}
+                Assert.IsLessThanOrEqualTo(0, ((IComparable<MyIComparable>)l[i]).CompareTo(l[i + 1]));
+        }
 
-		public static void TestComparison()
-		{ 
-			MyIComparable[] a =
-			[
-				new(1, Donkey),
-				new(5, Donkey),
-				new(2, Cat),
-				new(4, Cat),
-				new(3, Dog)
-			];
+        public static void TestComparison()
+        {
+            MyIComparable[] a =
+            [
+                new(1, Donkey),
+                new(5, Donkey),
+                new(2, Cat),
+                new(4, Cat),
+                new(3, Dog)
+            ];
 
-			// Sort array with #Comparison
+            // Sort array with #Comparison
             // ReSharper disable once ConvertToLocalFunction
             Comparison<MyIComparable> comparison = (i1, i2) => -i2.Version.CompareTo(i1.Version);
-			Array.Sort(a, comparison);
+            Array.Sort(a, comparison);
 
-			for (int i = 0; i < a.Length-1; i++)
-				Assert.IsTrue( a[i].Version <= a[i+1].Version );
-		}
+            for (int i = 0; i < a.Length - 1; i++)
+                Assert.IsLessThanOrEqualTo(a[i + 1].Version, a[i].Version);
+        }
 
         #endregion
     }
 
 
-	// #comparer #IEquatable #override #== #<, #>, #!=
-	[DebuggerDisplay("Number={Number}, Animal={Animal}")]
-	public class MyIEquatable(int number, string animal) : IEquatable<MyIEquatable>
-	{
-		public int Number { get; } = number;
-		public string Animal { private init; get; } = animal;
+    // #comparer #IEquatable #override #== #<, #>, #!=
+    [DebuggerDisplay("Number={Number}, Animal={Animal}")]
+    public class MyIEquatable(int number, string animal) : IEquatable<MyIEquatable>
+    {
+        public int Number { get; } = number;
+        public string Animal { private init; get; } = animal;
 
 
-		public override bool Equals(object? other)
+        public override bool Equals(object? other)
         {
-			return Equals(other as MyIEquatable); 
+            return Equals(other as MyIEquatable);
         }
 
-		public override int GetHashCode() => Number;
+        public override int GetHashCode() => Number;
 
         #region IEquatable
-		//bool IEquatable<MyEquatable>.Equals(MyEquatable other)
+        //bool IEquatable<MyEquatable>.Equals(MyEquatable other)
         public bool Equals(MyIEquatable? other)
-		{
-			// #Object #ReferenceEquals 
-			if (ReferenceEquals(other, null))
-				return false;
+        {
+            // #Object #ReferenceEquals 
+            if (ReferenceEquals(other, null))
+                return false;
 
-			return  Number == other.Number && Animal == other.Animal;
-		}
-		#endregion
+            return Number == other.Number && Animal == other.Animal;
+        }
+        #endregion
 
-		#region override Comparsion Operators
+        #region override Comparsion Operators
         // #overload #operator #less #< #== #!=
-		public static bool operator ==(MyIEquatable obj1, MyIEquatable obj2) =>  obj1.Equals(obj2);
+        public static bool operator ==(MyIEquatable obj1, MyIEquatable obj2) => obj1.Equals(obj2);
 
-        public static bool operator !=(MyIEquatable obj1, MyIEquatable obj2) =>  !obj1.Equals(obj2);
+        public static bool operator !=(MyIEquatable obj1, MyIEquatable obj2) => !obj1.Equals(obj2);
 
         public static bool operator <(MyIEquatable obj1, MyIEquatable obj2) => (obj1.Number < obj2.Number);
 
         public static bool operator >(MyIEquatable obj1, MyIEquatable obj2) => (obj1.Number > obj2.Number);
 
-		#endregion
+        #endregion
 
-		#region Test
-		public static void Test()
+        #region Test
+        public static void Test()
         {
-			MyIEquatable me1 = new MyIEquatable(1, "Donkey");
-			MyIEquatable me2 = new MyIEquatable(2, "Donkey");
-			MyIEquatable me3 = new MyIEquatable(1, "Donkey");
+            MyIEquatable me1 = new MyIEquatable(1, "Donkey");
+            MyIEquatable me2 = new MyIEquatable(2, "Donkey");
+            MyIEquatable me3 = new MyIEquatable(1, "Donkey");
 
-            
-			Assert.IsTrue(me1 == me3);
-			Assert.IsTrue(me1 != me2);
-			Assert.IsTrue(me1 < me2);
 
-			MyIComparable me4 = new MyIComparable(1, "Donkey");
-			Assert.IsNotNull(me4);
-			//Does not compile, because of type check during compilation
-			//Assert.IsTrue(me1 != me4);
-		}
+            Assert.IsTrue(me1 == me3);
+            Assert.IsTrue(me1 != me2);
+            Assert.IsTrue(me1 < me2);
 
-		public static void PartialOrderTest()
+            MyIComparable me4 = new MyIComparable(1, "Donkey");
+            Assert.IsNotNull(me4);
+            //Does not compile, because of type check during compilation
+            //Assert.IsTrue(me1 != me4);
+        }
+
+        public static void PartialOrderTest()
         {
             List<int> l = [3, 4, 8, 2, 1, 2, 4, 5, 2, 7];
             l.Sort();

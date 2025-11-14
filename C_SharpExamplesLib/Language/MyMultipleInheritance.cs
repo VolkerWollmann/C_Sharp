@@ -10,9 +10,9 @@ namespace C_SharpExamplesLib.Language
     // TODO : https://stackoverflow.com/questions/178333/multiple-inheritance-in-c-sharp
     // Does not Compile
     // class MyMultipleInheritance : BaseClassA, BaseClassB
-	//{
-		
-	//}
+    //{
+
+    //}
 
     public abstract class MyMultipleInheritanceTest
     {

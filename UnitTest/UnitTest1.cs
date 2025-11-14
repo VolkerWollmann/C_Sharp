@@ -8,62 +8,62 @@ using MyClassAccessibilityTest = AccessibilityOtherProjectCore.MyClassAccessibil
 namespace UnitTest
 {
     [TestClass]
-	public class AllUnitTests
-	{
-		[TestMethod]
-		public void Enum_Test()
-		{
-			MyEnum.Enum_Test();
-		}
+    public class AllUnitTests
+    {
+        [TestMethod]
+        public void Enum_Test()
+        {
+            MyEnum.Enum_Test();
+        }
 
         [TestMethod]
         public void LoopInvariant()
         {
             MyLoopInvariant.LoopInvariant1();
-			MyLoopInvariant.LoopInvariant2();
-        }
-        
-		[TestMethod]
-		public void Operator_Test()
-		{
-			MyOperator.Operator_Test();
-		}
-
-		[TestMethod]
-		public void AnonymousTypes_Test()
-		{
-			MyAnonymousType.AnonymousType_Test();
-		}
-
-		[TestMethod]
-		public void Exception_Test()
-		{
-			MyException.Exception_Test();
-		}
-
-		[TestMethod]
-		public void CSharp6Test()
-		{
-			CSharp6.Test();
+            MyLoopInvariant.LoopInvariant2();
         }
 
-		[TestMethod]
-		public void DictionaryDoubleUsage()
-		{
-			CSharp6.DictionaryDoubleUsage();
-		}
+        [TestMethod]
+        public void Operator_Test()
+        {
+            MyOperator.Operator_Test();
+        }
 
-		[TestMethod]
-		public void Assert_Test()
-		{
-			CSharp6.Assert_Test();
-		}
+        [TestMethod]
+        public void AnonymousTypes_Test()
+        {
+            MyAnonymousType.AnonymousType_Test();
+        }
 
-		[TestMethod]
-		public void TestTuple()
-		{
-			CSharp6.TupleTest();
-		}
+        [TestMethod]
+        public void Exception_Test()
+        {
+            MyException.Exception_Test();
+        }
+
+        [TestMethod]
+        public void CSharp6Test()
+        {
+            CSharp6.Test();
+        }
+
+        [TestMethod]
+        public void DictionaryDoubleUsage()
+        {
+            CSharp6.DictionaryDoubleUsage();
+        }
+
+        [TestMethod]
+        public void Assert_Test()
+        {
+            CSharp6.Assert_Test();
+        }
+
+        [TestMethod]
+        public void TestTuple()
+        {
+            CSharp6.TupleTest();
+        }
 
         [TestMethod]
         public void NullableReferences()
@@ -71,110 +71,110 @@ namespace UnitTest
             CSharp6.NullableReferences();
         }
 
-		[TestMethod]
-		public void ExtensionMethod()
-		{
-			MyExtensionMethod.Test();
-		}
-
-		[TestMethod]
-		public void TestScratchMethod()
-		{
-			Scratch.Test();
-		}
-
-		[TestMethod]
-		public void ClassAccessibility_Test()
-		{
-			MyClassAccessibilityTestA.Test();
-			MyClassAccessibilityTestB.Test();
-			AccessibilityProjectCore.MyClassAccessibilityTest.Test();
-            MyClassAccessibilityTest.Test();
-		}
-
-		[TestMethod]
-		public void ExplicitImplicitInterfaceImplementation()
+        [TestMethod]
+        public void ExtensionMethod()
         {
-			MyInterfaceVisibility.ExplicitImplicitInterfaceImplementation();
-		}
+            MyExtensionMethod.Test();
+        }
 
-		[TestMethod]
-		public void Types()
-		{
-			MyType.Test();
-		}
+        [TestMethod]
+        public void TestScratchMethod()
+        {
+            Scratch.Test();
+        }
 
-		[TestMethod]
-		public void AbstractClass()
-		{
-			AbstractClassTest.Test();
-		}
+        [TestMethod]
+        public void ClassAccessibility_Test()
+        {
+            MyClassAccessibilityTestA.Test();
+            MyClassAccessibilityTestB.Test();
+            AccessibilityProjectCore.MyClassAccessibilityTest.Test();
+            MyClassAccessibilityTest.Test();
+        }
 
-		[TestMethod]
-		public void Reflection()
-		{
-			MyReflection.Test();
-		}
+        [TestMethod]
+        public void ExplicitImplicitInterfaceImplementation()
+        {
+            MyInterfaceVisibility.ExplicitImplicitInterfaceImplementation();
+        }
 
-		[TestMethod]
-		public void SimpleCSharp()
-		{
-			MySimpleCSharp.Test();
-		}
+        [TestMethod]
+        public void Types()
+        {
+            MyType.Test();
+        }
 
-		[TestMethod]
-		public void CallByReference()
-		{
-			MySimpleCSharp.TestCallByReference();
-		}
-		
-		[TestMethod]
+        [TestMethod]
+        public void AbstractClass()
+        {
+            AbstractClassTest.Test();
+        }
+
+        [TestMethod]
+        public void Reflection()
+        {
+            MyReflection.Test();
+        }
+
+        [TestMethod]
+        public void SimpleCSharp()
+        {
+            MySimpleCSharp.Test();
+        }
+
+        [TestMethod]
+        public void CallByReference()
+        {
+            MySimpleCSharp.TestCallByReference();
+        }
+
+        [TestMethod]
         public void RecursiveClassTest()
         {
             CSharp.MyRecursiveCLass.Test();
         }
 
         [TestMethod]
-		public void ReadFileTest()
-		{
-			MyFileOperation.ReadLinesFromFile();
-		}
+        public void ReadFileTest()
+        {
+            MyFileOperation.ReadLinesFromFile();
+        }
 
-		[TestMethod]
-		public void Cast()
-		{
-			MyCast.Test();
-		}
+        [TestMethod]
+        public void Cast()
+        {
+            MyCast.Test();
+        }
 
         [TestMethod]
         public void Attribute()
         {
-			MyAttributedClassTest.Test();
+            MyAttributedClassTest.Test();
         }
-
-		[TestMethod]
-		public void LocalFunction()
-        {
-			CSharp.LocalFunction();
-		}
-
-		[TestMethod]
-		public void MultiLineStringConstant()
-		{
-			CSharp.MultiLineStringConstant();
-		}
 
         [TestMethod]
-		public void NamedParameters()
+        public void LocalFunction()
         {
-			CSharp.NamedParameters();
+            CSharp.LocalFunction();
         }
 
-		[TestMethod]
-		public void OptionalParameters()
-		{
-			CSharp.OptionalParameters();
-		}
+        [TestMethod]
+        public void MultiLineStringConstant()
+        {
+            CSharp.MultiLineStringConstant();
+        }
+
+        [TestMethod]
+        public void NamedParameters()
+        {
+            CSharp.NamedParameters();
+        }
+
+        [TestMethod]
+        public void OptionalParameters()
+        {
+            CSharp.OptionalParameters();
+        }
 
 
         [TestMethod]
@@ -184,19 +184,19 @@ namespace UnitTest
         }
 
         [TestMethod]
-		public void ShowCompilerServices()
+        public void ShowCompilerServices()
         {
-			CSharp.ShowCompilerServices();
-		}
+            CSharp.ShowCompilerServices();
+        }
 
-		[TestMethod]
-		public void LazyClassTest()
-		{
-			CSharp.LazyClassTest();
-		}
-		
+        [TestMethod]
+        public void LazyClassTest()
+        {
+            CSharp.LazyClassTest();
+        }
 
-		[TestMethod]
+
+        [TestMethod]
         public void MultipleInheritance()
         {
             MyMultipleInheritanceTest.Test();
@@ -235,7 +235,7 @@ namespace UnitTest
         [TestMethod]
         public void ShowBitArray()
         {
-			CSharp.ShowBitArray();
+            CSharp.ShowBitArray();
         }
 
         [TestMethod]
@@ -247,7 +247,7 @@ namespace UnitTest
         [TestMethod]
         public void ObsoleteMethod()
         {
-			MyObsolete.Test();
+            MyObsolete.Test();
         }
 
         [TestMethod]
@@ -271,14 +271,14 @@ namespace UnitTest
         [TestMethod]
         public void StepThrough()
         {
-			DebugStepThrough.StepThroughExample();
+            DebugStepThrough.StepThroughExample();
         }
 
-		[TestMethod]
-		public void TestReturnAssignment()
-		{
-			CSharp.ReturnAssignment();
-		}
+        [TestMethod]
+        public void TestReturnAssignment()
+        {
+            CSharp.ReturnAssignment();
+        }
 
         [TestMethod]
         public void StringJoin()

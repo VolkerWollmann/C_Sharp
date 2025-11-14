@@ -2,37 +2,37 @@
 
 namespace MyEnumerableIntegerRangeLibrary
 {
-	/// <summary>
-	/// Simulate a source, which is worth to be encapsulated for lazy linq queries.
-	/// </summary>
-	
-	public class MyDatabaseStatementIntegerSetEnumerator(MyDatabaseStatementIntegerSet set) : IEnumerator<int>
-	{
-		internal readonly MyDatabaseStatementIntegerSet MyDatabaseStatementIntegerSet = set;
+    /// <summary>
+    /// Simulate a source, which is worth to be encapsulated for lazy linq queries.
+    /// </summary>
 
-		#region IEnumerator<int>
-		int _index = -1;
+    public class MyDatabaseStatementIntegerSetEnumerator(MyDatabaseStatementIntegerSet set) : IEnumerator<int>
+    {
+        internal readonly MyDatabaseStatementIntegerSet MyDatabaseStatementIntegerSet = set;
 
-		public void Dispose()
-		{
-		}
+        #region IEnumerator<int>
+        int _index = -1;
 
-		public bool MoveNext()
-		{
-			_index = MyDatabaseStatementIntegerSet.GetNextIndex(_index);
-			return _index > 0;
-		}
+        public void Dispose()
+        {
+        }
 
-		public void Reset()
-		{
-			_index = -1;
-		}
+        public bool MoveNext()
+        {
+            _index = MyDatabaseStatementIntegerSet.GetNextIndex(_index);
+            return _index > 0;
+        }
 
-		public int Current => MyDatabaseStatementIntegerSet.GetValueAtIndex(_index);
+        public void Reset()
+        {
+            _index = -1;
+        }
 
-		object IEnumerator.Current => Current;
+        public int Current => MyDatabaseStatementIntegerSet.GetValueAtIndex(_index);
 
-		#endregion
+        object IEnumerator.Current => Current;
 
-	}
+        #endregion
+
+    }
 }

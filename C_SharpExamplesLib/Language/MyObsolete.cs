@@ -9,7 +9,7 @@ namespace C_SharpExamplesLib.Language
 
         }
 
-        [Obsolete("Use NewMethod",false)]
+        [Obsolete("Use NewMethod", false)]
         internal void Method()
         {
 

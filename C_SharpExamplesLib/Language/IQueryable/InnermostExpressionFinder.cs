@@ -7,13 +7,13 @@ namespace C_SharpExamplesLib.Language.IQueryable
     /// </summary>
     internal class InnermostExpressionFinder(string expressionName) : ExpressionVisitor
     {
-	    private MethodCallExpression? _innermostExpression;
+        private MethodCallExpression? _innermostExpression;
 
         private readonly List<Type> _innerMostGenericTypes =
         [
-	        typeof(MyConditionalEnumeratorQueryable<>),
-	        typeof(MySelectorEnumeratorQueryable<,>),
-	        typeof(MyEnumeratorQueryable<>)
+            typeof(MyConditionalEnumeratorQueryable<>),
+            typeof(MySelectorEnumeratorQueryable<,>),
+            typeof(MyEnumeratorQueryable<>)
         ];
 
         private bool BaseTypeFits(Type typeToCheck)

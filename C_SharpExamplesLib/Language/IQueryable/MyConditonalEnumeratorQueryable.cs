@@ -10,44 +10,44 @@ namespace C_SharpExamplesLib.Language.IQueryable
     /// </summary>
     /// <typeparam name="TType">Type of the elements</typeparam>
     public class MyConditionalEnumeratorQueryable<TType> : IMyDisposeQueryable<TType>
-	{
-		private readonly MyConditionalEnumerator<TType> _myIntegerEnumerator;
+    {
+        private readonly MyConditionalEnumerator<TType> _myIntegerEnumerator;
 
-		/// <summary>
-		/// Filters out objects, which do not match the condition 
-		/// </summary>
-		/// <param name="integerEnumerator">the base enumerator</param>
-		/// <param name="expression">condition</param>
-		public MyConditionalEnumeratorQueryable(IEnumerator<TType> integerEnumerator, MethodCallExpression? expression)
-			
-		{
-			_myIntegerEnumerator = new MyConditionalEnumerator<TType>(integerEnumerator, expression);
-			Expression = Expression.Constant(this);
+        /// <summary>
+        /// Filters out objects, which do not match the condition 
+        /// </summary>
+        /// <param name="integerEnumerator">the base enumerator</param>
+        /// <param name="expression">condition</param>
+        public MyConditionalEnumeratorQueryable(IEnumerator<TType> integerEnumerator, MethodCallExpression? expression)
 
-			Provider = new MyConditionalEnumeratorQueryProvider<TType>(this);
-		}
+        {
+            _myIntegerEnumerator = new MyConditionalEnumerator<TType>(integerEnumerator, expression);
+            Expression = Expression.Constant(this);
 
-		/// <summary>
-		/// used if type is known at compile time
-		/// </summary>
-		/// <returns></returns>
-		public IEnumerator<TType> GetEnumerator()
-		{
-			return _myIntegerEnumerator;
-		}
+            Provider = new MyConditionalEnumeratorQueryProvider<TType>(this);
+        }
 
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return _myIntegerEnumerator;
-		}
+        /// <summary>
+        /// used if type is known at compile time
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerator<TType> GetEnumerator()
+        {
+            return _myIntegerEnumerator;
+        }
 
-		public void Dispose()
-		{
-			_myIntegerEnumerator.Dispose();
-		}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _myIntegerEnumerator;
+        }
 
-		public Type ElementType => typeof(TType);
-		public Expression Expression { get; }
-		public IQueryProvider Provider { get; }
-	}
+        public void Dispose()
+        {
+            _myIntegerEnumerator.Dispose();
+        }
+
+        public Type ElementType => typeof(TType);
+        public Expression Expression { get; }
+        public IQueryProvider Provider { get; }
+    }
 }

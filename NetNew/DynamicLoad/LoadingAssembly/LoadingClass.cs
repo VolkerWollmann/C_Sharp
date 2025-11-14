@@ -12,7 +12,7 @@ namespace LoadingAssembly
         public static void Execute()
         {
             Assert.IsNotNull(Dummy);
-            
+
             // #Load the #assembly #dynamically
             Assembly assembly = Assembly.Load("MyCalculator");
 
@@ -27,13 +27,13 @@ namespace LoadingAssembly
                     as IMyCalculator;
 
             int result = dynamicCreatedInstance!.Add(1, 2);
-            Assert.IsTrue(result == 3);
+            Assert.AreEqual(3, result);
         }
 
         public static void TestDllVersion()
         {
             Assembly t = Assembly.Load("IMyCalculatorInterface");
-            
+
             // #assembly #version info defined in csproj-File
             Assembly assembly = Assembly.Load("MyCalculator");
 
@@ -42,12 +42,12 @@ namespace LoadingAssembly
             Assert.AreEqual(1, version.Major);
             Assert.AreEqual(2, version.Minor);
             Assert.AreEqual(4, version.Revision);
-            
+
             // Get the assembly's full path
             string assemblyPath = assembly.Location;
             FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assemblyPath);
             Assert.AreEqual("1.2.3.4", fileVersionInfo.FileVersion);
-            Assert.IsTrue(fileVersionInfo.ProductVersion!.StartsWith("1.2.3-UnitTestInfo"));
+            Assert.StartsWith("1.2.3-UnitTestInfo", fileVersionInfo.ProductVersion);
         }
     }
 }

@@ -3,14 +3,14 @@ using C_SharpExamplesLib.Language;
 
 namespace UnitTest
 {
-	[TestClass]
-	public class CompareUnitTest
+    [TestClass]
+    public class CompareUnitTest
     {
-	    [TestMethod]
-		public void TestIComparer()
-		{
-			MyIComparable.TestIComparer();
-		}
+        [TestMethod]
+        public void TestIComparer()
+        {
+            MyIComparable.TestIComparer();
+        }
 
         [TestMethod]
         public void TestIComparable()
@@ -18,22 +18,22 @@ namespace UnitTest
             MyIComparable.TestIComparable();
         }
 
-		[TestMethod]
-		public void TestComparison()
-		{
-			MyIComparable.TestComparison();
-		}
-
-		[TestMethod]
-		public void TestIEqualityComparer()
-		{
-			MyIEqualityComparer.Test();
-		}
-
-		[TestMethod]
-		public void TestIEquatable()
+        [TestMethod]
+        public void TestComparison()
         {
-			MyIEquatable.Test();
+            MyIComparable.TestComparison();
+        }
+
+        [TestMethod]
+        public void TestIEqualityComparer()
+        {
+            MyIEqualityComparer.Test();
+        }
+
+        [TestMethod]
+        public void TestIEquatable()
+        {
+            MyIEquatable.Test();
         }
 
         [TestMethod]

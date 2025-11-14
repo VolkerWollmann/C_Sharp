@@ -37,7 +37,7 @@ namespace C_SharpExamplesLib.Language
             Assert.IsTrue(x.GetType() == typeof(List<int>));
 
             Type tx = typeof(List<int>);
-            Assert.AreEqual(tx, typeof(List<int>));
+            Assert.AreEqual(typeof(List<int>), tx);
 
             Type tx2 = typeof(List<int>);
             Assert.AreEqual(tx, tx2);
@@ -52,13 +52,13 @@ namespace C_SharpExamplesLib.Language
             Assert.IsInstanceOfType(tx3O, tx3);
 
             if (x is { } il)
-                Assert.IsTrue(il != null);
+                Assert.IsNotNull(il);
 
             if (x is { } il2)
-                Assert.IsTrue(il2 != null);
+                Assert.IsNotNull(il2);
 
             if (y is List<int> il3)
-                Assert.IsTrue(il3 != null);
+                Assert.IsNotNull(il3);
 
 
             MyType2.Test2();
@@ -74,7 +74,7 @@ namespace C_SharpExamplesLib.Language
 
             Type myType3Type = typeof(MyType3);
             string mytype3Name = myType3Type.FullName ?? "";
-            
+
             Type? testType = ass.GetType(mytype3Name);
 
             Assert.AreEqual(myType3Type, testType);

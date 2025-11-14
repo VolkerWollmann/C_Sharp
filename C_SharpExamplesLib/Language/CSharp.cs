@@ -72,7 +72,7 @@ namespace C_SharpExamplesLib.Language
         // #named #parameter #named parameter
         public static void NamedParameters()
         {
-            int Sum( int parameter1, int parameter2)
+            int Sum(int parameter1, int parameter2)
             {
                 return parameter1 + parameter2;
             }
@@ -88,7 +88,7 @@ namespace C_SharpExamplesLib.Language
         // #optional parameter
         public static void OptionalParameters()
         {
-            int Sum(int parameter1, int parameter2=3)
+            int Sum(int parameter1, int parameter2 = 3)
             {
                 return parameter1 + parameter2;
             }
@@ -120,7 +120,7 @@ namespace C_SharpExamplesLib.Language
         // #CompilerServices #CallerMemberName #GetCurrentMethod
         public static void ShowCompilerServices()
         {
-            TraceMessage(System.Reflection.MethodBase.GetCurrentMethod()?.Name ?? "Nothing to trace" );
+            TraceMessage(System.Reflection.MethodBase.GetCurrentMethod()?.Name ?? "Nothing to trace");
         }
 
         private static void TraceMessage(string message,
@@ -130,8 +130,8 @@ namespace C_SharpExamplesLib.Language
         {
             Assert.AreEqual("ShowCompilerServices", message);
             Assert.AreEqual("ShowCompilerServices", memberName);
-            Assert.IsTrue(sourceFilePath.EndsWith("CSharp.cs"));
-            Assert.IsTrue( sourceLineNumber > 0);
+            Assert.EndsWith("CSharp.cs", sourceFilePath);
+            Assert.IsGreaterThan(0, sourceLineNumber);
         }
 
         #endregion
@@ -140,7 +140,7 @@ namespace C_SharpExamplesLib.Language
         // #lazy
         private class LazyClass
         {
-            internal readonly int[] Array = [1,2,3,4,5,6,7,8,9,10];
+            internal readonly int[] Array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
             internal int Length => Array.Length;
         }
 
@@ -160,8 +160,8 @@ namespace C_SharpExamplesLib.Language
             Assert.IsTrue(lazy.IsValueCreated);
 
             // The object can be used.
-            Assert.IsTrue( test.Length > 0);
-            Assert.AreEqual(1, test.Array[0] );
+            Assert.IsGreaterThan(0, test.Length);
+            Assert.AreEqual(1, test.Array[0]);
         }
 
         #endregion
@@ -175,7 +175,7 @@ namespace C_SharpExamplesLib.Language
         /// #ToString()
         public static void ToStringExamples()
         {
-            string iString  = 1.ToString();
+            string iString = 1.ToString();
             Assert.AreEqual("1", iString);
 
             //Does not compile
@@ -191,16 +191,16 @@ namespace C_SharpExamplesLib.Language
 
         public class MyRecursiveCLass
         {
-	        private static readonly MyRecursiveCLass Anchor = new();
-	        private static int _counter = 1;
-	        private readonly int _myCounter;
+            private static readonly MyRecursiveCLass Anchor = new();
+            private static int _counter = 1;
+            private readonly int _myCounter;
 
-	        private MyRecursiveCLass()
+            private MyRecursiveCLass()
             {
                 _myCounter = _counter++;
             }
 
-	        private void WriteData()
+            private void WriteData()
             {
                 Console.WriteLine("MyCounter:" + _myCounter);
 
@@ -235,23 +235,23 @@ namespace C_SharpExamplesLib.Language
                 goto Label2;
 
             // ReSharper disable once HeuristicUnreachableCode
-            #pragma warning disable CS0162 // Unreachable code detected
+#pragma warning disable CS0162 // Unreachable code detected
             throw new Exception("That must not happen");
 
-            Label1:
-                Console.WriteLine("Successful Test with Label 1.");
-                goto Label3;
+        Label1:
+            Console.WriteLine("Successful Test with Label 1.");
+            goto Label3;
 
-            Label2:
-                Console.WriteLine("Successful Test with Label 2.");
-                goto Label3;
+        Label2:
+            Console.WriteLine("Successful Test with Label 2.");
+            goto Label3;
 
             // ReSharper disable once HeuristicUnreachableCode
             throw new Exception("That must not happen");
-            #pragma warning restore CS0162 // Unreachable code detected
+#pragma warning restore CS0162 // Unreachable code detected
 
-            Label3:
-                Console.WriteLine("Test end.");
+        Label3:
+            Console.WriteLine("Test end.");
 
         }
         #endregion
@@ -269,7 +269,7 @@ namespace C_SharpExamplesLib.Language
         }
         private static int ParamsSum(params int[] values)
         {
-            int sum=0;
+            int sum = 0;
             values.ToList().ForEach(v => sum += v);
 
             return sum;
@@ -282,8 +282,8 @@ namespace C_SharpExamplesLib.Language
             // will not compile
             //Assert.AreEqual(9, ParamSumSimple(1, 3, 5));
 
-            Assert.AreEqual(12, ParamsSum( 2, 4, 6 ));
-            Assert.AreEqual(9, ParamsSum(1,3,5));
+            Assert.AreEqual(12, ParamsSum(2, 4, 6));
+            Assert.AreEqual(9, ParamsSum(1, 3, 5));
 
         }
         #endregion
@@ -298,7 +298,7 @@ namespace C_SharpExamplesLib.Language
         // #return #assignment #expression
         public static void ReturnAssignment()
         {
-	        var lOne = GetOne();
+            var lOne = GetOne();
             Assert.AreEqual(1, lOne);
 
             var lOne2 = _one;
@@ -345,20 +345,20 @@ namespace C_SharpExamplesLib.Language
             }
             Console.WriteLine();
         }
-        
+
         public static void ShowBitArray()
         {
             byte[] myBytes = [1, 2, 3, 4, 5];
             BitArray myBitArray = new BitArray(myBytes);    // Internal representation is in integer
-            
-            Assert.AreEqual(40, myBitArray.Count);
-            Assert.AreEqual(40, myBitArray.Length);
+
+            Assert.HasCount(40, myBitArray);
+            Assert.HasCount(40, myBitArray);
             PrintBitArrayValues(myBitArray, 32);
 
             int[] integers = [-1];
             BitArray myBitArray2 = new BitArray(integers);
-            Assert.AreEqual(32, myBitArray2.Count);
-            Assert.AreEqual(32, myBitArray2.Length);
+            Assert.HasCount(32, myBitArray2);
+            Assert.HasCount(32, myBitArray2);
             PrintBitArrayValues(myBitArray2, 32);
 
         }
@@ -378,7 +378,7 @@ namespace C_SharpExamplesLib.Language
             //myDynamic2 = "String";
             //Assert.AreEqual("String", myDynamic2);
         }
-        
+
         #endregion
     }
 

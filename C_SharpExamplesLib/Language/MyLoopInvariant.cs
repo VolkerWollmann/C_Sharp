@@ -25,15 +25,15 @@ namespace C_SharpExamplesLib.Language
 
             int max = rn[0];
             int i = 0;
-            while(i <= n)
+            while (i <= n)
             {
                 if (rn[i] > max)
                     max = rn[i];
 
                 i++;
-                
+
                 // Loop invariant: The maximum element found so far is stored in 'max'.
-                Assert.IsTrue(rn.Take(i).All( rni => rni <= max));
+                Assert.IsTrue(rn.Take(i).All(rni => rni <= max));
             }
 
             // Loop invariant: The maximum element found is stored in 'max'.
@@ -41,43 +41,43 @@ namespace C_SharpExamplesLib.Language
         }
         public static void LoopInvariant2()
         {
-            
+
             int[] rn = InitArray();
             int n = rn.Length - 1;
 
             int i = 0;
-            while( i < n)
+            while (i < n)
             {
                 // Outer loop invariant:
-                for (int i2 = 0; i2 < i-1; i2++) { Assert.IsTrue(rn[i2] < rn[i2+1]); }
+                for (int i2 = 0; i2 < i - 1; i2++) { Assert.IsLessThan(rn[i2 + 1], rn[i2]); }
 
                 int j = n;
-                while(j > i)
+                while (j > i)
                 {
-                    if (rn[j-1] > rn[j])
+                    if (rn[j - 1] > rn[j])
                     {
                         // Swap elements
-                        (rn[j], rn[j -1]) = (rn[j-1], rn[j]);
+                        (rn[j], rn[j - 1]) = (rn[j - 1], rn[j]);
                     }
 
                     j--;
                     // Inner loop invariant
-                    Assert.IsTrue(rn[j] < rn[j+1]);
+                    Assert.IsLessThan(rn[j + 1], rn[j]);
 
                 }
 
                 // Inner loop invariant
-                Assert.IsTrue(j == i);
-                Assert.IsTrue(rn[i] < rn[i + 1]);
+                Assert.AreEqual(i, j);
+                Assert.IsLessThan(rn[i + 1], rn[i]);
 
                 // Outer loop invariant:
-                for (int i2 = 0; i2 < i; i2++) { Assert.IsTrue(rn[i2] < rn[i2 + 1]); }
+                for (int i2 = 0; i2 < i; i2++) { Assert.IsLessThan(rn[i2 + 1], rn[i2]); }
 
-                i++; 
+                i++;
             }
 
             // Outer loop invariant: the list is sorted
-            for (int i2 =0; i2 < n; i2++) { Assert.IsTrue(rn[i2] < rn[i2+1]); }
+            for (int i2 = 0; i2 < n; i2++) { Assert.IsLessThan(rn[i2 + 1], rn[i2]); }
 
 
             {

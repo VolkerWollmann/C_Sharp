@@ -10,25 +10,25 @@ namespace UnitTest
     public class CSharp7UnitTests
     {
         /// <summary>
-		///  Gets or sets the test context which provides
-		///  information about and functionality for the current test run.
-		///</summary>
-		// ReSharper disable once UnusedAutoPropertyAccessor.Global
-		public TestContext TestContext { get; set; }
+        ///  Gets or sets the test context which provides
+        ///  information about and functionality for the current test run.
+        ///</summary>
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
+        public TestContext TestContext { get; set; }
 
         [TestMethod]
         public void TestTheContext()
         {
-	        Console.WriteLine(TestContext.TestName);
-	        var me = MethodBase.GetCurrentMethod()?.Name;
-	        Assert.AreEqual(TestContext.TestName, me);
-		}
+            Console.WriteLine(TestContext.TestName);
+            var me = MethodBase.GetCurrentMethod()?.Name;
+            Assert.AreEqual(TestContext.TestName, me);
+        }
 
-		[TestMethod]
-		public void Deconstruct()
-		{
-			CSharp7.TestDeconstruct();
-		}
+        [TestMethod]
+        public void Deconstruct()
+        {
+            CSharp7.TestDeconstruct();
+        }
 
         [TestMethod]
         public void BigInteger()
@@ -43,14 +43,15 @@ namespace UnitTest
         }
 
         // #ExpectedException
-        [TestMethod, ExpectedException(typeof(OutOfMemoryException), "Expected OutOfMemoryException" )]
-        public void ExpectedException()
-        {
-            throw new OutOfMemoryException();
-        }
+        //[TestMethod] 
+        //[ExpectedException(typeof(OutOfMemoryException), "Expected OutOfMemoryException" )]
+        //public void ExpectedException()
+        //{
+        //    throw new OutOfMemoryException();
+        //}
 
         // #DataTestMethod #DataRow #UintTest #Parameter
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("a", "b")]
         [DataRow(" ", "a")]
         public void DataTestMethod(string value1, string value2)
@@ -66,12 +67,12 @@ namespace UnitTest
         }
 
         // #DynamicData #UintTest #Parameter
-        [DynamicData(nameof(GetDynamicData), DynamicDataSourceType.Method)] 
+        [DynamicData(nameof(GetDynamicData))]
         [TestMethod()]
         public void DynamicDataTestMethod(string value1, string value2)
         {
             Assert.AreEqual(value1 + value2, string.Concat(value1, value2));
         }
-        
+
     }
 }

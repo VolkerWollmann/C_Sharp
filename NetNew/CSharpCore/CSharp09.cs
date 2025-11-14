@@ -13,7 +13,7 @@ namespace CSharpNew
 
         public static void TestRecord()
         {
-            Person p = new ("Heinz", "Mueller");
+            Person p = new("Heinz", "Mueller");
 
             var (f, l) = p;
             Assert.AreEqual(f, p.FirstName);
@@ -26,13 +26,13 @@ namespace CSharpNew
         // #contentEquality vs #referentialEquality
         public static void ContentEquality(ITestOutputHelper testOutputHelper)
         {
-            Person p1 = new ("Heinz", "Mueller");
-            Person p2 = new ("Heinz", "Mueller");
+            Person p1 = new("Heinz", "Mueller");
+            Person p2 = new("Heinz", "Mueller");
 
             testOutputHelper.WriteLine($"P1 : FirstName: {p1.FirstName} LastName: {p1.LastName}  ");
             testOutputHelper.WriteLine($"P2 : FirstName: {p2.FirstName} LastName: {p2.LastName}  ");
             testOutputHelper.WriteLine($"p1 == p2 : {p1 == p2}");
-            
+
             Assert.AreEqual(p1, p2);
         }
 
@@ -46,8 +46,8 @@ namespace CSharpNew
         public static void TestInit()
         {
             var m = new Point { X = 41, Y = 42 };
-            Assert.IsTrue( m.X == 41);
-            Assert.IsTrue(m.Y == 42);
+            Assert.AreEqual(41, m.X);
+            Assert.AreEqual(42, m.Y);
 
             //Will not compile
             //m.X = 43;

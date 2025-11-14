@@ -10,13 +10,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CSharpNew
 {
-    
+
     public abstract class CSharp
     {
         #region stream
         // #Stream
         public static async Task StreamTestUnconventionalUsage()
         {
+            #nullable enable
             string[] lines = ["First line", "Second line", "Third line"];
             await using StreamWriter fileWriter = new("WriteLines2.txt"); // works without brackets in C# 8.0
 
@@ -32,11 +33,13 @@ namespace CSharpNew
             fileWriter.Close();    // redundant, bit does not hurt
 
             using StreamReader fileReader = new("WriteLines2.txt");
-            while (!fileReader.EndOfStream)
-            {
-                string line = await fileReader.ReadLineAsync();
-                Assert.IsTrue(lines.Contains(line));
+
+            string? testline;
+            while ((testline = await fileReader.ReadLineAsync()) is not null)
+            { 
+                Assert.IsTrue(lines.Contains(testline));
             }
+            #nullable restore
         }
 
         // #stream
@@ -54,7 +57,7 @@ namespace CSharpNew
             StreamReader streamReader = new StreamReader(p2MemoryStream);
             string s = streamReader.ReadToEnd();
 
-            Assert.IsTrue(s.Contains("Hund"));
+            Assert.Contains("Hund", s);
         }
 
         #endregion
@@ -69,12 +72,12 @@ namespace CSharpNew
             // This is the logic for all queue consumers
             Action consumer = () =>
             {
-	            // decrement CDE count once for each element consumed from queue
+                // decrement CDE count once for each element consumed from queue
                 // ReSharper disable once AccessToDisposedClosure
                 while (queue.TryDequeue(out var local))
                 {
-                    Assert.IsTrue(local >= 0);
-	                cde.Signal();
+                    Assert.IsGreaterThanOrEqualTo(0, local);
+                    cde.Signal();
                 }
             };
 
@@ -124,11 +127,11 @@ namespace CSharpNew
 
         #region DebuggerDisplay
 
-        [DebuggerDisplay("Ship: Name = {Name}, Tonnage = {Tonnage}" )]
+        [DebuggerDisplay("Ship: Name = {Name}, Tonnage = {Tonnage}")]
         private class Ship
         {
             internal string Name { get; private init; }
-            internal int  Tonnage { get; private init; }
+            internal int Tonnage { get; private init; }
 
             internal Ship(string name, int tonnage)
             {
@@ -140,7 +143,7 @@ namespace CSharpNew
         public static void TestDebuggerDisplay()
         {
             Ship ship = new Ship("SMS rubber boat", 5);
-            Assert.IsTrue(ship != null);
+            Assert.IsNotNull(ship);
 
             // watch here ship in Debugger
         }
@@ -153,14 +156,14 @@ namespace CSharpNew
         {
             Console.WriteLine("TestFloatingPointNumericTypes");
 
-            float f = (float) Math.Sqrt(2);
+            float f = (float)Math.Sqrt(2);
             double d = Math.Sqrt(2);
             decimal dec = 1.4142135623730950488016887242097m;
 
-            Assert.IsTrue(f.ToString(CultureInfo.InvariantCulture).StartsWith("1.414213"));
-            Assert.IsTrue(d.ToString(CultureInfo.InvariantCulture).StartsWith("1.414213562373095"));
-            Assert.IsTrue(dec.ToString(CultureInfo.InvariantCulture).StartsWith("1.414213562373095048801688724"));
-            
+            Assert.StartsWith("1.414213", f.ToString(CultureInfo.InvariantCulture));
+            Assert.StartsWith("1.414213562373095", d.ToString(CultureInfo.InvariantCulture));
+            Assert.StartsWith("1.414213562373095048801688724", dec.ToString(CultureInfo.InvariantCulture));
+
         }
         #endregion
 
@@ -168,23 +171,23 @@ namespace CSharpNew
 
         private class BaseClass
         {
-	        internal readonly string V1 = "B1";
+            internal readonly string V1 = "B1";
 
-	        public virtual string V2 => "B2";
+            public virtual string V2 => "B2";
 
-	        internal readonly string V3 = "B3";
-		}
+            internal readonly string V3 = "B3";
+        }
 
         private class DerivedClass : BaseClass
         {
-			#pragma warning disable CS0108
-			internal readonly string V1 = "D1";
-			#pragma warning restore CS0108
+#pragma warning disable CS0108
+            internal readonly string V1 = "D1";
+#pragma warning restore CS0108
 
-	        public override string V2 => "D2";
+            public override string V2 => "D2";
 
-	        internal new readonly string V3 = "D3";
-		}
+            internal new readonly string V3 = "D3";
+        }
 
         public static void TestFieldHiding()
         {
@@ -192,11 +195,11 @@ namespace CSharpNew
             Assert.AreEqual("D1", derivedClass.V1);
             Assert.AreEqual("D2", derivedClass.V2);
             Assert.AreEqual("D3", derivedClass.V3);
-			BaseClass baseClass = derivedClass;
+            BaseClass baseClass = derivedClass;
             Assert.AreEqual("B1", baseClass.V1);
             Assert.AreEqual("D2", baseClass.V2);
             Assert.AreEqual("B3", baseClass.V3);
-		}
+        }
 
         #endregion
     }

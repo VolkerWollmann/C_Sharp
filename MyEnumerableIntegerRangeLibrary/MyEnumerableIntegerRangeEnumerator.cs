@@ -8,7 +8,7 @@ namespace MyEnumerableIntegerRangeLibrary
     /// </summary>
     public class MyEnumerableIntegerRangeEnumerator(MyEnumerableIntegerRange range) : IEnumerator<int>
     {
-	    private int _i = -1;
+        private int _i = -1;
         #region IEnumerator<int>
         public void Dispose()
         {

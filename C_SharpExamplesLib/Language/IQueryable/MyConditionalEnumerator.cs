@@ -3,74 +3,74 @@ using System.Linq.Expressions;
 
 namespace C_SharpExamplesLib.Language.IQueryable
 {
-	/// <summary>
-	/// Simulate a source, which is worth to be encapsulated for lazy linq queries.
-	/// </summary>
+    /// <summary>
+    /// Simulate a source, which is worth to be encapsulated for lazy linq queries.
+    /// </summary>
 
-	public class MyConditionalEnumerator<TType> : IEnumerator<TType>
-	{
-		private readonly IEnumerator<TType> _myBaseEnumerator;
-		private readonly LambdaExpression _lambdaExpression;
+    public class MyConditionalEnumerator<TType> : IEnumerator<TType>
+    {
+        private readonly IEnumerator<TType> _myBaseEnumerator;
+        private readonly LambdaExpression _lambdaExpression;
 
-		#region IEnumerator<int>
-		public void Dispose()
-		{
-			_myBaseEnumerator.Dispose();
-		}
+        #region IEnumerator<int>
+        public void Dispose()
+        {
+            _myBaseEnumerator.Dispose();
+        }
 
-		private bool MoveNextConditional()
-		{ 
-			bool baseEnumeratorMoveResult = _myBaseEnumerator.MoveNext();
-			
-			Func<TType, bool> compiledExpression = (Func<TType, bool>)_lambdaExpression.Compile();
+        private bool MoveNextConditional()
+        {
+            bool baseEnumeratorMoveResult = _myBaseEnumerator.MoveNext();
 
-			while (baseEnumeratorMoveResult && !compiledExpression(Current))
-			{
-				baseEnumeratorMoveResult = _myBaseEnumerator.MoveNext();
-			}
+            Func<TType, bool> compiledExpression = (Func<TType, bool>)_lambdaExpression.Compile();
 
-			return baseEnumeratorMoveResult;
-		}
-		public bool MoveNext()
-		{
-			return MoveNextConditional();
-		}
+            while (baseEnumeratorMoveResult && !compiledExpression(Current))
+            {
+                baseEnumeratorMoveResult = _myBaseEnumerator.MoveNext();
+            }
 
-		public void Reset()
-		{
-			_myBaseEnumerator.Reset();
-		}
+            return baseEnumeratorMoveResult;
+        }
+        public bool MoveNext()
+        {
+            return MoveNextConditional();
+        }
 
-		public TType Current => _myBaseEnumerator.Current;
+        public void Reset()
+        {
+            _myBaseEnumerator.Reset();
+        }
 
-		object IEnumerator.Current => Current!;
+        public TType Current => _myBaseEnumerator.Current;
 
-		#endregion
+        object IEnumerator.Current => Current!;
 
-		#region Constructor
+        #endregion
 
-		public MyConditionalEnumerator(IEnumerator<TType> enumerator, Expression? expression)
-		{
-			_myBaseEnumerator = enumerator;
+        #region Constructor
 
-			if (expression is MethodCallExpression methodCallExpression)
-			{
-				// apply lambda/where on the items and get a filtered MyIntegerSet
-				// get lambda expression
-				_lambdaExpression =
-					(LambdaExpression)((UnaryExpression)(methodCallExpression.Arguments[1])).Operand;
-			}
-			else if (expression is UnaryExpression unaryExpression)
-			{
-				_lambdaExpression = (LambdaExpression)unaryExpression.Operand;
-			}
-			else
-			{
-				throw new ArgumentException(
-					"whereExpression must be a method call expression with a lambda expression as the second argument.");
-			}
+        public MyConditionalEnumerator(IEnumerator<TType> enumerator, Expression? expression)
+        {
+            _myBaseEnumerator = enumerator;
 
-		}
-		#endregion
-	}
+            if (expression is MethodCallExpression methodCallExpression)
+            {
+                // apply lambda/where on the items and get a filtered MyIntegerSet
+                // get lambda expression
+                _lambdaExpression =
+                    (LambdaExpression)((UnaryExpression)(methodCallExpression.Arguments[1])).Operand;
+            }
+            else if (expression is UnaryExpression unaryExpression)
+            {
+                _lambdaExpression = (LambdaExpression)unaryExpression.Operand;
+            }
+            else
+            {
+                throw new ArgumentException(
+                    "whereExpression must be a method call expression with a lambda expression as the second argument.");
+            }
+
+        }
+        #endregion
+    }
 }

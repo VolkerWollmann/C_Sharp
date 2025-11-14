@@ -15,7 +15,7 @@
             // Called to raise an alarm
             public void RaiseAlarm()
             {
-	            // Only raise the alarm if someone has
+                // Only raise the alarm if someone has
                 // subscribed. 
                 OnAlarmRaised();
                 OnAlarmRaised2?.Invoke();
@@ -43,7 +43,7 @@
                 // Create a new alarm
                 Alarm alarm = new Alarm();
 
-                
+
 
                 // Connect the two listener methods
                 Console.WriteLine("Add two listeners");
@@ -65,11 +65,11 @@
                 alarm.OnAlarmRaised2 -= AlarmListener1;
 
                 alarm.RaiseAlarm();
-                
+
                 Console.WriteLine("Alarm raised");
             }
         }
-       
+
         // #action #delegate
         public static void ActionDelegate()
         {

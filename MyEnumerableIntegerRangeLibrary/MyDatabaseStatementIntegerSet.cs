@@ -19,10 +19,10 @@ namespace MyEnumerableIntegerRangeLibrary
 
         private void ExecuteNonQuery(string statement)
         {
-	        using var scope = new TransactionScope();
-	        SqlCommand command = new SqlCommand(statement, _dataBaseConnection);
-	        command.ExecuteNonQuery();
-	        scope.Complete();               // enforces the commit
+            using var scope = new TransactionScope();
+            SqlCommand command = new SqlCommand(statement, _dataBaseConnection);
+            command.ExecuteNonQuery();
+            scope.Complete();               // enforces the commit
         }
 
         /// <summary>
@@ -35,10 +35,10 @@ namespace MyEnumerableIntegerRangeLibrary
             int result = -1;
             SqlCommand command = new SqlCommand(statement, _dataBaseConnection);
             SqlDataReader reader = command.ExecuteReader();
-            if ( reader.Read() && (!reader.IsDBNull(0)))
+            if (reader.Read() && (!reader.IsDBNull(0)))
                 result = reader.GetInt32(0);
             reader.Close();
-            
+
             return result;
         }
 
@@ -82,20 +82,20 @@ namespace MyEnumerableIntegerRangeLibrary
             return ExecuteScalarQuery(statement);
         }
 
-		#endregion
+        #endregion
 
-		#region IMyIntegerSet IEnumerator<int> support
-		public void Dispose()
+        #region IMyIntegerSet IEnumerator<int> support
+        public void Dispose()
         {
             DeleteTable();
             _dataBaseConnection?.Close();
         }
 
-		#endregion
+        #endregion
 
-		#region IEnumerable<int>
-		// bad implementation because only one iterator possible
-		public IEnumerator<int> GetEnumerator()
+        #region IEnumerable<int>
+        // bad implementation because only one iterator possible
+        public IEnumerator<int> GetEnumerator()
         {
             return new MyDatabaseStatementIntegerSetEnumerator(this);
         }
@@ -106,32 +106,32 @@ namespace MyEnumerableIntegerRangeLibrary
         }
         #endregion
 
-        
-		#region Constructor
 
-		public MyDatabaseStatementIntegerSet(string connectionString, List<int> set)
+        #region Constructor
+
+        public MyDatabaseStatementIntegerSet(string connectionString, List<int> set)
         {
-            _dataBaseConnection = _dataBaseConnection = new SqlConnection(connectionString); 
+            _dataBaseConnection = _dataBaseConnection = new SqlConnection(connectionString);
             _dataBaseConnection.Open();
-            
+
             TableName = "MyDatabaseStatementIntegerSet_" + Guid.NewGuid().ToString("N").ToUpper();
 
             // create table
             CreateTable();
-            
+
             // insert values
             InsertValues(set);
 
         }
 
-        protected MyDatabaseStatementIntegerSet(MyDatabaseStatementIntegerSet origin )
+        protected MyDatabaseStatementIntegerSet(MyDatabaseStatementIntegerSet origin)
         {
-	        _dataBaseConnection = origin._dataBaseConnection!;
-	        //_dataBaseConnection.Open();
+            _dataBaseConnection = origin._dataBaseConnection!;
+            //_dataBaseConnection.Open();
 
-	        TableName = origin.TableName;
+            TableName = origin.TableName;
         }
-		#endregion
+        #endregion
 
-	}
+    }
 }

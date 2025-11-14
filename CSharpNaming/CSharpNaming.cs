@@ -46,7 +46,7 @@ namespace CSharpNaming
             #endregion
 
             #region II. Use Verb Noun for Methods: void ClearStack()
-            void ClearStack() {}
+            void ClearStack() { }
             #endregion
 
             #region
@@ -183,11 +183,11 @@ namespace CSharpNaming
             Assert.IsNotNull(lastName);
             Assert.AreEqual(0, firstIndex);
             Assert.IsFalse(isDeleted);
-          
-            Assert.AreEqual(100,index);
+
+            Assert.AreEqual(100, index);
             Assert.AreEqual("", timeSheet);
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-            Assert.AreEqual(isCompleted, false);
+            Assert.IsFalse(isCompleted);
             #endregion
 
         }
@@ -231,7 +231,7 @@ namespace CSharpNaming
         [SuppressMessage("ReSharper", "PrivateFieldCanBeConvertedToLocalVariable")]
         private class Account
         {
-            public static string BankName="";
+            public static string BankName = "";
             private static decimal _reserves;
 
             private string Number { get; }
@@ -244,9 +244,9 @@ namespace CSharpNaming
             public Account()
             {
                 BankName = "-";
-                Assert.AreEqual(BankName,"-");
+                Assert.AreEqual("-", BankName);
                 _reserves = 0;
-                Assert.AreEqual(_reserves,0);
+                Assert.AreEqual(0, _reserves);
                 Number = "1";
                 string t = Number;
                 Assert.AreEqual("1", t);
@@ -284,7 +284,7 @@ namespace CSharpNaming
 
         #region XVI. Do not explicitly specify a type of an enum or values of enums
         //      (except bit fields)
-        
+
         // Don't
         private enum WrongDirection : long
         {
@@ -326,11 +326,13 @@ namespace CSharpNaming
 
         private void ConsumeVariables()
         {
+#pragma warning disable MSTEST0032 // Assertion condition is always true
             Assert.IsNotNull(ClientAppointment);
             Assert.IsNotNull(TimeLeft);
             Assert.IsNotNull(client_Appointment);
             Assert.IsNotNull(time_Left);
-            
+#pragma warning restore MSTEST0032 // Assertion condition is always true            
+
             FunctionII();
             FunctionV();
             FunctionVI();
@@ -348,7 +350,7 @@ namespace CSharpNaming
             Assert.AreEqual(Color.Red, color);
 
             Dockings d = Dockings.Bottom | Dockings.None | Dockings.Top;
-            Assert.AreNotEqual(d, Dockings.Bottom);
+            Assert.AreNotEqual(Dockings.Bottom, d);
 
             WrongDirection w = WrongDirection.East;
             Assert.AreEqual(WrongDirection.East, w);
@@ -379,7 +381,7 @@ namespace CSharpNaming
             Assert.AreEqual((Coin)CoinEnum.Penny, coin2);
 
 
-            Employee e = new Employee(); 
+            Employee e = new Employee();
             Assert.IsNotNull(e);
 
             BusinessLocation b = new BusinessLocation();
@@ -412,7 +414,7 @@ namespace CSharpNaming
                 return;
 
             _registrationDate = DateTime.Now;
-            Assert.IsNotNull(_registrationDate);
+            //Assert.IsNotNull(_registrationDate);
 
         }
         #endregion

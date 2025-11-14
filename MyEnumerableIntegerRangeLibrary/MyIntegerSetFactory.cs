@@ -23,31 +23,31 @@ namespace MyEnumerableIntegerRangeLibrary
 
         private string GetConnectionString()
         {
-	        if (_connectionString == "")
-	        {
-		        Settings settings = new Settings();
+            if (_connectionString == "")
+            {
+                Settings settings = new Settings();
 
-		        string databaseServer = settings.DatabaseServer;
-		        Assert.IsNotNull(databaseServer);
-                
-		        var builder = new SqlConnectionStringBuilder
-		        {
-			        DataSource = settings.DatabaseServer, // server address
-			        InitialCatalog = settings.DatabaseName, // database name
-			        IntegratedSecurity = false, // server auth(false)/win auth(true)
-			        MultipleActiveResultSets = false, // activate/deactivate MARS
-			        PersistSecurityInfo = true, // hide login credentials
-			        UserID = settings.DatabaseUser, // user name
-			        Password = settings.DatabasePassword, // password
-			        ApplicationName = GetType().Name, // MyIntegerSetFactory
-			        Encrypt = false,
-			        TrustServerCertificate = true
-		        };
+                string databaseServer = settings.DatabaseServer;
+                Assert.IsNotNull(databaseServer);
 
-		        _connectionString = builder.ConnectionString;
-	        }
+                var builder = new SqlConnectionStringBuilder
+                {
+                    DataSource = settings.DatabaseServer, // server address
+                    InitialCatalog = settings.DatabaseName, // database name
+                    IntegratedSecurity = false, // server auth(false)/win auth(true)
+                    MultipleActiveResultSets = false, // activate/deactivate MARS
+                    PersistSecurityInfo = true, // hide login credentials
+                    UserID = settings.DatabaseUser, // user name
+                    Password = settings.DatabasePassword, // password
+                    ApplicationName = GetType().Name, // MyIntegerSetFactory
+                    Encrypt = false,
+                    TrustServerCertificate = true
+                };
 
-	        return _connectionString;
+                _connectionString = builder.ConnectionString;
+            }
+
+            return _connectionString;
         }
 
         private bool TestDatabaseConnection()
@@ -60,20 +60,20 @@ namespace MyEnumerableIntegerRangeLibrary
                 string connectionString = GetConnectionString();
                 _dataBaseConnection = new SqlConnection(connectionString);
                 _dataBaseConnection.Open();
-				_dataBaseConnection.Close();
-			}
+                _dataBaseConnection.Close();
+            }
             catch (Exception)
             {
                 _dataBaseConnection = null;
                 return false;
             }
-            
+
             return true;
         }
 
         public void Dispose()
         {
-            _myIntegerSets.ForEach( integerSet => integerSet.Dispose() );
+            _myIntegerSets.ForEach(integerSet => integerSet.Dispose());
             _dataBaseConnection = null;
         }
         public MyIntegerSetFactory()
@@ -82,50 +82,50 @@ namespace MyEnumerableIntegerRangeLibrary
         }
 
         public List<IMyIntegerSet> GetIntegerSets(DesiredDatabases desiredDatabases = DesiredDatabases.Memory |
-                                                                                      DesiredDatabases.DatabaseCursor | 
-                                                                                      DesiredDatabases.DatabaseStatement )
+                                                                                      DesiredDatabases.DatabaseCursor |
+                                                                                      DesiredDatabases.DatabaseStatement)
         {
             List<IMyIntegerSet> result = [];
-            if (( desiredDatabases & DesiredDatabases.Memory) == DesiredDatabases.Memory)
+            if ((desiredDatabases & DesiredDatabases.Memory) == DesiredDatabases.Memory)
             {
                 var myIntegerSet = new MyMemoryIntegerSet([1, 2, 3]);
                 _myIntegerSets.Add(myIntegerSet);
                 result.Add(myIntegerSet);
-                
+
             }
 
-            if (!DatabaseIntegerSetsAvailable()) 
+            if (!DatabaseIntegerSetsAvailable())
                 return result;
 
-			if ((desiredDatabases & DesiredDatabases.DatabaseCursor) == DesiredDatabases.DatabaseCursor)
-			{
-                var myDatabaseIntegerSet = new MyDatabaseCursorIntegerSet( _connectionString, [1, 2, 3]);
+            if ((desiredDatabases & DesiredDatabases.DatabaseCursor) == DesiredDatabases.DatabaseCursor)
+            {
+                var myDatabaseIntegerSet = new MyDatabaseCursorIntegerSet(_connectionString, [1, 2, 3]);
                 _myIntegerSets.Add(myDatabaseIntegerSet);
                 result.Add(myDatabaseIntegerSet);
             }
 
-			if ((desiredDatabases & DesiredDatabases.DatabaseStatement) == DesiredDatabases.DatabaseStatement)
-			{
-				var myDatabaseIntegerSet = new MyDatabaseStatementIntegerSet(_connectionString, [1, 2, 3]);
-				_myIntegerSets.Add(myDatabaseIntegerSet);
-				result.Add(myDatabaseIntegerSet);
-			}
+            if ((desiredDatabases & DesiredDatabases.DatabaseStatement) == DesiredDatabases.DatabaseStatement)
+            {
+                var myDatabaseIntegerSet = new MyDatabaseStatementIntegerSet(_connectionString, [1, 2, 3]);
+                _myIntegerSets.Add(myDatabaseIntegerSet);
+                result.Add(myDatabaseIntegerSet);
+            }
 
-			if ((desiredDatabases & DesiredDatabases.DatabaseOptimizedStatement) == DesiredDatabases.DatabaseOptimizedStatement)
+            if ((desiredDatabases & DesiredDatabases.DatabaseOptimizedStatement) == DesiredDatabases.DatabaseOptimizedStatement)
             {
                 var myOptimizedDatabaseIntegerSet = new MyOptimizedDatabaseStatementIntegerSet(_connectionString,
-	                [1, 2, 3]);
+                    [1, 2, 3]);
                 _myIntegerSets.Add(myOptimizedDatabaseIntegerSet);
                 result.Add(myOptimizedDatabaseIntegerSet);
             }
-           
+
             return result;
         }
 
         //public List<IMyIntegerSet> GetIntegerSets(DesiredDatabases desiredDatabases = DesiredDatabases.Memory |
-	       // DesiredDatabases.DatabaseCursor |
-	       // DesiredDatabases.DatabaseStatement |
-	       // DesiredDatabases.DatabaseOptimizedStatement)
+        // DesiredDatabases.DatabaseCursor |
+        // DesiredDatabases.DatabaseStatement |
+        // DesiredDatabases.DatabaseOptimizedStatement)
         //{
         //}
 

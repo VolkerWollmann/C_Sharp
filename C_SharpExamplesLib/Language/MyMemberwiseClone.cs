@@ -22,9 +22,9 @@
             {
                 Person other = new Person
                 {
-	                IdInfo = new IdInfo(IdInfo.IdNumber),
-	                Name = new string(Name),
-	                Age = Age
+                    IdInfo = new IdInfo(IdInfo.IdNumber),
+                    Name = new string(Name),
+                    Age = Age
                 };
                 return other;
             }
@@ -41,9 +41,9 @@
             // Create an instance of Person and assign values to its fields.
             Person p1 = new Person
             {
-	            Age = 42,
-	            Name = "Sam",
-	            IdInfo = new IdInfo(6565)
+                Age = 42,
+                Name = "Sam",
+                IdInfo = new IdInfo(6565)
             };
 
             // Perform a shallow copy of p1 and assign it to p2.

@@ -9,10 +9,10 @@ namespace C_SharpExamplesLib.Language
 
     public abstract class CSharp7
     {
-	    private class Person
+        private class Person
         {
-	        private string FirstName { get; }
-	        private string LastName { get; }
+            private string FirstName { get; }
+            private string LastName { get; }
 
             internal Person(string firstName, string lastName)
             {
@@ -46,7 +46,7 @@ namespace C_SharpExamplesLib.Language
         }
 
         // c# 7 : value tuple
-        
+
         private static (int, string) ReturnMacchi()
         {
             return (1, "Macchi");

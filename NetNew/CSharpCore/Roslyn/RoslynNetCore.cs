@@ -15,11 +15,11 @@ namespace CSharpNew.Roslyn
             var indents = new String(' ', _tabs);
             if (node != null)
             {
-	            Debug.WriteLine(indents + $"{node.Kind(),-20}" + ":" + MyRoslynNextCore.ProgramText
-		            .Substring(node.FullSpan.Start, node.FullSpan.Length)
-		            .Substring(0, Math.Min(100, node.FullSpan.Length)).Replace("  ", " ")
-		            .Replace("\r\n", string.Empty));
-	            base.Visit(node);
+                Debug.WriteLine(indents + $"{node.Kind(),-20}" + ":" + MyRoslynNextCore.ProgramText
+                    .Substring(node.FullSpan.Start, node.FullSpan.Length)
+                    .Substring(0, Math.Min(100, node.FullSpan.Length)).Replace("  ", " ")
+                    .Replace("\r\n", string.Empty));
+                base.Visit(node);
             }
 
             --_tabs;

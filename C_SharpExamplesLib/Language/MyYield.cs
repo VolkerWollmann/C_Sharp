@@ -17,10 +17,10 @@ namespace C_SharpExamplesLib.Language
 
         private static IEnumerable<int> FourToSix()
         {
-            for(int i = 4; i <= 6; i++)
+            for (int i = 4; i <= 6; i++)
             {
-				Console.WriteLine("4..6: " + i);
-				yield return i;
+                Console.WriteLine("4..6: " + i);
+                yield return i;
             }
         }
 
@@ -42,16 +42,16 @@ namespace C_SharpExamplesLib.Language
             }
         }
 
-		private static IEnumerable<int> OneToSixUnionAsEnumerableOfUnion()
-		{
-			foreach (int i in OneToThree().ToList().Union(FourToSix()))
-			{
-				Console.WriteLine("1..6 as Enumerable of Union:" + i);
-				yield return i;
-			}
-		}
+        private static IEnumerable<int> OneToSixUnionAsEnumerableOfUnion()
+        {
+            foreach (int i in OneToThree().ToList().Union(FourToSix()))
+            {
+                Console.WriteLine("1..6 as Enumerable of Union:" + i);
+                yield return i;
+            }
+        }
 
-		private static IEnumerable<int> OneToSixUnionOfEnumerableToList()
+        private static IEnumerable<int> OneToSixUnionOfEnumerableToList()
         {
             foreach (int i in OneToThree().Union(FourToSix()).ToList())
             {
@@ -95,18 +95,18 @@ namespace C_SharpExamplesLib.Language
             Test(OneToSixUnionOfLists());
             Test(OneToSixUnionOfEnumerableToList());
             Test(OneToSixAsThreeLists());
-			Test(OneToSixUnionAsEnumerableOfUnion());
-		}
+            Test(OneToSixUnionAsEnumerableOfUnion());
+        }
 
         public static void TestIEnumerableAssignment()
         {
             //#IEnumerable OneToSix is only assigned, Debugger F11 will pass by
             var l16 = OneToSix();
-           
+
             var l16Enumerator = l16.GetEnumerator();
             l16Enumerator.MoveNext(); //#IEnumerable is used
             var firstElement = l16Enumerator.Current;
-            Assert.AreEqual(1,firstElement);
+            Assert.AreEqual(1, firstElement);
             l16Enumerator.Dispose();
         }
     }

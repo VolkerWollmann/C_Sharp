@@ -4,7 +4,7 @@ namespace C_SharpExamplesLib.Language
 {
     public abstract class DebugStepThrough
     {
-	    private static void Level2()
+        private static void Level2()
         {
             // Put Breakpoint here
             // ;

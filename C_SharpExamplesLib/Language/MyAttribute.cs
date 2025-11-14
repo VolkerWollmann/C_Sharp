@@ -6,7 +6,7 @@ namespace C_SharpExamplesLib.Language
     [AttributeUsage(AttributeTargets.Class)]
     public class AuthorAttribute(string name) : Attribute
     {
-	    public double Version = 1.0;
+        public double Version = 1.0;
 
         public string GetName()
         {

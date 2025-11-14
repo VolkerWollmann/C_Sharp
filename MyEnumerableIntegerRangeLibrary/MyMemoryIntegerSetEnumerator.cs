@@ -2,37 +2,37 @@
 
 namespace MyEnumerableIntegerRangeLibrary
 {
-	public class MyMemoryIntegerSetEnumerator: IEnumerator<int>
-	{
-		private readonly MyMemoryIntegerSet _set;
-		int _index = -1;
-		
-		#region IEnumerator<int>
-		public void Dispose()
-		{
-		}
+    public class MyMemoryIntegerSetEnumerator : IEnumerator<int>
+    {
+        private readonly MyMemoryIntegerSet _set;
+        int _index = -1;
 
-		public bool MoveNext()
-		{
-			_index =  _set.GetNextIndex(_index);
-			return _index >= 0;
-		}
+        #region IEnumerator<int>
+        public void Dispose()
+        {
+        }
 
-		public void Reset()
-		{
-			_index = -1;
-		}
+        public bool MoveNext()
+        {
+            _index = _set.GetNextIndex(_index);
+            return _index >= 0;
+        }
 
-		public int Current => _set.GetValueAtIndex(_index);
+        public void Reset()
+        {
+            _index = -1;
+        }
 
-		object IEnumerator.Current => Current;
+        public int Current => _set.GetValueAtIndex(_index);
 
-		#endregion
+        object IEnumerator.Current => Current;
 
-		public MyMemoryIntegerSetEnumerator(MyMemoryIntegerSet set)
-		{
-			this._set = set;
-			Reset();
-		}
-	}
+        #endregion
+
+        public MyMemoryIntegerSetEnumerator(MyMemoryIntegerSet set)
+        {
+            this._set = set;
+            Reset();
+        }
+    }
 }

@@ -13,13 +13,13 @@ namespace C_SharpExamplesLib.Language.DataTypes
             DateTime d2 = new DateTime(2024, 3, 11, 12, 17, 23, DateTimeKind.Local);
 
             bool b1 = d1.Equals(d2);
-            Assert.AreEqual(false, b1);
+            Assert.IsFalse(b1);
 
             DateTime d1L = d1.ToLocalTime();
             DateTime d2L = d2.ToLocalTime();
 
             bool b2 = d1L.Equals(d2L);
-            Assert.AreEqual(true,b2);
+            Assert.IsTrue(b2);
         }
     }
 }

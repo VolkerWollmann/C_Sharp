@@ -45,10 +45,10 @@ namespace UnitTest
         }
 
         [TestMethod]
-		public void BlockingCollection()
-		{
-			MyBlockingCollection.BlockingCollection();
-		}
+        public void BlockingCollection()
+        {
+            MyBlockingCollection.BlockingCollection();
+        }
 
-	}
+    }
 }

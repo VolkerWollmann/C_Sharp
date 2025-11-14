@@ -3,13 +3,13 @@
 namespace C_SharpExamplesLib.Language.IQueryable
 {
     public class MySelectorEnumeratorQueryProvider<TResultType, TBaseType>(
-	    MySelectorEnumeratorQueryable<TResultType, TBaseType> mySelectorEnumerator)
-	    : IQueryProvider
+        MySelectorEnumeratorQueryable<TResultType, TBaseType> mySelectorEnumerator)
+        : IQueryProvider
     {
-	    public System.Linq.IQueryable CreateQuery(Expression expression)
+        public System.Linq.IQueryable CreateQuery(Expression expression)
         {
             throw new NotImplementedException();
-            
+
         }
 
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
@@ -19,10 +19,10 @@ namespace C_SharpExamplesLib.Language.IQueryable
 
             if (whereExpression != null)
             {
-				var result = MyQueryableFactory.GetMyConditionalEnumeratorQueryable(
-					mySelectorEnumerator.GetEnumerator(), whereExpression);
+                var result = MyQueryableFactory.GetMyConditionalEnumeratorQueryable(
+                    mySelectorEnumerator.GetEnumerator(), whereExpression);
 
-				return (IQueryable<TElement>)result;
+                return (IQueryable<TElement>)result;
             }
 
             InnermostExpressionFinder selectFinder = new InnermostExpressionFinder("Select");
@@ -41,9 +41,9 @@ namespace C_SharpExamplesLib.Language.IQueryable
             throw new NotImplementedException("CreateQuery");
         }
 
-		#region aggregate functions
-		#region Any
-		private bool Any()
+        #region aggregate functions
+        #region Any
+        private bool Any()
         {
             using var enumerator = mySelectorEnumerator.GetEnumerator();
             return enumerator.MoveNext();
@@ -75,7 +75,7 @@ namespace C_SharpExamplesLib.Language.IQueryable
 
         public TResult Execute<TResult>(Expression expression)
         {
-            return (TResult) Execute(expression);
+            return (TResult)Execute(expression);
         }
 
     }

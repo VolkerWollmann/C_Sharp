@@ -4,9 +4,9 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 {
     internal class MyParallelArray
     {
-	    readonly int _maxX;
-	    readonly int _maxY;
-	    readonly int[,] _theArray;
+        readonly int _maxX;
+        readonly int _maxY;
+        readonly int[,] _theArray;
 
         internal MyParallelArray(int x, int y)
         {
@@ -14,7 +14,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
             _maxY = y;
 
             _theArray = new int[x, y];
-            
+
             Assert.IsNotNull(_theArray);
 
         }
@@ -31,7 +31,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
 
         internal void SetToOne(int x, int y)
         {
-            for(int z=0; z < 10000000; z++)
+            for (int z = 0; z < 10000000; z++)
                 _theArray[x, y] = 1;
         }
 
@@ -90,7 +90,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
             for (int x = 0; x < _maxX; x++)
             {
                 tasks.Add(
-                    Task.Run(DoOperationAsyncParallel(x, 0,_theOperation)));
+                    Task.Run(DoOperationAsyncParallel(x, 0, _theOperation)));
 
             }
 
@@ -113,7 +113,7 @@ namespace C_SharpExamplesLib.Language.ConcurrentDataTypes
             for (int i = 0; i < 150; i++)
             {
                 Thread.Sleep(100);
-                
+
             }
         }
     }

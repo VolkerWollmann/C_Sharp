@@ -8,11 +8,11 @@ namespace UnitTest
     [TestClass]
     public class TaskUnitTest
     {
-		[TestMethod]
-		public void Task_ContinueWith()
-		{
-			MyTasks.TestContinueWith();
-		}
+        [TestMethod]
+        public void Task_ContinueWith()
+        {
+            MyTasks.TestContinueWith();
+        }
 
         [TestMethod]
         public void Task_ConstantTaskResult()
@@ -21,76 +21,76 @@ namespace UnitTest
         }
 
         [TestMethod]
-		public void Task_ThreadSafetyViolation()
-		{
-			MyTasks.Task_ThreadSafetyViolation();
-		}
+        public void Task_ThreadSafetyViolation()
+        {
+            MyTasks.Task_ThreadSafetyViolation();
+        }
 
-		[TestMethod]
-		public void Task_ObjectLock()
-		{
+        [TestMethod]
+        public void Task_ObjectLock()
+        {
             MyLock.SharedTotal.TestTaskObjectLock();
-		}
-
-		[TestMethod]
-		public void Task_Monitor()
-		{
-			MyTasks.TestTaskMonitor();
-		}
-
-		[TestMethod]
-		public void Task_Interlocked()
-		{
-			MyTasks.TestTaskInterlocked();
-		}
-
-		[TestMethod]
-		public void Task_DeadLock()
-        {
-			MyTasks.TaskDeadLock();
         }
 
-		[TestMethod]
-		public void Task_ChildTask()
-		{
-			MyTasks.TestChildTask();
-		}
-
-		[TestMethod]
-		public void Task_AsyncAwait()
+        [TestMethod]
+        public void Task_Monitor()
         {
-			MyTasks.Test_AsyncAwait(); 
+            MyTasks.TestTaskMonitor();
         }
 
-		[TestMethod]
-		public void Task_AsyncAwaitException()
-		{
-			MyTasks.Test_AsyncAwaitException();
-		}
-
-		[TestMethod]
-		public void Task_AsyncAwaitWhenAll()
-		{
-			MyTasks.Test_AsyncAwaitWhenAll();
-		}
-
-		[TestMethod]
-		public void Task_BlockingCollection()
+        [TestMethod]
+        public void Task_Interlocked()
         {
-	        MyBlockingCollection.BlockingCollection();
-		}
-
-		[TestMethod]
-		public void Task_Cancellation()
-        {
-			MyTasks.Task_Cancellation();
+            MyTasks.TestTaskInterlocked();
         }
 
-		[TestMethod]
-		public void Task_OperationCanceledException()
-		{
-			MyTasks.Task_OperationCanceledException();
-		}
+        [TestMethod]
+        public void Task_DeadLock()
+        {
+            MyTasks.TaskDeadLock();
+        }
+
+        [TestMethod]
+        public void Task_ChildTask()
+        {
+            MyTasks.TestChildTask();
+        }
+
+        [TestMethod]
+        public void Task_AsyncAwait()
+        {
+            MyTasks.Test_AsyncAwait();
+        }
+
+        [TestMethod]
+        public void Task_AsyncAwaitException()
+        {
+            MyTasks.Test_AsyncAwaitException();
+        }
+
+        [TestMethod]
+        public void Task_AsyncAwaitWhenAll()
+        {
+            MyTasks.Test_AsyncAwaitWhenAll();
+        }
+
+        [TestMethod]
+        public void Task_BlockingCollection()
+        {
+            MyBlockingCollection.BlockingCollection();
+        }
+
+        [TestMethod]
+        public void Task_Cancellation()
+        {
+            MyTasks.Task_Cancellation();
+        }
+
+        [TestMethod]
+        public void Task_OperationCanceledException()
+        {
+            MyTasks.Task_OperationCanceledException();
+        }
 
         [TestMethod]
         public void Task_SchedulerTest_AsInfiniteLoop()
@@ -111,16 +111,16 @@ namespace UnitTest
         }
 
         [TestMethod]
-		public void Task_Event()
+        public void Task_Event()
         {
-			MyTaskEvent.TaskEvent();
-		}
+            MyTaskEvent.TaskEvent();
+        }
 
-		[TestMethod]
-		public void Task_Times()
-		{
-			MyTasks.Task_Times();
-		}
+        [TestMethod]
+        public void Task_Times()
+        {
+            MyTasks.Task_Times();
+        }
 
     }
 }

@@ -15,13 +15,13 @@ namespace C_SharpExamplesLib.Language
         private void Write(ConstantExpression constantExpression)
         {
             var cr = typeof(EnumerableQuery<int>);
-            
+
             if (constantExpression.Type.IsAssignableFrom(cr))
             {
                 Console.WriteLine(GetSpace() + "Enumerable Query:" + constantExpression.Value);
             }
             else
-                Console.WriteLine(GetSpace() + "Constant:" + constantExpression.Value );
+                Console.WriteLine(GetSpace() + "Constant:" + constantExpression.Value);
         }
 
         private void Write(UnaryExpression unaryExpression)
@@ -29,7 +29,7 @@ namespace C_SharpExamplesLib.Language
             Console.WriteLine(GetSpace() + "Unary Expression:");
             Write(unaryExpression.Operand);
         }
-        private void Write(Expression<Func<int>> parameterLessIntegerFunction )
+        private void Write(Expression<Func<int>> parameterLessIntegerFunction)
         {
             Console.WriteLine(GetSpace() + "f():");
             Write(parameterLessIntegerFunction.Body);
@@ -42,7 +42,7 @@ namespace C_SharpExamplesLib.Language
             Write(binaryExpression.Right);
         }
 
-        private void Write(Expression<Func<int,int>> unaryFunction)
+        private void Write(Expression<Func<int, int>> unaryFunction)
         {
             Console.WriteLine(GetSpace() + "int f(int x):" + unaryFunction.NodeType.ToString());
             Write(unaryFunction.Body);
@@ -72,7 +72,7 @@ namespace C_SharpExamplesLib.Language
 
         private void Write(ParameterExpression parameterExpression)
         {
-            Console.WriteLine(GetSpace() + "Parameter Expression: " +  parameterExpression.Name);
+            Console.WriteLine(GetSpace() + "Parameter Expression: " + parameterExpression.Name);
         }
 
         private void Write(Expression<Func<IEnumerable<int>, IEnumerable<int>>> unaryFunction)
@@ -81,7 +81,7 @@ namespace C_SharpExamplesLib.Language
             Write(unaryFunction.Body);
         }
 
-        internal void Write(Expression expression )
+        internal void Write(Expression expression)
         {
             _indent = _indent + 5;
 
@@ -107,7 +107,7 @@ namespace C_SharpExamplesLib.Language
                 Write(expression5);
             else
                 Console.WriteLine(GetSpace() + expression);
-            
+
             _indent = _indent - 5;
         }
     }
@@ -131,7 +131,7 @@ namespace C_SharpExamplesLib.Language
             {
                 lambdaExpression.Parameters.ToList().ForEach(Write);
 
-                Write(lambdaExpression.Body);         
+                Write(lambdaExpression.Body);
             }
         }
 
@@ -191,7 +191,8 @@ namespace C_SharpExamplesLib.Language
             // write
             MyExpressionWriter1 myExpressionWriter1 = new MyExpressionWriter1();
             expressions.ForEach(expression =>
-                {   Console.WriteLine(expression);
+                {
+                    Console.WriteLine(expression);
                     myExpressionWriter1.Write(expression);
                     Console.WriteLine("----");
                 });
@@ -214,20 +215,20 @@ namespace C_SharpExamplesLib.Language
         {
             // Define a parameter for the lambda expression (x)
             ParameterExpression parameter = Expression.Parameter(typeof(int), "x");
-            
+
             // Define the body of the lambda expression (x * x)
             Expression body = Expression.Multiply(parameter, parameter);
-            
+
             // Create the lambda expression (x => x * x)
             LambdaExpression lambda = Expression.Lambda(body, parameter);
-            
+
             // Compile the lambda expression into a delegate
             var compiledLambda = (Func<int, int>)lambda.Compile();
-            
+
             // Use the compiled lambda expression
             int result = compiledLambda(5);
-            
-            Assert.AreEqual(25,result);
+
+            Assert.AreEqual(25, result);
         }
     }
 }

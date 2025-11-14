@@ -8,7 +8,7 @@ namespace CSharpNew
     {
         public static void RangeOperators()
         {
-            var array = new [] { 1, 2, 3, 4, 5 };
+            var array = new[] { 1, 2, 3, 4, 5 };
             var slice1 = array[2..^3];    // array[new Range(2, new Index(3, fromEnd: true))]
             var slice2 = array[..^3];     // array[Range.EndAt(new Index(3, fromEnd: true))]
             var slice3 = array[2..];      // array[Range.StartAt(2)]
@@ -23,7 +23,7 @@ namespace CSharpNew
         #region switch case guards
         private readonly struct Point(int x, int y)
         {
-	        public int X { get; } = x;
+            public int X { get; } = x;
             public int Y { get; } = y;
         }
 
@@ -101,10 +101,10 @@ namespace CSharpNew
         {
             return person switch
             {
-                ( { FamilyName: "Polizia", FirstName: { } firstName, Pet: null })
+                ({ FamilyName: "Polizia", FirstName: { } firstName, Pet: null })
                     => S(firstName + " ohne Macchi"),
-                
-                ( { FamilyName: "Polizia", FirstName: { } firstName, Pet: ( { Name: { } petName }) })
+
+                ({ FamilyName: "Polizia", FirstName: { } firstName, Pet: ({ Name: { } petName }) })
                     => S(firstName + " mit " + petName),
                 _ => throw new NotImplementedException(),
             };
@@ -125,21 +125,21 @@ namespace CSharpNew
         public static void PropertyPatternMatching()
         {
             Person wolfgang1 = new Person("Polizia", "Wolfgang", 35, null);
-            
+
             wolfgang1.Deconstruct(out _, out _, out int age, out Animal animal);
             Assert.AreEqual(35, age);
-            Assert.AreEqual(null, animal);
-            
-            Assert.AreEqual( "Wolfgang ohne Macchi", PersonMatch(wolfgang1));
+            Assert.IsNull(animal);
+
+            Assert.AreEqual("Wolfgang ohne Macchi", PersonMatch(wolfgang1));
 
             Person wolfgang2 = new Person("Polizia", "Wolfgang", 35, new Animal("Macchi"));
-            Assert.AreEqual( "Wolfgang mit Macchi", PersonMatch(wolfgang2));
+            Assert.AreEqual("Wolfgang mit Macchi", PersonMatch(wolfgang2));
         }
 
         public static void PositionalPatternMatching()
         {
             Person wolfgang1 = new Person("Polizia", "", 35, null);
-            Assert.AreEqual( "Polizia matches", PersonPositionalMatch(wolfgang1));
+            Assert.AreEqual("Polizia matches", PersonPositionalMatch(wolfgang1));
 
             Person wolfgang2 = new Person("Polizia", "Wolfgang", 35, new Animal("Macchi"));
             Assert.AreEqual("Polizia and Wolfgang match", PersonPositionalMatch(wolfgang2));
@@ -171,14 +171,14 @@ namespace CSharpNew
 
         #region null forgiving operator
 #nullable enable
-	    private class NullablePerson(string name)
+        private class NullablePerson(string name)
         {
-	        public string Name { get; } = name ?? throw new ArgumentNullException(name);
+            public string Name { get; } = name ?? throw new ArgumentNullException(name);
         }
 
         public static void NullNameShouldThrowTest()
         {
-	        var heinz = new NullablePerson("Heinz");
+            var heinz = new NullablePerson("Heinz");
             Assert.AreEqual("Heinz", heinz.Name);
             // ! #null forgiving operator : will suppress compiler warning
             var person = new NullablePerson(null!);

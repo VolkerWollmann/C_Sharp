@@ -36,7 +36,7 @@ namespace AccessibilityProjectCore
     public static class MyClassAccessibilityTestA
     {
         public static void Test()
-        { 
+        {
             MyClassAccessibility mca = new MyClassAccessibility();
 
             mca.Test1();
@@ -56,12 +56,12 @@ namespace AccessibilityProjectCore
             MyClassAccessibilityTestB mca2 = new MyClassAccessibilityTestB
             {
                 // _MyPrivateNumber = 42 //Error   CS0122  'MyClassAccessibility._myPrivateNumber' is inaccessible due to its protection level AccessibilityProject    E:\C_Sharp\C_Sharp\AccessibilityProject\MyClassAccessibility.cs  55  Active
-                MyInternalNumber = 42, 
-                MyProtectedNumber = 42, 
-                MyPublicNumber = 42, 
+                MyInternalNumber = 42,
+                MyProtectedNumber = 42,
+                MyPublicNumber = 42,
                 MyInternalProtected = 42
             };
-            
+
             Assert.IsNotNull(mca2);
         }
     }
@@ -72,7 +72,9 @@ namespace AccessibilityProjectCore
         {
             MyClassAccessibilityTestB mcaB = new MyClassAccessibilityTestB
             {
-                MyInternalNumber = 42, MyPublicNumber = 42, MyInternalProtected = 42
+                MyInternalNumber = 42,
+                MyPublicNumber = 42,
+                MyInternalProtected = 42
 
                 //, MyPrivateNumber = 42,    //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level 
                 //, MyProtectedNumber = 42,  //Error CS0122  'MyClassAccessibility.MyNumber' is inaccessible due to its protection level
@@ -84,7 +86,7 @@ namespace AccessibilityProjectCore
 
     interface IIncrement
     {
-        int Increment(int i); 
+        int Increment(int i);
     }
 
     // #interface #explicit implementation

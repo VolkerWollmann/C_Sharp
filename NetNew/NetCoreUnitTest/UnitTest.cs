@@ -54,10 +54,10 @@ namespace NetNewUnitTest
             }
             catch (ArgumentNullException ane)
             {
-                Assert.AreNotEqual(ane, null);
+                Assert.IsNotNull(ane);
                 //throw ane;
             }
-           
+
         }
 
         [Fact]
@@ -68,7 +68,7 @@ namespace NetNewUnitTest
     }
     public class CSharp09UnitTest(ITestOutputHelper output)
     {
-	    [Fact]
+        [Fact]
         public void TestRecord()
         {
             CSharp09.TestRecord();
@@ -98,38 +98,38 @@ namespace NetNewUnitTest
             MyVector.Test();
         }
 
-		// #inline data  #data
-		[Theory]
-		[InlineData(0)]
-		[InlineData(1)]
-		public void TestTheoryExampleInLineData(int i)
-		{
-			Assert.IsTrue(i < 2);
-		}
+        // #inline data  #data
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        public void TestTheoryExampleInLineData(int i)
+        {
+            Assert.IsLessThan(2, i);
+        }
 
-		[Theory]
-		[InlineData(new[] { 0, 1 })]
-		public void TestTheoryExampleInLineData2(int[] i)
-		{
-			foreach (int i2 in i)
-				Assert.IsTrue(i2 < 2);
-		}
+        [Theory]
+        [InlineData(new[] { 0, 1 })]
+        public void TestTheoryExampleInLineData2(int[] i)
+        {
+            foreach (int i2 in i)
+                Assert.IsLessThan(2, i2);
+        }
 
-		public static IEnumerable<object[]> TestData => new List<object[]>
-		{
-			new object[] {0},
-			new object[] {1}
-		};
+        public static IEnumerable<object[]> TestData => new List<object[]>
+        {
+            new object[] {0},
+            new object[] {1}
+        };
 
-		[Theory]
-		[MemberData(nameof(TestData))]
-		public void TestTheoryExampleMemberData(int i)
-		{
-			Assert.IsTrue(i < 2);
+        [Theory]
+        [MemberData(nameof(TestData))]
+        public void TestTheoryExampleMemberData(int i)
+        {
+            Assert.IsLessThan(2, i);
 
-		}
+        }
 
-		[Fact]
+        [Fact]
         public void TestDynamicLoad()
         {
             LoadingClass.Execute();
@@ -177,33 +177,33 @@ namespace NetNewUnitTest
         {
             CSharp.TestFieldHiding();
         }
-	}
+    }
 
     public class CSharp10UnitTest
     {
-	    [Fact]
-	    public void FromFileScopedNamespace()
-	    {
+        [Fact]
+        public void FromFileScopedNamespace()
+        {
             CSharp10.DefinedInFileScopedNameSpace();
-		}
+        }
     }
     public class CSharp11UnitTest
     {
-	    [Fact]
-	    public void FileClasses()
-	    {
+        [Fact]
+        public void FileClasses()
+        {
             CSharp11.TestFileClasses1();
             CSharp11.TestFileClasses2();
-	    }
+        }
     }
 
     public class CSharp12UnitTest
     {
-	    [Fact]
-	    public void PrimaryConstructor()
-	    {
-		    CSharp12.TestPrimaryConstructor();
-	    }
+        [Fact]
+        public void PrimaryConstructor()
+        {
+            CSharp12.TestPrimaryConstructor();
+        }
 
         [Fact]
         public void Swap()
@@ -226,7 +226,7 @@ namespace NetNewUnitTest
         [Fact]
         public void SelfHostedTest()
         {
-           // ??? 
+            // ??? 
         }
     }
 
@@ -248,36 +248,36 @@ namespace NetNewUnitTest
 
     public class MathTest
     {
-	    private double GetZero()
-	    {
-		    return 0;
-	    }
+        private double GetZero()
+        {
+            return 0;
+        }
 
-	    [Fact]
-	    public void Use_NaN_IsInfinity()
-	    {
-		    double result = Math.Sqrt(-1);
-		    Assert.IsTrue(Double.IsNaN(result));
+        [Fact]
+        public void Use_NaN_IsInfinity()
+        {
+            double result = Math.Sqrt(-1);
+            Assert.IsTrue(Double.IsNaN(result));
 
-		    double result2 = 1 / GetZero();
-			Assert.IsTrue(Double.IsInfinity(result2));
+            double result2 = 1 / GetZero();
+            Assert.IsTrue(Double.IsInfinity(result2));
 
             double positiveInfinity = double.PositiveInfinity;
             Assert.IsTrue(Double.IsInfinity(positiveInfinity));
         }
 
-	    [Fact]
-	    public void TestFloatingPointNumericTypes()
-	    {
-		    CSharp.TestFloatingPointNumericTypes();
-	    }
+        [Fact]
+        public void TestFloatingPointNumericTypes()
+        {
+            CSharp.TestFloatingPointNumericTypes();
+        }
 
-	    [Fact]
-	    public void TestRounding()
-	    {
-		    Assert.AreEqual(Math.Ceiling(1.2), 2);
-			Assert.AreEqual(Math.Floor(1.5), 1);
-            Assert.AreEqual(Math.Round(1.5, MidpointRounding.ToEven),2);
-		}
-	}
+        [Fact]
+        public void TestRounding()
+        {
+            Assert.AreEqual(2, Math.Ceiling(1.2));
+            Assert.AreEqual(1, Math.Floor(1.5));
+            Assert.AreEqual(2, Math.Round(1.5, MidpointRounding.ToEven));
+        }
+    }
 }

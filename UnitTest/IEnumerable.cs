@@ -7,27 +7,27 @@ using MyEnumerableIntegerRangeLibrary;
 namespace UnitTest
 {
     [TestClass]
-	public class IEnumerable
-	{
-		private MyIntegerSetFactory _myIntegerSetFactory;
+    public class IEnumerable
+    {
+        private MyIntegerSetFactory _myIntegerSetFactory;
 
         [TestInitialize]
-		public void Initialize()
-		{
-			_myIntegerSetFactory = new MyIntegerSetFactory();
-			
-			_myIntegerSetFactory.GetIntegerSets();
-		}
+        public void Initialize()
+        {
+            _myIntegerSetFactory = new MyIntegerSetFactory();
 
-		[TestCleanup]
-		public void Cleanup()
-		{
-			_myIntegerSetFactory.Dispose();
-		}
+            _myIntegerSetFactory.GetIntegerSets();
+        }
 
-		[TestMethod]
-		public void Test_IEnumerable()
-		{
+        [TestCleanup]
+        public void Cleanup()
+        {
+            _myIntegerSetFactory.Dispose();
+        }
+
+        [TestMethod]
+        public void Test_IEnumerable()
+        {
             // uses public IEnumerator<int> GetEnumerator()
             // uses public bool MoveNext()
             // uses int IEnumerator<int>.Current
@@ -38,15 +38,15 @@ namespace UnitTest
                 test++;
                 if (i > 5)
                     break;
-                Assert.IsTrue(test < 6);
+                Assert.IsLessThan(6, test);
             }
-            
+
             Assert.AreEqual("Macchi", myIntegerRange.Name);
         }
 
-		[TestMethod]
-		public void Test_IEnumerable_TwoEnumeratorsOnIEnumerable()
-		{
+        [TestMethod]
+        public void Test_IEnumerable_TwoEnumeratorsOnIEnumerable()
+        {
             MyEnumerableIntegerRange myIntegerRange = new MyEnumerableIntegerRange(1, 10);
             foreach (int i in myIntegerRange)
             {
@@ -75,21 +75,21 @@ namespace UnitTest
             Assert.IsNotNull(d);
         }
 
-		[TestMethod]
-		public void Test_IEnumerable_Where()
-		{
+        [TestMethod]
+        public void Test_IEnumerable_Where()
+        {
             MyEnumerableIntegerRange myIntegerRange = new MyEnumerableIntegerRange(1, 10);
 
             List<int> test = [2, 4, 6, 8, 10];
             foreach (int i in myIntegerRange.Where(i => i % 2 == 0))
             {
-                Assert.IsTrue(test.Contains(i));
+                Assert.Contains(i, test);
             }
         }
 
-		[TestMethod]
-		public void Test_IEnumerable_FromMemoryIntegerSet()
-		{
+        [TestMethod]
+        public void Test_IEnumerable_FromMemoryIntegerSet()
+        {
             MyMemoryIntegerSet myMemoryIntegerSet = new MyMemoryIntegerSet([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
             int test = 0;
             foreach (int i in myMemoryIntegerSet)
@@ -97,8 +97,8 @@ namespace UnitTest
                 test++;
                 if (i > 5)
                     break;
-                Assert.IsTrue(test < 6);
+                Assert.IsLessThan(6, test);
             }
         }
-	}
+    }
 }

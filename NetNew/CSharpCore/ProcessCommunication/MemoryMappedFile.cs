@@ -5,20 +5,20 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CSharpNew.ProcessCommunication
 {
-	/// <summary>
-	/// #MemoryMappedFile
-	/// </summary>
-	public abstract class MemoryMappedFile
+    /// <summary>
+    /// #MemoryMappedFile
+    /// </summary>
+    public abstract class MemoryMappedFile
     {
         private static SysIOMem.MemoryMappedFile _memoryMappedFile;
         private static void MemoryMappedFileWriter()
         {
-	        using var accessor = _memoryMappedFile.CreateViewAccessor(0, 100);
-	        accessor.Write(0, 'D');  // a char are 2 bytes !!!
-	        accessor.Write(2, 'o');
-	        accessor.Write(4, 'g');
-                    
-	        accessor.Flush();
+            using var accessor = _memoryMappedFile.CreateViewAccessor(0, 100);
+            accessor.Write(0, 'D');  // a char are 2 bytes !!!
+            accessor.Write(2, 'o');
+            accessor.Write(4, 'g');
+
+            accessor.Flush();
         }
 
         private static void MemoryMappedFileReader()

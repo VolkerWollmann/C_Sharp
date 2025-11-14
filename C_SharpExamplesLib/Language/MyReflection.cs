@@ -26,18 +26,18 @@ namespace C_SharpExamplesLib.Language
         {
             Type t = typeof(Ship);
 
-            ConstructorInfo[] ci =  t.GetConstructors();
+            ConstructorInfo[] ci = t.GetConstructors();
 
             object ship = ci[0].Invoke(["HMS Victory"]);
 
             MethodInfo mi = t.GetMethods().First(m => m.Name == "SetSpeed");
 
-            bool speedSet1 = ((Ship) ship).SetSpeed(4);
-			Assert.AreEqual(true, speedSet1);
+            bool speedSet1 = ((Ship)ship).SetSpeed(4);
+            Assert.IsTrue(speedSet1);
 
-			bool speedSet2 = (bool)(mi.Invoke(ship, [5]) ?? false);
+            bool speedSet2 = (bool)(mi.Invoke(ship, [5]) ?? false);
             Assert.AreEqual(5, ((Ship)ship).Speed);
-            Assert.AreEqual(true,speedSet2);
+            Assert.IsTrue(speedSet2);
 
             var properties = t.GetProperties();
 

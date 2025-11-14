@@ -2,11 +2,11 @@
 
 namespace C_SharpExamplesLib.Language
 {
-	/// <summary>
-	/// #virtual method
-	/// </summary>
-	public class MyVirtual
-	{
+    /// <summary>
+    /// #virtual method
+    /// </summary>
+    public class MyVirtual
+    {
         public virtual int One()
         {
             return 1;
