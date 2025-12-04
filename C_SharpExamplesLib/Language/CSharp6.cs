@@ -156,7 +156,8 @@ namespace C_SharpExamplesLib.Language
         //#nullable enable
         public static void NullableReferences()
         {
-            //string? t = null;
+            //string t = null;   // CS8600 : Converting null literal or possible null value to non-nullable type.
+            //Assert.IsNull(t);
             //TODO nullable references
         }
 
