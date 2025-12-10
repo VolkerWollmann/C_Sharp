@@ -267,6 +267,20 @@ namespace NetNewUnitTest
         }
 
         [Fact]
+        public void IntegerCompareTo()
+        {
+            var v1 = 1.CompareTo(42);
+            Assert.AreEqual(-1, v1);
+
+            var v2 = 42.CompareTo(1);
+            Assert.AreEqual(1, v2);
+
+            var v3 = 42.CompareTo(42);
+            Assert.AreEqual(0, v3);
+
+        }
+
+        [Fact]
         public void TestFloatingPointNumericTypes()
         {
             CSharp.TestFloatingPointNumericTypes();
