@@ -27,6 +27,7 @@
     <PackageReference Include="MSTest.TestFramework" Version="4.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.0" />
+    <PackageReference Include="System.IO.Abstractions.TestingHelpers" Version="22.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyEnumerableIntegerRangeLibrary\MyEnumerableIntegerRangeLibrary.csproj" />

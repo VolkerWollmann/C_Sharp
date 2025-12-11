@@ -141,6 +141,12 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void MockFile()
+        {
+            MyFileOperation.MockFile();
+        }
+
+        [TestMethod]
         public void Cast()
         {
             MyCast.Test();
