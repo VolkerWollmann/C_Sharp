@@ -142,6 +142,12 @@ namespace C_SharpExamplesLib.Language
         {
             internal readonly int[] Array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
             internal int Length => Array.Length;
+
+            public LazyClass()
+            {
+                // For debbuging purposes
+                Thread.Sleep(100);
+            }
         }
 
         public static void LazyClassTest()
@@ -153,7 +159,7 @@ namespace C_SharpExamplesLib.Language
             Assert.IsFalse(lazy.IsValueCreated);
 
             // Get the Value
-            // ... This executes Test().
+            // ... This creates the instance of LazyClass.
             LazyClass test = lazy.Value;
 
             // Show the IsValueCreated is true.
