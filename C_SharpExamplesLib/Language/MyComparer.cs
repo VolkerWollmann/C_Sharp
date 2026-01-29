@@ -106,6 +106,7 @@ namespace C_SharpExamplesLib.Language
         // Sort order is by Version, then by Animal
         // Except NONE, which has the lowest priority.
         // Important: There must be only one NONE to make order total.
+        //            natural order, unique elements
         //
         // ![CDATA[
         // This CompareTo() <= 0 is a pre order:
@@ -122,6 +123,7 @@ namespace C_SharpExamplesLib.Language
         // </summary>
 
         // #IComparable
+        // used for an alternative sort order to the natural order
         int IComparable<MyIComparable>.CompareTo(MyIComparable? other)
         {
             return CompareInternal(other);
@@ -131,7 +133,7 @@ namespace C_SharpExamplesLib.Language
         #endregion
 
         #region IComparer
-        // #IComparer
+        // #IComparer : 
         int IComparer<MyIComparable>.Compare(MyIComparable? x, MyIComparable? y)
         {
             if (x == null && y == null) return 0;       // Consider nulls as equal
