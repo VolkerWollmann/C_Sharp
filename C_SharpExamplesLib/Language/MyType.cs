@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Azure.Core.GeoJson;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_SharpExamplesLib.Language
 {
@@ -26,11 +27,24 @@ namespace C_SharpExamplesLib.Language
                 List<int> x = [1];
                 Assert.IsNotNull(x);
 
+                bool t1 = typeof(List<int>).IsInstanceOfType(x);
+                Assert.IsTrue(t1);
+
+                bool t2 = x is List<int>;
+                Assert.IsTrue(t2);
+
+                bool t3 = x is IList<int>;
+                Assert.IsTrue(t3);
+
+                object? i = Convert.ChangeType("1", typeof(int));
+                Assert.IsInstanceOfType(i,typeof(int));
             }
         }
 
         public static void Test()
         {
+
+
             List<int> x = [];
             IntegerList2 y = [];
 
@@ -60,6 +74,9 @@ namespace C_SharpExamplesLib.Language
             if (y is List<int> il3)
                 Assert.IsNotNull(il3);
 
+            // IntegerList2 does not implement IConvertible
+            // var yFromx = Convert.ChangeType(x, typeof(IntegerList2));
+            // Assert.IsInstanceOfType(yFromx, typeof(IntegerList2));
 
             MyType2.Test2();
 
