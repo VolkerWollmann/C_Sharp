@@ -7,7 +7,7 @@ using MyEnumerableIntegerRangeLibrary;
 namespace UnitTest
 {
     [TestClass]
-    public class IEnumerable
+    public class IEnumerableUnitTest
     {
         private MyIntegerSetFactory _myIntegerSetFactory;
 
