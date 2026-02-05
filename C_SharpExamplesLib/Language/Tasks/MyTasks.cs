@@ -285,6 +285,62 @@ namespace C_SharpExamplesLib.Language.Tasks
         }
         #endregion
 
+        #region IAsyncEnumerable
+        private static async IAsyncEnumerable<int> ProduceNumbersAsync()
+        {
+            yield return 1;
+            await Task.Delay(1000);
+
+            yield return 2;
+            await Task.Delay(1500);
+
+            yield return 3;
+            await Task.Delay(800);
+        }
+
+        private static async void DoSomethingElse()
+        {
+            Console.WriteLine("Doing something else...");
+            await Task.Delay(500);
+            Console.WriteLine("Done with something else.");
+        }
+
+        static void ReactToNumber(int number)
+        {
+            Console.WriteLine($"   Reacting to {number}");
+        }
+
+        private static async void Use_IAsyncEnumerable()
+        {
+            Console.WriteLine("Starting async producer...");
+
+            await foreach (int number in ProduceNumbersAsync())
+            {
+                Console.WriteLine($"➡️ Received number: {number}");
+
+                // React immediately when a number arrives
+                ReactToNumber(number);
+
+                // Main program can still await or do async work here
+                await Task.Run(DoSomethingElse);
+            }
+
+            Console.WriteLine("All numbers processed.");
+        }
+
+        public static void Test_Use_IAsyncEnumerable()
+        {
+            Use_IAsyncEnumerable();
+            for (int i = 0; i < 10; i++)
+            {
+                Thread.Sleep(200);
+                Console.WriteLine($"Test_AsyncAwait:{i}");
+            }
+
+        }
+
+        #endregion
+
         #region Async_await_exception
         /// #async #await #exception
         private static int RaiseException()

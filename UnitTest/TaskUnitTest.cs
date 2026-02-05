@@ -63,6 +63,12 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void Task_AsyncAwaitIAsyncEnumerable()
+        {
+            MyTasks.Test_Use_IAsyncEnumerable();
+        }
+        
+        [TestMethod]
         public void Task_AsyncAwaitException()
         {
             MyTasks.Test_AsyncAwaitException();
