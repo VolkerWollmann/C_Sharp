@@ -4,7 +4,7 @@ namespace CSharpNew
 {
     internal class CSharp11DummyA;
     file class CSharp11DummyB;
-    public abstract partial class CSharp11
+    public abstract partial class CSharp11Partial
     {
         public static void TestFileClasses1()
         {

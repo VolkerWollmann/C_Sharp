@@ -192,8 +192,14 @@ namespace NetNewUnitTest
         [Fact]
         public void FileClasses()
         {
-            CSharp11.TestFileClasses1();
-            CSharp11.TestFileClasses2();
+            CSharp11Partial.TestFileClasses1();
+            CSharp11Partial.TestFileClasses2();
+        }
+
+        [Fact]
+        public void RequiredMembers()
+        {
+            CSharp11.TestRequiredMembers();
         }
     }
 

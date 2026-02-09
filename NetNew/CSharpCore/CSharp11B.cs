@@ -2,7 +2,7 @@
 
 namespace CSharpNew
 {
-    public abstract partial class CSharp11
+    public abstract partial class CSharp11Partial
     {
         public static void TestFileClasses2()
         {
