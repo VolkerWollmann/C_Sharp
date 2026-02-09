@@ -165,6 +165,12 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void PropertyWithBackingField()
+        {
+            CSharp.PropertyWithBackingField();
+        }
+
+        [TestMethod]
         public void MultiLineStringConstant()
         {
             CSharp.MultiLineStringConstant();

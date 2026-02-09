@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Net.Http.Headers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_SharpExamplesLib.Language
@@ -327,6 +328,43 @@ namespace C_SharpExamplesLib.Language
 
             Assert.AreEqual("1", commaSeparatedIds2);
         }
+
+
+        #region backing field
+        private static int TheValue
+        {
+            set { TheValue = value;
+                  TheValue = TheValue + 1;
+            }
+            get;
+        }
+
+        private static int _theValue2;
+
+        private static int TheValue2
+        {
+            set
+            {
+                _theValue2 = value;
+                _theValue2 = _theValue2 + 1;
+            }
+
+            get { return _theValue2; }
+        }
+
+        public static void PropertyWithBackingField()
+        {
+            TheValue2 = 5;
+            Assert.AreEqual(6, TheValue2);
+
+            // Will cause stack overflow exception, because the property is calling itself recursively without a backing field
+            // This cannot be caught.
+            //Assert.Throws<StackOverflowException>( ()=>
+            //{ 
+            //    TheValue = 5;
+            //});
+        }
+        #endregion
 
         #region byte bitarray
 
