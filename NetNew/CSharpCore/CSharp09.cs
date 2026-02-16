@@ -8,7 +8,7 @@ namespace CSharpNew
     {
         // Visual Studio 2022 : comment test change
 
-        // #record 
+        // #record #value tuple type
         private record Person(string FirstName, string LastName);
 
         public static void TestRecord()
