@@ -51,7 +51,7 @@ namespace C_SharpExamplesLib.Language
         {
             return (1, "Macchi");
         }
-        // #return value tuple
+        // #return #value tuple
         public static void ReturnValueTuple()
         {
             var (number, macchi) = ReturnMacchi();

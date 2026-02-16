@@ -54,7 +54,7 @@ namespace C_SharpExamplesLib.Language
         private const string InternalRabbit = "Rabbit";
         private string StringInterpolation3() => $"({InternalRabbit}:{InternalRabbit,10}:{InternalRabbit,3}:{InternalRabbit,-10}:)";
 
-        // Method with return type #Tuple
+        // Method with return type #Tuple #Value Tuple
         private (int Zahl, bool Wahrheit) GetTuple() => (1, true);
 
         // #Dictionary #initialization
