@@ -42,6 +42,12 @@ namespace UnitTest
             CSharp7.ReturnValueTuple();
         }
 
+        [TestMethod]
+        public void TestDiscard()
+        {
+            CSharp7.TestDiscard();
+        }
+
         // #ExpectedException
         //[TestMethod] 
         //[ExpectedException(typeof(OutOfMemoryException), "Expected OutOfMemoryException" )]

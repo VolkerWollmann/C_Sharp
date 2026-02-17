@@ -63,5 +63,12 @@ namespace C_SharpExamplesLib.Language
             Assert.AreEqual(1, result.Item1);
             Assert.AreEqual("Macchi", result.Item2);
         }
+
+
+        public static void TestDiscard()
+        {
+            // #discard return value
+            _ = ReturnMacchi();
+        }
     }
 }
