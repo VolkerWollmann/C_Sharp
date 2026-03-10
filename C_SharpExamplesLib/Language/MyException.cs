@@ -42,6 +42,37 @@ namespace C_SharpExamplesLib.Language
             }
         }
     }
+
+    internal class T1
+    {
+        public string Message  { get; set; } 
+        public void Test()
+        {
+            
+        }
+    }
+
+    internal class T2 : IDisposable
+    {
+        private readonly T1 _t1;
+        private readonly string _messageFormT2;
+        public T2(T1 t1, string messageFormT2)
+        {
+            _t1 = t1;
+            _messageFormT2 = messageFormT2;
+        }
+
+        public void Crash()
+        {
+            throw  new Exception("Crash");
+        }
+
+        public void Dispose()
+        {
+            _t1.Message = _messageFormT2;
+        }
+    }
+
     public abstract class MyException
     {
         public static void Exception_Test()
@@ -68,10 +99,29 @@ namespace C_SharpExamplesLib.Language
             }
             catch (Exception ne)
             {
-                Assert.IsTrue(!ne.StackTrace?.Contains("InnerGet"));            //call stack does not contain InnerGet
+                Assert.DoesNotContain(ne.StackTrace!,"InnerGet");            //call stack does not contain InnerGet
                 Assert.IsTrue(ne.StackTrace?.Contains("GetFirstCharacter2"));
                 Assert.IsTrue(ne.StackTrace?.Contains("Test"));
             }
+        }
+
+        public static void Exception_Dispose_Test()
+        {
+            T1 t1 = new T1();
+            
+            using (var t2 = new T2(t1, "Hello"))
+            {
+                try
+                {
+                    t2.Crash();  // if this throws, Dispose() is still called
+                }
+                catch
+                {
+                    // ignore the exception, we just want to see if Dispose() is called
+                }
+            }
+            
+            Assert.AreEqual("Hello",t1.Message);
         }
     }
 }

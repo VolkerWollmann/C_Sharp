@@ -42,6 +42,12 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void Exception_Dispose_Test()
+        {
+            MyException.Exception_Dispose_Test();
+        }
+
+        [TestMethod]
         public void CSharp6Test()
         {
             CSharp6.Test();
