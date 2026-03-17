@@ -424,6 +424,14 @@ namespace C_SharpExamplesLib.Language
         }
 
         #endregion
+
+        public static void UriTest()
+        {
+            Uri uri = new Uri("https://www.example.com");
+            Assert.AreEqual("https", uri.Scheme);
+            Assert.AreEqual("www.example.com", uri.Host);
+
+        }
     }
 
 
