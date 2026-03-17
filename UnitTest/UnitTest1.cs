@@ -263,6 +263,12 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void Uri()
+        {
+            CSharp.UriTest();
+        }
+
+        [TestMethod]
         public void ObsoleteMethod()
         {
             MyObsolete.Test();
