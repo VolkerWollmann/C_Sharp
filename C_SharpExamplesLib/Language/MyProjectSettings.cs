@@ -1,5 +1,5 @@
 ﻿using System.Configuration;
-using C_Sharp.Properties;
+using C_SharpExamplesLib.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_SharpExamplesLib.Language
