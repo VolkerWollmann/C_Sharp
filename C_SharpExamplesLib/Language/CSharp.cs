@@ -331,6 +331,7 @@ namespace C_SharpExamplesLib.Language
 
 
         #region backing field
+        #pragma warning disable CS9266
         private static int TheValue
         {
             set { TheValue = value;
@@ -338,6 +339,7 @@ namespace C_SharpExamplesLib.Language
             }
             get;
         }
+        #pragma warning restore CS9266
 
         private static int _theValue2;
 
