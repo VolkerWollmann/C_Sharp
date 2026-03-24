@@ -433,6 +433,28 @@ namespace C_SharpExamplesLib.Language
             Assert.AreEqual("www.example.com", uri.Host);
 
         }
+
+        #region Operator precedence
+        // #operator #precedence #and #or
+        public static void TestOperatorPrecedence()
+        {
+            bool a = false;
+            bool b = true;
+            bool c = true;
+            bool result1;
+            
+            // AND has higher precedence than OR, so this is evaluated as (a && b) || c
+            result1 = a && b || c; 
+            Assert.IsTrue(result1);
+
+            bool result2 = (a && b ) || c;
+            Assert.IsTrue(result2);
+
+            bool result3 = a && (b || c); 
+            Assert.IsFalse(result3);
+        }
+
+        #endregion
     }
 
 
