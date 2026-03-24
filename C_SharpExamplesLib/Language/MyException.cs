@@ -20,7 +20,7 @@ namespace C_SharpExamplesLib.Language
             {
                 Assert.IsTrue(ne.StackTrace?.Contains("InnerGet"));
                 Assert.IsTrue(ne.StackTrace?.Contains("GetFirstCharacter"));
-                Assert.IsTrue(!ne.StackTrace?.Contains("Test"));
+                Assert.IsFalse(ne.StackTrace?.Contains("Test"));
                 throw;
             }
         }
@@ -35,7 +35,7 @@ namespace C_SharpExamplesLib.Language
             {
                 Assert.IsTrue(ne.StackTrace?.Contains("InnerGet"));
                 Assert.IsTrue(ne.StackTrace?.Contains("GetFirstCharacter2"));
-                Assert.IsTrue(!ne.StackTrace?.Contains("Test"));
+                Assert.IsFalse(ne.StackTrace?.Contains("Test"));
 
                 throw new Exception("New Exception", ne);
 
@@ -45,7 +45,7 @@ namespace C_SharpExamplesLib.Language
 
     internal class T1
     {
-        public string Message  { get; set; } 
+        public string Message { get; set; } = string.Empty;
         public void Test()
         {
             
@@ -120,7 +120,8 @@ namespace C_SharpExamplesLib.Language
                     // ignore the exception, we just want to see if Dispose() is called
                 }
             }
-            
+
+            // t1.Message is set during dispose of t2
             Assert.AreEqual("Hello",t1.Message);
         }
     }
