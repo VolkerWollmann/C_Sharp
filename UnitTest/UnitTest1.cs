@@ -309,5 +309,12 @@ namespace UnitTest
         {
             CSharp.StringJoin();
         }
+
+        [TestMethod]
+        public void TestOperatorPrecedence()
+        {
+            CSharp.TestOperatorPrecedence();
+        }
+        
     }
 }
