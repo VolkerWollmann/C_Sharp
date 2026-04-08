@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.Extensions.Primitives;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
@@ -90,7 +91,7 @@ namespace C_SharpExamplesLib.OtherExamples
                     Assert.IsTrue(resultList?.Any(e => e.Title == "eum et est occaecati"));
                     Assert.IsTrue(resultList?.Any(e => (e.Id >= 0)));
                     Assert.IsTrue(resultList?.Any(e => (e.UserId >= 0)));
-                    Assert.IsTrue(resultList?.Any(e => (!e.Body.IsNullOrEmpty())));
+                    Assert.IsTrue(resultList?.Any(e => !string.IsNullOrEmpty(e.Body)));
                     _result = 2;
                 }
 

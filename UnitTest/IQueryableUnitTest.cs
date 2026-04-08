@@ -44,6 +44,17 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void Test_ElementAt()
+        {
+            foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+            {
+                using var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+                int elementAtTwo = myQueryableIntegerSet.ElementAt(2);
+                Assert.AreEqual(3, elementAtTwo);
+            }
+        }
+
+        [TestMethod]
         public void Test_ForEach()
         {
             foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
