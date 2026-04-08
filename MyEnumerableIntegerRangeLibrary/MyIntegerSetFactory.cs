@@ -86,10 +86,12 @@ namespace MyEnumerableIntegerRangeLibrary
                                                                                       DesiredDatabases.DatabaseStatement |
                                                                                       DesiredDatabases.DatabaseOptimizedStatement)
         {
+            List<int> initialValues = [1, 2, 3];
             List<IMyIntegerSet> result = [];
+
             if ((desiredDatabases & DesiredDatabases.Memory) == DesiredDatabases.Memory)
             {
-                var myIntegerSet = new MyMemoryIntegerSet([1, 2, 3]);
+                var myIntegerSet = new MyMemoryIntegerSet(initialValues);
                 _myIntegerSets.Add(myIntegerSet);
                 result.Add(myIntegerSet);
 
@@ -100,14 +102,14 @@ namespace MyEnumerableIntegerRangeLibrary
 
             if ((desiredDatabases & DesiredDatabases.DatabaseCursor) == DesiredDatabases.DatabaseCursor)
             {
-                var myDatabaseIntegerSet = new MyDatabaseCursorIntegerSet(_connectionString, [1, 2, 3]);
+                var myDatabaseIntegerSet = new MyDatabaseCursorIntegerSet(_connectionString, initialValues);
                 _myIntegerSets.Add(myDatabaseIntegerSet);
                 result.Add(myDatabaseIntegerSet);
             }
 
             if ((desiredDatabases & DesiredDatabases.DatabaseStatement) == DesiredDatabases.DatabaseStatement)
             {
-                var myDatabaseIntegerSet = new MyDatabaseStatementIntegerSet(_connectionString, [1, 2, 3]);
+                var myDatabaseIntegerSet = new MyDatabaseStatementIntegerSet(_connectionString, initialValues);
                 _myIntegerSets.Add(myDatabaseIntegerSet);
                 result.Add(myDatabaseIntegerSet);
             }
@@ -115,7 +117,7 @@ namespace MyEnumerableIntegerRangeLibrary
             if ((desiredDatabases & DesiredDatabases.DatabaseOptimizedStatement) == DesiredDatabases.DatabaseOptimizedStatement)
             {
                 var myOptimizedDatabaseIntegerSet = new MyOptimizedDatabaseStatementIntegerSet(_connectionString,
-                    [1, 2, 3]);
+                    initialValues);
                 _myIntegerSets.Add(myOptimizedDatabaseIntegerSet);
                 result.Add(myOptimizedDatabaseIntegerSet);
             }
