@@ -44,7 +44,7 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void Test_IndexElement()
+        public void Test_ElementAt()
         {
             foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
             {
