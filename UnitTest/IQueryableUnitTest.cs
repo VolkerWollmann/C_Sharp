@@ -50,7 +50,7 @@ namespace UnitTest
             {
                 using var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
                 int elementAtTwo = myQueryableIntegerSet.ElementAt(2);
-                //Assert.AreEqual(1, first);
+                Assert.AreEqual(3, elementAtTwo);
             }
         }
 
