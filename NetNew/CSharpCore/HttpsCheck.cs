@@ -27,6 +27,17 @@ namespace CSharpNew
                 ServerCertificateCustomValidationCallback =
                     (request, cert, chain, errors) =>
                     {
+                        Console.WriteLine("=== Certificate Chain ===");
+
+                        foreach (var element in chain.ChainElements)
+                        {
+                            var c = element.Certificate;
+                            Console.WriteLine("------------------------");
+                            Console.WriteLine("Subject: " + c.Subject);
+                            Console.WriteLine("Issuer : " + c.Issuer);
+                            Console.WriteLine("Expires: " + c.GetExpirationDateString());
+                        }
+
                         certFromServer = new X509Certificate2(cert);
                         return true; // allow request (IMPORTANT: don't do this in production)
                     }
