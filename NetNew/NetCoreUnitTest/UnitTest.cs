@@ -66,6 +66,7 @@ namespace NetNewUnitTest
             CSharp08.NullCoalescingExample();
         }
     }
+
     public class CSharp09UnitTest(ITestOutputHelper output)
     {
         [Fact]
@@ -117,8 +118,8 @@ namespace NetNewUnitTest
 
         public static IEnumerable<object[]> TestData => new List<object[]>
         {
-            new object[] {0},
-            new object[] {1}
+            new object[] { 0 },
+            new object[] { 1 }
         };
 
         [Theory]
@@ -187,6 +188,7 @@ namespace NetNewUnitTest
             CSharp10.DefinedInFileScopedNameSpace();
         }
     }
+
     public class CSharp11UnitTest
     {
         [Fact]
@@ -298,6 +300,15 @@ namespace NetNewUnitTest
             Assert.AreEqual(2, Math.Ceiling(1.2));
             Assert.AreEqual(1, Math.Floor(1.5));
             Assert.AreEqual(2, Math.Round(1.5, MidpointRounding.ToEven));
+        }
+    }
+
+    public class HttpsCheckTest
+    {
+        [Fact]
+        public void TestHttpsCheck()
+        {
+            HttpsCheck.CheckHttps();
         }
     }
 }
