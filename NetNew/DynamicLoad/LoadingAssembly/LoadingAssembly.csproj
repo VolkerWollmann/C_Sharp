@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="MSTest.TestAdapter" Version="4.2.1" />
     <PackageReference Include="MSTest.TestFramework" Version="4.2.1" />
+    <PackageReference Include="OpenTelemetry.Api" Version="1.15.3" />
   </ItemGroup>
 
   <ItemGroup>
