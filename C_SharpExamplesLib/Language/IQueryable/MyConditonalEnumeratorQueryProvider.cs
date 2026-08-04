@@ -91,7 +91,51 @@ namespace C_SharpExamplesLib.Language.IQueryable
             return max;
         }
 
+        private TType First()
+        {
+            using var enumerator = queryableIntegerEnumerator.GetEnumerator();
+            enumerator.Reset();
+            if (enumerator.MoveNext())
+            {
+                return enumerator.Current!;
+            }
+
+            throw new InvalidOperationException("Sequence contains no elements.");
+        }
+
         #endregion
+        #endregion
+
+        #region AtIndex
+        private TType AtIndex(int index)
+        {
+            if (index < 0)
+                throw new ArgumentOutOfRangeException(nameof(index));
+
+            using var enumerator = queryableIntegerEnumerator.GetEnumerator();
+            enumerator.Reset();
+            for (int i = 0; i <= index; i++)
+            {
+                if (!enumerator.MoveNext())
+                    throw new ArgumentOutOfRangeException(nameof(index));
+            }
+
+            return enumerator.Current!;
+        }
+
+        private static int GetIndexArgument(MethodCallExpression methodCall)
+        {
+            Expression indexExpression = methodCall.Arguments[1];
+            if (indexExpression is UnaryExpression { NodeType: ExpressionType.Convert } convert &&
+                convert.Operand is ConstantExpression inner &&
+                inner.Value is int converted)
+                return converted;
+
+            if (indexExpression is ConstantExpression { Value: int idx })
+                return idx;
+
+            throw new NotSupportedException("ElementAt index must be a constant int.");
+        }
         #endregion
 
         public TResult Execute<TResult>(Expression expression)
@@ -112,6 +156,14 @@ namespace C_SharpExamplesLib.Language.IQueryable
             // Check for max
             if (expression is MethodCallExpression { Method.Name: "Max", Arguments.Count: 1 })
                 return (TResult)(object)Max();
+
+            // Check for first
+            if (expression is MethodCallExpression { Method.Name: "First" })
+                return (TResult)(object)First()!;
+
+            // Check for ElementAt
+            if (expression is MethodCallExpression { Method.Name: "ElementAt", Arguments.Count: 2 } elementAtCall)
+                return (TResult)(object)AtIndex(GetIndexArgument(elementAtCall))!;
 
             throw new NotImplementedException();
         }

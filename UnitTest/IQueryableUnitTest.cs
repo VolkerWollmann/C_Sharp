@@ -357,5 +357,77 @@ namespace UnitTest
                 Assert.AreEqual(3, max);
             }
         }
+
+        [TestMethod]
+        public void Test_Where_First()
+        {
+            foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+            {
+                using var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+                int first = myQueryableIntegerSet.Where(i => i >= 2).First();
+
+                Assert.AreEqual(2, first);
+            }
+        }
+
+        [TestMethod]
+        public void Test_Where_ElementAt()
+        {
+            foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+            {
+                using var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+                int elementAtOne = myQueryableIntegerSet.Where(i => i >= 2).ElementAt(1);
+
+                Assert.AreEqual(3, elementAtOne);
+            }
+        }
+
+        [TestMethod]
+        public void Test_Select_Sum()
+        {
+            foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+            {
+                using var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+                var sum = myQueryableIntegerSet.Select(e => e * 2).Sum();
+
+                Assert.AreEqual(12, sum);
+            }
+        }
+
+        [TestMethod]
+        public void Test_Select_Max()
+        {
+            foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+            {
+                using var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+                var max = myQueryableIntegerSet.Select(e => e * 2).Max();
+
+                Assert.AreEqual(6, max);
+            }
+        }
+
+        [TestMethod]
+        public void Test_Select_First()
+        {
+            foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+            {
+                using var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+                int first = myQueryableIntegerSet.Select(e => e * 2).First();
+
+                Assert.AreEqual(2, first);
+            }
+        }
+
+        [TestMethod]
+        public void Test_Select_ElementAt()
+        {
+            foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+            {
+                using var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+                int elementAtTwo = myQueryableIntegerSet.Select(e => e * 2).ElementAt(2);
+
+                Assert.AreEqual(6, elementAtTwo);
+            }
+        }
     }
 }
