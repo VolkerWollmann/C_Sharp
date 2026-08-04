@@ -1,8 +1,6 @@
 ﻿namespace MyEnumerableIntegerRangeLibrary
 {
-    public interface IMyIntegerSet : IEnumerable<int>
+    public interface IMyIntegerSet : IEnumerable<int>, IDisposable
     {
-        void Dispose();
-
     }
 }

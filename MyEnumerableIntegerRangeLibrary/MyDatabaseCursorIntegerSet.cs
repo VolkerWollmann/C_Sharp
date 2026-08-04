@@ -94,7 +94,7 @@ namespace MyEnumerableIntegerRangeLibrary
             DataBaseConnection = new SqlConnection(connectionString);
             DataBaseConnection.Open();
 
-            TableName = "MyDatabaseCursorIntegerSet_" + Guid.NewGuid().ToString("N").ToUpper();
+            TableName = "MyDatabaseCursorIntegerSet_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + Guid.NewGuid().ToString("N").ToUpper();
 
             // create table
             CreateTable();

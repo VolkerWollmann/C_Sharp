@@ -114,7 +114,7 @@ namespace MyEnumerableIntegerRangeLibrary
             _dataBaseConnection = _dataBaseConnection = new SqlConnection(connectionString);
             _dataBaseConnection.Open();
 
-            TableName = "MyDatabaseStatementIntegerSet_" + Guid.NewGuid().ToString("N").ToUpper();
+            TableName = "MyDatabaseStatementIntegerSet_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + Guid.NewGuid().ToString("N").ToUpper();
 
             // create table
             CreateTable();
