@@ -101,6 +101,21 @@ namespace C_SharpExamplesLib.Language.IQueryable
         }
 
         #endregion
+
+        #region Count
+        private int Count()
+        {
+            using var enumerator = mySelectorEnumerator.GetEnumerator();
+            enumerator.Reset();
+            int count = 0;
+            while (enumerator.MoveNext())
+            {
+                count++;
+            }
+
+            return count;
+        }
+        #endregion
         #endregion
 
         #region AtIndex
@@ -154,6 +169,10 @@ namespace C_SharpExamplesLib.Language.IQueryable
             // Check for max
             if (expression is MethodCallExpression { Method.Name: "Max", Arguments.Count: 1 })
                 return Max();
+
+            // Check for count
+            if (expression is MethodCallExpression { Method.Name: "Count", Arguments.Count: 1 })
+                return Count();
 
             // Check for first
             if (expression is MethodCallExpression { Method.Name: "First" })

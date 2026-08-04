@@ -359,6 +359,42 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void Test_Count()
+        {
+            foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+            {
+                using var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+                var count = myQueryableIntegerSet.Count();
+
+                Assert.AreEqual(3, count);
+            }
+        }
+
+        [TestMethod]
+        public void Test_Where_Count()
+        {
+            foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+            {
+                using var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+                var count = myQueryableIntegerSet.Where(i => i >= 2).Count();
+
+                Assert.AreEqual(2, count);
+            }
+        }
+
+        [TestMethod]
+        public void Test_Select_Count()
+        {
+            foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)
+            {
+                using var myQueryableIntegerSet = GetMyQueryable(myIntegerSet);
+                var count = myQueryableIntegerSet.Select(e => e * 2).Count();
+
+                Assert.AreEqual(3, count);
+            }
+        }
+
+        [TestMethod]
         public void Test_Where_First()
         {
             foreach (IMyIntegerSet myIntegerSet in _myIntegerSets)

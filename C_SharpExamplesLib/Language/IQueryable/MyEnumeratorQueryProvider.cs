@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using MyEnumerableIntegerRangeLibrary;
 
 namespace C_SharpExamplesLib.Language.IQueryable
 {
@@ -104,6 +105,30 @@ namespace C_SharpExamplesLib.Language.IQueryable
         }
 
         #endregion
+
+        #region Count
+        private int Count()
+        {
+            using var enumerator = queryableIntegerEnumerator.GetEnumerator();
+
+            // Optimize : let the database count instead of enumerating all elements
+            if (enumerator is MyDatabaseStatementIntegerSetEnumerator
+                {
+                    MyDatabaseStatementIntegerSet: MyOptimizedDatabaseStatementIntegerSet optimizedSet
+                })
+                return optimizedSet.Count();
+
+            // the hard way
+            enumerator.Reset();
+            int count = 0;
+            while (enumerator.MoveNext())
+            {
+                count++;
+            }
+
+            return count;
+        }
+        #endregion
         #endregion
 
         #region AtIndex
@@ -156,6 +181,10 @@ namespace C_SharpExamplesLib.Language.IQueryable
             // Check for max
             if (expression is MethodCallExpression { Method.Name: "Max", Arguments.Count: 1 })
                 return (TResult)(object)Max();
+
+            // Check for count
+            if (expression is MethodCallExpression { Method.Name: "Count", Arguments.Count: 1 })
+                return (TResult)(object)Count();
 
             // Check for first
             if (expression is MethodCallExpression { Method.Name: "First" })

@@ -8,7 +8,7 @@ namespace MyEnumerableIntegerRangeLibrary
 
     public class MyDatabaseStatementIntegerSetEnumerator(MyDatabaseStatementIntegerSet set) : IEnumerator<int>
     {
-        internal readonly MyDatabaseStatementIntegerSet MyDatabaseStatementIntegerSet = set;
+        public readonly MyDatabaseStatementIntegerSet MyDatabaseStatementIntegerSet = set;
 
         #region IEnumerator<int>
         int _index = -1;
