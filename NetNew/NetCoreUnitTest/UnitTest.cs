@@ -220,6 +220,45 @@ namespace NetNewUnitTest
         }
     }
 
+    public class CSharp13UnitTest
+    {
+        [Fact]
+        public void ParamsCollections()
+        {
+            CSharp13.ParamsCollections();
+        }
+
+        [Fact]
+        public void NewLockType()
+        {
+            CSharp13.NewLockType();
+        }
+
+        [Fact]
+        public void ImplicitIndexInObjectInitializer()
+        {
+            CSharp13.ImplicitIndexInObjectInitializer();
+        }
+
+        [Fact]
+        public void EscapeSequence()
+        {
+            CSharp13.EscapeSequence();
+        }
+
+        [Fact]
+        public void AllowsRefStruct()
+        {
+            CSharp13.AllowsRefStruct();
+        }
+
+        [Fact]
+        public void PartialProperties()
+        {
+            CSharp13.PartialProperties();
+        }
+    }
+
     public class RoslynUnitTest
     {
         [Fact]
