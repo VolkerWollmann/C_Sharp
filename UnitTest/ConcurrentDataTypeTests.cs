@@ -1,4 +1,5 @@
-﻿using C_SharpExamplesLib.Language.ConcurrentDataTypes;
+﻿using System.Threading.Tasks;
+using C_SharpExamplesLib.Language.ConcurrentDataTypes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTest
@@ -50,5 +51,28 @@ namespace UnitTest
             MyBlockingCollection.BlockingCollection();
         }
 
+        [TestMethod]
+        public async Task Channel_Unbounded()
+        {
+            await MyChannel.Test_UnboundedChannel();
+        }
+
+        [TestMethod]
+        public async Task Channel_BackPressure()
+        {
+            await MyChannel.Test_BoundedChannelBackPressure();
+        }
+
+        [TestMethod]
+        public async Task Channel_MultipleConsumers()
+        {
+            await MyChannel.Test_MultipleConsumers();
+        }
+
+        [TestMethod]
+        public void Channel_DropOldest()
+        {
+            MyChannel.Test_BoundedChannelDropsOldest();
+        }
     }
 }
