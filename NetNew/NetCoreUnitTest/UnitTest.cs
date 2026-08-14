@@ -259,6 +259,45 @@ namespace NetNewUnitTest
         }
     }
 
+    public class CSharp14UnitTest
+    {
+        [Fact]
+        public void ExtensionMembers()
+        {
+            CSharp14.ExtensionMembers();
+        }
+
+        [Fact]
+        public void FieldKeyword()
+        {
+            CSharp14.FieldKeyword();
+        }
+
+        [Fact]
+        public void NullConditionalAssignment()
+        {
+            CSharp14.NullConditionalAssignment();
+        }
+
+        [Fact]
+        public void NameOfUnboundGeneric()
+        {
+            CSharp14.NameOfUnboundGeneric();
+        }
+
+        [Fact]
+        public void LambdaParameterModifiers()
+        {
+            CSharp14.LambdaParameterModifiers();
+        }
+
+        [Fact]
+        public void CompoundAssignmentOperator()
+        {
+            CSharp14.CompoundAssignmentOperator();
+        }
+    }
+
     public class RoslynUnitTest
     {
         [Fact]
