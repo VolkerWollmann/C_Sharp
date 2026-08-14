@@ -192,7 +192,7 @@ namespace C_SharpExamplesLib.Language.IQueryable
 
             // Check for ElementAt
             if (expression is MethodCallExpression { Method.Name: "ElementAt", Arguments.Count: 2 } elementAtCall)
-                return (TResult)(object)AtIndex(GetIndexArgument(elementAtCall));
+                return (TResult)(object)AtIndex(GetIndexArgument(elementAtCall))!;
 
 
             throw new NotImplementedException();

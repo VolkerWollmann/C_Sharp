@@ -357,7 +357,11 @@ namespace C_SharpExamplesLib.Language.Tasks
             {
                 Console.WriteLine("Perform Exception started");
                 int result = await (Task.Run(RaiseException));
+                // MSTEST0040 is expected here: the "async void" is the point of this demo.
+                // The await above always throws, so this assert is never reached.
+#pragma warning disable MSTEST0040
                 Assert.AreEqual(2, result, "This assert must not occur");
+#pragma warning restore MSTEST0040
                 Console.WriteLine("Perform Exception finished");
             }
             catch (Exception e)
