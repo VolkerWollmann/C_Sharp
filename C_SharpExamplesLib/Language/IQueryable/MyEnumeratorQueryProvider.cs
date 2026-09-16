@@ -91,14 +91,13 @@ namespace C_SharpExamplesLib.Language.IQueryable
             return max;
         }
 
-        private int First()
+        private TType First()
         {
             using var enumerator = queryableIntegerEnumerator.GetEnumerator();
             enumerator.Reset();
             if (enumerator.MoveNext())
             {
-                return (int)(object)enumerator.Current!;
-
+                return enumerator.Current!;
             }
 
             throw new InvalidOperationException("Sequence contains no elements.");
@@ -188,7 +187,7 @@ namespace C_SharpExamplesLib.Language.IQueryable
 
             // Check for first
             if (expression is MethodCallExpression { Method.Name: "First" })
-                return (TResult)(object)First();
+                return (TResult)(object)First()!;
 
             // Check for ElementAt
             if (expression is MethodCallExpression { Method.Name: "ElementAt", Arguments.Count: 2 } elementAtCall)
