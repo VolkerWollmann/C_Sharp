@@ -32,8 +32,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccessibilityOtherProjectCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccessibilityProjectCore", "AccessibilityProjectCore\AccessibilityProjectCore.csproj", "{2010C185-788E-4649-AC19-62F8AE9419BD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyEnumerableIntegerRangeLibrary", "MyEnumerableIntegerRangeLibrary\MyEnumerableIntegerRangeLibrary.csproj", "{37BAE7E9-B10B-4D9F-8BFD-7295AE3EEE90}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C_SharpExampleProgram", "C_SharpExamples\C_SharpExampleProgram.csproj", "{6EB9C40D-507E-414E-9DC4-B36E1FF91211}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMyCalculatorInterface", "NetNew\DynamicLoad\IMyCalculator\IMyCalculatorInterface.csproj", "{F66CAE6B-8862-294B-44B5-5908F4E55045}"
@@ -76,10 +74,6 @@ Global
 		{2010C185-788E-4649-AC19-62F8AE9419BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2010C185-788E-4649-AC19-62F8AE9419BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2010C185-788E-4649-AC19-62F8AE9419BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{37BAE7E9-B10B-4D9F-8BFD-7295AE3EEE90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37BAE7E9-B10B-4D9F-8BFD-7295AE3EEE90}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37BAE7E9-B10B-4D9F-8BFD-7295AE3EEE90}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37BAE7E9-B10B-4D9F-8BFD-7295AE3EEE90}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6EB9C40D-507E-414E-9DC4-B36E1FF91211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6EB9C40D-507E-414E-9DC4-B36E1FF91211}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EB9C40D-507E-414E-9DC4-B36E1FF91211}.Release|Any CPU.ActiveCfg = Release|Any CPU
