@@ -30,6 +30,28 @@ namespace C_SharpExamplesLib.Language.IQueryable
                 return (IMyDisposeQueryable<TType>)r2;
             }
 
+            if (enumerator is MyDatabaseStatementAnimalSetEnumerator x4)
+            {
+                // Optimize : Do the first where clause with where condition on database
+                ExpressionCompileVisitor ecv = new ExpressionCompileVisitor(null);
+                ecv.Visit(whereExpressionClaCallExpression.Arguments[1]);
+                string whereClause = ecv.GetCondition();
+                var r1 = new MyOptimizedDatabaseStatementAnimalSetEnumerator(x4, whereClause);
+                var r2 = new MyEnumeratorQueryable<MyAnimal>(r1);
+                return (IMyDisposeQueryable<TType>)r2;
+            }
+
+            if (enumerator is MyDatabaseCursorAnimalSetEnumerator x5)
+            {
+                // Optimize : Do the first where clause with where condition on database
+                ExpressionCompileVisitor ecv = new ExpressionCompileVisitor(null);
+                ecv.Visit(whereExpressionClaCallExpression.Arguments[1]);
+                string whereClause = ecv.GetCondition();
+                var r1 = new MyOptimizedDatabaseCursorAnimalSetEnumerator(x5, whereClause);
+                var r2 = new MyEnumeratorQueryable<MyAnimal>(r1);
+                return (IMyDisposeQueryable<TType>)r2;
+            }
+
             MyConditionalEnumeratorQueryable<TType> x = new MyConditionalEnumeratorQueryable<TType>(
                     enumerator, whereExpressionClaCallExpression);
             return x;

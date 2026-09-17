@@ -117,6 +117,12 @@ namespace C_SharpExamplesLib.Language.IQueryable
                 })
                 return optimizedSet.Count();
 
+            if (enumerator is MyDatabaseStatementAnimalSetEnumerator
+                {
+                    MyDatabaseStatementAnimalSet: MyOptimizedDatabaseStatementAnimalSet optimizedAnimalSet
+                })
+                return optimizedAnimalSet.Count();
+
             // the hard way
             enumerator.Reset();
             int count = 0;

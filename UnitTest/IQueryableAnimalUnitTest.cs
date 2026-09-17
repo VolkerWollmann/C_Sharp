@@ -41,6 +41,17 @@ namespace UnitTest
             return new MyEnumeratorQueryable<MyAnimal>(myAnimalSet.GetEnumerator());
         }
 
+        /// <summary>
+        /// Documents which variants are covered by the other tests:
+        /// memory only, or memory plus the three database variants
+        /// </summary>
+        [TestMethod]
+        public void Test_AnimalSetVariants()
+        {
+            int expected = _myAnimalSetFactory.DatabaseAnimalSetsAvailable() ? 4 : 1;
+            Assert.HasCount(expected, _myAnimalSets);
+        }
+
         [TestMethod]
         public void Test_ToList()
         {
@@ -141,6 +152,73 @@ namespace UnitTest
                 MyAnimal first = myQueryableAnimalSet.Where(a => a.Futter == "Fisch").First();
 
                 Assert.AreEqual(MyAnimalSetFactory.Fridolin, first);
+            }
+        }
+
+        [TestMethod]
+        public void Test_Count()
+        {
+            foreach (IMySet<MyAnimal> myAnimalSet in _myAnimalSets)
+            {
+                using var myQueryableAnimalSet = GetMyQueryable(myAnimalSet);
+                int count = myQueryableAnimalSet.Count();
+
+                Assert.AreEqual(4, count);
+            }
+        }
+
+        [TestMethod]
+        public void Test_Where_And_Or()
+        {
+            foreach (IMySet<MyAnimal> myAnimalSet in _myAnimalSets)
+            {
+                using var myQueryableAnimalSet = GetMyQueryable(myAnimalSet);
+                var result = myQueryableAnimalSet
+                    .Where(a => a.Nr > 1 && (a.Art == "Hund" || a.Futter == "Fisch"))
+                    .Select(a => a.Name)
+                    .ToList();
+
+                CollectionAssert.AreEqual(new List<string> { "Amica", "Fridolin" }, result);
+            }
+        }
+
+        [TestMethod]
+        public void Test_Where_CapturedVariable()
+        {
+            string wanted = "Heidi";
+            foreach (IMySet<MyAnimal> myAnimalSet in _myAnimalSets)
+            {
+                using var myQueryableAnimalSet = GetMyQueryable(myAnimalSet);
+                MyAnimal result = myQueryableAnimalSet.Where(a => a.Name == wanted).First();
+
+                Assert.AreEqual(MyAnimalSetFactory.Heidi, result);
+            }
+        }
+
+        [TestMethod]
+        public void Test_Where_Where()
+        {
+            foreach (IMySet<MyAnimal> myAnimalSet in _myAnimalSets)
+            {
+                using var myQueryableAnimalSet = GetMyQueryable(myAnimalSet);
+                var result = myQueryableAnimalSet
+                    .Where(a => a.Nr >= 2)
+                    .Where(a => a.Art.StartsWith("Z"))
+                    .ToList();
+
+                CollectionAssert.AreEqual(new List<MyAnimal> { MyAnimalSetFactory.Heidi }, result);
+            }
+        }
+
+        [TestMethod]
+        public void Test_Where_ElementAt()
+        {
+            foreach (IMySet<MyAnimal> myAnimalSet in _myAnimalSets)
+            {
+                using var myQueryableAnimalSet = GetMyQueryable(myAnimalSet);
+                MyAnimal result = myQueryableAnimalSet.Where(a => a.Nr != 2).ElementAt(1);
+
+                Assert.AreEqual(MyAnimalSetFactory.Heidi, result);
             }
         }
 
